@@ -1,0 +1,3 @@
+{"section":"startup","method":"GetStartup","kind":"call","http":"GET","path":"/v1/startup","summary":"Get startup status","signature":"GetStartup(ctx context.Context) (*StartupStartup, error)"}
+{"section":"startup","method":"CreateStartup","kind":"call","http":"POST","path":"/v1/startup","summary":"Register a startup","signature":"CreateStartup(ctx context.Context, body StartupStartup) error"}
+{"section":"startup","method":"GetFormSchema","kind":"call","http":"GET","path":"/v1/startup/form/schema","summary":"Get startup form schema","signature":"GetFormSchema(ctx context.Context) (*StartupFormSchema, error)"}

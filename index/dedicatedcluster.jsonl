@@ -1,0 +1,1 @@
+{"section":"dedicatedcluster","method":"ListAvailabilities","kind":"call","http":"GET","path":"/v1/dedicated/cluster/availabilities","summary":"List cluster configuration availability","signature":"ListAvailabilities(ctx context.Context, quantity int, params ...ListAvailabilitiesParams) ([]DedicatedClusterAvailability, error)","deprecated":true}

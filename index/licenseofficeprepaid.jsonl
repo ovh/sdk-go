@@ -1,0 +1,1 @@
+{"section":"licenseofficeprepaid","method":"Unconfigure","kind":"call","http":"POST","path":"/v1/license/officePrepaid/{serviceName}/unconfigure","summary":"Unconfigure a prepaid user","signature":"Unconfigure(ctx context.Context, serviceName string) (*LicenseOfficePrepaidOfficeTaskNative, error)"}

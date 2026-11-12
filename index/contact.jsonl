@@ -1,0 +1,2 @@
+{"section":"contact","method":"ListForms","kind":"call","http":"GET","path":"/v1/contact/form","summary":"Get form characteristics","signature":"ListForms(ctx context.Context) ([]ContactFormCharacteristic, error)"}
+{"section":"contact","method":"Send","kind":"call","http":"POST","path":"/v1/contact/form/send","summary":"Send form following characteristics of /contact/form","signature":"Send(ctx context.Context, body SendRequest) error"}

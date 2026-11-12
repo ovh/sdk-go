@@ -1,0 +1,1 @@
+{"section":"supplymondialrelay","method":"MondialRelay","kind":"call","http":"POST","path":"/v1/supply/mondialRelay","summary":"Find the 10 nearest MondialRelay points from address or city.","signature":"MondialRelay(ctx context.Context, body MondialRelayRequest) (*SupplyMondialRelayReturn, error)"}
