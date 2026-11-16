@@ -2,6 +2,44 @@
 
 Notable changes to the SDK. Behavioural changes are called out explicitly.
 
+## 0.3.0 (2026-11-16)
+
+Compared with 0.2.1.
+
+### New
+
+- `backupservices`: the package `backupservices`
+- `licensehycu`: the package `licensehycu`
+- `publiccloud`: `PublicCloudStorageFileFileStorageAttachment`
+- `publiccloud`: `PublicCloudStorageFileFileStorageStatusEnum`
+- `publiccloud`: `PublicCloudStorageFileFileStorageCurrentState.Attachments`
+- `publiccloud`: `PublicCloudStorageFileFileStorageCurrentState.Status`
+- `veeamveeamenterprise`: the package `veeamveeamenterprise`
+
+### SDK core
+
+- The operation index (`index/<section>.jsonl`) gives the IAM actions each method requires, in
+  `iam`: what to grant a service account that gets a 403. For an `AllX` iterator over a v1
+  list, those of the list and of the get it calls for each object.
+
+<details>
+<summary>Every change to the API contract, as oasdiff reports it (10)</summary>
+
+#### `publiccloud`
+
+- `AllShares`: added the optional property `items/currentState/allOf[#/components/schemas/publicCloud.storage.file.FileStorageCurrentState]/attachments` to the response with the `200` status (GET /v2/publicCloud/project/{projectId}/storage/file/share)
+- `AllShares`: added the optional property `items/currentState/allOf[#/components/schemas/publicCloud.storage.file.FileStorageCurrentState]/status` to the response with the `200` status (GET /v2/publicCloud/project/{projectId}/storage/file/share)
+- `CreateShare`: added the optional property `currentState/allOf[#/components/schemas/publicCloud.storage.file.FileStorageCurrentState]/attachments` to the response with the `200` status (POST /v2/publicCloud/project/{projectId}/storage/file/share)
+- `CreateShare`: added the optional property `currentState/allOf[#/components/schemas/publicCloud.storage.file.FileStorageCurrentState]/status` to the response with the `200` status (POST /v2/publicCloud/project/{projectId}/storage/file/share)
+- `DeleteShare`: added the optional property `currentState/allOf[#/components/schemas/publicCloud.storage.file.FileStorageCurrentState]/attachments` to the response with the `200` status (DELETE /v2/publicCloud/project/{projectId}/storage/file/share/{fileStorageId})
+- `DeleteShare`: added the optional property `currentState/allOf[#/components/schemas/publicCloud.storage.file.FileStorageCurrentState]/status` to the response with the `200` status (DELETE /v2/publicCloud/project/{projectId}/storage/file/share/{fileStorageId})
+- `EditShare`: added the optional property `currentState/allOf[#/components/schemas/publicCloud.storage.file.FileStorageCurrentState]/attachments` to the response with the `200` status (PUT /v2/publicCloud/project/{projectId}/storage/file/share/{fileStorageId})
+- `EditShare`: added the optional property `currentState/allOf[#/components/schemas/publicCloud.storage.file.FileStorageCurrentState]/status` to the response with the `200` status (PUT /v2/publicCloud/project/{projectId}/storage/file/share/{fileStorageId})
+- `GetShare`: added the optional property `currentState/allOf[#/components/schemas/publicCloud.storage.file.FileStorageCurrentState]/attachments` to the response with the `200` status (GET /v2/publicCloud/project/{projectId}/storage/file/share/{fileStorageId})
+- `GetShare`: added the optional property `currentState/allOf[#/components/schemas/publicCloud.storage.file.FileStorageCurrentState]/status` to the response with the `200` status (GET /v2/publicCloud/project/{projectId}/storage/file/share/{fileStorageId})
+
+</details>
+
 ## 0.2.1 (2026-11-12)
 
 First release.

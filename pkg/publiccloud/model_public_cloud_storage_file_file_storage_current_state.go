@@ -8,6 +8,8 @@ package publiccloud
 
 // PublicCloudStorageFileFileStorageCurrentState Current state of a file storage as observed from the infrastructure
 type PublicCloudStorageFileFileStorageCurrentState struct {
+	// Instances that declare this file storage in their shares list, with the access level they declare. Null when no instance declares it, or when the list cannot be read.
+	Attachments []PublicCloudStorageFileFileStorageAttachment `json:"attachments,omitempty"`
 	// Action availability flags derived from the file storage status
 	Capabilities []PublicCloudStorageFileFileStorageCapability `json:"capabilities,omitempty"`
 	// File storage description
@@ -28,4 +30,6 @@ type PublicCloudStorageFileFileStorageCurrentState struct {
 	ShareType *PublicCloudStorageFileFileStorageTypeEnum `json:"shareType,omitempty"`
 	// Current size of the file storage in GB
 	Size *int `json:"size,omitempty"`
+	// File storage status as reported by the infrastructure
+	Status *PublicCloudStorageFileFileStorageStatusEnum `json:"status,omitempty"`
 }

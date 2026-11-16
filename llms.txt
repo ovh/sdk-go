@@ -11,7 +11,7 @@ names from the URL is not reliable.
 
 - [Guide](README.md): install, first program, finding an operation, arguments, pagination, errors, configuration
 - [Agent notes](AGENTS.md): the conventions in short, for AI coding agents
-- [Operation index](index/README.md): one index/<section>.jsonl per section, each line a method with its route and Go signature
+- [Operation index](index/README.md): one index/<section>.jsonl per section, each line a method with its route, Go signature and required IAM actions
 
 ## Optional
 

@@ -1,3 +1,3 @@
-{"section":"partner","method":"GetPartner","kind":"call","http":"GET","path":"/v1/partner","summary":"Get partner status","signature":"GetPartner(ctx context.Context) (*Partner2Partner, error)"}
-{"section":"partner","method":"CreatePartner","kind":"call","http":"POST","path":"/v1/partner","summary":"Register as a partner","signature":"CreatePartner(ctx context.Context, body Partner2Partner) error"}
+{"section":"partner","method":"GetPartner","kind":"call","http":"GET","path":"/v1/partner","summary":"Get partner status","signature":"GetPartner(ctx context.Context) (*Partner2Partner, error)","iam":["account:apiovh:partner/get"]}
+{"section":"partner","method":"CreatePartner","kind":"call","http":"POST","path":"/v1/partner","summary":"Register as a partner","signature":"CreatePartner(ctx context.Context, body Partner2Partner) error","iam":["account:apiovh:partner/create"]}
 {"section":"partner","method":"GetFormSchema","kind":"call","http":"GET","path":"/v1/partner/form/schema","summary":"Get partner form schema","signature":"GetFormSchema(ctx context.Context) (*Partner2FormSchema, error)"}

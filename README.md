@@ -147,8 +147,8 @@ Two values of one enumeration that would make the same name (`"CLOUDWEB_1"` and
 
 ### Look up the route in the index
 
-`index/<section>.jsonl`, at the root of the module, lists every method with the route it calls
-and its signature, one JSON object per line. It is generated from the SDK's code at each
+`index/<section>.jsonl`, at the root of the module, lists every method with the route it calls,
+its signature and the IAM actions it requires, one JSON object per line. It is generated from the SDK's code at each
 release, so it always matches it:
 
 ```shell
@@ -158,10 +158,11 @@ grep -h '"path":"/v1/vrack/{serviceName}"' "$(go list -m -f '{{.Dir}}' github.co
 Run it in your project: `go list -m` gives the SDK version your project uses.
 
 ```json
-{"section":"vrack","method":"GetVrack","kind":"call","http":"GET","path":"/v1/vrack/{serviceName}","summary":"Get a vRack. Returns the name and description of the vRack.","signature":"GetVrack(ctx context.Context, serviceName string) (*VrackVrackWithIAM, error)"}
+{"section":"vrack","method":"GetVrack","kind":"call","http":"GET","path":"/v1/vrack/{serviceName}","summary":"Get a vRack. Returns the name and description of the vRack.","signature":"GetVrack(ctx context.Context, serviceName string) (*VrackVrackWithIAM, error)","iam":["vrack:apiovh:get"]}
 ```
 
-`index/README.md` describes each field.
+`index/README.md` describes each field. To list what a program needs, collect the `iam` of
+the methods it calls: those are the actions to grant its service account.
 
 ### Search by URL path
 

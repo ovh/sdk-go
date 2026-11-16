@@ -6,4 +6,4 @@ package ovh
 
 // Version is the SDK's version. It is "dev" in the generator repository; scripts/export.sh sets
 // it to the published version (e.g. 0.1.0) in the module it exports.
-const Version = "0.2.1"
+const Version = "0.3.0"

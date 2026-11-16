@@ -7,8 +7,9 @@ Notes for AI coding agents that write code with this SDK, or work in this reposi
 - Each API section is a package: `github.com/ovh/sdk-go/pkg/<section>`, in lowercase
   (`publicCloud` is `pkg/publiccloud`). Its operations are methods on `<section>.New(client)`.
 - To find the method for a route, read `index/<section>.jsonl` at the root of this module. It
-  has one JSON line per method, with the route, the Go signature and the summary. Search it
-  before you guess a name. From a project that uses the SDK, this searches the version it uses:
+  has one JSON line per method, with the route, the Go signature, the summary and the IAM
+  actions the call requires (`iam`). Search it before you guess a name. When you write a
+  program, list the `iam` of the methods it calls: the service account needs those actions. From a project that uses the SDK, this searches the version it uses:
 
   ```shell
   grep -h '"path":"/v1/vrack/{serviceName}"' "$(go list -m -f '{{.Dir}}' github.com/ovh/sdk-go)"/index/*.jsonl

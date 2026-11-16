@@ -20,4 +20,5 @@ Fields:
 | `http`, `path` | The route, with its API version. For `each`, the route of the list. |
 | `summary` | The API's one-line description, when it has one. |
 | `signature` | The method's Go signature. Types are those of the section's package. |
+| `iam` | The IAM actions the call requires: a 403 means the caller's policy lacks one. For `each`, those of the list and of the fetch. |
 | `deprecated` | Present and true when the API has deprecated the operation. |
