@@ -17,8 +17,12 @@ import (
 )
 
 // send performs one logical request: debug logging, retries and the response size cap. It
-// returns the response unread, exactly as the transport handed it back.
-func (c *Client) send(request *http.Request) (*http.Response, error) {
+// returns the response unread, exactly as the transport handed it back, and the number of
+// times the request was sent.
+//
+// With an error, the response may still be non-nil, its body already closed: the server
+// answered, but the answer could not be used. The caller reads only its status and headers.
+func (c *Client) send(request *http.Request) (*http.Response, int, error) {
 	attempts := c.retry.attempts()
 	var waited time.Duration
 
@@ -26,7 +30,7 @@ func (c *Client) send(request *http.Request) (*http.Response, error) {
 		if c.debug {
 			dump, err := httputil.DumpRequestOut(request, c.debugBody)
 			if err != nil {
-				return nil, err
+				return nil, attempt - 1, err // this attempt was not sent
 			}
 			log.Printf("\n%s\n", redactDebugDump(dump))
 		}
@@ -35,21 +39,22 @@ func (c *Client) send(request *http.Request) (*http.Response, error) {
 		if err != nil {
 			// Not retried: a request that produced no response may still have been applied by
 			// the server, and we cannot tell.
-			return resp, err
+			return resp, attempt, err
 		}
 
 		if c.debug {
 			dump, err := httputil.DumpResponse(resp, c.debugBody)
 			if err != nil {
-				// The caller drops a response that comes with an error, so close it here.
+				// The body cannot be used, so close it here. The response is still returned:
+				// its status and headers tell what the server answered.
 				resp.Body.Close()
-				return nil, err
+				return resp, attempt, err
 			}
 			log.Printf("\n%s\n", redactDebugDump(dump))
 		}
 
 		if attempt >= attempts || !shouldRetry(request, resp) {
-			return c.capResponseBody(resp), nil
+			return c.capResponseBody(resp), attempt, nil
 		}
 
 		delay, ok := retryDelay(c.retry, attempt, resp)
@@ -57,7 +62,7 @@ func (c *Client) send(request *http.Request) (*http.Response, error) {
 			// The server asked us to wait longer than MaxDelay allows, or this request has
 			// waited long enough. Hand the response back untouched -- its body has not been
 			// consumed -- rather than retry too early.
-			return c.capResponseBody(resp), nil
+			return c.capResponseBody(resp), attempt, nil
 		}
 		waited += delay
 
@@ -68,7 +73,7 @@ func (c *Client) send(request *http.Request) (*http.Response, error) {
 		if request.GetBody != nil {
 			body, err := request.GetBody()
 			if err != nil {
-				return nil, fmt.Errorf("ovh: cannot rewind request body for retry: %w", err)
+				return nil, attempt, fmt.Errorf("ovh: cannot rewind request body for retry: %w", err)
 			}
 			request.Body = body
 		}
@@ -79,7 +84,7 @@ func (c *Client) send(request *http.Request) (*http.Response, error) {
 		}
 
 		if err := c.wait(request.Context(), delay); err != nil {
-			return nil, err
+			return nil, attempt, err
 		}
 	}
 }

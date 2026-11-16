@@ -2,14 +2,16 @@
 
 > The Go client for the OVHcloud API (github.com/ovh/sdk-go): one package per API section under
 > pkg/, about 7 000 operations, OAuth2 service-account authentication, typed errors and
-> iterators over lists. Most of the code is generated from the API's OpenAPI specifications.
+> iterators over lists, helpers that wait for asynchronous work, and a read-only mode for
+> exploring an account safely. Most of the code is generated from the API's OpenAPI
+> specifications.
 
 Before you write a call, look up the method for its route in the operation index: guessing
 names from the URL is not reliable.
 
 ## Docs
 
-- [Guide](README.md): install, first program, finding an operation, arguments, pagination, errors, configuration
+- [Guide](README.md): install, first program, finding an operation, arguments, pagination, waiting for asynchronous work, errors, configuration
 - [Agent notes](AGENTS.md): the conventions in short, for AI coding agents
 - [Operation index](index/README.md): one index/<section>.jsonl per section, each line a method with its route, Go signature and required IAM actions
 

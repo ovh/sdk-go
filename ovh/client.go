@@ -81,6 +81,16 @@ type Client struct {
 	maxResponseBytes int64
 	debug            bool
 	debugBody        bool
+	// readOnly, readOnlyExcept and allowed are the policy WithReadOnly and
+	// WithAllowedOperations set; allowed is nil when there is no allow-list.
+	readOnly       bool
+	readOnlyExcept []string
+	allowed        []string
+	// dryRun, beforeRequest and afterRequest are set by WithDryRun, WithBeforeRequest and
+	// WithAfterRequest.
+	dryRun        bool
+	beforeRequest []BeforeRequestHook
+	afterRequest  []AfterRequestHook
 	// wait sleeps between retry attempts; tests replace it so they need not sleep.
 	wait func(ctx context.Context, d time.Duration) error
 }

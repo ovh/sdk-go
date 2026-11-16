@@ -1,1 +1,0 @@
-{"section":"session","method":"GetSession","kind":"call","http":"GET","path":"/v1/session","summary":"Get the current session user data","signature":"GetSession(ctx context.Context) (*SessionUserData, error)","iam":["account:apiovh:session/get"]}

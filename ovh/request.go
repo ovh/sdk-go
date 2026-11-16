@@ -24,6 +24,10 @@ import (
 //	var me map[string]any
 //	err := c.Do(ctx, &ovh.Request{Method: http.MethodGet, Path: "/v1/me"}, &me)
 type Request struct {
+	// Operation describes the operation the request calls. Generated methods set it; a
+	// Request built by hand may leave it nil, and the registry is then searched for the
+	// route (see [MatchOperation]).
+	Operation *Operation
 	// Method is the HTTP method, e.g. http.MethodGet.
 	Method string
 	// Path is appended to the client's endpoint and includes the API version: "/v1/me",
@@ -47,13 +51,76 @@ func (c *Client) Do(ctx context.Context, req *Request, out any) error {
 	return err
 }
 
-func (c *Client) do(ctx context.Context, req *Request, out any) (http.Header, error) {
-	httpReq, err := c.newHTTPRequest(ctx, req)
+// do sends one logical call. The steps run in this order: find the operation, apply the
+// policy (WithReadOnly, WithAllowedOperations), check and encode the request, run the before
+// hooks, stop there in dry-run mode, then sign the request and send it. The after hooks see
+// every outcome, refusals included.
+func (c *Client) do(ctx context.Context, req *Request, out any) (header http.Header, err error) {
+	start := time.Now()
+	call := &CallInfo{Method: req.Method, Path: req.Path, Query: req.Query, Body: req.Body}
+	var result CallResult
+	if len(c.afterRequest) > 0 {
+		defer func() {
+			// A panic (in a before hook, a token source...) must not look like a success to
+			// the after hooks. They see it as an error, then the panic goes on.
+			p := recover()
+			result.Err, result.Duration = err, time.Since(start)
+			if p != nil {
+				result.Err = fmt.Errorf("ovh: panic: %v", p)
+			}
+			for _, hook := range c.afterRequest {
+				hook(ctx, call, result)
+			}
+			if p != nil {
+				panic(p)
+			}
+		}()
+	}
+
+	op := req.Operation
+	if op == nil {
+		op, _ = MatchOperation(req.Method, req.Path)
+	}
+	call.Operation = op
+	if err := c.allow(op, req); err != nil {
+		return nil, err
+	}
+	if req.Operation == nil && op != nil {
+		named := *req // the caller's Request is left as it is
+		named.Operation = op
+		req = &named
+	}
+	prepared, err := c.prepare(req)
+	if err != nil {
+		return nil, err
+	}
+	call.Query = prepared.url.Query()
+
+	for _, hook := range c.beforeRequest {
+		if err := hook(ctx, call); err != nil {
+			return nil, fmt.Errorf("ovh: %s (%s %s) not sent: refused by a hook: %w", callName(op), req.Method, req.Path, err)
+		}
+	}
+	if c.dryRun && !readOnlyMethod(req.Method) {
+		header := c.headersFor(req, prepared)
+		for name := range sensitiveDebugHeaders {
+			header.Del(name)
+		}
+		return nil, &DryRunError{Operation: op, Method: req.Method, URL: prepared.url.String(),
+			Header: header, Body: prepared.body}
+	}
+
+	httpReq, err := c.sign(ctx, req, prepared)
 	if err != nil {
 		return nil, err
 	}
 
-	resp, err := c.send(httpReq)
+	resp, attempts, err := c.send(httpReq)
+	result.Attempts = attempts
+	if resp != nil {
+		// Also on an error: send may return the response it could not use.
+		result.StatusCode, result.QueryID = resp.StatusCode, resp.Header.Get("X-Ovh-Queryid")
+	}
 	if err != nil {
 		return nil, err
 	}
@@ -65,7 +132,7 @@ func (c *Client) do(ctx context.Context, req *Request, out any) (http.Header, er
 	}
 
 	if resp.StatusCode < 200 || resp.StatusCode > 299 {
-		return resp.Header, newAPIError(req, resp, body)
+		return resp.Header, newAPIError(op, req, resp, body)
 	}
 
 	if out == nil || len(body) == 0 {
@@ -82,59 +149,67 @@ func (c *Client) do(ctx context.Context, req *Request, out any) (http.Header, er
 	return resp.Header, nil
 }
 
-func (c *Client) newHTTPRequest(ctx context.Context, req *Request) (*http.Request, error) {
+// prepared is a request checked and encoded, but not signed: building it needs no token. A dry
+// run reports it, and sign turns it into an *http.Request.
+type prepared struct {
+	url    *url.URL
+	header http.Header // the headers from Params
+	body   []byte      // the JSON body, nil when the request has none
+}
+
+func (c *Client) prepare(req *Request) (*prepared, error) {
 	// The path is appended to the endpoint as text, so one not starting with "/" would change
 	// the host the request (and its bearer token) goes to: "@evil.example/" or ".evil.example/".
 	if !strings.HasPrefix(req.Path, "/") {
-		return nil, fmt.Errorf("ovh: invalid path %q: it must start with /", req.Path)
+		return nil, fmt.Errorf("%w: path %q: it must start with /", ErrInvalidRequest, req.Path)
 	}
 	path, _, _ := strings.Cut(req.Path, "?")
 	if m := placeholder.FindStringSubmatch(path); m != nil {
-		return nil, fmt.Errorf("ovh: %s %s: the path parameter %s is empty", req.Method, req.Path, m[1])
+		where := req.Method + " " + req.Path
+		if req.Operation != nil {
+			where = req.Operation.Name + " (" + where + ")"
+		}
+		return nil, fmt.Errorf("%w: %s: the path parameter %s is empty", ErrInvalidRequest, where, m[1])
 	}
 	u, err := url.Parse(c.endpoint + req.Path)
 	if err != nil {
-		return nil, fmt.Errorf("ovh: invalid path %q: %w", req.Path, err)
+		return nil, fmt.Errorf("%w: path %q: %w", ErrInvalidRequest, req.Path, err)
 	}
 
 	query := u.Query()
 	for k, vs := range req.Query {
 		query[k] = append(query[k], vs...)
 	}
-	header := http.Header{}
-	if err := encodeParams(req.Params, query, header); err != nil {
+	p := &prepared{url: u, header: http.Header{}}
+	if err := encodeParams(req.Params, query, p.header); err != nil {
 		return nil, err
 	}
 	u.RawQuery = query.Encode()
 
-	var body io.Reader
 	if req.Body != nil {
-		buf, err := json.Marshal(req.Body)
+		p.body, err = json.Marshal(req.Body)
 		if err != nil {
 			return nil, fmt.Errorf("ovh: %s %s: encoding body: %w", req.Method, req.Path, err)
 		}
+	}
+	return p, nil
+}
+
+// sign builds the *http.Request of a prepared request: it adds the headers and the OAuth2
+// token.
+func (c *Client) sign(ctx context.Context, req *Request, p *prepared) (*http.Request, error) {
+	var body io.Reader
+	if p.body != nil {
 		// A *bytes.Reader lets http.NewRequest set GetBody, so retries can resend it.
-		body = bytes.NewReader(buf)
+		body = bytes.NewReader(p.body)
 	}
 
-	httpReq, err := http.NewRequestWithContext(ctx, req.Method, u.String(), body)
+	httpReq, err := http.NewRequestWithContext(ctx, req.Method, p.url.String(), body)
 	if err != nil {
 		return nil, err
 	}
 
-	httpReq.Header.Set("Accept", "application/json")
-	if body != nil {
-		httpReq.Header.Set("Content-Type", "application/json")
-	}
-	for _, h := range []http.Header{c.headers, header, req.Header} {
-		for k, vs := range h {
-			for _, v := range vs {
-				httpReq.Header.Add(k, v)
-			}
-		}
-	}
-	// Set last, so neither the client's headers nor a Request can replace it.
-	httpReq.Header.Set("User-Agent", c.userAgent)
+	httpReq.Header = c.headersFor(req, p)
 
 	token, err := c.tokens.Token()
 	if err != nil {
@@ -143,6 +218,26 @@ func (c *Client) newHTTPRequest(ctx context.Context, req *Request) (*http.Reques
 	token.SetAuthHeader(httpReq)
 
 	return httpReq, nil
+}
+
+// headersFor returns the headers of a request, all but the Authorization header that sign adds
+// last.
+func (c *Client) headersFor(req *Request, p *prepared) http.Header {
+	header := http.Header{}
+	header.Set("Accept", "application/json")
+	if p.body != nil {
+		header.Set("Content-Type", "application/json")
+	}
+	for _, h := range []http.Header{c.headers, p.header, req.Header} {
+		for k, vs := range h {
+			for _, v := range vs {
+				header.Add(k, v)
+			}
+		}
+	}
+	// Set last, so neither the client's headers nor a Request can replace it.
+	header.Set("User-Agent", c.userAgent)
+	return header
 }
 
 // Call sends req and returns the decoded response. The section packages use it, one call per

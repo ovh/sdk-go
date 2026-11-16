@@ -198,9 +198,28 @@ func (s *Service) GetVrack(ctx context.Context, serviceName string) (*VrackVrack
 ```
 
 After the route, a method's documentation gives the API's description of the operation, what
-each argument is, the IAM actions your service account needs, and whether the operation is in
-beta or deprecated (with its removal date and replacement, when the API gives them). `go doc` on
+each argument is, the IAM actions your service account needs, and whether the operation is
+deprecated (with its removal date and replacement, when the API gives them). `go doc` on
 a type shows its fields, each with its description.
+
+`go doc` on a package shows the routes it calls and the lists to start from:
+
+```shell
+go doc github.com/ovh/sdk-go/pkg/vrack
+```
+
+### At run time
+
+Every operation of the packages your program imports is registered, with its route, summary and
+required IAM actions:
+
+```go
+op, ok := ovh.LookupOperation("vrack.GetVrack")
+fmt.Println(op.Method, op.Path, op.IAMActions) // GET /v1/vrack/{serviceName} [vrack:apiovh:get]
+
+op, ok = ovh.MatchOperation(http.MethodGet, "/v1/vrack/pn-123456") // the operation of a URL
+for _, op := range ovh.Operations() { ... }                         // all of them, by name
+```
 
 ---
 
@@ -232,6 +251,57 @@ ids, err := vracks.ListVracks(ctx, vrack.ListVracksParams{        // filtered on
 ```go
 fmt.Println(ovh.Value(v.Name))
 ```
+
+### Waiting for the work to finish
+
+Many operations only start the work. A v2 resource comes back `CREATING` or `UPDATING` and
+becomes `READY` later; many v1 operations return a task that moves from `todo` to `done`.
+Rather than sleeping in a loop, wait with the GET of the same object:
+
+```go
+inst, err := pc.CreateInstance(ctx, projectID, spec)
+if err != nil {
+	return err
+}
+inst, err = ovh.WaitReady(ctx, func(ctx context.Context) (*publiccloud.PublicCloudInstanceInstance, error) {
+	return pc.GetInstance(ctx, projectID, ovh.Value(inst.ID))
+})
+```
+
+| Function | Polls until |
+|---|---|
+| `ovh.WaitReady(ctx, get)` | the object's `ResourceStatus` is `READY` (v2 resources) |
+| `ovh.WaitTask(ctx, get)` | the task's `Status` is `done` or `DONE` |
+| `ovh.WaitGone(ctx, get)` | `get` answers 404, after a deletion |
+| `ovh.Wait(ctx, get, done)` | your `done` function says so |
+
+They poll every 2 seconds at first, then less often, up to every 30 seconds, and give up after
+30 minutes (`ovh.WaitTimeout(d)`, `ovh.WaitPoll(first, max)`); the context can stop them
+sooner. A failed status (a resource in `ERROR`, a task in error, cancelled, or waiting for an
+action) ends the wait with an error matching `ovh.ErrWaitFailed`. A 429 or a 5xx is polled
+again; any other error ends the wait. Each returns the last value it read, with the error.
+
+### Request bodies have no read-only fields
+
+The API sets some fields itself: an ID, a creation date, a status. A type the API returns has
+them, marked `Read-only` in its documentation. A request body never does, so you cannot send one
+by mistake. A body whose type has read-only fields takes that type's **writable** form instead,
+named with `Writable` after it.
+
+To change an object, get it, then call its `Writable` method: it returns the object in that
+form, nested objects included. Change what you need, then send it:
+
+```go
+web := hostingweb.New(client)
+v, err := web.GetEnvVar(ctx, "example.com", "API_URL") // *HostingWebEnvVar: Key, Type and Status are read-only
+body := v.Writable()                                   // HostingWebEnvVarWritable
+body.Value = ovh.Ptr("https://api.example.com")
+task, err := web.UpdateEnvVar(ctx, "example.com", "API_URL", body)
+```
+
+`Writable` returns a deep copy: changing `body` leaves `v` as it was. You can also build the
+writable form yourself, with only the fields you set:
+`hostingweb.HostingWebEnvVarWritable{Value: ovh.Ptr("https://api.example.com")}`.
 
 ### `List` and `All`
 
@@ -277,7 +347,7 @@ for p, err := range publiccloud.New(client).AllProjects(ctx) {
 	if err != nil {
 		return err
 	}
-	if ovh.Value(p.ResourceStatus) == "READY" {
+	if ovh.Value(p.ResourceStatus) == publiccloud.CommonResourceStatusEnumReady {
 		fmt.Println(ovh.Value(p.ID))
 		break
 	}
@@ -295,10 +365,11 @@ over the objects (see [`List` and `All`](#list-and-all)).
 
 ## 6. Handling errors
 
-Printing an error shows what the API said:
+Printing an error shows the method, the route and what the API said. On a 401 or a 403, it
+also gives the IAM actions the call needs, which the service account's policy must grant:
 
 ```
-GET /v1/vrack/pn-1: 403 Forbidden: This call has not been granted (Client::Forbidden)
+vrack.GetVrack: GET /v1/vrack/pn-1: 403 Forbidden: This call has not been granted (Client::Forbidden); requires the IAM action vrack:apiovh:get
 ```
 
 To act on a common status, use `errors.Is`:
@@ -320,7 +391,8 @@ if errors.Is(err, ovh.ErrNotFound) {
 | 429 | `ovh.ErrTooManyRequests` |
 
 For anything else, use `errors.As` with `*ovh.APIError`. It carries `StatusCode`, the API's
-`Class` and `Message`, `QueryID` (the identifier OVHcloud support asks for), and the raw `Body`:
+`Class` and `Message`, `QueryID` (the identifier OVHcloud support asks for), the raw `Body`,
+the method's name in `Operation`, and the IAM actions the call needs in `IAMActions`:
 
 ```go
 var apiErr *ovh.APIError
@@ -333,8 +405,14 @@ An empty path parameter is refused before anything is sent, since `GetVrack(ctx,
 otherwise call `GET /v1/vrack/`, another route:
 
 ```
-ovh: GET /v1/vrack/{serviceName}: the path parameter serviceName is empty
+ovh: invalid request: vrack.GetVrack (GET /v1/vrack/{serviceName}): the path parameter serviceName is empty
 ```
+
+It matches `ovh.ErrInvalidRequest`. A request refused by the client's configuration
+(`WithReadOnly`, `WithAllowedOperations`, below) is an `*ovh.NotAllowedError`, matching
+`ovh.ErrNotAllowed`; nothing is sent either. A call that `WithDryRun` does not send is an
+`*ovh.DryRunError`, matching `ovh.ErrDryRun`. A call refused by a hook returns an error that
+wraps the hook's own error.
 
 ---
 
@@ -357,6 +435,94 @@ Options are passed once, to `ovh.NewClient`. All are optional.
 | `WithProxy(fn)` | Choose a proxy. By default the SDK honours `HTTP_PROXY` / `HTTPS_PROXY`. |
 | `WithUserAgent("my-tool/1.2")` | Names your application in the `User-Agent`, after the SDK's own `ovhcloud-go-sdk/<version> (…)`, which is always sent. |
 | `WithHTTPClient(hc)`, `WithEndpoint(url)`, `WithHeader(k, v)` | For proxies, tests and special cases. `WithHeader` cannot set `User-Agent`. |
+| `WithReadOnly(except...)` | Send only `GET` and `HEAD`, and the operations named in `except`. Anything else is refused before it is sent. |
+| `WithAllowedOperations(patterns...)` | Send only the operations whose name matches a pattern: `"vrack.GetVrack"`, `"vrack.*"`, `"*.Get*"`. |
+| `WithDryRun()` | Send reads (`GET`, `HEAD`) as usual. Do not send anything else: return an `*ovh.DryRunError` with the URL and body it would have sent. |
+| `WithBeforeRequest(hook)` | Run `hook` before each call, to log it or to refuse it by returning an error. |
+| `WithAfterRequest(hook)` | Run `hook` after each call, with its status, query ID, error, duration and number of attempts. |
+
+**Limiting what a client can do.** A program, or an AI agent, that should only look at an
+account can get a read-only client, so a bug cannot change anything:
+
+```go
+client, err := ovh.NewClient(ovh.WithReadOnly())                                   // reads only
+client, err := ovh.NewClient(ovh.WithReadOnly("cloud.RebootProjectInstance"))      // reads, and one action
+client, err := ovh.NewClient(ovh.WithAllowedOperations("vrack.*", "dedicatedserver.Get*")) // these only
+```
+
+Operations are named as in Go, package and method. A request must pass both options when both
+are given. Through `Client.Do`, a route is named by the packages your program imports; with
+`WithAllowedOperations`, a route none of them declares is refused. The IAM policy of the service
+account remains the real limit: these options protect against mistakes, not against someone
+who controls the program.
+
+**Planning changes with a dry run.** With `WithDryRun()`, a program reads the real state of the
+account, but changes nothing. A call that would change something is not sent. It returns an
+`*ovh.DryRunError`, which matches `ovh.ErrDryRun`, and holds what would have been sent:
+
+```go
+client, err := ovh.NewClient(ovh.WithDryRun())
+...
+_, err = vrack.New(client).CreateCloudProject(ctx, "pn-1", vrack.CreateCloudProjectRequest{
+	Project: "0123456789abcdef",
+})
+var dry *ovh.DryRunError
+if errors.As(err, &dry) {
+	fmt.Println(dry.Method, dry.URL, string(dry.Body))
+}
+```
+
+```
+POST https://api.eu.ovhcloud.com/v1/vrack/pn-1/cloudProject {"project":"0123456789abcdef"}
+```
+
+Printed, the error itself reads:
+
+```
+ovh: vrack.CreateCloudProject (POST https://api.eu.ovhcloud.com/v1/vrack/pn-1/cloudProject) not sent: dry run
+```
+
+`Operation` is the operation (nil when the route is unknown), `URL` is the full URL with its
+query, `Header` the headers, and `Body` the JSON body. No OAuth2 token is fetched for such a
+call, and the credential headers (`Authorization`, `Cookie`...) are left out. It is never
+retried. The policy still applies first: with `WithReadOnly` or `WithAllowedOperations`, a
+refused call stays an `*ovh.NotAllowedError`.
+
+**Watching every call with hooks.** A hook sees every call the client makes, with the operation
+it calls. Use it to keep an audit log, or to refuse some calls:
+
+```go
+client, err := ovh.NewClient(
+	ovh.WithBeforeRequest(func(ctx context.Context, call *ovh.CallInfo) error {
+		if call.Operation != nil && call.Operation.Deprecated {
+			return fmt.Errorf("%s is deprecated", call.Operation.Name)
+		}
+		return nil
+	}),
+	ovh.WithAfterRequest(func(ctx context.Context, call *ovh.CallInfo, r ovh.CallResult) {
+		log.Printf("%s %s: %d in %s (%d attempts, query %s): %v",
+			call.Method, call.Path, r.StatusCode, r.Duration, r.Attempts, r.QueryID, r.Err)
+	}),
+)
+```
+
+- `CallInfo` has the `Operation` (nil when the route is unknown), `Method`, `Path`, `Query` and
+  `Body`. It never holds the token.
+- A before hook runs once per call, just before it is sent. Retries do not run it again. If it
+  returns an error, nothing is sent, and the error the caller gets wraps it (`errors.Is` works).
+- An after hook runs once per call, after the retries. It also sees the calls that were not
+  sent: refused by the policy or by a before hook, malformed, or stopped by a dry run. Then
+  `StatusCode` and `Attempts` are 0.
+- Several hooks run in the order they were given.
+- A client is shared, so calls made at the same time run the same hook at the same time. A
+  hook must be safe for concurrent use: protect what it writes with a mutex, for example.
+- If a call panics (in a before hook, for example), the after hooks still run, with an error
+  that says so, and then the panic goes on.
+- Each page of an `AllX` iterator is a separate call, so the hooks run once per page.
+
+In one call, the steps run in this order: find the operation, check `WithReadOnly` and
+`WithAllowedOperations`, check the request, run the before hooks, stop if it is a dry run,
+then send. The after hooks run last, whatever happened.
 
 A reasonable starting point:
 

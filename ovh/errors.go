@@ -13,9 +13,10 @@ import (
 )
 
 // APIError is returned for any response outside 2xx. Its message is the API's own, so
-// printing the error is usually enough to see what went wrong:
+// printing the error is usually enough to see what went wrong. It names the operation, and on
+// a 401 or 403 the IAM actions the call needs:
 //
-//	GET /v1/me: 401 Unauthorized: You must login first (Client::Unauthorized)
+//	me.GetMe: GET /v1/me: 403 Forbidden: ... (Client::Forbidden); requires the IAM action account:apiovh:me/get
 //
 // Match a common status with errors.Is:
 //
@@ -26,6 +27,12 @@ import (
 //	var apiErr *ovh.APIError
 //	if errors.As(err, &apiErr) && apiErr.StatusCode == http.StatusConflict { ... }
 type APIError struct {
+	// Operation is the operation's name, "me.GetMe", when the request was one the registry
+	// knows: a generated method's, or one Client.Do matched (see [MatchOperation]).
+	Operation string
+	// IAMActions are the IAM actions the operation needs: on a 403, the caller's policy lacks
+	// one of them.
+	IAMActions []string
 	Method     string
 	Path       string
 	StatusCode int
@@ -76,7 +83,7 @@ func (e *APIError) Is(target error) bool {
 	return false
 }
 
-func newAPIError(req *Request, resp *http.Response, body []byte) *APIError {
+func newAPIError(op *Operation, req *Request, resp *http.Response, body []byte) *APIError {
 	e := &APIError{
 		Method:     req.Method,
 		Path:       req.Path,
@@ -92,11 +99,17 @@ func newAPIError(req *Request, resp *http.Response, body []byte) *APIError {
 	if json.Unmarshal(body, &payload) == nil {
 		e.Class, e.Message = payload.Class, payload.Message
 	}
+	if op != nil {
+		e.Operation, e.IAMActions = op.Name, op.IAMActions
+	}
 	return e
 }
 
 func (e *APIError) Error() string {
 	var b strings.Builder
+	if e.Operation != "" {
+		fmt.Fprintf(&b, "%s: ", e.Operation)
+	}
 	fmt.Fprintf(&b, "%s %s: %s", e.Method, e.Path, e.Status)
 	switch {
 	case e.Message != "":
@@ -107,5 +120,45 @@ func (e *APIError) Error() string {
 	if e.Class != "" {
 		fmt.Fprintf(&b, " (%s)", e.Class)
 	}
+	if len(e.IAMActions) > 0 && (e.StatusCode == http.StatusUnauthorized || e.StatusCode == http.StatusForbidden) {
+		s := ""
+		if len(e.IAMActions) > 1 {
+			s = "s"
+		}
+		fmt.Fprintf(&b, "; requires the IAM action%s %s", s, strings.Join(e.IAMActions, ", "))
+	}
 	return b.String()
+}
+
+// ErrInvalidRequest is matched, with errors.Is, by the error of a request refused before it is
+// sent because it is malformed: an empty path parameter, a path not starting with "/".
+var ErrInvalidRequest = errors.New("ovh: invalid request")
+
+// ErrNotAllowed is matched, with errors.Is, by the *NotAllowedError of a request the client's
+// configuration refuses ([WithReadOnly], [WithAllowedOperations]).
+var ErrNotAllowed = errors.New("ovh: operation not allowed")
+
+// NotAllowedError is returned, before anything is sent, for a request the client is configured
+// to refuse.
+type NotAllowedError struct {
+	// Operation is the refused operation's name, empty when the registry does not know the
+	// route (a Client.Do call to a package the program does not import).
+	Operation string
+	Method    string
+	Path      string
+	// Reason says which option refused it.
+	Reason string
+}
+
+func (e *NotAllowedError) Error() string {
+	name := e.Operation
+	if name == "" {
+		name = "request"
+	}
+	return fmt.Sprintf("ovh: %s (%s %s) not sent: %s", name, e.Method, e.Path, e.Reason)
+}
+
+// Is makes errors.Is(err, ovh.ErrNotAllowed) true.
+func (e *NotAllowedError) Is(target error) bool {
+	return target == ErrNotAllowed
 }

@@ -2,6 +2,4915 @@
 
 Notable changes to the SDK. Behavioural changes are called out explicitly.
 
+## 0.6.1 (2026-11-16)
+
+Compared with 0.4.0.
+
+### Breaking changes
+
+Code using these must change.
+
+- `auth`: `Credential` takes a `AuthAPICredentialRequestParams` instead of a `CredentialRequest` (POST /v1/auth/credential)
+- `auth`: `AuthShouldDisplayMFAEnrollmentEnumFalse`: removed
+- `auth`: `AuthShouldDisplayMFAEnrollmentEnumForced`: removed
+- `auth`: `AuthShouldDisplayMFAEnrollmentEnumTrue`: removed
+- `auth`: `CredentialRequest.AccessRules`: changed from []AuthAccessRule to []AuthAccessRuleRequest
+- `cloud`: 129 changes, listed below
+- `domain`: 31 changes, listed below
+- `location`: `AllLocations`, `GetLocation`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode`
+- `me`: 142 changes, listed below
+- `order`: `CreateCartBackupServicesOptions`, `CreateCartBackupServices`, `CreateCartDomain`, `CreateCartVcdaMigrationOptions`, `CreateCartVcdaMigration`, `CreateCartVrackServicesOptions`, `CreateCartVrackServices`, `GetCatalogPublicAdvisoryServicesHostingWeb`, `GetCatalogPublicAdvisoryServicesPublicCloud`, `GetCatalogPublicAdvisoryServicesTelecom`, `GetCatalogPublicBackupServices`, `GetCatalogPublicVcdaMigration`, `ListCartBackupServicesOptions`, `ListCartBackupServices`, `ListCartDomains`, `ListCartVcdaMigrationOptions`, `ListCartVcdaMigrations`, `ListCartVrackServicesOptions`, `ListCartVrackServices`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode`
+- `ovhcloudconnect`: `OvhcloudconnectCatalogEnumOccPublic`: removed
+- `ovhcloudconnect`: `OvhcloudconnectRegionEnumAny`: removed
+- `ovhcloudconnect`: `OvhcloudconnectRegionEnumCa`: removed
+- `ovhcloudconnect`: `OvhcloudconnectRegionEnumEu`: removed
+- `ovhcloudconnect`: `OvhcloudconnectRegionEnumUs`: removed
+- `packxdsl`: `XdslDslTypeEnumAdsl`: removed
+- `packxdsl`: `XdslDslTypeEnumFtte`: removed
+- `packxdsl`: `XdslDslTypeEnumFtth`: removed
+- `packxdsl`: `XdslDslTypeEnumFtto`: removed
+- `packxdsl`: `XdslDslTypeEnumSdsl`: removed
+- `packxdsl`: `XdslDslTypeEnumVdsl`: removed
+- `publiccloud`: 15 changes, listed below
+- `xdsl`: 19 changes, listed below
+
+<details>
+<summary>Breaking changes: everything in cloud, domain, me, publiccloud, xdsl</summary>
+
+#### `cloud`
+
+- `CloudAggregatedSortOrderEnumAsc`: removed
+- `CloudAggregatedSortOrderEnumDesc`: removed
+- `CloudCatalogImageCategoryEnumApps`: removed
+- `CloudCatalogImageCategoryEnumLinux`: removed
+- `CloudCatalogImageCategoryEnumSnapshot`: removed
+- `CloudCatalogImageCategoryEnumUnknown`: removed
+- `CloudCatalogImageCategoryEnumWindows`: removed
+- `CloudCatalogImageSubCategoryEnumAlmalinux`: removed
+- `CloudCatalogImageSubCategoryEnumCentos`: removed
+- `CloudCatalogImageSubCategoryEnumCloudlinux`: removed
+- `CloudCatalogImageSubCategoryEnumCoreos`: removed
+- `CloudCatalogImageSubCategoryEnumCpanel`: removed
+- `CloudCatalogImageSubCategoryEnumDataiku`: removed
+- `CloudCatalogImageSubCategoryEnumDatascience`: removed
+- `CloudCatalogImageSubCategoryEnumDebian`: removed
+- `CloudCatalogImageSubCategoryEnumDocker`: removed
+- `CloudCatalogImageSubCategoryEnumDokku`: removed
+- `CloudCatalogImageSubCategoryEnumEmpty`: removed
+- `CloudCatalogImageSubCategoryEnumFedora`: removed
+- `CloudCatalogImageSubCategoryEnumFreebsd`: removed
+- `CloudCatalogImageSubCategoryEnumLinux`: removed
+- `CloudCatalogImageSubCategoryEnumMinikube`: removed
+- `CloudCatalogImageSubCategoryEnumN8n`: removed
+- `CloudCatalogImageSubCategoryEnumNvidiaNgc`: removed
+- `CloudCatalogImageSubCategoryEnumPlesk`: removed
+- `CloudCatalogImageSubCategoryEnumRockylinux`: removed
+- `CloudCatalogImageSubCategoryEnumRstudio`: removed
+- `CloudCatalogImageSubCategoryEnumUbuntu`: removed
+- `CloudCatalogImageSubCategoryEnumWindows`: removed
+- `CloudCatalogInstanceBackupPricingIntervalEnumHour`: removed
+- `CloudCatalogInstanceBackupPricingIntervalEnumMonth`: removed
+- `CloudCatalogInstancesFlavorRegionStockStatusEnumAvailable`: removed
+- `CloudCatalogInstancesFlavorRegionStockStatusEnumLow`: removed
+- `CloudCatalogInstancesFlavorRegionStockStatusEnumOutOfStock`: removed
+- `CloudCatalogInstancesFlavorSpecDiskInterfaceEnumNvMeEphemeral`: removed
+- `CloudCatalogInstancesFlavorSpecDiskInterfaceEnumNvMePassthrough`: removed
+- `CloudCatalogInstancesFlavorSpecDiskInterfaceEnumNvMe`: removed
+- `CloudCatalogInstancesFlavorSpecDiskInterfaceEnumSsd`: removed
+- `CloudCatalogInstancesFlavorSpecGPUMemoryInterfaceEnumGddr5X`: removed
+- `CloudCatalogInstancesFlavorSpecGPUMemoryInterfaceEnumGddr5`: removed
+- `CloudCatalogInstancesFlavorSpecGPUMemoryInterfaceEnumGddr6`: removed
+- `CloudCatalogInstancesFlavorSpecGPUMemoryInterfaceEnumHBM2e`: removed
+- `CloudCatalogInstancesFlavorSpecGPUMemoryInterfaceEnumHBM3e`: removed
+- `CloudCatalogInstancesFlavorSpecGPUMemoryInterfaceEnumHbm2`: removed
+- `CloudCatalogInstancesFlavorSpecGPUMemoryInterfaceEnumNvMe`: removed
+- `CloudCatalogLoadbalancerPricingPriceTypeEnumHour`: removed
+- `CloudCatalogNetworkIPModelTypeEnumFloatingIP`: removed
+- `CloudCatalogNetworkIPModelTypeEnumPublicIP`: removed
+- `CloudCatalogNetworkSubnetCapabilityEnumFloatingIP`: removed
+- `CloudCatalogNetworkSubnetCapabilityEnumPublicIP`: removed
+- `CloudCatalogShareModelPricingIntervalEnumHour`: removed
+- `CloudCatalogShareModelPricingIntervalEnumMonth`: removed
+- `CloudCatalogVolumeModelPricingIntervalEnumHour`: removed
+- `CloudCatalogVolumeModelPricingIntervalEnumMonth`: removed
+- `CloudCatalogVolumeModelPricingIntervalEnumNone`: removed
+- `CloudIPExtnetIPStatusEnumActive`: removed
+- `CloudIPExtnetIPStatusEnumBuild`: removed
+- `CloudIPExtnetIPStatusEnumDown`: removed
+- `CloudIPExtnetIPStatusEnumError`: removed
+- `CloudInstanceSearchFieldEnumFlavor`: removed
+- `CloudInstanceSearchFieldEnumImage`: removed
+- `CloudInstanceSearchFieldEnumName`: removed
+- `CloudInstanceSearchFieldEnumRegion`: removed
+- `CloudInstanceSearchSortEnumCreationDate`: removed
+- `CloudInstanceSearchSortEnumFlavor`: removed
+- `CloudInstanceSearchSortEnumImage`: removed
+- `CloudInstanceSearchSortEnumName`: removed
+- `CloudInstanceSearchSortEnumRegion`: removed
+- `CloudProjectAiDataStoreContainersListStatusTypeEnumFailed`: removed
+- `CloudProjectAiDataStoreContainersListStatusTypeEnumPartial`: removed
+- `CloudProjectAiDataStoreContainersListStatusTypeEnumSuccess`: removed
+- `CloudProjectAiGuideLanguageEnumDeDe`: removed
+- `CloudProjectAiGuideLanguageEnumDe`: removed
+- `CloudProjectAiGuideLanguageEnumEnAsia`: removed
+- `CloudProjectAiGuideLanguageEnumEnAu`: removed
+- `CloudProjectAiGuideLanguageEnumEnCa`: removed
+- `CloudProjectAiGuideLanguageEnumEnGb`: removed
+- `CloudProjectAiGuideLanguageEnumEnIe`: removed
+- `CloudProjectAiGuideLanguageEnumEnSg`: removed
+- `CloudProjectAiGuideLanguageEnumEnUs`: removed
+- `CloudProjectAiGuideLanguageEnumEn`: removed
+- `CloudProjectAiGuideLanguageEnumEsEs`: removed
+- `CloudProjectAiGuideLanguageEnumEsUs`: removed
+- `CloudProjectAiGuideLanguageEnumFrCa`: removed
+- `CloudProjectAiGuideLanguageEnumFrFr`: removed
+- `CloudProjectAiGuideLanguageEnumFr`: removed
+- `CloudProjectAiGuideLanguageEnumItIt`: removed
+- `CloudProjectAiGuideLanguageEnumIt`: removed
+- `CloudProjectAiGuideLanguageEnumPlPl`: removed
+- `CloudProjectAiGuideLanguageEnumPl`: removed
+- `CloudProjectAiGuideLanguageEnumPtPt`: removed
+- `CloudProjectAiGuideLanguageEnumPt`: removed
+- `CloudProjectDatabaseCapabilitiesRegionTypeEnum1Az`: removed
+- `CloudProjectDatabaseCapabilitiesRegionTypeEnum3Az`: removed
+- `CloudProjectRegionImageOsTypeEnumBaremetalLinux`: removed
+- `CloudProjectRegionImageOsTypeEnumLinux`: removed
+- `CloudProjectRegionImageOsTypeEnumWindows`: removed
+- `CloudProjectRegionImageStatusEnumActive`: removed
+- `CloudProjectRegionImageStatusEnumDeleted`: removed
+- `CloudProjectRegionImageStatusEnumError`: removed
+- `CloudProjectRegionImageStatusEnumQueued`: removed
+- `CloudProjectRegionImageStatusEnumSaving`: removed
+- `CloudProjectRegionImageTypeEnumCustom`: removed
+- `CloudProjectRegionImageTypeEnumOfficial`: removed
+- `CloudProjectRegionImageTypeEnumRescue`: removed
+- `CloudProjectRegionImageTypeEnumSnapshot`: removed
+- `CloudProjectRegionImageVisibilityEnumCommunity`: removed
+- `CloudProjectRegionImageVisibilityEnumPrivate`: removed
+- `CloudProjectRegionImageVisibilityEnumPublic`: removed
+- `CloudProjectRegionImageVisibilityEnumShared`: removed
+- `CloudShareSearchFieldEnumName`: removed
+- `CloudShareSearchFieldEnumRegion`: removed
+- `CloudShareSearchFieldEnumShareID`: removed
+- `CloudShareSearchSortEnumCreationDate`: removed
+- `CloudShareSearchSortEnumName`: removed
+- `CloudShareSearchSortEnumRegion`: removed
+- `CloudShareSearchSortEnumSize`: removed
+- `CloudSubnetSubnetCapabilityEnumFloatingIP`: removed
+- `CloudSubnetSubnetCapabilityEnumPublicIP`: removed
+- `CloudVolumeVolumeBandwidthUnitEnumGbS`: removed
+- `CloudVolumeVolumeBandwidthUnitEnumGiBS`: removed
+- `CloudVolumeVolumeBandwidthUnitEnumMbSGb`: removed
+- `CloudVolumeVolumeBandwidthUnitEnumMbS`: removed
+- `CloudVolumeVolumeBandwidthUnitEnumMiBSGiB`: removed
+- `CloudVolumeVolumeBandwidthUnitEnumMiBS`: removed
+- `CloudVolumeVolumeIopsUnitEnumIopsGb`: removed
+- `CloudVolumeVolumeIopsUnitEnumIopsGiB`: removed
+- `CloudVolumeVolumeIopsUnitEnumIops`: removed
+- `GetOrderRuleAvailability`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/cloud/order/rule/availability)
+
+#### `domain`
+
+- `DomainAftermarketPlatformEnumSedo`: removed
+- `DomainApproveTypeEnumAccept`: removed
+- `DomainApproveTypeEnumReject`: removed
+- `DomainOvhSubsidiaryEnumDe`: removed
+- `DomainOvhSubsidiaryEnumEs`: removed
+- `DomainOvhSubsidiaryEnumFr`: removed
+- `DomainOvhSubsidiaryEnumGb`: removed
+- `DomainOvhSubsidiaryEnumIe`: removed
+- `DomainOvhSubsidiaryEnumIt`: removed
+- `DomainOvhSubsidiaryEnumMa`: removed
+- `DomainOvhSubsidiaryEnumNl`: removed
+- `DomainOvhSubsidiaryEnumPl`: removed
+- `DomainOvhSubsidiaryEnumPt`: removed
+- `DomainOvhSubsidiaryEnumSn`: removed
+- `DomainOvhSubsidiaryEnumTn`: removed
+- `GetExtensionsByCategory`, `GetExtensionsRegistryConfigurations`, `GetExtensions`, `ListExtensionsHighlighteds`, `ListExtensionsPricingAttributes`, `ListExtensions`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode`
+- `OrderCurrencyCodeEnumAud`: removed
+- `OrderCurrencyCodeEnumCad`: removed
+- `OrderCurrencyCodeEnumCzk`: removed
+- `OrderCurrencyCodeEnumEur`: removed
+- `OrderCurrencyCodeEnumGbp`: removed
+- `OrderCurrencyCodeEnumInr`: removed
+- `OrderCurrencyCodeEnumLtl`: removed
+- `OrderCurrencyCodeEnumMad`: removed
+- `OrderCurrencyCodeEnumNA`: removed
+- `OrderCurrencyCodeEnumPln`: removed
+- `OrderCurrencyCodeEnumPoints`: removed
+- `OrderCurrencyCodeEnumSgd`: removed
+- `OrderCurrencyCodeEnumTnd`: removed
+- `OrderCurrencyCodeEnumUsd`: removed
+- `OrderCurrencyCodeEnumXof`: removed
+
+#### `me`
+
+- `BillingBillingTaskStatusEnumCancelled`: removed
+- `BillingBillingTaskStatusEnumCustomerError`: removed
+- `BillingBillingTaskStatusEnumDoing`: removed
+- `BillingBillingTaskStatusEnumDone`: removed
+- `BillingBillingTaskStatusEnumInit`: removed
+- `BillingBillingTaskStatusEnumOvhError`: removed
+- `BillingBillingTaskStatusEnumTodo`: removed
+- `BillingOrderPaymentMeanFieldTypeEnumHidden`: removed
+- `BillingOrderPaymentMeanFieldTypeEnumSelect`: removed
+- `BillingOrderPaymentMeanFieldTypeEnumText`: removed
+- `BillingOrderPaymentMeanIntegrationEnumGetForm`: removed
+- `BillingOrderPaymentMeanIntegrationEnumPostForm`: removed
+- `BillingOrderPaymentMeanIntegrationEnumRedirect`: removed
+- `BillingVoucherAccountOperationEnumCancelCredit`: removed
+- `BillingVoucherAccountOperationEnumCancelDebit`: removed
+- `BillingVoucherAccountOperationEnumCancelPreDebit`: removed
+- `BillingVoucherAccountOperationEnumCredit`: removed
+- `BillingVoucherAccountOperationEnumDebit`: removed
+- `BillingVoucherAccountOperationEnumPreCredit`: removed
+- `BillingVoucherAccountOperationEnumPreDebit`: removed
+- `CreateOrderVoucher`, `CreatePaymentMethod2`, `DeleteOrderVoucher`, `DeletePaymentMethodByID`, `GetBillDownload`, `GetDepositDownload`, `GetDepositPaidBillsDownload`, `GetDepositRequest`, `GetOrderByOrderIDDetailsByDetailIDExtension`, `GetOrderByOrderIDDetailsByDetailID`, `GetOrderDetailsOperations`, `GetOrderVoucher`, `GetPaymentMethodByID`, `GetRefundDownload`, `GetWithdrawalDownload`, `ListDepositRequests`, `ListOrderAvailablePaymentMethods`, `ListOrderDetailsOperations`, `ListOrderVouchers`, `ListPaymentMethod2`, `UpdatePaymentMethodByID`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode`
+- `GetProcedure2FA500Response`: removed
+- `MeProcedure2FAHTTPMethodEnumPost`: removed
+- `MeProcedure2FAHTTPMethodEnumPut`: removed
+- `MeProcedure2FAStatusEnumOpen`: removed
+- `MeProcedureFraudHTTPMethodEnumPost`: removed
+- `MeProcedureFraudHTTPMethodEnumPut`: removed
+- `MeProcedureFraudStatusEnumOK`: removed
+- `MeProcedureFraudStatusEnumOpen`: removed
+- `MeProcedureFraudStatusEnumRequired`: removed
+- `MeProcedureGDPRCategoryEnumAccessRight`: removed
+- `MeProcedureGDPRCategoryEnumErasureRight`: removed
+- `MeProcedureGDPRCategoryEnumLimitationRight`: removed
+- `MeProcedureGDPRCategoryEnumOppositionRight`: removed
+- `MeProcedureGDPRCategoryEnumOtherRequest`: removed
+- `MeProcedureGDPRCategoryEnumPaymentMethodRemove`: removed
+- `MeProcedureGDPRCategoryEnumPortabilityRight`: removed
+- `MeProcedureGDPRCategoryEnumRectificationRight`: removed
+- `MeProcedureGDPRHTTPMethodEnumPost`: removed
+- `MeProcedureGDPRHTTPMethodEnumPut`: removed
+- `MeProcedureIdentityHTTPMethodEnumPost`: removed
+- `MeProcedureIdentityHTTPMethodEnumPut`: removed
+- `MeProcedureIdentityStatusEnumOK`: removed
+- `MeProcedureIdentityStatusEnumOpen`: removed
+- `MeProcedureIdentityStatusEnumRequired`: removed
+- `MeSvaBankAccountStatusEnumActive`: removed
+- `MeSvaBankAccountStatusEnumBlocked`: removed
+- `MeSvaBankAccountStatusEnumCreated`: removed
+- `MeSvaBankAccountStatusEnumDisabled`: removed
+- `MeSvaBankAccountStatusEnumRejected`: removed
+- `MeSvaCashoutStatusEnumDone`: removed
+- `MeSvaCashoutStatusEnumError`: removed
+- `MeSvaCashoutStatusEnumPending`: removed
+- `MeSvaCdrStatusEnumCreated`: removed
+- `MeSvaCdrStatusEnumError`: removed
+- `MeSvaCdrStatusEnumPaid`: removed
+- `MeSvaCdrStatusEnumPaying`: removed
+- `MeSvaDocumentNatureEnumAdministrationMandate`: removed
+- `MeSvaDocumentNatureEnumBeneficiariesRegistryDbeS1`: removed
+- `MeSvaDocumentNatureEnumBodaccDocument`: removed
+- `MeSvaDocumentNatureEnumBusinessRegisterCertificate`: removed
+- `MeSvaDocumentNatureEnumCommercialCorporateRegisterCertificate`: removed
+- `MeSvaDocumentNatureEnumCompanyAgreement`: removed
+- `MeSvaDocumentNatureEnumCompanyShareDocument`: removed
+- `MeSvaDocumentNatureEnumCompanyStatutes`: removed
+- `MeSvaDocumentNatureEnumCrowdfundingProjectDetails`: removed
+- `MeSvaDocumentNatureEnumFoundRules`: removed
+- `MeSvaDocumentNatureEnumFoundationIdentityProof`: removed
+- `MeSvaDocumentNatureEnumGeneralAssemblyDocument`: removed
+- `MeSvaDocumentNatureEnumIban`: removed
+- `MeSvaDocumentNatureEnumJoafeDocument`: removed
+- `MeSvaDocumentNatureEnumKbis`: removed
+- `MeSvaDocumentNatureEnumLastGeneralMeetingReport`: removed
+- `MeSvaDocumentNatureEnumMarketPresenceProof`: removed
+- `MeSvaDocumentNatureEnumMicroEnterpriseDocument`: removed
+- `MeSvaDocumentNatureEnumProofOfIdentity`: removed
+- `MeSvaDocumentNatureEnumResellerProof`: removed
+- `MeSvaDocumentNatureEnumSecondaryProofOfIdentity`: removed
+- `MeSvaDocumentStatusEnumExpired`: removed
+- `MeSvaDocumentStatusEnumInvalid`: removed
+- `MeSvaDocumentStatusEnumNeedManualValidation`: removed
+- `MeSvaDocumentStatusEnumPending`: removed
+- `MeSvaDocumentStatusEnumRejected`: removed
+- `MeSvaDocumentStatusEnumRemoved`: removed
+- `MeSvaDocumentStatusEnumUpToDate`: removed
+- `MeSvaDocumentStatusEnumWaitingForUpload`: removed
+- `MeSvaDocumentTypeEnumAddressProof`: removed
+- `MeSvaDocumentTypeEnumCompanyRegistration`: removed
+- `MeSvaDocumentTypeEnumDriverLicence`: removed
+- `MeSvaDocumentTypeEnumID`: removed
+- `MeSvaDocumentTypeEnumIban`: removed
+- `MeSvaDocumentTypeEnumNone`: removed
+- `MeSvaDocumentTypeEnumOther`: removed
+- `MeSvaDocumentTypeEnumPasseportEu`: removed
+- `MeSvaDocumentTypeEnumPasseportOther`: removed
+- `MeSvaDocumentTypeEnumResidencePermit`: removed
+- `MeSvaDocumentTypeEnumSelfie`: removed
+- `MeSvaDocumentTypeEnumStatus`: removed
+- `MeSvaWalletCompanyKindEnumAdministration`: removed
+- `MeSvaWalletCompanyKindEnumAssociation`: removed
+- `MeSvaWalletCompanyKindEnumChurch`: removed
+- `MeSvaWalletCompanyKindEnumCraftsman`: removed
+- `MeSvaWalletCompanyKindEnumCse`: removed
+- `MeSvaWalletCompanyKindEnumEarl`: removed
+- `MeSvaWalletCompanyKindEnumEndowmentFund`: removed
+- `MeSvaWalletCompanyKindEnumFcp`: removed
+- `MeSvaWalletCompanyKindEnumFi`: removed
+- `MeSvaWalletCompanyKindEnumFoundationUnderUmbrellaFoundation`: removed
+- `MeSvaWalletCompanyKindEnumFoundation`: removed
+- `MeSvaWalletCompanyKindEnumGroupWithPublicInterest`: removed
+- `MeSvaWalletCompanyKindEnumInsuranceCompany`: removed
+- `MeSvaWalletCompanyKindEnumMicroEnterprise`: removed
+- `MeSvaWalletCompanyKindEnumUeUnlistedCompany`: removed
+- `MeSvaWalletCompanyKindEnumUnlistedCompany`: removed
+- `MeSvaWalletKycStatusEnumBlocked`: removed
+- `MeSvaWalletKycStatusEnumExpired`: removed
+- `MeSvaWalletKycStatusEnumInProgress`: removed
+- `MeSvaWalletKycStatusEnumNone`: removed
+- `MeSvaWalletKycStatusEnumUnderReview`: removed
+- `MeSvaWalletKycStatusEnumValid`: removed
+- `MeSvaWalletKycStatusEnumWaitingForDocument`: removed
+- `MeSvaWalletStatusEnumBlocked`: removed
+- `MeSvaWalletStatusEnumExpired`: removed
+- `MeSvaWalletStatusEnumNone`: removed
+- `MeSvaWalletStatusEnumValid`: removed
+- `MeSvaWalletStatusEnumWaitingForKyc`: removed
+- `NichandleRequiredPaymentMethodEnumMandatoryForAutorenew`: removed
+- `NichandleRequiredPaymentMethodEnumMandatoryForPostpaid`: removed
+- `NichandleRequiredPaymentMethodEnumNotMandatory`: removed
+- `SuggestCompanyIDTypeEnumCompanyNumber`: removed
+- `SuggestCompanyIDTypeEnumDuns`: removed
+- `SuggestCompanyIDTypeEnumNin`: removed
+- `SuggestCompanyIDTypeEnumSiren`: removed
+- `SuggestCompanyIDTypeEnumSiret`: removed
+- `SuggestCompanyIDTypeEnumVatEnriched`: removed
+- `SuggestCompanyIDTypeEnumVat`: removed
+- `SuggestEntityTypeEnumAdministration`: removed
+- `SuggestEntityTypeEnumAssociation`: removed
+- `SuggestEntityTypeEnumCorporation`: removed
+- `SuggestTypeEnumName`: removed
+- `SuggestTypeEnumSiren`: removed
+- `SuggestTypeEnumSiret`: removed
+
+#### `publiccloud`
+
+- `PublicCloudBlockStorageBlockCurrentStateManager.Capabilities`: removed
+- `PublicCloudBlockStorageVolumeCapabilityNameEnumAttach`: removed
+- `PublicCloudBlockStorageVolumeCapabilityNameEnumCreateBackup`: removed
+- `PublicCloudBlockStorageVolumeCapabilityNameEnumCreateSnapshot`: removed
+- `PublicCloudBlockStorageVolumeCapabilityNameEnumDelete`: removed
+- `PublicCloudBlockStorageVolumeCapabilityNameEnumDetach`: removed
+- `PublicCloudBlockStorageVolumeCapabilityNameEnumExtend`: removed
+- `PublicCloudBlockStorageVolumeCapabilityNameEnumRename`: removed
+- `PublicCloudBlockStorageVolumeCapabilityNameEnumRetype`: removed
+- `PublicCloudBlockStorageVolumeCapabilityReasonEnumAttachLimitReached`: removed
+- `PublicCloudBlockStorageVolumeCapabilityReasonEnumHasDependentSnapshots`: removed
+- `PublicCloudBlockStorageVolumeCapabilityReasonEnumInvalidStatus`: removed
+- `PublicCloudBlockStorageVolumeCapabilityReasonEnumNeedsDetach`: removed
+- `PublicCloudBlockStorageVolumeCapabilityReasonEnumNotAttached`: removed
+- `PublicCloudBlockStorageVolumeCapabilityReasonEnumUnsupportedVolumeType`: removed
+
+#### `xdsl`
+
+- `XdslWizardCustomerCivilityEnumM`: removed
+- `XdslWizardCustomerCivilityEnumMme`: removed
+- `XdslWizardDiagsInterventionStatusEnumClosed`: removed
+- `XdslWizardDiagsInterventionStatusEnumFrozen`: removed
+- `XdslWizardDiagsInterventionStatusEnumIntervention`: removed
+- `XdslWizardDiagsInterventionStatusEnumObservation`: removed
+- `XdslWizardDiagsInterventionStatusEnumOpen`: removed
+- `XdslWizardDiagsInterventionStatusEnumProcess`: removed
+- `XdslWizardDiagsInterventionStatusEnumResolved`: removed
+- `XdslWizardDiagsPPPSessionStatusEnumConnected`: removed
+- `XdslWizardDiagsPPPSessionStatusEnumDisconnected`: removed
+- `XdslWizardWizardStatusEnumDoing`: removed
+- `XdslWizardWizardStatusEnumDone`: removed
+- `XdslWizardWizardStatusEnumError`: removed
+- `XdslWizardWizardStatusEnumProblem`: removed
+- `XdslWizardWizardStepEnumDiag`: removed
+- `XdslWizardWizardStepEnumInit`: removed
+- `XdslWizardWizardStepEnumIntervention`: removed
+- `XdslWizardWizardStepEnumValidateForm`: removed
+
+</details>
+
+### Removed by the API
+
+The API no longer serves these, so their Go symbols are gone.
+
+- `auth`: `GetShouldDisplayMFAEnrollment` (GET /v1/auth/shouldDisplayMFAEnrollment)
+- `auth`: `APICredential`
+- `auth`: `AuthCredential`
+- `auth`: `AuthShouldDisplayMFAEnrollmentEnum`
+- `auth`: `CredentialRequest`
+- `cloud`: 41 operations, 124 types, listed below
+- `dedicatedcloud`: `GetSapCapabilities` (GET /v1/dedicatedCloud/{serviceName}/sap/capabilities)
+- `dedicatedcloud`: `RequestContactForVmwareCloudDirectorMigration` (POST /v1/dedicatedCloud/{serviceName}/requestContactForVmwareCloudDirectorMigration)
+- `dedicatedcloud`: `ValidateSap` (POST /v1/dedicatedCloud/{serviceName}/sap/validate)
+- `dedicatedcloud`: `DedicatedCloudSapInformationSapPreInstallation`
+- `dedicatedcloud`: `DedicatedCloudSapParamsValidate`
+- `domain`: 6 operations, 19 types, listed below
+- `guides`: the package `guides`
+- `me`: 41 operations, 81 types, 3 fields, listed below
+- `newaccount`: `ListOvhSubsidiaries` (GET /v1/newAccount/ovhSubsidiary)
+- `newaccount`: `ListResidentialCountries` (GET /v1/newAccount/residentialCountry)
+- `newaccount`: `NewAccountOvhSubsidiaryBillingCountry`
+- `newaccount`: `NewAccountResidentialCountryResidentialCountry`
+- `ovhcloudconnect`: `GetOrderDiversityCatalog` (GET /v1/ovhCloudConnect/order/diversity/catalog)
+- `ovhcloudconnect`: `OvhcloudconnectCatalogEnum`
+- `ovhcloudconnect`: `OvhcloudconnectDiversityCatalog`
+- `ovhcloudconnect`: `OvhcloudconnectDiversityPlan`
+- `ovhcloudconnect`: `OvhcloudconnectDiversityPop`
+- `ovhcloudconnect`: `OvhcloudconnectRegionEnum`
+- `packxdsl`: `ListSearches` (GET /v1/pack/xdsl/search)
+- `packxdsl`: `PackXdslPackDetail`
+- `packxdsl`: `XdslDslTypeEnum`
+- `partner`: 1 operation, 14 types, listed below
+- `publiccloud`: 3 operations, 8 types, listed below
+- `session`: the package `session`
+- `sms`: 6 operations, 3 types, listed below
+- `startup`: 1 operation, 26 types, listed below
+- `support`: `GetChatToken` (GET /v1/support/chat/token)
+- `support`: `SupportChatToken`
+- `terraform`: the package `terraform`
+- `vps`: `GetVPSBillingVersion` (GET /v1/vps/{serviceName}/version)
+- `vps`: `GetVPSMetricsToken` (GET /v1/vps/{serviceName}/metricsToken)
+- `vps`: `ListVPSZonesImpactedByMigrationStein` (GET /v1/vps/migrationStein)
+- `vps`: `VPSMetricsToken`
+- `vps`: `VPSMigrationStein`
+- `vps`: `VPSVPSBillingVersion`
+- `xdsl`: 7 operations, 16 types, listed below
+
+<details>
+<summary>Removed by the API: everything in cloud, domain, me, partner, publiccloud, sms, startup, xdsl</summary>
+
+#### `cloud`
+
+- `AttachProjectRegionIPExtnet` (POST /v1/cloud/project/{serviceName}/region/{regionName}/ip/extnet/{extnetIp}/attach)
+- `DetachProjectRegionIPExtnet` (POST /v1/cloud/project/{serviceName}/region/{regionName}/ip/extnet/{extnetIp}/detach)
+- `GetOrderRuleAvailabilitySandbox` (GET /v1/cloud/order/rule/availabilitySandbox)
+- `GetProjectAggregatedFloatingip` (GET /v1/cloud/project/{serviceName}/aggregated/floatingip)
+- `GetProjectAggregatedGateway` (GET /v1/cloud/project/{serviceName}/aggregated/gateway)
+- `GetProjectAggregatedInstanceBackup` (GET /v1/cloud/project/{serviceName}/aggregated/instanceBackup/{id})
+- `GetProjectAggregatedLoadbalancerFlavor` (GET /v1/cloud/project/{serviceName}/aggregated/loadbalancer/flavor)
+- `GetProjectAggregatedLoadbalancer` (GET /v1/cloud/project/{serviceName}/aggregated/loadbalancer)
+- `GetProjectAggregatedNetwork` (GET /v1/cloud/project/{serviceName}/aggregated/network)
+- `GetProjectAggregatedObjectStorage` (GET /v1/cloud/project/{serviceName}/aggregated/objectStorage)
+- `GetProjectAggregatedVolumeBackup` (GET /v1/cloud/project/{serviceName}/aggregated/volumeBackup)
+- `GetProjectAiDataRegionAliasContainers` (GET /v1/cloud/project/{serviceName}/ai/data/region/{region}/alias/{alias}/containers)
+- `GetProjectAiEndpointsMetrics` (GET /v1/cloud/project/{serviceName}/ai/endpoints/metrics/{modelName})
+- `GetProjectAiSuggestionApp` (GET /v1/cloud/project/{serviceName}/ai/suggestion/app)
+- `GetProjectAiSuggestionJob` (GET /v1/cloud/project/{serviceName}/ai/suggestion/job)
+- `GetProjectAiSuggestionNotebookAi` (GET /v1/cloud/project/{serviceName}/ai/suggestion/notebook-ai)
+- `GetProjectAiSuggestionNotebookQuantumEmulator` (GET /v1/cloud/project/{serviceName}/ai/suggestion/notebook-quantum/emulator)
+- `GetProjectAiSuggestionNotebookQuantumQpu` (GET /v1/cloud/project/{serviceName}/ai/suggestion/notebook-quantum/qpu)
+- `GetProjectAiSuggestionNotebook` (GET /v1/cloud/project/{serviceName}/ai/suggestion/notebook)
+- `GetProjectCatalogInstanceBackup` (GET /v1/cloud/project/{serviceName}/catalog/instanceBackup)
+- `GetProjectCatalogInstance` (GET /v1/cloud/project/{serviceName}/catalog/instance)
+- `GetProjectCatalogLoadbalancer` (GET /v1/cloud/project/{serviceName}/catalog/loadbalancer)
+- `GetProjectCatalogNetwork` (GET /v1/cloud/project/{serviceName}/catalog/network)
+- `GetProjectCatalogShare` (GET /v1/cloud/project/{serviceName}/catalog/share)
+- `GetProjectCatalogVolume` (GET /v1/cloud/project/{serviceName}/catalog/volume)
+- `GetProjectRegionGatewayMetricsToken` (GET /v1/cloud/project/{serviceName}/region/{regionName}/gateway/{id}/metricsToken)
+- `GetProjectRegionIPExtnet` (GET /v1/cloud/project/{serviceName}/region/{regionName}/ip/extnet/{extnetIp})
+- `GetProjectRegionImage` (GET /v1/cloud/project/{serviceName}/region/{regionName}/image/{imageId})
+- `GetProjectRegionInstanceMetricsToken` (GET /v1/cloud/project/{serviceName}/region/{regionName}/instance/{instanceId}/metricsToken)
+- `ListMigrationSteins` (GET /v1/cloud/migrationStein)
+- `ListProjectAggregatedInstanceBackups` (GET /v1/cloud/project/{serviceName}/aggregated/instanceBackup)
+- `ListProjectAggregatedInstances` (GET /v1/cloud/project/{serviceName}/aggregated/instance)
+- `ListProjectAggregatedShares` (GET /v1/cloud/project/{serviceName}/aggregated/share)
+- `ListProjectAggregatedSshkeys` (GET /v1/cloud/project/{serviceName}/aggregated/sshkey)
+- `ListProjectAiEndpointsMetrics` (GET /v1/cloud/project/{serviceName}/ai/endpoints/metrics)
+- `ListProjectAiGuides` (GET /v1/cloud/project/{serviceName}/ai/guides)
+- `ListProjectDatabaseAvailabilitySuggestions` (GET /v1/cloud/project/{serviceName}/database/availability/suggestion)
+- `ListProjectDatabaseCapabilitiesRegions` (GET /v1/cloud/project/{serviceName}/database/capabilities/regions)
+- `ListProjectQuantumGuides` (GET /v1/cloud/project/{serviceName}/quantum/guides)
+- `ListProjectRegionImages` (GET /v1/cloud/project/{serviceName}/region/{regionName}/image)
+- `SignatureProjectAiPartnersRegionPartnerContract` (POST /v1/cloud/project/{serviceName}/ai/partners/region/{region}/partner/{partnerId}/contract/signature)
+- `CloudAggregatedAggregatedFloatingIPs`
+- `CloudAggregatedAggregatedGateways`
+- `CloudAggregatedAggregatedInstanceBackup`
+- `CloudAggregatedAggregatedLoadBalancerFlavors`
+- `CloudAggregatedAggregatedLoadBalancers`
+- `CloudAggregatedAggregatedNetworks`
+- `CloudAggregatedAggregatedObjectStorage`
+- `CloudAggregatedAggregatedSSHKey`
+- `CloudAggregatedAggregatedVolumeBackups`
+- `CloudAggregatedError`
+- `CloudAggregatedNetworksNetwork`
+- `CloudAggregatedNetworksSubnetCapability`
+- `CloudAggregatedNetworksSubnetGateway`
+- `CloudAggregatedNetworksSubnet`
+- `CloudAggregatedSortOrderEnum`
+- `CloudCatalogImageCategoryEnum`
+- `CloudCatalogImageSubCategoryEnum`
+- `CloudCatalogInstanceBackupPricingIntervalEnum`
+- `CloudCatalogInstanceBackupPricing`
+- `CloudCatalogInstanceBackup`
+- `CloudCatalogInstanceBackups`
+- `CloudCatalogInstancesFilterModelCategory`
+- `CloudCatalogInstancesFilterModelDeployment`
+- `CloudCatalogInstancesFilterModelRegion`
+- `CloudCatalogInstancesFilterModelSubCategory`
+- `CloudCatalogInstancesFilter`
+- `CloudCatalogInstancesFlavorPricingPrice`
+- `CloudCatalogInstancesFlavorPricing`
+- `CloudCatalogInstancesFlavorRegionStockStatusEnum`
+- `CloudCatalogInstancesFlavorRegion`
+- `CloudCatalogInstancesFlavorSpecBandwidth`
+- `CloudCatalogInstancesFlavorSpecDiskInterfaceEnum`
+- `CloudCatalogInstancesFlavorSpecDisk`
+- `CloudCatalogInstancesFlavorSpecGPUMemoryInterfaceEnum`
+- `CloudCatalogInstancesFlavorSpecGPUMemory`
+- `CloudCatalogInstancesFlavorSpecGPU`
+- `CloudCatalogInstancesFlavorSpecSpecWithUnit`
+- `CloudCatalogInstancesFlavorSpec`
+- `CloudCatalogInstancesFlavor`
+- `CloudCatalogInstancesImageRegion`
+- `CloudCatalogInstancesImage`
+- `CloudCatalogInstances`
+- `CloudCatalogLoadbalancerFlavorRegion`
+- `CloudCatalogLoadbalancerFlavor`
+- `CloudCatalogLoadbalancerPricingPriceTypeEnum`
+- `CloudCatalogLoadbalancerPricingPrice`
+- `CloudCatalogLoadbalancerPricing`
+- `CloudCatalogLoadbalancerQuotaResource`
+- `CloudCatalogLoadbalancerQuota`
+- `CloudCatalogLoadbalancer`
+- `CloudCatalogNetworkIPModelTypeEnum`
+- `CloudCatalogNetworkIPModel`
+- `CloudCatalogNetworkPricing`
+- `CloudCatalogNetworkQuota`
+- `CloudCatalogNetworkRouterModelRouterSpecsPublicBandwidth`
+- `CloudCatalogNetworkRouterModelRouterSpecs`
+- `CloudCatalogNetworkRouterModel`
+- `CloudCatalogNetworkSubnetCapabilityEnum`
+- `CloudCatalogNetwork`
+- `CloudCatalogRegionFilters`
+- `CloudCatalogRegion`
+- `CloudCatalogShareModelPricingIntervalEnum`
+- `CloudCatalogSharesFilter`
+- `CloudCatalogSharesFilters`
+- `CloudCatalogSharesModelFilters`
+- `CloudCatalogSharesModelPricing`
+- `CloudCatalogSharesModelSpecs`
+- `CloudCatalogSharesModel`
+- `CloudCatalogSharesRegionFilter`
+- `CloudCatalogShares`
+- `CloudCatalogVolumeModelPricingIntervalEnum`
+- `CloudCatalogVolumesFilter`
+- `CloudCatalogVolumesFilters`
+- `CloudCatalogVolumesModelFilters`
+- `CloudCatalogVolumesModelPricing`
+- `CloudCatalogVolumesModelSpecsBandwidth`
+- `CloudCatalogVolumesModelSpecsVolumeCapacity`
+- `CloudCatalogVolumesModelSpecsVolumeIops`
+- `CloudCatalogVolumesModelSpecsVolume`
+- `CloudCatalogVolumesModelSpecs`
+- `CloudCatalogVolumesModel`
+- `CloudCatalogVolumes`
+- `CloudIPExtnetIPStatusEnum`
+- `CloudIPExtnetIP`
+- `CloudInstanceAggregatedIPAddress`
+- `CloudInstanceAggregatedInstance`
+- `CloudInstanceAggregatedVolume`
+- `CloudInstanceSearchFieldEnum`
+- `CloudInstanceSearchSortEnum`
+- `CloudMetricsToken`
+- `CloudMigrationStein`
+- `CloudProjectAggregateObjectStorage`
+- `CloudProjectAiDataStoreContainersListStatusTypeEnum`
+- `CloudProjectAiDataStoreContainersList`
+- `CloudProjectAiEndpointsMetricPoint`
+- `CloudProjectAiEndpointsMetrics`
+- `CloudProjectAiEndpointsModelMetric`
+- `CloudProjectAiGuideLanguageEnum`
+- `CloudProjectAiGuide`
+- `CloudProjectAiSuggestionSuggestionAppList`
+- `CloudProjectAiSuggestionSuggestionApp`
+- `CloudProjectAiSuggestionSuggestionEditor`
+- `CloudProjectAiSuggestionSuggestionFramework`
+- `CloudProjectAiSuggestionSuggestionJobList`
+- `CloudProjectAiSuggestionSuggestionJob`
+- `CloudProjectAiSuggestionSuggestionNotebookList`
+- `CloudProjectAiSuggestionSuggestionNotebook`
+- `CloudProjectAiSuggestionSuggestionResources`
+- `CloudProjectDatabaseAvailabilitySuggestion`
+- `CloudProjectDatabaseCapabilitiesRegionTypeEnum`
+- `CloudProjectDatabaseCapabilitiesRegion`
+- `CloudProjectIPExtnetAttachCreation`
+- `CloudProjectRegionImageOsTypeEnum`
+- `CloudProjectRegionImageStatusEnum`
+- `CloudProjectRegionImageTypeEnum`
+- `CloudProjectRegionImageVisibilityEnum`
+- `CloudRegionImage`
+- `CloudShareAggregatedShare`
+- `CloudShareSearchFieldEnum`
+- `CloudShareSearchSortEnum`
+- `CloudSubnetSubnetCapabilityEnum`
+- `CloudVolumeVolumeBandwidthUnitEnum`
+- `CloudVolumeVolumeIopsUnitEnum`
+- `OrderCatalogCloudRegionPricePrice`
+
+#### `domain`
+
+- `ApproveDataClaimNotice` (POST /v1/domain/data/claimNotice/approve)
+- `GetAftermarketNegotiableDomains` (GET /v1/domain/aftermarket/negotiableDomains)
+- `GetAlternativeNames` (GET /v1/domain/alternativeNames)
+- `GetSuggest` (GET /v1/domain/suggest/{label})
+- `GetZoneHost` (GET /v1/domain/zone/host)
+- `ListMaintenances` (GET /v1/domain/maintenance)
+- `DomainAftermarketNegotiableDomainsDomain`
+- `DomainAftermarketNegotiableDomainsMetaSedo`
+- `DomainAftermarketNegotiableDomainsMeta`
+- `DomainAftermarketNegotiableDomainsPrice`
+- `DomainAftermarketNegotiableDomains`
+- `DomainAftermarketPlatformEnum`
+- `DomainApproveTypeEnum`
+- `DomainApprove`
+- `DomainMaintenanceExtensionMaintenance`
+- `DomainOvhSubsidiaryEnum`
+- `DomainPaginationCursor`
+- `DomainSuggestAlternativeName`
+- `DomainSuggestAlternativeNamesPayload`
+- `DomainSuggestAlternativeNamesResult`
+- `DomainSuggestDomain`
+- `DomainSuggestResult`
+- `DomainZoneHost`
+- `OrderCurrencyCodeEnum`
+- `OrderPrice`
+
+#### `me`
+
+- `AttachmentSvaWalletCashouts` (POST /v1/me/sva/wallet/cashouts/{id}/attachment)
+- `CreateManualDomainPayment` (POST /v1/me/manualDomainPayment)
+- `CreatePreferencesManager` (POST /v1/me/preferences/manager)
+- `CreateProcedure2FA` (POST /v1/me/procedure/2FA)
+- `CreateProcedureFraud` (POST /v1/me/procedure/fraud)
+- `CreateProcedureIdentity` (POST /v1/me/procedure/identity)
+- `CreateSvaOnboarding` (POST /v1/me/sva/onboarding)
+- `CreateSvaWalletBankAccount` (POST /v1/me/sva/wallet/bankAccount)
+- `CreateSvaWallet` (POST /v1/me/sva/wallet)
+- `DeletePreferencesManager` (DELETE /v1/me/preferences/manager/{key})
+- `DocumentSvaWallet` (POST /v1/me/sva/wallet/document)
+- `Feedback` (POST /v1/me/feedback)
+- `FinalizeProcedure2FA` (POST /v1/me/procedure/2FA/finalize)
+- `FinalizeProcedureFraud` (POST /v1/me/procedure/fraud/finalize)
+- `FinalizeProcedureGdpr` (POST /v1/me/procedure/gdpr/finalize)
+- `FinalizeProcedureIdentity` (POST /v1/me/procedure/identity/finalize)
+- `GdprProcedure` (POST /v1/me/procedure/gdpr)
+- `GetBillingCapacities` (GET /v1/me/billing/capacities)
+- `GetManualDomainPayment` (GET /v1/me/manualDomainPayment)
+- `GetOrderCapacities` (GET /v1/me/order/{orderId}/capacities)
+- `GetPreferencesManager`, iterator `AllPreferencesManagers` (GET /v1/me/preferences/manager/{key})
+- `GetProcedure2FA` (GET /v1/me/procedure/2FA)
+- `GetProcedureFraud` (GET /v1/me/procedure/fraud)
+- `GetProcedureIdentity` (GET /v1/me/procedure/identity)
+- `GetSuggestCompany` (GET /v1/me/suggest/company)
+- `GetSvaOnboarding` (GET /v1/me/sva/onboarding)
+- `GetSvaWalletBankAccount` (GET /v1/me/sva/wallet/bankAccount)
+- `GetSvaWalletCashouts` (GET /v1/me/sva/wallet/cashouts/{id})
+- `GetSvaWallet` (GET /v1/me/sva/wallet)
+- `GetVoucherAccountMovements`, iterator `AllVoucherAccountMovements` (GET /v1/me/voucherAccount/{voucherAccountId}/movements/{movementId})
+- `GetVoucherAccount`, iterator `AllVoucherAccounts` (GET /v1/me/voucherAccount/{voucherAccountId})
+- `ListOrderAvailablePaymentMeans` (GET /v1/me/order/{orderId}/availablePaymentMean)
+- `ListPreferencesManagers` (GET /v1/me/preferences/manager)
+- `ListSuggestCompanyIdentificationNumbers` (GET /v1/me/suggest/companyIdentificationNumbers)
+- `ListSvaCdrs` (GET /v1/me/sva/cdr)
+- `ListSvaWalletCashouts` (GET /v1/me/sva/wallet/cashouts)
+- `ListVoucherAccountMovements` (GET /v1/me/voucherAccount/{voucherAccountId}/movements)
+- `ListVoucherAccounts` (GET /v1/me/voucherAccount)
+- `TransactionPaymentMethod` (POST /v1/me/payment/method/{paymentMethodId}/transaction)
+- `UpdatePreferencesManager` (PUT /v1/me/preferences/manager/{key})
+- `UpdateSvaWallet` (PUT /v1/me/sva/wallet)
+- `BillingBillingTaskStatusEnum`
+- `BillingManualDomainPaymentStatus`
+- `BillingOrderAutomaticPaymentCapacities`
+- `BillingOrderAvailablePaymentMeanField`
+- `BillingOrderAvailablePaymentMean`
+- `BillingOrderOrderCapacities`
+- `BillingOrderPaymentMeanFieldTypeEnum`
+- `BillingOrderPaymentMeanIntegrationEnum`
+- `BillingVoucherAccountOperationEnum`
+- `BillingVoucherAccount`
+- `BillingVoucherMovement`
+- `CreatePreferencesManagerRequest`
+- `FeedbackRequest`
+- `MePaymentMethodOneclickCreation`
+- `MePaymentMethodOneclickResponse`
+- `MeProcedure2FACreateLinks`
+- `MeProcedure2FACreateResponse`
+- `MeProcedure2FACreate`
+- `MeProcedure2FAHTTPMethodEnum`
+- `MeProcedure2FAStatusEnum`
+- `MeProcedure2FAStatus`
+- `MeProcedureFraudCreateLinks`
+- `MeProcedureFraudCreateResponse`
+- `MeProcedureFraudCreate`
+- `MeProcedureFraudHTTPMethodEnum`
+- `MeProcedureFraudStatusEnum`
+- `MeProcedureFraudStatus`
+- `MeProcedureGDPRCategoryEnum`
+- `MeProcedureGDPRCreateLinks`
+- `MeProcedureGDPRCreateResponse`
+- `MeProcedureGDPRCreate`
+- `MeProcedureGDPRFinalize`
+- `MeProcedureGDPRHTTPMethodEnum`
+- `MeProcedureIdentityCreateLinks`
+- `MeProcedureIdentityCreateResponse`
+- `MeProcedureIdentityCreate`
+- `MeProcedureIdentityHTTPMethodEnum`
+- `MeProcedureIdentityStatusEnum`
+- `MeProcedureIdentityStatus`
+- `MeSvaBankAccountCreation`
+- `MeSvaBankAccountStatusEnum`
+- `MeSvaBankAccount`
+- `MeSvaCashoutAttachment`
+- `MeSvaCashoutStatusEnum`
+- `MeSvaCashout`
+- `MeSvaCdrStatusEnum`
+- `MeSvaCdr`
+- `MeSvaCompanyUpdate`
+- `MeSvaCompanyWritable`
+- `MeSvaCompany`
+- `MeSvaDocumentCreation`
+- `MeSvaDocumentNatureEnum`
+- `MeSvaDocumentStatusEnum`
+- `MeSvaDocumentTypeEnum`
+- `MeSvaDocument`
+- `MeSvaOnboardingCompanyWritable`
+- `MeSvaOnboardingCreationWritable`
+- `MeSvaOnboardingPersonalInfoRepresentativeWritable`
+- `MeSvaOnboarding`
+- `MeSvaPersonalInfoAddress`
+- `MeSvaPersonalInfoRepresentativeWritable`
+- `MeSvaPersonalInfoUpdate`
+- `MeSvaPersonalInfoWritable`
+- `MeSvaPersonalInfo`
+- `MeSvaWalletBalance`
+- `MeSvaWalletCompanyKindEnum`
+- `MeSvaWalletCreationWritable`
+- `MeSvaWalletKycStatusEnum`
+- `MeSvaWalletStatusEnum`
+- `MeSvaWalletUpdateWritable`
+- `MeSvaWallet`
+- `NichandleBillingCapacities`
+- `NichandleManagerPreferenceWritable`
+- `NichandleManagerPreference`
+- `NichandleRequiredPaymentMethodEnum`
+- `SuggestCompanyEntry`
+- `SuggestCompanyIDTypeEnum`
+- `SuggestCompanyIdentificationNumbers`
+- `SuggestCompany`
+- `SuggestEntityTypeEnum`
+- `SuggestTypeEnum`
+- `BillingBill.PdfBetaURL`
+- `BillingCorrectiveInvoice.PdfBetaURL`
+- `BillingDownPaymentInvoice.PdfBetaURL`
+
+#### `partner`
+
+- `GetFormSchema` (GET /v1/partner/form/schema)
+- `Partner2FormFieldConfig`
+- `Partner2FormField`
+- `Partner2FormSchemaAccountNumberOfEmployeesOption`
+- `Partner2FormSchemaAccountNumberOfEmployees`
+- `Partner2FormSchemaAccountPartnerTypeOption`
+- `Partner2FormSchemaAccountPartnerType`
+- `Partner2FormSchemaAccount`
+- `Partner2FormSchemaContactPositionOption`
+- `Partner2FormSchemaContactPosition`
+- `Partner2FormSchemaContact`
+- `Partner2FormSchemaPartnerShip`
+- `Partner2FormSchemaPartnershipAreaOfExpertiseOption`
+- `Partner2FormSchemaPartnershipAreaOfExpertise`
+- `Partner2FormSchema`
+
+#### `publiccloud`
+
+- `GetAiAgent4manager` (GET /v2/publicCloud/ai/agent4manager)
+- `GetObjectStorageServices` (GET /v2/publicCloud/project/{projectId}/service/storage/object)
+- `GetServices` (GET /v2/publicCloud/project/{projectId}/service)
+- `PublicCloudAiAgentsAgentManagerCurrentState`
+- `PublicCloudAiAgentsManagerAgent`
+- `PublicCloudBlockStorageBlockCapability`
+- `PublicCloudBlockStorageBlockCurrentStateManager`
+- `PublicCloudBlockStorageBlockManager`
+- `PublicCloudBlockStorageVolumeCapabilityNameEnum`
+- `PublicCloudBlockStorageVolumeCapabilityReasonEnum`
+- `PublicCloudProjectProjectServiceEntry`
+
+#### `sms`
+
+- `GetVirtualNumbersTime2chatAutoResponse` (GET /v1/sms/{serviceName}/virtualNumbers/{number}/time2chat/autoResponse)
+- `GetVirtualNumbersTime2chatContact` (GET /v1/sms/{serviceName}/virtualNumbers/{number}/time2chat/contact)
+- `GetVirtualNumbersTime2chatKyc` (GET /v1/sms/{serviceName}/virtualNumbers/{number}/time2chat/kyc)
+- `UpdateVirtualNumbersTime2chatAutoResponse` (PUT /v1/sms/{serviceName}/virtualNumbers/{number}/time2chat/autoResponse)
+- `UpdateVirtualNumbersTime2chatContact` (PUT /v1/sms/{serviceName}/virtualNumbers/{number}/time2chat/contact)
+- `UpdateVirtualNumbersTime2chatKyc` (PUT /v1/sms/{serviceName}/virtualNumbers/{number}/time2chat/kyc)
+- `SmsAutoResponse`
+- `SmsContact`
+- `SmsKYC`
+
+#### `startup`
+
+- `GetFormSchema` (GET /v1/startup/form/schema)
+- `StartupFormFieldConfig`
+- `StartupFormField`
+- `StartupFormSchemaAwarnessOption`
+- `StartupFormSchemaAwarness`
+- `StartupFormSchemaCompanyDetail`
+- `StartupFormSchemaCompanyEmployeesNumberOption`
+- `StartupFormSchemaCompanyEmployeesNumber`
+- `StartupFormSchemaCompanyIncubatorCountryOption`
+- `StartupFormSchemaCompanyIncubatorCountry`
+- `StartupFormSchemaCompanyIncubator`
+- `StartupFormSchemaCompanyRelatedIndustryOption`
+- `StartupFormSchemaCompanyRelatedIndustry`
+- `StartupFormSchemaCompanySocialNetwork`
+- `StartupFormSchemaCompany`
+- `StartupFormSchemaFundRaisingLastFundRaisingOption`
+- `StartupFormSchemaFundRaisingLastFundRaising`
+- `StartupFormSchemaFundRaisingPlannedFundRaisingOption`
+- `StartupFormSchemaFundRaisingPlannedFundRaising`
+- `StartupFormSchemaFundRaising`
+- `StartupFormSchemaProjectRelatedTechnologyOption`
+- `StartupFormSchemaProjectRelatedTechnology`
+- `StartupFormSchemaProjectRequirementsInfrastructureUsingOption`
+- `StartupFormSchemaProjectRequirementsInfrastructureUsing`
+- `StartupFormSchemaProjectRequirements`
+- `StartupFormSchemaProject`
+- `StartupFormSchema`
+
+#### `xdsl`
+
+- `CreateDiagnosticWizard` (POST /v1/xdsl/diagnosticWizard)
+- `DeleteDiagnosticWizard` (DELETE /v1/xdsl/diagnosticWizard)
+- `DiagsDiagnosticWizard` (POST /v1/xdsl/diagnosticWizard/diags)
+- `GetDiagnosticWizard` (GET /v1/xdsl/diagnosticWizard)
+- `InterventionDiagnosticWizard` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `UpdateDiagnosticWizard` (PATCH /v1/xdsl/diagnosticWizard)
+- `ValidateFormDiagnosticWizard` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `XdslWizardCustomerCivilityEnum`
+- `XdslWizardDiagsInterventionStatusEnum`
+- `XdslWizardDiagsLinkInformation`
+- `XdslWizardDiagsPPPSessionStatusEnum`
+- `XdslWizardDiagsPPPSession`
+- `XdslWizardDiagsProviderStatus`
+- `XdslWizardDiagsStatistics`
+- `XdslWizardWizardBuffer`
+- `XdslWizardWizardDiags`
+- `XdslWizardWizardFormCustomerContact`
+- `XdslWizardWizardFormWritable`
+- `XdslWizardWizardForm`
+- `XdslWizardWizardStatusEnum`
+- `XdslWizardWizardStepEnum`
+- `XdslWizardWizardTaskDetailsWritable`
+- `XdslWizardWizardTaskDetails`
+
+</details>
+
+### New
+
+- `auth`: `AuthAPICredentialRequestParams`
+- `auth`: `AuthAPICredentialRequest`
+- `auth`: `AuthAPICredential`
+- `auth`: `AuthAccessRuleRequest`
+- `ssl`: the package `ssl`
+
+### Changed
+
+No change to the Go API, but the API behaves differently.
+
+- `auth`: `Credential`: the `state` response's property `type` changed from `string` to `any` for status `200` (POST /v1/auth/credential)
+- `publiccloud`: `AllVolumes`: removed `#/components/schemas/publicCloud.blockStorage.BlockCurrentStateManager` from the `items/currentState` response property `allOf` list for the response status `200` (GET /v2/publicCloud/project/{projectId}/storage/block/volume)
+- `publiccloud`: `GetVolume`: removed `#/components/schemas/publicCloud.blockStorage.BlockCurrentStateManager` from the `currentState` response property `allOf` list for the response status `200` (GET /v2/publicCloud/project/{projectId}/storage/block/volume/{id})
+
+### SDK core
+
+- The generated code is rendered by OVHcloud's own SDK generator, shared by every OVHcloud SDK,
+  in place of openapi-generator. The code is the same: only the first comment of each
+  generated file changes, to `// Code generated by ovhcloud-sdk-generator. DO NOT EDIT.`
+
+<details>
+<summary>Every change to the API contract, as oasdiff reports it (501)</summary>
+
+#### `auth`
+
+- `Credential`: added `#/components/schemas/auth.CredentialStateEnum` to the `state` response property `allOf` list for the response status `200` (POST /v1/auth/credential)
+- `Credential`: added the new optional request property `allowedIPs` (POST /v1/auth/credential)
+- `Credential`: removed the `expired` enum value from the `state` response property for the response status `200` (POST /v1/auth/credential)
+- `Credential`: removed the `pendingValidation` enum value from the `state` response property for the response status `200` (POST /v1/auth/credential)
+- `Credential`: removed the `refused` enum value from the `state` response property for the response status `200` (POST /v1/auth/credential)
+- `Credential`: removed the `validated` enum value from the `state` response property for the response status `200` (POST /v1/auth/credential)
+- `Credential`: the `consumerKey` response's property `format` was narrowed from `none` to `password` for status `200` (POST /v1/auth/credential)
+- `Credential`: the `state` response's property `type` changed from `string` to `any` for status `200` (POST /v1/auth/credential)
+- `Credential`: the request property `redirection` became nullable (POST /v1/auth/credential)
+- `Credential`: the response optional property `consumerKey` became read-only for the status `200` (POST /v1/auth/credential)
+- `Credential`: the response optional property `state` became read-only for the status `200` (POST /v1/auth/credential)
+- `Credential`: the response optional property `validationUrl` became read-only for the status `200` (POST /v1/auth/credential)
+- `Credential`: the response property `validationUrl` became not nullable for the status `200` (POST /v1/auth/credential)
+- `GetCurrentCredential`: the response optional property `rules/items/method` became read-only for the status `200` (GET /v1/auth/currentCredential)
+- `GetCurrentCredential`: the response optional property `rules/items/path` became read-only for the status `200` (GET /v1/auth/currentCredential)
+- `GetDetails`: the response optional property `allowedRoutes/items/method` became read-only for the status `200` (GET /v1/auth/details)
+- `GetDetails`: the response optional property `allowedRoutes/items/path` became read-only for the status `200` (GET /v1/auth/details)
+- `GetShouldDisplayMFAEnrollment`: api path removed without deprecation (GET /v1/auth/shouldDisplayMFAEnrollment)
+- removed the schema `api.Credential` ( )
+- removed the schema `auth.Credential` ( )
+- removed the schema `auth.ShouldDisplayMFAEnrollmentEnum` ( )
+
+#### `cloud`
+
+- `AttachProjectRegionIPExtnet`: api path removed without deprecation (POST /v1/cloud/project/{serviceName}/region/{regionName}/ip/extnet/{extnetIp}/attach)
+- `DetachProjectRegionIPExtnet`: api path removed without deprecation (POST /v1/cloud/project/{serviceName}/region/{regionName}/ip/extnet/{extnetIp}/detach)
+- `GetOrderRuleAvailabilitySandbox`: api path removed without deprecation (GET /v1/cloud/order/rule/availabilitySandbox)
+- `GetOrderRuleAvailability`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/cloud/order/rule/availability)
+- `GetProjectAggregatedFloatingip`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/aggregated/floatingip)
+- `GetProjectAggregatedGateway`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/aggregated/gateway)
+- `GetProjectAggregatedInstanceBackup`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/aggregated/instanceBackup/{id})
+- `GetProjectAggregatedLoadbalancerFlavor`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/aggregated/loadbalancer/flavor)
+- `GetProjectAggregatedLoadbalancer`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/aggregated/loadbalancer)
+- `GetProjectAggregatedNetwork`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/aggregated/network)
+- `GetProjectAggregatedObjectStorage`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/aggregated/objectStorage)
+- `GetProjectAggregatedVolumeBackup`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/aggregated/volumeBackup)
+- `GetProjectAiDataRegionAliasContainers`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/ai/data/region/{region}/alias/{alias}/containers)
+- `GetProjectAiEndpointsMetrics`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/ai/endpoints/metrics/{modelName})
+- `GetProjectAiSuggestionApp`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/ai/suggestion/app)
+- `GetProjectAiSuggestionJob`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/ai/suggestion/job)
+- `GetProjectAiSuggestionNotebookAi`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/ai/suggestion/notebook-ai)
+- `GetProjectAiSuggestionNotebookQuantumEmulator`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/ai/suggestion/notebook-quantum/emulator)
+- `GetProjectAiSuggestionNotebookQuantumQpu`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/ai/suggestion/notebook-quantum/qpu)
+- `GetProjectAiSuggestionNotebook`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/ai/suggestion/notebook)
+- `GetProjectCatalogInstanceBackup`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/catalog/instanceBackup)
+- `GetProjectCatalogInstance`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/catalog/instance)
+- `GetProjectCatalogLoadbalancer`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/catalog/loadbalancer)
+- `GetProjectCatalogNetwork`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/catalog/network)
+- `GetProjectCatalogShare`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/catalog/share)
+- `GetProjectCatalogVolume`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/catalog/volume)
+- `GetProjectRegionGatewayMetricsToken`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/region/{regionName}/gateway/{id}/metricsToken)
+- `GetProjectRegionIPExtnet`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/region/{regionName}/ip/extnet/{extnetIp})
+- `GetProjectRegionImage`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/region/{regionName}/image/{imageId})
+- `GetProjectRegionInstanceMetricsToken`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/region/{regionName}/instance/{instanceId}/metricsToken)
+- `ListMigrationSteins`: api path removed without deprecation (GET /v1/cloud/migrationStein)
+- `ListProjectAggregatedInstanceBackups`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/aggregated/instanceBackup)
+- `ListProjectAggregatedInstances`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/aggregated/instance)
+- `ListProjectAggregatedShares`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/aggregated/share)
+- `ListProjectAggregatedSshkeys`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/aggregated/sshkey)
+- `ListProjectAiEndpointsMetrics`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/ai/endpoints/metrics)
+- `ListProjectAiGuides`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/ai/guides)
+- `ListProjectDatabaseAvailabilitySuggestions`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/database/availability/suggestion)
+- `ListProjectDatabaseCapabilitiesRegions`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/database/capabilities/regions)
+- `ListProjectQuantumGuides`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/quantum/guides)
+- `ListProjectRegionImages`: api path removed without deprecation (GET /v1/cloud/project/{serviceName}/region/{regionName}/image)
+- `SignatureProjectAiPartnersRegionPartnerContract`: api path removed without deprecation (POST /v1/cloud/project/{serviceName}/ai/partners/region/{region}/partner/{partnerId}/contract/signature)
+- removed the schema `cloud.MetricsToken` ( )
+- removed the schema `cloud.ProjectIpExtnetAttachCreation` ( )
+- removed the schema `cloud.aggregated.AggregatedFloatingIps` ( )
+- removed the schema `cloud.aggregated.AggregatedGateways` ( )
+- removed the schema `cloud.aggregated.AggregatedInstanceBackup` ( )
+- removed the schema `cloud.aggregated.AggregatedLoadBalancerFlavors` ( )
+- removed the schema `cloud.aggregated.AggregatedLoadBalancers` ( )
+- removed the schema `cloud.aggregated.AggregatedNetworks` ( )
+- removed the schema `cloud.aggregated.AggregatedObjectStorage` ( )
+- removed the schema `cloud.aggregated.AggregatedSSHKey` ( )
+- removed the schema `cloud.aggregated.AggregatedVolumeBackups` ( )
+- removed the schema `cloud.aggregated.Error` ( )
+- removed the schema `cloud.aggregated.SortOrderEnum` ( )
+- removed the schema `cloud.aggregated.networks.Network` ( )
+- removed the schema `cloud.aggregated.networks.Subnet` ( )
+- removed the schema `cloud.aggregated.networks.subnet.Capability` ( )
+- removed the schema `cloud.aggregated.networks.subnet.Gateway` ( )
+- removed the schema `cloud.catalog.Image.CategoryEnum` ( )
+- removed the schema `cloud.catalog.Image.SubCategoryEnum` ( )
+- removed the schema `cloud.catalog.InstanceBackup.Pricing.IntervalEnum` ( )
+- removed the schema `cloud.catalog.InstanceBackup.Pricing` ( )
+- removed the schema `cloud.catalog.InstanceBackup` ( )
+- removed the schema `cloud.catalog.InstanceBackups` ( )
+- removed the schema `cloud.catalog.Instances` ( )
+- removed the schema `cloud.catalog.Loadbalancer.Flavor.Region` ( )
+- removed the schema `cloud.catalog.Loadbalancer.Flavor` ( )
+- removed the schema `cloud.catalog.Loadbalancer.Pricing.Price.TypeEnum` ( )
+- removed the schema `cloud.catalog.Loadbalancer.Pricing.Price` ( )
+- removed the schema `cloud.catalog.Loadbalancer.Pricing` ( )
+- removed the schema `cloud.catalog.Loadbalancer.Quota.Resource` ( )
+- removed the schema `cloud.catalog.Loadbalancer.Quota` ( )
+- removed the schema `cloud.catalog.Loadbalancer` ( )
+- removed the schema `cloud.catalog.Network.IpModel.TypeEnum` ( )
+- removed the schema `cloud.catalog.Network.IpModel` ( )
+- removed the schema `cloud.catalog.Network.Pricing` ( )
+- removed the schema `cloud.catalog.Network.Quota` ( )
+- removed the schema `cloud.catalog.Network.RouterModel.RouterSpecs.PublicBandwidth` ( )
+- removed the schema `cloud.catalog.Network.RouterModel.RouterSpecs` ( )
+- removed the schema `cloud.catalog.Network.RouterModel` ( )
+- removed the schema `cloud.catalog.Network.Subnet.CapabilityEnum` ( )
+- removed the schema `cloud.catalog.Network` ( )
+- removed the schema `cloud.catalog.Region.Filters` ( )
+- removed the schema `cloud.catalog.Region` ( )
+- removed the schema `cloud.catalog.Share.Model.Pricing.IntervalEnum` ( )
+- removed the schema `cloud.catalog.Shares.Filter` ( )
+- removed the schema `cloud.catalog.Shares.Filters` ( )
+- removed the schema `cloud.catalog.Shares.Model.Filters` ( )
+- removed the schema `cloud.catalog.Shares.Model.Pricing` ( )
+- removed the schema `cloud.catalog.Shares.Model.Specs` ( )
+- removed the schema `cloud.catalog.Shares.Model` ( )
+- removed the schema `cloud.catalog.Shares.RegionFilter` ( )
+- removed the schema `cloud.catalog.Shares` ( )
+- removed the schema `cloud.catalog.Volume.Model.Pricing.IntervalEnum` ( )
+- removed the schema `cloud.catalog.Volumes.Filter` ( )
+- removed the schema `cloud.catalog.Volumes.Filters` ( )
+- removed the schema `cloud.catalog.Volumes.Model.Filters` ( )
+- removed the schema `cloud.catalog.Volumes.Model.Pricing` ( )
+- removed the schema `cloud.catalog.Volumes.Model.Specs.Bandwidth` ( )
+- removed the schema `cloud.catalog.Volumes.Model.Specs.Volume.Capacity` ( )
+- removed the schema `cloud.catalog.Volumes.Model.Specs.Volume.Iops` ( )
+- removed the schema `cloud.catalog.Volumes.Model.Specs.Volume` ( )
+- removed the schema `cloud.catalog.Volumes.Model.Specs` ( )
+- removed the schema `cloud.catalog.Volumes.Model` ( )
+- removed the schema `cloud.catalog.Volumes` ( )
+- removed the schema `cloud.catalog.instances.Filter` ( )
+- removed the schema `cloud.catalog.instances.Flavor` ( )
+- removed the schema `cloud.catalog.instances.Image` ( )
+- removed the schema `cloud.catalog.instances.filter.ModelCategory` ( )
+- removed the schema `cloud.catalog.instances.filter.ModelDeployment` ( )
+- removed the schema `cloud.catalog.instances.filter.ModelRegion` ( )
+- removed the schema `cloud.catalog.instances.filter.ModelSubCategory` ( )
+- removed the schema `cloud.catalog.instances.flavor.Pricing` ( )
+- removed the schema `cloud.catalog.instances.flavor.Region` ( )
+- removed the schema `cloud.catalog.instances.flavor.Spec` ( )
+- removed the schema `cloud.catalog.instances.flavor.pricing.Price` ( )
+- removed the schema `cloud.catalog.instances.flavor.region.StockStatusEnum` ( )
+- removed the schema `cloud.catalog.instances.flavor.spec.Bandwidth` ( )
+- removed the schema `cloud.catalog.instances.flavor.spec.Disk.InterfaceEnum` ( )
+- removed the schema `cloud.catalog.instances.flavor.spec.Disk` ( )
+- removed the schema `cloud.catalog.instances.flavor.spec.GPU.MemoryInterfaceEnum` ( )
+- removed the schema `cloud.catalog.instances.flavor.spec.GPU.Memory` ( )
+- removed the schema `cloud.catalog.instances.flavor.spec.GPU` ( )
+- removed the schema `cloud.catalog.instances.flavor.spec.SpecWithUnit` ( )
+- removed the schema `cloud.catalog.instances.image.Region` ( )
+- removed the schema `cloud.instance.AggregatedInstance` ( )
+- removed the schema `cloud.instance.AggregatedIpAddress` ( )
+- removed the schema `cloud.instance.AggregatedVolume` ( )
+- removed the schema `cloud.instance.SearchFieldEnum` ( )
+- removed the schema `cloud.instance.SearchSortEnum` ( )
+- removed the schema `cloud.ip.ExtnetIpStatusEnum` ( )
+- removed the schema `cloud.ip.ExtnetIp` ( )
+- removed the schema `cloud.migrationStein` ( )
+- removed the schema `cloud.project.Aggregate.ObjectStorage` ( )
+- removed the schema `cloud.project.ai.DataStoreContainersListStatusTypeEnum` ( )
+- removed the schema `cloud.project.ai.DataStoreContainersList` ( )
+- removed the schema `cloud.project.ai.GuideLanguageEnum` ( )
+- removed the schema `cloud.project.ai.Guide` ( )
+- removed the schema `cloud.project.ai.endpoints.MetricPoint` ( )
+- removed the schema `cloud.project.ai.endpoints.Metrics` ( )
+- removed the schema `cloud.project.ai.endpoints.ModelMetric` ( )
+- removed the schema `cloud.project.ai.suggestion.SuggestionAppList` ( )
+- removed the schema `cloud.project.ai.suggestion.SuggestionApp` ( )
+- removed the schema `cloud.project.ai.suggestion.SuggestionEditor` ( )
+- removed the schema `cloud.project.ai.suggestion.SuggestionFramework` ( )
+- removed the schema `cloud.project.ai.suggestion.SuggestionJobList` ( )
+- removed the schema `cloud.project.ai.suggestion.SuggestionJob` ( )
+- removed the schema `cloud.project.ai.suggestion.SuggestionNotebookList` ( )
+- removed the schema `cloud.project.ai.suggestion.SuggestionNotebook` ( )
+- removed the schema `cloud.project.ai.suggestion.SuggestionResources` ( )
+- removed the schema `cloud.project.database.availability.Suggestion` ( )
+- removed the schema `cloud.project.database.capabilities.Region` ( )
+- removed the schema `cloud.project.database.capabilities.region.TypeEnum` ( )
+- removed the schema `cloud.project.region.ImageOsTypeEnum` ( )
+- removed the schema `cloud.project.region.ImageStatusEnum` ( )
+- removed the schema `cloud.project.region.ImageTypeEnum` ( )
+- removed the schema `cloud.project.region.ImageVisibilityEnum` ( )
+- removed the schema `cloud.region.Image` ( )
+- removed the schema `cloud.share.AggregatedShare` ( )
+- removed the schema `cloud.share.SearchFieldEnum` ( )
+- removed the schema `cloud.share.SearchSortEnum` ( )
+- removed the schema `cloud.subnet.SubnetCapabilityEnum` ( )
+- removed the schema `cloud.volume.VolumeBandwidthUnitEnum` ( )
+- removed the schema `cloud.volume.VolumeIopsUnitEnum` ( )
+- removed the schema `macAddress` ( )
+- removed the schema `order.catalog.cloud.RegionPrice.Price` ( )
+
+#### `dedicatedcloud`
+
+- `GetSapCapabilities`: api path removed without deprecation (GET /v1/dedicatedCloud/{serviceName}/sap/capabilities)
+- `RequestContactForVmwareCloudDirectorMigration`: api path removed without deprecation (POST /v1/dedicatedCloud/{serviceName}/requestContactForVmwareCloudDirectorMigration)
+- `ValidateSap`: api path removed without deprecation (POST /v1/dedicatedCloud/{serviceName}/sap/validate)
+- removed the schema `dedicatedCloud.sap.informationSapPreInstallation` ( )
+- removed the schema `dedicatedCloud.sap.paramsValidate` ( )
+
+#### `domain`
+
+- `ApproveDataClaimNotice`: api path removed without deprecation (POST /v1/domain/data/claimNotice/approve)
+- `GetAftermarketNegotiableDomains`: api path removed without deprecation (GET /v1/domain/aftermarket/negotiableDomains)
+- `GetAlternativeNames`: api path removed without deprecation (GET /v1/domain/alternativeNames)
+- `GetExtensionsByCategory`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/domain/extensions/byCategory)
+- `GetExtensionsRegistryConfigurations`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/domain/extensions/{name}/registryConfigurations)
+- `GetExtensions`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/domain/extensions/{name})
+- `GetSuggest`: api path removed without deprecation (GET /v1/domain/suggest/{label})
+- `GetZoneHost`: api path removed without deprecation (GET /v1/domain/zone/host)
+- `ListExtensionsHighlighteds`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/domain/extensions/highlighted)
+- `ListExtensionsPricingAttributes`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/domain/extensions/pricingAttributes)
+- `ListExtensions`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/domain/extensions)
+- `ListMaintenances`: api path removed without deprecation (GET /v1/domain/maintenance)
+- removed the schema `domain.ApproveTypeEnum` ( )
+- removed the schema `domain.Approve` ( )
+- removed the schema `domain.OvhSubsidiaryEnum` ( )
+- removed the schema `domain.PaginationCursor` ( )
+- removed the schema `domain.SuggestDomain` ( )
+- removed the schema `domain.SuggestResult` ( )
+- removed the schema `domain.aftermarket.NegotiableDomains` ( )
+- removed the schema `domain.aftermarket.PlatformEnum` ( )
+- removed the schema `domain.aftermarket.negotiableDomains.Domain` ( )
+- removed the schema `domain.aftermarket.negotiableDomains.Meta` ( )
+- removed the schema `domain.aftermarket.negotiableDomains.Price` ( )
+- removed the schema `domain.aftermarket.negotiableDomains.meta.Sedo` ( )
+- removed the schema `domain.maintenance.ExtensionMaintenance` ( )
+- removed the schema `domain.suggest.AlternativeName` ( )
+- removed the schema `domain.suggest.AlternativeNamesPayload` ( )
+- removed the schema `domain.suggest.AlternativeNamesResult` ( )
+- removed the schema `domain.zone.Host` ( )
+- removed the schema `order.CurrencyCodeEnum` ( )
+- removed the schema `order.Price` ( )
+
+#### `location`
+
+- `AllLocations`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v2/location)
+- `GetLocation`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v2/location/{name})
+
+#### `me`
+
+- `AttachmentSvaWalletCashouts`: api path removed without deprecation (POST /v1/me/sva/wallet/cashouts/{id}/attachment)
+- `CreateManualDomainPayment`: api path removed without deprecation (POST /v1/me/manualDomainPayment)
+- `CreateOrderVoucher`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (POST /v1/me/order/{orderId}/voucher)
+- `CreatePaymentMethod2`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (POST /v1/me/paymentMethod)
+- `CreatePreferencesManager`: api path removed without deprecation (POST /v1/me/preferences/manager)
+- `CreateProcedure2FA`: api path removed without deprecation (POST /v1/me/procedure/2FA)
+- `CreateProcedureFraud`: api path removed without deprecation (POST /v1/me/procedure/fraud)
+- `CreateProcedureIdentity`: api path removed without deprecation (POST /v1/me/procedure/identity)
+- `CreateSvaOnboarding`: api path removed without deprecation (POST /v1/me/sva/onboarding)
+- `CreateSvaWalletBankAccount`: api path removed without deprecation (POST /v1/me/sva/wallet/bankAccount)
+- `CreateSvaWallet`: api path removed without deprecation (POST /v1/me/sva/wallet)
+- `DeleteOrderVoucher`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (DELETE /v1/me/order/{orderId}/voucher/{balanceName})
+- `DeletePaymentMethodByID`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (DELETE /v1/me/paymentMethod/{id})
+- `DeletePreferencesManager`: api path removed without deprecation (DELETE /v1/me/preferences/manager/{key})
+- `DocumentSvaWallet`: api path removed without deprecation (POST /v1/me/sva/wallet/document)
+- `Feedback`: api path removed without deprecation (POST /v1/me/feedback)
+- `FinalizeProcedure2FA`: api path removed without deprecation (POST /v1/me/procedure/2FA/finalize)
+- `FinalizeProcedureFraud`: api path removed without deprecation (POST /v1/me/procedure/fraud/finalize)
+- `FinalizeProcedureGdpr`: api path removed without deprecation (POST /v1/me/procedure/gdpr/finalize)
+- `FinalizeProcedureIdentity`: api path removed without deprecation (POST /v1/me/procedure/identity/finalize)
+- `GdprProcedure`: api path removed without deprecation (POST /v1/me/procedure/gdpr)
+- `GetBillDownload`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/me/bill/{billId}/download)
+- `GetBill`: removed the optional property `pdfBetaUrl` from the response with the `200` status (GET /v1/me/bill/{billId})
+- `GetBillingCapacities`: api path removed without deprecation (GET /v1/me/billing/capacities)
+- `GetCorrectiveInvoice`: removed the optional property `pdfBetaUrl` from the response with the `200` status (GET /v1/me/correctiveInvoice/{correctiveInvoiceId})
+- `GetDepositDownload`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/me/deposit/{depositId}/download)
+- `GetDepositPaidBillsDownload`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/me/deposit/{depositId}/paidBills/{billId}/download)
+- `GetDepositPaidBills`: removed the optional property `pdfBetaUrl` from the response with the `200` status (GET /v1/me/deposit/{depositId}/paidBills/{billId})
+- `GetDepositRequest`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/me/depositRequest/{id})
+- `GetDownPaymentInvoice`: removed the optional property `pdfBetaUrl` from the response with the `200` status (GET /v1/me/downPaymentInvoice/{downPaymentInvoiceId})
+- `GetManualDomainPayment`: api path removed without deprecation (GET /v1/me/manualDomainPayment)
+- `GetOrderByOrderIDDetailsByDetailIDExtension`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/me/order/{orderId}/details/{detailId}/extension)
+- `GetOrderByOrderIDDetailsByDetailID`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/me/order/{orderId}/details/{detailId})
+- `GetOrderCapacities`: api path removed without deprecation (GET /v1/me/order/{orderId}/capacities)
+- `GetOrderDetailsOperations`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/me/order/{orderId}/details/{detailId}/operations/{operationId})
+- `GetOrderVoucher`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/me/order/{orderId}/voucher/{balanceName})
+- `GetPaymentMethodByID`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/me/paymentMethod/{id})
+- `GetPreferencesManager`: api path removed without deprecation (GET /v1/me/preferences/manager/{key})
+- `GetProcedure2FA`: api path removed without deprecation (GET /v1/me/procedure/2FA)
+- `GetProcedureFraud`: api path removed without deprecation (GET /v1/me/procedure/fraud)
+- `GetProcedureIdentity`: api path removed without deprecation (GET /v1/me/procedure/identity)
+- `GetRefundDownload`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/me/refund/{refundId}/download)
+- `GetSuggestCompany`: api path removed without deprecation (GET /v1/me/suggest/company)
+- `GetSvaOnboarding`: api path removed without deprecation (GET /v1/me/sva/onboarding)
+- `GetSvaWalletBankAccount`: api path removed without deprecation (GET /v1/me/sva/wallet/bankAccount)
+- `GetSvaWalletCashouts`: api path removed without deprecation (GET /v1/me/sva/wallet/cashouts/{id})
+- `GetSvaWallet`: api path removed without deprecation (GET /v1/me/sva/wallet)
+- `GetVoucherAccountMovements`: api path removed without deprecation (GET /v1/me/voucherAccount/{voucherAccountId}/movements/{movementId})
+- `GetVoucherAccount`: api path removed without deprecation (GET /v1/me/voucherAccount/{voucherAccountId})
+- `GetWithdrawalDownload`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/me/withdrawal/{withdrawalId}/download)
+- `ListDepositRequests`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/me/depositRequest)
+- `ListOrderAvailablePaymentMeans`: api path removed without deprecation (GET /v1/me/order/{orderId}/availablePaymentMean)
+- `ListOrderAvailablePaymentMethods`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/me/order/{orderId}/availablePaymentMethod)
+- `ListOrderDetailsOperations`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/me/order/{orderId}/details/{detailId}/operations)
+- `ListOrderVouchers`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/me/order/{orderId}/voucher)
+- `ListPaymentMethod2`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/me/paymentMethod)
+- `ListPreferencesManagers`: api path removed without deprecation (GET /v1/me/preferences/manager)
+- `ListSuggestCompanyIdentificationNumbers`: api path removed without deprecation (GET /v1/me/suggest/companyIdentificationNumbers)
+- `ListSvaCdrs`: api path removed without deprecation (GET /v1/me/sva/cdr)
+- `ListSvaWalletCashouts`: api path removed without deprecation (GET /v1/me/sva/wallet/cashouts)
+- `ListVoucherAccountMovements`: api path removed without deprecation (GET /v1/me/voucherAccount/{voucherAccountId}/movements)
+- `ListVoucherAccounts`: api path removed without deprecation (GET /v1/me/voucherAccount)
+- `TransactionPaymentMethod`: api path removed without deprecation (POST /v1/me/payment/method/{paymentMethodId}/transaction)
+- `UpdatePaymentMethodByID`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (PUT /v1/me/paymentMethod/{id})
+- `UpdatePreferencesManager`: api path removed without deprecation (PUT /v1/me/preferences/manager/{key})
+- `UpdateSvaWallet`: api path removed without deprecation (PUT /v1/me/sva/wallet)
+- removed the schema `billing.BillingTaskStatusEnum` ( )
+- removed the schema `billing.ManualDomainPaymentStatus` ( )
+- removed the schema `billing.VoucherAccount` ( )
+- removed the schema `billing.VoucherMovement` ( )
+- removed the schema `billing.order.AutomaticPaymentCapacities` ( )
+- removed the schema `billing.order.AvailablePaymentMeanField` ( )
+- removed the schema `billing.order.AvailablePaymentMean` ( )
+- removed the schema `billing.order.OrderCapacities` ( )
+- removed the schema `billing.order.PaymentMeanFieldTypeEnum` ( )
+- removed the schema `billing.order.PaymentMeanIntegrationEnum` ( )
+- removed the schema `billing.voucherAccount.OperationEnum` ( )
+- removed the schema `email` ( )
+- removed the schema `me.payment.method.oneclick.Creation` ( )
+- removed the schema `me.payment.method.oneclick.Response` ( )
+- removed the schema `me.procedure.2FA.CreateLinks` ( )
+- removed the schema `me.procedure.2FA.CreateResponse` ( )
+- removed the schema `me.procedure.2FA.Create` ( )
+- removed the schema `me.procedure.2FA.HTTPMethodEnum` ( )
+- removed the schema `me.procedure.2FA.StatusEnum` ( )
+- removed the schema `me.procedure.2FA.Status` ( )
+- removed the schema `me.procedure.GDPR.CategoryEnum` ( )
+- removed the schema `me.procedure.GDPR.CreateLinks` ( )
+- removed the schema `me.procedure.GDPR.CreateResponse` ( )
+- removed the schema `me.procedure.GDPR.Create` ( )
+- removed the schema `me.procedure.GDPR.Finalize` ( )
+- removed the schema `me.procedure.GDPR.HTTPMethodEnum` ( )
+- removed the schema `me.procedure.fraud.CreateLinks` ( )
+- removed the schema `me.procedure.fraud.CreateResponse` ( )
+- removed the schema `me.procedure.fraud.Create` ( )
+- removed the schema `me.procedure.fraud.HTTPMethodEnum` ( )
+- removed the schema `me.procedure.fraud.StatusEnum` ( )
+- removed the schema `me.procedure.fraud.Status` ( )
+- removed the schema `me.procedure.identity.CreateLinks` ( )
+- removed the schema `me.procedure.identity.CreateResponse` ( )
+- removed the schema `me.procedure.identity.Create` ( )
+- removed the schema `me.procedure.identity.HTTPMethodEnum` ( )
+- removed the schema `me.procedure.identity.StatusEnum` ( )
+- removed the schema `me.procedure.identity.Status` ( )
+- removed the schema `me.sva.BankAccount` ( )
+- removed the schema `me.sva.CashoutAttachment` ( )
+- removed the schema `me.sva.Cashout` ( )
+- removed the schema `me.sva.Cdr` ( )
+- removed the schema `me.sva.Company.Update` ( )
+- removed the schema `me.sva.CompanyWritable` ( )
+- removed the schema `me.sva.Company` ( )
+- removed the schema `me.sva.Document` ( )
+- removed the schema `me.sva.Onboarding` ( )
+- removed the schema `me.sva.PersonalInfo.Address` ( )
+- removed the schema `me.sva.PersonalInfo.RepresentativeWritable` ( )
+- removed the schema `me.sva.PersonalInfo.Update` ( )
+- removed the schema `me.sva.PersonalInfoWritable` ( )
+- removed the schema `me.sva.PersonalInfo` ( )
+- removed the schema `me.sva.Wallet` ( )
+- removed the schema `me.sva.bankAccount.Creation` ( )
+- removed the schema `me.sva.bankAccount.StatusEnum` ( )
+- removed the schema `me.sva.cashout.StatusEnum` ( )
+- removed the schema `me.sva.cdr.StatusEnum` ( )
+- removed the schema `me.sva.document.Creation` ( )
+- removed the schema `me.sva.document.NatureEnum` ( )
+- removed the schema `me.sva.document.StatusEnum` ( )
+- removed the schema `me.sva.document.TypeEnum` ( )
+- removed the schema `me.sva.onboarding.CompanyWritable` ( )
+- removed the schema `me.sva.onboarding.CreationWritable` ( )
+- removed the schema `me.sva.onboarding.PersonalInfo.RepresentativeWritable` ( )
+- removed the schema `me.sva.wallet.Balance` ( )
+- removed the schema `me.sva.wallet.CompanyKindEnum` ( )
+- removed the schema `me.sva.wallet.CreationWritable` ( )
+- removed the schema `me.sva.wallet.KycStatusEnum` ( )
+- removed the schema `me.sva.wallet.StatusEnum` ( )
+- removed the schema `me.sva.wallet.UpdateWritable` ( )
+- removed the schema `nichandle.BillingCapacities` ( )
+- removed the schema `nichandle.ManagerPreferenceWritable` ( )
+- removed the schema `nichandle.ManagerPreference` ( )
+- removed the schema `nichandle.RequiredPaymentMethodEnum` ( )
+- removed the schema `suggest.CompanyEntry` ( )
+- removed the schema `suggest.CompanyIdTypeEnum` ( )
+- removed the schema `suggest.CompanyIdentificationNumbers` ( )
+- removed the schema `suggest.Company` ( )
+- removed the schema `suggest.EntityTypeEnum` ( )
+- removed the schema `suggest.TypeEnum` ( )
+
+#### `newaccount`
+
+- `ListOvhSubsidiaries`: api path removed without deprecation (GET /v1/newAccount/ovhSubsidiary)
+- `ListResidentialCountries`: api path removed without deprecation (GET /v1/newAccount/residentialCountry)
+- removed the schema `newAccount-ovhSubsidiary.BillingCountry` ( )
+- removed the schema `newAccount-residentialCountry.ResidentialCountry` ( )
+
+#### `order`
+
+- `CreateCartBackupServicesOptions`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (POST /v1/order/cart/{cartId}/backupServices/options)
+- `CreateCartBackupServices`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (POST /v1/order/cart/{cartId}/backupServices)
+- `CreateCartDomain`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (POST /v1/order/cart/{cartId}/domain)
+- `CreateCartVcdaMigrationOptions`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (POST /v1/order/cart/{cartId}/vcdaMigration/options)
+- `CreateCartVcdaMigration`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (POST /v1/order/cart/{cartId}/vcdaMigration)
+- `CreateCartVrackServicesOptions`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (POST /v1/order/cart/{cartId}/vrackServices/options)
+- `CreateCartVrackServices`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (POST /v1/order/cart/{cartId}/vrackServices)
+- `GetCatalogPublicAdvisoryServicesHostingWeb`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/order/catalog/public/advisoryServicesHostingWeb)
+- `GetCatalogPublicAdvisoryServicesPublicCloud`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/order/catalog/public/advisoryServicesPublicCloud)
+- `GetCatalogPublicAdvisoryServicesTelecom`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/order/catalog/public/advisoryServicesTelecom)
+- `GetCatalogPublicBackupServices`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/order/catalog/public/backupServices)
+- `GetCatalogPublicVcdaMigration`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/order/catalog/public/vcdaMigration)
+- `ListCartBackupServicesOptions`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/order/cart/{cartId}/backupServices/options)
+- `ListCartBackupServices`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/order/cart/{cartId}/backupServices)
+- `ListCartDomains`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/order/cart/{cartId}/domain)
+- `ListCartVcdaMigrationOptions`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/order/cart/{cartId}/vcdaMigration/options)
+- `ListCartVcdaMigrations`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/order/cart/{cartId}/vcdaMigration)
+- `ListCartVrackServicesOptions`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/order/cart/{cartId}/vrackServices/options)
+- `ListCartVrackServices`: the endpoint no longer allows anonymous access and now only accepts `oAuth2AuthCode` (GET /v1/order/cart/{cartId}/vrackServices)
+
+#### `ovhcloudconnect`
+
+- `GetOrderDiversityCatalog`: api path removed without deprecation (GET /v1/ovhCloudConnect/order/diversity/catalog)
+- removed the schema `ovhcloudconnect.CatalogEnum` ( )
+- removed the schema `ovhcloudconnect.RegionEnum` ( )
+- removed the schema `ovhcloudconnect.diversity.catalog` ( )
+- removed the schema `ovhcloudconnect.diversity.plan` ( )
+- removed the schema `ovhcloudconnect.diversity.pop` ( )
+
+#### `packxdsl`
+
+- `ListSearches`: api path removed without deprecation (GET /v1/pack/xdsl/search)
+- removed the schema `pack.xdsl.PackDetail` ( )
+- removed the schema `xdsl.DslTypeEnum` ( )
+
+#### `partner`
+
+- `GetFormSchema`: api path removed without deprecation (GET /v1/partner/form/schema)
+- removed the schema `partner2.form.Field` ( )
+- removed the schema `partner2.form.Schema` ( )
+- removed the schema `partner2.form.field.Config` ( )
+- removed the schema `partner2.form.schema.Account` ( )
+- removed the schema `partner2.form.schema.Contact` ( )
+- removed the schema `partner2.form.schema.PartnerShip` ( )
+- removed the schema `partner2.form.schema.account.NumberOfEmployees` ( )
+- removed the schema `partner2.form.schema.account.PartnerType` ( )
+- removed the schema `partner2.form.schema.account.numberOfEmployees.Option` ( )
+- removed the schema `partner2.form.schema.account.partnerType.Option` ( )
+- removed the schema `partner2.form.schema.contact.Position` ( )
+- removed the schema `partner2.form.schema.contact.position.Option` ( )
+- removed the schema `partner2.form.schema.partnership.AreaOfExpertise` ( )
+- removed the schema `partner2.form.schema.partnership.areaOfExpertise.Option` ( )
+
+#### `publiccloud`
+
+- `AllVolumes`: added `#/components/schemas/publicCloud.blockStorage.BlockCurrentState` to the `items/currentState` response property `allOf` list for the response status `200` (GET /v2/publicCloud/project/{projectId}/storage/block/volume)
+- `AllVolumes`: removed `#/components/schemas/publicCloud.blockStorage.BlockCurrentStateManager` from the `items/currentState` response property `allOf` list for the response status `200` (GET /v2/publicCloud/project/{projectId}/storage/block/volume)
+- `GetAiAgent4manager`: api path removed without deprecation (GET /v2/publicCloud/ai/agent4manager)
+- `GetObjectStorageServices`: api path removed without deprecation (GET /v2/publicCloud/project/{projectId}/service/storage/object)
+- `GetServices`: api path removed without deprecation (GET /v2/publicCloud/project/{projectId}/service)
+- `GetVolume`: added `#/components/schemas/publicCloud.blockStorage.BlockCurrentState` to the `currentState` response property `allOf` list for the response status `200` (GET /v2/publicCloud/project/{projectId}/storage/block/volume/{id})
+- `GetVolume`: removed `#/components/schemas/publicCloud.blockStorage.BlockCurrentStateManager` from the `currentState` response property `allOf` list for the response status `200` (GET /v2/publicCloud/project/{projectId}/storage/block/volume/{id})
+- removed the schema `publicCloud.ai.agents.AgentManagerCurrentState` ( )
+- removed the schema `publicCloud.ai.agents.ManagerAgent` ( )
+- removed the schema `publicCloud.blockStorage.BlockCapability` ( )
+- removed the schema `publicCloud.blockStorage.BlockCurrentStateManager` ( )
+- removed the schema `publicCloud.blockStorage.BlockManager` ( )
+- removed the schema `publicCloud.blockStorage.VolumeCapabilityNameEnum` ( )
+- removed the schema `publicCloud.blockStorage.VolumeCapabilityReasonEnum` ( )
+- removed the schema `publicCloud.project.ProjectServiceEntry` ( )
+
+#### `sms`
+
+- `GetVirtualNumbersTime2chatAutoResponse`: api path removed without deprecation (GET /v1/sms/{serviceName}/virtualNumbers/{number}/time2chat/autoResponse)
+- `GetVirtualNumbersTime2chatContact`: api path removed without deprecation (GET /v1/sms/{serviceName}/virtualNumbers/{number}/time2chat/contact)
+- `GetVirtualNumbersTime2chatKyc`: api path removed without deprecation (GET /v1/sms/{serviceName}/virtualNumbers/{number}/time2chat/kyc)
+- `UpdateVirtualNumbersTime2chatAutoResponse`: api path removed without deprecation (PUT /v1/sms/{serviceName}/virtualNumbers/{number}/time2chat/autoResponse)
+- `UpdateVirtualNumbersTime2chatContact`: api path removed without deprecation (PUT /v1/sms/{serviceName}/virtualNumbers/{number}/time2chat/contact)
+- `UpdateVirtualNumbersTime2chatKyc`: api path removed without deprecation (PUT /v1/sms/{serviceName}/virtualNumbers/{number}/time2chat/kyc)
+- removed the schema `sms.AutoResponse` ( )
+- removed the schema `sms.Contact` ( )
+- removed the schema `sms.KYC` ( )
+
+#### `startup`
+
+- `GetFormSchema`: api path removed without deprecation (GET /v1/startup/form/schema)
+- removed the schema `startup.form.Field` ( )
+- removed the schema `startup.form.Schema` ( )
+- removed the schema `startup.form.field.Config` ( )
+- removed the schema `startup.form.schema.Awarness` ( )
+- removed the schema `startup.form.schema.Company` ( )
+- removed the schema `startup.form.schema.FundRaising` ( )
+- removed the schema `startup.form.schema.Project` ( )
+- removed the schema `startup.form.schema.awarness.Option` ( )
+- removed the schema `startup.form.schema.company.Detail` ( )
+- removed the schema `startup.form.schema.company.EmployeesNumber` ( )
+- removed the schema `startup.form.schema.company.Incubator` ( )
+- removed the schema `startup.form.schema.company.RelatedIndustry` ( )
+- removed the schema `startup.form.schema.company.SocialNetwork` ( )
+- removed the schema `startup.form.schema.company.employeesNumber.Option` ( )
+- removed the schema `startup.form.schema.company.incubator.Country` ( )
+- removed the schema `startup.form.schema.company.incubator.country.Option` ( )
+- removed the schema `startup.form.schema.company.relatedIndustry.Option` ( )
+- removed the schema `startup.form.schema.fundRaising.LastFundRaising` ( )
+- removed the schema `startup.form.schema.fundRaising.PlannedFundRaising` ( )
+- removed the schema `startup.form.schema.fundRaising.lastFundRaising.Option` ( )
+- removed the schema `startup.form.schema.fundRaising.plannedFundRaising.Option` ( )
+- removed the schema `startup.form.schema.project.RelatedTechnology` ( )
+- removed the schema `startup.form.schema.project.Requirements` ( )
+- removed the schema `startup.form.schema.project.relatedTechnology.Option` ( )
+- removed the schema `startup.form.schema.project.requirements.InfrastructureUsing` ( )
+- removed the schema `startup.form.schema.project.requirements.infrastructureUsing.Option` ( )
+
+#### `support`
+
+- `GetChatToken`: api path removed without deprecation (GET /v1/support/chat/token)
+- removed the schema `support.chat.Token` ( )
+
+#### `vps`
+
+- `GetVPSBillingVersion`: api path removed with deprecation (GET /v1/vps/{serviceName}/version)
+- `GetVPSMetricsToken`: api path removed without deprecation (GET /v1/vps/{serviceName}/metricsToken)
+- `ListVPSZonesImpactedByMigrationStein`: api path removed without deprecation (GET /v1/vps/migrationStein)
+- removed the schema `vps.MetricsToken` ( )
+- removed the schema `vps.VpsBillingVersion` ( )
+- removed the schema `vps.migrationStein` ( )
+
+#### `xdsl`
+
+- `CreateDiagnosticWizard`: api path removed without deprecation (POST /v1/xdsl/diagnosticWizard)
+- `DeleteDiagnosticWizard`: api path removed without deprecation (DELETE /v1/xdsl/diagnosticWizard)
+- `DiagsDiagnosticWizard`: api path removed without deprecation (POST /v1/xdsl/diagnosticWizard/diags)
+- `GetDiagnosticWizard`: api path removed without deprecation (GET /v1/xdsl/diagnosticWizard)
+- `InterventionDiagnosticWizard`: api path removed without deprecation (POST /v1/xdsl/diagnosticWizard/intervention)
+- `UpdateDiagnosticWizard`: api path removed without deprecation (PATCH /v1/xdsl/diagnosticWizard)
+- `ValidateFormDiagnosticWizard`: api path removed without deprecation (POST /v1/xdsl/diagnosticWizard/validateForm)
+- removed the schema `xdsl.wizard.CustomerCivilityEnum` ( )
+- removed the schema `xdsl.wizard.WizardBuffer` ( )
+- removed the schema `xdsl.wizard.WizardDiags` ( )
+- removed the schema `xdsl.wizard.WizardFormCustomerContact` ( )
+- removed the schema `xdsl.wizard.WizardFormWritable` ( )
+- removed the schema `xdsl.wizard.WizardForm` ( )
+- removed the schema `xdsl.wizard.WizardStatusEnum` ( )
+- removed the schema `xdsl.wizard.WizardStepEnum` ( )
+- removed the schema `xdsl.wizard.WizardTaskDetailsWritable` ( )
+- removed the schema `xdsl.wizard.WizardTaskDetails` ( )
+- removed the schema `xdsl.wizard.diags.InterventionStatusEnum` ( )
+- removed the schema `xdsl.wizard.diags.LinkInformation` ( )
+- removed the schema `xdsl.wizard.diags.PPPSessionStatusEnum` ( )
+- removed the schema `xdsl.wizard.diags.PPPSession` ( )
+- removed the schema `xdsl.wizard.diags.ProviderStatus` ( )
+- removed the schema `xdsl.wizard.diags.Statistics` ( )
+
+</details>
+
+## 0.4.0 (2026-11-16)
+
+Compared with 0.3.0.
+
+### Breaking changes
+
+Code using these must change.
+
+- `alldom`: `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/allDom/{serviceName}/serviceInfos)
+- `cdndedicated`: `UpdateDomainsCacheRules` takes a `CdnanycastCacheRuleWritable` instead of a `CdnanycastCacheRule` (PUT /v1/cdn/dedicated/{serviceName}/domains/{domain}/cacheRules/{cacheRuleId})
+- `cdndedicated`: `UpdateDomains` takes a `CdnanycastDomainWritable` instead of a `CdnanycastDomain` (PUT /v1/cdn/dedicated/{serviceName}/domains/{domain})
+- `cdndedicated`: `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/cdn/dedicated/{serviceName}/serviceInfos)
+- `cloud`: 72 parameters, 42 changes, listed below
+- `clusterhadoop`: `UpdateNetworkACL` takes a `ClusterHadoopNetworkACLWritable` instead of a `ClusterHadoopNetworkACL` (PUT /v1/cluster/hadoop/{serviceName}/networkAcl/{block})
+- `clusterhadoop`: `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/cluster/hadoop/{serviceName}/serviceInfos)
+- `clusterhadoop`: `UpdateUser` takes a `ClusterHadoopUserWritable` instead of a `ClusterHadoopUser` (PUT /v1/cluster/hadoop/{serviceName}/user/{username})
+- `dbaaslogs`: 2 parameters, 14 changes, listed below
+- `dedicatedceph`: `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/dedicated/ceph/{serviceName}/serviceInfos)
+- `dedicatedcloud`: 5 parameters, 17 changes, listed below
+- `dedicatedhousing`: `UpdateFeaturesBackupFTPAccess` takes a `DedicatedServerBackupFtpACLWritable` instead of a `DedicatedServerBackupFtpACL` (PUT /v1/dedicated/housing/{serviceName}/features/backupFTP/access/{ipBlock})
+- `dedicatedhousing`: `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/dedicated/housing/{serviceName}/serviceInfos)
+- `dedicatednasha`: 3 parameters, 21 changes, listed below
+- `dedicatedserver`: 8 parameters, 34 changes, listed below
+- `domain`: 13 parameters, 32 changes, listed below
+- `emaildomain`: 6 parameters, 14 changes, listed below
+- `emailexchange`: 20 parameters, 10 changes, listed below
+- `emailmxplan`: 5 parameters, 8 changes, listed below
+- `emailpro`: 6 parameters, 70 changes, listed below
+- `freefax`: `UpdateDirectory` takes a `TelephonyDirectoryInfoWritable` instead of a `TelephonyDirectoryInfo` (PUT /v1/freefax/{serviceName}/directory)
+- `freefax`: `UpdateFreefax` takes a `FreefaxFreefaxPropertiesWritable` instead of a `FreefaxFreefaxProperties` (PUT /v1/freefax/{serviceName})
+- `freefax`: `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/freefax/{serviceName}/serviceInfos)
+- `freefax`: `UpdateVoicemail` takes a `TelephonyVoicemailPropertiesWritable` instead of a `TelephonyVoicemailProperties` (PUT /v1/freefax/{serviceName}/voicemail)
+- `freefax`: `FreefaxFreefaxProperties.Number`: removed
+- `horizonview`: 1 parameter, 14 changes, listed below
+- `hostingprivatedatabase`: 3 parameters, 39 changes, listed below
+- `hostingweb`: 12 parameters, 33 changes, listed below
+- `iam`: 7 parameters, 6 changes, listed below
+- `ip`: `UpdateFirewall` takes a `IPFirewallIPWritable` instead of a `IPFirewallIP` (PUT /v1/ip/{ip}/firewall/{ipOnFirewall})
+- `ip`: `UpdateGame` takes a `IPGameMitigationWritable` instead of a `IPGameMitigation` (PUT /v1/ip/{ip}/game/{ipOnGame})
+- `ip`: `UpdateIP` takes a `IPIPWritable` instead of a `IPIP` (PUT /v1/ip/{ip})
+- `ip`: `UpdateMitigationProfiles` takes a `IPMitigationProfileWritable` instead of a `IPMitigationProfile` (PUT /v1/ip/{ip}/mitigationProfiles/{ipMitigationProfile})
+- `ip`: `UpdateMitigation` takes a `IPMitigationIPWritable` instead of a `IPMitigationIP` (PUT /v1/ip/{ip}/mitigation/{ipOnMitigation})
+- `iploadbalancing`: 14 parameters, 25 changes, listed below
+- `licensecloudlinux`: `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/license/cloudLinux/{serviceName}/serviceInfos)
+- `licensecpanel`: `UpdateCpanel` takes a `LicenseCpanelCpanelWritable` instead of a `LicenseCpanelCpanel` (PUT /v1/license/cpanel/{serviceName})
+- `licensecpanel`: `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/license/cpanel/{serviceName}/serviceInfos)
+- `licensecpanel`: `LicenseCpanelCpanel.Creation`: removed
+- `licensecpanel`: `LicenseCpanelCpanel.Domain`: removed
+- `licensecpanel`: `LicenseCpanelCpanel.IP`: removed
+- `licensecpanel`: `LicenseCpanelCpanel.LicenseID`: removed
+- `licensecpanel`: `LicenseCpanelCpanel.Status`: removed
+- `licensecpanel`: `LicenseCpanelCpanel.Version`: removed
+- `licensedirectadmin`: 2 parameters, 7 changes, listed below
+- `licensehycu`: 2 parameters, 9 changes, listed below
+- `licenseoffice`: 1 parameter, 14 changes, listed below
+- `licenseplesk`: 2 parameters, 24 changes, listed below
+- `licensesqlserver`: `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/license/sqlserver/{serviceName}/serviceInfos)
+- `licensevirtuozzo`: 2 parameters, 9 changes, listed below
+- `licensewindows`: `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/license/windows/{serviceName}/serviceInfos)
+- `licensewindows`: `UpdateWindows` takes a `LicenseWindowsWindowsWritable` instead of a `LicenseWindowsWindows` (PUT /v1/license/windows/{serviceName})
+- `licensewindows`: `LicenseWindowsWindows.Creation`: removed
+- `licensewindows`: `LicenseWindowsWindows.Domain`: removed
+- `licensewindows`: `LicenseWindowsWindows.IP`: removed
+- `licensewindows`: `LicenseWindowsWindows.LicenseID`: removed
+- `licensewindows`: `LicenseWindowsWindows.Status`: removed
+- `licensewindows`: `LicenseWindowsWindows.Version`: removed
+- `licenseworklight`: `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/license/worklight/{serviceName}/serviceInfos)
+- `licenseworklight`: `UpdateWorklight` takes a `LicenseWorklightWorkLightWritable` instead of a `LicenseWorklightWorkLight` (PUT /v1/license/worklight/{serviceName})
+- `licenseworklight`: `LicenseWorklightWorkLight.Creation`: removed
+- `licenseworklight`: `LicenseWorklightWorkLight.Domain`: removed
+- `licenseworklight`: `LicenseWorklightWorkLight.IP`: removed
+- `licenseworklight`: `LicenseWorklightWorkLight.LicenseID`: removed
+- `licenseworklight`: `LicenseWorklightWorkLight.Status`: removed
+- `licenseworklight`: `LicenseWorklightWorkLight.Version`: removed
+- `me`: 30 parameters, 5 changes, listed below
+- `metrics`: 1 parameter, 14 changes, listed below
+- `msservices`: 7 parameters, 18 changes, listed below
+- `notification`: 4 parameters, 12 changes, listed below
+- `nutanix`: 2 parameters, 8 changes, listed below
+- `overthebox`: 2 parameters, 27 changes, listed below
+- `ovhcloudconnect`: `CreateConfigPopDatacenterExtra` takes a `OvhcloudconnectDatacenterExtraConfigWritable` instead of a `OvhcloudconnectDatacenterExtraConfig` (POST /v1/ovhCloudConnect/{serviceName}/config/pop/{popId}/datacenter/{datacenterId}/extra)
+- `ovhcloudconnect`: `CreateConfigPopDatacenter` takes a `OvhcloudconnectDatacenterConfigWritable` instead of a `OvhcloudconnectDatacenterConfig` (POST /v1/ovhCloudConnect/{serviceName}/config/pop/{popId}/datacenter)
+- `ovhcloudconnect`: `CreateConfigPop` takes a `OvhcloudconnectPopConfigWritable` instead of a `OvhcloudconnectPopConfig` (POST /v1/ovhCloudConnect/{serviceName}/config/pop)
+- `ovhcloudconnect`: `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/ovhCloudConnect/{serviceName}/serviceInfos)
+- `packsiptrunk`: `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/pack/siptrunk/{packName}/serviceInfos)
+- `packxdsl`: 2 parameters, 18 changes, listed below
+- `partner`: `CreatePartner` takes a `Partner2PartnerWritable` instead of a `Partner2Partner` (POST /v1/partner)
+- `services`: `UpdateSavingsPlansSubscribed` takes a `ServicesSavingsPlansSavingsPlanWritable` instead of a `ServicesSavingsPlansSavingsPlan` (PUT /v1/services/{serviceId}/savingsPlans/subscribed/{savingsPlanId})
+- `sms`: 11 parameters, 29 changes, listed below
+- `stackmis`: `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/stack/mis/{serviceName}/serviceInfos)
+- `startup`: `CreateStartup` takes a `StartupStartupWritable` instead of a `StartupStartup` (POST /v1/startup)
+- `storage`: 6 parameters, 15 changes, listed below
+- `telephony`: 61 parameters, 173 changes, listed below
+- `veeamcloudconnect`: `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/veeamCloudConnect/{serviceName}/serviceInfos)
+- `veeamveeamenterprise`: 1 parameter, 14 changes, listed below
+- `vip`: 1 parameter, 14 changes, listed below
+- `vps`: 6 parameters, 24 changes, listed below
+- `vrack`: 3 parameters, 7 changes, listed below
+- `xdsl`: 14 parameters, 79 changes, listed below
+
+<details>
+<summary>Breaking changes: everything in cloud, dbaaslogs, dedicatedcloud, dedicatednasha, dedicatedserver, domain, emaildomain, emailexchange, emailmxplan, emailpro, horizonview, hostingprivatedatabase, hostingweb, iam, iploadbalancing, licensedirectadmin, licensehycu, licenseoffice, licenseplesk, licensevirtuozzo, me, metrics, msservices, notification, nutanix, overthebox, packxdsl, sms, storage, telephony, veeamveeamenterprise, vip, vps, vrack, xdsl</summary>
+
+#### `cloud`
+
+- `AddAlerting` takes a `CloudAlertingAlertingWritable` instead of a `CloudAlertingAlerting` (POST /v1/cloud/project/{serviceName}/alerting)
+- `CommandProjectAiApp` takes a `CloudProjectAiAppAppSpecInputWritable` instead of a `CloudProjectAiAppAppSpecInput` (POST /v1/cloud/project/{serviceName}/ai/app/command)
+- `CommandProjectAiJob` takes a `CloudProjectAiJobJobSpecInputWritable` instead of a `CloudProjectAiJobJobSpecInput` (POST /v1/cloud/project/{serviceName}/ai/job/command)
+- `CommandProjectAiNotebook` takes a `CloudProjectAiNotebookNotebookSpecInputWritable` instead of a `CloudProjectAiNotebookNotebookSpecInput` (POST /v1/cloud/project/{serviceName}/ai/notebook/command)
+- `CreateProjectAiApp` takes a `CloudProjectAiAppAppSpecInputWritable` instead of a `CloudProjectAiAppAppSpecInput` (POST /v1/cloud/project/{serviceName}/ai/app)
+- `CreateProjectAiJob` takes a `CloudProjectAiJobJobSpecInputWritable` instead of a `CloudProjectAiJobJobSpecInput` (POST /v1/cloud/project/{serviceName}/ai/job)
+- `CreateProjectAiNotebook` takes a `CloudProjectAiNotebookNotebookSpecInputWritable` instead of a `CloudProjectAiNotebookNotebookSpecInput` (POST /v1/cloud/project/{serviceName}/ai/notebook)
+- `CreateProjectAiRegistry` takes a `CloudProjectAiRegistryRegistryWritable` instead of a `CloudProjectAiRegistryRegistry` (POST /v1/cloud/project/{serviceName}/ai/registry)
+- `CreateProjectContainerRegistryOpenIDConnect` takes a `CloudContainerRegistryOIDCPostWritable` instead of a `CloudContainerRegistryOIDCPost` (POST /v1/cloud/project/{serviceName}/containerRegistry/{registryID}/openIdConnect)
+- `CreateProjectDatabaseClickhouseDatabase` takes a `CloudProjectDatabaseServiceDatabaseWritable` instead of a `CloudProjectDatabaseServiceDatabase` (POST /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId}/database)
+- `CreateProjectDatabaseClickhouseIntegration` takes a `CloudProjectDatabaseServiceIntegrationWritable` instead of a `CloudProjectDatabaseServiceIntegration` (POST /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId}/integration)
+- `CreateProjectDatabaseClickhouse` takes a `CloudProjectDatabaseServiceCreationWritable` instead of a `CloudProjectDatabaseServiceCreation` (POST /v1/cloud/project/{serviceName}/database/clickhouse)
+- `CreateProjectDatabaseGrafanaIntegration` takes a `CloudProjectDatabaseServiceIntegrationWritable` instead of a `CloudProjectDatabaseServiceIntegration` (POST /v1/cloud/project/{serviceName}/database/grafana/{clusterId}/integration)
+- `CreateProjectDatabaseGrafana` takes a `CloudProjectDatabaseServiceCreationWritable` instead of a `CloudProjectDatabaseServiceCreation` (POST /v1/cloud/project/{serviceName}/database/grafana)
+- `CreateProjectDatabaseKafkaACL` takes a `CloudProjectDatabaseKafkaTopicACLWritable` instead of a `CloudProjectDatabaseKafkaTopicACL` (POST /v1/cloud/project/{serviceName}/database/kafka/{clusterId}/acl)
+- `CreateProjectDatabaseKafkaConnectIntegration` takes a `CloudProjectDatabaseServiceIntegrationWritable` instead of a `CloudProjectDatabaseServiceIntegration` (POST /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId}/integration)
+- `CreateProjectDatabaseKafkaConnect` takes a `CloudProjectDatabaseServiceCreationWritable` instead of a `CloudProjectDatabaseServiceCreation` (POST /v1/cloud/project/{serviceName}/database/kafkaConnect)
+- `CreateProjectDatabaseKafkaIntegration` takes a `CloudProjectDatabaseServiceIntegrationWritable` instead of a `CloudProjectDatabaseServiceIntegration` (POST /v1/cloud/project/{serviceName}/database/kafka/{clusterId}/integration)
+- `CreateProjectDatabaseKafkaMirrorMakerIntegration` takes a `CloudProjectDatabaseServiceIntegrationWritable` instead of a `CloudProjectDatabaseServiceIntegration` (POST /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId}/integration)
+- `CreateProjectDatabaseKafkaMirrorMaker` takes a `CloudProjectDatabaseServiceCreationWritable` instead of a `CloudProjectDatabaseServiceCreation` (POST /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker)
+- `CreateProjectDatabaseKafkaSchemaRegistryACL` takes a `CloudProjectDatabaseKafkaSchemaRegistryACLWritable` instead of a `CloudProjectDatabaseKafkaSchemaRegistryACL` (POST /v1/cloud/project/{serviceName}/database/kafka/{clusterId}/schemaRegistryAcl)
+- `CreateProjectDatabaseKafkaTopicACL` takes a `CloudProjectDatabaseKafkaTopicACLWritable` instead of a `CloudProjectDatabaseKafkaTopicACL` (POST /v1/cloud/project/{serviceName}/database/kafka/{clusterId}/topicAcl)
+- `CreateProjectDatabaseKafkaTopic` takes a `CloudProjectDatabaseKafkaTopicCreationWritable` instead of a `CloudProjectDatabaseKafkaTopicCreation` (POST /v1/cloud/project/{serviceName}/database/kafka/{clusterId}/topic)
+- `CreateProjectDatabaseKafka` takes a `CloudProjectDatabaseServiceCreationWritable` instead of a `CloudProjectDatabaseServiceCreation` (POST /v1/cloud/project/{serviceName}/database/kafka)
+- `CreateProjectDatabaseMongodbNode` takes a `CloudProjectDatabaseServiceNodeCreationWritable` instead of a `CloudProjectDatabaseServiceNodeCreation` (POST /v1/cloud/project/{serviceName}/database/mongodb/{clusterId}/node)
+- `CreateProjectDatabaseMongodb` takes a `CloudProjectDatabaseServiceCreationWritable` instead of a `CloudProjectDatabaseServiceCreation` (POST /v1/cloud/project/{serviceName}/database/mongodb)
+- `CreateProjectDatabaseMysqlDatabase` takes a `CloudProjectDatabaseServiceDatabaseWritable` instead of a `CloudProjectDatabaseServiceDatabase` (POST /v1/cloud/project/{serviceName}/database/mysql/{clusterId}/database)
+- `CreateProjectDatabaseMysqlIntegration` takes a `CloudProjectDatabaseServiceIntegrationWritable` instead of a `CloudProjectDatabaseServiceIntegration` (POST /v1/cloud/project/{serviceName}/database/mysql/{clusterId}/integration)
+- `CreateProjectDatabaseMysql` takes a `CloudProjectDatabaseServiceCreationWritable` instead of a `CloudProjectDatabaseServiceCreation` (POST /v1/cloud/project/{serviceName}/database/mysql)
+- `CreateProjectDatabaseOpensearchIntegration` takes a `CloudProjectDatabaseServiceIntegrationWritable` instead of a `CloudProjectDatabaseServiceIntegration` (POST /v1/cloud/project/{serviceName}/database/opensearch/{clusterId}/integration)
+- `CreateProjectDatabaseOpensearchPattern` takes a `CloudProjectDatabaseOpensearchPatternWritable` instead of a `CloudProjectDatabaseOpensearchPattern` (POST /v1/cloud/project/{serviceName}/database/opensearch/{clusterId}/pattern)
+- `CreateProjectDatabaseOpensearch` takes a `CloudProjectDatabaseServiceCreationWritable` instead of a `CloudProjectDatabaseServiceCreation` (POST /v1/cloud/project/{serviceName}/database/opensearch)
+- `CreateProjectDatabasePostgresqlDatabase` takes a `CloudProjectDatabaseServiceDatabaseWritable` instead of a `CloudProjectDatabaseServiceDatabase` (POST /v1/cloud/project/{serviceName}/database/postgresql/{clusterId}/database)
+- `CreateProjectDatabasePostgresqlIntegration` takes a `CloudProjectDatabaseServiceIntegrationWritable` instead of a `CloudProjectDatabaseServiceIntegration` (POST /v1/cloud/project/{serviceName}/database/postgresql/{clusterId}/integration)
+- `CreateProjectDatabasePostgresql` takes a `CloudProjectDatabaseServiceCreationWritable` instead of a `CloudProjectDatabaseServiceCreation` (POST /v1/cloud/project/{serviceName}/database/postgresql)
+- `CreateProjectDatabaseValkeyIntegration` takes a `CloudProjectDatabaseServiceIntegrationWritable` instead of a `CloudProjectDatabaseServiceIntegration` (POST /v1/cloud/project/{serviceName}/database/valkey/{clusterId}/integration)
+- `CreateProjectDatabaseValkey` takes a `CloudProjectDatabaseServiceCreationWritable` instead of a `CloudProjectDatabaseServiceCreation` (POST /v1/cloud/project/{serviceName}/database/valkey)
+- `CreateProjectRegionLoadbalancingHealthMonitor` takes a `CloudLoadbalancingHealthMonitorWritable` instead of a `CloudLoadbalancingHealthMonitor` (POST /v1/cloud/project/{serviceName}/region/{regionName}/loadbalancing/healthMonitor)
+- `CreateProjectRegionLoadbalancingL7PolicyL7Rule` takes a `CloudLoadbalancingL7RuleWritable` instead of a `CloudLoadbalancingL7Rule` (POST /v1/cloud/project/{serviceName}/region/{regionName}/loadbalancing/l7Policy/{l7PolicyId}/l7Rule)
+- `CreateProjectRegionLoadbalancingL7Policy` takes a `CloudLoadbalancingL7PolicyWritable` instead of a `CloudLoadbalancingL7Policy` (POST /v1/cloud/project/{serviceName}/region/{regionName}/loadbalancing/l7Policy)
+- `CreateProjectRegionLoadbalancingLoadbalancer` takes a `CloudLoadbalancingLoadbalancerCreateInputWritable` instead of a `CloudLoadbalancingLoadbalancerCreateInput` (POST /v1/cloud/project/{serviceName}/region/{regionName}/loadbalancing/loadbalancer)
+- `CreateProjectRegionLoadbalancingPoolMember` takes a `CloudLoadbalancingPoolCreateMembersWritable` instead of a `CloudLoadbalancingPoolCreateMembers` (POST /v1/cloud/project/{serviceName}/region/{regionName}/loadbalancing/pool/{poolId}/member)
+- `CreateProjectRegionShareSnapshot` takes a `CloudShareSnapshotSnapshotWritable` instead of a `CloudShareSnapshotSnapshot` (POST /v1/cloud/project/{serviceName}/region/{regionName}/share/{shareId}/snapshot)
+- `DatasyncProjectAiApp` takes a `CloudProjectAiVolumeDataSyncSpecWritable` instead of a `CloudProjectAiVolumeDataSyncSpec` (POST /v1/cloud/project/{serviceName}/ai/app/{appId}/datasync)
+- `DatasyncProjectAiJob` takes a `CloudProjectAiVolumeDataSyncSpecWritable` instead of a `CloudProjectAiVolumeDataSyncSpec` (POST /v1/cloud/project/{serviceName}/ai/job/{jobId}/datasync)
+- `DatasyncProjectAiNotebook` takes a `CloudProjectAiVolumeDataSyncSpecWritable` instead of a `CloudProjectAiVolumeDataSyncSpec` (POST /v1/cloud/project/{serviceName}/ai/notebook/{notebookId}/datasync)
+- `UpdateProjectAiNotebook` takes a `CloudProjectAiNotebookNotebookUpdateWritable` instead of a `CloudProjectAiNotebookNotebookUpdate` (PUT /v1/cloud/project/{serviceName}/ai/notebook/{notebookId})
+- `UpdateProjectContainerRegistryIPRestrictionsManagement` takes a `[]CloudContainerRegistryIPRestrictionsWritable` instead of a `[]CloudContainerRegistryIPRestrictions` (PUT /v1/cloud/project/{serviceName}/containerRegistry/{registryID}/ipRestrictions/management)
+- `UpdateProjectContainerRegistryIPRestrictionsRegistry` takes a `[]CloudContainerRegistryIPRestrictionsWritable` instead of a `[]CloudContainerRegistryIPRestrictions` (PUT /v1/cloud/project/{serviceName}/containerRegistry/{registryID}/ipRestrictions/registry)
+- `UpdateProjectDatabaseClickhouseUser` takes a `CloudProjectDatabaseServiceUserWithRolesWritable` instead of a `CloudProjectDatabaseServiceUserWithRoles` (PUT /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId}/user/{userId})
+- `UpdateProjectDatabaseClickhouse` takes a `CloudProjectDatabaseServiceWritable` instead of a `CloudProjectDatabaseService` (PUT /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `UpdateProjectDatabaseGrafana` takes a `CloudProjectDatabaseServiceWithoutPrometheusWritable` instead of a `CloudProjectDatabaseServiceWithoutPrometheus` (PUT /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `UpdateProjectDatabaseKafkaConnectConnector` takes a `CloudProjectDatabaseKafkaConnectConnectorWritable` instead of a `CloudProjectDatabaseKafkaConnectConnector` (PUT /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId}/connector/{connectorId})
+- `UpdateProjectDatabaseKafkaConnect` takes a `CloudProjectDatabaseServiceWritable` instead of a `CloudProjectDatabaseService` (PUT /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `UpdateProjectDatabaseKafkaMirrorMakerReplication` takes a `CloudProjectDatabaseServiceReplicationWritable` instead of a `CloudProjectDatabaseServiceReplication` (PUT /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId}/replication/{replicationId})
+- `UpdateProjectDatabaseKafkaMirrorMaker` takes a `CloudProjectDatabaseServiceWritable` instead of a `CloudProjectDatabaseService` (PUT /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `UpdateProjectDatabaseKafkaTopic` takes a `CloudProjectDatabaseKafkaTopicWritable` instead of a `CloudProjectDatabaseKafkaTopic` (PUT /v1/cloud/project/{serviceName}/database/kafka/{clusterId}/topic/{topicId})
+- `UpdateProjectDatabaseKafka` takes a `CloudProjectDatabaseKafkaServiceWritable` instead of a `CloudProjectDatabaseKafkaService` (PUT /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `UpdateProjectDatabaseMongodbNode` takes a `CloudProjectDatabaseServiceNodeWritable` instead of a `CloudProjectDatabaseServiceNode` (PUT /v1/cloud/project/{serviceName}/database/mongodb/{clusterId}/node/{nodeId})
+- `UpdateProjectDatabaseMongodbUser` takes a `CloudProjectDatabaseServiceUserWithPasswordAndRolesWritable` instead of a `CloudProjectDatabaseServiceUserWithPasswordAndRoles` (PUT /v1/cloud/project/{serviceName}/database/mongodb/{clusterId}/user/{userId})
+- `UpdateProjectDatabaseMongodb` takes a `CloudProjectDatabaseServiceWritable` instead of a `CloudProjectDatabaseService` (PUT /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `UpdateProjectDatabaseMysql` takes a `CloudProjectDatabaseServiceWritable` instead of a `CloudProjectDatabaseService` (PUT /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `UpdateProjectDatabaseOpensearchUser` takes a `CloudProjectDatabaseOpensearchUserWritable` instead of a `CloudProjectDatabaseOpensearchUser` (PUT /v1/cloud/project/{serviceName}/database/opensearch/{clusterId}/user/{userId})
+- `UpdateProjectDatabaseOpensearch` takes a `CloudProjectDatabaseOpensearchServiceWritable` instead of a `CloudProjectDatabaseOpensearchService` (PUT /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `UpdateProjectDatabasePostgresqlConnectionPool` takes a `CloudProjectDatabasePostgresqlConnectionPoolWritable` instead of a `CloudProjectDatabasePostgresqlConnectionPool` (PUT /v1/cloud/project/{serviceName}/database/postgresql/{clusterId}/connectionPool/{connectionPoolId})
+- `UpdateProjectDatabasePostgresqlUser` takes a `CloudProjectDatabaseServiceUserWithRolesWritable` instead of a `CloudProjectDatabaseServiceUserWithRoles` (PUT /v1/cloud/project/{serviceName}/database/postgresql/{clusterId}/user/{userId})
+- `UpdateProjectDatabasePostgresql` takes a `CloudProjectDatabaseServiceWritable` instead of a `CloudProjectDatabaseService` (PUT /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `UpdateProjectDatabaseValkeyUser` takes a `CloudProjectDatabaseValkeyUserWritable` instead of a `CloudProjectDatabaseValkeyUser` (PUT /v1/cloud/project/{serviceName}/database/valkey/{clusterId}/user/{userId})
+- `UpdateProjectDatabaseValkey` takes a `CloudProjectDatabaseServiceWritable` instead of a `CloudProjectDatabaseService` (PUT /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `UpdateProjectRegionLoadbalancingL7PolicyL7Rule` takes a `CloudLoadbalancingL7RuleWritable` instead of a `CloudLoadbalancingL7Rule` (PUT /v1/cloud/project/{serviceName}/region/{regionName}/loadbalancing/l7Policy/{l7PolicyId}/l7Rule/{l7RuleId})
+- `UpdateProjectServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/cloud/project/{serviceName}/serviceInfos)
+- `UpdateProject` takes a `CloudProjectWritable` instead of a `CloudProject` (PUT /v1/cloud/project/{serviceName})
+- `(*Service).GetProjectServiceInfos`: changed from func(context.Context, string) (*ServicesService, error) to func(context.Context, string) (*ServicesService, error)
+- `CloudContainerRegistryOIDCPost.Provider`: changed from CloudContainerRegistryOIDCConfiguration to CloudContainerRegistryOIDCConfigurationWritable
+- `CloudLoadbalancingHealthMonitorCreate.OperatingStatus`: removed
+- `CloudLoadbalancingHealthMonitorCreate.ProvisioningStatus`: removed
+- `CloudLoadbalancingPoolCreateMembers.Members`: changed from []CloudLoadbalancingPoolMember to []CloudLoadbalancingPoolMemberWritable
+- `CloudProject.Access`: removed
+- `CloudProject.CreationDate`: removed
+- `CloudProject.Expiration`: removed
+- `CloudProject.OrderID`: removed
+- `CloudProject.PlanCode`: removed
+- `CloudProject.ProjectID`: removed
+- `CloudProject.ProjectName`: removed
+- `CloudProject.Status`: removed
+- `CloudProject.Unleash`: removed
+- `CloudProjectAiAppAppSpecInput.Volumes`: changed from []CloudProjectAiVolumeVolume to []CloudProjectAiVolumeVolumeWritable
+- `CloudProjectAiJobJobSpecInput.Shutdown`: removed
+- `CloudProjectAiJobJobSpecInput.Volumes`: changed from []CloudProjectAiVolumeVolume to []CloudProjectAiVolumeVolumeWritable
+- `CloudProjectAiNotebookNotebookSpecInput.Shutdown`: removed
+- `CloudProjectAiNotebookNotebookSpecInput.Volumes`: changed from []CloudProjectAiVolumeVolume to []CloudProjectAiVolumeVolumeWritable
+- `CloudProjectAiNotebookNotebookUpdate.Volumes`: changed from []CloudProjectAiVolumeVolume to []CloudProjectAiVolumeVolumeWritable
+- `CloudProjectDatabaseKafkaTopicCreation.ID`: removed
+- `CloudProjectDatabaseServiceCreation.Backups`: changed from *CloudProjectDatabaseServiceBackup to *CloudProjectDatabaseServiceBackupWritable
+- `CloudProjectDatabaseServiceCreation.Disk`: changed from *CloudProjectDatabaseServiceDisk to *CloudProjectDatabaseServiceDiskWritable
+- `CloudProjectDatabaseServiceCreation.IPRestrictions`: changed from []CloudProjectDatabaseServiceIPRestriction to []CloudProjectDatabaseServiceIPRestrictionWritable
+- `CloudProjectDatabaseServiceNodeCreation.CreatedAt`: removed
+- `CloudProjectDatabaseServiceNodeCreation.ID`: removed
+- `CloudProjectDatabaseServiceNodeCreation.Name`: removed
+- `CloudProjectDatabaseServiceNodeCreation.Port`: removed
+- `CloudProjectDatabaseServiceNodeCreation.Status`: removed
+- `ServicesService.CanDeleteAtExpiration`: removed
+- `ServicesService.ContactAdmin`: removed
+- `ServicesService.ContactBilling`: removed
+- `ServicesService.ContactTech`: removed
+- `ServicesService.Creation`: removed
+- `ServicesService.Domain`: removed
+- `ServicesService.EngagedUpTo`: removed
+- `ServicesService.Expiration`: removed
+- `ServicesService.PossibleRenewPeriod`: removed
+- `ServicesService.RenewalType`: removed
+- `ServicesService.ServiceID`: removed
+- `ServicesService.Status`: removed
+- `ServicesService`: changed from ServicesService to ServicesService
+
+#### `dbaaslogs`
+
+- `CreateEncryptionKey` takes a `DbaasLogsEncryptionKeyWritable` instead of a `DbaasLogsEncryptionKey` (POST /v1/dbaas/logs/{serviceName}/encryptionKey)
+- `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/dbaas/logs/{serviceName}/serviceInfos)
+- `(*Service).GetServiceInfos`: changed from func(context.Context, string) (*ServicesService, error) to func(context.Context, string) (*ServicesService, error)
+- `ServicesService.CanDeleteAtExpiration`: removed
+- `ServicesService.ContactAdmin`: removed
+- `ServicesService.ContactBilling`: removed
+- `ServicesService.ContactTech`: removed
+- `ServicesService.Creation`: removed
+- `ServicesService.Domain`: removed
+- `ServicesService.EngagedUpTo`: removed
+- `ServicesService.Expiration`: removed
+- `ServicesService.PossibleRenewPeriod`: removed
+- `ServicesService.RenewalType`: removed
+- `ServicesService.ServiceID`: removed
+- `ServicesService.Status`: removed
+- `ServicesService`: changed from ServicesService to ServicesService
+
+#### `dedicatedcloud`
+
+- `UpdateAllowedNetwork` takes a `DedicatedCloudAllowedNetworkWritable` instead of a `DedicatedCloudAllowedNetwork` (PUT /v1/dedicatedCloud/{serviceName}/allowedNetwork/{networkAccessId})
+- `UpdateDatacenter` takes a `DedicatedCloudDatacenterWritable` instead of a `DedicatedCloudDatacenter` (PUT /v1/dedicatedCloud/{serviceName}/datacenter/{datacenterId})
+- `UpdateDedicatedCloud` takes a `DedicatedCloudDedicatedCloudWritable` instead of a `DedicatedCloudDedicatedCloud` (PUT /v1/dedicatedCloud/{serviceName})
+- `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/dedicatedCloud/{serviceName}/serviceInfos)
+- `UpdateUserRight` takes a `DedicatedCloudRightWritable` instead of a `DedicatedCloudRight` (PUT /v1/dedicatedCloud/{serviceName}/user/{userId}/right/{rightId})
+- `DedicatedCloudDedicatedCloud.AdvancedSecurity`: removed
+- `DedicatedCloudDedicatedCloud.Bandwidth`: removed
+- `DedicatedCloudDedicatedCloud.BillingType`: removed
+- `DedicatedCloudDedicatedCloud.CanMigrateToVCD`: removed
+- `DedicatedCloudDedicatedCloud.CertifiedInterfaceURL`: removed
+- `DedicatedCloudDedicatedCloud.CommercialRange`: removed
+- `DedicatedCloudDedicatedCloud.Generation`: removed
+- `DedicatedCloudDedicatedCloud.Location`: removed
+- `DedicatedCloudDedicatedCloud.ManagementInterface`: removed
+- `DedicatedCloudDedicatedCloud.ProductReference`: removed
+- `DedicatedCloudDedicatedCloud.ServiceName`: removed
+- `DedicatedCloudDedicatedCloud.ServicePackName`: removed
+- `DedicatedCloudDedicatedCloud.Spla`: removed
+- `DedicatedCloudDedicatedCloud.State`: removed
+- `DedicatedCloudDedicatedCloud.VScopeURL`: removed
+- `DedicatedCloudDedicatedCloud.Version`: removed
+- `DedicatedCloudDedicatedCloud.WebInterfaceURL`: removed
+
+#### `dedicatednasha`
+
+- `UpdateNasha` takes a `DedicatedNashaStorageWritable` instead of a `DedicatedNashaStorage` (PUT /v1/dedicated/nasha/{serviceName})
+- `UpdatePartition` takes a `DedicatedNashaPartitionWritable` instead of a `DedicatedNashaPartition` (PUT /v1/dedicated/nasha/{serviceName}/partition/{partitionName})
+- `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/dedicated/nasha/{serviceName}/serviceInfos)
+- `(*Service).GetServiceInfos`: changed from func(context.Context, string) (*ServicesService, error) to func(context.Context, string) (*ServicesService, error)
+- `DedicatedNashaStorage.CanCreatePartition`: removed
+- `DedicatedNashaStorage.Datacenter`: removed
+- `DedicatedNashaStorage.DiskType`: removed
+- `DedicatedNashaStorage.IP`: removed
+- `DedicatedNashaStorage.ServiceName`: removed
+- `DedicatedNashaStorage.ZpoolCapacity`: removed
+- `DedicatedNashaStorage.ZpoolSize`: removed
+- `ServicesService.CanDeleteAtExpiration`: removed
+- `ServicesService.ContactAdmin`: removed
+- `ServicesService.ContactBilling`: removed
+- `ServicesService.ContactTech`: removed
+- `ServicesService.Creation`: removed
+- `ServicesService.Domain`: removed
+- `ServicesService.EngagedUpTo`: removed
+- `ServicesService.Expiration`: removed
+- `ServicesService.PossibleRenewPeriod`: removed
+- `ServicesService.RenewalType`: removed
+- `ServicesService.ServiceID`: removed
+- `ServicesService.Status`: removed
+- `ServicesService`: changed from ServicesService to ServicesService
+
+#### `dedicatedserver`
+
+- `UpdateBurst` takes a `DedicatedServerServerBurstWritable` instead of a `DedicatedServerServerBurst` (PUT /v1/dedicated/server/{serviceName}/burst)
+- `UpdateFeaturesBackupFTPAccess` takes a `DedicatedServerBackupFtpACLWritable` instead of a `DedicatedServerBackupFtpACL` (PUT /v1/dedicated/server/{serviceName}/features/backupFTP/access/{ipBlock})
+- `UpdateFeaturesFirewall` takes a `DedicatedServerFirewallWritable` instead of a `DedicatedServerFirewall` (PUT /v1/dedicated/server/{serviceName}/features/firewall)
+- `UpdateSecondaryDNSDomains` takes a `DedicatedSecondaryDNSDomainSecondaryDNSWritable` instead of a `DedicatedSecondaryDNSDomainSecondaryDNS` (PUT /v1/dedicated/server/{serviceName}/secondaryDnsDomains/{domain})
+- `UpdateServer` takes a `DedicatedServerDedicatedWritable` instead of a `DedicatedServerDedicated` (PUT /v1/dedicated/server/{serviceName})
+- `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/dedicated/server/{serviceName}/serviceInfos)
+- `UpdateSpla` takes a `DedicatedServerSplaWritable` instead of a `DedicatedServerSpla` (PUT /v1/dedicated/server/{serviceName}/spla/{id})
+- `UpdateVirtualNetworkInterface` takes a `DedicatedVirtualNetworkInterfaceVirtualNetworkInterfaceWritable` instead of a `DedicatedVirtualNetworkInterfaceVirtualNetworkInterface` (PUT /v1/dedicated/server/{serviceName}/virtualNetworkInterface/{uuid})
+- `(*Service).GetServiceInfos`: changed from func(context.Context, string) (*ServicesService, error) to func(context.Context, string) (*ServicesService, error)
+- `DedicatedServerDedicated.AvailabilityZone`: removed
+- `DedicatedServerDedicated.CommercialRange`: removed
+- `DedicatedServerDedicated.Datacenter`: removed
+- `DedicatedServerDedicated.IP`: removed
+- `DedicatedServerDedicated.LinkSpeed`: removed
+- `DedicatedServerDedicated.Name`: removed
+- `DedicatedServerDedicated.NewUpgradeSystem`: removed
+- `DedicatedServerDedicated.Os`: removed
+- `DedicatedServerDedicated.PowerState`: removed
+- `DedicatedServerDedicated.ProfessionalUse`: removed
+- `DedicatedServerDedicated.Rack`: removed
+- `DedicatedServerDedicated.Region`: removed
+- `DedicatedServerDedicated.Reverse`: removed
+- `DedicatedServerDedicated.ServerID`: removed
+- `DedicatedServerDedicated.SupportLevel`: removed
+- `DedicatedVirtualNetworkInterfaceVirtualNetworkInterface.Enabled`: removed
+- `DedicatedVirtualNetworkInterfaceVirtualNetworkInterface.NetworkInterfaceController`: removed
+- `DedicatedVirtualNetworkInterfaceVirtualNetworkInterface.ServerName`: removed
+- `DedicatedVirtualNetworkInterfaceVirtualNetworkInterface.UUID`: removed
+- `DedicatedVirtualNetworkInterfaceVirtualNetworkInterface.Vrack`: removed
+- `ServicesService.CanDeleteAtExpiration`: removed
+- `ServicesService.ContactAdmin`: removed
+- `ServicesService.ContactBilling`: removed
+- `ServicesService.ContactTech`: removed
+- `ServicesService.Creation`: removed
+- `ServicesService.Domain`: removed
+- `ServicesService.EngagedUpTo`: removed
+- `ServicesService.Expiration`: removed
+- `ServicesService.PossibleRenewPeriod`: removed
+- `ServicesService.RenewalType`: removed
+- `ServicesService.ServiceID`: removed
+- `ServicesService.Status`: removed
+- `ServicesService`: changed from ServicesService to ServicesService
+
+#### `domain`
+
+- `CheckConfigurationRule` takes a `DomainConfigurationRulesRuleDataWritable` instead of a `DomainConfigurationRulesRuleData` (POST /v1/domain/configurationRule/check)
+- `CreateContact` takes a `DomainContactWritable` instead of a `DomainContact` (POST /v1/domain/contact)
+- `CreateDsRecord` takes a `DnssecUpdatePayloadWritable` instead of a `DnssecUpdatePayload` (POST /v1/domain/{serviceName}/dsRecord)
+- `CreateDynDNSRecord` takes a `DomainZoneDynHostRecordWritable` instead of a `DomainZoneDynHostRecord` (POST /v1/domain/zone/{zoneName}/dynHost/record)
+- `CreateRecord` takes a `DomainZoneRecordCreateWritable` instead of a `DomainZoneRecordCreate` (POST /v1/domain/zone/{zoneName}/record)
+- `EditDomain` takes a `DomainDomainServiceWritable` instead of a `DomainDomainService` (PUT /v1/domain/{serviceName})
+- `EditDynDNSLogin` takes a `DomainZoneDynHostLoginWritable` instead of a `DomainZoneDynHostLogin` (PUT /v1/domain/zone/{zoneName}/dynHost/login/{login})
+- `EditDynDNSRecord` takes a `DomainZoneDynHostRecordWritable` instead of a `DomainZoneDynHostRecord` (PUT /v1/domain/zone/{zoneName}/dynHost/record/{id})
+- `UkOutgoingTransfer` takes a `DomainUkRegistrarWritable` instead of a `DomainUkRegistrar` (POST /v1/domain/{serviceName}/ukOutgoingTransfer)
+- `UpdateContact` takes a `DomainContactWritable` instead of a `DomainContact` (PUT /v1/domain/contact/{contactId})
+- `UpdateGlueRecord` takes a `DomainGlueRecordGlueRecordWritable` instead of a `DomainGlueRecordGlueRecord` (POST /v1/domain/{serviceName}/glueRecord/{host}/update)
+- `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/domain/{serviceName}/serviceInfos)
+- `UpdateZoneServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/domain/zone/{zoneName}/serviceInfos)
+- `(*Service).GetServiceInfos`: changed from func(context.Context, string) (*ServicesService, error) to func(context.Context, string) (*ServicesService, error)
+- `(*Service).GetZoneServiceInfos`: changed from func(context.Context, string) (*ServicesService, error) to func(context.Context, string) (*ServicesService, error)
+- `DnssecUpdatePayload.Keys`: changed from []DnssecKey to []DnssecKeyWritable
+- `DomainConfigurationRulesRuleData.Owner`: changed from *DomainContact to *DomainContactWritable
+- `DomainZoneRecordCreate.ID`: removed
+- `DomainZoneRecordCreate.Zone`: removed
+- `NichandleNichandle.Currency`: removed
+- `NichandleNichandle.CustomerCode`: removed
+- `NichandleNichandle.Email`: removed
+- `NichandleNichandle.KycValidated`: removed
+- `NichandleNichandle.Nichandle`: removed
+- `NichandleNichandle.OvhCompany`: removed
+- `NichandleNichandle.OvhSubsidiary`: removed
+- `NichandleNichandle.State`: removed
+- `NichandleOvhCompanyEnumKimsufi`: removed
+- `NichandleOvhCompanyEnumOvh`: removed
+- `NichandleOvhCompanyEnumSoyoustart`: removed
+- `NichandleStateEnumComplete`: removed
+- `NichandleStateEnumIncomplete`: removed
+- `ServicesService.CanDeleteAtExpiration`: removed
+- `ServicesService.ContactAdmin`: removed
+- `ServicesService.ContactBilling`: removed
+- `ServicesService.ContactTech`: removed
+- `ServicesService.Creation`: removed
+- `ServicesService.Domain`: removed
+- `ServicesService.EngagedUpTo`: removed
+- `ServicesService.Expiration`: removed
+- `ServicesService.PossibleRenewPeriod`: removed
+- `ServicesService.RenewalType`: removed
+- `ServicesService.ServiceID`: removed
+- `ServicesService.Status`: removed
+- `ServicesService`: changed from ServicesService to ServicesService
+
+#### `emaildomain`
+
+- `UpdateAccount` takes a `EmailDomainAccountWritable` instead of a `EmailDomainAccount` (PUT /v1/email/domain/{domain}/account/{accountName})
+- `UpdateDelegatedAccountResponder` takes a `EmailDomainResponderAccountWritable` instead of a `EmailDomainResponderAccount` (PUT /v1/email/domain/delegatedAccount/{email}/responder)
+- `UpdateDelegatedAccount` takes a `EmailDomainAccountDelegatedWritable` instead of a `EmailDomainAccountDelegated` (PUT /v1/email/domain/delegatedAccount/{email})
+- `UpdateMailingList` takes a `EmailDomainMailingListWritable` instead of a `EmailDomainMailingList` (PUT /v1/email/domain/{domain}/mailingList/{name})
+- `UpdateResponder` takes a `EmailDomainResponderWritable` instead of a `EmailDomainResponder` (PUT /v1/email/domain/{domain}/responder/{account})
+- `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/email/domain/{domain}/serviceInfos)
+- `(*Service).GetServiceInfos`: changed from func(context.Context, string) (*ServicesService, error) to func(context.Context, string) (*ServicesService, error)
+- `ServicesService.CanDeleteAtExpiration`: removed
+- `ServicesService.ContactAdmin`: removed
+- `ServicesService.ContactBilling`: removed
+- `ServicesService.ContactTech`: removed
+- `ServicesService.Creation`: removed
+- `ServicesService.Domain`: removed
+- `ServicesService.EngagedUpTo`: removed
+- `ServicesService.Expiration`: removed
+- `ServicesService.PossibleRenewPeriod`: removed
+- `ServicesService.RenewalType`: removed
+- `ServicesService.ServiceID`: removed
+- `ServicesService.Status`: removed
+- `ServicesService`: changed from ServicesService to ServicesService
+
+#### `emailexchange`
+
+- `PatchServiceReceiveConnector` takes a `EmailExchangeReceiveConnectorWritable` instead of a `EmailExchangeReceiveConnector` (PATCH /v1/email/exchange/{organizationName}/service/{exchangeService}/receiveConnector/{id})
+- `UpdateServiceAccountArchive` takes a `EmailExchangeExchangeAccountArchiveWritable` instead of a `EmailExchangeExchangeAccountArchive` (PUT /v1/email/exchange/{organizationName}/service/{exchangeService}/account/{primaryEmailAddress}/archive)
+- `UpdateServiceAccountProtocol` takes a `EmailExchangeExchangeAccountProtocolWritable` instead of a `EmailExchangeExchangeAccountProtocol` (PUT /v1/email/exchange/{organizationName}/service/{exchangeService}/account/{primaryEmailAddress}/protocol)
+- `UpdateServiceAccount` takes a `EmailExchangeAccountWritable` instead of a `EmailExchangeAccount` (PUT /v1/email/exchange/{organizationName}/service/{exchangeService}/account/{primaryEmailAddress})
+- `UpdateServiceAuthorizedIP` takes a `EmailExchangeExchangeServiceAuthorizedIPWritable` instead of a `EmailExchangeExchangeServiceAuthorizedIP` (PUT /v1/email/exchange/{organizationName}/service/{exchangeService}/authorizedIp/{ip})
+- `UpdateServiceDevice` takes a `EmailExchangeExchangeServiceDeviceWritable` instead of a `EmailExchangeExchangeServiceDevice` (PUT /v1/email/exchange/{organizationName}/service/{exchangeService}/device/{identity})
+- `UpdateServiceDomainDisclaimer` takes a `EmailExchangeDisclaimerWritable` instead of a `EmailExchangeDisclaimer` (PUT /v1/email/exchange/{organizationName}/service/{exchangeService}/domain/{domainName}/disclaimer)
+- `UpdateServiceDomain` takes a `EmailExchangeDomainWritable` instead of a `EmailExchangeDomain` (PUT /v1/email/exchange/{organizationName}/service/{exchangeService}/domain/{domainName})
+- `UpdateServiceExternalContact` takes a `EmailExchangeExchangeExternalContactWritable` instead of a `EmailExchangeExchangeExternalContact` (PUT /v1/email/exchange/{organizationName}/service/{exchangeService}/externalContact/{externalEmailAddress})
+- `UpdateServiceMailingList` takes a `EmailExchangeMailingListWritable` instead of a `EmailExchangeMailingList` (PUT /v1/email/exchange/{organizationName}/service/{exchangeService}/mailingList/{mailingListAddress})
+- `UpdateServiceProtocol` takes a `EmailExchangeExchangeServiceProtocolWritable` instead of a `EmailExchangeExchangeServiceProtocol` (PUT /v1/email/exchange/{organizationName}/service/{exchangeService}/protocol)
+- `UpdateServicePublicFolderPermission` takes a `EmailExchangeExchangePublicFolderPermissionWritable` instead of a `EmailExchangeExchangePublicFolderPermission` (PUT /v1/email/exchange/{organizationName}/service/{exchangeService}/publicFolder/{path}/permission/{allowedAccountId})
+- `UpdateServicePublicFolder` takes a `EmailExchangePublicFolderWritable` instead of a `EmailExchangePublicFolder` (PUT /v1/email/exchange/{organizationName}/service/{exchangeService}/publicFolder/{path})
+- `UpdateServiceRemoteMailbox` takes a `EmailExchangeExchangeRemoteMailboxWritable` instead of a `EmailExchangeExchangeRemoteMailbox` (PUT /v1/email/exchange/{organizationName}/service/{exchangeService}/remoteMailbox/{primaryEmailAddress})
+- `UpdateServiceResourceAccount` takes a `EmailExchangeResourceAccountWritable` instead of a `EmailExchangeResourceAccount` (PUT /v1/email/exchange/{organizationName}/service/{exchangeService}/resourceAccount/{resourceEmailAddress})
+- `UpdateServiceSendConnector` takes a `EmailExchangeSendConnectorWritable` instead of a `EmailExchangeSendConnector` (PUT /v1/email/exchange/{organizationName}/service/{exchangeService}/sendConnector/{id})
+- `UpdateServiceServer` takes a `EmailExchangeServerWritable` instead of a `EmailExchangeServer` (PUT /v1/email/exchange/{organizationName}/service/{exchangeService}/server)
+- `UpdateServiceServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/email/exchange/{organizationName}/service/{exchangeService}/serviceInfos)
+- `UpdateServiceSharedAccount` takes a `EmailExchangeSharedAccountWritable` instead of a `EmailExchangeSharedAccount` (PUT /v1/email/exchange/{organizationName}/service/{exchangeService}/sharedAccount/{sharedEmailAddress})
+- `UpdateService` takes a `EmailExchangeExchangeServiceWritable` instead of a `EmailExchangeExchangeService` (PUT /v1/email/exchange/{organizationName}/service/{exchangeService})
+- `EmailExchangeExchangeService.CnameDcvRecord`: removed
+- `EmailExchangeExchangeService.DefaultSmartHost`: removed
+- `EmailExchangeExchangeService.Domain`: removed
+- `EmailExchangeExchangeService.Hostname`: removed
+- `EmailExchangeExchangeService.LastUpdateDate`: removed
+- `EmailExchangeExchangeService.Offer`: removed
+- `EmailExchangeExchangeService.SSLExpirationDate`: removed
+- `EmailExchangeExchangeService.State`: removed
+- `EmailExchangeExchangeService.TaskPendingID`: removed
+- `EmailExchangeExchangeService.WebURL`: removed
+
+#### `emailmxplan`
+
+- `UpdateAccount` takes a `EmailMxplanAccountWritable` instead of a `EmailMxplanAccount` (PUT /v1/email/mxplan/{service}/account/{email})
+- `UpdateDomainDisclaimer` takes a `EmailProDisclaimerWritable` instead of a `EmailProDisclaimer` (PUT /v1/email/mxplan/{service}/domain/{domainName}/disclaimer)
+- `UpdateDomain` takes a `EmailMxplanDomainWritable` instead of a `EmailMxplanDomain` (PUT /v1/email/mxplan/{service}/domain/{domainName})
+- `UpdateExternalContact` takes a `EmailMxplanExternalContactWritable` instead of a `EmailMxplanExternalContact` (PUT /v1/email/mxplan/{service}/externalContact/{externalEmailAddress})
+- `UpdateMxplan` takes a `EmailMxplanServiceWritable` instead of a `EmailMxplanService` (PUT /v1/email/mxplan/{service})
+- `EmailMxplanService.Domain`: removed
+- `EmailMxplanService.Hostname`: removed
+- `EmailMxplanService.IsZimbra`: removed
+- `EmailMxplanService.LastUpdateDate`: removed
+- `EmailMxplanService.Offer`: removed
+- `EmailMxplanService.State`: removed
+- `EmailMxplanService.TaskPendingID`: removed
+- `EmailMxplanService.WebURL`: removed
+
+#### `emailpro`
+
+- `UpdateAccount` takes a `EmailProAccountWritable` instead of a `EmailProAccount` (PUT /v1/email/pro/{service}/account/{email})
+- `UpdateDomainDisclaimer` takes a `EmailProDisclaimerWritable` instead of a `EmailProDisclaimer` (PUT /v1/email/pro/{service}/domain/{domainName}/disclaimer)
+- `UpdateDomain` takes a `EmailProDomainWritable` instead of a `EmailProDomain` (PUT /v1/email/pro/{service}/domain/{domainName})
+- `UpdateExternalContact` takes a `EmailProExternalContactWritable` instead of a `EmailProExternalContact` (PUT /v1/email/pro/{service}/externalContact/{externalEmailAddress})
+- `UpdatePro` takes a `EmailProServiceWritable` instead of a `EmailProService` (PUT /v1/email/pro/{service})
+- `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/email/pro/{service}/serviceInfos)
+- `(*Service).GetServiceInfos`: changed from func(context.Context, string) (*ServicesService, error) to func(context.Context, string) (*ServicesService, error)
+- `EmailProAccount.Configured`: removed
+- `EmailProAccount.CreationDate`: removed
+- `EmailProAccount.CurrentUsage`: removed
+- `EmailProAccount.ExpirationDate`: removed
+- `EmailProAccount.ExpirationOutlookDate`: removed
+- `EmailProAccount.ID`: removed
+- `EmailProAccount.LastLogoffDate`: removed
+- `EmailProAccount.LastLogonDate`: removed
+- `EmailProAccount.LastUpdateDate`: removed
+- `EmailProAccount.PasswordLastUpdate`: removed
+- `EmailProAccount.PrimaryEmailAddress`: removed
+- `EmailProAccount.SAMAccountName`: removed
+- `EmailProAccount.SpamDetected`: removed
+- `EmailProAccount.SpamTicketNumber`: removed
+- `EmailProAccount.State`: removed
+- `EmailProAccount.TaskPendingID`: removed
+- `EmailProDisclaimer.CreationDate`: removed
+- `EmailProDisclaimer.Name`: removed
+- `EmailProDisclaimer.TaskPendingID`: removed
+- `EmailProDomain.CnameToCheck`: removed
+- `EmailProDomain.DomainAliases`: removed
+- `EmailProDomain.DomainValidated`: removed
+- `EmailProDomain.IsAliasDomain`: removed
+- `EmailProDomain.MxIsValid`: removed
+- `EmailProDomain.MxRecord`: removed
+- `EmailProDomain.Name`: removed
+- `EmailProDomain.SrvIsValid`: removed
+- `EmailProDomain.SrvRecord`: removed
+- `EmailProDomain.State`: removed
+- `EmailProDomain.TaskPendingID`: removed
+- `EmailProExternalContact.CreationDate`: removed
+- `EmailProExternalContact.ID`: removed
+- `EmailProExternalContact.State`: removed
+- `EmailProExternalContact.TaskPendingID`: removed
+- `EmailProObjectStateEnumCreating`: removed
+- `EmailProObjectStateEnumDeleting`: removed
+- `EmailProObjectStateEnumOK`: removed
+- `EmailProObjectStateEnumReopening`: removed
+- `EmailProObjectStateEnumSuspended`: removed
+- `EmailProObjectStateEnumSuspending`: removed
+- `EmailProObjectStateEnumUnknown`: removed
+- `EmailProService.Domain`: removed
+- `EmailProService.Hostname`: removed
+- `EmailProService.LastUpdateDate`: removed
+- `EmailProService.Offer`: removed
+- `EmailProService.State`: removed
+- `EmailProService.TaskPendingID`: removed
+- `EmailProService.WebURL`: removed
+- `EmailProServiceOfferEnumEmailpro`: removed
+- `EmailProServiceStateEnumCreating`: removed
+- `EmailProServiceStateEnumDeleting`: removed
+- `EmailProServiceStateEnumInMaintenance`: removed
+- `EmailProServiceStateEnumOK`: removed
+- `EmailProServiceStateEnumReopening`: removed
+- `EmailProServiceStateEnumSuspended`: removed
+- `EmailProServiceStateEnumSuspending`: removed
+- `ServicesService.CanDeleteAtExpiration`: removed
+- `ServicesService.ContactAdmin`: removed
+- `ServicesService.ContactBilling`: removed
+- `ServicesService.ContactTech`: removed
+- `ServicesService.Creation`: removed
+- `ServicesService.Domain`: removed
+- `ServicesService.EngagedUpTo`: removed
+- `ServicesService.Expiration`: removed
+- `ServicesService.PossibleRenewPeriod`: removed
+- `ServicesService.RenewalType`: removed
+- `ServicesService.ServiceID`: removed
+- `ServicesService.Status`: removed
+- `ServicesService`: changed from ServicesService to ServicesService
+
+#### `horizonview`
+
+- `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/horizonView/{serviceName}/serviceInfos)
+- `(*Service).GetServiceInfos`: changed from func(context.Context, string) (*ServicesService, error) to func(context.Context, string) (*ServicesService, error)
+- `ServicesService.CanDeleteAtExpiration`: removed
+- `ServicesService.ContactAdmin`: removed
+- `ServicesService.ContactBilling`: removed
+- `ServicesService.ContactTech`: removed
+- `ServicesService.Creation`: removed
+- `ServicesService.Domain`: removed
+- `ServicesService.EngagedUpTo`: removed
+- `ServicesService.Expiration`: removed
+- `ServicesService.PossibleRenewPeriod`: removed
+- `ServicesService.RenewalType`: removed
+- `ServicesService.ServiceID`: removed
+- `ServicesService.Status`: removed
+- `ServicesService`: changed from ServicesService to ServicesService
+
+#### `hostingprivatedatabase`
+
+- `UpdatePrivateDatabase` takes a `HostingPrivateDatabaseServiceWritable` instead of a `HostingPrivateDatabaseService` (PUT /v1/hosting/privateDatabase/{serviceName})
+- `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/hosting/privateDatabase/{serviceName}/serviceInfos)
+- `UpdateWhitelist` takes a `HostingPrivateDatabaseWhitelistWritable` instead of a `HostingPrivateDatabaseWhitelist` (PUT /v1/hosting/privateDatabase/{serviceName}/whitelist/{ip})
+- `(*Service).GetServiceInfos`: changed from func(context.Context, string) (*ServicesService, error) to func(context.Context, string) (*ServicesService, error)
+- `HostingPrivateDatabaseService.CPU`: removed
+- `HostingPrivateDatabaseService.Capabilities`: removed
+- `HostingPrivateDatabaseService.Datacenter`: removed
+- `HostingPrivateDatabaseService.GraphEndpoint`: removed
+- `HostingPrivateDatabaseService.GuiURL`: removed
+- `HostingPrivateDatabaseService.HostnameFtp`: removed
+- `HostingPrivateDatabaseService.Hostname`: removed
+- `HostingPrivateDatabaseService.IP`: removed
+- `HostingPrivateDatabaseService.Infrastructure`: removed
+- `HostingPrivateDatabaseService.IsUnderMaintenance`: removed
+- `HostingPrivateDatabaseService.LastCheck`: removed
+- `HostingPrivateDatabaseService.Offer`: removed
+- `HostingPrivateDatabaseService.PortFtp`: removed
+- `HostingPrivateDatabaseService.Port`: removed
+- `HostingPrivateDatabaseService.QuotaSize`: removed
+- `HostingPrivateDatabaseService.QuotaUsed`: removed
+- `HostingPrivateDatabaseService.RAM`: removed
+- `HostingPrivateDatabaseService.Server`: removed
+- `HostingPrivateDatabaseService.ServiceName`: removed
+- `HostingPrivateDatabaseService.State`: removed
+- `HostingPrivateDatabaseService.TLSCa`: removed
+- `HostingPrivateDatabaseService.Type`: removed
+- `HostingPrivateDatabaseService.VersionLabel`: removed
+- `HostingPrivateDatabaseService.VersionNumber`: removed
+- `HostingPrivateDatabaseService.Version`: removed
+- `ServicesService.CanDeleteAtExpiration`: removed
+- `ServicesService.ContactAdmin`: removed
+- `ServicesService.ContactBilling`: removed
+- `ServicesService.ContactTech`: removed
+- `ServicesService.Creation`: removed
+- `ServicesService.Domain`: removed
+- `ServicesService.EngagedUpTo`: removed
+- `ServicesService.Expiration`: removed
+- `ServicesService.PossibleRenewPeriod`: removed
+- `ServicesService.RenewalType`: removed
+- `ServicesService.ServiceID`: removed
+- `ServicesService.Status`: removed
+- `ServicesService`: changed from ServicesService to ServicesService
+
+#### `hostingweb`
+
+- `CreateCron` takes a `HostingWebCronWritable` instead of a `HostingWebCron` (POST /v1/hosting/web/{serviceName}/cron)
+- `UpdateCDNDomainOption` takes a `CDNDomainOptionWritable` instead of a `CDNDomainOption` (PUT /v1/hosting/web/{serviceName}/cdn/domain/{domainName}/option/{optionName})
+- `UpdateConfiguration` takes a `HostingWebConfigurationWritable` instead of a `HostingWebConfiguration` (PUT /v1/hosting/web/{serviceName}/configuration)
+- `UpdateCron` takes a `HostingWebCronWritable` instead of a `HostingWebCron` (PUT /v1/hosting/web/{serviceName}/cron/{id})
+- `UpdateEmail` takes a `HostingWebEmailWritable` instead of a `HostingWebEmail` (PUT /v1/hosting/web/{serviceName}/email)
+- `UpdateEnvVar` takes a `HostingWebEnvVarWritable` instead of a `HostingWebEnvVar` (PUT /v1/hosting/web/{serviceName}/envVar/{key})
+- `UpdateOwnLogsUserLogs` takes a `HostingWebUserLogsWritable` instead of a `HostingWebUserLogs` (PUT /v1/hosting/web/{serviceName}/ownLogs/{id}/userLogs/{login})
+- `UpdateRuntime` takes a `HostingWebRuntimeWritable` instead of a `HostingWebRuntime` (PUT /v1/hosting/web/{serviceName}/runtime/{id})
+- `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/hosting/web/{serviceName}/serviceInfos)
+- `UpdateUserLogs` takes a `HostingWebUserLogsWritable` instead of a `HostingWebUserLogs` (PUT /v1/hosting/web/{serviceName}/userLogs/{login})
+- `UpdateUser` takes a `HostingWebUserWritable` instead of a `HostingWebUser` (PUT /v1/hosting/web/{serviceName}/user/{login})
+- `UpdateWeb` takes a `HostingWebServiceWritable` instead of a `HostingWebService` (PUT /v1/hosting/web/{serviceName})
+- `HostingWebService.AvailableBoostOffer`: removed
+- `HostingWebService.BoostOffer`: removed
+- `HostingWebService.ClusterIP`: removed
+- `HostingWebService.ClusterIPv6`: removed
+- `HostingWebService.Cluster`: removed
+- `HostingWebService.CountriesIP`: removed
+- `HostingWebService.Datacenter`: removed
+- `HostingWebService.DefaultAttachedDomain`: removed
+- `HostingWebService.Filer`: removed
+- `HostingWebService.HasCDN`: removed
+- `HostingWebService.HasHostedSSL`: removed
+- `HostingWebService.Home`: removed
+- `HostingWebService.HostingIP`: removed
+- `HostingWebService.HostingIPv6`: removed
+- `HostingWebService.LastOvhConfigScan`: removed
+- `HostingWebService.MultipleSSL`: removed
+- `HostingWebService.ObjectQuota`: removed
+- `HostingWebService.ObjectUsed`: removed
+- `HostingWebService.Offer`: removed
+- `HostingWebService.OperatingSystem`: removed
+- `HostingWebService.PhpVersions`: removed
+- `HostingWebService.PrimaryLogin`: removed
+- `HostingWebService.QuotaSize`: removed
+- `HostingWebService.QuotaUsed`: removed
+- `HostingWebService.RecommendedOffer`: removed
+- `HostingWebService.ResourceType`: removed
+- `HostingWebService.ServiceManagementAccess`: removed
+- `HostingWebService.ServiceName`: removed
+- `HostingWebService.State`: removed
+- `HostingWebService.Token`: removed
+- `HostingWebService.TrafficQuotaSize`: removed
+- `HostingWebService.TrafficQuotaUsed`: removed
+- `HostingWebService.Updates`: removed
+
+#### `iam`
+
+- `CreatePermissionsGroup` takes a `IAMPermissionsGroupWritable` instead of a `IAMPermissionsGroup` (POST /v2/iam/permissionsGroup)
+- `CreatePolicy` takes a `IAMPolicyCreationWritable` instead of a `IAMPolicyCreation` (POST /v2/iam/policy)
+- `CreateResourceGroup` takes a `IAMGroupCreationWritable` instead of a `IAMGroupCreation` (POST /v2/iam/resourceGroup)
+- `UpdatePermissionsGroup` takes a `IAMPermissionsGroupWritable` instead of a `IAMPermissionsGroup` (PUT /v2/iam/permissionsGroup/{permissionsGroupURN})
+- `UpdatePolicy` takes a `IAMPolicyUpdateWritable` instead of a `IAMPolicyUpdate` (PUT /v2/iam/policy/{policyId})
+- `UpdateResourceGroup` takes a `IAMGroupUpdateWritable` instead of a `IAMGroupUpdate` (PUT /v2/iam/resourceGroup/{groupId})
+- `UpdateResource` takes a `IAMResourceResourceWritable` instead of a `IAMResourceResource` (PUT /v2/iam/resource/{resourceURN})
+- `IAMGroupCreation.Resources`: changed from []IAMGroupResource to []IAMGroupResourceWritable
+- `IAMGroupUpdate.Resources`: changed from []IAMGroupResource to []IAMGroupResourceWritable
+- `IAMPolicyCreation.PermissionsGroups`: changed from []IAMPolicyPermissionsGroup to []IAMPolicyPermissionsGroupWritable
+- `IAMPolicyCreation.Resources`: changed from []IAMPolicyResource to []IAMPolicyResourceWritable
+- `IAMPolicyUpdate.PermissionsGroups`: changed from []IAMPolicyPermissionsGroup to []IAMPolicyPermissionsGroupWritable
+- `IAMPolicyUpdate.Resources`: changed from []IAMPolicyResource to []IAMPolicyResourceWritable
+
+#### `iploadbalancing`
+
+- `UpdateHTTPFarmServer` takes a `IPLoadbalancingBackendHTTPCustomerServerBackendHTTPServerWritable` instead of a `IPLoadbalancingBackendHTTPCustomerServerBackendHTTPServer` (PUT /v1/ipLoadbalancing/{serviceName}/http/farm/{farmId}/server/{serverId})
+- `UpdateHTTPFarm` takes a `IPLoadbalancingBackendHTTPBackendHTTPWritable` instead of a `IPLoadbalancingBackendHTTPBackendHTTP` (PUT /v1/ipLoadbalancing/{serviceName}/http/farm/{farmId})
+- `UpdateHTTPFrontend` takes a `IPLoadbalancingFrontendHTTPFrontendHTTPWritable` instead of a `IPLoadbalancingFrontendHTTPFrontendHTTP` (PUT /v1/ipLoadbalancing/{serviceName}/http/frontend/{frontendId})
+- `UpdateHTTPRouteRule` takes a `IPLoadbalancingRouteRuleRouteRuleWritable` instead of a `IPLoadbalancingRouteRuleRouteRule` (PUT /v1/ipLoadbalancing/{serviceName}/http/route/{routeId}/rule/{ruleId})
+- `UpdateHTTPRoute` takes a `IPLoadbalancingRouteHTTPRouteHTTPWritable` instead of a `IPLoadbalancingRouteHTTPRouteHTTP` (PUT /v1/ipLoadbalancing/{serviceName}/http/route/{routeId})
+- `UpdateIPLoadbalancing` takes a `IPLoadbalancingIPWritable` instead of a `IPLoadbalancingIP` (PUT /v1/ipLoadbalancing/{serviceName})
+- `UpdateQuota` takes a `IPLoadbalancingQuotaQuotaWritable` instead of a `IPLoadbalancingQuotaQuota` (PUT /v1/ipLoadbalancing/{serviceName}/quota/{zone})
+- `UpdateSSL` takes a `IPLoadbalancingSSLSSLWritable` instead of a `IPLoadbalancingSSLSSL` (PUT /v1/ipLoadbalancing/{serviceName}/ssl/{id})
+- `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/ipLoadbalancing/{serviceName}/serviceInfos)
+- `UpdateTCPFarmServer` takes a `IPLoadbalancingBackendTCPCustomerServerBackendTCPServerWritable` instead of a `IPLoadbalancingBackendTCPCustomerServerBackendTCPServer` (PUT /v1/ipLoadbalancing/{serviceName}/tcp/farm/{farmId}/server/{serverId})
+- `UpdateTCPFarm` takes a `IPLoadbalancingBackendTCPBackendTCPWritable` instead of a `IPLoadbalancingBackendTCPBackendTCP` (PUT /v1/ipLoadbalancing/{serviceName}/tcp/farm/{farmId})
+- `UpdateTCPFrontend` takes a `IPLoadbalancingFrontendTCPFrontendTCPWritable` instead of a `IPLoadbalancingFrontendTCPFrontendTCP` (PUT /v1/ipLoadbalancing/{serviceName}/tcp/frontend/{frontendId})
+- `UpdateTCPRouteRule` takes a `IPLoadbalancingRouteRuleRouteRuleWritable` instead of a `IPLoadbalancingRouteRuleRouteRule` (PUT /v1/ipLoadbalancing/{serviceName}/tcp/route/{routeId}/rule/{ruleId})
+- `UpdateTCPRoute` takes a `IPLoadbalancingRouteTCPRouteTCPWritable` instead of a `IPLoadbalancingRouteTCPRouteTCP` (PUT /v1/ipLoadbalancing/{serviceName}/tcp/route/{routeId})
+- `(*Service).GetServiceInfos`: changed from func(context.Context, string) (*ServicesService, error) to func(context.Context, string) (*ServicesService, error)
+- `IPLoadbalancingIP.IPLoadbalancing`: removed
+- `IPLoadbalancingIP.IPv4`: removed
+- `IPLoadbalancingIP.IPv6`: removed
+- `IPLoadbalancingIP.MetricsToken`: removed
+- `IPLoadbalancingIP.Offer`: removed
+- `IPLoadbalancingIP.OrderableZone`: removed
+- `IPLoadbalancingIP.ServiceName`: removed
+- `IPLoadbalancingIP.State`: removed
+- `IPLoadbalancingIP.VrackEligibility`: removed
+- `IPLoadbalancingIP.VrackName`: removed
+- `IPLoadbalancingIP.Zone`: removed
+- `ServicesService.CanDeleteAtExpiration`: removed
+- `ServicesService.ContactAdmin`: removed
+- `ServicesService.ContactBilling`: removed
+- `ServicesService.ContactTech`: removed
+- `ServicesService.Creation`: removed
+- `ServicesService.Domain`: removed
+- `ServicesService.EngagedUpTo`: removed
+- `ServicesService.Expiration`: removed
+- `ServicesService.PossibleRenewPeriod`: removed
+- `ServicesService.RenewalType`: removed
+- `ServicesService.ServiceID`: removed
+- `ServicesService.Status`: removed
+- `ServicesService`: changed from ServicesService to ServicesService
+
+#### `licensedirectadmin`
+
+- `UpdateDirectadmin` takes a `LicenseDirectadminDirectAdminWritable` instead of a `LicenseDirectadminDirectAdmin` (PUT /v1/license/directadmin/{serviceName})
+- `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/license/directadmin/{serviceName}/serviceInfos)
+- `LicenseDirectadminDirectAdmin.ClientID`: removed
+- `LicenseDirectadminDirectAdmin.Creation`: removed
+- `LicenseDirectadminDirectAdmin.Domain`: removed
+- `LicenseDirectadminDirectAdmin.IP`: removed
+- `LicenseDirectadminDirectAdmin.LicenseID`: removed
+- `LicenseDirectadminDirectAdmin.Status`: removed
+- `LicenseDirectadminDirectAdmin.Version`: removed
+
+#### `licensehycu`
+
+- `UpdateHycu` takes a `LicenseHycuHycuWritable` instead of a `LicenseHycuHycu` (PUT /v1/license/hycu/{serviceName})
+- `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/license/hycu/{serviceName}/serviceInfos)
+- `LicenseHycuHycu.Creation`: removed
+- `LicenseHycuHycu.Domain`: removed
+- `LicenseHycuHycu.LicenseID`: removed
+- `LicenseHycuHycu.License`: removed
+- `LicenseHycuHycu.Status`: removed
+- `LicenseStateEnumOK`: removed
+- `LicenseStateEnumReleased`: removed
+- `LicenseStateEnumTerminated`: removed
+- `LicenseStateEnumToDeliver`: removed
+
+#### `licenseoffice`
+
+- `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/license/office/{serviceName}/serviceInfos)
+- `(*Service).GetServiceInfos`: changed from func(context.Context, string) (*ServicesService, error) to func(context.Context, string) (*ServicesService, error)
+- `ServicesService.CanDeleteAtExpiration`: removed
+- `ServicesService.ContactAdmin`: removed
+- `ServicesService.ContactBilling`: removed
+- `ServicesService.ContactTech`: removed
+- `ServicesService.Creation`: removed
+- `ServicesService.Domain`: removed
+- `ServicesService.EngagedUpTo`: removed
+- `ServicesService.Expiration`: removed
+- `ServicesService.PossibleRenewPeriod`: removed
+- `ServicesService.RenewalType`: removed
+- `ServicesService.ServiceID`: removed
+- `ServicesService.Status`: removed
+- `ServicesService`: changed from ServicesService to ServicesService
+
+#### `licenseplesk`
+
+- `UpdatePlesk` takes a `LicensePleskPleskWritable` instead of a `LicensePleskPlesk` (PUT /v1/license/plesk/{serviceName})
+- `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/license/plesk/{serviceName}/serviceInfos)
+- `(*Service).GetServiceInfos`: changed from func(context.Context, string) (*ServicesService, error) to func(context.Context, string) (*ServicesService, error)
+- `LicensePleskPlesk.Creation`: removed
+- `LicensePleskPlesk.DomainNumber`: removed
+- `LicensePleskPlesk.Domain`: removed
+- `LicensePleskPlesk.IP`: removed
+- `LicensePleskPlesk.InformationKey`: removed
+- `LicensePleskPlesk.Key`: removed
+- `LicensePleskPlesk.LicenseID`: removed
+- `LicensePleskPlesk.ProductKey`: removed
+- `LicensePleskPlesk.Status`: removed
+- `LicensePleskPlesk.Version`: removed
+- `ServicesService.CanDeleteAtExpiration`: removed
+- `ServicesService.ContactAdmin`: removed
+- `ServicesService.ContactBilling`: removed
+- `ServicesService.ContactTech`: removed
+- `ServicesService.Creation`: removed
+- `ServicesService.Domain`: removed
+- `ServicesService.EngagedUpTo`: removed
+- `ServicesService.Expiration`: removed
+- `ServicesService.PossibleRenewPeriod`: removed
+- `ServicesService.RenewalType`: removed
+- `ServicesService.ServiceID`: removed
+- `ServicesService.Status`: removed
+- `ServicesService`: changed from ServicesService to ServicesService
+
+#### `licensevirtuozzo`
+
+- `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/license/virtuozzo/{serviceName}/serviceInfos)
+- `UpdateVirtuozzo` takes a `LicenseVirtuozzoVirtuozzoWritable` instead of a `LicenseVirtuozzoVirtuozzo` (PUT /v1/license/virtuozzo/{serviceName})
+- `LicenseVirtuozzoVirtuozzo.ContainerNumber`: removed
+- `LicenseVirtuozzoVirtuozzo.Creation`: removed
+- `LicenseVirtuozzoVirtuozzo.Domain`: removed
+- `LicenseVirtuozzoVirtuozzo.IP`: removed
+- `LicenseVirtuozzoVirtuozzo.InformationKey`: removed
+- `LicenseVirtuozzoVirtuozzo.LicenseID`: removed
+- `LicenseVirtuozzoVirtuozzo.ProductKey`: removed
+- `LicenseVirtuozzoVirtuozzo.Status`: removed
+- `LicenseVirtuozzoVirtuozzo.Version`: removed
+
+#### `me`
+
+- `CreateContact` takes a `MeContactContactWritable` instead of a `MeContactContact` (POST /v1/me/contact)
+- `CreateSvaOnboarding` takes a `MeSvaOnboardingCreationWritable` instead of a `MeSvaOnboardingCreation` (POST /v1/me/sva/onboarding)
+- `CreateSvaWallet` takes a `MeSvaWalletCreationWritable` instead of a `MeSvaWalletCreation` (POST /v1/me/sva/wallet)
+- `EditAccountDetails` takes a `NichandleNichandleWritable` instead of a `NichandleNichandle` (PUT /v1/me)
+- `UpdateAPICredential` takes a `AuthAPICredentialWritable` instead of a `AuthAPICredential` (PUT /v1/me/api/credential/{credentialId})
+- `UpdateAccessRestrictionIP` takes a `NichandleIPRestrictionWritable` instead of a `NichandleIPRestriction` (PUT /v1/me/accessRestriction/ip/{id})
+- `UpdateAccessRestrictionSms` takes a `NichandleAccessRestrictionSmsAccountWritable` instead of a `NichandleAccessRestrictionSmsAccount` (PUT /v1/me/accessRestriction/sms/{id})
+- `UpdateAccessRestrictionTotp` takes a `NichandleAccessRestrictionTOTPAccountWritable` instead of a `NichandleAccessRestrictionTOTPAccount` (PUT /v1/me/accessRestriction/totp/{id})
+- `UpdateAccessRestrictionU2f` takes a `NichandleAccessRestrictionU2FAccountWritable` instead of a `NichandleAccessRestrictionU2FAccount` (PUT /v1/me/accessRestriction/u2f/{id})
+- `UpdateAutorenew` takes a `NichandleNicAutorenewInfosWritable` instead of a `NichandleNicAutorenewInfos` (PUT /v1/me/autorenew)
+- `UpdateConsentDecision` takes a `MeConsentDecisionWritable` instead of a `MeConsentDecision` (PUT /v1/me/consent/{campaignName}/decision)
+- `UpdateContact` takes a `MeContactContactWritable` instead of a `MeContactContact` (PUT /v1/me/contact/{contactId})
+- `UpdateDocument` takes a `NichandleDocumentDocumentWritable` instead of a `NichandleDocumentDocument` (PUT /v1/me/document/{id})
+- `UpdateFidelityAccount` takes a `BillingFidelityAccountWritable` instead of a `BillingFidelityAccount` (PUT /v1/me/fidelityAccount)
+- `UpdateIPOrganisation` takes a `NichandleIPv4OrgWritable` instead of a `NichandleIPv4Org` (PUT /v1/me/ipOrganisation/{organisationId})
+- `UpdateIdentityGroup` takes a `AuthGroupWritable` instead of a `AuthGroup` (PUT /v1/me/identity/group/{group})
+- `UpdateIdentityProvider` takes a `AuthProviderWritable` instead of a `AuthProvider` (PUT /v1/me/identity/provider)
+- `UpdateIdentityUser` takes a `AuthUserWritable` instead of a `AuthUser` (PUT /v1/me/identity/user/{user})
+- `UpdateOvhAccount` takes a `BillingOvhAccountWritable` instead of a `BillingOvhAccount` (PUT /v1/me/ovhAccount/{ovhAccountId})
+- `UpdatePaymentMeanBankAccount` takes a `MePaymentMeanBankAccountWritable` instead of a `MePaymentMeanBankAccount` (PUT /v1/me/paymentMean/bankAccount/{id})
+- `UpdatePaymentMeanCreditCard` takes a `MePaymentMeanCreditCardWritable` instead of a `MePaymentMeanCreditCard` (PUT /v1/me/paymentMean/creditCard/{id})
+- `UpdatePaymentMeanDeferredPaymentAccount` takes a `MePaymentMeanDeferredWritable` instead of a `MePaymentMeanDeferred` (PUT /v1/me/paymentMean/deferredPaymentAccount/{id})
+- `UpdatePaymentMeanPaypal` takes a `MePaymentMeanPaypalWritable` instead of a `MePaymentMeanPaypal` (PUT /v1/me/paymentMean/paypal/{id})
+- `UpdatePaymentMethodByID` takes a `MePaymentMethodPaymentMethodWritable` instead of a `MePaymentMethodPaymentMethod` (PUT /v1/me/paymentMethod/{id})
+- `UpdatePaymentMethodByPaymentMethodID` takes a `MePaymentPaymentMethodWritable` instead of a `MePaymentPaymentMethod` (PUT /v1/me/payment/method/{paymentMethodId})
+- `UpdatePreferencesManager` takes a `NichandleManagerPreferenceWritable` instead of a `NichandleManagerPreference` (PUT /v1/me/preferences/manager/{key})
+- `UpdateSubAccount` takes a `NichandleSubAccountWritable` instead of a `NichandleSubAccount` (PUT /v1/me/subAccount/{id})
+- `UpdateSubscription` takes a `NichandleSubscriptionWritable` instead of a `NichandleSubscription` (PUT /v1/me/subscription/{subscriptionType})
+- `UpdateSvaWallet` takes a `MeSvaWalletUpdateWritable` instead of a `MeSvaWalletUpdate` (PUT /v1/me/sva/wallet)
+- `UpdateTaskDomainArgument` takes a `NichandleDomainTaskArgumentWritable` instead of a `NichandleDomainTaskArgument` (PUT /v1/me/task/domain/{id}/argument/{key})
+- `CreateDocumentRequest.Tags`: changed from []ComplexTypeSafeKeyValueString to []ComplexTypeSafeKeyValueStringWritable
+- `MeSvaOnboardingCompany.Beneficiaries`: changed from []MeSvaPersonalInfo to []MeSvaPersonalInfoWritable
+- `MeSvaOnboardingPersonalInfoRepresentative.ID`: removed
+- `MeSvaPersonalInfoRepresentative.ID`: removed
+- `MeSvaWalletCreation.Company`: changed from MeSvaCompany to MeSvaCompanyWritable
+
+#### `metrics`
+
+- `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/metrics/{serviceName}/serviceInfos)
+- `(*Service).GetServiceInfos`: changed from func(context.Context, string) (*ServicesService, error) to func(context.Context, string) (*ServicesService, error)
+- `ServicesService.CanDeleteAtExpiration`: removed
+- `ServicesService.ContactAdmin`: removed
+- `ServicesService.ContactBilling`: removed
+- `ServicesService.ContactTech`: removed
+- `ServicesService.Creation`: removed
+- `ServicesService.Domain`: removed
+- `ServicesService.EngagedUpTo`: removed
+- `ServicesService.Expiration`: removed
+- `ServicesService.PossibleRenewPeriod`: removed
+- `ServicesService.RenewalType`: removed
+- `ServicesService.ServiceID`: removed
+- `ServicesService.Status`: removed
+- `ServicesService`: changed from ServicesService to ServicesService
+
+#### `msservices`
+
+- `UpdateAccountExchange` takes a `MsServicesExchangeInformationWritable` instead of a `MsServicesExchangeInformation` (PUT /v1/msServices/{serviceName}/account/{userPrincipalName}/exchange)
+- `UpdateAccountSharepoint` takes a `MsServicesSharepointInformationWritable` instead of a `MsServicesSharepointInformation` (PUT /v1/msServices/{serviceName}/account/{userPrincipalName}/sharepoint)
+- `UpdateAccount` takes a `MsServicesAccountWritable` instead of a `MsServicesAccount` (PUT /v1/msServices/{serviceName}/account/{userPrincipalName})
+- `UpdateExchange` takes a `MsServicesExchangeServiceWritable` instead of a `MsServicesExchangeService` (PUT /v1/msServices/{serviceName}/exchange)
+- `UpdateMsServices` takes a `MsServicesActiveDirectoryOrganizationalUnitWritable` instead of a `MsServicesActiveDirectoryOrganizationalUnit` (PUT /v1/msServices/{serviceName})
+- `UpdateSharepointServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/msServices/sharepoint/{domain}/serviceInfos)
+- `UpdateSharepoint` takes a `MsServicesSharepointServiceWritable` instead of a `MsServicesSharepointService` (PUT /v1/msServices/{serviceName}/sharepoint)
+- `(*Service).GetSharepointServiceInfos`: changed from func(context.Context, string) (*ServicesService, error) to func(context.Context, string) (*ServicesService, error)
+- `MsServicesActiveDirectoryOrganizationalUnit.Name`: removed
+- `MsServicesActiveDirectoryOrganizationalUnit.OfficeTenantServiceName`: removed
+- `MsServicesActiveDirectoryOrganizationalUnit.State`: removed
+- `MsServicesActiveDirectoryOrganizationalUnit.TaskPendingID`: removed
+- `ServicesService.CanDeleteAtExpiration`: removed
+- `ServicesService.ContactAdmin`: removed
+- `ServicesService.ContactBilling`: removed
+- `ServicesService.ContactTech`: removed
+- `ServicesService.Creation`: removed
+- `ServicesService.Domain`: removed
+- `ServicesService.EngagedUpTo`: removed
+- `ServicesService.Expiration`: removed
+- `ServicesService.PossibleRenewPeriod`: removed
+- `ServicesService.RenewalType`: removed
+- `ServicesService.ServiceID`: removed
+- `ServicesService.Status`: removed
+- `ServicesService`: changed from ServicesService to ServicesService
+
+#### `notification`
+
+- `CreateRouting` takes a `NotificationRoutingPostInputWritable` instead of a `NotificationRoutingPostInput` (POST /v2/notification/routing)
+- `UpdateContactMeanTask` takes a `CommonTaskWithInputsNotificationContactMeanTaskInputsWritable` instead of a `CommonTaskWithInputsNotificationContactMeanTaskInputs` (PUT /v2/notification/contactMean/{contactMeanId}/task/{taskId})
+- `UpdateContactMean` takes a `NotificationContactMeanContactMeanWritable` instead of a `NotificationContactMeanContactMean` (PUT /v2/notification/contactMean/{contactMeanId})
+- `UpdateRouting` takes a `NotificationRoutingRoutingWritable` instead of a `NotificationRoutingRouting` (PUT /v2/notification/routing/{routingId})
+- `CommonTaskWithInputsNotificationContactMeanTaskInputs.CreatedAt`: removed
+- `CommonTaskWithInputsNotificationContactMeanTaskInputs.Errors`: removed
+- `CommonTaskWithInputsNotificationContactMeanTaskInputs.FinishedAt`: removed
+- `CommonTaskWithInputsNotificationContactMeanTaskInputs.ID`: removed
+- `CommonTaskWithInputsNotificationContactMeanTaskInputs.Link`: removed
+- `CommonTaskWithInputsNotificationContactMeanTaskInputs.Message`: removed
+- `CommonTaskWithInputsNotificationContactMeanTaskInputs.Progress`: removed
+- `CommonTaskWithInputsNotificationContactMeanTaskInputs.StartedAt`: removed
+- `CommonTaskWithInputsNotificationContactMeanTaskInputs.Status`: removed
+- `CommonTaskWithInputsNotificationContactMeanTaskInputs.Type`: removed
+- `CommonTaskWithInputsNotificationContactMeanTaskInputs.UpdatedAt`: removed
+- `NotificationRoutingPostInput.Rules`: changed from []NotificationRoutingRule to []NotificationRoutingRuleWritable
+
+#### `nutanix`
+
+- `UpdateNutanix` takes a `NutanixClusterWritable` instead of a `NutanixCluster` (PUT /v1/nutanix/{serviceName})
+- `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/nutanix/{serviceName}/serviceInfos)
+- `NutanixCluster.ControlPanelURL`: removed
+- `NutanixCluster.Ipfo`: removed
+- `NutanixCluster.Iplb`: removed
+- `NutanixCluster.Name`: removed
+- `NutanixCluster.Nodes`: changed from []NutanixNodes to []NutanixNodesWritable
+- `NutanixCluster.PrismSecretID`: removed
+- `NutanixCluster.RackAwareness`: removed
+- `NutanixCluster.Vrack`: removed
+
+#### `overthebox`
+
+- `UpdateOverTheBox` takes a `OverTheBoxServiceWritable` instead of a `OverTheBoxService` (PUT /v1/overTheBox/{serviceName})
+- `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/overTheBox/{serviceName}/serviceInfos)
+- `OverTheBoxOperationModeEnumOvertheboxLegacy`: removed
+- `OverTheBoxOperationModeEnumOverthebox`: removed
+- `OverTheBoxOperationModeEnumWireguard`: removed
+- `OverTheBoxService.AutoMTU`: removed
+- `OverTheBoxService.Bandwidth`: removed
+- `OverTheBoxService.ConfigurationMode`: removed
+- `OverTheBoxService.GraphEndpoint`: removed
+- `OverTheBoxService.IPv6Enabled`: removed
+- `OverTheBoxService.Offer`: removed
+- `OverTheBoxService.OperationMode`: removed
+- `OverTheBoxService.PrettyOfferName`: removed
+- `OverTheBoxService.SOCKSProxyEnabled`: removed
+- `OverTheBoxService.ServiceName`: removed
+- `OverTheBoxService.Status`: removed
+- `OverTheBoxService.TunnelMode`: removed
+- `OverTheBoxServiceConfigurationModeEnumAutoconfigure`: removed
+- `OverTheBoxServiceConfigurationModeEnumLocal`: removed
+- `OverTheBoxServiceStatusEnumActive`: removed
+- `OverTheBoxServiceStatusEnumCreating`: removed
+- `OverTheBoxServiceStatusEnumDeleted`: removed
+- `OverTheBoxServiceStatusEnumSuspended`: removed
+- `OverTheBoxServiceStatusEnumToCreate`: removed
+- `OverTheBoxServiceStatusEnumToDelete`: removed
+- `OverTheBoxTunnelModeEnumGlorytunHybrid`: removed
+- `OverTheBoxTunnelModeEnumGlorytunMud`: removed
+- `OverTheBoxTunnelModeEnumGlorytun`: removed
+- `OverTheBoxTunnelModeEnumWireguard`: removed
+
+#### `packxdsl`
+
+- `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/pack/xdsl/{packName}/serviceInfos)
+- `UpdateXdsl` takes a `PackXdslPackAdslWritable` instead of a `PackXdslPackAdsl` (PUT /v1/pack/xdsl/{packName})
+- `(*Service).GetServiceInfos`: changed from func(context.Context, string) (*ServicesService, error) to func(context.Context, string) (*ServicesService, error)
+- `PackXdslPackAdsl.Capabilities`: removed
+- `PackXdslPackAdsl.OfferDescription`: removed
+- `PackXdslPackAdsl.OfferPrice`: removed
+- `PackXdslPackAdsl.PackName`: removed
+- `ServicesService.CanDeleteAtExpiration`: removed
+- `ServicesService.ContactAdmin`: removed
+- `ServicesService.ContactBilling`: removed
+- `ServicesService.ContactTech`: removed
+- `ServicesService.Creation`: removed
+- `ServicesService.Domain`: removed
+- `ServicesService.EngagedUpTo`: removed
+- `ServicesService.Expiration`: removed
+- `ServicesService.PossibleRenewPeriod`: removed
+- `ServicesService.RenewalType`: removed
+- `ServicesService.ServiceID`: removed
+- `ServicesService.Status`: removed
+- `ServicesService`: changed from ServicesService to ServicesService
+
+#### `sms`
+
+- `UpdatePhonebooksPhonebookContact` takes a `SmsPhonebookContactWritable` instead of a `SmsPhonebookContact` (PUT /v1/sms/{serviceName}/phonebooks/{bookKey}/phonebookContact/{id})
+- `UpdatePhonebooks` takes a `SmsPhonebookWritable` instead of a `SmsPhonebook` (PUT /v1/sms/{serviceName}/phonebooks/{bookKey})
+- `UpdateReceivers` takes a `SmsReceiverWritable` instead of a `SmsReceiver` (PUT /v1/sms/{serviceName}/receivers/{slotId})
+- `UpdateSendersDocuments` takes a `SmsSenderDocumentWritable` instead of a `SmsSenderDocument` (PUT /v1/sms/{serviceName}/senders/{sender}/documents/{documentID})
+- `UpdateSenders` takes a `SmsSenderWritable` instead of a `SmsSender` (PUT /v1/sms/{serviceName}/senders/{sender})
+- `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/sms/{serviceName}/serviceInfos)
+- `UpdateSms` takes a `SmsAccountWritable` instead of a `SmsAccount` (PUT /v1/sms/{serviceName})
+- `UpdateTemplatesControl` takes a `SmsTemplateControlWritable` instead of a `SmsTemplateControl` (PUT /v1/sms/{serviceName}/templatesControl/{name})
+- `UpdateUsersReceivers` takes a `SmsReceiverWritable` instead of a `SmsReceiver` (PUT /v1/sms/{serviceName}/users/{login}/receivers/{slotId})
+- `UpdateUsers` takes a `SmsUserWritable` instead of a `SmsUser` (PUT /v1/sms/{serviceName}/users/{login})
+- `UpdateVirtualNumbersServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/sms/virtualNumbers/{number}/serviceInfos)
+- `(*Service).CreateSendersDocuments`: changed from func(context.Context, string, string, CreateSendersDocumentsRequest) (*SmsSenderDocument, error) to func(context.Context, string, string, CreateSendersDocumentsRequest) (*SmsSenderDocument, error)
+- `(*Service).GetSendersDocuments`: changed from func(context.Context, string, string, string) (*SmsSenderDocument, error) to func(context.Context, string, string, string) (*SmsSenderDocument, error)
+- `(*Service).GetSenders`: changed from func(context.Context, string, string) (*SmsSender, error) to func(context.Context, string, string) (*SmsSender, error)
+- `(*Service).GetTemplatesControl`: changed from func(context.Context, string, string) (*SmsTemplateControl, error) to func(context.Context, string, string) (*SmsTemplateControl, error)
+- `(*Service).GetUsers`: changed from func(context.Context, string, string) (*SmsUser, error) to func(context.Context, string, string) (*SmsUser, error)
+- `SmsAccount.Channel`: removed
+- `SmsAccount.CreditsHoldByQuota`: removed
+- `SmsAccount.CreditsLeft`: removed
+- `SmsAccount.Name`: removed
+- `SmsAccount.Smpp`: removed
+- `SmsAccount.Status`: removed
+- `SmsAccount.UserQuantityWithQuota`: removed
+- `SmsSender.Comment`: removed
+- `SmsSender.Referer`: removed
+- `SmsSender.Sender`: removed
+- `SmsSender.Type`: removed
+- `SmsSender.ValidationMedia`: removed
+- `SmsSenderDocument.CreatedAt`: removed
+- `SmsSenderDocument.DocumentID`: removed
+- `SmsSenderDocument.GetURL`: removed
+- `SmsSenderDocument.PutURL`: removed
+- `SmsSenderDocument.Size`: removed
+- `SmsSenderDocument`: changed from SmsSenderDocument to SmsSenderDocument
+- `SmsSender`: changed from SmsSender to SmsSender
+- `SmsTemplateControl.Comment`: removed
+- `SmsTemplateControl.Datetime`: removed
+- `SmsTemplateControl`: changed from SmsTemplateControl to SmsTemplateControl
+- `SmsUser.Login`: removed
+- `SmsUser`: changed from SmsUser to SmsUser
+
+#### `storage`
+
+- `CreateShareACL` takes a `StorageNetAppShareACLRuleWritable` instead of a `StorageNetAppShareACLRule` (POST /v1/storage/netapp/{serviceName}/share/{shareId}/acl)
+- `CreateShareSnapshot` takes a `StorageNetAppShareSnapshotWritable` instead of a `StorageNetAppShareSnapshot` (POST /v1/storage/netapp/{serviceName}/share/{shareId}/snapshot)
+- `CreateShare` takes a `StorageNetAppShareWritable` instead of a `StorageNetAppShare` (POST /v1/storage/netapp/{serviceName}/share)
+- `CreateSnapshotPolicy` takes a `StorageNetAppSnapshotPolicyWritable` instead of a `StorageNetAppSnapshotPolicy` (POST /v1/storage/netapp/{serviceName}/snapshotPolicy)
+- `UpdateNashaServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/storage/nasha/{serviceName}/serviceInfos)
+- `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/storage/netapp/{serviceName}/serviceInfos)
+- `(*Service).GetNashaServiceInfos`: changed from func(context.Context, string) (*ServicesService, error) to func(context.Context, string) (*ServicesService, error)
+- `(*Service).GetServiceInfos`: changed from func(context.Context, string) (*ServicesService, error) to func(context.Context, string) (*ServicesService, error)
+- `ServicesService.CanDeleteAtExpiration`: removed
+- `ServicesService.ContactAdmin`: removed
+- `ServicesService.ContactBilling`: removed
+- `ServicesService.ContactTech`: removed
+- `ServicesService.Creation`: removed
+- `ServicesService.Domain`: removed
+- `ServicesService.EngagedUpTo`: removed
+- `ServicesService.Expiration`: removed
+- `ServicesService.PossibleRenewPeriod`: removed
+- `ServicesService.RenewalType`: removed
+- `ServicesService.ServiceID`: removed
+- `ServicesService.Status`: removed
+- `ServicesService`: changed from ServicesService to ServicesService
+
+#### `telephony`
+
+- `UpdateAbbreviatedNumber` takes a `TelephonyAbbreviatedNumberGroupWritable` instead of a `TelephonyAbbreviatedNumberGroup` (PUT /v1/telephony/{billingAccount}/abbreviatedNumber/{abbreviatedNumber})
+- `UpdateAliasesServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/telephony/aliases/{serviceName}/serviceInfos)
+- `UpdateCarrierSIPSettings` takes a `TelephonyCarrierSIPDetailsWritable` instead of a `TelephonyCarrierSIPDetails` (PUT /v1/telephony/{billingAccount}/carrierSip/{serviceName}/settings)
+- `UpdateCarrierSIPVnoRanges` takes a `TelephonyCarrierSIPVnoRangeWritable` instead of a `TelephonyCarrierSIPVnoRange` (PUT /v1/telephony/{billingAccount}/carrierSip/{serviceName}/vno/{contractReference}/ranges/{prefix})
+- `UpdateConferenceRooms` takes a `TelephonyConferenceRoomWritable` instead of a `TelephonyConferenceRoom` (PUT /v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber})
+- `UpdateConferenceSettings` takes a `TelephonyConferencePropertiesWritable` instead of a `TelephonyConferenceProperties` (PUT /v1/telephony/{billingAccount}/conference/{serviceName}/settings)
+- `UpdateDdi` takes a `TelephonyDdiWritable` instead of a `TelephonyDdi` (PUT /v1/telephony/{billingAccount}/ddi/{serviceName})
+- `UpdateEasyHuntingHuntingAgentQueue` takes a `TelephonyOvhPabxHuntingAgentQueueWritable` instead of a `TelephonyOvhPabxHuntingAgentQueue` (PUT /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/queue/{queueId})
+- `UpdateEasyHuntingHuntingAgent` takes a `TelephonyOvhPabxHuntingAgentWritable` instead of a `TelephonyOvhPabxHuntingAgent` (PUT /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId})
+- `UpdateEasyHuntingHuntingQueueAgent` takes a `TelephonyOvhPabxHuntingAgentQueueWritable` instead of a `TelephonyOvhPabxHuntingAgentQueue` (PUT /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue/{queueId}/agent/{agentId})
+- `UpdateEasyHuntingHuntingQueue` takes a `TelephonyOvhPabxHuntingQueueWritable` instead of a `TelephonyOvhPabxHuntingQueue` (PUT /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue/{queueId})
+- `UpdateEasyHuntingHunting` takes a `TelephonyOvhPabxHuntingWritable` instead of a `TelephonyOvhPabxHunting` (PUT /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting)
+- `UpdateEasyHuntingScreenListConditionsConditions` takes a `TelephonyEasyHuntingScreenListsConditionsWritable` instead of a `TelephonyEasyHuntingScreenListsConditions` (PUT /v1/telephony/{billingAccount}/easyHunting/{serviceName}/screenListConditions/conditions/{conditionId})
+- `UpdateEasyHuntingTimeConditionsConditions` takes a `TelephonyEasyHuntingTimeConditionsWritable` instead of a `TelephonyEasyHuntingTimeConditions` (PUT /v1/telephony/{billingAccount}/easyHunting/{serviceName}/timeConditions/conditions/{conditionId})
+- `UpdateEasyHunting` takes a `TelephonyEasyHuntingWritable` instead of a `TelephonyEasyHunting` (PUT /v1/telephony/{billingAccount}/easyHunting/{serviceName})
+- `UpdateFaxScreenLists` takes a `TelephonyFaxScreenWritable` instead of a `TelephonyFaxScreen` (PUT /v1/telephony/{billingAccount}/fax/{serviceName}/screenLists)
+- `UpdateFaxSettings` takes a `TelephonyFaxPropertiesWritable` instead of a `TelephonyFaxProperties` (PUT /v1/telephony/{billingAccount}/fax/{serviceName}/settings)
+- `UpdateFax` takes a `TelephonyFaxWritable` instead of a `TelephonyFax` (PUT /v1/telephony/{billingAccount}/fax/{serviceName})
+- `UpdateLineAbbreviatedNumber` takes a `TelephonyAbbreviatedNumberWritable` instead of a `TelephonyAbbreviatedNumber` (PUT /v1/telephony/{billingAccount}/line/{serviceName}/abbreviatedNumber/{abbreviatedNumber})
+- `UpdateLineOptions` takes a `TelephonyLineOptionsWritable` instead of a `TelephonyLineOptions` (PUT /v1/telephony/{billingAccount}/line/{serviceName}/options)
+- `UpdateLinePhoneFunctionKey` takes a `TelephonyFunctionKeyWritable` instead of a `TelephonyFunctionKey` (PUT /v1/telephony/{billingAccount}/line/{serviceName}/phone/functionKey/{keyNum})
+- `UpdateLinePhonePhonebookPhonebookContact` takes a `TelephonyPhonebookContactWritable` instead of a `TelephonyPhonebookContact` (PUT /v1/telephony/{billingAccount}/line/{serviceName}/phone/phonebook/{bookKey}/phonebookContact/{id})
+- `UpdateLinePhonePhonebook` takes a `TelephonyPhonebookWritable` instead of a `TelephonyPhonebook` (PUT /v1/telephony/{billingAccount}/line/{serviceName}/phone/phonebook/{bookKey})
+- `UpdateLinePhoneRma` takes a `TelephonyRmaWritable` instead of a `TelephonyRma` (PUT /v1/telephony/{billingAccount}/line/{serviceName}/phone/rma/{id})
+- `UpdateLinePhone` takes a `TelephonyPhoneWritable` instead of a `TelephonyPhone` (PUT /v1/telephony/{billingAccount}/line/{serviceName}/phone)
+- `UpdateLine` takes a `TelephonyLineWritable` instead of a `TelephonyLine` (PUT /v1/telephony/{billingAccount}/line/{serviceName})
+- `UpdateLinesServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/telephony/lines/{serviceName}/serviceInfos)
+- `UpdateNumber` takes a `TelephonyNumberWritable` instead of a `TelephonyNumber` (PUT /v1/telephony/{billingAccount}/number/{serviceName})
+- `UpdateOfferTask` takes a `TelephonyOfferTaskWritable` instead of a `TelephonyOfferTask` (PUT /v1/telephony/{billingAccount}/offerTask/{taskId})
+- `UpdateOvhPabxDialplanExtensionConditionTime` takes a `TelephonyOvhPabxDialplanExtensionConditionTimeWritable` instead of a `TelephonyOvhPabxDialplanExtensionConditionTime` (PUT /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}/conditionTime/{conditionId})
+- `UpdateOvhPabxDialplanExtensionRule` takes a `TelephonyOvhPabxDialplanExtensionRuleWritable` instead of a `TelephonyOvhPabxDialplanExtensionRule` (PUT /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}/rule/{ruleId})
+- `UpdateOvhPabxDialplanExtension` takes a `TelephonyOvhPabxDialplanExtensionWritable` instead of a `TelephonyOvhPabxDialplanExtension` (PUT /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId})
+- `UpdateOvhPabxDialplan` takes a `TelephonyOvhPabxDialplanWritable` instead of a `TelephonyOvhPabxDialplan` (PUT /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId})
+- `UpdateOvhPabxHuntingAgentQueue` takes a `TelephonyOvhPabxHuntingAgentQueueWritable` instead of a `TelephonyOvhPabxHuntingAgentQueue` (PUT /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/queue/{queueId})
+- `UpdateOvhPabxHuntingAgent` takes a `TelephonyOvhPabxHuntingAgentWritable` instead of a `TelephonyOvhPabxHuntingAgent` (PUT /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId})
+- `UpdateOvhPabxHuntingQueueAgent` takes a `TelephonyOvhPabxHuntingAgentQueueWritable` instead of a `TelephonyOvhPabxHuntingAgentQueue` (PUT /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}/agent/{agentId})
+- `UpdateOvhPabxHuntingQueue` takes a `TelephonyOvhPabxHuntingQueueWritable` instead of a `TelephonyOvhPabxHuntingQueue` (PUT /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId})
+- `UpdateOvhPabxHunting` takes a `TelephonyOvhPabxHuntingWritable` instead of a `TelephonyOvhPabxHunting` (PUT /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting)
+- `UpdateOvhPabxMenuEntry` takes a `TelephonyOvhPabxMenuEntryWritable` instead of a `TelephonyOvhPabxMenuEntry` (PUT /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/menu/{menuId}/entry/{entryId})
+- `UpdateOvhPabxMenu` takes a `TelephonyOvhPabxMenuWritable` instead of a `TelephonyOvhPabxMenu` (PUT /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/menu/{menuId})
+- `UpdateOvhPabxTts` takes a `TelephonyOvhPabxTtsWritable` instead of a `TelephonyOvhPabxTts` (PUT /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/tts/{id})
+- `UpdateOvhPabx` takes a `TelephonyOvhPabxWritable` instead of a `TelephonyOvhPabx` (PUT /v1/telephony/{billingAccount}/ovhPabx/{serviceName})
+- `UpdatePhonebookPhonebookContact` takes a `TelephonyPhonebookContactWritable` instead of a `TelephonyPhonebookContact` (PUT /v1/telephony/{billingAccount}/phonebook/{bookKey}/phonebookContact/{id})
+- `UpdatePhonebook` takes a `TelephonyPhonebookMasterWritable` instead of a `TelephonyPhonebookMaster` (PUT /v1/telephony/{billingAccount}/phonebook/{bookKey})
+- `UpdatePortabilityDocument` takes a `TelephonyPortabilityDocumentWritable` instead of a `TelephonyPortabilityDocument` (PUT /v1/telephony/{billingAccount}/portability/{id}/document/{documentId})
+- `UpdateRedirect` takes a `TelephonyRedirectWritable` instead of a `TelephonyRedirect` (PUT /v1/telephony/{billingAccount}/redirect/{serviceName})
+- `UpdateRsva` takes a `TelephonyRsvaWritable` instead of a `TelephonyRsva` (PUT /v1/telephony/{billingAccount}/rsva/{serviceName})
+- `UpdateSchedulerEvents` takes a `TelephonySchedulerEventWritable` instead of a `TelephonySchedulerEvent` (PUT /v1/telephony/{billingAccount}/scheduler/{serviceName}/events/{uid})
+- `UpdateScheduler` takes a `TelephonySchedulerWritable` instead of a `TelephonyScheduler` (PUT /v1/telephony/{billingAccount}/scheduler/{serviceName})
+- `UpdateScreen` takes a `TelephonyScreenWritable` instead of a `TelephonyScreen` (PUT /v1/telephony/{billingAccount}/screen/{serviceName})
+- `UpdateServiceDirectory` takes a `TelephonyDirectoryInfoWritable` instead of a `TelephonyDirectoryInfo` (PUT /v1/telephony/{billingAccount}/service/{serviceName}/directory)
+- `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/telephony/{billingAccount}/serviceInfos)
+- `UpdateServiceOfferTask` takes a `TelephonyOfferTaskWritable` instead of a `TelephonyOfferTask` (PUT /v1/telephony/{billingAccount}/service/{serviceName}/offerTask/{taskId})
+- `UpdateService` takes a `TelephonyTelephonyServiceWritable` instead of a `TelephonyTelephonyService` (PUT /v1/telephony/{billingAccount}/service/{serviceName})
+- `UpdateSounds` takes a `TelephonySoundWritable` instead of a `TelephonySound` (PUT /v1/telephony/sounds/{id})
+- `UpdateSpareServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/telephony/spare/{spare}/serviceInfos)
+- `UpdateTelephony` takes a `TelephonyBillingAccountWritable` instead of a `TelephonyBillingAccount` (PUT /v1/telephony/{billingAccount})
+- `UpdateTimeConditionCondition` takes a `TelephonyTimeConditionWritable` instead of a `TelephonyTimeCondition` (PUT /v1/telephony/{billingAccount}/timeCondition/{serviceName}/condition/{id})
+- `UpdateTrunksServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/telephony/trunks/{serviceName}/serviceInfos)
+- `UpdateVoicemailSettings` takes a `TelephonyVoicemailPropertiesWritable` instead of a `TelephonyVoicemailProperties` (PUT /v1/telephony/{billingAccount}/voicemail/{serviceName}/settings)
+- `UpdateVoicemail` takes a `TelephonyVoicemailWritable` instead of a `TelephonyVoicemail` (PUT /v1/telephony/{billingAccount}/voicemail/{serviceName})
+- `(*Service).ConvertToLineNumber`: changed from func(context.Context, string, string, ConvertToLineNumberRequest) (*TelephonyOfferTask, error) to func(context.Context, string, string, ConvertToLineNumberRequest) (*TelephonyOfferTask, error)
+- `(*Service).ConvertToNumberLine`: changed from func(context.Context, string, string) (*TelephonyOfferTask, error) to func(context.Context, string, string) (*TelephonyOfferTask, error)
+- `(*Service).CreateAbbreviatedNumber`: changed from func(context.Context, string, CreateAbbreviatedNumberRequest) (*TelephonyAbbreviatedNumberGroup, error) to func(context.Context, string, CreateAbbreviatedNumberRequest) (*TelephonyAbbreviatedNumberGroup, error)
+- `(*Service).CreateConferenceRooms`: changed from func(context.Context, string, string, CreateConferenceRoomsRequest) (*TelephonyConferenceRoom, error) to func(context.Context, string, string, CreateConferenceRoomsRequest) (*TelephonyConferenceRoom, error)
+- `(*Service).CreateEasyHuntingHuntingAgentQueue`: changed from func(context.Context, string, string, int, CreateEasyHuntingHuntingAgentQueueRequest) (*TelephonyOvhPabxHuntingAgentQueue, error) to func(context.Context, string, string, int, CreateEasyHuntingHuntingAgentQueueRequest) (*TelephonyOvhPabxHuntingAgentQueue, error)
+- `(*Service).CreateEasyHuntingHuntingQueue`: changed from func(context.Context, string, string, CreateEasyHuntingHuntingQueueRequest) (*TelephonyOvhPabxHuntingQueue, error) to func(context.Context, string, string, CreateEasyHuntingHuntingQueueRequest) (*TelephonyOvhPabxHuntingQueue, error)
+- `(*Service).CreateEasyHuntingTimeConditionsConditions`: changed from func(context.Context, string, string, CreateEasyHuntingTimeConditionsConditionsRequest) (*TelephonyEasyHuntingTimeConditions, error) to func(context.Context, string, string, CreateEasyHuntingTimeConditionsConditionsRequest) (*TelephonyEasyHuntingTimeConditions, error)
+- `(*Service).CreateOvhPabxDialplanExtension`: changed from func(context.Context, string, string, int, CreateOvhPabxDialplanExtensionRequest) (*TelephonyOvhPabxDialplanExtension, error) to func(context.Context, string, string, int, CreateOvhPabxDialplanExtensionRequest) (*TelephonyOvhPabxDialplanExtension, error)
+- `(*Service).CreateOvhPabxDialplan`: changed from func(context.Context, string, string, CreateOvhPabxDialplanRequest) (*TelephonyOvhPabxDialplan, error) to func(context.Context, string, string, CreateOvhPabxDialplanRequest) (*TelephonyOvhPabxDialplan, error)
+- `(*Service).CreateOvhPabxHuntingAgentQueue`: changed from func(context.Context, string, string, int, CreateEasyHuntingHuntingAgentQueueRequest) (*TelephonyOvhPabxHuntingAgentQueue, error) to func(context.Context, string, string, int, CreateEasyHuntingHuntingAgentQueueRequest) (*TelephonyOvhPabxHuntingAgentQueue, error)
+- `(*Service).CreateOvhPabxHuntingQueue`: changed from func(context.Context, string, string, CreateEasyHuntingHuntingQueueRequest) (*TelephonyOvhPabxHuntingQueue, error) to func(context.Context, string, string, CreateEasyHuntingHuntingQueueRequest) (*TelephonyOvhPabxHuntingQueue, error)
+- `(*Service).CreateOvhPabxMenuEntry`: changed from func(context.Context, string, string, int, CreateOvhPabxMenuEntryRequest) (*TelephonyOvhPabxMenuEntry, error) to func(context.Context, string, string, int, CreateOvhPabxMenuEntryRequest) (*TelephonyOvhPabxMenuEntry, error)
+- `(*Service).CreateSounds`: changed from func(context.Context, CreateSoundsRequest) (*TelephonySound, error) to func(context.Context, CreateSoundsRequest) (*TelephonySound, error)
+- `(*Service).GetAbbreviatedNumber`: changed from func(context.Context, string, int) (*TelephonyAbbreviatedNumberGroup, error) to func(context.Context, string, int) (*TelephonyAbbreviatedNumberGroup, error)
+- `(*Service).GetAliasesServiceInfos`: changed from func(context.Context, string) (*ServicesService, error) to func(context.Context, string) (*ServicesService, error)
+- `(*Service).GetConferenceRooms`: changed from func(context.Context, string, string, int) (*TelephonyConferenceRoom, error) to func(context.Context, string, string, int) (*TelephonyConferenceRoom, error)
+- `(*Service).GetConferenceSettings`: changed from func(context.Context, string, string) (*TelephonyConferenceProperties, error) to func(context.Context, string, string) (*TelephonyConferenceProperties, error)
+- `(*Service).GetEasyHuntingHuntingAgentQueue`: changed from func(context.Context, string, string, int, int) (*TelephonyOvhPabxHuntingAgentQueue, error) to func(context.Context, string, string, int, int) (*TelephonyOvhPabxHuntingAgentQueue, error)
+- `(*Service).GetEasyHuntingHuntingQueueAgent`: changed from func(context.Context, string, string, int, int) (*TelephonyOvhPabxHuntingAgentQueue, error) to func(context.Context, string, string, int, int) (*TelephonyOvhPabxHuntingAgentQueue, error)
+- `(*Service).GetEasyHuntingHuntingQueue`: changed from func(context.Context, string, string, int) (*TelephonyOvhPabxHuntingQueue, error) to func(context.Context, string, string, int) (*TelephonyOvhPabxHuntingQueue, error)
+- `(*Service).GetEasyHuntingHunting`: changed from func(context.Context, string, string) (*TelephonyOvhPabxHunting, error) to func(context.Context, string, string) (*TelephonyOvhPabxHunting, error)
+- `(*Service).GetEasyHuntingTimeConditionsConditions`: changed from func(context.Context, string, string, int) (*TelephonyEasyHuntingTimeConditions, error) to func(context.Context, string, string, int) (*TelephonyEasyHuntingTimeConditions, error)
+- `(*Service).GetEasyHunting`: changed from func(context.Context, string, string) (*TelephonyEasyHunting, error) to func(context.Context, string, string) (*TelephonyEasyHunting, error)
+- `(*Service).GetLineOptions`: changed from func(context.Context, string, string) (*TelephonyLineOptions, error) to func(context.Context, string, string) (*TelephonyLineOptions, error)
+- `(*Service).GetLinePhoneFunctionKey`: changed from func(context.Context, string, string, int) (*TelephonyFunctionKey, error) to func(context.Context, string, string, int) (*TelephonyFunctionKey, error)
+- `(*Service).GetLinePhoneRma`: changed from func(context.Context, string, string, string) (*TelephonyRma, error) to func(context.Context, string, string, string) (*TelephonyRma, error)
+- `(*Service).GetLinePhone`: changed from func(context.Context, string, string) (*TelephonyPhone, error) to func(context.Context, string, string) (*TelephonyPhone, error)
+- `(*Service).GetLinesServiceInfos`: changed from func(context.Context, string) (*ServicesService, error) to func(context.Context, string) (*ServicesService, error)
+- `(*Service).GetNumber`: changed from func(context.Context, string, string) (*TelephonyNumber, error) to func(context.Context, string, string) (*TelephonyNumber, error)
+- `(*Service).GetOfferTask`: changed from func(context.Context, string, int) (*TelephonyOfferTask, error) to func(context.Context, string, int) (*TelephonyOfferTask, error)
+- `(*Service).GetOvhPabxDialplanExtension`: changed from func(context.Context, string, string, int, int) (*TelephonyOvhPabxDialplanExtension, error) to func(context.Context, string, string, int, int) (*TelephonyOvhPabxDialplanExtension, error)
+- `(*Service).GetOvhPabxDialplan`: changed from func(context.Context, string, string, int) (*TelephonyOvhPabxDialplan, error) to func(context.Context, string, string, int) (*TelephonyOvhPabxDialplan, error)
+- `(*Service).GetOvhPabxHuntingAgentQueue`: changed from func(context.Context, string, string, int, int) (*TelephonyOvhPabxHuntingAgentQueue, error) to func(context.Context, string, string, int, int) (*TelephonyOvhPabxHuntingAgentQueue, error)
+- `(*Service).GetOvhPabxHuntingQueueAgent`: changed from func(context.Context, string, string, int, int) (*TelephonyOvhPabxHuntingAgentQueue, error) to func(context.Context, string, string, int, int) (*TelephonyOvhPabxHuntingAgentQueue, error)
+- `(*Service).GetOvhPabxHuntingQueue`: changed from func(context.Context, string, string, int) (*TelephonyOvhPabxHuntingQueue, error) to func(context.Context, string, string, int) (*TelephonyOvhPabxHuntingQueue, error)
+- `(*Service).GetOvhPabxHunting`: changed from func(context.Context, string, string) (*TelephonyOvhPabxHunting, error) to func(context.Context, string, string) (*TelephonyOvhPabxHunting, error)
+- `(*Service).GetOvhPabxMenuEntry`: changed from func(context.Context, string, string, int, int) (*TelephonyOvhPabxMenuEntry, error) to func(context.Context, string, string, int, int) (*TelephonyOvhPabxMenuEntry, error)
+- `(*Service).GetPhonebook`: changed from func(context.Context, string, string) (*TelephonyPhonebookMaster, error) to func(context.Context, string, string) (*TelephonyPhonebookMaster, error)
+- `(*Service).GetRedirect`: changed from func(context.Context, string, string) (*TelephonyRedirect, error) to func(context.Context, string, string) (*TelephonyRedirect, error)
+- `(*Service).GetScreen`: changed from func(context.Context, string, string) (*TelephonyScreen, error) to func(context.Context, string, string) (*TelephonyScreen, error)
+- `(*Service).GetServiceInfos`: changed from func(context.Context, string) (*ServicesService, error) to func(context.Context, string) (*ServicesService, error)
+- `(*Service).GetServiceOfferTask`: changed from func(context.Context, string, string, int) (*TelephonyOfferTask, error) to func(context.Context, string, string, int) (*TelephonyOfferTask, error)
+- `(*Service).GetService`: changed from func(context.Context, string, string) (*TelephonyTelephonyService, error) to func(context.Context, string, string) (*TelephonyTelephonyService, error)
+- `(*Service).GetSounds`: changed from func(context.Context, int) (*TelephonySound, error) to func(context.Context, int) (*TelephonySound, error)
+- `(*Service).GetSpareServiceInfos`: changed from func(context.Context, string) (*ServicesService, error) to func(context.Context, string) (*ServicesService, error)
+- `(*Service).GetTrunksServiceInfos`: changed from func(context.Context, string) (*ServicesService, error) to func(context.Context, string) (*ServicesService, error)
+- `(*Service).GetVoicemailSettings`: changed from func(context.Context, string, string) (*TelephonyVoicemailProperties, error) to func(context.Context, string, string) (*TelephonyVoicemailProperties, error)
+- `ServicesService.CanDeleteAtExpiration`: removed
+- `ServicesService.ContactAdmin`: removed
+- `ServicesService.ContactBilling`: removed
+- `ServicesService.ContactTech`: removed
+- `ServicesService.Creation`: removed
+- `ServicesService.Domain`: removed
+- `ServicesService.EngagedUpTo`: removed
+- `ServicesService.Expiration`: removed
+- `ServicesService.PossibleRenewPeriod`: removed
+- `ServicesService.RenewalType`: removed
+- `ServicesService.ServiceID`: removed
+- `ServicesService.Status`: removed
+- `ServicesService`: changed from ServicesService to ServicesService
+- `TelephonyAbbreviatedNumberGroup.AbbreviatedNumber`: removed
+- `TelephonyAbbreviatedNumberGroup`: changed from TelephonyAbbreviatedNumberGroup to TelephonyAbbreviatedNumberGroup
+- `TelephonyBillingAccount.AllowedOutplan`: removed
+- `TelephonyBillingAccount.BillingAccount`: removed
+- `TelephonyBillingAccount.CurrentOutplan`: removed
+- `TelephonyBillingAccount.HasSpecialNumbers`: removed
+- `TelephonyBillingAccount.SecurityDeposit`: removed
+- `TelephonyBillingAccount.Status`: removed
+- `TelephonyBillingAccount.Trusted`: removed
+- `TelephonyConferenceProperties.AnnounceFilename`: removed
+- `TelephonyConferenceProperties.EventsChannel`: removed
+- `TelephonyConferenceProperties.RoomNumber`: removed
+- `TelephonyConferenceProperties`: changed from TelephonyConferenceProperties to TelephonyConferenceProperties
+- `TelephonyConferenceRoom.AnnounceFilename`: removed
+- `TelephonyConferenceRoom.EventsChannel`: removed
+- `TelephonyConferenceRoom.RoomNumber`: removed
+- `TelephonyConferenceRoom`: changed from TelephonyConferenceRoom to TelephonyConferenceRoom
+- `TelephonyEasyHunting.FeatureType`: removed
+- `TelephonyEasyHunting.IsCCS`: removed
+- `TelephonyEasyHunting.ServiceName`: removed
+- `TelephonyEasyHunting.ServiceType`: removed
+- `TelephonyEasyHuntingTimeConditions.ConditionID`: removed
+- `TelephonyEasyHuntingTimeConditions`: changed from TelephonyEasyHuntingTimeConditions to TelephonyEasyHuntingTimeConditions
+- `TelephonyEasyHunting`: changed from TelephonyEasyHunting to TelephonyEasyHunting
+- `TelephonyFunctionKey.Default`: removed
+- `TelephonyFunctionKey.KeyNum`: removed
+- `TelephonyFunctionKey.Label`: removed
+- `TelephonyFunctionKey.Type`: removed
+- `TelephonyFunctionKey`: changed from TelephonyFunctionKey to TelephonyFunctionKey
+- `TelephonyLineOptions.Proxy`: removed
+- `TelephonyLineOptions.VoicemailExternalNumber`: removed
+- `TelephonyLineOptions.VoicemailInternalNumber`: removed
+- `TelephonyLineOptions`: changed from TelephonyLineOptions to TelephonyLineOptions
+- `TelephonyNumber.FeatureType`: removed
+- `TelephonyNumber.PartOfPool`: removed
+- `TelephonyNumber.ServiceName`: removed
+- `TelephonyNumber.ServiceType`: removed
+- `TelephonyNumber`: changed from TelephonyNumber to TelephonyNumber
+- `TelephonyOfferTask.Action`: removed
+- `TelephonyOfferTask.Status`: removed
+- `TelephonyOfferTask.TaskID`: removed
+- `TelephonyOfferTask.Type`: removed
+- `TelephonyOfferTask`: changed from TelephonyOfferTask to TelephonyOfferTask
+- `TelephonyOvhPabxDialplan.DialplanID`: removed
+- `TelephonyOvhPabxDialplan.LastUpdate`: removed
+- `TelephonyOvhPabxDialplanExtension.ExtensionID`: removed
+- `TelephonyOvhPabxDialplanExtension`: changed from TelephonyOvhPabxDialplanExtension to TelephonyOvhPabxDialplanExtension
+- `TelephonyOvhPabxDialplan`: changed from TelephonyOvhPabxDialplan to TelephonyOvhPabxDialplan
+- `TelephonyOvhPabxHunting.Name`: removed
+- `TelephonyOvhPabxHuntingAgentQueue.AgentID`: removed
+- `TelephonyOvhPabxHuntingAgentQueue.QueueID`: removed
+- `TelephonyOvhPabxHuntingAgentQueue`: changed from TelephonyOvhPabxHuntingAgentQueue to TelephonyOvhPabxHuntingAgentQueue
+- `TelephonyOvhPabxHuntingQueue.QueueID`: removed
+- `TelephonyOvhPabxHuntingQueue`: changed from TelephonyOvhPabxHuntingQueue to TelephonyOvhPabxHuntingQueue
+- `TelephonyOvhPabxHunting`: changed from TelephonyOvhPabxHunting to TelephonyOvhPabxHunting
+- `TelephonyOvhPabxMenuEntry.EntryID`: removed
+- `TelephonyOvhPabxMenuEntry.Position`: removed
+- `TelephonyOvhPabxMenuEntry`: changed from TelephonyOvhPabxMenuEntry to TelephonyOvhPabxMenuEntry
+- `TelephonyPhone.Brand`: removed
+- `TelephonyPhone.Description`: removed
+- `TelephonyPhone.MacAddress`: removed
+- `TelephonyPhone.MaxSimultaneousCalls`: removed
+- `TelephonyPhone.Maxline`: removed
+- `TelephonyPhone.PhoneConfiguration`: removed
+- `TelephonyPhone.Protocol`: removed
+- `TelephonyPhone.UserPassword`: removed
+- `TelephonyPhone`: changed from TelephonyPhone to TelephonyPhone
+- `TelephonyPhonebookMaster.BookKey`: removed
+- `TelephonyPhonebookMaster`: changed from TelephonyPhonebookMaster to TelephonyPhonebookMaster
+- `TelephonyRedirect.Destination`: removed
+- `TelephonyRedirect.FeatureType`: removed
+- `TelephonyRedirect.ServiceName`: removed
+- `TelephonyRedirect.ServiceType`: removed
+- `TelephonyRedirect`: changed from TelephonyRedirect to TelephonyRedirect
+- `TelephonyRma.Cancellable`: removed
+- `TelephonyRma.CreationDatetime`: removed
+- `TelephonyRma.EquipmentReference`: removed
+- `TelephonyRma.ID`: removed
+- `TelephonyRma.NewMerchandise`: removed
+- `TelephonyRma.OfferTypeNew`: removed
+- `TelephonyRma.OfferTypeOld`: removed
+- `TelephonyRma.ReceptionDatetime`: removed
+- `TelephonyRma.Status`: removed
+- `TelephonyRma.Steps`: removed
+- `TelephonyRma.TerminationDatetime`: removed
+- `TelephonyRma.Type`: removed
+- `TelephonyRma`: changed from TelephonyRma to TelephonyRma
+- `TelephonyScreen.ServiceName`: removed
+- `TelephonyScreen`: changed from TelephonyScreen to TelephonyScreen
+- `TelephonySound.CreationDate`: removed
+- `TelephonySound.GetURL`: removed
+- `TelephonySound.ID`: removed
+- `TelephonySound.PutURL`: removed
+- `TelephonySound.Size`: removed
+- `TelephonySound`: changed from TelephonySound to TelephonySound
+- `TelephonyTelephonyService.AssociatedDeviceMac`: removed
+- `TelephonyTelephonyService.CountryCode`: removed
+- `TelephonyTelephonyService.Country`: removed
+- `TelephonyTelephonyService.CurrentOutplan`: removed
+- `TelephonyTelephonyService.FeatureType`: removed
+- `TelephonyTelephonyService.GetPublicOffer`: removed
+- `TelephonyTelephonyService.HasFaxCapabilities`: removed
+- `TelephonyTelephonyService.Offers`: removed
+- `TelephonyTelephonyService.Properties`: removed
+- `TelephonyTelephonyService.Rio`: removed
+- `TelephonyTelephonyService.ServiceName`: removed
+- `TelephonyTelephonyService.ServiceType`: removed
+- `TelephonyTelephonyService.SimultaneousLines`: removed
+- `TelephonyTelephonyService`: changed from TelephonyTelephonyService to TelephonyTelephonyService
+- `TelephonyVoicemailProperties.AnnouceMessage`: removed
+- `TelephonyVoicemailProperties.IsNewVersion`: removed
+- `TelephonyVoicemailProperties.UnreadMessages`: removed
+- `TelephonyVoicemailProperties`: changed from TelephonyVoicemailProperties to TelephonyVoicemailProperties
+
+#### `veeamveeamenterprise`
+
+- `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/veeam/veeamEnterprise/{serviceName}/serviceInfos)
+- `(*Service).GetServiceInfos`: changed from func(context.Context, string) (*ServicesService, error) to func(context.Context, string) (*ServicesService, error)
+- `ServicesService.CanDeleteAtExpiration`: removed
+- `ServicesService.ContactAdmin`: removed
+- `ServicesService.ContactBilling`: removed
+- `ServicesService.ContactTech`: removed
+- `ServicesService.Creation`: removed
+- `ServicesService.Domain`: removed
+- `ServicesService.EngagedUpTo`: removed
+- `ServicesService.Expiration`: removed
+- `ServicesService.PossibleRenewPeriod`: removed
+- `ServicesService.RenewalType`: removed
+- `ServicesService.ServiceID`: removed
+- `ServicesService.Status`: removed
+- `ServicesService`: changed from ServicesService to ServicesService
+
+#### `vip`
+
+- `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/vip/{serviceName}/serviceInfos)
+- `(*Service).GetServiceInfos`: changed from func(context.Context, string) (*ServicesService, error) to func(context.Context, string) (*ServicesService, error)
+- `ServicesService.CanDeleteAtExpiration`: removed
+- `ServicesService.ContactAdmin`: removed
+- `ServicesService.ContactBilling`: removed
+- `ServicesService.ContactTech`: removed
+- `ServicesService.Creation`: removed
+- `ServicesService.Domain`: removed
+- `ServicesService.EngagedUpTo`: removed
+- `ServicesService.Expiration`: removed
+- `ServicesService.PossibleRenewPeriod`: removed
+- `ServicesService.RenewalType`: removed
+- `ServicesService.ServiceID`: removed
+- `ServicesService.Status`: removed
+- `ServicesService`: changed from ServicesService to ServicesService
+
+#### `vps`
+
+- `EditVPSBackupFtpACL` takes a `DedicatedServerBackupFtpACLWritable` instead of a `DedicatedServerBackupFtpACL` (PUT /v1/vps/{serviceName}/backupftp/access/{ipBlock})
+- `EditVPSDisk` takes a `VPSDiskWritable` instead of a `VPSDisk` (PUT /v1/vps/{serviceName}/disks/{id})
+- `EditVPSIP` takes a `VPSIPWritable` instead of a `VPSIP` (PUT /v1/vps/{serviceName}/ips/{ipAddress})
+- `EditVPSServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/vps/{serviceName}/serviceInfos)
+- `EditVPSSnapshot` takes a `VPSSnapshotWritable` instead of a `VPSSnapshot` (PUT /v1/vps/{serviceName}/snapshot)
+- `EditVPS` takes a `VPSVPSWritable` instead of a `VPSVPS` (PUT /v1/vps/{serviceName})
+- `(*Service).GetVPSDisk`: changed from func(context.Context, string, int) (*VPSDisk, error) to func(context.Context, string, int) (*VPSDisk, error)
+- `(*Service).GetVPSSnapshot`: changed from func(context.Context, string) (*VPSSnapshot, error) to func(context.Context, string) (*VPSSnapshot, error)
+- `VPSDisk.BandwidthLimit`: removed
+- `VPSDisk.ID`: removed
+- `VPSDisk.ServiceName`: removed
+- `VPSDisk.Size`: removed
+- `VPSDisk.State`: removed
+- `VPSDisk.Type`: removed
+- `VPSDisk`: changed from VPSDisk to VPSDisk
+- `VPSSnapshot.CreationDate`: removed
+- `VPSSnapshot.ID`: removed
+- `VPSSnapshot.Region`: removed
+- `VPSSnapshot`: changed from VPSSnapshot to VPSSnapshot
+- `VPSVPS.Cluster`: removed
+- `VPSVPS.LockStatus`: removed
+- `VPSVPS.MemoryLimit`: removed
+- `VPSVPS.Model`: removed
+- `VPSVPS.MonitoringIPBlocks`: removed
+- `VPSVPS.Name`: removed
+- `VPSVPS.OfferType`: removed
+- `VPSVPS.State`: removed
+- `VPSVPS.Vcore`: removed
+- `VPSVPS.ZoneType`: removed
+- `VPSVPS.Zone`: removed
+
+#### `vrack`
+
+- `UpdateIPv6BridgedSubrange` takes a `VrackBridgedSubrangeWritable` instead of a `VrackBridgedSubrange` (PUT /v1/vrack/{serviceName}/ipv6/{ipv6}/bridgedSubrange/{bridgedSubrange})
+- `UpdatePublicRoutingPriority` takes a `VrackPublicRoutingPriorityWritable` instead of a `VrackPublicRoutingPriority` (PUT /v1/vrack/{serviceName}/publicRoutingPriority/{priorityId})
+- `UpdateVrack` takes a `VrackVrackWritable` instead of a `VrackVrack` (PUT /v1/vrack/{serviceName})
+- `(*Service).GetPublicRoutingPriority`: changed from func(context.Context, string, string) (*VrackPublicRoutingPriority, error) to func(context.Context, string, string) (*VrackPublicRoutingPriority, error)
+- `VrackPublicRoutingPriority.PriorityID`: removed
+- `VrackPublicRoutingPriority.Region`: removed
+- `VrackPublicRoutingPriority.Type`: removed
+- `VrackPublicRoutingPriority.Vrack`: removed
+- `VrackPublicRoutingPriority`: changed from VrackPublicRoutingPriority to VrackPublicRoutingPriority
+- `VrackVrack.ServiceName`: removed
+
+#### `xdsl`
+
+- `UpdateDHCPStaticAddress` takes a `XdslDHCPStaticAddressWritable` instead of a `XdslDHCPStaticAddress` (PUT /v1/xdsl/{serviceName}/modem/lan/{lanName}/dhcp/{dhcpName}/DHCPStaticAddresses/{MACAddress})
+- `UpdateDiagnosticWizard` takes a `XdslWizardWizardTaskDetailsWritable` instead of a `XdslWizardWizardTaskDetails` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateEmailPro` takes a `XdslXdslEmailProWritable` instead of a `XdslXdslEmailPro` (PUT /v1/xdsl/email/pro/{email})
+- `UpdateModemLanDhcp` takes a `XdslDHCPWritable` instead of a `XdslDHCP` (PUT /v1/xdsl/{serviceName}/modem/lan/{lanName}/dhcp/{dhcpName})
+- `UpdateModemLan` takes a `XdslLANWritable` instead of a `XdslLAN` (PUT /v1/xdsl/{serviceName}/modem/lan/{lanName})
+- `UpdateModemTemplate` takes a `XdslTemplateModemWritable` instead of a `XdslTemplateModem` (PUT /v1/xdsl/templateModem/{name})
+- `UpdateModemWifi` takes a `XdslWLANWritable` instead of a `XdslWLAN` (PUT /v1/xdsl/{serviceName}/modem/wifi/{wifiName})
+- `UpdateModem` takes a `XdslModemWritable` instead of a `XdslModem` (PUT /v1/xdsl/{serviceName}/modem)
+- `UpdateMonitoringNotification` takes a `XdslMonitoringNotificationWritable` instead of a `XdslMonitoringNotification` (PUT /v1/xdsl/{serviceName}/monitoringNotifications/{id})
+- `UpdatePortMapping` takes a `XdslPortMappingWritable` instead of a `XdslPortMapping` (PUT /v1/xdsl/{serviceName}/modem/portMappings/{name})
+- `UpdateRma` takes a `TelephonyRmaWritable` instead of a `TelephonyRma` (PUT /v1/xdsl/{serviceName}/rma/{id})
+- `UpdateServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/xdsl/{serviceName}/serviceInfos)
+- `UpdateSpareServiceInfos` takes a `ServicesServiceWritable` instead of a `ServicesService` (PUT /v1/xdsl/spare/{spare}/serviceInfos)
+- `UpdateXdsl` takes a `XdslAccessWritable` instead of a `XdslAccess` (PUT /v1/xdsl/{serviceName})
+- `(*Service).AddDHCPStaticAddress`: changed from func(context.Context, string, string, string, XdslModemLanDhcpDHCPStaticAddressesPost) (*XdslDHCPStaticAddress, error) to func(context.Context, string, string, string, XdslModemLanDhcpDHCPStaticAddressesPost) (*XdslDHCPStaticAddress, error)
+- `(*Service).AddPortMapping`: changed from func(context.Context, string, XdslModemPortMappingsPost) (*XdslPortMapping, error) to func(context.Context, string, XdslModemPortMappingsPost) (*XdslPortMapping, error)
+- `(*Service).CreateModemTemplate`: changed from func(context.Context, XdslTemplateModemPost) (*XdslTemplateModem, error) to func(context.Context, XdslTemplateModemPost) (*XdslTemplateModem, error)
+- `(*Service).GetDHCPStaticAddress`: changed from func(context.Context, string, string, string, string) (*XdslDHCPStaticAddress, error) to func(context.Context, string, string, string, string) (*XdslDHCPStaticAddress, error)
+- `(*Service).GetModemLanDhcp`: changed from func(context.Context, string, string, string) (*XdslDHCP, error) to func(context.Context, string, string, string) (*XdslDHCP, error)
+- `(*Service).GetModemTemplate`: changed from func(context.Context, string) (*XdslTemplateModem, error) to func(context.Context, string) (*XdslTemplateModem, error)
+- `(*Service).GetModem`: changed from func(context.Context, string) (*XdslModem, error) to func(context.Context, string) (*XdslModem, error)
+- `(*Service).GetPortMapping`: changed from func(context.Context, string, string) (*XdslPortMapping, error) to func(context.Context, string, string) (*XdslPortMapping, error)
+- `(*Service).GetServiceInfos`: changed from func(context.Context, string) (*ServicesService, error) to func(context.Context, string) (*ServicesService, error)
+- `(*Service).GetSpareServiceInfos`: changed from func(context.Context, string) (*ServicesService, error) to func(context.Context, string) (*ServicesService, error)
+- `ServicesService.CanDeleteAtExpiration`: removed
+- `ServicesService.ContactAdmin`: removed
+- `ServicesService.ContactBilling`: removed
+- `ServicesService.ContactTech`: removed
+- `ServicesService.Creation`: removed
+- `ServicesService.Domain`: removed
+- `ServicesService.EngagedUpTo`: removed
+- `ServicesService.Expiration`: removed
+- `ServicesService.PossibleRenewPeriod`: removed
+- `ServicesService.RenewalType`: removed
+- `ServicesService.ServiceID`: removed
+- `ServicesService.Status`: removed
+- `ServicesService`: changed from ServicesService to ServicesService
+- `XdslAccess.AccessName`: removed
+- `XdslAccess.AccessType`: removed
+- `XdslAccess.Address`: removed
+- `XdslAccess.Capabilities`: removed
+- `XdslAccess.IPv6Enabled`: removed
+- `XdslAccess.MailSending`: removed
+- `XdslAccess.ModemProfile`: removed
+- `XdslAccess.Mttr`: removed
+- `XdslAccess.Nra`: removed
+- `XdslAccess.PackName`: removed
+- `XdslAccess.PairsNumber`: removed
+- `XdslAccess.ProviderInfra`: removed
+- `XdslAccess.Provider`: removed
+- `XdslAccess.Role`: removed
+- `XdslAccess.Status`: removed
+- `XdslDHCP.DhcpName`: removed
+- `XdslDHCP.TaskID`: removed
+- `XdslDHCPStaticAddress.MACAddress`: removed
+- `XdslDHCPStaticAddress.TaskID`: removed
+- `XdslDHCPStaticAddress`: changed from XdslDHCPStaticAddress to XdslDHCPStaticAddress
+- `XdslDHCP`: changed from XdslDHCP to XdslDHCP
+- `XdslModem.AcsVersion`: removed
+- `XdslModem.BrandName`: removed
+- `XdslModem.Capabilities`: removed
+- `XdslModem.EasyFirewallLevel`: removed
+- `XdslModem.IPv6Support`: removed
+- `XdslModem.LastCwmpRequestDate`: removed
+- `XdslModem.MacAddress`: removed
+- `XdslModem.Model`: removed
+- `XdslModem.SerialNumber`: removed
+- `XdslModem`: changed from XdslModem to XdslModem
+- `XdslPortMapping.ID`: removed
+- `XdslPortMapping.Name`: removed
+- `XdslPortMapping.TaskID`: removed
+- `XdslPortMapping`: changed from XdslPortMapping to XdslPortMapping
+- `XdslTemplateModem.Capabilities`: removed
+- `XdslTemplateModem.CreationDate`: removed
+- `XdslTemplateModem.DHCP`: removed
+- `XdslTemplateModem.DmzIP`: removed
+- `XdslTemplateModem.LAN`: removed
+- `XdslTemplateModem.MtuSize`: removed
+- `XdslTemplateModem.Name`: removed
+- `XdslTemplateModem.PortMapping`: removed
+- `XdslTemplateModem.WLAN`: removed
+- `XdslTemplateModem`: changed from XdslTemplateModem to XdslTemplateModem
+- `XdslXdslEmailPro.CurrentUsage`: removed
+- `XdslXdslEmailPro.Domain`: removed
+- `XdslXdslEmailPro.ID`: removed
+- `XdslXdslEmailPro.LastLogoffDate`: removed
+- `XdslXdslEmailPro.LastLogonDate`: removed
+- `XdslXdslEmailPro.Login`: removed
+- `XdslXdslEmailPro.PasswordLastUpdate`: removed
+- `XdslXdslEmailPro.PrimaryEmailAddress`: removed
+- `XdslXdslEmailPro.Quota`: removed
+- `XdslXdslEmailPro.State`: removed
+- `XdslXdslEmailPro.TaskPendingID`: removed
+
+</details>
+
+### Removed by the API
+
+The API no longer serves these, so their Go symbols are gone.
+
+- `cloud`: 14 types, listed below
+- `dedicatedcloud`: `DedicatedCloudDedicatedCloud`
+- `dedicatednasha`: `DedicatedNashaStorage`
+- `dedicatedserver`: `DedicatedServerDedicated`
+- `dedicatedserver`: `DedicatedVirtualNetworkInterfaceVirtualNetworkInterface`
+- `domain`: `DnssecUpdatePayload`
+- `domain`: `DomainConfigurationRulesRuleData`
+- `domain`: `DomainZoneRecordCreate`
+- `domain`: `NichandleCurrency`
+- `domain`: `NichandleNichandle`
+- `domain`: `NichandleOvhCompanyEnum`
+- `domain`: `NichandleStateEnum`
+- `emailexchange`: `EmailExchangeExchangeService`
+- `emailmxplan`: `EmailMxplanService`
+- `emailpro`: `EmailProAccount`
+- `emailpro`: `EmailProDisclaimer`
+- `emailpro`: `EmailProDomain`
+- `emailpro`: `EmailProExternalContact`
+- `emailpro`: `EmailProObjectStateEnum`
+- `emailpro`: `EmailProServiceOfferEnum`
+- `emailpro`: `EmailProServiceStateEnum`
+- `emailpro`: `EmailProService`
+- `freefax`: `FreefaxFreefaxProperties`
+- `hostingprivatedatabase`: `HostingPrivateDatabaseService`
+- `hostingweb`: `HostingWebService`
+- `iam`: `IAMGroupCreation`
+- `iam`: `IAMGroupUpdate`
+- `iam`: `IAMPolicyCreation`
+- `iam`: `IAMPolicyUpdate`
+- `iploadbalancing`: `IPLoadbalancingIP`
+- `licensecpanel`: `LicenseCpanelCpanel`
+- `licensedirectadmin`: `LicenseDirectadminDirectAdmin`
+- `licensehycu`: `LicenseHycuHycu`
+- `licensehycu`: `LicenseStateEnum`
+- `licenseplesk`: `LicensePleskPlesk`
+- `licensevirtuozzo`: `LicenseVirtuozzoVirtuozzo`
+- `licensewindows`: `LicenseWindowsWindows`
+- `licenseworklight`: `LicenseWorklightWorkLight`
+- `me`: `MeSvaOnboardingCompany`
+- `me`: `MeSvaOnboardingCreation`
+- `me`: `MeSvaOnboardingPersonalInfoRepresentative`
+- `me`: `MeSvaPersonalInfoRepresentative`
+- `me`: `MeSvaWalletCreation`
+- `me`: `MeSvaWalletUpdate`
+- `msservices`: `MsServicesActiveDirectoryOrganizationalUnit`
+- `notification`: `CommonTaskWithInputsNotificationContactMeanTaskInputs`
+- `notification`: `NotificationRoutingPostInput`
+- `nutanix`: `NutanixCluster`
+- `overthebox`: `OverTheBoxGraphEndpoint`
+- `overthebox`: `OverTheBoxOperationModeEnum`
+- `overthebox`: `OverTheBoxServiceConfigurationModeEnum`
+- `overthebox`: `OverTheBoxServiceStatusEnum`
+- `overthebox`: `OverTheBoxService`
+- `overthebox`: `OverTheBoxTunnelModeEnum`
+- `packxdsl`: `PackXdslPackAdsl`
+- `sms`: `SmsAccount`
+- `telephony`: `TelephonyBillingAccount`
+- `vps`: `VPSVPS`
+- `vrack`: `VrackVrack`
+- `vrackservices`: `VrackServicesServiceRangeCurrentState.ReservedIPs`
+- `xdsl`: `XdslAccess`
+- `xdsl`: `XdslXdslEmailPro`
+
+<details>
+<summary>Removed by the API: everything in cloud</summary>
+
+#### `cloud`
+
+- `CloudContainerRegistryOIDCPost`
+- `CloudLoadbalancingHealthMonitorCreate`
+- `CloudLoadbalancingLoadbalancerCreateInput`
+- `CloudLoadbalancingLoadbalancerListenerCreate`
+- `CloudLoadbalancingLoadbalancerPoolCreate`
+- `CloudLoadbalancingPoolCreateMembers`
+- `CloudProjectAiAppAppSpecInput`
+- `CloudProjectAiJobJobSpecInput`
+- `CloudProjectAiNotebookNotebookSpecInput`
+- `CloudProjectAiNotebookNotebookUpdate`
+- `CloudProjectDatabaseKafkaTopicCreation`
+- `CloudProjectDatabaseServiceCreation`
+- `CloudProjectDatabaseServiceNodeCreation`
+- `CloudProject`
+
+</details>
+
+### New
+
+- `alldom`: `ServicesServiceWritable`
+- `cdndedicated`: `CdnanycastCacheRuleWritable`
+- `cdndedicated`: `CdnanycastDomainWritable`
+- `cdndedicated`: `ServicesServiceWritable`
+- `cloud`: 48 types, listed below
+- `clusterhadoop`: `ClusterHadoopNetworkACLWritable`
+- `clusterhadoop`: `ClusterHadoopUserWritable`
+- `clusterhadoop`: `ServicesServiceWritable`
+- `dbaaslogs`: `DbaasLogsEncryptionKeyWritable`
+- `dbaaslogs`: `ServicesServiceWritable`
+- `dedicatedceph`: `ServicesServiceWritable`
+- `dedicatedcloud`: `DedicatedCloudAllowedNetworkWritable`
+- `dedicatedcloud`: `DedicatedCloudDatacenterWritable`
+- `dedicatedcloud`: `DedicatedCloudDedicatedCloudWritable`
+- `dedicatedcloud`: `DedicatedCloudRightWritable`
+- `dedicatedcloud`: `ServicesServiceWritable`
+- `dedicatedhousing`: `DedicatedServerBackupFtpACLWritable`
+- `dedicatedhousing`: `ServicesServiceWritable`
+- `dedicatednasha`: `DedicatedNashaPartitionWritable`
+- `dedicatednasha`: `DedicatedNashaStorageWritable`
+- `dedicatednasha`: `ServicesServiceWritable`
+- `dedicatedserver`: `DedicatedSecondaryDNSDomainSecondaryDNSWritable`
+- `dedicatedserver`: `DedicatedServerBackupFtpACLWritable`
+- `dedicatedserver`: `DedicatedServerDedicatedWritable`
+- `dedicatedserver`: `DedicatedServerFirewallWritable`
+- `dedicatedserver`: `DedicatedServerServerBurstWritable`
+- `dedicatedserver`: `DedicatedServerSplaWritable`
+- `dedicatedserver`: `DedicatedVirtualNetworkInterfaceVirtualNetworkInterfaceWritable`
+- `dedicatedserver`: `ServicesServiceWritable`
+- `domain`: 12 types, listed below
+- `emaildomain`: `EmailDomainAccountDelegatedWritable`
+- `emaildomain`: `EmailDomainAccountWritable`
+- `emaildomain`: `EmailDomainMailingListWritable`
+- `emaildomain`: `EmailDomainResponderAccountWritable`
+- `emaildomain`: `EmailDomainResponderWritable`
+- `emaildomain`: `ServicesServiceWritable`
+- `emailexchange`: 20 types, listed below
+- `emailmxplan`: `EmailMxplanAccountWritable`
+- `emailmxplan`: `EmailMxplanDomainWritable`
+- `emailmxplan`: `EmailMxplanExternalContactWritable`
+- `emailmxplan`: `EmailMxplanServiceWritable`
+- `emailmxplan`: `EmailProDisclaimerWritable`
+- `emailpro`: `EmailProAccountWritable`
+- `emailpro`: `EmailProDisclaimerWritable`
+- `emailpro`: `EmailProDomainWritable`
+- `emailpro`: `EmailProExternalContactWritable`
+- `emailpro`: `EmailProServiceWritable`
+- `emailpro`: `ServicesServiceWritable`
+- `freefax`: `FreefaxFreefaxPropertiesWritable`
+- `freefax`: `ServicesServiceWritable`
+- `freefax`: `TelephonyDirectoryInfoWritable`
+- `freefax`: `TelephonyVoicemailPropertiesWritable`
+- `horizonview`: `ServicesServiceWritable`
+- `hostingprivatedatabase`: `HostingPrivateDatabaseServiceWritable`
+- `hostingprivatedatabase`: `HostingPrivateDatabaseWhitelistWritable`
+- `hostingprivatedatabase`: `ServicesServiceWritable`
+- `hostingweb`: 10 types, listed below
+- `iam`: 9 types, listed below
+- `ip`: `IPFirewallIPWritable`
+- `ip`: `IPGameMitigationWritable`
+- `ip`: `IPIPWritable`
+- `ip`: `IPMitigationIPWritable`
+- `ip`: `IPMitigationProfileWritable`
+- `iploadbalancing`: 13 types, listed below
+- `licensecloudlinux`: `ServicesServiceWritable`
+- `licensecpanel`: `LicenseCpanelCpanelWritable`
+- `licensecpanel`: `ServicesServiceWritable`
+- `licensedirectadmin`: `LicenseDirectadminDirectAdminWritable`
+- `licensedirectadmin`: `ServicesServiceWritable`
+- `licensehycu`: `LicenseHycuHycuWritable`
+- `licensehycu`: `ServicesServiceWritable`
+- `licenseoffice`: `ServicesServiceWritable`
+- `licenseplesk`: `LicensePleskPleskWritable`
+- `licenseplesk`: `ServicesServiceWritable`
+- `licensesqlserver`: `ServicesServiceWritable`
+- `licensevirtuozzo`: `LicenseVirtuozzoVirtuozzoWritable`
+- `licensevirtuozzo`: `ServicesServiceWritable`
+- `licensewindows`: `LicenseWindowsWindowsWritable`
+- `licensewindows`: `ServicesServiceWritable`
+- `licenseworklight`: `LicenseWorklightWorkLightWritable`
+- `licenseworklight`: `ServicesServiceWritable`
+- `me`: 35 types, listed below
+- `metrics`: `ServicesServiceWritable`
+- `msservices`: `MsServicesAccountWritable`
+- `msservices`: `MsServicesActiveDirectoryOrganizationalUnitWritable`
+- `msservices`: `MsServicesExchangeInformationWritable`
+- `msservices`: `MsServicesExchangeServiceWritable`
+- `msservices`: `MsServicesSharepointInformationWritable`
+- `msservices`: `MsServicesSharepointServiceWritable`
+- `msservices`: `ServicesServiceWritable`
+- `notification`: `CommonTaskWithInputsNotificationContactMeanTaskInputsWritable`
+- `notification`: `NotificationContactMeanContactMeanWritable`
+- `notification`: `NotificationRoutingPostInputWritable`
+- `notification`: `NotificationRoutingRoutingWritable`
+- `notification`: `NotificationRoutingRuleContactMeanWritable`
+- `notification`: `NotificationRoutingRuleWritable`
+- `nutanix`: `NutanixClusterWritable`
+- `nutanix`: `NutanixNodesWritable`
+- `nutanix`: `ServicesServiceWritable`
+- `overthebox`: `OverTheBoxServiceWritable`
+- `overthebox`: `ServicesServiceWritable`
+- `ovhcloudconnect`: `OvhcloudconnectDatacenterConfigWritable`
+- `ovhcloudconnect`: `OvhcloudconnectDatacenterExtraConfigWritable`
+- `ovhcloudconnect`: `OvhcloudconnectPopConfigWritable`
+- `ovhcloudconnect`: `ServicesServiceWritable`
+- `packsiptrunk`: `ServicesServiceWritable`
+- `packxdsl`: `PackXdslPackAdslWritable`
+- `packxdsl`: `ServicesServiceWritable`
+- `partner`: `Partner2PartnerWritable`
+- `services`: `ServicesSavingsPlansSavingsPlanWritable`
+- `sms`: 9 types, listed below
+- `stackmis`: `ServicesServiceWritable`
+- `startup`: `StartupStartupWritable`
+- `storage`: `ServicesServiceWritable`
+- `storage`: `StorageNetAppShareACLRuleWritable`
+- `storage`: `StorageNetAppShareSnapshotWritable`
+- `storage`: `StorageNetAppShareWritable`
+- `storage`: `StorageNetAppSnapshotPolicyWritable`
+- `telephony`: 49 types, listed below
+- `veeamcloudconnect`: `ServicesServiceWritable`
+- `veeamveeamenterprise`: `ServicesServiceWritable`
+- `vip`: `ServicesServiceWritable`
+- `vps`: `DedicatedServerBackupFtpACLWritable`
+- `vps`: `ServicesServiceWritable`
+- `vps`: `VPSDiskWritable`
+- `vps`: `VPSIPWritable`
+- `vps`: `VPSSnapshotWritable`
+- `vps`: `VPSVPSWritable`
+- `vrack`: `VrackBridgedSubrangeWritable`
+- `vrack`: `VrackPublicRoutingPriorityWritable`
+- `vrack`: `VrackVrackWritable`
+- `xdsl`: 14 types, listed below
+
+<details>
+<summary>New: everything in cloud, domain, emailexchange, hostingweb, iam, iploadbalancing, me, sms, telephony, xdsl</summary>
+
+#### `cloud`
+
+- `CloudAlertingAlertingWritable`
+- `CloudContainerRegistryIPRestrictionsWritable`
+- `CloudContainerRegistryOIDCConfigurationWritable`
+- `CloudContainerRegistryOIDCPostWritable`
+- `CloudLoadbalancingHealthMonitorCreateWritable`
+- `CloudLoadbalancingHealthMonitorWritable`
+- `CloudLoadbalancingL7PolicyWritable`
+- `CloudLoadbalancingL7RuleWritable`
+- `CloudLoadbalancingLoadbalancerCreateInputWritable`
+- `CloudLoadbalancingLoadbalancerListenerCreateWritable`
+- `CloudLoadbalancingLoadbalancerPoolCreateWritable`
+- `CloudLoadbalancingPoolCreateMembersWritable`
+- `CloudLoadbalancingPoolMemberWritable`
+- `CloudProjectAiAppAppSpecInputWritable`
+- `CloudProjectAiJobJobSpecInputWritable`
+- `CloudProjectAiNotebookNotebookSpecInputWritable`
+- `CloudProjectAiNotebookNotebookUpdateWritable`
+- `CloudProjectAiRegistryRegistryWritable`
+- `CloudProjectAiVolumeDataSyncSpecWritable`
+- `CloudProjectAiVolumeVolumeWritable`
+- `CloudProjectDatabaseKafkaConnectConnectorWritable`
+- `CloudProjectDatabaseKafkaSchemaRegistryACLWritable`
+- `CloudProjectDatabaseKafkaServiceWritable`
+- `CloudProjectDatabaseKafkaTopicACLWritable`
+- `CloudProjectDatabaseKafkaTopicCreationWritable`
+- `CloudProjectDatabaseKafkaTopicWritable`
+- `CloudProjectDatabaseOpensearchPatternWritable`
+- `CloudProjectDatabaseOpensearchServiceWritable`
+- `CloudProjectDatabaseOpensearchUserWritable`
+- `CloudProjectDatabasePostgresqlConnectionPoolWritable`
+- `CloudProjectDatabaseServiceBackupWritable`
+- `CloudProjectDatabaseServiceCreationWritable`
+- `CloudProjectDatabaseServiceDatabaseWritable`
+- `CloudProjectDatabaseServiceDiskWritable`
+- `CloudProjectDatabaseServiceIPRestrictionWritable`
+- `CloudProjectDatabaseServiceIntegrationWritable`
+- `CloudProjectDatabaseServiceNodeCreationWritable`
+- `CloudProjectDatabaseServiceNodeWritable`
+- `CloudProjectDatabaseServiceReplicationWritable`
+- `CloudProjectDatabaseServiceStorageWritable`
+- `CloudProjectDatabaseServiceUserWithPasswordAndRolesWritable`
+- `CloudProjectDatabaseServiceUserWithRolesWritable`
+- `CloudProjectDatabaseServiceWithoutPrometheusWritable`
+- `CloudProjectDatabaseServiceWritable`
+- `CloudProjectDatabaseValkeyUserWritable`
+- `CloudProjectWritable`
+- `CloudShareSnapshotSnapshotWritable`
+- `ServicesServiceWritable`
+
+#### `domain`
+
+- `DnssecKeyWritable`
+- `DnssecUpdatePayloadWritable`
+- `DomainConfigurationRulesRuleDataWritable`
+- `DomainContactWritable`
+- `DomainDomainServiceWritable`
+- `DomainGlueRecordGlueRecordWritable`
+- `DomainUkRegistrarWritable`
+- `DomainZoneDynHostLoginWritable`
+- `DomainZoneDynHostRecordWritable`
+- `DomainZoneRecordCreateWritable`
+- `NichandleNichandleWritable`
+- `ServicesServiceWritable`
+
+#### `emailexchange`
+
+- `EmailExchangeAccountWritable`
+- `EmailExchangeDisclaimerWritable`
+- `EmailExchangeDomainWritable`
+- `EmailExchangeExchangeAccountArchiveWritable`
+- `EmailExchangeExchangeAccountProtocolWritable`
+- `EmailExchangeExchangeExternalContactWritable`
+- `EmailExchangeExchangePublicFolderPermissionWritable`
+- `EmailExchangeExchangeRemoteMailboxWritable`
+- `EmailExchangeExchangeServiceAuthorizedIPWritable`
+- `EmailExchangeExchangeServiceDeviceWritable`
+- `EmailExchangeExchangeServiceProtocolWritable`
+- `EmailExchangeExchangeServiceWritable`
+- `EmailExchangeMailingListWritable`
+- `EmailExchangePublicFolderWritable`
+- `EmailExchangeReceiveConnectorWritable`
+- `EmailExchangeResourceAccountWritable`
+- `EmailExchangeSendConnectorWritable`
+- `EmailExchangeServerWritable`
+- `EmailExchangeSharedAccountWritable`
+- `ServicesServiceWritable`
+
+#### `hostingweb`
+
+- `CDNDomainOptionWritable`
+- `HostingWebConfigurationWritable`
+- `HostingWebCronWritable`
+- `HostingWebEmailWritable`
+- `HostingWebEnvVarWritable`
+- `HostingWebRuntimeWritable`
+- `HostingWebServiceWritable`
+- `HostingWebUserLogsWritable`
+- `HostingWebUserWritable`
+- `ServicesServiceWritable`
+
+#### `iam`
+
+- `IAMGroupCreationWritable`
+- `IAMGroupResourceWritable`
+- `IAMGroupUpdateWritable`
+- `IAMPermissionsGroupWritable`
+- `IAMPolicyCreationWritable`
+- `IAMPolicyPermissionsGroupWritable`
+- `IAMPolicyResourceWritable`
+- `IAMPolicyUpdateWritable`
+- `IAMResourceResourceWritable`
+
+#### `iploadbalancing`
+
+- `IPLoadbalancingBackendHTTPBackendHTTPWritable`
+- `IPLoadbalancingBackendHTTPCustomerServerBackendHTTPServerWritable`
+- `IPLoadbalancingBackendTCPBackendTCPWritable`
+- `IPLoadbalancingBackendTCPCustomerServerBackendTCPServerWritable`
+- `IPLoadbalancingFrontendHTTPFrontendHTTPWritable`
+- `IPLoadbalancingFrontendTCPFrontendTCPWritable`
+- `IPLoadbalancingIPWritable`
+- `IPLoadbalancingQuotaQuotaWritable`
+- `IPLoadbalancingRouteHTTPRouteHTTPWritable`
+- `IPLoadbalancingRouteRuleRouteRuleWritable`
+- `IPLoadbalancingRouteTCPRouteTCPWritable`
+- `IPLoadbalancingSSLSSLWritable`
+- `ServicesServiceWritable`
+
+#### `me`
+
+- `AuthAPICredentialWritable`
+- `AuthGroupWritable`
+- `AuthProviderWritable`
+- `AuthUserWritable`
+- `BillingFidelityAccountWritable`
+- `BillingOvhAccountWritable`
+- `ComplexTypeSafeKeyValueStringWritable`
+- `MeConsentDecisionWritable`
+- `MeContactContactWritable`
+- `MePaymentMeanBankAccountWritable`
+- `MePaymentMeanCreditCardWritable`
+- `MePaymentMeanDeferredWritable`
+- `MePaymentMeanPaypalWritable`
+- `MePaymentMethodPaymentMethodWritable`
+- `MePaymentPaymentMethodWritable`
+- `MeSvaCompanyWritable`
+- `MeSvaOnboardingCompanyWritable`
+- `MeSvaOnboardingCreationWritable`
+- `MeSvaOnboardingPersonalInfoRepresentativeWritable`
+- `MeSvaPersonalInfoRepresentativeWritable`
+- `MeSvaPersonalInfoWritable`
+- `MeSvaWalletCreationWritable`
+- `MeSvaWalletUpdateWritable`
+- `NichandleAccessRestrictionSmsAccountWritable`
+- `NichandleAccessRestrictionTOTPAccountWritable`
+- `NichandleAccessRestrictionU2FAccountWritable`
+- `NichandleDocumentDocumentWritable`
+- `NichandleDomainTaskArgumentWritable`
+- `NichandleIPRestrictionWritable`
+- `NichandleIPv4OrgWritable`
+- `NichandleManagerPreferenceWritable`
+- `NichandleNicAutorenewInfosWritable`
+- `NichandleNichandleWritable`
+- `NichandleSubAccountWritable`
+- `NichandleSubscriptionWritable`
+
+#### `sms`
+
+- `ServicesServiceWritable`
+- `SmsAccountWritable`
+- `SmsPhonebookContactWritable`
+- `SmsPhonebookWritable`
+- `SmsReceiverWritable`
+- `SmsSenderDocumentWritable`
+- `SmsSenderWritable`
+- `SmsTemplateControlWritable`
+- `SmsUserWritable`
+
+#### `telephony`
+
+- `ServicesServiceWritable`
+- `TelephonyAbbreviatedNumberGroupWritable`
+- `TelephonyAbbreviatedNumberWritable`
+- `TelephonyBillingAccountWritable`
+- `TelephonyCarrierSIPDetailsWritable`
+- `TelephonyCarrierSIPVnoRangeWritable`
+- `TelephonyConferencePropertiesWritable`
+- `TelephonyConferenceRoomWritable`
+- `TelephonyDdiWritable`
+- `TelephonyDirectoryInfoWritable`
+- `TelephonyEasyHuntingScreenListsConditionsWritable`
+- `TelephonyEasyHuntingTimeConditionsWritable`
+- `TelephonyEasyHuntingWritable`
+- `TelephonyFaxPropertiesWritable`
+- `TelephonyFaxScreenWritable`
+- `TelephonyFaxWritable`
+- `TelephonyFunctionKeyWritable`
+- `TelephonyLineOptionsWritable`
+- `TelephonyLineWritable`
+- `TelephonyNumberWritable`
+- `TelephonyOfferTaskWritable`
+- `TelephonyOvhPabxDialplanExtensionConditionTimeWritable`
+- `TelephonyOvhPabxDialplanExtensionRuleWritable`
+- `TelephonyOvhPabxDialplanExtensionWritable`
+- `TelephonyOvhPabxDialplanWritable`
+- `TelephonyOvhPabxHuntingAgentQueueWritable`
+- `TelephonyOvhPabxHuntingAgentWritable`
+- `TelephonyOvhPabxHuntingQueueWritable`
+- `TelephonyOvhPabxHuntingWritable`
+- `TelephonyOvhPabxMenuEntryWritable`
+- `TelephonyOvhPabxMenuWritable`
+- `TelephonyOvhPabxTtsWritable`
+- `TelephonyOvhPabxWritable`
+- `TelephonyPhoneWritable`
+- `TelephonyPhonebookContactWritable`
+- `TelephonyPhonebookMasterWritable`
+- `TelephonyPhonebookWritable`
+- `TelephonyPortabilityDocumentWritable`
+- `TelephonyRedirectWritable`
+- `TelephonyRmaWritable`
+- `TelephonyRsvaWritable`
+- `TelephonySchedulerEventWritable`
+- `TelephonySchedulerWritable`
+- `TelephonyScreenWritable`
+- `TelephonySoundWritable`
+- `TelephonyTelephonyServiceWritable`
+- `TelephonyTimeConditionWritable`
+- `TelephonyVoicemailPropertiesWritable`
+- `TelephonyVoicemailWritable`
+
+#### `xdsl`
+
+- `ServicesServiceWritable`
+- `TelephonyRmaWritable`
+- `XdslAccessWritable`
+- `XdslDHCPStaticAddressWritable`
+- `XdslDHCPWritable`
+- `XdslLANWritable`
+- `XdslModemWritable`
+- `XdslMonitoringNotificationWritable`
+- `XdslPortMappingWritable`
+- `XdslTemplateModemWritable`
+- `XdslWLANWritable`
+- `XdslWizardWizardFormWritable`
+- `XdslWizardWizardTaskDetailsWritable`
+- `XdslXdslEmailProWritable`
+
+</details>
+
+### Changed
+
+No change to the Go API, but the API behaves differently.
+
+- `cloud`: `CreateProjectContainerRegistryOpenIDConnect`: added `#/components/schemas/cloud.containerRegistry.OIDCConfigurationWritable` to the `provider` request property `allOf` list (POST /v1/cloud/project/{serviceName}/containerRegistry/{registryID}/openIdConnect)
+- `cloud`: `CreateProjectDatabaseClickhouse`, `CreateProjectDatabaseGrafana`, `CreateProjectDatabaseKafkaConnect`, `CreateProjectDatabaseKafkaMirrorMaker`, `CreateProjectDatabaseKafka`, `CreateProjectDatabaseMongodb`, `CreateProjectDatabaseMysql`, `CreateProjectDatabaseOpensearch`, `CreateProjectDatabasePostgresql`, `CreateProjectDatabaseValkey`, `UpdateProjectDatabaseClickhouse`, `UpdateProjectDatabaseGrafana`, `UpdateProjectDatabaseKafkaConnect`, `UpdateProjectDatabaseKafkaMirrorMaker`, `UpdateProjectDatabaseKafka`, `UpdateProjectDatabaseMongodb`, `UpdateProjectDatabaseMysql`, `UpdateProjectDatabaseOpensearch`, `UpdateProjectDatabasePostgresql`, `UpdateProjectDatabaseValkey`: added `#/components/schemas/cloud.project.database.service.BackupWritable` to the `backups` request property `allOf` list
+- `cloud`: `CreateProjectDatabaseClickhouse`, `CreateProjectDatabaseGrafana`, `CreateProjectDatabaseKafkaConnect`, `CreateProjectDatabaseKafkaMirrorMaker`, `CreateProjectDatabaseKafka`, `CreateProjectDatabaseMongodb`, `CreateProjectDatabaseMysql`, `CreateProjectDatabaseOpensearch`, `CreateProjectDatabasePostgresql`, `CreateProjectDatabaseValkey`, `UpdateProjectDatabaseClickhouse`, `UpdateProjectDatabaseGrafana`, `UpdateProjectDatabaseKafkaConnect`, `UpdateProjectDatabaseKafkaMirrorMaker`, `UpdateProjectDatabaseKafka`, `UpdateProjectDatabaseMongodb`, `UpdateProjectDatabaseMysql`, `UpdateProjectDatabaseOpensearch`, `UpdateProjectDatabasePostgresql`, `UpdateProjectDatabaseValkey`: added `#/components/schemas/cloud.project.database.service.DiskWritable` to the `disk` request property `allOf` list
+- `cloud`: `CreateProjectRegionLoadbalancingLoadbalancer`: added `#/components/schemas/cloud.loadbalancing.loadbalancer.PoolCreateWritable` to the `listeners/items/pool` request property `allOf` list (POST /v1/cloud/project/{serviceName}/region/{regionName}/loadbalancing/loadbalancer)
+- `cloud`: `UpdateProjectDatabaseClickhouse`, `UpdateProjectDatabaseGrafana`, `UpdateProjectDatabaseKafkaConnect`, `UpdateProjectDatabaseKafkaMirrorMaker`, `UpdateProjectDatabaseKafka`, `UpdateProjectDatabaseMongodb`, `UpdateProjectDatabaseMysql`, `UpdateProjectDatabaseOpensearch`, `UpdateProjectDatabasePostgresql`, `UpdateProjectDatabaseValkey`: added `#/components/schemas/cloud.project.database.service.StorageWritable` to the `storage` request property `allOf` list
+- `domain`: `CheckConfigurationRule`: added `#/components/schemas/domain.ContactWritable` to the `owner` request property `allOf` list (POST /v1/domain/configurationRule/check)
+- `domain`: `CheckConfigurationRule`: added `#/components/schemas/nichandle.NichandleWritable` to the `adminAccount` request property `allOf` list (POST /v1/domain/configurationRule/check)
+- `domain`: `CheckConfigurationRule`: added `#/components/schemas/nichandle.NichandleWritable` to the `techAccount` request property `allOf` list (POST /v1/domain/configurationRule/check)
+- `me`: `CreateSvaOnboarding`: added `#/components/schemas/me.sva.onboarding.CompanyWritable` to the `company` request property `allOf` list (POST /v1/me/sva/onboarding)
+- `me`: `CreateSvaOnboarding`: added `#/components/schemas/me.sva.onboarding.PersonalInfo.RepresentativeWritable` to the `representative` request property `allOf` list (POST /v1/me/sva/onboarding)
+- `me`: `CreateSvaWallet`, `UpdateSvaWallet`: added `#/components/schemas/me.sva.PersonalInfo.RepresentativeWritable` to the `representative` request property `allOf` list
+- `me`: `CreateSvaWallet`: added `#/components/schemas/me.sva.CompanyWritable` to the `company` request property `allOf` list (POST /v1/me/sva/wallet)
+- `xdsl`: `UpdateDiagnosticWizard`: added `#/components/schemas/xdsl.wizard.WizardFormWritable` to the `form` request property `allOf` list (PATCH /v1/xdsl/diagnosticWizard)
+
+### SDK core
+
+- The operation index (`index/<section>.jsonl`) gives the IAM actions each method requires, in
+  `iam`: what to grant a service account that gets a 403. For an `AllX` iterator over a v1
+  list, those of the list and of the get it calls for each object.
+- **Breaking:** request bodies no longer have the fields the API marks read-only, so they cannot
+  be sent by mistake. A body whose type has read-only fields, or reaches one that has, now takes
+  that type's writable form, `<Type>Writable`: `UpdateEnvVar` takes a
+  `HostingWebEnvVarWritable` instead of a `HostingWebEnvVar`. To send back what a GET returned,
+  call its `Writable` method, then change what you need: `body := v.Writable()`. In returned
+  types, those fields are marked `Read-only`.
+- Each package has a `doc.go`: the routes it calls, the lists to start from, and where its
+  line of the operation index is: run `go doc` on the package.
+
+- Waiting for asynchronous work: `ovh.WaitReady` polls a v2 resource until its
+  `ResourceStatus` is `READY`, `ovh.WaitTask` a task until it is `done`, `ovh.WaitGone` until a
+  404 after a deletion, and `ovh.Wait` until any condition. A failed status ends the wait with
+  an error matching `ovh.ErrWaitFailed`; the wait gives up after 30 minutes by default.
+- `ovh.WithReadOnly(except...)` makes a client send only `GET` and `HEAD`, and
+  `ovh.WithAllowedOperations(patterns...)` only the operations whose name matches. A refused
+  request is never sent, and returns an `*ovh.NotAllowedError` matching `ovh.ErrNotAllowed`.
+- Every generated operation is registered with its route, summary and required IAM actions:
+  `ovh.LookupOperation("vrack.GetVrack")`, `ovh.MatchOperation(method, path)`,
+  `ovh.Operations()`.
+- **Behavioural change:** an `*ovh.APIError` names the operation (`Operation`) and the IAM
+  actions it needs (`IAMActions`). Its message starts with the operation's name, and on a 401
+  or 403 ends with the IAM actions: code matching the message text must be updated.
+- A request refused before it is sent because it is malformed (an empty path parameter, a path
+  not starting with `/`) returns an error matching `ovh.ErrInvalidRequest`. The message now
+  starts with `ovh: invalid request:` and names the operation.
+
+<details>
+<summary>Every change to the API contract, as oasdiff reports it (1386)</summary>
+
+#### `auth`
+
+- `Credential`: the request optional property `accessRules/items/method` became not read-only (POST /v1/auth/credential)
+- `Credential`: the request optional property `accessRules/items/path` became not read-only (POST /v1/auth/credential)
+- `GetCurrentCredential`: the response optional property `rules/items/method` became not read-only for the status `200` (GET /v1/auth/currentCredential)
+- `GetCurrentCredential`: the response optional property `rules/items/path` became not read-only for the status `200` (GET /v1/auth/currentCredential)
+- `GetDetails`: the response optional property `allowedRoutes/items/method` became not read-only for the status `200` (GET /v1/auth/details)
+- `GetDetails`: the response optional property `allowedRoutes/items/path` became not read-only for the status `200` (GET /v1/auth/details)
+
+#### `cloud`
+
+- `AddAlerting`: the response optional property `formattedMonthlyThreshold/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/alerting)
+- `AddAlerting`: the response optional property `formattedMonthlyThreshold/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/alerting)
+- `AddAlerting`: the response optional property `formattedMonthlyThreshold/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/alerting)
+- `AddAlerting`: the response optional property `formattedMonthlyThreshold/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/alerting)
+- `CreateProjectContainerRegistryOpenIDConnect`: added `#/components/schemas/cloud.containerRegistry.OIDCConfigurationWritable` to the `provider` request property `allOf` list (POST /v1/cloud/project/{serviceName}/containerRegistry/{registryID}/openIdConnect)
+- `CreateProjectContainerRegistryOpenIDConnect`: removed `#/components/schemas/cloud.containerRegistry.OIDCConfiguration` from the `provider` request property `allOf` list (POST /v1/cloud/project/{serviceName}/containerRegistry/{registryID}/openIdConnect)
+- `CreateProjectDatabaseClickhouse`: added `#/components/schemas/cloud.project.database.service.BackupWritable` to the `backups` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/clickhouse)
+- `CreateProjectDatabaseClickhouse`: added `#/components/schemas/cloud.project.database.service.DiskWritable` to the `disk` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/clickhouse)
+- `CreateProjectDatabaseClickhouse`: removed `#/components/schemas/cloud.project.database.service.Backup` from the `backups` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/clickhouse)
+- `CreateProjectDatabaseClickhouse`: removed `#/components/schemas/cloud.project.database.service.Disk` from the `disk` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/clickhouse)
+- `CreateProjectDatabaseClickhouse`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/clickhouse)
+- `CreateProjectDatabaseClickhouse`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/clickhouse)
+- `CreateProjectDatabaseClickhouse`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/clickhouse)
+- `CreateProjectDatabaseClickhouse`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/clickhouse)
+- `CreateProjectDatabaseClickhouse`: the response optional property `endpoints/items/component` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/clickhouse)
+- `CreateProjectDatabaseClickhouse`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/clickhouse)
+- `CreateProjectDatabaseClickhouse`: the response optional property `endpoints/items/path` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/clickhouse)
+- `CreateProjectDatabaseClickhouse`: the response optional property `endpoints/items/port` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/clickhouse)
+- `CreateProjectDatabaseClickhouse`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/clickhouse)
+- `CreateProjectDatabaseClickhouse`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/clickhouse)
+- `CreateProjectDatabaseClickhouse`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/clickhouse)
+- `CreateProjectDatabaseClickhouse`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/clickhouse)
+- `CreateProjectDatabaseGrafana`: added `#/components/schemas/cloud.project.database.service.BackupWritable` to the `backups` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/grafana)
+- `CreateProjectDatabaseGrafana`: added `#/components/schemas/cloud.project.database.service.DiskWritable` to the `disk` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/grafana)
+- `CreateProjectDatabaseGrafana`: removed `#/components/schemas/cloud.project.database.service.Backup` from the `backups` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/grafana)
+- `CreateProjectDatabaseGrafana`: removed `#/components/schemas/cloud.project.database.service.Disk` from the `disk` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/grafana)
+- `CreateProjectDatabaseGrafana`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/grafana)
+- `CreateProjectDatabaseGrafana`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/grafana)
+- `CreateProjectDatabaseGrafana`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/grafana)
+- `CreateProjectDatabaseGrafana`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/grafana)
+- `CreateProjectDatabaseGrafana`: the response optional property `endpoints/items/component` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/grafana)
+- `CreateProjectDatabaseGrafana`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/grafana)
+- `CreateProjectDatabaseGrafana`: the response optional property `endpoints/items/path` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/grafana)
+- `CreateProjectDatabaseGrafana`: the response optional property `endpoints/items/port` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/grafana)
+- `CreateProjectDatabaseGrafana`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/grafana)
+- `CreateProjectDatabaseGrafana`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/grafana)
+- `CreateProjectDatabaseGrafana`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/grafana)
+- `CreateProjectDatabaseGrafana`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/grafana)
+- `CreateProjectDatabaseKafkaConnect`: added `#/components/schemas/cloud.project.database.service.BackupWritable` to the `backups` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/kafkaConnect)
+- `CreateProjectDatabaseKafkaConnect`: added `#/components/schemas/cloud.project.database.service.DiskWritable` to the `disk` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/kafkaConnect)
+- `CreateProjectDatabaseKafkaConnect`: removed `#/components/schemas/cloud.project.database.service.Backup` from the `backups` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/kafkaConnect)
+- `CreateProjectDatabaseKafkaConnect`: removed `#/components/schemas/cloud.project.database.service.Disk` from the `disk` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/kafkaConnect)
+- `CreateProjectDatabaseKafkaConnect`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafkaConnect)
+- `CreateProjectDatabaseKafkaConnect`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafkaConnect)
+- `CreateProjectDatabaseKafkaConnect`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafkaConnect)
+- `CreateProjectDatabaseKafkaConnect`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafkaConnect)
+- `CreateProjectDatabaseKafkaConnect`: the response optional property `endpoints/items/component` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafkaConnect)
+- `CreateProjectDatabaseKafkaConnect`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafkaConnect)
+- `CreateProjectDatabaseKafkaConnect`: the response optional property `endpoints/items/path` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafkaConnect)
+- `CreateProjectDatabaseKafkaConnect`: the response optional property `endpoints/items/port` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafkaConnect)
+- `CreateProjectDatabaseKafkaConnect`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafkaConnect)
+- `CreateProjectDatabaseKafkaConnect`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafkaConnect)
+- `CreateProjectDatabaseKafkaConnect`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafkaConnect)
+- `CreateProjectDatabaseKafkaConnect`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafkaConnect)
+- `CreateProjectDatabaseKafkaMirrorMaker`: added `#/components/schemas/cloud.project.database.service.BackupWritable` to the `backups` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker)
+- `CreateProjectDatabaseKafkaMirrorMaker`: added `#/components/schemas/cloud.project.database.service.DiskWritable` to the `disk` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker)
+- `CreateProjectDatabaseKafkaMirrorMaker`: removed `#/components/schemas/cloud.project.database.service.Backup` from the `backups` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker)
+- `CreateProjectDatabaseKafkaMirrorMaker`: removed `#/components/schemas/cloud.project.database.service.Disk` from the `disk` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker)
+- `CreateProjectDatabaseKafkaMirrorMaker`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker)
+- `CreateProjectDatabaseKafkaMirrorMaker`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker)
+- `CreateProjectDatabaseKafkaMirrorMaker`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker)
+- `CreateProjectDatabaseKafkaMirrorMaker`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker)
+- `CreateProjectDatabaseKafkaMirrorMaker`: the response optional property `endpoints/items/component` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker)
+- `CreateProjectDatabaseKafkaMirrorMaker`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker)
+- `CreateProjectDatabaseKafkaMirrorMaker`: the response optional property `endpoints/items/path` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker)
+- `CreateProjectDatabaseKafkaMirrorMaker`: the response optional property `endpoints/items/port` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker)
+- `CreateProjectDatabaseKafkaMirrorMaker`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker)
+- `CreateProjectDatabaseKafkaMirrorMaker`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker)
+- `CreateProjectDatabaseKafkaMirrorMaker`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker)
+- `CreateProjectDatabaseKafkaMirrorMaker`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker)
+- `CreateProjectDatabaseKafka`: added `#/components/schemas/cloud.project.database.service.BackupWritable` to the `backups` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/kafka)
+- `CreateProjectDatabaseKafka`: added `#/components/schemas/cloud.project.database.service.DiskWritable` to the `disk` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/kafka)
+- `CreateProjectDatabaseKafka`: removed `#/components/schemas/cloud.project.database.service.Backup` from the `backups` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/kafka)
+- `CreateProjectDatabaseKafka`: removed `#/components/schemas/cloud.project.database.service.Disk` from the `disk` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/kafka)
+- `CreateProjectDatabaseKafka`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafka)
+- `CreateProjectDatabaseKafka`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafka)
+- `CreateProjectDatabaseKafka`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafka)
+- `CreateProjectDatabaseKafka`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafka)
+- `CreateProjectDatabaseKafka`: the response optional property `endpoints/items/component` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafka)
+- `CreateProjectDatabaseKafka`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafka)
+- `CreateProjectDatabaseKafka`: the response optional property `endpoints/items/path` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafka)
+- `CreateProjectDatabaseKafka`: the response optional property `endpoints/items/port` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafka)
+- `CreateProjectDatabaseKafka`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafka)
+- `CreateProjectDatabaseKafka`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafka)
+- `CreateProjectDatabaseKafka`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafka)
+- `CreateProjectDatabaseKafka`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/kafka)
+- `CreateProjectDatabaseMongodb`: added `#/components/schemas/cloud.project.database.service.BackupWritable` to the `backups` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/mongodb)
+- `CreateProjectDatabaseMongodb`: added `#/components/schemas/cloud.project.database.service.DiskWritable` to the `disk` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/mongodb)
+- `CreateProjectDatabaseMongodb`: removed `#/components/schemas/cloud.project.database.service.Backup` from the `backups` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/mongodb)
+- `CreateProjectDatabaseMongodb`: removed `#/components/schemas/cloud.project.database.service.Disk` from the `disk` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/mongodb)
+- `CreateProjectDatabaseMongodb`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mongodb)
+- `CreateProjectDatabaseMongodb`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mongodb)
+- `CreateProjectDatabaseMongodb`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mongodb)
+- `CreateProjectDatabaseMongodb`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mongodb)
+- `CreateProjectDatabaseMongodb`: the response optional property `endpoints/items/component` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mongodb)
+- `CreateProjectDatabaseMongodb`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mongodb)
+- `CreateProjectDatabaseMongodb`: the response optional property `endpoints/items/path` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mongodb)
+- `CreateProjectDatabaseMongodb`: the response optional property `endpoints/items/port` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mongodb)
+- `CreateProjectDatabaseMongodb`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mongodb)
+- `CreateProjectDatabaseMongodb`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mongodb)
+- `CreateProjectDatabaseMongodb`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mongodb)
+- `CreateProjectDatabaseMongodb`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mongodb)
+- `CreateProjectDatabaseMysql`: added `#/components/schemas/cloud.project.database.service.BackupWritable` to the `backups` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/mysql)
+- `CreateProjectDatabaseMysql`: added `#/components/schemas/cloud.project.database.service.DiskWritable` to the `disk` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/mysql)
+- `CreateProjectDatabaseMysql`: removed `#/components/schemas/cloud.project.database.service.Backup` from the `backups` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/mysql)
+- `CreateProjectDatabaseMysql`: removed `#/components/schemas/cloud.project.database.service.Disk` from the `disk` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/mysql)
+- `CreateProjectDatabaseMysql`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mysql)
+- `CreateProjectDatabaseMysql`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mysql)
+- `CreateProjectDatabaseMysql`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mysql)
+- `CreateProjectDatabaseMysql`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mysql)
+- `CreateProjectDatabaseMysql`: the response optional property `endpoints/items/component` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mysql)
+- `CreateProjectDatabaseMysql`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mysql)
+- `CreateProjectDatabaseMysql`: the response optional property `endpoints/items/path` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mysql)
+- `CreateProjectDatabaseMysql`: the response optional property `endpoints/items/port` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mysql)
+- `CreateProjectDatabaseMysql`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mysql)
+- `CreateProjectDatabaseMysql`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mysql)
+- `CreateProjectDatabaseMysql`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mysql)
+- `CreateProjectDatabaseMysql`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mysql)
+- `CreateProjectDatabaseOpensearch`: added `#/components/schemas/cloud.project.database.service.BackupWritable` to the `backups` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/opensearch)
+- `CreateProjectDatabaseOpensearch`: added `#/components/schemas/cloud.project.database.service.DiskWritable` to the `disk` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/opensearch)
+- `CreateProjectDatabaseOpensearch`: removed `#/components/schemas/cloud.project.database.service.Backup` from the `backups` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/opensearch)
+- `CreateProjectDatabaseOpensearch`: removed `#/components/schemas/cloud.project.database.service.Disk` from the `disk` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/opensearch)
+- `CreateProjectDatabaseOpensearch`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/opensearch)
+- `CreateProjectDatabaseOpensearch`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/opensearch)
+- `CreateProjectDatabaseOpensearch`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/opensearch)
+- `CreateProjectDatabaseOpensearch`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/opensearch)
+- `CreateProjectDatabaseOpensearch`: the response optional property `endpoints/items/component` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/opensearch)
+- `CreateProjectDatabaseOpensearch`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/opensearch)
+- `CreateProjectDatabaseOpensearch`: the response optional property `endpoints/items/path` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/opensearch)
+- `CreateProjectDatabaseOpensearch`: the response optional property `endpoints/items/port` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/opensearch)
+- `CreateProjectDatabaseOpensearch`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/opensearch)
+- `CreateProjectDatabaseOpensearch`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/opensearch)
+- `CreateProjectDatabaseOpensearch`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/opensearch)
+- `CreateProjectDatabaseOpensearch`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/opensearch)
+- `CreateProjectDatabasePostgresql`: added `#/components/schemas/cloud.project.database.service.BackupWritable` to the `backups` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/postgresql)
+- `CreateProjectDatabasePostgresql`: added `#/components/schemas/cloud.project.database.service.DiskWritable` to the `disk` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/postgresql)
+- `CreateProjectDatabasePostgresql`: removed `#/components/schemas/cloud.project.database.service.Backup` from the `backups` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/postgresql)
+- `CreateProjectDatabasePostgresql`: removed `#/components/schemas/cloud.project.database.service.Disk` from the `disk` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/postgresql)
+- `CreateProjectDatabasePostgresql`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/postgresql)
+- `CreateProjectDatabasePostgresql`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/postgresql)
+- `CreateProjectDatabasePostgresql`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/postgresql)
+- `CreateProjectDatabasePostgresql`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/postgresql)
+- `CreateProjectDatabasePostgresql`: the response optional property `endpoints/items/component` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/postgresql)
+- `CreateProjectDatabasePostgresql`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/postgresql)
+- `CreateProjectDatabasePostgresql`: the response optional property `endpoints/items/path` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/postgresql)
+- `CreateProjectDatabasePostgresql`: the response optional property `endpoints/items/port` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/postgresql)
+- `CreateProjectDatabasePostgresql`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/postgresql)
+- `CreateProjectDatabasePostgresql`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/postgresql)
+- `CreateProjectDatabasePostgresql`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/postgresql)
+- `CreateProjectDatabasePostgresql`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/postgresql)
+- `CreateProjectDatabaseValkey`: added `#/components/schemas/cloud.project.database.service.BackupWritable` to the `backups` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/valkey)
+- `CreateProjectDatabaseValkey`: added `#/components/schemas/cloud.project.database.service.DiskWritable` to the `disk` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/valkey)
+- `CreateProjectDatabaseValkey`: removed `#/components/schemas/cloud.project.database.service.Backup` from the `backups` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/valkey)
+- `CreateProjectDatabaseValkey`: removed `#/components/schemas/cloud.project.database.service.Disk` from the `disk` request property `allOf` list (POST /v1/cloud/project/{serviceName}/database/valkey)
+- `CreateProjectDatabaseValkey`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/valkey)
+- `CreateProjectDatabaseValkey`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/valkey)
+- `CreateProjectDatabaseValkey`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/valkey)
+- `CreateProjectDatabaseValkey`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/valkey)
+- `CreateProjectDatabaseValkey`: the response optional property `endpoints/items/component` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/valkey)
+- `CreateProjectDatabaseValkey`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/valkey)
+- `CreateProjectDatabaseValkey`: the response optional property `endpoints/items/path` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/valkey)
+- `CreateProjectDatabaseValkey`: the response optional property `endpoints/items/port` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/valkey)
+- `CreateProjectDatabaseValkey`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/valkey)
+- `CreateProjectDatabaseValkey`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/valkey)
+- `CreateProjectDatabaseValkey`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/valkey)
+- `CreateProjectDatabaseValkey`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/valkey)
+- `CreateProjectRegionLoadbalancingLoadbalancer`: added `#/components/schemas/cloud.loadbalancing.loadbalancer.PoolCreateWritable` to the `listeners/items/pool` request property `allOf` list (POST /v1/cloud/project/{serviceName}/region/{regionName}/loadbalancing/loadbalancer)
+- `CreateProjectRegionLoadbalancingLoadbalancer`: removed `#/components/schemas/cloud.loadbalancing.loadbalancer.PoolCreate` from the `listeners/items/pool` request property `allOf` list (POST /v1/cloud/project/{serviceName}/region/{regionName}/loadbalancing/loadbalancer)
+- `GetAlertingConfiguration`: the response optional property `formattedMonthlyThreshold/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/alerting/{id})
+- `GetAlertingConfiguration`: the response optional property `formattedMonthlyThreshold/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/alerting/{id})
+- `GetAlertingConfiguration`: the response optional property `formattedMonthlyThreshold/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/alerting/{id})
+- `GetAlertingConfiguration`: the response optional property `formattedMonthlyThreshold/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/alerting/{id})
+- `GetInstanceOnRegion`: the response optional property `pricings/items/price/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/region/{regionName}/instance/{instanceId})
+- `GetInstanceOnRegion`: the response optional property `pricings/items/price/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/region/{regionName}/instance/{instanceId})
+- `GetInstanceOnRegion`: the response optional property `pricings/items/price/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/region/{regionName}/instance/{instanceId})
+- `GetInstanceOnRegion`: the response optional property `pricings/items/price/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/region/{regionName}/instance/{instanceId})
+- `GetInstancesOnRegion`: the response optional property `items/pricings/items/price/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/region/{regionName}/instance)
+- `GetInstancesOnRegion`: the response optional property `items/pricings/items/price/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/region/{regionName}/instance)
+- `GetInstancesOnRegion`: the response optional property `items/pricings/items/price/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/region/{regionName}/instance)
+- `GetInstancesOnRegion`: the response optional property `items/pricings/items/price/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/region/{regionName}/instance)
+- `GetProjectCatalogInstance`: the response optional property `flavors/items/pricings/items/prices/items/hourlyVcoreEquivalent/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `flavors/items/pricings/items/prices/items/monthlyEquivalent/allOf[#/components/schemas/order.Price]/currencyCode`, `flavors/items/pricings/items/prices/items/price/allOf[#/components/schemas/order.Price]/currencyCode`) (GET /v1/cloud/project/{serviceName}/catalog/instance)
+- `GetProjectCatalogInstance`: the response optional property `flavors/items/pricings/items/prices/items/hourlyVcoreEquivalent/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `flavors/items/pricings/items/prices/items/monthlyEquivalent/allOf[#/components/schemas/order.Price]/priceInUcents`, `flavors/items/pricings/items/prices/items/price/allOf[#/components/schemas/order.Price]/priceInUcents`) (GET /v1/cloud/project/{serviceName}/catalog/instance)
+- `GetProjectCatalogInstance`: the response optional property `flavors/items/pricings/items/prices/items/hourlyVcoreEquivalent/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `flavors/items/pricings/items/prices/items/monthlyEquivalent/allOf[#/components/schemas/order.Price]/text`, `flavors/items/pricings/items/prices/items/price/allOf[#/components/schemas/order.Price]/text`) (GET /v1/cloud/project/{serviceName}/catalog/instance)
+- `GetProjectCatalogInstance`: the response optional property `flavors/items/pricings/items/prices/items/hourlyVcoreEquivalent/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `flavors/items/pricings/items/prices/items/monthlyEquivalent/allOf[#/components/schemas/order.Price]/value`, `flavors/items/pricings/items/prices/items/price/allOf[#/components/schemas/order.Price]/value`) (GET /v1/cloud/project/{serviceName}/catalog/instance)
+- `GetProjectCredit`: the response optional property `available_credit/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `total_credit/allOf[#/components/schemas/order.Price]/currencyCode`, `used_credit/allOf[#/components/schemas/order.Price]/currencyCode`) (GET /v1/cloud/project/{serviceName}/credit/{id})
+- `GetProjectCredit`: the response optional property `available_credit/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `total_credit/allOf[#/components/schemas/order.Price]/priceInUcents`, `used_credit/allOf[#/components/schemas/order.Price]/priceInUcents`) (GET /v1/cloud/project/{serviceName}/credit/{id})
+- `GetProjectCredit`: the response optional property `available_credit/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `total_credit/allOf[#/components/schemas/order.Price]/text`, `used_credit/allOf[#/components/schemas/order.Price]/text`) (GET /v1/cloud/project/{serviceName}/credit/{id})
+- `GetProjectCredit`: the response optional property `available_credit/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `total_credit/allOf[#/components/schemas/order.Price]/value`, `used_credit/allOf[#/components/schemas/order.Price]/value`) (GET /v1/cloud/project/{serviceName}/credit/{id})
+- `GetProjectDatabaseClickhouse`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `GetProjectDatabaseClickhouse`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `GetProjectDatabaseClickhouse`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `GetProjectDatabaseClickhouse`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `GetProjectDatabaseClickhouse`: the response optional property `endpoints/items/component` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `GetProjectDatabaseClickhouse`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `GetProjectDatabaseClickhouse`: the response optional property `endpoints/items/path` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `GetProjectDatabaseClickhouse`: the response optional property `endpoints/items/port` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `GetProjectDatabaseClickhouse`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `GetProjectDatabaseClickhouse`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `GetProjectDatabaseClickhouse`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `GetProjectDatabaseClickhouse`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `GetProjectDatabaseGrafana`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `GetProjectDatabaseGrafana`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `GetProjectDatabaseGrafana`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `GetProjectDatabaseGrafana`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `GetProjectDatabaseGrafana`: the response optional property `endpoints/items/component` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `GetProjectDatabaseGrafana`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `GetProjectDatabaseGrafana`: the response optional property `endpoints/items/path` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `GetProjectDatabaseGrafana`: the response optional property `endpoints/items/port` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `GetProjectDatabaseGrafana`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `GetProjectDatabaseGrafana`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `GetProjectDatabaseGrafana`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `GetProjectDatabaseGrafana`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `GetProjectDatabaseKafkaConnect`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `GetProjectDatabaseKafkaConnect`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `GetProjectDatabaseKafkaConnect`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `GetProjectDatabaseKafkaConnect`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `GetProjectDatabaseKafkaConnect`: the response optional property `endpoints/items/component` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `GetProjectDatabaseKafkaConnect`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `GetProjectDatabaseKafkaConnect`: the response optional property `endpoints/items/path` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `GetProjectDatabaseKafkaConnect`: the response optional property `endpoints/items/port` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `GetProjectDatabaseKafkaConnect`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `GetProjectDatabaseKafkaConnect`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `GetProjectDatabaseKafkaConnect`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `GetProjectDatabaseKafkaConnect`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `GetProjectDatabaseKafkaMirrorMaker`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `GetProjectDatabaseKafkaMirrorMaker`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `GetProjectDatabaseKafkaMirrorMaker`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `GetProjectDatabaseKafkaMirrorMaker`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `GetProjectDatabaseKafkaMirrorMaker`: the response optional property `endpoints/items/component` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `GetProjectDatabaseKafkaMirrorMaker`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `GetProjectDatabaseKafkaMirrorMaker`: the response optional property `endpoints/items/path` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `GetProjectDatabaseKafkaMirrorMaker`: the response optional property `endpoints/items/port` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `GetProjectDatabaseKafkaMirrorMaker`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `GetProjectDatabaseKafkaMirrorMaker`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `GetProjectDatabaseKafkaMirrorMaker`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `GetProjectDatabaseKafkaMirrorMaker`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `GetProjectDatabaseKafka`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `GetProjectDatabaseKafka`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `GetProjectDatabaseKafka`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `GetProjectDatabaseKafka`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `GetProjectDatabaseKafka`: the response optional property `endpoints/items/component` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `GetProjectDatabaseKafka`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `GetProjectDatabaseKafka`: the response optional property `endpoints/items/path` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `GetProjectDatabaseKafka`: the response optional property `endpoints/items/port` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `GetProjectDatabaseKafka`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `GetProjectDatabaseKafka`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `GetProjectDatabaseKafka`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `GetProjectDatabaseKafka`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `GetProjectDatabaseMongodb`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `GetProjectDatabaseMongodb`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `GetProjectDatabaseMongodb`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `GetProjectDatabaseMongodb`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `GetProjectDatabaseMongodb`: the response optional property `endpoints/items/component` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `GetProjectDatabaseMongodb`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `GetProjectDatabaseMongodb`: the response optional property `endpoints/items/path` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `GetProjectDatabaseMongodb`: the response optional property `endpoints/items/port` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `GetProjectDatabaseMongodb`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `GetProjectDatabaseMongodb`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `GetProjectDatabaseMongodb`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `GetProjectDatabaseMongodb`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `GetProjectDatabaseMysql`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `GetProjectDatabaseMysql`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `GetProjectDatabaseMysql`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `GetProjectDatabaseMysql`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `GetProjectDatabaseMysql`: the response optional property `endpoints/items/component` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `GetProjectDatabaseMysql`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `GetProjectDatabaseMysql`: the response optional property `endpoints/items/path` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `GetProjectDatabaseMysql`: the response optional property `endpoints/items/port` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `GetProjectDatabaseMysql`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `GetProjectDatabaseMysql`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `GetProjectDatabaseMysql`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `GetProjectDatabaseMysql`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `GetProjectDatabaseOpensearch`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `GetProjectDatabaseOpensearch`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `GetProjectDatabaseOpensearch`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `GetProjectDatabaseOpensearch`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `GetProjectDatabaseOpensearch`: the response optional property `endpoints/items/component` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `GetProjectDatabaseOpensearch`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `GetProjectDatabaseOpensearch`: the response optional property `endpoints/items/path` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `GetProjectDatabaseOpensearch`: the response optional property `endpoints/items/port` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `GetProjectDatabaseOpensearch`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `GetProjectDatabaseOpensearch`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `GetProjectDatabaseOpensearch`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `GetProjectDatabaseOpensearch`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `GetProjectDatabasePostgresql`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `GetProjectDatabasePostgresql`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `GetProjectDatabasePostgresql`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `GetProjectDatabasePostgresql`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `GetProjectDatabasePostgresql`: the response optional property `endpoints/items/component` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `GetProjectDatabasePostgresql`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `GetProjectDatabasePostgresql`: the response optional property `endpoints/items/path` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `GetProjectDatabasePostgresql`: the response optional property `endpoints/items/port` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `GetProjectDatabasePostgresql`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `GetProjectDatabasePostgresql`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `GetProjectDatabasePostgresql`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `GetProjectDatabasePostgresql`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `GetProjectDatabaseService`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/service/{clusterId})
+- `GetProjectDatabaseService`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/service/{clusterId})
+- `GetProjectDatabaseService`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/service/{clusterId})
+- `GetProjectDatabaseService`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/service/{clusterId})
+- `GetProjectDatabaseService`: the response optional property `endpoints/items/component` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/service/{clusterId})
+- `GetProjectDatabaseService`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/service/{clusterId})
+- `GetProjectDatabaseService`: the response optional property `endpoints/items/path` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/service/{clusterId})
+- `GetProjectDatabaseService`: the response optional property `endpoints/items/port` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/service/{clusterId})
+- `GetProjectDatabaseService`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/service/{clusterId})
+- `GetProjectDatabaseService`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/service/{clusterId})
+- `GetProjectDatabaseService`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/service/{clusterId})
+- `GetProjectDatabaseService`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/service/{clusterId})
+- `GetProjectDatabaseValkey`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `GetProjectDatabaseValkey`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `GetProjectDatabaseValkey`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `GetProjectDatabaseValkey`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `GetProjectDatabaseValkey`: the response optional property `endpoints/items/component` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `GetProjectDatabaseValkey`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `GetProjectDatabaseValkey`: the response optional property `endpoints/items/path` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `GetProjectDatabaseValkey`: the response optional property `endpoints/items/port` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `GetProjectDatabaseValkey`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `GetProjectDatabaseValkey`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `GetProjectDatabaseValkey`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `GetProjectDatabaseValkey`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (GET /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `GetProjectUsageCurrent`: the response optional property `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/managedKubernetesService/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/quantum/allOf[#/components/schemas/cloud.billingView.HourlyQuantum]/notebook/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/currencyCode`, `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/quantum/allOf[#/components/schemas/cloud.billingView.HourlyQuantum]/processingUnit/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/currencyCode` and 10 more) (GET /v1/cloud/project/{serviceName}/usage/current)
+- `GetProjectUsageCurrent`: the response optional property `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/managedKubernetesService/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/quantum/allOf[#/components/schemas/cloud.billingView.HourlyQuantum]/notebook/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/priceInUcents`, `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/quantum/allOf[#/components/schemas/cloud.billingView.HourlyQuantum]/processingUnit/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/priceInUcents` and 10 more) (GET /v1/cloud/project/{serviceName}/usage/current)
+- `GetProjectUsageCurrent`: the response optional property `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/managedKubernetesService/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/quantum/allOf[#/components/schemas/cloud.billingView.HourlyQuantum]/notebook/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/text`, `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/quantum/allOf[#/components/schemas/cloud.billingView.HourlyQuantum]/processingUnit/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/text` and 10 more) (GET /v1/cloud/project/{serviceName}/usage/current)
+- `GetProjectUsageCurrent`: the response optional property `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/managedKubernetesService/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/quantum/allOf[#/components/schemas/cloud.billingView.HourlyQuantum]/notebook/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/value`, `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/quantum/allOf[#/components/schemas/cloud.billingView.HourlyQuantum]/processingUnit/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/value` and 10 more) (GET /v1/cloud/project/{serviceName}/usage/current)
+- `GetProjectUsageForecast`: the response optional property `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/managedKubernetesService/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/quantum/allOf[#/components/schemas/cloud.billingView.HourlyQuantum]/notebook/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/currencyCode`, `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/quantum/allOf[#/components/schemas/cloud.billingView.HourlyQuantum]/processingUnit/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/currencyCode` and 10 more) (GET /v1/cloud/project/{serviceName}/usage/forecast)
+- `GetProjectUsageForecast`: the response optional property `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/managedKubernetesService/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/quantum/allOf[#/components/schemas/cloud.billingView.HourlyQuantum]/notebook/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/priceInUcents`, `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/quantum/allOf[#/components/schemas/cloud.billingView.HourlyQuantum]/processingUnit/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/priceInUcents` and 10 more) (GET /v1/cloud/project/{serviceName}/usage/forecast)
+- `GetProjectUsageForecast`: the response optional property `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/managedKubernetesService/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/quantum/allOf[#/components/schemas/cloud.billingView.HourlyQuantum]/notebook/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/text`, `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/quantum/allOf[#/components/schemas/cloud.billingView.HourlyQuantum]/processingUnit/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/text` and 10 more) (GET /v1/cloud/project/{serviceName}/usage/forecast)
+- `GetProjectUsageForecast`: the response optional property `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/managedKubernetesService/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/quantum/allOf[#/components/schemas/cloud.billingView.HourlyQuantum]/notebook/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/value`, `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/quantum/allOf[#/components/schemas/cloud.billingView.HourlyQuantum]/processingUnit/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/value` and 10 more) (GET /v1/cloud/project/{serviceName}/usage/forecast)
+- `GetProjectUsageHistory`: the response optional property `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/managedKubernetesService/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/quantum/allOf[#/components/schemas/cloud.billingView.HourlyQuantum]/notebook/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/currencyCode`, `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/quantum/allOf[#/components/schemas/cloud.billingView.HourlyQuantum]/processingUnit/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/currencyCode` and 10 more) (GET /v1/cloud/project/{serviceName}/usage/history/{usageId})
+- `GetProjectUsageHistory`: the response optional property `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/managedKubernetesService/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/quantum/allOf[#/components/schemas/cloud.billingView.HourlyQuantum]/notebook/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/priceInUcents`, `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/quantum/allOf[#/components/schemas/cloud.billingView.HourlyQuantum]/processingUnit/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/priceInUcents` and 10 more) (GET /v1/cloud/project/{serviceName}/usage/history/{usageId})
+- `GetProjectUsageHistory`: the response optional property `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/managedKubernetesService/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/quantum/allOf[#/components/schemas/cloud.billingView.HourlyQuantum]/notebook/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/text`, `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/quantum/allOf[#/components/schemas/cloud.billingView.HourlyQuantum]/processingUnit/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/text` and 10 more) (GET /v1/cloud/project/{serviceName}/usage/history/{usageId})
+- `GetProjectUsageHistory`: the response optional property `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/managedKubernetesService/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/quantum/allOf[#/components/schemas/cloud.billingView.HourlyQuantum]/notebook/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/value`, `hourlyUsage/allOf[#/components/schemas/cloud.billingView.HourlyResources]/quantum/allOf[#/components/schemas/cloud.billingView.HourlyQuantum]/processingUnit/items/details/items/totalPrice/allOf[#/components/schemas/order.Price]/value` and 10 more) (GET /v1/cloud/project/{serviceName}/usage/history/{usageId})
+- `GetProjectUsagePlans`: the response optional property `flavors/items/fees/allOf[#/components/schemas/cloud.plan.Fees]/flatFee/allOf[#/components/schemas/cloud.plan.FlatFee]/details/items/totalPrice/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `flavors/items/fees/allOf[#/components/schemas/cloud.plan.Fees]/flatFee/allOf[#/components/schemas/cloud.plan.FlatFee]/details/items/unitPrice/allOf[#/components/schemas/order.Price]/currencyCode`, `flavors/items/fees/allOf[#/components/schemas/cloud.plan.Fees]/flatFee/allOf[#/components/schemas/cloud.plan.FlatFee]/totalPrice/allOf[#/components/schemas/order.Price]/currencyCode` and 5 more) (GET /v1/cloud/project/{serviceName}/usage/plans)
+- `GetProjectUsagePlans`: the response optional property `flavors/items/fees/allOf[#/components/schemas/cloud.plan.Fees]/flatFee/allOf[#/components/schemas/cloud.plan.FlatFee]/details/items/totalPrice/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `flavors/items/fees/allOf[#/components/schemas/cloud.plan.Fees]/flatFee/allOf[#/components/schemas/cloud.plan.FlatFee]/details/items/unitPrice/allOf[#/components/schemas/order.Price]/priceInUcents`, `flavors/items/fees/allOf[#/components/schemas/cloud.plan.Fees]/flatFee/allOf[#/components/schemas/cloud.plan.FlatFee]/totalPrice/allOf[#/components/schemas/order.Price]/priceInUcents` and 5 more) (GET /v1/cloud/project/{serviceName}/usage/plans)
+- `GetProjectUsagePlans`: the response optional property `flavors/items/fees/allOf[#/components/schemas/cloud.plan.Fees]/flatFee/allOf[#/components/schemas/cloud.plan.FlatFee]/details/items/totalPrice/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `flavors/items/fees/allOf[#/components/schemas/cloud.plan.Fees]/flatFee/allOf[#/components/schemas/cloud.plan.FlatFee]/details/items/unitPrice/allOf[#/components/schemas/order.Price]/text`, `flavors/items/fees/allOf[#/components/schemas/cloud.plan.Fees]/flatFee/allOf[#/components/schemas/cloud.plan.FlatFee]/totalPrice/allOf[#/components/schemas/order.Price]/text` and 5 more) (GET /v1/cloud/project/{serviceName}/usage/plans)
+- `GetProjectUsagePlans`: the response optional property `flavors/items/fees/allOf[#/components/schemas/cloud.plan.Fees]/flatFee/allOf[#/components/schemas/cloud.plan.FlatFee]/details/items/totalPrice/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `flavors/items/fees/allOf[#/components/schemas/cloud.plan.Fees]/flatFee/allOf[#/components/schemas/cloud.plan.FlatFee]/details/items/unitPrice/allOf[#/components/schemas/order.Price]/value`, `flavors/items/fees/allOf[#/components/schemas/cloud.plan.Fees]/flatFee/allOf[#/components/schemas/cloud.plan.FlatFee]/totalPrice/allOf[#/components/schemas/order.Price]/value` and 5 more) (GET /v1/cloud/project/{serviceName}/usage/plans)
+- `UnshelveProjectDatabaseMongodb`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mongodb/{clusterId}/unshelve)
+- `UnshelveProjectDatabaseMongodb`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mongodb/{clusterId}/unshelve)
+- `UnshelveProjectDatabaseMongodb`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mongodb/{clusterId}/unshelve)
+- `UnshelveProjectDatabaseMongodb`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mongodb/{clusterId}/unshelve)
+- `UnshelveProjectDatabaseMongodb`: the response optional property `endpoints/items/component` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mongodb/{clusterId}/unshelve)
+- `UnshelveProjectDatabaseMongodb`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mongodb/{clusterId}/unshelve)
+- `UnshelveProjectDatabaseMongodb`: the response optional property `endpoints/items/path` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mongodb/{clusterId}/unshelve)
+- `UnshelveProjectDatabaseMongodb`: the response optional property `endpoints/items/port` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mongodb/{clusterId}/unshelve)
+- `UnshelveProjectDatabaseMongodb`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mongodb/{clusterId}/unshelve)
+- `UnshelveProjectDatabaseMongodb`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mongodb/{clusterId}/unshelve)
+- `UnshelveProjectDatabaseMongodb`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mongodb/{clusterId}/unshelve)
+- `UnshelveProjectDatabaseMongodb`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (POST /v1/cloud/project/{serviceName}/database/mongodb/{clusterId}/unshelve)
+- `UpdateProjectDatabaseClickhouse`: added `#/components/schemas/cloud.project.database.service.BackupWritable` to the `backups` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `UpdateProjectDatabaseClickhouse`: added `#/components/schemas/cloud.project.database.service.DiskWritable` to the `disk` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `UpdateProjectDatabaseClickhouse`: added `#/components/schemas/cloud.project.database.service.StorageWritable` to the `storage` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `UpdateProjectDatabaseClickhouse`: removed `#/components/schemas/cloud.project.database.service.Backup` from the `backups` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `UpdateProjectDatabaseClickhouse`: removed `#/components/schemas/cloud.project.database.service.Disk` from the `disk` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `UpdateProjectDatabaseClickhouse`: removed `#/components/schemas/cloud.project.database.service.Storage` from the `storage` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `UpdateProjectDatabaseClickhouse`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `UpdateProjectDatabaseClickhouse`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `UpdateProjectDatabaseClickhouse`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `UpdateProjectDatabaseClickhouse`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `UpdateProjectDatabaseClickhouse`: the response optional property `endpoints/items/component` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `UpdateProjectDatabaseClickhouse`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `UpdateProjectDatabaseClickhouse`: the response optional property `endpoints/items/path` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `UpdateProjectDatabaseClickhouse`: the response optional property `endpoints/items/port` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `UpdateProjectDatabaseClickhouse`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `UpdateProjectDatabaseClickhouse`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `UpdateProjectDatabaseClickhouse`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `UpdateProjectDatabaseClickhouse`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/clickhouse/{clusterId})
+- `UpdateProjectDatabaseGrafana`: added `#/components/schemas/cloud.project.database.service.BackupWritable` to the `backups` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `UpdateProjectDatabaseGrafana`: added `#/components/schemas/cloud.project.database.service.DiskWritable` to the `disk` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `UpdateProjectDatabaseGrafana`: added `#/components/schemas/cloud.project.database.service.StorageWritable` to the `storage` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `UpdateProjectDatabaseGrafana`: removed `#/components/schemas/cloud.project.database.service.Backup` from the `backups` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `UpdateProjectDatabaseGrafana`: removed `#/components/schemas/cloud.project.database.service.Disk` from the `disk` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `UpdateProjectDatabaseGrafana`: removed `#/components/schemas/cloud.project.database.service.Storage` from the `storage` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `UpdateProjectDatabaseGrafana`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `UpdateProjectDatabaseGrafana`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `UpdateProjectDatabaseGrafana`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `UpdateProjectDatabaseGrafana`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `UpdateProjectDatabaseGrafana`: the response optional property `endpoints/items/component` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `UpdateProjectDatabaseGrafana`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `UpdateProjectDatabaseGrafana`: the response optional property `endpoints/items/path` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `UpdateProjectDatabaseGrafana`: the response optional property `endpoints/items/port` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `UpdateProjectDatabaseGrafana`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `UpdateProjectDatabaseGrafana`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `UpdateProjectDatabaseGrafana`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `UpdateProjectDatabaseGrafana`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/grafana/{clusterId})
+- `UpdateProjectDatabaseKafkaConnect`: added `#/components/schemas/cloud.project.database.service.BackupWritable` to the `backups` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `UpdateProjectDatabaseKafkaConnect`: added `#/components/schemas/cloud.project.database.service.DiskWritable` to the `disk` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `UpdateProjectDatabaseKafkaConnect`: added `#/components/schemas/cloud.project.database.service.StorageWritable` to the `storage` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `UpdateProjectDatabaseKafkaConnect`: removed `#/components/schemas/cloud.project.database.service.Backup` from the `backups` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `UpdateProjectDatabaseKafkaConnect`: removed `#/components/schemas/cloud.project.database.service.Disk` from the `disk` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `UpdateProjectDatabaseKafkaConnect`: removed `#/components/schemas/cloud.project.database.service.Storage` from the `storage` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `UpdateProjectDatabaseKafkaConnect`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `UpdateProjectDatabaseKafkaConnect`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `UpdateProjectDatabaseKafkaConnect`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `UpdateProjectDatabaseKafkaConnect`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `UpdateProjectDatabaseKafkaConnect`: the response optional property `endpoints/items/component` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `UpdateProjectDatabaseKafkaConnect`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `UpdateProjectDatabaseKafkaConnect`: the response optional property `endpoints/items/path` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `UpdateProjectDatabaseKafkaConnect`: the response optional property `endpoints/items/port` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `UpdateProjectDatabaseKafkaConnect`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `UpdateProjectDatabaseKafkaConnect`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `UpdateProjectDatabaseKafkaConnect`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `UpdateProjectDatabaseKafkaConnect`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafkaConnect/{clusterId})
+- `UpdateProjectDatabaseKafkaMirrorMaker`: added `#/components/schemas/cloud.project.database.service.BackupWritable` to the `backups` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `UpdateProjectDatabaseKafkaMirrorMaker`: added `#/components/schemas/cloud.project.database.service.DiskWritable` to the `disk` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `UpdateProjectDatabaseKafkaMirrorMaker`: added `#/components/schemas/cloud.project.database.service.StorageWritable` to the `storage` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `UpdateProjectDatabaseKafkaMirrorMaker`: removed `#/components/schemas/cloud.project.database.service.Backup` from the `backups` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `UpdateProjectDatabaseKafkaMirrorMaker`: removed `#/components/schemas/cloud.project.database.service.Disk` from the `disk` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `UpdateProjectDatabaseKafkaMirrorMaker`: removed `#/components/schemas/cloud.project.database.service.Storage` from the `storage` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `UpdateProjectDatabaseKafkaMirrorMaker`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `UpdateProjectDatabaseKafkaMirrorMaker`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `UpdateProjectDatabaseKafkaMirrorMaker`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `UpdateProjectDatabaseKafkaMirrorMaker`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `UpdateProjectDatabaseKafkaMirrorMaker`: the response optional property `endpoints/items/component` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `UpdateProjectDatabaseKafkaMirrorMaker`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `UpdateProjectDatabaseKafkaMirrorMaker`: the response optional property `endpoints/items/path` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `UpdateProjectDatabaseKafkaMirrorMaker`: the response optional property `endpoints/items/port` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `UpdateProjectDatabaseKafkaMirrorMaker`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `UpdateProjectDatabaseKafkaMirrorMaker`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `UpdateProjectDatabaseKafkaMirrorMaker`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `UpdateProjectDatabaseKafkaMirrorMaker`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafkaMirrorMaker/{clusterId})
+- `UpdateProjectDatabaseKafka`: added `#/components/schemas/cloud.project.database.service.BackupWritable` to the `backups` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `UpdateProjectDatabaseKafka`: added `#/components/schemas/cloud.project.database.service.DiskWritable` to the `disk` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `UpdateProjectDatabaseKafka`: added `#/components/schemas/cloud.project.database.service.StorageWritable` to the `storage` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `UpdateProjectDatabaseKafka`: removed `#/components/schemas/cloud.project.database.service.Backup` from the `backups` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `UpdateProjectDatabaseKafka`: removed `#/components/schemas/cloud.project.database.service.Disk` from the `disk` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `UpdateProjectDatabaseKafka`: removed `#/components/schemas/cloud.project.database.service.Storage` from the `storage` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `UpdateProjectDatabaseKafka`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `UpdateProjectDatabaseKafka`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `UpdateProjectDatabaseKafka`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `UpdateProjectDatabaseKafka`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `UpdateProjectDatabaseKafka`: the response optional property `endpoints/items/component` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `UpdateProjectDatabaseKafka`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `UpdateProjectDatabaseKafka`: the response optional property `endpoints/items/path` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `UpdateProjectDatabaseKafka`: the response optional property `endpoints/items/port` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `UpdateProjectDatabaseKafka`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `UpdateProjectDatabaseKafka`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `UpdateProjectDatabaseKafka`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `UpdateProjectDatabaseKafka`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/kafka/{clusterId})
+- `UpdateProjectDatabaseMongodb`: added `#/components/schemas/cloud.project.database.service.BackupWritable` to the `backups` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `UpdateProjectDatabaseMongodb`: added `#/components/schemas/cloud.project.database.service.DiskWritable` to the `disk` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `UpdateProjectDatabaseMongodb`: added `#/components/schemas/cloud.project.database.service.StorageWritable` to the `storage` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `UpdateProjectDatabaseMongodb`: removed `#/components/schemas/cloud.project.database.service.Backup` from the `backups` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `UpdateProjectDatabaseMongodb`: removed `#/components/schemas/cloud.project.database.service.Disk` from the `disk` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `UpdateProjectDatabaseMongodb`: removed `#/components/schemas/cloud.project.database.service.Storage` from the `storage` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `UpdateProjectDatabaseMongodb`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `UpdateProjectDatabaseMongodb`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `UpdateProjectDatabaseMongodb`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `UpdateProjectDatabaseMongodb`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `UpdateProjectDatabaseMongodb`: the response optional property `endpoints/items/component` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `UpdateProjectDatabaseMongodb`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `UpdateProjectDatabaseMongodb`: the response optional property `endpoints/items/path` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `UpdateProjectDatabaseMongodb`: the response optional property `endpoints/items/port` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `UpdateProjectDatabaseMongodb`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `UpdateProjectDatabaseMongodb`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `UpdateProjectDatabaseMongodb`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `UpdateProjectDatabaseMongodb`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/mongodb/{clusterId})
+- `UpdateProjectDatabaseMysql`: added `#/components/schemas/cloud.project.database.service.BackupWritable` to the `backups` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `UpdateProjectDatabaseMysql`: added `#/components/schemas/cloud.project.database.service.DiskWritable` to the `disk` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `UpdateProjectDatabaseMysql`: added `#/components/schemas/cloud.project.database.service.StorageWritable` to the `storage` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `UpdateProjectDatabaseMysql`: removed `#/components/schemas/cloud.project.database.service.Backup` from the `backups` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `UpdateProjectDatabaseMysql`: removed `#/components/schemas/cloud.project.database.service.Disk` from the `disk` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `UpdateProjectDatabaseMysql`: removed `#/components/schemas/cloud.project.database.service.Storage` from the `storage` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `UpdateProjectDatabaseMysql`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `UpdateProjectDatabaseMysql`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `UpdateProjectDatabaseMysql`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `UpdateProjectDatabaseMysql`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `UpdateProjectDatabaseMysql`: the response optional property `endpoints/items/component` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `UpdateProjectDatabaseMysql`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `UpdateProjectDatabaseMysql`: the response optional property `endpoints/items/path` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `UpdateProjectDatabaseMysql`: the response optional property `endpoints/items/port` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `UpdateProjectDatabaseMysql`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `UpdateProjectDatabaseMysql`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `UpdateProjectDatabaseMysql`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `UpdateProjectDatabaseMysql`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/mysql/{clusterId})
+- `UpdateProjectDatabaseOpensearch`: added `#/components/schemas/cloud.project.database.service.BackupWritable` to the `backups` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `UpdateProjectDatabaseOpensearch`: added `#/components/schemas/cloud.project.database.service.DiskWritable` to the `disk` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `UpdateProjectDatabaseOpensearch`: added `#/components/schemas/cloud.project.database.service.StorageWritable` to the `storage` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `UpdateProjectDatabaseOpensearch`: removed `#/components/schemas/cloud.project.database.service.Backup` from the `backups` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `UpdateProjectDatabaseOpensearch`: removed `#/components/schemas/cloud.project.database.service.Disk` from the `disk` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `UpdateProjectDatabaseOpensearch`: removed `#/components/schemas/cloud.project.database.service.Storage` from the `storage` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `UpdateProjectDatabaseOpensearch`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `UpdateProjectDatabaseOpensearch`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `UpdateProjectDatabaseOpensearch`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `UpdateProjectDatabaseOpensearch`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `UpdateProjectDatabaseOpensearch`: the response optional property `endpoints/items/component` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `UpdateProjectDatabaseOpensearch`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `UpdateProjectDatabaseOpensearch`: the response optional property `endpoints/items/path` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `UpdateProjectDatabaseOpensearch`: the response optional property `endpoints/items/port` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `UpdateProjectDatabaseOpensearch`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `UpdateProjectDatabaseOpensearch`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `UpdateProjectDatabaseOpensearch`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `UpdateProjectDatabaseOpensearch`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/opensearch/{clusterId})
+- `UpdateProjectDatabasePostgresql`: added `#/components/schemas/cloud.project.database.service.BackupWritable` to the `backups` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `UpdateProjectDatabasePostgresql`: added `#/components/schemas/cloud.project.database.service.DiskWritable` to the `disk` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `UpdateProjectDatabasePostgresql`: added `#/components/schemas/cloud.project.database.service.StorageWritable` to the `storage` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `UpdateProjectDatabasePostgresql`: removed `#/components/schemas/cloud.project.database.service.Backup` from the `backups` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `UpdateProjectDatabasePostgresql`: removed `#/components/schemas/cloud.project.database.service.Disk` from the `disk` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `UpdateProjectDatabasePostgresql`: removed `#/components/schemas/cloud.project.database.service.Storage` from the `storage` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `UpdateProjectDatabasePostgresql`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `UpdateProjectDatabasePostgresql`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `UpdateProjectDatabasePostgresql`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `UpdateProjectDatabasePostgresql`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `UpdateProjectDatabasePostgresql`: the response optional property `endpoints/items/component` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `UpdateProjectDatabasePostgresql`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `UpdateProjectDatabasePostgresql`: the response optional property `endpoints/items/path` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `UpdateProjectDatabasePostgresql`: the response optional property `endpoints/items/port` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `UpdateProjectDatabasePostgresql`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `UpdateProjectDatabasePostgresql`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `UpdateProjectDatabasePostgresql`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `UpdateProjectDatabasePostgresql`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/postgresql/{clusterId})
+- `UpdateProjectDatabaseValkey`: added `#/components/schemas/cloud.project.database.service.BackupWritable` to the `backups` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `UpdateProjectDatabaseValkey`: added `#/components/schemas/cloud.project.database.service.DiskWritable` to the `disk` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `UpdateProjectDatabaseValkey`: added `#/components/schemas/cloud.project.database.service.StorageWritable` to the `storage` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `UpdateProjectDatabaseValkey`: removed `#/components/schemas/cloud.project.database.service.Backup` from the `backups` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `UpdateProjectDatabaseValkey`: removed `#/components/schemas/cloud.project.database.service.Disk` from the `disk` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `UpdateProjectDatabaseValkey`: removed `#/components/schemas/cloud.project.database.service.Storage` from the `storage` request property `allOf` list (PUT /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `UpdateProjectDatabaseValkey`: the response optional property `capabilities/additionalProperties/create` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `UpdateProjectDatabaseValkey`: the response optional property `capabilities/additionalProperties/delete` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `UpdateProjectDatabaseValkey`: the response optional property `capabilities/additionalProperties/read` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `UpdateProjectDatabaseValkey`: the response optional property `capabilities/additionalProperties/update` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `UpdateProjectDatabaseValkey`: the response optional property `endpoints/items/component` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `UpdateProjectDatabaseValkey`: the response optional property `endpoints/items/domain` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `UpdateProjectDatabaseValkey`: the response optional property `endpoints/items/path` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `UpdateProjectDatabaseValkey`: the response optional property `endpoints/items/port` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `UpdateProjectDatabaseValkey`: the response optional property `endpoints/items/scheme` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `UpdateProjectDatabaseValkey`: the response optional property `endpoints/items/sslMode` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `UpdateProjectDatabaseValkey`: the response optional property `endpoints/items/ssl` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- `UpdateProjectDatabaseValkey`: the response optional property `endpoints/items/uri` became not read-only for the status `200` (PUT /v1/cloud/project/{serviceName}/database/valkey/{clusterId})
+- removed the schema `cloud.Project` ( )
+- removed the schema `cloud.containerRegistry.OIDCPost` ( )
+- removed the schema `cloud.loadbalancing.HealthMonitorCreate` ( )
+- removed the schema `cloud.loadbalancing.Loadbalancer.CreateInput` ( )
+- removed the schema `cloud.loadbalancing.loadbalancer.ListenerCreate` ( )
+- removed the schema `cloud.loadbalancing.loadbalancer.PoolCreate` ( )
+- removed the schema `cloud.loadbalancing.pool.CreateMembers` ( )
+- removed the schema `cloud.project.ai.app.AppSpecInput` ( )
+- removed the schema `cloud.project.ai.job.JobSpecInput` ( )
+- removed the schema `cloud.project.ai.notebook.NotebookSpecInput` ( )
+- removed the schema `cloud.project.ai.notebook.NotebookUpdate` ( )
+- removed the schema `cloud.project.database.ServiceCreation` ( )
+- removed the schema `cloud.project.database.kafka.TopicCreation` ( )
+- removed the schema `cloud.project.database.service.NodeCreation` ( )
+
+#### `dedicatedcloud`
+
+- removed the schema `dedicatedCloud.dedicatedCloud` ( )
+
+#### `dedicatednasha`
+
+- removed the schema `dedicated.nasha.Storage` ( )
+
+#### `dedicatedserver`
+
+- removed the schema `dedicated.server.Dedicated` ( )
+- removed the schema `dedicated.virtualNetworkInterface.VirtualNetworkInterface` ( )
+- removed the schema `macAddress` ( )
+
+#### `domain`
+
+- `CheckConfigurationRule`: added `#/components/schemas/domain.ContactWritable` to the `owner` request property `allOf` list (POST /v1/domain/configurationRule/check)
+- `CheckConfigurationRule`: added `#/components/schemas/nichandle.NichandleWritable` to the `adminAccount` request property `allOf` list (POST /v1/domain/configurationRule/check)
+- `CheckConfigurationRule`: added `#/components/schemas/nichandle.NichandleWritable` to the `techAccount` request property `allOf` list (POST /v1/domain/configurationRule/check)
+- `CheckConfigurationRule`: removed `#/components/schemas/domain.Contact` from the `owner` request property `allOf` list (POST /v1/domain/configurationRule/check)
+- `CheckConfigurationRule`: removed `#/components/schemas/nichandle.Nichandle` from the `adminAccount` request property `allOf` list (POST /v1/domain/configurationRule/check)
+- `CheckConfigurationRule`: removed `#/components/schemas/nichandle.Nichandle` from the `techAccount` request property `allOf` list (POST /v1/domain/configurationRule/check)
+- `EditDomain`: the response optional property `contactAdmin/allOf[#/components/schemas/domain.ContactSummary]/id` became not read-only for the status `200` (shared schema: `domain.ContactSummary`, also at `contactBilling/allOf[#/components/schemas/domain.ContactSummary]/id`, `contactOwner/allOf[#/components/schemas/domain.ContactSummary]/id` and 1 more) (PUT /v1/domain/{serviceName})
+- `EditDomain`: the response optional property `nameServers/items/id` became not read-only for the status `200` (PUT /v1/domain/{serviceName})
+- `EditDomain`: the response optional property `nameServers/items/ipv4` became not read-only for the status `200` (PUT /v1/domain/{serviceName})
+- `EditDomain`: the response optional property `nameServers/items/ipv6` became not read-only for the status `200` (PUT /v1/domain/{serviceName})
+- `EditDomain`: the response optional property `nameServers/items/nameServerType` became not read-only for the status `200` (PUT /v1/domain/{serviceName})
+- `EditDomain`: the response optional property `nameServers/items/nameServer` became not read-only for the status `200` (PUT /v1/domain/{serviceName})
+- `EditDomain`: the response optional property `parentService/allOf[#/components/schemas/domain.ParentService]/name` became not read-only for the status `200` (PUT /v1/domain/{serviceName})
+- `EditDomain`: the response optional property `parentService/allOf[#/components/schemas/domain.ParentService]/type` became not read-only for the status `200` (PUT /v1/domain/{serviceName})
+- `GetDomain`: the response optional property `contactAdmin/allOf[#/components/schemas/domain.ContactSummary]/id` became not read-only for the status `200` (shared schema: `domain.ContactSummary`, also at `contactBilling/allOf[#/components/schemas/domain.ContactSummary]/id`, `contactOwner/allOf[#/components/schemas/domain.ContactSummary]/id` and 1 more) (GET /v1/domain/{serviceName})
+- `GetDomain`: the response optional property `nameServers/items/id` became not read-only for the status `200` (GET /v1/domain/{serviceName})
+- `GetDomain`: the response optional property `nameServers/items/ipv4` became not read-only for the status `200` (GET /v1/domain/{serviceName})
+- `GetDomain`: the response optional property `nameServers/items/ipv6` became not read-only for the status `200` (GET /v1/domain/{serviceName})
+- `GetDomain`: the response optional property `nameServers/items/nameServerType` became not read-only for the status `200` (GET /v1/domain/{serviceName})
+- `GetDomain`: the response optional property `nameServers/items/nameServer` became not read-only for the status `200` (GET /v1/domain/{serviceName})
+- `GetDomain`: the response optional property `parentService/allOf[#/components/schemas/domain.ParentService]/name` became not read-only for the status `200` (GET /v1/domain/{serviceName})
+- `GetDomain`: the response optional property `parentService/allOf[#/components/schemas/domain.ParentService]/type` became not read-only for the status `200` (GET /v1/domain/{serviceName})
+- removed the schema `dnssec.UpdatePayload` ( )
+- removed the schema `domain.configuration.rules.RuleData` ( )
+- removed the schema `domain.zone.RecordCreate` ( )
+- removed the schema `nichandle.Currency` ( )
+- removed the schema `nichandle.Nichandle` ( )
+- removed the schema `nichandle.OvhCompanyEnum` ( )
+- removed the schema `nichandle.StateEnum` ( )
+
+#### `emailexchange`
+
+- removed the schema `email.exchange.ExchangeService` ( )
+
+#### `emailmxplan`
+
+- removed the schema `email.mxplan.Service` ( )
+
+#### `emailpro`
+
+- `UpdateAccount`: the request optional property `spamAndVirusConfiguration/allOf[#/components/schemas/email.pro.spamAndVirusConfiguration]/checkDKIM` became not read-only (PUT /v1/email/pro/{service}/account/{email})
+- `UpdateAccount`: the request optional property `spamAndVirusConfiguration/allOf[#/components/schemas/email.pro.spamAndVirusConfiguration]/checkSPF` became not read-only (PUT /v1/email/pro/{service}/account/{email})
+- `UpdateAccount`: the request optional property `spamAndVirusConfiguration/allOf[#/components/schemas/email.pro.spamAndVirusConfiguration]/deleteSpam` became not read-only (PUT /v1/email/pro/{service}/account/{email})
+- `UpdateAccount`: the request optional property `spamAndVirusConfiguration/allOf[#/components/schemas/email.pro.spamAndVirusConfiguration]/deleteVirus` became not read-only (PUT /v1/email/pro/{service}/account/{email})
+- `UpdateAccount`: the request optional property `spamAndVirusConfiguration/allOf[#/components/schemas/email.pro.spamAndVirusConfiguration]/putInJunk` became not read-only (PUT /v1/email/pro/{service}/account/{email})
+- `UpdateAccount`: the request optional property `spamAndVirusConfiguration/allOf[#/components/schemas/email.pro.spamAndVirusConfiguration]/tagSpam` became not read-only (PUT /v1/email/pro/{service}/account/{email})
+- `UpdateAccount`: the request optional property `spamAndVirusConfiguration/allOf[#/components/schemas/email.pro.spamAndVirusConfiguration]/tagVirus` became not read-only (PUT /v1/email/pro/{service}/account/{email})
+- `UpdatePro`: the request optional property `spamAndVirusConfiguration/allOf[#/components/schemas/email.pro.spamAndVirusConfiguration]/checkDKIM` became not read-only (PUT /v1/email/pro/{service})
+- `UpdatePro`: the request optional property `spamAndVirusConfiguration/allOf[#/components/schemas/email.pro.spamAndVirusConfiguration]/checkSPF` became not read-only (PUT /v1/email/pro/{service})
+- `UpdatePro`: the request optional property `spamAndVirusConfiguration/allOf[#/components/schemas/email.pro.spamAndVirusConfiguration]/deleteSpam` became not read-only (PUT /v1/email/pro/{service})
+- `UpdatePro`: the request optional property `spamAndVirusConfiguration/allOf[#/components/schemas/email.pro.spamAndVirusConfiguration]/deleteVirus` became not read-only (PUT /v1/email/pro/{service})
+- `UpdatePro`: the request optional property `spamAndVirusConfiguration/allOf[#/components/schemas/email.pro.spamAndVirusConfiguration]/putInJunk` became not read-only (PUT /v1/email/pro/{service})
+- `UpdatePro`: the request optional property `spamAndVirusConfiguration/allOf[#/components/schemas/email.pro.spamAndVirusConfiguration]/tagSpam` became not read-only (PUT /v1/email/pro/{service})
+- `UpdatePro`: the request optional property `spamAndVirusConfiguration/allOf[#/components/schemas/email.pro.spamAndVirusConfiguration]/tagVirus` became not read-only (PUT /v1/email/pro/{service})
+- removed the schema `email.pro.Account` ( )
+- removed the schema `email.pro.Domain` ( )
+- removed the schema `email.pro.ExternalContact` ( )
+- removed the schema `email.pro.ObjectStateEnum` ( )
+- removed the schema `email.pro.ServiceOfferEnum` ( )
+- removed the schema `email.pro.ServiceStateEnum` ( )
+- removed the schema `email.pro.Service` ( )
+- removed the schema `email.pro.disclaimer` ( )
+
+#### `freefax`
+
+- removed the schema `freefax.FreefaxProperties` ( )
+
+#### `hostingprivatedatabase`
+
+- `GetPrivateDatabase`: the response optional property `capabilities/items/create` became not read-only for the status `200` (GET /v1/hosting/privateDatabase/{serviceName})
+- `GetPrivateDatabase`: the response optional property `capabilities/items/delete` became not read-only for the status `200` (GET /v1/hosting/privateDatabase/{serviceName})
+- `GetPrivateDatabase`: the response optional property `capabilities/items/object` became not read-only for the status `200` (GET /v1/hosting/privateDatabase/{serviceName})
+- `GetPrivateDatabase`: the response optional property `capabilities/items/update` became not read-only for the status `200` (GET /v1/hosting/privateDatabase/{serviceName})
+- `GetPrivateDatabase`: the response optional property `graphEndpoint/allOf[#/components/schemas/hosting.privateDatabase.GraphEndpoint]/host` became not read-only for the status `200` (GET /v1/hosting/privateDatabase/{serviceName})
+- `GetPrivateDatabase`: the response optional property `graphEndpoint/allOf[#/components/schemas/hosting.privateDatabase.GraphEndpoint]/readTokenId` became not read-only for the status `200` (GET /v1/hosting/privateDatabase/{serviceName})
+- `GetPrivateDatabase`: the response optional property `graphEndpoint/allOf[#/components/schemas/hosting.privateDatabase.GraphEndpoint]/readToken` became not read-only for the status `200` (GET /v1/hosting/privateDatabase/{serviceName})
+- removed the schema `hosting.privateDatabase.Service` ( )
+
+#### `hostingweb`
+
+- `GetWeb`: the response optional property `availableBoostOffer/items/price/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (GET /v1/hosting/web/{serviceName})
+- `GetWeb`: the response optional property `availableBoostOffer/items/price/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (GET /v1/hosting/web/{serviceName})
+- `GetWeb`: the response optional property `availableBoostOffer/items/price/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (GET /v1/hosting/web/{serviceName})
+- `GetWeb`: the response optional property `availableBoostOffer/items/price/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (GET /v1/hosting/web/{serviceName})
+- `GetWeb`: the response optional property `countriesIp/items/country` became not read-only for the status `200` (GET /v1/hosting/web/{serviceName})
+- `GetWeb`: the response optional property `countriesIp/items/ip` became not read-only for the status `200` (GET /v1/hosting/web/{serviceName})
+- `GetWeb`: the response optional property `countriesIp/items/ipv6` became not read-only for the status `200` (GET /v1/hosting/web/{serviceName})
+- removed the schema `hosting.web.Service` ( )
+
+#### `iam`
+
+- `AllPolicies`: the response optional property `items/resources/items/group/allOf[#/components/schemas/iam.policy.Group]/id` became not read-only for the status `200` (GET /v2/iam/policy)
+- `AllPolicies`: the response optional property `items/resources/items/group/allOf[#/components/schemas/iam.policy.Group]/name` became not read-only for the status `200` (GET /v2/iam/policy)
+- `AllPolicies`: the response optional property `items/resources/items/group/allOf[#/components/schemas/iam.policy.Group]/readOnly` became not read-only for the status `200` (GET /v2/iam/policy)
+- `AllPolicies`: the response optional property `items/resources/items/resource/allOf[#/components/schemas/iam.policy.SingleResource]/displayName` became not read-only for the status `200` (GET /v2/iam/policy)
+- `AllPolicies`: the response optional property `items/resources/items/resource/allOf[#/components/schemas/iam.policy.SingleResource]/id` became not read-only for the status `200` (GET /v2/iam/policy)
+- `AllPolicies`: the response optional property `items/resources/items/resource/allOf[#/components/schemas/iam.policy.SingleResource]/name` became not read-only for the status `200` (GET /v2/iam/policy)
+- `AllPolicies`: the response optional property `items/resources/items/resource/allOf[#/components/schemas/iam.policy.SingleResource]/owner` became not read-only for the status `200` (GET /v2/iam/policy)
+- `AllPolicies`: the response optional property `items/resources/items/resource/allOf[#/components/schemas/iam.policy.SingleResource]/tags` became not read-only for the status `200` (GET /v2/iam/policy)
+- `AllPolicies`: the response optional property `items/resources/items/resource/allOf[#/components/schemas/iam.policy.SingleResource]/type` became not read-only for the status `200` (GET /v2/iam/policy)
+- `CreatePolicy`: the response optional property `resources/items/group/allOf[#/components/schemas/iam.policy.Group]/id` became not read-only for the status `200` (POST /v2/iam/policy)
+- `CreatePolicy`: the response optional property `resources/items/group/allOf[#/components/schemas/iam.policy.Group]/name` became not read-only for the status `200` (POST /v2/iam/policy)
+- `CreatePolicy`: the response optional property `resources/items/group/allOf[#/components/schemas/iam.policy.Group]/readOnly` became not read-only for the status `200` (POST /v2/iam/policy)
+- `CreatePolicy`: the response optional property `resources/items/resource/allOf[#/components/schemas/iam.policy.SingleResource]/displayName` became not read-only for the status `200` (POST /v2/iam/policy)
+- `CreatePolicy`: the response optional property `resources/items/resource/allOf[#/components/schemas/iam.policy.SingleResource]/id` became not read-only for the status `200` (POST /v2/iam/policy)
+- `CreatePolicy`: the response optional property `resources/items/resource/allOf[#/components/schemas/iam.policy.SingleResource]/name` became not read-only for the status `200` (POST /v2/iam/policy)
+- `CreatePolicy`: the response optional property `resources/items/resource/allOf[#/components/schemas/iam.policy.SingleResource]/owner` became not read-only for the status `200` (POST /v2/iam/policy)
+- `CreatePolicy`: the response optional property `resources/items/resource/allOf[#/components/schemas/iam.policy.SingleResource]/tags` became not read-only for the status `200` (POST /v2/iam/policy)
+- `CreatePolicy`: the response optional property `resources/items/resource/allOf[#/components/schemas/iam.policy.SingleResource]/type` became not read-only for the status `200` (POST /v2/iam/policy)
+- `GetPolicy`: the response optional property `resources/items/group/allOf[#/components/schemas/iam.policy.Group]/id` became not read-only for the status `200` (GET /v2/iam/policy/{policyId})
+- `GetPolicy`: the response optional property `resources/items/group/allOf[#/components/schemas/iam.policy.Group]/name` became not read-only for the status `200` (GET /v2/iam/policy/{policyId})
+- `GetPolicy`: the response optional property `resources/items/group/allOf[#/components/schemas/iam.policy.Group]/readOnly` became not read-only for the status `200` (GET /v2/iam/policy/{policyId})
+- `GetPolicy`: the response optional property `resources/items/resource/allOf[#/components/schemas/iam.policy.SingleResource]/displayName` became not read-only for the status `200` (GET /v2/iam/policy/{policyId})
+- `GetPolicy`: the response optional property `resources/items/resource/allOf[#/components/schemas/iam.policy.SingleResource]/id` became not read-only for the status `200` (GET /v2/iam/policy/{policyId})
+- `GetPolicy`: the response optional property `resources/items/resource/allOf[#/components/schemas/iam.policy.SingleResource]/name` became not read-only for the status `200` (GET /v2/iam/policy/{policyId})
+- `GetPolicy`: the response optional property `resources/items/resource/allOf[#/components/schemas/iam.policy.SingleResource]/owner` became not read-only for the status `200` (GET /v2/iam/policy/{policyId})
+- `GetPolicy`: the response optional property `resources/items/resource/allOf[#/components/schemas/iam.policy.SingleResource]/tags` became not read-only for the status `200` (GET /v2/iam/policy/{policyId})
+- `GetPolicy`: the response optional property `resources/items/resource/allOf[#/components/schemas/iam.policy.SingleResource]/type` became not read-only for the status `200` (GET /v2/iam/policy/{policyId})
+- `UpdatePolicy`: the response optional property `resources/items/group/allOf[#/components/schemas/iam.policy.Group]/id` became not read-only for the status `200` (PUT /v2/iam/policy/{policyId})
+- `UpdatePolicy`: the response optional property `resources/items/group/allOf[#/components/schemas/iam.policy.Group]/name` became not read-only for the status `200` (PUT /v2/iam/policy/{policyId})
+- `UpdatePolicy`: the response optional property `resources/items/group/allOf[#/components/schemas/iam.policy.Group]/readOnly` became not read-only for the status `200` (PUT /v2/iam/policy/{policyId})
+- `UpdatePolicy`: the response optional property `resources/items/resource/allOf[#/components/schemas/iam.policy.SingleResource]/displayName` became not read-only for the status `200` (PUT /v2/iam/policy/{policyId})
+- `UpdatePolicy`: the response optional property `resources/items/resource/allOf[#/components/schemas/iam.policy.SingleResource]/id` became not read-only for the status `200` (PUT /v2/iam/policy/{policyId})
+- `UpdatePolicy`: the response optional property `resources/items/resource/allOf[#/components/schemas/iam.policy.SingleResource]/name` became not read-only for the status `200` (PUT /v2/iam/policy/{policyId})
+- `UpdatePolicy`: the response optional property `resources/items/resource/allOf[#/components/schemas/iam.policy.SingleResource]/owner` became not read-only for the status `200` (PUT /v2/iam/policy/{policyId})
+- `UpdatePolicy`: the response optional property `resources/items/resource/allOf[#/components/schemas/iam.policy.SingleResource]/tags` became not read-only for the status `200` (PUT /v2/iam/policy/{policyId})
+- `UpdatePolicy`: the response optional property `resources/items/resource/allOf[#/components/schemas/iam.policy.SingleResource]/type` became not read-only for the status `200` (PUT /v2/iam/policy/{policyId})
+- removed the schema `iam.group.Creation` ( )
+- removed the schema `iam.group.Update` ( )
+- removed the schema `iam.policy.Creation` ( )
+- removed the schema `iam.policy.Update` ( )
+
+#### `iploadbalancing`
+
+- removed the schema `ipLoadbalancing.Ip` ( )
+
+#### `licensecpanel`
+
+- removed the schema `license.cpanel.Cpanel` ( )
+
+#### `licensedirectadmin`
+
+- removed the schema `license.directadmin.DirectAdmin` ( )
+
+#### `licensehycu`
+
+- removed the schema `license.StateEnum` ( )
+- removed the schema `license.hycu.Hycu` ( )
+
+#### `licenseplesk`
+
+- removed the schema `license.plesk.Plesk` ( )
+
+#### `licensevirtuozzo`
+
+- removed the schema `license.virtuozzo.Virtuozzo` ( )
+
+#### `licensewindows`
+
+- removed the schema `license.windows.Windows` ( )
+
+#### `licenseworklight`
+
+- removed the schema `license.worklight.WorkLight` ( )
+
+#### `me`
+
+- `CodeCredit`: the response optional property `amount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (POST /v1/me/credit/code)
+- `CodeCredit`: the response optional property `amount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (POST /v1/me/credit/code)
+- `CodeCredit`: the response optional property `amount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (POST /v1/me/credit/code)
+- `CodeCredit`: the response optional property `amount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (POST /v1/me/credit/code)
+- `CreateIdentityProvider`: the response optional property `idpSigningCertificates/items/expiration` became not read-only for the status `200` (POST /v1/me/identity/provider)
+- `CreateIdentityProvider`: the response optional property `idpSigningCertificates/items/subject` became not read-only for the status `200` (POST /v1/me/identity/provider)
+- `CreateOrderVoucher`: the response optional property `amount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (POST /v1/me/order/{orderId}/voucher)
+- `CreateOrderVoucher`: the response optional property `amount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (POST /v1/me/order/{orderId}/voucher)
+- `CreateOrderVoucher`: the response optional property `amount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (POST /v1/me/order/{orderId}/voucher)
+- `CreateOrderVoucher`: the response optional property `amount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (POST /v1/me/order/{orderId}/voucher)
+- `CreateSvaOnboarding`: added `#/components/schemas/me.sva.onboarding.CompanyWritable` to the `company` request property `allOf` list (POST /v1/me/sva/onboarding)
+- `CreateSvaOnboarding`: added `#/components/schemas/me.sva.onboarding.PersonalInfo.RepresentativeWritable` to the `representative` request property `allOf` list (POST /v1/me/sva/onboarding)
+- `CreateSvaOnboarding`: removed `#/components/schemas/me.sva.onboarding.Company` from the `company` request property `allOf` list (POST /v1/me/sva/onboarding)
+- `CreateSvaOnboarding`: removed `#/components/schemas/me.sva.onboarding.PersonalInfo.Representative` from the `representative` request property `allOf` list (POST /v1/me/sva/onboarding)
+- `CreateSvaWallet`: added `#/components/schemas/me.sva.CompanyWritable` to the `company` request property `allOf` list (POST /v1/me/sva/wallet)
+- `CreateSvaWallet`: added `#/components/schemas/me.sva.PersonalInfo.RepresentativeWritable` to the `representative` request property `allOf` list (POST /v1/me/sva/wallet)
+- `CreateSvaWallet`: removed `#/components/schemas/me.sva.Company` from the `company` request property `allOf` list (POST /v1/me/sva/wallet)
+- `CreateSvaWallet`: removed `#/components/schemas/me.sva.PersonalInfo.Representative` from the `representative` request property `allOf` list (POST /v1/me/sva/wallet)
+- `CreateSvaWallet`: the response optional property `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/availableAmount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/costsAmount/allOf[#/components/schemas/order.Price]/currencyCode`, `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/pendingAmount/allOf[#/components/schemas/order.Price]/currencyCode`) (POST /v1/me/sva/wallet)
+- `CreateSvaWallet`: the response optional property `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/availableAmount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/costsAmount/allOf[#/components/schemas/order.Price]/priceInUcents`, `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/pendingAmount/allOf[#/components/schemas/order.Price]/priceInUcents`) (POST /v1/me/sva/wallet)
+- `CreateSvaWallet`: the response optional property `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/availableAmount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/costsAmount/allOf[#/components/schemas/order.Price]/text`, `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/pendingAmount/allOf[#/components/schemas/order.Price]/text`) (POST /v1/me/sva/wallet)
+- `CreateSvaWallet`: the response optional property `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/availableAmount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/costsAmount/allOf[#/components/schemas/order.Price]/value`, `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/pendingAmount/allOf[#/components/schemas/order.Price]/value`) (POST /v1/me/sva/wallet)
+- `CreditOrderFidelityAccount`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/currencyCode`, `tax/allOf[#/components/schemas/order.Price]/currencyCode`) (POST /v1/me/fidelityAccount/creditOrder)
+- `CreditOrderFidelityAccount`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/priceInUcents`, `tax/allOf[#/components/schemas/order.Price]/priceInUcents`) (POST /v1/me/fidelityAccount/creditOrder)
+- `CreditOrderFidelityAccount`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/text`, `tax/allOf[#/components/schemas/order.Price]/text`) (POST /v1/me/fidelityAccount/creditOrder)
+- `CreditOrderFidelityAccount`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/value`, `tax/allOf[#/components/schemas/order.Price]/value`) (POST /v1/me/fidelityAccount/creditOrder)
+- `CreditOrderOvhAccount`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/currencyCode`, `tax/allOf[#/components/schemas/order.Price]/currencyCode`) (POST /v1/me/ovhAccount/{ovhAccountId}/creditOrder)
+- `CreditOrderOvhAccount`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/priceInUcents`, `tax/allOf[#/components/schemas/order.Price]/priceInUcents`) (POST /v1/me/ovhAccount/{ovhAccountId}/creditOrder)
+- `CreditOrderOvhAccount`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/text`, `tax/allOf[#/components/schemas/order.Price]/text`) (POST /v1/me/ovhAccount/{ovhAccountId}/creditOrder)
+- `CreditOrderOvhAccount`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/value`, `tax/allOf[#/components/schemas/order.Price]/value`) (POST /v1/me/ovhAccount/{ovhAccountId}/creditOrder)
+- `DeletePaymentMethodByPaymentMethodID`: the response optional property `icon/allOf[#/components/schemas/me.payment.Icon]/data` became not read-only for the status `200` (DELETE /v1/me/payment/method/{paymentMethodId})
+- `DeletePaymentMethodByPaymentMethodID`: the response optional property `icon/allOf[#/components/schemas/me.payment.Icon]/name` became not read-only for the status `200` (DELETE /v1/me/payment/method/{paymentMethodId})
+- `DeletePaymentMethodByPaymentMethodID`: the response optional property `icon/allOf[#/components/schemas/me.payment.Icon]/url` became not read-only for the status `200` (DELETE /v1/me/payment/method/{paymentMethodId})
+- `FinalizePaymentMethod`: the response optional property `icon/allOf[#/components/schemas/me.payment.Icon]/data` became not read-only for the status `200` (POST /v1/me/payment/method/{paymentMethodId}/finalize)
+- `FinalizePaymentMethod`: the response optional property `icon/allOf[#/components/schemas/me.payment.Icon]/name` became not read-only for the status `200` (POST /v1/me/payment/method/{paymentMethodId}/finalize)
+- `FinalizePaymentMethod`: the response optional property `icon/allOf[#/components/schemas/me.payment.Icon]/url` became not read-only for the status `200` (POST /v1/me/payment/method/{paymentMethodId}/finalize)
+- `GetAPICredential`: the response optional property `rules/items/method` became not read-only for the status `200` (GET /v1/me/api/credential/{credentialId})
+- `GetAPICredential`: the response optional property `rules/items/path` became not read-only for the status `200` (GET /v1/me/api/credential/{credentialId})
+- `GetBillDebtOperation`: the response optional property `amount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (GET /v1/me/bill/{billId}/debt/operation/{operationId})
+- `GetBillDebtOperation`: the response optional property `amount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (GET /v1/me/bill/{billId}/debt/operation/{operationId})
+- `GetBillDebtOperation`: the response optional property `amount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (GET /v1/me/bill/{billId}/debt/operation/{operationId})
+- `GetBillDebtOperation`: the response optional property `amount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (GET /v1/me/bill/{billId}/debt/operation/{operationId})
+- `GetBillDebt`: the response optional property `amount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `dueAmount/allOf[#/components/schemas/order.Price]/currencyCode`, `pendingAmount/allOf[#/components/schemas/order.Price]/currencyCode` and 2 more) (GET /v1/me/bill/{billId}/debt)
+- `GetBillDebt`: the response optional property `amount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `dueAmount/allOf[#/components/schemas/order.Price]/priceInUcents`, `pendingAmount/allOf[#/components/schemas/order.Price]/priceInUcents` and 2 more) (GET /v1/me/bill/{billId}/debt)
+- `GetBillDebt`: the response optional property `amount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `dueAmount/allOf[#/components/schemas/order.Price]/text`, `pendingAmount/allOf[#/components/schemas/order.Price]/text` and 2 more) (GET /v1/me/bill/{billId}/debt)
+- `GetBillDebt`: the response optional property `amount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `dueAmount/allOf[#/components/schemas/order.Price]/value`, `pendingAmount/allOf[#/components/schemas/order.Price]/value` and 2 more) (GET /v1/me/bill/{billId}/debt)
+- `GetBillDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (GET /v1/me/bill/{billId}/details/{billDetailId})
+- `GetBillDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (GET /v1/me/bill/{billId}/details/{billDetailId})
+- `GetBillDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (GET /v1/me/bill/{billId}/details/{billDetailId})
+- `GetBillDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (GET /v1/me/bill/{billId}/details/{billDetailId})
+- `GetBill`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/currencyCode`, `tax/allOf[#/components/schemas/order.Price]/currencyCode`) (GET /v1/me/bill/{billId})
+- `GetBill`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/priceInUcents`, `tax/allOf[#/components/schemas/order.Price]/priceInUcents`) (GET /v1/me/bill/{billId})
+- `GetBill`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/text`, `tax/allOf[#/components/schemas/order.Price]/text`) (GET /v1/me/bill/{billId})
+- `GetBill`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/value`, `tax/allOf[#/components/schemas/order.Price]/value`) (GET /v1/me/bill/{billId})
+- `GetCorrectiveInvoiceDebtOperation`: the response optional property `amount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (GET /v1/me/correctiveInvoice/{correctiveInvoiceId}/debt/operation/{operationId})
+- `GetCorrectiveInvoiceDebtOperation`: the response optional property `amount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (GET /v1/me/correctiveInvoice/{correctiveInvoiceId}/debt/operation/{operationId})
+- `GetCorrectiveInvoiceDebtOperation`: the response optional property `amount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (GET /v1/me/correctiveInvoice/{correctiveInvoiceId}/debt/operation/{operationId})
+- `GetCorrectiveInvoiceDebtOperation`: the response optional property `amount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (GET /v1/me/correctiveInvoice/{correctiveInvoiceId}/debt/operation/{operationId})
+- `GetCorrectiveInvoiceDebt`: the response optional property `amount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `dueAmount/allOf[#/components/schemas/order.Price]/currencyCode`, `pendingAmount/allOf[#/components/schemas/order.Price]/currencyCode` and 2 more) (GET /v1/me/correctiveInvoice/{correctiveInvoiceId}/debt)
+- `GetCorrectiveInvoiceDebt`: the response optional property `amount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `dueAmount/allOf[#/components/schemas/order.Price]/priceInUcents`, `pendingAmount/allOf[#/components/schemas/order.Price]/priceInUcents` and 2 more) (GET /v1/me/correctiveInvoice/{correctiveInvoiceId}/debt)
+- `GetCorrectiveInvoiceDebt`: the response optional property `amount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `dueAmount/allOf[#/components/schemas/order.Price]/text`, `pendingAmount/allOf[#/components/schemas/order.Price]/text` and 2 more) (GET /v1/me/correctiveInvoice/{correctiveInvoiceId}/debt)
+- `GetCorrectiveInvoiceDebt`: the response optional property `amount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `dueAmount/allOf[#/components/schemas/order.Price]/value`, `pendingAmount/allOf[#/components/schemas/order.Price]/value` and 2 more) (GET /v1/me/correctiveInvoice/{correctiveInvoiceId}/debt)
+- `GetCorrectiveInvoiceDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (GET /v1/me/correctiveInvoice/{correctiveInvoiceId}/details/{correctiveInvoiceDetailId})
+- `GetCorrectiveInvoiceDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (GET /v1/me/correctiveInvoice/{correctiveInvoiceId}/details/{correctiveInvoiceDetailId})
+- `GetCorrectiveInvoiceDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (GET /v1/me/correctiveInvoice/{correctiveInvoiceId}/details/{correctiveInvoiceDetailId})
+- `GetCorrectiveInvoiceDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (GET /v1/me/correctiveInvoice/{correctiveInvoiceId}/details/{correctiveInvoiceDetailId})
+- `GetCorrectiveInvoice`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/currencyCode`, `tax/allOf[#/components/schemas/order.Price]/currencyCode`) (GET /v1/me/correctiveInvoice/{correctiveInvoiceId})
+- `GetCorrectiveInvoice`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/priceInUcents`, `tax/allOf[#/components/schemas/order.Price]/priceInUcents`) (GET /v1/me/correctiveInvoice/{correctiveInvoiceId})
+- `GetCorrectiveInvoice`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/text`, `tax/allOf[#/components/schemas/order.Price]/text`) (GET /v1/me/correctiveInvoice/{correctiveInvoiceId})
+- `GetCorrectiveInvoice`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/value`, `tax/allOf[#/components/schemas/order.Price]/value`) (GET /v1/me/correctiveInvoice/{correctiveInvoiceId})
+- `GetCreditBalanceMovement`: the response optional property `amount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (GET /v1/me/credit/balance/{balanceName}/movement/{movementId})
+- `GetCreditBalanceMovement`: the response optional property `amount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (GET /v1/me/credit/balance/{balanceName}/movement/{movementId})
+- `GetCreditBalanceMovement`: the response optional property `amount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (GET /v1/me/credit/balance/{balanceName}/movement/{movementId})
+- `GetCreditBalanceMovement`: the response optional property `amount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (GET /v1/me/credit/balance/{balanceName}/movement/{movementId})
+- `GetCreditBalance`: the response optional property `amount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `balanceDetails/items/amount/allOf[#/components/schemas/order.Price]/currencyCode`, `balanceDetails/items/expiring/items/amount/allOf[#/components/schemas/order.Price]/currencyCode` and 2 more) (GET /v1/me/credit/balance/{balanceName})
+- `GetCreditBalance`: the response optional property `amount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `balanceDetails/items/amount/allOf[#/components/schemas/order.Price]/priceInUcents`, `balanceDetails/items/expiring/items/amount/allOf[#/components/schemas/order.Price]/priceInUcents` and 2 more) (GET /v1/me/credit/balance/{balanceName})
+- `GetCreditBalance`: the response optional property `amount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `balanceDetails/items/amount/allOf[#/components/schemas/order.Price]/text`, `balanceDetails/items/expiring/items/amount/allOf[#/components/schemas/order.Price]/text` and 2 more) (GET /v1/me/credit/balance/{balanceName})
+- `GetCreditBalance`: the response optional property `amount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `balanceDetails/items/amount/allOf[#/components/schemas/order.Price]/value`, `balanceDetails/items/expiring/items/amount/allOf[#/components/schemas/order.Price]/value` and 2 more) (GET /v1/me/credit/balance/{balanceName})
+- `GetDebtAccountDebtOperation`: the response optional property `amount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (GET /v1/me/debtAccount/debt/{debtId}/operation/{operationId})
+- `GetDebtAccountDebtOperation`: the response optional property `amount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (GET /v1/me/debtAccount/debt/{debtId}/operation/{operationId})
+- `GetDebtAccountDebtOperation`: the response optional property `amount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (GET /v1/me/debtAccount/debt/{debtId}/operation/{operationId})
+- `GetDebtAccountDebtOperation`: the response optional property `amount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (GET /v1/me/debtAccount/debt/{debtId}/operation/{operationId})
+- `GetDebtAccountDebt`: the response optional property `amount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `dueAmount/allOf[#/components/schemas/order.Price]/currencyCode`, `pendingAmount/allOf[#/components/schemas/order.Price]/currencyCode` and 2 more) (GET /v1/me/debtAccount/debt/{debtId})
+- `GetDebtAccountDebt`: the response optional property `amount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `dueAmount/allOf[#/components/schemas/order.Price]/priceInUcents`, `pendingAmount/allOf[#/components/schemas/order.Price]/priceInUcents` and 2 more) (GET /v1/me/debtAccount/debt/{debtId})
+- `GetDebtAccountDebt`: the response optional property `amount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `dueAmount/allOf[#/components/schemas/order.Price]/text`, `pendingAmount/allOf[#/components/schemas/order.Price]/text` and 2 more) (GET /v1/me/debtAccount/debt/{debtId})
+- `GetDebtAccountDebt`: the response optional property `amount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `dueAmount/allOf[#/components/schemas/order.Price]/value`, `pendingAmount/allOf[#/components/schemas/order.Price]/value` and 2 more) (GET /v1/me/debtAccount/debt/{debtId})
+- `GetDebtAccount`: the response optional property `dueAmount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `pendingAmount/allOf[#/components/schemas/order.Price]/currencyCode`, `todoAmount/allOf[#/components/schemas/order.Price]/currencyCode` and 1 more) (GET /v1/me/debtAccount)
+- `GetDebtAccount`: the response optional property `dueAmount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `pendingAmount/allOf[#/components/schemas/order.Price]/priceInUcents`, `todoAmount/allOf[#/components/schemas/order.Price]/priceInUcents` and 1 more) (GET /v1/me/debtAccount)
+- `GetDebtAccount`: the response optional property `dueAmount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `pendingAmount/allOf[#/components/schemas/order.Price]/text`, `todoAmount/allOf[#/components/schemas/order.Price]/text` and 1 more) (GET /v1/me/debtAccount)
+- `GetDebtAccount`: the response optional property `dueAmount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `pendingAmount/allOf[#/components/schemas/order.Price]/value`, `todoAmount/allOf[#/components/schemas/order.Price]/value` and 1 more) (GET /v1/me/debtAccount)
+- `GetDepositDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `unitPrice/allOf[#/components/schemas/order.Price]/currencyCode`) (GET /v1/me/deposit/{depositId}/details/{depositDetailId})
+- `GetDepositDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `unitPrice/allOf[#/components/schemas/order.Price]/priceInUcents`) (GET /v1/me/deposit/{depositId}/details/{depositDetailId})
+- `GetDepositDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `unitPrice/allOf[#/components/schemas/order.Price]/text`) (GET /v1/me/deposit/{depositId}/details/{depositDetailId})
+- `GetDepositDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `unitPrice/allOf[#/components/schemas/order.Price]/value`) (GET /v1/me/deposit/{depositId}/details/{depositDetailId})
+- `GetDepositPaidBillsDebtOperation`: the response optional property `amount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (GET /v1/me/deposit/{depositId}/paidBills/{billId}/debt/operation/{operationId})
+- `GetDepositPaidBillsDebtOperation`: the response optional property `amount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (GET /v1/me/deposit/{depositId}/paidBills/{billId}/debt/operation/{operationId})
+- `GetDepositPaidBillsDebtOperation`: the response optional property `amount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (GET /v1/me/deposit/{depositId}/paidBills/{billId}/debt/operation/{operationId})
+- `GetDepositPaidBillsDebtOperation`: the response optional property `amount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (GET /v1/me/deposit/{depositId}/paidBills/{billId}/debt/operation/{operationId})
+- `GetDepositPaidBillsDebt`: the response optional property `amount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `dueAmount/allOf[#/components/schemas/order.Price]/currencyCode`, `pendingAmount/allOf[#/components/schemas/order.Price]/currencyCode` and 2 more) (GET /v1/me/deposit/{depositId}/paidBills/{billId}/debt)
+- `GetDepositPaidBillsDebt`: the response optional property `amount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `dueAmount/allOf[#/components/schemas/order.Price]/priceInUcents`, `pendingAmount/allOf[#/components/schemas/order.Price]/priceInUcents` and 2 more) (GET /v1/me/deposit/{depositId}/paidBills/{billId}/debt)
+- `GetDepositPaidBillsDebt`: the response optional property `amount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `dueAmount/allOf[#/components/schemas/order.Price]/text`, `pendingAmount/allOf[#/components/schemas/order.Price]/text` and 2 more) (GET /v1/me/deposit/{depositId}/paidBills/{billId}/debt)
+- `GetDepositPaidBillsDebt`: the response optional property `amount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `dueAmount/allOf[#/components/schemas/order.Price]/value`, `pendingAmount/allOf[#/components/schemas/order.Price]/value` and 2 more) (GET /v1/me/deposit/{depositId}/paidBills/{billId}/debt)
+- `GetDepositPaidBillsDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (GET /v1/me/deposit/{depositId}/paidBills/{billId}/details/{billDetailId})
+- `GetDepositPaidBillsDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (GET /v1/me/deposit/{depositId}/paidBills/{billId}/details/{billDetailId})
+- `GetDepositPaidBillsDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (GET /v1/me/deposit/{depositId}/paidBills/{billId}/details/{billDetailId})
+- `GetDepositPaidBillsDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (GET /v1/me/deposit/{depositId}/paidBills/{billId}/details/{billDetailId})
+- `GetDepositPaidBills`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/currencyCode`, `tax/allOf[#/components/schemas/order.Price]/currencyCode`) (GET /v1/me/deposit/{depositId}/paidBills/{billId})
+- `GetDepositPaidBills`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/priceInUcents`, `tax/allOf[#/components/schemas/order.Price]/priceInUcents`) (GET /v1/me/deposit/{depositId}/paidBills/{billId})
+- `GetDepositPaidBills`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/text`, `tax/allOf[#/components/schemas/order.Price]/text`) (GET /v1/me/deposit/{depositId}/paidBills/{billId})
+- `GetDepositPaidBills`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/value`, `tax/allOf[#/components/schemas/order.Price]/value`) (GET /v1/me/deposit/{depositId}/paidBills/{billId})
+- `GetDeposit`: the response optional property `amount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (GET /v1/me/deposit/{depositId})
+- `GetDeposit`: the response optional property `amount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (GET /v1/me/deposit/{depositId})
+- `GetDeposit`: the response optional property `amount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (GET /v1/me/deposit/{depositId})
+- `GetDeposit`: the response optional property `amount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (GET /v1/me/deposit/{depositId})
+- `GetDownPaymentInvoiceDebtOperation`: the response optional property `amount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (GET /v1/me/downPaymentInvoice/{downPaymentInvoiceId}/debt/operation/{operationId})
+- `GetDownPaymentInvoiceDebtOperation`: the response optional property `amount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (GET /v1/me/downPaymentInvoice/{downPaymentInvoiceId}/debt/operation/{operationId})
+- `GetDownPaymentInvoiceDebtOperation`: the response optional property `amount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (GET /v1/me/downPaymentInvoice/{downPaymentInvoiceId}/debt/operation/{operationId})
+- `GetDownPaymentInvoiceDebtOperation`: the response optional property `amount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (GET /v1/me/downPaymentInvoice/{downPaymentInvoiceId}/debt/operation/{operationId})
+- `GetDownPaymentInvoiceDebt`: the response optional property `amount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `dueAmount/allOf[#/components/schemas/order.Price]/currencyCode`, `pendingAmount/allOf[#/components/schemas/order.Price]/currencyCode` and 2 more) (GET /v1/me/downPaymentInvoice/{downPaymentInvoiceId}/debt)
+- `GetDownPaymentInvoiceDebt`: the response optional property `amount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `dueAmount/allOf[#/components/schemas/order.Price]/priceInUcents`, `pendingAmount/allOf[#/components/schemas/order.Price]/priceInUcents` and 2 more) (GET /v1/me/downPaymentInvoice/{downPaymentInvoiceId}/debt)
+- `GetDownPaymentInvoiceDebt`: the response optional property `amount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `dueAmount/allOf[#/components/schemas/order.Price]/text`, `pendingAmount/allOf[#/components/schemas/order.Price]/text` and 2 more) (GET /v1/me/downPaymentInvoice/{downPaymentInvoiceId}/debt)
+- `GetDownPaymentInvoiceDebt`: the response optional property `amount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `dueAmount/allOf[#/components/schemas/order.Price]/value`, `pendingAmount/allOf[#/components/schemas/order.Price]/value` and 2 more) (GET /v1/me/downPaymentInvoice/{downPaymentInvoiceId}/debt)
+- `GetDownPaymentInvoiceDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (GET /v1/me/downPaymentInvoice/{downPaymentInvoiceId}/details/{downPaymentInvoiceDetailId})
+- `GetDownPaymentInvoiceDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (GET /v1/me/downPaymentInvoice/{downPaymentInvoiceId}/details/{downPaymentInvoiceDetailId})
+- `GetDownPaymentInvoiceDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (GET /v1/me/downPaymentInvoice/{downPaymentInvoiceId}/details/{downPaymentInvoiceDetailId})
+- `GetDownPaymentInvoiceDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (GET /v1/me/downPaymentInvoice/{downPaymentInvoiceId}/details/{downPaymentInvoiceDetailId})
+- `GetDownPaymentInvoice`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/currencyCode`, `tax/allOf[#/components/schemas/order.Price]/currencyCode`) (GET /v1/me/downPaymentInvoice/{downPaymentInvoiceId})
+- `GetDownPaymentInvoice`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/priceInUcents`, `tax/allOf[#/components/schemas/order.Price]/priceInUcents`) (GET /v1/me/downPaymentInvoice/{downPaymentInvoiceId})
+- `GetDownPaymentInvoice`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/text`, `tax/allOf[#/components/schemas/order.Price]/text`) (GET /v1/me/downPaymentInvoice/{downPaymentInvoiceId})
+- `GetDownPaymentInvoice`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/value`, `tax/allOf[#/components/schemas/order.Price]/value`) (GET /v1/me/downPaymentInvoice/{downPaymentInvoiceId})
+- `GetIdentityProvider`: the response optional property `idpSigningCertificates/items/expiration` became not read-only for the status `200` (GET /v1/me/identity/provider)
+- `GetIdentityProvider`: the response optional property `idpSigningCertificates/items/subject` became not read-only for the status `200` (GET /v1/me/identity/provider)
+- `GetOrderByOrderIDDetailsByDetailID`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `unitPrice/allOf[#/components/schemas/order.Price]/currencyCode`) (GET /v1/me/order/{orderId}/details/{detailId})
+- `GetOrderByOrderIDDetailsByDetailID`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `unitPrice/allOf[#/components/schemas/order.Price]/priceInUcents`) (GET /v1/me/order/{orderId}/details/{detailId})
+- `GetOrderByOrderIDDetailsByDetailID`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `unitPrice/allOf[#/components/schemas/order.Price]/text`) (GET /v1/me/order/{orderId}/details/{detailId})
+- `GetOrderByOrderIDDetailsByDetailID`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `unitPrice/allOf[#/components/schemas/order.Price]/value`) (GET /v1/me/order/{orderId}/details/{detailId})
+- `GetOrderByOrderIDDetailsByOrderDetailID`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `unitPrice/allOf[#/components/schemas/order.Price]/currencyCode`) (GET /v1/me/order/{orderId}/details/{orderDetailId})
+- `GetOrderByOrderIDDetailsByOrderDetailID`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `unitPrice/allOf[#/components/schemas/order.Price]/priceInUcents`) (GET /v1/me/order/{orderId}/details/{orderDetailId})
+- `GetOrderByOrderIDDetailsByOrderDetailID`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `unitPrice/allOf[#/components/schemas/order.Price]/text`) (GET /v1/me/order/{orderId}/details/{orderDetailId})
+- `GetOrderByOrderIDDetailsByOrderDetailID`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `unitPrice/allOf[#/components/schemas/order.Price]/value`) (GET /v1/me/order/{orderId}/details/{orderDetailId})
+- `GetOrderDebtOperation`: the response optional property `amount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (GET /v1/me/order/{orderId}/debt/operation/{operationId})
+- `GetOrderDebtOperation`: the response optional property `amount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (GET /v1/me/order/{orderId}/debt/operation/{operationId})
+- `GetOrderDebtOperation`: the response optional property `amount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (GET /v1/me/order/{orderId}/debt/operation/{operationId})
+- `GetOrderDebtOperation`: the response optional property `amount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (GET /v1/me/order/{orderId}/debt/operation/{operationId})
+- `GetOrderDebt`: the response optional property `amount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `dueAmount/allOf[#/components/schemas/order.Price]/currencyCode`, `pendingAmount/allOf[#/components/schemas/order.Price]/currencyCode` and 2 more) (GET /v1/me/order/{orderId}/debt)
+- `GetOrderDebt`: the response optional property `amount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `dueAmount/allOf[#/components/schemas/order.Price]/priceInUcents`, `pendingAmount/allOf[#/components/schemas/order.Price]/priceInUcents` and 2 more) (GET /v1/me/order/{orderId}/debt)
+- `GetOrderDebt`: the response optional property `amount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `dueAmount/allOf[#/components/schemas/order.Price]/text`, `pendingAmount/allOf[#/components/schemas/order.Price]/text` and 2 more) (GET /v1/me/order/{orderId}/debt)
+- `GetOrderDebt`: the response optional property `amount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `dueAmount/allOf[#/components/schemas/order.Price]/value`, `pendingAmount/allOf[#/components/schemas/order.Price]/value` and 2 more) (GET /v1/me/order/{orderId}/debt)
+- `GetOrderVoucher`: the response optional property `amount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (GET /v1/me/order/{orderId}/voucher/{balanceName})
+- `GetOrderVoucher`: the response optional property `amount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (GET /v1/me/order/{orderId}/voucher/{balanceName})
+- `GetOrderVoucher`: the response optional property `amount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (GET /v1/me/order/{orderId}/voucher/{balanceName})
+- `GetOrderVoucher`: the response optional property `amount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (GET /v1/me/order/{orderId}/voucher/{balanceName})
+- `GetOrder`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/currencyCode`, `tax/allOf[#/components/schemas/order.Price]/currencyCode`) (GET /v1/me/order/{orderId})
+- `GetOrder`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/priceInUcents`, `tax/allOf[#/components/schemas/order.Price]/priceInUcents`) (GET /v1/me/order/{orderId})
+- `GetOrder`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/text`, `tax/allOf[#/components/schemas/order.Price]/text`) (GET /v1/me/order/{orderId})
+- `GetOrder`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/value`, `tax/allOf[#/components/schemas/order.Price]/value`) (GET /v1/me/order/{orderId})
+- `GetOvhAccountMovements`: the response optional property `amount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `balance/allOf[#/components/schemas/order.Price]/currencyCode`, `previousBalance/allOf[#/components/schemas/order.Price]/currencyCode` and 1 more) (GET /v1/me/ovhAccount/{ovhAccountId}/movements/{movementId})
+- `GetOvhAccountMovements`: the response optional property `amount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `balance/allOf[#/components/schemas/order.Price]/priceInUcents`, `previousBalance/allOf[#/components/schemas/order.Price]/priceInUcents` and 1 more) (GET /v1/me/ovhAccount/{ovhAccountId}/movements/{movementId})
+- `GetOvhAccountMovements`: the response optional property `amount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `balance/allOf[#/components/schemas/order.Price]/text`, `previousBalance/allOf[#/components/schemas/order.Price]/text` and 1 more) (GET /v1/me/ovhAccount/{ovhAccountId}/movements/{movementId})
+- `GetOvhAccountMovements`: the response optional property `amount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `balance/allOf[#/components/schemas/order.Price]/value`, `previousBalance/allOf[#/components/schemas/order.Price]/value` and 1 more) (GET /v1/me/ovhAccount/{ovhAccountId}/movements/{movementId})
+- `GetOvhAccount`: the response optional property `availableAfterCredit/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `balance/allOf[#/components/schemas/order.Price]/currencyCode`, `retrievableAmount/allOf[#/components/schemas/order.Price]/currencyCode`) (GET /v1/me/ovhAccount/{ovhAccountId})
+- `GetOvhAccount`: the response optional property `availableAfterCredit/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `balance/allOf[#/components/schemas/order.Price]/priceInUcents`, `retrievableAmount/allOf[#/components/schemas/order.Price]/priceInUcents`) (GET /v1/me/ovhAccount/{ovhAccountId})
+- `GetOvhAccount`: the response optional property `availableAfterCredit/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `balance/allOf[#/components/schemas/order.Price]/text`, `retrievableAmount/allOf[#/components/schemas/order.Price]/text`) (GET /v1/me/ovhAccount/{ovhAccountId})
+- `GetOvhAccount`: the response optional property `availableAfterCredit/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `balance/allOf[#/components/schemas/order.Price]/value`, `retrievableAmount/allOf[#/components/schemas/order.Price]/value`) (GET /v1/me/ovhAccount/{ovhAccountId})
+- `GetPaymentMeanBankAccount`: the response optional property `icon/allOf[#/components/schemas/me.paymentMean.IconData]/data` became not read-only for the status `200` (GET /v1/me/paymentMean/bankAccount/{id})
+- `GetPaymentMeanBankAccount`: the response optional property `icon/allOf[#/components/schemas/me.paymentMean.IconData]/name` became not read-only for the status `200` (GET /v1/me/paymentMean/bankAccount/{id})
+- `GetPaymentMeanBankAccount`: the response optional property `icon/allOf[#/components/schemas/me.paymentMean.IconData]/url` became not read-only for the status `200` (GET /v1/me/paymentMean/bankAccount/{id})
+- `GetPaymentMeanCreditCard`: the response optional property `icon/allOf[#/components/schemas/me.paymentMean.IconData]/data` became not read-only for the status `200` (GET /v1/me/paymentMean/creditCard/{id})
+- `GetPaymentMeanCreditCard`: the response optional property `icon/allOf[#/components/schemas/me.paymentMean.IconData]/name` became not read-only for the status `200` (GET /v1/me/paymentMean/creditCard/{id})
+- `GetPaymentMeanCreditCard`: the response optional property `icon/allOf[#/components/schemas/me.paymentMean.IconData]/url` became not read-only for the status `200` (GET /v1/me/paymentMean/creditCard/{id})
+- `GetPaymentMeanDeferredPaymentAccount`: the response optional property `icon/allOf[#/components/schemas/me.paymentMean.IconData]/data` became not read-only for the status `200` (GET /v1/me/paymentMean/deferredPaymentAccount/{id})
+- `GetPaymentMeanDeferredPaymentAccount`: the response optional property `icon/allOf[#/components/schemas/me.paymentMean.IconData]/name` became not read-only for the status `200` (GET /v1/me/paymentMean/deferredPaymentAccount/{id})
+- `GetPaymentMeanDeferredPaymentAccount`: the response optional property `icon/allOf[#/components/schemas/me.paymentMean.IconData]/url` became not read-only for the status `200` (GET /v1/me/paymentMean/deferredPaymentAccount/{id})
+- `GetPaymentMeanPaypal`: the response optional property `icon/allOf[#/components/schemas/me.paymentMean.IconData]/data` became not read-only for the status `200` (GET /v1/me/paymentMean/paypal/{id})
+- `GetPaymentMeanPaypal`: the response optional property `icon/allOf[#/components/schemas/me.paymentMean.IconData]/name` became not read-only for the status `200` (GET /v1/me/paymentMean/paypal/{id})
+- `GetPaymentMeanPaypal`: the response optional property `icon/allOf[#/components/schemas/me.paymentMean.IconData]/url` became not read-only for the status `200` (GET /v1/me/paymentMean/paypal/{id})
+- `GetPaymentMethodByPaymentMethodID`: the response optional property `icon/allOf[#/components/schemas/me.payment.Icon]/data` became not read-only for the status `200` (GET /v1/me/payment/method/{paymentMethodId})
+- `GetPaymentMethodByPaymentMethodID`: the response optional property `icon/allOf[#/components/schemas/me.payment.Icon]/name` became not read-only for the status `200` (GET /v1/me/payment/method/{paymentMethodId})
+- `GetPaymentMethodByPaymentMethodID`: the response optional property `icon/allOf[#/components/schemas/me.payment.Icon]/url` became not read-only for the status `200` (GET /v1/me/payment/method/{paymentMethodId})
+- `GetPaymentTransaction`: the response optional property `amount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (GET /v1/me/payment/transaction/{transactionId})
+- `GetPaymentTransaction`: the response optional property `amount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (GET /v1/me/payment/transaction/{transactionId})
+- `GetPaymentTransaction`: the response optional property `amount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (GET /v1/me/payment/transaction/{transactionId})
+- `GetPaymentTransaction`: the response optional property `amount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (GET /v1/me/payment/transaction/{transactionId})
+- `GetRefundDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `unitPrice/allOf[#/components/schemas/order.Price]/currencyCode`) (GET /v1/me/refund/{refundId}/details/{refundDetailId})
+- `GetRefundDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `unitPrice/allOf[#/components/schemas/order.Price]/priceInUcents`) (GET /v1/me/refund/{refundId}/details/{refundDetailId})
+- `GetRefundDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `unitPrice/allOf[#/components/schemas/order.Price]/text`) (GET /v1/me/refund/{refundId}/details/{refundDetailId})
+- `GetRefundDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `unitPrice/allOf[#/components/schemas/order.Price]/value`) (GET /v1/me/refund/{refundId}/details/{refundDetailId})
+- `GetRefund`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/currencyCode`, `tax/allOf[#/components/schemas/order.Price]/currencyCode`) (GET /v1/me/refund/{refundId})
+- `GetRefund`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/priceInUcents`, `tax/allOf[#/components/schemas/order.Price]/priceInUcents`) (GET /v1/me/refund/{refundId})
+- `GetRefund`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/text`, `tax/allOf[#/components/schemas/order.Price]/text`) (GET /v1/me/refund/{refundId})
+- `GetRefund`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/value`, `tax/allOf[#/components/schemas/order.Price]/value`) (GET /v1/me/refund/{refundId})
+- `GetReverseBillDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `unitPrice/allOf[#/components/schemas/order.Price]/currencyCode`) (GET /v1/me/reverseBill/{reverseBillId}/details/{reverseBillDetailId})
+- `GetReverseBillDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `unitPrice/allOf[#/components/schemas/order.Price]/priceInUcents`) (GET /v1/me/reverseBill/{reverseBillId}/details/{reverseBillDetailId})
+- `GetReverseBillDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `unitPrice/allOf[#/components/schemas/order.Price]/text`) (GET /v1/me/reverseBill/{reverseBillId}/details/{reverseBillDetailId})
+- `GetReverseBillDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `unitPrice/allOf[#/components/schemas/order.Price]/value`) (GET /v1/me/reverseBill/{reverseBillId}/details/{reverseBillDetailId})
+- `GetReverseBill`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/currencyCode`, `tax/allOf[#/components/schemas/order.Price]/currencyCode`) (GET /v1/me/reverseBill/{reverseBillId})
+- `GetReverseBill`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/priceInUcents`, `tax/allOf[#/components/schemas/order.Price]/priceInUcents`) (GET /v1/me/reverseBill/{reverseBillId})
+- `GetReverseBill`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/text`, `tax/allOf[#/components/schemas/order.Price]/text`) (GET /v1/me/reverseBill/{reverseBillId})
+- `GetReverseBill`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/value`, `tax/allOf[#/components/schemas/order.Price]/value`) (GET /v1/me/reverseBill/{reverseBillId})
+- `GetSvaWalletCashouts`: the response optional property `amount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (GET /v1/me/sva/wallet/cashouts/{id})
+- `GetSvaWalletCashouts`: the response optional property `amount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (GET /v1/me/sva/wallet/cashouts/{id})
+- `GetSvaWalletCashouts`: the response optional property `amount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (GET /v1/me/sva/wallet/cashouts/{id})
+- `GetSvaWalletCashouts`: the response optional property `amount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (GET /v1/me/sva/wallet/cashouts/{id})
+- `GetSvaWallet`: the response optional property `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/availableAmount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/costsAmount/allOf[#/components/schemas/order.Price]/currencyCode`, `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/pendingAmount/allOf[#/components/schemas/order.Price]/currencyCode`) (GET /v1/me/sva/wallet)
+- `GetSvaWallet`: the response optional property `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/availableAmount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/costsAmount/allOf[#/components/schemas/order.Price]/priceInUcents`, `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/pendingAmount/allOf[#/components/schemas/order.Price]/priceInUcents`) (GET /v1/me/sva/wallet)
+- `GetSvaWallet`: the response optional property `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/availableAmount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/costsAmount/allOf[#/components/schemas/order.Price]/text`, `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/pendingAmount/allOf[#/components/schemas/order.Price]/text`) (GET /v1/me/sva/wallet)
+- `GetSvaWallet`: the response optional property `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/availableAmount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/costsAmount/allOf[#/components/schemas/order.Price]/value`, `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/pendingAmount/allOf[#/components/schemas/order.Price]/value`) (GET /v1/me/sva/wallet)
+- `GetVoucherAccountMovements`: the response optional property `amount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `balance/allOf[#/components/schemas/order.Price]/currencyCode`, `previousBalance/allOf[#/components/schemas/order.Price]/currencyCode`) (GET /v1/me/voucherAccount/{voucherAccountId}/movements/{movementId})
+- `GetVoucherAccountMovements`: the response optional property `amount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `balance/allOf[#/components/schemas/order.Price]/priceInUcents`, `previousBalance/allOf[#/components/schemas/order.Price]/priceInUcents`) (GET /v1/me/voucherAccount/{voucherAccountId}/movements/{movementId})
+- `GetVoucherAccountMovements`: the response optional property `amount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `balance/allOf[#/components/schemas/order.Price]/text`, `previousBalance/allOf[#/components/schemas/order.Price]/text`) (GET /v1/me/voucherAccount/{voucherAccountId}/movements/{movementId})
+- `GetVoucherAccountMovements`: the response optional property `amount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `balance/allOf[#/components/schemas/order.Price]/value`, `previousBalance/allOf[#/components/schemas/order.Price]/value`) (GET /v1/me/voucherAccount/{voucherAccountId}/movements/{movementId})
+- `GetVoucherAccount`: the response optional property `balance/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (GET /v1/me/voucherAccount/{voucherAccountId})
+- `GetVoucherAccount`: the response optional property `balance/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (GET /v1/me/voucherAccount/{voucherAccountId})
+- `GetVoucherAccount`: the response optional property `balance/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (GET /v1/me/voucherAccount/{voucherAccountId})
+- `GetVoucherAccount`: the response optional property `balance/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (GET /v1/me/voucherAccount/{voucherAccountId})
+- `GetWithdrawalDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `unitPrice/allOf[#/components/schemas/order.Price]/currencyCode`) (GET /v1/me/withdrawal/{withdrawalId}/details/{withdrawalDetailId})
+- `GetWithdrawalDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `unitPrice/allOf[#/components/schemas/order.Price]/priceInUcents`) (GET /v1/me/withdrawal/{withdrawalId}/details/{withdrawalDetailId})
+- `GetWithdrawalDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `unitPrice/allOf[#/components/schemas/order.Price]/text`) (GET /v1/me/withdrawal/{withdrawalId}/details/{withdrawalDetailId})
+- `GetWithdrawalDetails`: the response optional property `totalPrice/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `unitPrice/allOf[#/components/schemas/order.Price]/value`) (GET /v1/me/withdrawal/{withdrawalId}/details/{withdrawalDetailId})
+- `GetWithdrawal`: the response optional property `amount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (GET /v1/me/withdrawal/{withdrawalId})
+- `GetWithdrawal`: the response optional property `amount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (GET /v1/me/withdrawal/{withdrawalId})
+- `GetWithdrawal`: the response optional property `amount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (GET /v1/me/withdrawal/{withdrawalId})
+- `GetWithdrawal`: the response optional property `amount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (GET /v1/me/withdrawal/{withdrawalId})
+- `ListPaymentAvailableMethods`: the response optional property `items/icon/allOf[#/components/schemas/me.payment.Icon]/data` became not read-only for the status `200` (GET /v1/me/payment/availableMethods)
+- `ListPaymentAvailableMethods`: the response optional property `items/icon/allOf[#/components/schemas/me.payment.Icon]/name` became not read-only for the status `200` (GET /v1/me/payment/availableMethods)
+- `ListPaymentAvailableMethods`: the response optional property `items/icon/allOf[#/components/schemas/me.payment.Icon]/url` became not read-only for the status `200` (GET /v1/me/payment/availableMethods)
+- `ListSvaCdrs`: the response optional property `items/buyAmount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (GET /v1/me/sva/cdr)
+- `ListSvaCdrs`: the response optional property `items/buyAmount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (GET /v1/me/sva/cdr)
+- `ListSvaCdrs`: the response optional property `items/buyAmount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (GET /v1/me/sva/cdr)
+- `ListSvaCdrs`: the response optional property `items/buyAmount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (GET /v1/me/sva/cdr)
+- `ListSvaWalletCashouts`: the response optional property `items/amount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (GET /v1/me/sva/wallet/cashouts)
+- `ListSvaWalletCashouts`: the response optional property `items/amount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (GET /v1/me/sva/wallet/cashouts)
+- `ListSvaWalletCashouts`: the response optional property `items/amount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (GET /v1/me/sva/wallet/cashouts)
+- `ListSvaWalletCashouts`: the response optional property `items/amount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (GET /v1/me/sva/wallet/cashouts)
+- `PayBillDebt`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/currencyCode`, `tax/allOf[#/components/schemas/order.Price]/currencyCode`) (POST /v1/me/bill/{billId}/debt/pay)
+- `PayBillDebt`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/priceInUcents`, `tax/allOf[#/components/schemas/order.Price]/priceInUcents`) (POST /v1/me/bill/{billId}/debt/pay)
+- `PayBillDebt`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/text`, `tax/allOf[#/components/schemas/order.Price]/text`) (POST /v1/me/bill/{billId}/debt/pay)
+- `PayBillDebt`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/value`, `tax/allOf[#/components/schemas/order.Price]/value`) (POST /v1/me/bill/{billId}/debt/pay)
+- `PayCorrectiveInvoiceDebt`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/currencyCode`, `tax/allOf[#/components/schemas/order.Price]/currencyCode`) (POST /v1/me/correctiveInvoice/{correctiveInvoiceId}/debt/pay)
+- `PayCorrectiveInvoiceDebt`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/priceInUcents`, `tax/allOf[#/components/schemas/order.Price]/priceInUcents`) (POST /v1/me/correctiveInvoice/{correctiveInvoiceId}/debt/pay)
+- `PayCorrectiveInvoiceDebt`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/text`, `tax/allOf[#/components/schemas/order.Price]/text`) (POST /v1/me/correctiveInvoice/{correctiveInvoiceId}/debt/pay)
+- `PayCorrectiveInvoiceDebt`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/value`, `tax/allOf[#/components/schemas/order.Price]/value`) (POST /v1/me/correctiveInvoice/{correctiveInvoiceId}/debt/pay)
+- `PayDebtAccountDebt`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/currencyCode`, `tax/allOf[#/components/schemas/order.Price]/currencyCode`) (POST /v1/me/debtAccount/debt/{debtId}/pay)
+- `PayDebtAccountDebt`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/priceInUcents`, `tax/allOf[#/components/schemas/order.Price]/priceInUcents`) (POST /v1/me/debtAccount/debt/{debtId}/pay)
+- `PayDebtAccountDebt`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/text`, `tax/allOf[#/components/schemas/order.Price]/text`) (POST /v1/me/debtAccount/debt/{debtId}/pay)
+- `PayDebtAccountDebt`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/value`, `tax/allOf[#/components/schemas/order.Price]/value`) (POST /v1/me/debtAccount/debt/{debtId}/pay)
+- `PayDebtAccount`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/currencyCode`, `tax/allOf[#/components/schemas/order.Price]/currencyCode`) (POST /v1/me/debtAccount/pay)
+- `PayDebtAccount`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/priceInUcents`, `tax/allOf[#/components/schemas/order.Price]/priceInUcents`) (POST /v1/me/debtAccount/pay)
+- `PayDebtAccount`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/text`, `tax/allOf[#/components/schemas/order.Price]/text`) (POST /v1/me/debtAccount/pay)
+- `PayDebtAccount`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/value`, `tax/allOf[#/components/schemas/order.Price]/value`) (POST /v1/me/debtAccount/pay)
+- `PayDepositPaidBillsDebt`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/currencyCode`, `tax/allOf[#/components/schemas/order.Price]/currencyCode`) (POST /v1/me/deposit/{depositId}/paidBills/{billId}/debt/pay)
+- `PayDepositPaidBillsDebt`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/priceInUcents`, `tax/allOf[#/components/schemas/order.Price]/priceInUcents`) (POST /v1/me/deposit/{depositId}/paidBills/{billId}/debt/pay)
+- `PayDepositPaidBillsDebt`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/text`, `tax/allOf[#/components/schemas/order.Price]/text`) (POST /v1/me/deposit/{depositId}/paidBills/{billId}/debt/pay)
+- `PayDepositPaidBillsDebt`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/value`, `tax/allOf[#/components/schemas/order.Price]/value`) (POST /v1/me/deposit/{depositId}/paidBills/{billId}/debt/pay)
+- `PayDownPaymentInvoiceDebt`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/currencyCode`, `tax/allOf[#/components/schemas/order.Price]/currencyCode`) (POST /v1/me/downPaymentInvoice/{downPaymentInvoiceId}/debt/pay)
+- `PayDownPaymentInvoiceDebt`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/priceInUcents`, `tax/allOf[#/components/schemas/order.Price]/priceInUcents`) (POST /v1/me/downPaymentInvoice/{downPaymentInvoiceId}/debt/pay)
+- `PayDownPaymentInvoiceDebt`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/text`, `tax/allOf[#/components/schemas/order.Price]/text`) (POST /v1/me/downPaymentInvoice/{downPaymentInvoiceId}/debt/pay)
+- `PayDownPaymentInvoiceDebt`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/value`, `tax/allOf[#/components/schemas/order.Price]/value`) (POST /v1/me/downPaymentInvoice/{downPaymentInvoiceId}/debt/pay)
+- `PayOrderDebt`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/currencyCode`, `tax/allOf[#/components/schemas/order.Price]/currencyCode`) (POST /v1/me/order/{orderId}/debt/pay)
+- `PayOrderDebt`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/priceInUcents`, `tax/allOf[#/components/schemas/order.Price]/priceInUcents`) (POST /v1/me/order/{orderId}/debt/pay)
+- `PayOrderDebt`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/text`, `tax/allOf[#/components/schemas/order.Price]/text`) (POST /v1/me/order/{orderId}/debt/pay)
+- `PayOrderDebt`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/value`, `tax/allOf[#/components/schemas/order.Price]/value`) (POST /v1/me/order/{orderId}/debt/pay)
+- `RetrieveMoneyOvhAccount`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/currencyCode`, `tax/allOf[#/components/schemas/order.Price]/currencyCode`) (POST /v1/me/ovhAccount/{ovhAccountId}/retrieveMoney)
+- `RetrieveMoneyOvhAccount`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/priceInUcents`, `tax/allOf[#/components/schemas/order.Price]/priceInUcents`) (POST /v1/me/ovhAccount/{ovhAccountId}/retrieveMoney)
+- `RetrieveMoneyOvhAccount`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/text`, `tax/allOf[#/components/schemas/order.Price]/text`) (POST /v1/me/ovhAccount/{ovhAccountId}/retrieveMoney)
+- `RetrieveMoneyOvhAccount`: the response optional property `priceWithTax/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `priceWithoutTax/allOf[#/components/schemas/order.Price]/value`, `tax/allOf[#/components/schemas/order.Price]/value`) (POST /v1/me/ovhAccount/{ovhAccountId}/retrieveMoney)
+- `UpdatePaymentMethodByPaymentMethodID`: the response optional property `icon/allOf[#/components/schemas/me.payment.Icon]/data` became not read-only for the status `200` (PUT /v1/me/payment/method/{paymentMethodId})
+- `UpdatePaymentMethodByPaymentMethodID`: the response optional property `icon/allOf[#/components/schemas/me.payment.Icon]/name` became not read-only for the status `200` (PUT /v1/me/payment/method/{paymentMethodId})
+- `UpdatePaymentMethodByPaymentMethodID`: the response optional property `icon/allOf[#/components/schemas/me.payment.Icon]/url` became not read-only for the status `200` (PUT /v1/me/payment/method/{paymentMethodId})
+- `UpdateSvaWallet`: added `#/components/schemas/me.sva.PersonalInfo.RepresentativeWritable` to the `representative` request property `allOf` list (PUT /v1/me/sva/wallet)
+- `UpdateSvaWallet`: removed `#/components/schemas/me.sva.PersonalInfo.Representative` from the `representative` request property `allOf` list (PUT /v1/me/sva/wallet)
+- `UpdateSvaWallet`: the response optional property `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/availableAmount/allOf[#/components/schemas/order.Price]/currencyCode` became not read-only for the status `200` (shared schema: `order.Price`, also at `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/costsAmount/allOf[#/components/schemas/order.Price]/currencyCode`, `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/pendingAmount/allOf[#/components/schemas/order.Price]/currencyCode`) (PUT /v1/me/sva/wallet)
+- `UpdateSvaWallet`: the response optional property `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/availableAmount/allOf[#/components/schemas/order.Price]/priceInUcents` became not read-only for the status `200` (shared schema: `order.Price`, also at `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/costsAmount/allOf[#/components/schemas/order.Price]/priceInUcents`, `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/pendingAmount/allOf[#/components/schemas/order.Price]/priceInUcents`) (PUT /v1/me/sva/wallet)
+- `UpdateSvaWallet`: the response optional property `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/availableAmount/allOf[#/components/schemas/order.Price]/text` became not read-only for the status `200` (shared schema: `order.Price`, also at `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/costsAmount/allOf[#/components/schemas/order.Price]/text`, `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/pendingAmount/allOf[#/components/schemas/order.Price]/text`) (PUT /v1/me/sva/wallet)
+- `UpdateSvaWallet`: the response optional property `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/availableAmount/allOf[#/components/schemas/order.Price]/value` became not read-only for the status `200` (shared schema: `order.Price`, also at `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/costsAmount/allOf[#/components/schemas/order.Price]/value`, `balance/allOf[#/components/schemas/me.sva.wallet.Balance]/pendingAmount/allOf[#/components/schemas/order.Price]/value`) (PUT /v1/me/sva/wallet)
+- removed the schema `me.sva.PersonalInfo.Representative` ( )
+- removed the schema `me.sva.onboarding.Company` ( )
+- removed the schema `me.sva.onboarding.Creation` ( )
+- removed the schema `me.sva.onboarding.PersonalInfo.Representative` ( )
+- removed the schema `me.sva.wallet.Creation` ( )
+- removed the schema `me.sva.wallet.Update` ( )
+
+#### `msservices`
+
+- removed the schema `msServices.ActiveDirectoryOrganizationalUnit` ( )
+
+#### `notification`
+
+- `AllContactMeanTasks`: the response optional property `items/errors/items/message` became not read-only for the status `200` (GET /v2/notification/contactMean/{contactMeanId}/task)
+- `AllContactMeanTasks`: the response optional property `items/progress/items/name` became not read-only for the status `200` (GET /v2/notification/contactMean/{contactMeanId}/task)
+- `AllContactMeanTasks`: the response optional property `items/progress/items/status` became not read-only for the status `200` (GET /v2/notification/contactMean/{contactMeanId}/task)
+- `AllContactMeans`: the response optional property `items/currentTasks/items/errors/items/message` became not read-only for the status `200` (GET /v2/notification/contactMean)
+- `AllContactMeans`: the response optional property `items/currentTasks/items/errors` became not read-only for the status `200` (GET /v2/notification/contactMean)
+- `AllContactMeans`: the response optional property `items/currentTasks/items/id` became not read-only for the status `200` (GET /v2/notification/contactMean)
+- `AllContactMeans`: the response optional property `items/currentTasks/items/link` became not read-only for the status `200` (GET /v2/notification/contactMean)
+- `AllContactMeans`: the response optional property `items/currentTasks/items/status` became not read-only for the status `200` (GET /v2/notification/contactMean)
+- `AllContactMeans`: the response optional property `items/currentTasks/items/type` became not read-only for the status `200` (GET /v2/notification/contactMean)
+- `CreateContactMean`: the response optional property `currentTasks/items/errors/items/message` became not read-only for the status `200` (POST /v2/notification/contactMean)
+- `CreateContactMean`: the response optional property `currentTasks/items/errors` became not read-only for the status `200` (POST /v2/notification/contactMean)
+- `CreateContactMean`: the response optional property `currentTasks/items/id` became not read-only for the status `200` (POST /v2/notification/contactMean)
+- `CreateContactMean`: the response optional property `currentTasks/items/link` became not read-only for the status `200` (POST /v2/notification/contactMean)
+- `CreateContactMean`: the response optional property `currentTasks/items/status` became not read-only for the status `200` (POST /v2/notification/contactMean)
+- `CreateContactMean`: the response optional property `currentTasks/items/type` became not read-only for the status `200` (POST /v2/notification/contactMean)
+- `GetContactMeanTask`: the response optional property `errors/items/message` became not read-only for the status `200` (GET /v2/notification/contactMean/{contactMeanId}/task/{taskId})
+- `GetContactMeanTask`: the response optional property `progress/items/name` became not read-only for the status `200` (GET /v2/notification/contactMean/{contactMeanId}/task/{taskId})
+- `GetContactMeanTask`: the response optional property `progress/items/status` became not read-only for the status `200` (GET /v2/notification/contactMean/{contactMeanId}/task/{taskId})
+- `GetContactMean`: the response optional property `currentTasks/items/errors/items/message` became not read-only for the status `200` (GET /v2/notification/contactMean/{contactMeanId})
+- `GetContactMean`: the response optional property `currentTasks/items/errors` became not read-only for the status `200` (GET /v2/notification/contactMean/{contactMeanId})
+- `GetContactMean`: the response optional property `currentTasks/items/id` became not read-only for the status `200` (GET /v2/notification/contactMean/{contactMeanId})
+- `GetContactMean`: the response optional property `currentTasks/items/link` became not read-only for the status `200` (GET /v2/notification/contactMean/{contactMeanId})
+- `GetContactMean`: the response optional property `currentTasks/items/status` became not read-only for the status `200` (GET /v2/notification/contactMean/{contactMeanId})
+- `GetContactMean`: the response optional property `currentTasks/items/type` became not read-only for the status `200` (GET /v2/notification/contactMean/{contactMeanId})
+- `RestartValidationContactMean`: the response optional property `currentTasks/items/errors/items/message` became not read-only for the status `200` (POST /v2/notification/contactMean/{contactMeanId}/restartValidation)
+- `RestartValidationContactMean`: the response optional property `currentTasks/items/errors` became not read-only for the status `200` (POST /v2/notification/contactMean/{contactMeanId}/restartValidation)
+- `RestartValidationContactMean`: the response optional property `currentTasks/items/id` became not read-only for the status `200` (POST /v2/notification/contactMean/{contactMeanId}/restartValidation)
+- `RestartValidationContactMean`: the response optional property `currentTasks/items/link` became not read-only for the status `200` (POST /v2/notification/contactMean/{contactMeanId}/restartValidation)
+- `RestartValidationContactMean`: the response optional property `currentTasks/items/status` became not read-only for the status `200` (POST /v2/notification/contactMean/{contactMeanId}/restartValidation)
+- `RestartValidationContactMean`: the response optional property `currentTasks/items/type` became not read-only for the status `200` (POST /v2/notification/contactMean/{contactMeanId}/restartValidation)
+- `UpdateContactMeanTask`: the response optional property `errors/items/message` became not read-only for the status `200` (PUT /v2/notification/contactMean/{contactMeanId}/task/{taskId})
+- `UpdateContactMeanTask`: the response optional property `progress/items/name` became not read-only for the status `200` (PUT /v2/notification/contactMean/{contactMeanId}/task/{taskId})
+- `UpdateContactMeanTask`: the response optional property `progress/items/status` became not read-only for the status `200` (PUT /v2/notification/contactMean/{contactMeanId}/task/{taskId})
+- `UpdateContactMean`: the response optional property `currentTasks/items/errors/items/message` became not read-only for the status `200` (PUT /v2/notification/contactMean/{contactMeanId})
+- `UpdateContactMean`: the response optional property `currentTasks/items/errors` became not read-only for the status `200` (PUT /v2/notification/contactMean/{contactMeanId})
+- `UpdateContactMean`: the response optional property `currentTasks/items/id` became not read-only for the status `200` (PUT /v2/notification/contactMean/{contactMeanId})
+- `UpdateContactMean`: the response optional property `currentTasks/items/link` became not read-only for the status `200` (PUT /v2/notification/contactMean/{contactMeanId})
+- `UpdateContactMean`: the response optional property `currentTasks/items/status` became not read-only for the status `200` (PUT /v2/notification/contactMean/{contactMeanId})
+- `UpdateContactMean`: the response optional property `currentTasks/items/type` became not read-only for the status `200` (PUT /v2/notification/contactMean/{contactMeanId})
+- `ValidateContactMean`: the response optional property `currentTasks/items/errors/items/message` became not read-only for the status `200` (POST /v2/notification/contactMean/{contactMeanId}/validate)
+- `ValidateContactMean`: the response optional property `currentTasks/items/errors` became not read-only for the status `200` (POST /v2/notification/contactMean/{contactMeanId}/validate)
+- `ValidateContactMean`: the response optional property `currentTasks/items/id` became not read-only for the status `200` (POST /v2/notification/contactMean/{contactMeanId}/validate)
+- `ValidateContactMean`: the response optional property `currentTasks/items/link` became not read-only for the status `200` (POST /v2/notification/contactMean/{contactMeanId}/validate)
+- `ValidateContactMean`: the response optional property `currentTasks/items/status` became not read-only for the status `200` (POST /v2/notification/contactMean/{contactMeanId}/validate)
+- `ValidateContactMean`: the response optional property `currentTasks/items/type` became not read-only for the status `200` (POST /v2/notification/contactMean/{contactMeanId}/validate)
+- removed the schema `common.TaskWithInputs_notification.contactMean.TaskInputs` ( )
+- removed the schema `notification.routing.PostInput` ( )
+
+#### `nutanix`
+
+- removed the schema `nutanix.cluster` ( )
+
+#### `overthebox`
+
+- removed the schema `overTheBox.GraphEndpoint` ( )
+- removed the schema `overTheBox.OperationModeEnum` ( )
+- removed the schema `overTheBox.ServiceConfigurationModeEnum` ( )
+- removed the schema `overTheBox.ServiceStatusEnum` ( )
+- removed the schema `overTheBox.Service` ( )
+- removed the schema `overTheBox.TunnelModeEnum` ( )
+
+#### `packxdsl`
+
+- removed the schema `pack.xdsl.PackAdsl` ( )
+
+#### `services`
+
+- `ChangePeriodEndActionSavingsPlansSubscribed`: the response optional property `plannedChanges/items/plannedOn` became not read-only for the status `200` (POST /v1/services/{serviceId}/savingsPlans/subscribed/{savingsPlanId}/changePeriodEndAction)
+- `ChangePeriodEndActionSavingsPlansSubscribed`: the response optional property `plannedChanges/items/properties/allOf[#/components/schemas/services.savingsPlans.PlannedChangeProperties]/status` became not read-only for the status `200` (POST /v1/services/{serviceId}/savingsPlans/subscribed/{savingsPlanId}/changePeriodEndAction)
+- `ChangePeriodEndActionSavingsPlansSubscribed`: the response optional property `plannedChanges/items/properties` became not read-only for the status `200` (POST /v1/services/{serviceId}/savingsPlans/subscribed/{savingsPlanId}/changePeriodEndAction)
+- `ChangeSizeSavingsPlansSubscribed`: the response optional property `plannedChanges/items/plannedOn` became not read-only for the status `200` (POST /v1/services/{serviceId}/savingsPlans/subscribed/{savingsPlanId}/changeSize)
+- `ChangeSizeSavingsPlansSubscribed`: the response optional property `plannedChanges/items/properties/allOf[#/components/schemas/services.savingsPlans.PlannedChangeProperties]/status` became not read-only for the status `200` (POST /v1/services/{serviceId}/savingsPlans/subscribed/{savingsPlanId}/changeSize)
+- `ChangeSizeSavingsPlansSubscribed`: the response optional property `plannedChanges/items/properties` became not read-only for the status `200` (POST /v1/services/{serviceId}/savingsPlans/subscribed/{savingsPlanId}/changeSize)
+- `ExecuteSavingsPlansSubscribe`: the response optional property `plannedChanges/items/plannedOn` became not read-only for the status `200` (POST /v1/services/{serviceId}/savingsPlans/subscribe/execute)
+- `ExecuteSavingsPlansSubscribe`: the response optional property `plannedChanges/items/properties/allOf[#/components/schemas/services.savingsPlans.PlannedChangeProperties]/status` became not read-only for the status `200` (POST /v1/services/{serviceId}/savingsPlans/subscribe/execute)
+- `ExecuteSavingsPlansSubscribe`: the response optional property `plannedChanges/items/properties` became not read-only for the status `200` (POST /v1/services/{serviceId}/savingsPlans/subscribe/execute)
+- `GetSavingsPlansSubscribed`: the response optional property `plannedChanges/items/plannedOn` became not read-only for the status `200` (GET /v1/services/{serviceId}/savingsPlans/subscribed/{savingsPlanId})
+- `GetSavingsPlansSubscribed`: the response optional property `plannedChanges/items/properties/allOf[#/components/schemas/services.savingsPlans.PlannedChangeProperties]/status` became not read-only for the status `200` (GET /v1/services/{serviceId}/savingsPlans/subscribed/{savingsPlanId})
+- `GetSavingsPlansSubscribed`: the response optional property `plannedChanges/items/properties` became not read-only for the status `200` (GET /v1/services/{serviceId}/savingsPlans/subscribed/{savingsPlanId})
+- `ListSavingsPlansSubscribeds`: the response optional property `items/plannedChanges/items/plannedOn` became not read-only for the status `200` (GET /v1/services/{serviceId}/savingsPlans/subscribed)
+- `ListSavingsPlansSubscribeds`: the response optional property `items/plannedChanges/items/properties/allOf[#/components/schemas/services.savingsPlans.PlannedChangeProperties]/status` became not read-only for the status `200` (GET /v1/services/{serviceId}/savingsPlans/subscribed)
+- `ListSavingsPlansSubscribeds`: the response optional property `items/plannedChanges/items/properties` became not read-only for the status `200` (GET /v1/services/{serviceId}/savingsPlans/subscribed)
+- `TerminateSavingsPlansSubscribed`: the response optional property `plannedChanges/items/plannedOn` became not read-only for the status `200` (POST /v1/services/{serviceId}/savingsPlans/subscribed/{savingsPlanId}/terminate)
+- `TerminateSavingsPlansSubscribed`: the response optional property `plannedChanges/items/properties/allOf[#/components/schemas/services.savingsPlans.PlannedChangeProperties]/status` became not read-only for the status `200` (POST /v1/services/{serviceId}/savingsPlans/subscribed/{savingsPlanId}/terminate)
+- `TerminateSavingsPlansSubscribed`: the response optional property `plannedChanges/items/properties` became not read-only for the status `200` (POST /v1/services/{serviceId}/savingsPlans/subscribed/{savingsPlanId}/terminate)
+- `UpdateSavingsPlansSubscribed`: the response optional property `plannedChanges/items/plannedOn` became not read-only for the status `200` (PUT /v1/services/{serviceId}/savingsPlans/subscribed/{savingsPlanId})
+- `UpdateSavingsPlansSubscribed`: the response optional property `plannedChanges/items/properties/allOf[#/components/schemas/services.savingsPlans.PlannedChangeProperties]/status` became not read-only for the status `200` (PUT /v1/services/{serviceId}/savingsPlans/subscribed/{savingsPlanId})
+- `UpdateSavingsPlansSubscribed`: the response optional property `plannedChanges/items/properties` became not read-only for the status `200` (PUT /v1/services/{serviceId}/savingsPlans/subscribed/{savingsPlanId})
+
+#### `sms`
+
+- removed the schema `sms.Account` ( )
+
+#### `telephony`
+
+- removed the schema `telephony.BillingAccount` ( )
+
+#### `vps`
+
+- `GetVPS`: the response optional property `lockStatus/allOf[#/components/schemas/vps.LockStatus]/locked` became not read-only for the status `200` (GET /v1/vps/{serviceName})
+- `GetVPS`: the response optional property `lockStatus/allOf[#/components/schemas/vps.LockStatus]/reason` became not read-only for the status `200` (GET /v1/vps/{serviceName})
+- removed the schema `vps.VPS` ( )
+
+#### `vrack`
+
+- removed the schema `vrack.vrack` ( )
+
+#### `vrackservices`
+
+- `AllResources`: removed the optional property `items/currentState/allOf[#/components/schemas/vrackServices.VrackServicesCurrentState]/services/allOf[#/components/schemas/vrackServices.ServicesCurrentState]/serviceRange/items/reservedIps` from the response with the `200` status (GET /v2/vrackServices/resource)
+- `GetResource`: removed the optional property `currentState/allOf[#/components/schemas/vrackServices.VrackServicesCurrentState]/services/allOf[#/components/schemas/vrackServices.ServicesCurrentState]/serviceRange/items/reservedIps` from the response with the `200` status (GET /v2/vrackServices/resource/{vrackServicesId})
+- `UpdateResource`: removed the optional property `currentState/allOf[#/components/schemas/vrackServices.VrackServicesCurrentState]/services/allOf[#/components/schemas/vrackServices.ServicesCurrentState]/serviceRange/items/reservedIps` from the response with the `200` status (PUT /v2/vrackServices/resource/{vrackServicesId})
+
+#### `xdsl`
+
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/case` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/avgRtt` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/maxRtt` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/minRtt` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/packetLoss` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/packetsRecv` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/packetsSent` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lastConnection` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lastDisconnection` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lastSeen` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lastStatusChange` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lnsIp` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lnsLoopbackIp` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lns` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/status` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/username` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/equipmentName` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/equipmentStatus` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/address` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/billingAccount` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/offer` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/range` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/site` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/sysId` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard)
+- `CreateModemTemplate`: the response optional property `DHCP/items/defaultGateway` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `DHCP/items/dhcpName` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `DHCP/items/domainName` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `DHCP/items/endAddress` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `DHCP/items/leaseTime` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `DHCP/items/primaryDNS` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `DHCP/items/secondaryDNS` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `DHCP/items/serverEnabled` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `DHCP/items/startAddress` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `DHCP/items/subnetMask` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `LAN/items/IPAddress` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `LAN/items/addressingType` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `LAN/items/lanName` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `LAN/items/subnetMask` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `WLAN/items/SSIDAdvertisementEnabled` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `WLAN/items/SSID` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `WLAN/items/bandSteering` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `WLAN/items/channelMode` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `WLAN/items/channel` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `WLAN/items/enabled` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `WLAN/items/frequency` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `WLAN/items/guest` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `WLAN/items/securityKey` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `WLAN/items/securityType` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `WLAN/items/wifiName` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `portMapping/items/allowedRemoteIp` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `portMapping/items/description` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `portMapping/items/externalPortEnd` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `portMapping/items/externalPortStart` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `portMapping/items/internalClient` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `portMapping/items/internalPort` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `portMapping/items/name` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `CreateModemTemplate`: the response optional property `portMapping/items/protocol` became not read-only for the status `200` (POST /v1/xdsl/templateModem)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/case` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/avgRtt` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/maxRtt` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/minRtt` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/packetLoss` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/packetsRecv` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/packetsSent` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lastConnection` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lastDisconnection` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lastSeen` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lastStatusChange` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lnsIp` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lnsLoopbackIp` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lns` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/status` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/username` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/equipmentName` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/equipmentStatus` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/address` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/billingAccount` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/offer` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/range` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/site` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `DiagsDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/sysId` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/diags)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/case` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/avgRtt` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/maxRtt` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/minRtt` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/packetLoss` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/packetsRecv` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/packetsSent` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lastConnection` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lastDisconnection` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lastSeen` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lastStatusChange` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lnsIp` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lnsLoopbackIp` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lns` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/status` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/username` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/equipmentName` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/equipmentStatus` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/address` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/billingAccount` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/offer` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/range` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/site` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/sysId` became not read-only for the status `200` (GET /v1/xdsl/diagnosticWizard)
+- `GetEmailPro`: the response optional property `currentUsage/allOf[#/components/schemas/complexType.UnitAndValue_double]/unit` became not read-only for the status `200` (GET /v1/xdsl/email/pro/{email})
+- `GetEmailPro`: the response optional property `currentUsage/allOf[#/components/schemas/complexType.UnitAndValue_double]/value` became not read-only for the status `200` (GET /v1/xdsl/email/pro/{email})
+- `GetEmailPro`: the response optional property `quota/allOf[#/components/schemas/complexType.UnitAndValue_long]/unit` became not read-only for the status `200` (GET /v1/xdsl/email/pro/{email})
+- `GetEmailPro`: the response optional property `quota/allOf[#/components/schemas/complexType.UnitAndValue_long]/value` became not read-only for the status `200` (GET /v1/xdsl/email/pro/{email})
+- `GetModemTemplate`: the response optional property `DHCP/items/defaultGateway` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `DHCP/items/dhcpName` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `DHCP/items/domainName` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `DHCP/items/endAddress` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `DHCP/items/leaseTime` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `DHCP/items/primaryDNS` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `DHCP/items/secondaryDNS` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `DHCP/items/serverEnabled` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `DHCP/items/startAddress` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `DHCP/items/subnetMask` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `LAN/items/IPAddress` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `LAN/items/addressingType` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `LAN/items/lanName` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `LAN/items/subnetMask` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `WLAN/items/SSIDAdvertisementEnabled` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `WLAN/items/SSID` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `WLAN/items/bandSteering` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `WLAN/items/channelMode` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `WLAN/items/channel` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `WLAN/items/enabled` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `WLAN/items/frequency` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `WLAN/items/guest` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `WLAN/items/securityKey` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `WLAN/items/securityType` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `WLAN/items/wifiName` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `portMapping/items/allowedRemoteIp` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `portMapping/items/description` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `portMapping/items/externalPortEnd` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `portMapping/items/externalPortStart` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `portMapping/items/internalClient` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `portMapping/items/internalPort` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `portMapping/items/name` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModemTemplate`: the response optional property `portMapping/items/protocol` became not read-only for the status `200` (GET /v1/xdsl/templateModem/{name})
+- `GetModem`: the response optional property `capabilities/allOf[#/components/schemas/xdsl.ModemCapabilities]/canBeManagedByOvh` became not read-only for the status `200` (GET /v1/xdsl/{serviceName}/modem)
+- `GetModem`: the response optional property `capabilities/allOf[#/components/schemas/xdsl.ModemCapabilities]/canChangeACS` became not read-only for the status `200` (GET /v1/xdsl/{serviceName}/modem)
+- `GetModem`: the response optional property `capabilities/allOf[#/components/schemas/xdsl.ModemCapabilities]/canChangeBridgeMode` became not read-only for the status `200` (GET /v1/xdsl/{serviceName}/modem)
+- `GetModem`: the response optional property `capabilities/allOf[#/components/schemas/xdsl.ModemCapabilities]/canChangeDHCP` became not read-only for the status `200` (GET /v1/xdsl/{serviceName}/modem)
+- `GetModem`: the response optional property `capabilities/allOf[#/components/schemas/xdsl.ModemCapabilities]/canChangeDMZ` became not read-only for the status `200` (GET /v1/xdsl/{serviceName}/modem)
+- `GetModem`: the response optional property `capabilities/allOf[#/components/schemas/xdsl.ModemCapabilities]/canChangeEasyFirewallLevel` became not read-only for the status `200` (GET /v1/xdsl/{serviceName}/modem)
+- `GetModem`: the response optional property `capabilities/allOf[#/components/schemas/xdsl.ModemCapabilities]/canChangeFirmware` became not read-only for the status `200` (GET /v1/xdsl/{serviceName}/modem)
+- `GetModem`: the response optional property `capabilities/allOf[#/components/schemas/xdsl.ModemCapabilities]/canChangeLAN` became not read-only for the status `200` (GET /v1/xdsl/{serviceName}/modem)
+- `GetModem`: the response optional property `capabilities/allOf[#/components/schemas/xdsl.ModemCapabilities]/canChangeManagement` became not read-only for the status `200` (GET /v1/xdsl/{serviceName}/modem)
+- `GetModem`: the response optional property `capabilities/allOf[#/components/schemas/xdsl.ModemCapabilities]/canChangeMtu` became not read-only for the status `200` (GET /v1/xdsl/{serviceName}/modem)
+- `GetModem`: the response optional property `capabilities/allOf[#/components/schemas/xdsl.ModemCapabilities]/canChangePortMapping` became not read-only for the status `200` (GET /v1/xdsl/{serviceName}/modem)
+- `GetModem`: the response optional property `capabilities/allOf[#/components/schemas/xdsl.ModemCapabilities]/canChangeWLAN` became not read-only for the status `200` (GET /v1/xdsl/{serviceName}/modem)
+- `GetModem`: the response optional property `capabilities/allOf[#/components/schemas/xdsl.ModemCapabilities]/canChangeWifiRadio` became not read-only for the status `200` (GET /v1/xdsl/{serviceName}/modem)
+- `GetModem`: the response optional property `capabilities/allOf[#/components/schemas/xdsl.ModemCapabilities]/canChangeWifiSSID` became not read-only for the status `200` (GET /v1/xdsl/{serviceName}/modem)
+- `GetModem`: the response optional property `capabilities/allOf[#/components/schemas/xdsl.ModemCapabilities]/canReboot` became not read-only for the status `200` (GET /v1/xdsl/{serviceName}/modem)
+- `GetModem`: the response optional property `capabilities/allOf[#/components/schemas/xdsl.ModemCapabilities]/canReconfigureVoip` became not read-only for the status `200` (GET /v1/xdsl/{serviceName}/modem)
+- `GetModem`: the response optional property `capabilities/allOf[#/components/schemas/xdsl.ModemCapabilities]/canRefreshConnectedDevices` became not read-only for the status `200` (GET /v1/xdsl/{serviceName}/modem)
+- `GetModem`: the response optional property `capabilities/allOf[#/components/schemas/xdsl.ModemCapabilities]/canReset` became not read-only for the status `200` (GET /v1/xdsl/{serviceName}/modem)
+- `GetModem`: the response optional property `capabilities/allOf[#/components/schemas/xdsl.ModemCapabilities]/canUseWifiRadio` became not read-only for the status `200` (GET /v1/xdsl/{serviceName}/modem)
+- `GetRma`: the response optional property `steps/items/description` became not read-only for the status `200` (GET /v1/xdsl/{serviceName}/rma/{id})
+- `GetRma`: the response optional property `steps/items/doneDate` became not read-only for the status `200` (GET /v1/xdsl/{serviceName}/rma/{id})
+- `GetRma`: the response optional property `steps/items/infos` became not read-only for the status `200` (GET /v1/xdsl/{serviceName}/rma/{id})
+- `GetRma`: the response optional property `steps/items/name` became not read-only for the status `200` (GET /v1/xdsl/{serviceName}/rma/{id})
+- `GetRma`: the response optional property `steps/items/status` became not read-only for the status `200` (GET /v1/xdsl/{serviceName}/rma/{id})
+- `GetXdsl`: the response optional property `address/allOf[#/components/schemas/xdsl.AddressDetail]/building` became not read-only for the status `200` (GET /v1/xdsl/{serviceName})
+- `GetXdsl`: the response optional property `address/allOf[#/components/schemas/xdsl.AddressDetail]/city` became not read-only for the status `200` (GET /v1/xdsl/{serviceName})
+- `GetXdsl`: the response optional property `address/allOf[#/components/schemas/xdsl.AddressDetail]/door` became not read-only for the status `200` (GET /v1/xdsl/{serviceName})
+- `GetXdsl`: the response optional property `address/allOf[#/components/schemas/xdsl.AddressDetail]/firstName` became not read-only for the status `200` (GET /v1/xdsl/{serviceName})
+- `GetXdsl`: the response optional property `address/allOf[#/components/schemas/xdsl.AddressDetail]/floor` became not read-only for the status `200` (GET /v1/xdsl/{serviceName})
+- `GetXdsl`: the response optional property `address/allOf[#/components/schemas/xdsl.AddressDetail]/inseeCode` became not read-only for the status `200` (GET /v1/xdsl/{serviceName})
+- `GetXdsl`: the response optional property `address/allOf[#/components/schemas/xdsl.AddressDetail]/lastName` became not read-only for the status `200` (GET /v1/xdsl/{serviceName})
+- `GetXdsl`: the response optional property `address/allOf[#/components/schemas/xdsl.AddressDetail]/numberStreet` became not read-only for the status `200` (GET /v1/xdsl/{serviceName})
+- `GetXdsl`: the response optional property `address/allOf[#/components/schemas/xdsl.AddressDetail]/residence` became not read-only for the status `200` (GET /v1/xdsl/{serviceName})
+- `GetXdsl`: the response optional property `address/allOf[#/components/schemas/xdsl.AddressDetail]/rivoliCode` became not read-only for the status `200` (GET /v1/xdsl/{serviceName})
+- `GetXdsl`: the response optional property `address/allOf[#/components/schemas/xdsl.AddressDetail]/stairs` became not read-only for the status `200` (GET /v1/xdsl/{serviceName})
+- `GetXdsl`: the response optional property `address/allOf[#/components/schemas/xdsl.AddressDetail]/street` became not read-only for the status `200` (GET /v1/xdsl/{serviceName})
+- `GetXdsl`: the response optional property `address/allOf[#/components/schemas/xdsl.AddressDetail]/zipCode` became not read-only for the status `200` (GET /v1/xdsl/{serviceName})
+- `GetXdsl`: the response optional property `capabilities/allOf[#/components/schemas/xdsl.AccessCapabilities]/canApplyLnsRateLimit` became not read-only for the status `200` (GET /v1/xdsl/{serviceName})
+- `GetXdsl`: the response optional property `capabilities/allOf[#/components/schemas/xdsl.AccessCapabilities]/canChangeDslamProfile` became not read-only for the status `200` (GET /v1/xdsl/{serviceName})
+- `GetXdsl`: the response optional property `capabilities/allOf[#/components/schemas/xdsl.AccessCapabilities]/canChangeLns` became not read-only for the status `200` (GET /v1/xdsl/{serviceName})
+- `GetXdsl`: the response optional property `capabilities/allOf[#/components/schemas/xdsl.AccessCapabilities]/canGetRadiusConnectionLogs` became not read-only for the status `200` (GET /v1/xdsl/{serviceName})
+- `GetXdsl`: the response optional property `capabilities/allOf[#/components/schemas/xdsl.AccessCapabilities]/canResetDslamPort` became not read-only for the status `200` (GET /v1/xdsl/{serviceName})
+- `GetXdsl`: the response optional property `capabilities/allOf[#/components/schemas/xdsl.AccessCapabilities]/hasDslamPort` became not read-only for the status `200` (GET /v1/xdsl/{serviceName})
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/case` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/avgRtt` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/maxRtt` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/minRtt` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/packetLoss` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/packetsRecv` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/packetsSent` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lastConnection` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lastDisconnection` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lastSeen` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lastStatusChange` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lnsIp` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lnsLoopbackIp` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lns` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/status` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/username` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/equipmentName` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/equipmentStatus` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/address` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/billingAccount` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/offer` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/range` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/site` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `InterventionDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/sysId` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/intervention)
+- `ResiliateAccess`: the request optional property `resiliationSurvey/allOf[#/components/schemas/xdsl.ResiliationSurvey]/comment` became not read-only (POST /v1/xdsl/{serviceName}/resiliate)
+- `ResiliateAccess`: the request optional property `resiliationSurvey/allOf[#/components/schemas/xdsl.ResiliationSurvey]/type` became not read-only (POST /v1/xdsl/{serviceName}/resiliate)
+- `UpdateDiagnosticWizard`: added `#/components/schemas/xdsl.wizard.WizardFormWritable` to the `form` request property `allOf` list (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: removed `#/components/schemas/xdsl.wizard.WizardForm` from the `form` request property `allOf` list (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/case` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/avgRtt` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/maxRtt` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/minRtt` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/packetLoss` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/packetsRecv` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/packetsSent` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lastConnection` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lastDisconnection` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lastSeen` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lastStatusChange` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lnsIp` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lnsLoopbackIp` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lns` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/status` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/username` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/equipmentName` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/equipmentStatus` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/address` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/billingAccount` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/offer` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/range` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/site` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/sysId` became not read-only for the status `200` (PATCH /v1/xdsl/diagnosticWizard)
+- `UpdateLineDiagnostic`: the request optional property `answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/bandwidthTestUnit` became not read-only (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the request optional property `answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/comment` became not read-only (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the request optional property `answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/conditionsAccepted` became not read-only (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the request optional property `answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/contactPhone` became not read-only (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the request optional property `answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/datetimeOfAppearance` became not read-only (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the request optional property `answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/downloadBandwidthTest` became not read-only (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the request optional property `answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/endAfternoonHours` became not read-only (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the request optional property `answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/endMorningHours` became not read-only (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the request optional property `answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/followBySms` became not read-only (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the request optional property `answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/hasModemKeptSynchronization` became not read-only (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the request optional property `answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/idAppointment` became not read-only (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the request optional property `answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/individualSite` became not read-only (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the request optional property `answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/modemIsSynchronized` became not read-only (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the request optional property `answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/modemMac` became not read-only (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the request optional property `answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/modemStillSynchronized` became not read-only (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the request optional property `answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/modemType` became not read-only (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the request optional property `answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/ovhTicket` became not read-only (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the request optional property `answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/problemType` became not read-only (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the request optional property `answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/resolvedAfterTests` became not read-only (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the request optional property `answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/secureSite` became not read-only (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the request optional property `answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/severalInternetConnections` became not read-only (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the request optional property `answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/siteClosedDays` became not read-only (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the request optional property `answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/siteDigicode` became not read-only (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the request optional property `answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/siteOpening` became not read-only (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the request optional property `answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/startAfternoonHours` became not read-only (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the request optional property `answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/startMorningHours` became not read-only (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the request optional property `answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/uploadBandwidthTest` became not read-only (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the response optional property `data/allOf[#/components/schemas/xdsl.lineDiagnostic.DiagnosticData]/answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/bandwidthTestUnit` became not read-only for the status `200` (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the response optional property `data/allOf[#/components/schemas/xdsl.lineDiagnostic.DiagnosticData]/answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/comment` became not read-only for the status `200` (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the response optional property `data/allOf[#/components/schemas/xdsl.lineDiagnostic.DiagnosticData]/answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/conditionsAccepted` became not read-only for the status `200` (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the response optional property `data/allOf[#/components/schemas/xdsl.lineDiagnostic.DiagnosticData]/answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/contactPhone` became not read-only for the status `200` (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the response optional property `data/allOf[#/components/schemas/xdsl.lineDiagnostic.DiagnosticData]/answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/datetimeOfAppearance` became not read-only for the status `200` (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the response optional property `data/allOf[#/components/schemas/xdsl.lineDiagnostic.DiagnosticData]/answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/downloadBandwidthTest` became not read-only for the status `200` (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the response optional property `data/allOf[#/components/schemas/xdsl.lineDiagnostic.DiagnosticData]/answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/endAfternoonHours` became not read-only for the status `200` (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the response optional property `data/allOf[#/components/schemas/xdsl.lineDiagnostic.DiagnosticData]/answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/endMorningHours` became not read-only for the status `200` (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the response optional property `data/allOf[#/components/schemas/xdsl.lineDiagnostic.DiagnosticData]/answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/followBySms` became not read-only for the status `200` (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the response optional property `data/allOf[#/components/schemas/xdsl.lineDiagnostic.DiagnosticData]/answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/hasModemKeptSynchronization` became not read-only for the status `200` (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the response optional property `data/allOf[#/components/schemas/xdsl.lineDiagnostic.DiagnosticData]/answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/idAppointment` became not read-only for the status `200` (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the response optional property `data/allOf[#/components/schemas/xdsl.lineDiagnostic.DiagnosticData]/answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/individualSite` became not read-only for the status `200` (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the response optional property `data/allOf[#/components/schemas/xdsl.lineDiagnostic.DiagnosticData]/answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/modemIsSynchronized` became not read-only for the status `200` (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the response optional property `data/allOf[#/components/schemas/xdsl.lineDiagnostic.DiagnosticData]/answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/modemMac` became not read-only for the status `200` (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the response optional property `data/allOf[#/components/schemas/xdsl.lineDiagnostic.DiagnosticData]/answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/modemStillSynchronized` became not read-only for the status `200` (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the response optional property `data/allOf[#/components/schemas/xdsl.lineDiagnostic.DiagnosticData]/answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/modemType` became not read-only for the status `200` (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the response optional property `data/allOf[#/components/schemas/xdsl.lineDiagnostic.DiagnosticData]/answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/ovhTicket` became not read-only for the status `200` (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the response optional property `data/allOf[#/components/schemas/xdsl.lineDiagnostic.DiagnosticData]/answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/problemType` became not read-only for the status `200` (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the response optional property `data/allOf[#/components/schemas/xdsl.lineDiagnostic.DiagnosticData]/answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/resolvedAfterTests` became not read-only for the status `200` (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the response optional property `data/allOf[#/components/schemas/xdsl.lineDiagnostic.DiagnosticData]/answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/secureSite` became not read-only for the status `200` (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the response optional property `data/allOf[#/components/schemas/xdsl.lineDiagnostic.DiagnosticData]/answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/severalInternetConnections` became not read-only for the status `200` (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the response optional property `data/allOf[#/components/schemas/xdsl.lineDiagnostic.DiagnosticData]/answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/siteClosedDays` became not read-only for the status `200` (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the response optional property `data/allOf[#/components/schemas/xdsl.lineDiagnostic.DiagnosticData]/answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/siteDigicode` became not read-only for the status `200` (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the response optional property `data/allOf[#/components/schemas/xdsl.lineDiagnostic.DiagnosticData]/answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/siteOpening` became not read-only for the status `200` (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the response optional property `data/allOf[#/components/schemas/xdsl.lineDiagnostic.DiagnosticData]/answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/startAfternoonHours` became not read-only for the status `200` (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the response optional property `data/allOf[#/components/schemas/xdsl.lineDiagnostic.DiagnosticData]/answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/startMorningHours` became not read-only for the status `200` (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `UpdateLineDiagnostic`: the response optional property `data/allOf[#/components/schemas/xdsl.lineDiagnostic.DiagnosticData]/answers/allOf[#/components/schemas/xdsl.lineDiagnostic.Answers]/uploadBandwidthTest` became not read-only for the status `200` (POST /v1/xdsl/{serviceName}/lines/{number}/diagnostic/run)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/case` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/avgRtt` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/maxRtt` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/minRtt` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/packetLoss` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/packetsRecv` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping/allOf[#/components/schemas/xdsl.wizard.diags.Statistics]/packetsSent` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ping` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lastConnection` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lastDisconnection` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lastSeen` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lastStatusChange` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lnsIp` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lnsLoopbackIp` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/lns` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/status` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp/allOf[#/components/schemas/xdsl.wizard.diags.PPPSession]/username` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/ppp` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/equipmentName` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/equipmentStatus` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/address` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/billingAccount` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/offer` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/range` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations/allOf[#/components/schemas/xdsl.wizard.diags.LinkInformation]/site` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad/allOf[#/components/schemas/xdsl.wizard.diags.ProviderStatus]/linkInformations` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag/allOf[#/components/schemas/xdsl.wizard.WizardDiags]/rad` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/diag` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- `ValidateFormDiagnosticWizard`: the response optional property `buffer/allOf[#/components/schemas/xdsl.wizard.WizardBuffer]/sysId` became not read-only for the status `200` (POST /v1/xdsl/diagnosticWizard/validateForm)
+- removed the schema `xdsl.Access` ( )
+- removed the schema `xdsl.xdslEmailPro` ( )
+
+</details>
+
 ## 0.3.0 (2026-11-16)
 
 Compared with 0.2.1.

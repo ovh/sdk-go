@@ -1,1 +1,0 @@
-{"section":"guides","method":"AllDatabases","kind":"pages","http":"GET","path":"/v2/guides/cloud/databases","summary":"Get a list of guides","signature":"AllDatabases(ctx context.Context, params ...ListDatabasesParams) iter.Seq2[*GuidesCloudDatabase, error]"}
