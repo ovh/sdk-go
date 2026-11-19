@@ -15,7 +15,7 @@ import (
 )
 
 // opListReferenceRegions is AllReferenceRegions's entry in the operation registry (ovh.Operations).
-var opListReferenceRegions = &ovh.Operation{Name: "vmwareclouddirector.AllReferenceRegions", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/reference/region", Summary: "List regions"}
+var opListReferenceRegions = &ovh.Operation{Name: "vmwareclouddirector.AllReferenceRegions", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/reference/region", Summary: "List regions", SchemasVersion: "1.0"}
 
 // AllReferenceRegions iterates over GET /v2/vmwareCloudDirector/reference/region (List regions),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it

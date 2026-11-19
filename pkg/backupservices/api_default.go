@@ -15,7 +15,7 @@ import (
 )
 
 // opCreateTenantVspcBackupAgent is CreateTenantVspcBackupAgent's entry in the operation registry (ovh.Operations).
-var opCreateTenantVspcBackupAgent = &ovh.Operation{Name: "backupservices.CreateTenantVspcBackupAgent", Method: http.MethodPost, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupAgent", Summary: "Creates backup agent", IAMActions: []string{"backupServices:apiovh:vspc/edit"}}
+var opCreateTenantVspcBackupAgent = &ovh.Operation{Name: "backupservices.CreateTenantVspcBackupAgent", Method: http.MethodPost, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupAgent", Summary: "Creates backup agent", IAMActions: []string{"backupServices:apiovh:vspc/edit"}, SchemasVersion: "1.0"}
 
 // CreateTenantVspcBackupAgent calls POST /v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupAgent: Creates backup agent
 //
@@ -30,7 +30,7 @@ func (s *Service) CreateTenantVspcBackupAgent(ctx context.Context, backupService
 }
 
 // opCreateTenantVspcBackupLicensesBackupServer is CreateTenantVspcBackupLicensesBackupServer's entry in the operation registry (ovh.Operations).
-var opCreateTenantVspcBackupLicensesBackupServer = &ovh.Operation{Name: "backupservices.CreateTenantVspcBackupLicensesBackupServer", Method: http.MethodPost, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupLicenses/{backupLicensesId}/backupServer", Summary: "Registers an additional backup server under the Backup Licenses subscription", IAMActions: []string{"backupServices:apiovh:vspc/backupLicenses/edit"}}
+var opCreateTenantVspcBackupLicensesBackupServer = &ovh.Operation{Name: "backupservices.CreateTenantVspcBackupLicensesBackupServer", Method: http.MethodPost, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupLicenses/{backupLicensesId}/backupServer", Summary: "Registers an additional backup server under the Backup Licenses subscription", IAMActions: []string{"backupServices:apiovh:vspc/backupLicenses/edit"}, SchemasVersion: "1.0"}
 
 // CreateTenantVspcBackupLicensesBackupServer calls POST /v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupLicenses/{backupLicensesId}/backupServer: Registers an additional backup server under the Backup Licenses subscription
 //
@@ -46,7 +46,7 @@ func (s *Service) CreateTenantVspcBackupLicensesBackupServer(ctx context.Context
 }
 
 // opDeleteTenantVspcBackupAgent is DeleteTenantVspcBackupAgent's entry in the operation registry (ovh.Operations).
-var opDeleteTenantVspcBackupAgent = &ovh.Operation{Name: "backupservices.DeleteTenantVspcBackupAgent", Method: http.MethodDelete, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupAgent/{backupAgentId}", Summary: "Deletes backup agent", IAMActions: []string{"backupServices:apiovh:vspc/edit"}}
+var opDeleteTenantVspcBackupAgent = &ovh.Operation{Name: "backupservices.DeleteTenantVspcBackupAgent", Method: http.MethodDelete, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupAgent/{backupAgentId}", Summary: "Deletes backup agent", IAMActions: []string{"backupServices:apiovh:vspc/edit"}, SchemasVersion: "1.0"}
 
 // DeleteTenantVspcBackupAgent calls DELETE /v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupAgent/{backupAgentId}: Deletes backup agent
 //
@@ -61,7 +61,7 @@ func (s *Service) DeleteTenantVspcBackupAgent(ctx context.Context, backupService
 }
 
 // opDeleteTenantVspcBackupLicensesBackupServer is DeleteTenantVspcBackupLicensesBackupServer's entry in the operation registry (ovh.Operations).
-var opDeleteTenantVspcBackupLicensesBackupServer = &ovh.Operation{Name: "backupservices.DeleteTenantVspcBackupLicensesBackupServer", Method: http.MethodDelete, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupLicenses/{backupLicensesId}/backupServer/{backupServerId}", Summary: "Deregisters a backup server from the Backup Licenses subscription; the subscription and license types are retained", IAMActions: []string{"backupServices:apiovh:vspc/backupLicenses/delete"}}
+var opDeleteTenantVspcBackupLicensesBackupServer = &ovh.Operation{Name: "backupservices.DeleteTenantVspcBackupLicensesBackupServer", Method: http.MethodDelete, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupLicenses/{backupLicensesId}/backupServer/{backupServerId}", Summary: "Deregisters a backup server from the Backup Licenses subscription; the subscription and license types are retained", IAMActions: []string{"backupServices:apiovh:vspc/backupLicenses/delete"}, SchemasVersion: "1.0"}
 
 // DeleteTenantVspcBackupLicensesBackupServer calls DELETE /v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupLicenses/{backupLicensesId}/backupServer/{backupServerId}: Deregisters a backup server from the Backup Licenses subscription; the subscription and license types are retained
 //
@@ -77,7 +77,7 @@ func (s *Service) DeleteTenantVspcBackupLicensesBackupServer(ctx context.Context
 }
 
 // opGetReferenceManagedBackupVaultRegion is GetReferenceManagedBackupVaultRegion's entry in the operation registry (ovh.Operations).
-var opGetReferenceManagedBackupVaultRegion = &ovh.Operation{Name: "backupservices.GetReferenceManagedBackupVaultRegion", Method: http.MethodGet, Path: "/v2/backupServices/reference/managedBackupVaultRegion", Summary: "Lists, per region where a Hosted Private Cloud is located, the region hosting the vaults of its Managed Backup service and the regions allowed as replication secondary site"}
+var opGetReferenceManagedBackupVaultRegion = &ovh.Operation{Name: "backupservices.GetReferenceManagedBackupVaultRegion", Method: http.MethodGet, Path: "/v2/backupServices/reference/managedBackupVaultRegion", Summary: "Lists, per region where a Hosted Private Cloud is located, the region hosting the vaults of its Managed Backup service and the regions allowed as replication secondary site", SchemasVersion: "1.0"}
 
 // GetReferenceManagedBackupVaultRegion calls GET /v2/backupServices/reference/managedBackupVaultRegion: Lists, per region where a Hosted Private Cloud is located, the region hosting the vaults of its Managed Backup service and the regions allowed as replication secondary site
 func (s *Service) GetReferenceManagedBackupVaultRegion(ctx context.Context) (map[string]BackupReferenceManagedBackupVaultRegion, error) {
@@ -85,7 +85,7 @@ func (s *Service) GetReferenceManagedBackupVaultRegion(ctx context.Context) (map
 }
 
 // opGetTenant is GetTenant's entry in the operation registry (ovh.Operations).
-var opGetTenant = &ovh.Operation{Name: "backupservices.GetTenant", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}", Summary: "Retrieves the details of your backup tenant", IAMActions: []string{"backupServices:apiovh:get"}}
+var opGetTenant = &ovh.Operation{Name: "backupservices.GetTenant", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}", Summary: "Retrieves the details of your backup tenant", IAMActions: []string{"backupServices:apiovh:get"}, SchemasVersion: "1.0"}
 
 // GetTenant calls GET /v2/backupServices/tenant/{backupServicesId}: Retrieves the details of your backup tenant
 //
@@ -98,7 +98,7 @@ func (s *Service) GetTenant(ctx context.Context, backupServicesID string) (*Back
 }
 
 // opGetTenantVault is GetTenantVault's entry in the operation registry (ovh.Operations).
-var opGetTenantVault = &ovh.Operation{Name: "backupservices.GetTenantVault", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vault/{vaultId}", Summary: "Retrieves specific vault details", IAMActions: []string{"backupServices:apiovh:vault/get"}}
+var opGetTenantVault = &ovh.Operation{Name: "backupservices.GetTenantVault", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vault/{vaultId}", Summary: "Retrieves specific vault details", IAMActions: []string{"backupServices:apiovh:vault/get"}, SchemasVersion: "1.0"}
 
 // GetTenantVault calls GET /v2/backupServices/tenant/{backupServicesId}/vault/{vaultId}: Retrieves specific vault details
 //
@@ -112,7 +112,7 @@ func (s *Service) GetTenantVault(ctx context.Context, backupServicesID string, v
 }
 
 // opGetTenantVaultBucket is GetTenantVaultBucket's entry in the operation registry (ovh.Operations).
-var opGetTenantVaultBucket = &ovh.Operation{Name: "backupservices.GetTenantVaultBucket", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vault/{vaultId}/bucket/{bucketId}", Summary: "Gets specific vault bucket details", IAMActions: []string{"backupServices:apiovh:vault/get"}}
+var opGetTenantVaultBucket = &ovh.Operation{Name: "backupservices.GetTenantVaultBucket", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vault/{vaultId}/bucket/{bucketId}", Summary: "Gets specific vault bucket details", IAMActions: []string{"backupServices:apiovh:vault/get"}, SchemasVersion: "1.0"}
 
 // GetTenantVaultBucket calls GET /v2/backupServices/tenant/{backupServicesId}/vault/{vaultId}/bucket/{bucketId}: Gets specific vault bucket details
 //
@@ -127,7 +127,7 @@ func (s *Service) GetTenantVaultBucket(ctx context.Context, backupServicesID str
 }
 
 // opGetTenantVaultBucketCredentials is GetTenantVaultBucketCredentials's entry in the operation registry (ovh.Operations).
-var opGetTenantVaultBucketCredentials = &ovh.Operation{Name: "backupservices.GetTenantVaultBucketCredentials", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vault/{vaultId}/bucket/{bucketId}/credentials", Summary: "Retrieves S3™*-compatible credentials and connection endpoint for a vault bucket", IAMActions: []string{"backupServices:apiovh:vault/credentials/get"}}
+var opGetTenantVaultBucketCredentials = &ovh.Operation{Name: "backupservices.GetTenantVaultBucketCredentials", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vault/{vaultId}/bucket/{bucketId}/credentials", Summary: "Retrieves S3™*-compatible credentials and connection endpoint for a vault bucket", IAMActions: []string{"backupServices:apiovh:vault/credentials/get"}, SchemasVersion: "1.0"}
 
 // GetTenantVaultBucketCredentials calls GET /v2/backupServices/tenant/{backupServicesId}/vault/{vaultId}/bucket/{bucketId}/credentials: Retrieves S3™*-compatible credentials and connection endpoint for a vault bucket
 //
@@ -145,7 +145,7 @@ func (s *Service) GetTenantVaultBucketCredentials(ctx context.Context, backupSer
 }
 
 // opGetTenantVspc is GetTenantVspc's entry in the operation registry (ovh.Operations).
-var opGetTenantVspc = &ovh.Operation{Name: "backupservices.GetTenantVspc", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}", Summary: "Retrieves details of a specific VSPC tenant", IAMActions: []string{"backupServices:apiovh:vspc/get"}}
+var opGetTenantVspc = &ovh.Operation{Name: "backupservices.GetTenantVspc", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}", Summary: "Retrieves details of a specific VSPC tenant", IAMActions: []string{"backupServices:apiovh:vspc/get"}, SchemasVersion: "1.0"}
 
 // GetTenantVspc calls GET /v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}: Retrieves details of a specific VSPC tenant
 //
@@ -159,7 +159,7 @@ func (s *Service) GetTenantVspc(ctx context.Context, backupServicesID string, vs
 }
 
 // opGetTenantVspcBackupAgent is GetTenantVspcBackupAgent's entry in the operation registry (ovh.Operations).
-var opGetTenantVspcBackupAgent = &ovh.Operation{Name: "backupservices.GetTenantVspcBackupAgent", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupAgent/{backupAgentId}", Summary: "Gets specific backup agent details", IAMActions: []string{"backupServices:apiovh:vspc/get"}}
+var opGetTenantVspcBackupAgent = &ovh.Operation{Name: "backupservices.GetTenantVspcBackupAgent", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupAgent/{backupAgentId}", Summary: "Gets specific backup agent details", IAMActions: []string{"backupServices:apiovh:vspc/get"}, SchemasVersion: "1.0"}
 
 // GetTenantVspcBackupAgent calls GET /v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupAgent/{backupAgentId}: Gets specific backup agent details
 //
@@ -174,7 +174,7 @@ func (s *Service) GetTenantVspcBackupAgent(ctx context.Context, backupServicesID
 }
 
 // opGetTenantVspcBackupLicenses is GetTenantVspcBackupLicenses's entry in the operation registry (ovh.Operations).
-var opGetTenantVspcBackupLicenses = &ovh.Operation{Name: "backupservices.GetTenantVspcBackupLicenses", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupLicenses/{backupLicensesId}", Summary: "Retrieves the Backup Licenses subscription of the VSPC tenant", IAMActions: []string{"backupServices:apiovh:vspc/backupLicenses/get"}}
+var opGetTenantVspcBackupLicenses = &ovh.Operation{Name: "backupservices.GetTenantVspcBackupLicenses", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupLicenses/{backupLicensesId}", Summary: "Retrieves the Backup Licenses subscription of the VSPC tenant", IAMActions: []string{"backupServices:apiovh:vspc/backupLicenses/get"}, SchemasVersion: "1.0"}
 
 // GetTenantVspcBackupLicenses calls GET /v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupLicenses/{backupLicensesId}: Retrieves the Backup Licenses subscription of the VSPC tenant
 //
@@ -189,7 +189,7 @@ func (s *Service) GetTenantVspcBackupLicenses(ctx context.Context, backupService
 }
 
 // opGetTenantVspcBackupLicensesBackupServer is GetTenantVspcBackupLicensesBackupServer's entry in the operation registry (ovh.Operations).
-var opGetTenantVspcBackupLicensesBackupServer = &ovh.Operation{Name: "backupservices.GetTenantVspcBackupLicensesBackupServer", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupLicenses/{backupLicensesId}/backupServer/{backupServerId}", Summary: "Gets specific backup server details", IAMActions: []string{"backupServices:apiovh:vspc/backupLicenses/get"}}
+var opGetTenantVspcBackupLicensesBackupServer = &ovh.Operation{Name: "backupservices.GetTenantVspcBackupLicensesBackupServer", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupLicenses/{backupLicensesId}/backupServer/{backupServerId}", Summary: "Gets specific backup server details", IAMActions: []string{"backupServices:apiovh:vspc/backupLicenses/get"}, SchemasVersion: "1.0"}
 
 // GetTenantVspcBackupLicensesBackupServer calls GET /v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupLicenses/{backupLicensesId}/backupServer/{backupServerId}: Gets specific backup server details
 //
@@ -205,7 +205,7 @@ func (s *Service) GetTenantVspcBackupLicensesBackupServer(ctx context.Context, b
 }
 
 // opGetTenantVspcManagedBackup is GetTenantVspcManagedBackup's entry in the operation registry (ovh.Operations).
-var opGetTenantVspcManagedBackup = &ovh.Operation{Name: "backupservices.GetTenantVspcManagedBackup", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managedBackup/{managedBackupId}", Summary: "Retrieves a Managed Backup service of the VSPC tenant", IAMActions: []string{"backupServices:apiovh:vspc/managedBackup/get"}}
+var opGetTenantVspcManagedBackup = &ovh.Operation{Name: "backupservices.GetTenantVspcManagedBackup", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managedBackup/{managedBackupId}", Summary: "Retrieves a Managed Backup service of the VSPC tenant", IAMActions: []string{"backupServices:apiovh:vspc/managedBackup/get"}, SchemasVersion: "1.0"}
 
 // GetTenantVspcManagedBackup calls GET /v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managedBackup/{managedBackupId}: Retrieves a Managed Backup service of the VSPC tenant
 //
@@ -220,7 +220,7 @@ func (s *Service) GetTenantVspcManagedBackup(ctx context.Context, backupServices
 }
 
 // opGetTenantVspcManagedBackupConsumption is GetTenantVspcManagedBackupConsumption's entry in the operation registry (ovh.Operations).
-var opGetTenantVspcManagedBackupConsumption = &ovh.Operation{Name: "backupservices.GetTenantVspcManagedBackupConsumption", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managedBackup/{managedBackupId}/consumption", Summary: "Retrieves the current billable consumption of the Managed Backup service: number of backed up virtual machines per vault level and size band with the matching plan code; no price is returned", IAMActions: []string{"backupServices:apiovh:vspc/managedBackup/get"}}
+var opGetTenantVspcManagedBackupConsumption = &ovh.Operation{Name: "backupservices.GetTenantVspcManagedBackupConsumption", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managedBackup/{managedBackupId}/consumption", Summary: "Retrieves the current billable consumption of the Managed Backup service: number of backed up virtual machines per vault level and size band with the matching plan code; no price is returned", IAMActions: []string{"backupServices:apiovh:vspc/managedBackup/get"}, SchemasVersion: "1.0"}
 
 // GetTenantVspcManagedBackupConsumption calls GET /v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managedBackup/{managedBackupId}/consumption: Retrieves the current billable consumption of the Managed Backup service: number of backed up virtual machines per vault level and size band with the matching plan code; no price is returned
 //
@@ -235,7 +235,7 @@ func (s *Service) GetTenantVspcManagedBackupConsumption(ctx context.Context, bac
 }
 
 // opGetTenantVspcManagedBackupVirtualMachine is GetTenantVspcManagedBackupVirtualMachine's entry in the operation registry (ovh.Operations).
-var opGetTenantVspcManagedBackupVirtualMachine = &ovh.Operation{Name: "backupservices.GetTenantVspcManagedBackupVirtualMachine", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managedBackup/{managedBackupId}/virtualMachine/{virtualMachineId}", Summary: "Retrieves the protection state, billing dimensions and last backup information of a virtual machine", IAMActions: []string{"backupServices:apiovh:vspc/managedBackup/get"}}
+var opGetTenantVspcManagedBackupVirtualMachine = &ovh.Operation{Name: "backupservices.GetTenantVspcManagedBackupVirtualMachine", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managedBackup/{managedBackupId}/virtualMachine/{virtualMachineId}", Summary: "Retrieves the protection state, billing dimensions and last backup information of a virtual machine", IAMActions: []string{"backupServices:apiovh:vspc/managedBackup/get"}, SchemasVersion: "1.0"}
 
 // GetTenantVspcManagedBackupVirtualMachine calls GET /v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managedBackup/{managedBackupId}/virtualMachine/{virtualMachineId}: Retrieves the protection state, billing dimensions and last backup information of a virtual machine
 //
@@ -251,7 +251,7 @@ func (s *Service) GetTenantVspcManagedBackupVirtualMachine(ctx context.Context, 
 }
 
 // opGetTenantVspcManagementAgent is GetTenantVspcManagementAgent's entry in the operation registry (ovh.Operations).
-var opGetTenantVspcManagementAgent = &ovh.Operation{Name: "backupservices.GetTenantVspcManagementAgent", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managementAgent", Summary: "Retrieves the download link for the management agent", IAMActions: []string{"backupServices:apiovh:vspc/get"}}
+var opGetTenantVspcManagementAgent = &ovh.Operation{Name: "backupservices.GetTenantVspcManagementAgent", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managementAgent", Summary: "Retrieves the download link for the management agent", IAMActions: []string{"backupServices:apiovh:vspc/get"}, SchemasVersion: "1.0"}
 
 // GetTenantVspcManagementAgent calls GET /v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managementAgent: Retrieves the download link for the management agent
 //
@@ -265,7 +265,7 @@ func (s *Service) GetTenantVspcManagementAgent(ctx context.Context, backupServic
 }
 
 // opListTenantVaultBuckets is AllTenantVaultBuckets's entry in the operation registry (ovh.Operations).
-var opListTenantVaultBuckets = &ovh.Operation{Name: "backupservices.AllTenantVaultBuckets", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vault/{vaultId}/bucket", Summary: "Lists buckets of the vault", IAMActions: []string{"backupServices:apiovh:vault/get"}}
+var opListTenantVaultBuckets = &ovh.Operation{Name: "backupservices.AllTenantVaultBuckets", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vault/{vaultId}/bucket", Summary: "Lists buckets of the vault", IAMActions: []string{"backupServices:apiovh:vault/get"}, SchemasVersion: "1.0"}
 
 // AllTenantVaultBuckets iterates over GET /v2/backupServices/tenant/{backupServicesId}/vault/{vaultId}/bucket (Lists buckets of the vault),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -281,7 +281,7 @@ func (s *Service) AllTenantVaultBuckets(ctx context.Context, backupServicesID st
 }
 
 // opListTenantVaults is AllTenantVaults's entry in the operation registry (ovh.Operations).
-var opListTenantVaults = &ovh.Operation{Name: "backupservices.AllTenantVaults", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vault", Summary: "Lists vaults for your tenant", IAMActions: []string{"backupServices:apiovh:vault/get"}}
+var opListTenantVaults = &ovh.Operation{Name: "backupservices.AllTenantVaults", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vault", Summary: "Lists vaults for your tenant", IAMActions: []string{"backupServices:apiovh:vault/get"}, SchemasVersion: "1.0"}
 
 // ListTenantVaultsParams holds the optional parameters of ListTenantVaults.
 type ListTenantVaultsParams struct {
@@ -302,7 +302,7 @@ func (s *Service) AllTenantVaults(ctx context.Context, backupServicesID string, 
 }
 
 // opListTenantVspcBackupAgents is AllTenantVspcBackupAgents's entry in the operation registry (ovh.Operations).
-var opListTenantVspcBackupAgents = &ovh.Operation{Name: "backupservices.AllTenantVspcBackupAgents", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupAgent", Summary: "Lists backup agents", IAMActions: []string{"backupServices:apiovh:vspc/get"}}
+var opListTenantVspcBackupAgents = &ovh.Operation{Name: "backupservices.AllTenantVspcBackupAgents", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupAgent", Summary: "Lists backup agents", IAMActions: []string{"backupServices:apiovh:vspc/get"}, SchemasVersion: "1.0"}
 
 // AllTenantVspcBackupAgents iterates over GET /v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupAgent (Lists backup agents),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -318,7 +318,7 @@ func (s *Service) AllTenantVspcBackupAgents(ctx context.Context, backupServicesI
 }
 
 // opListTenantVspcBackupLicenses is AllTenantVspcBackupLicenses's entry in the operation registry (ovh.Operations).
-var opListTenantVspcBackupLicenses = &ovh.Operation{Name: "backupservices.AllTenantVspcBackupLicenses", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupLicenses", Summary: "Retrieves the Backup Licenses subscription list of the VSPC tenant", IAMActions: []string{"backupServices:apiovh:vspc/backupLicenses/get"}}
+var opListTenantVspcBackupLicenses = &ovh.Operation{Name: "backupservices.AllTenantVspcBackupLicenses", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupLicenses", Summary: "Retrieves the Backup Licenses subscription list of the VSPC tenant", IAMActions: []string{"backupServices:apiovh:vspc/backupLicenses/get"}, SchemasVersion: "1.0"}
 
 // ListTenantVspcBackupLicensesParams holds the optional parameters of ListTenantVspcBackupLicenses.
 type ListTenantVspcBackupLicensesParams struct {
@@ -340,7 +340,7 @@ func (s *Service) AllTenantVspcBackupLicenses(ctx context.Context, backupService
 }
 
 // opListTenantVspcBackupLicensesBackupServers is AllTenantVspcBackupLicensesBackupServers's entry in the operation registry (ovh.Operations).
-var opListTenantVspcBackupLicensesBackupServers = &ovh.Operation{Name: "backupservices.AllTenantVspcBackupLicensesBackupServers", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupLicenses/{backupLicensesId}/backupServer", Summary: "Lists backup servers of the Backup Licenses subscription", IAMActions: []string{"backupServices:apiovh:vspc/backupLicenses/get"}}
+var opListTenantVspcBackupLicensesBackupServers = &ovh.Operation{Name: "backupservices.AllTenantVspcBackupLicensesBackupServers", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupLicenses/{backupLicensesId}/backupServer", Summary: "Lists backup servers of the Backup Licenses subscription", IAMActions: []string{"backupServices:apiovh:vspc/backupLicenses/get"}, SchemasVersion: "1.0"}
 
 // AllTenantVspcBackupLicensesBackupServers iterates over GET /v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupLicenses/{backupLicensesId}/backupServer (Lists backup servers of the Backup Licenses subscription),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -357,7 +357,7 @@ func (s *Service) AllTenantVspcBackupLicensesBackupServers(ctx context.Context, 
 }
 
 // opListTenantVspcBackupPolicies is AllTenantVspcBackupPolicies's entry in the operation registry (ovh.Operations).
-var opListTenantVspcBackupPolicies = &ovh.Operation{Name: "backupservices.AllTenantVspcBackupPolicies", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupPolicies", Summary: "Retrieves the list of backup policies available in your VSPC", IAMActions: []string{"backupServices:apiovh:vspc/get"}}
+var opListTenantVspcBackupPolicies = &ovh.Operation{Name: "backupservices.AllTenantVspcBackupPolicies", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupPolicies", Summary: "Retrieves the list of backup policies available in your VSPC", IAMActions: []string{"backupServices:apiovh:vspc/get"}, SchemasVersion: "1.0"}
 
 // AllTenantVspcBackupPolicies iterates over GET /v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupPolicies (Retrieves the list of backup policies available in your VSPC),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -373,7 +373,7 @@ func (s *Service) AllTenantVspcBackupPolicies(ctx context.Context, backupService
 }
 
 // opListTenantVspcManagedBackupVirtualMachines is AllTenantVspcManagedBackupVirtualMachines's entry in the operation registry (ovh.Operations).
-var opListTenantVspcManagedBackupVirtualMachines = &ovh.Operation{Name: "backupservices.AllTenantVspcManagedBackupVirtualMachines", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managedBackup/{managedBackupId}/virtualMachine", Summary: "Lists the virtual machines known to the Managed Backup service with their protection state, billing dimensions and last backup information", IAMActions: []string{"backupServices:apiovh:vspc/managedBackup/get"}}
+var opListTenantVspcManagedBackupVirtualMachines = &ovh.Operation{Name: "backupservices.AllTenantVspcManagedBackupVirtualMachines", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managedBackup/{managedBackupId}/virtualMachine", Summary: "Lists the virtual machines known to the Managed Backup service with their protection state, billing dimensions and last backup information", IAMActions: []string{"backupServices:apiovh:vspc/managedBackup/get"}, SchemasVersion: "1.0"}
 
 // AllTenantVspcManagedBackupVirtualMachines iterates over GET /v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managedBackup/{managedBackupId}/virtualMachine (Lists the virtual machines known to the Managed Backup service with their protection state, billing dimensions and last backup information),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -390,7 +390,7 @@ func (s *Service) AllTenantVspcManagedBackupVirtualMachines(ctx context.Context,
 }
 
 // opListTenantVspcManagedBackups is AllTenantVspcManagedBackups's entry in the operation registry (ovh.Operations).
-var opListTenantVspcManagedBackups = &ovh.Operation{Name: "backupservices.AllTenantVspcManagedBackups", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managedBackup", Summary: "Retrieves the Managed Backup services of the VSPC tenant, one per protected Hosted Private Cloud; empty when the Managed Backup add-on is not enabled", IAMActions: []string{"backupServices:apiovh:vspc/managedBackup/get"}}
+var opListTenantVspcManagedBackups = &ovh.Operation{Name: "backupservices.AllTenantVspcManagedBackups", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managedBackup", Summary: "Retrieves the Managed Backup services of the VSPC tenant, one per protected Hosted Private Cloud; empty when the Managed Backup add-on is not enabled", IAMActions: []string{"backupServices:apiovh:vspc/managedBackup/get"}, SchemasVersion: "1.0"}
 
 // ListTenantVspcManagedBackupsParams holds the optional parameters of ListTenantVspcManagedBackups.
 type ListTenantVspcManagedBackupsParams struct {
@@ -412,7 +412,7 @@ func (s *Service) AllTenantVspcManagedBackups(ctx context.Context, backupService
 }
 
 // opListTenantVspcs is AllTenantVspcs's entry in the operation registry (ovh.Operations).
-var opListTenantVspcs = &ovh.Operation{Name: "backupservices.AllTenantVspcs", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc", Summary: "Retrieves list of VSPC tenants", IAMActions: []string{"backupServices:apiovh:vspc/get"}}
+var opListTenantVspcs = &ovh.Operation{Name: "backupservices.AllTenantVspcs", Method: http.MethodGet, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc", Summary: "Retrieves list of VSPC tenants", IAMActions: []string{"backupServices:apiovh:vspc/get"}, SchemasVersion: "1.0"}
 
 // ListTenantVspcsParams holds the optional parameters of ListTenantVspcs.
 type ListTenantVspcsParams struct {
@@ -433,7 +433,7 @@ func (s *Service) AllTenantVspcs(ctx context.Context, backupServicesID string, p
 }
 
 // opListTenants is AllTenants's entry in the operation registry (ovh.Operations).
-var opListTenants = &ovh.Operation{Name: "backupservices.AllTenants", Method: http.MethodGet, Path: "/v2/backupServices/tenant", Summary: "Retrieves the backup tenants you manage", IAMActions: []string{"backupServices:apiovh:get"}}
+var opListTenants = &ovh.Operation{Name: "backupservices.AllTenants", Method: http.MethodGet, Path: "/v2/backupServices/tenant", Summary: "Retrieves the backup tenants you manage", IAMActions: []string{"backupServices:apiovh:get"}, SchemasVersion: "1.0"}
 
 // ListTenantsParams holds the optional parameters of ListTenants.
 type ListTenantsParams struct {
@@ -451,7 +451,7 @@ func (s *Service) AllTenants(ctx context.Context, params ...ListTenantsParams) i
 }
 
 // opResetPasswordTenantVspcManagedBackup is ResetPasswordTenantVspcManagedBackup's entry in the operation registry (ovh.Operations).
-var opResetPasswordTenantVspcManagedBackup = &ovh.Operation{Name: "backupservices.ResetPasswordTenantVspcManagedBackup", Method: http.MethodPost, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managedBackup/{managedBackupId}/resetPassword", Summary: "Resets the password of your account on the Veeam Backup & Replication web interface of the Managed Backup service", IAMActions: []string{"backupServices:apiovh:vspc/managedBackup/resetPassword"}}
+var opResetPasswordTenantVspcManagedBackup = &ovh.Operation{Name: "backupservices.ResetPasswordTenantVspcManagedBackup", Method: http.MethodPost, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managedBackup/{managedBackupId}/resetPassword", Summary: "Resets the password of your account on the Veeam Backup & Replication web interface of the Managed Backup service", IAMActions: []string{"backupServices:apiovh:vspc/managedBackup/resetPassword"}, SchemasVersion: "1.0"}
 
 // ResetPasswordTenantVspcManagedBackup calls POST /v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managedBackup/{managedBackupId}/resetPassword: Resets the password of your account on the Veeam Backup & Replication web interface of the Managed Backup service
 //
@@ -470,7 +470,7 @@ func (s *Service) ResetPasswordTenantVspcManagedBackup(ctx context.Context, back
 }
 
 // opUpdateTenantVault is UpdateTenantVault's entry in the operation registry (ovh.Operations).
-var opUpdateTenantVault = &ovh.Operation{Name: "backupservices.UpdateTenantVault", Method: http.MethodPut, Path: "/v2/backupServices/tenant/{backupServicesId}/vault/{vaultId}", Summary: "Updates vault display name and cloud repository", IAMActions: []string{"backupServices:apiovh:vault/edit"}}
+var opUpdateTenantVault = &ovh.Operation{Name: "backupservices.UpdateTenantVault", Method: http.MethodPut, Path: "/v2/backupServices/tenant/{backupServicesId}/vault/{vaultId}", Summary: "Updates vault display name and cloud repository", IAMActions: []string{"backupServices:apiovh:vault/edit"}, SchemasVersion: "1.0"}
 
 // UpdateTenantVault calls PUT /v2/backupServices/tenant/{backupServicesId}/vault/{vaultId}: Updates vault display name and cloud repository
 //
@@ -485,7 +485,7 @@ func (s *Service) UpdateTenantVault(ctx context.Context, backupServicesID string
 }
 
 // opUpdateTenantVspc is UpdateTenantVspc's entry in the operation registry (ovh.Operations).
-var opUpdateTenantVspc = &ovh.Operation{Name: "backupservices.UpdateTenantVspc", Method: http.MethodPut, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}", Summary: "Updates the display name of a VSPC tenant", IAMActions: []string{"backupServices:apiovh:vspc/edit"}}
+var opUpdateTenantVspc = &ovh.Operation{Name: "backupservices.UpdateTenantVspc", Method: http.MethodPut, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}", Summary: "Updates the display name of a VSPC tenant", IAMActions: []string{"backupServices:apiovh:vspc/edit"}, SchemasVersion: "1.0"}
 
 // UpdateTenantVspc calls PUT /v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}: Updates the display name of a VSPC tenant
 //
@@ -500,7 +500,7 @@ func (s *Service) UpdateTenantVspc(ctx context.Context, backupServicesID string,
 }
 
 // opUpdateTenantVspcBackupAgent is UpdateTenantVspcBackupAgent's entry in the operation registry (ovh.Operations).
-var opUpdateTenantVspcBackupAgent = &ovh.Operation{Name: "backupservices.UpdateTenantVspcBackupAgent", Method: http.MethodPut, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupAgent/{backupAgentId}", Summary: "Updates backup agent", IAMActions: []string{"backupServices:apiovh:vspc/edit"}}
+var opUpdateTenantVspcBackupAgent = &ovh.Operation{Name: "backupservices.UpdateTenantVspcBackupAgent", Method: http.MethodPut, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupAgent/{backupAgentId}", Summary: "Updates backup agent", IAMActions: []string{"backupServices:apiovh:vspc/edit"}, SchemasVersion: "1.0"}
 
 // UpdateTenantVspcBackupAgent calls PUT /v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupAgent/{backupAgentId}: Updates backup agent
 //
@@ -516,7 +516,7 @@ func (s *Service) UpdateTenantVspcBackupAgent(ctx context.Context, backupService
 }
 
 // opUpdateTenantVspcBackupLicensesBackupServer is UpdateTenantVspcBackupLicensesBackupServer's entry in the operation registry (ovh.Operations).
-var opUpdateTenantVspcBackupLicensesBackupServer = &ovh.Operation{Name: "backupservices.UpdateTenantVspcBackupLicensesBackupServer", Method: http.MethodPut, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupLicenses/{backupLicensesId}/backupServer/{backupServerId}", Summary: "Updates a backup server; IP and display name changes apply immediately, a license type change is applied on the 1st of the next month", IAMActions: []string{"backupServices:apiovh:vspc/backupLicenses/edit"}}
+var opUpdateTenantVspcBackupLicensesBackupServer = &ovh.Operation{Name: "backupservices.UpdateTenantVspcBackupLicensesBackupServer", Method: http.MethodPut, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupLicenses/{backupLicensesId}/backupServer/{backupServerId}", Summary: "Updates a backup server; IP and display name changes apply immediately, a license type change is applied on the 1st of the next month", IAMActions: []string{"backupServices:apiovh:vspc/backupLicenses/edit"}, SchemasVersion: "1.0"}
 
 // UpdateTenantVspcBackupLicensesBackupServer calls PUT /v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/backupLicenses/{backupLicensesId}/backupServer/{backupServerId}: Updates a backup server; IP and display name changes apply immediately, a license type change is applied on the 1st of the next month
 //
@@ -533,7 +533,7 @@ func (s *Service) UpdateTenantVspcBackupLicensesBackupServer(ctx context.Context
 }
 
 // opUpdateTenantVspcManagedBackup is UpdateTenantVspcManagedBackup's entry in the operation registry (ovh.Operations).
-var opUpdateTenantVspcManagedBackup = &ovh.Operation{Name: "backupservices.UpdateTenantVspcManagedBackup", Method: http.MethodPut, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managedBackup/{managedBackupId}", Summary: "Updates the display name of a Managed Backup service", IAMActions: []string{"backupServices:apiovh:vspc/managedBackup/edit"}}
+var opUpdateTenantVspcManagedBackup = &ovh.Operation{Name: "backupservices.UpdateTenantVspcManagedBackup", Method: http.MethodPut, Path: "/v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managedBackup/{managedBackupId}", Summary: "Updates the display name of a Managed Backup service", IAMActions: []string{"backupServices:apiovh:vspc/managedBackup/edit"}, SchemasVersion: "1.0"}
 
 // UpdateTenantVspcManagedBackup calls PUT /v2/backupServices/tenant/{backupServicesId}/vspc/{vspcTenantId}/managedBackup/{managedBackupId}: Updates the display name of a Managed Backup service
 //

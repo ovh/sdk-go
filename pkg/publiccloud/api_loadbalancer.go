@@ -15,7 +15,7 @@ import (
 )
 
 // opCreateLoadBalancer is CreateLoadBalancer's entry in the operation registry (ovh.Operations).
-var opCreateLoadBalancer = &ovh.Operation{Name: "publiccloud.CreateLoadBalancer", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/loadbalancer", Summary: "Create a load balancer", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/create"}}
+var opCreateLoadBalancer = &ovh.Operation{Name: "publiccloud.CreateLoadBalancer", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/loadbalancer", Summary: "Create a load balancer", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/create"}, SchemasVersion: "1.0"}
 
 // CreateLoadBalancer calls POST /v2/publicCloud/project/{projectId}/loadbalancer: Create a load balancer
 //
@@ -33,7 +33,7 @@ func (s *Service) CreateLoadBalancer(ctx context.Context, projectID string, body
 }
 
 // opCreateLoadBalancerL7Policy is CreateLoadBalancerL7Policy's entry in the operation registry (ovh.Operations).
-var opCreateLoadBalancerL7Policy = &ovh.Operation{Name: "publiccloud.CreateLoadBalancerL7Policy", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener/{listenerId}/l7policy", Summary: "Create an L7 policy", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/listener/L7policy/create"}}
+var opCreateLoadBalancerL7Policy = &ovh.Operation{Name: "publiccloud.CreateLoadBalancerL7Policy", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener/{listenerId}/l7policy", Summary: "Create an L7 policy", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/listener/L7policy/create"}, SchemasVersion: "1.0"}
 
 // CreateLoadBalancerL7Policy calls POST /v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener/{listenerId}/l7policy: Create an L7 policy
 //
@@ -52,7 +52,7 @@ func (s *Service) CreateLoadBalancerL7Policy(ctx context.Context, projectID stri
 }
 
 // opCreateLoadBalancerListener is CreateLoadBalancerListener's entry in the operation registry (ovh.Operations).
-var opCreateLoadBalancerListener = &ovh.Operation{Name: "publiccloud.CreateLoadBalancerListener", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener", Summary: "Create a listener", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/listener/create"}}
+var opCreateLoadBalancerListener = &ovh.Operation{Name: "publiccloud.CreateLoadBalancerListener", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener", Summary: "Create a listener", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/listener/create"}, SchemasVersion: "1.0"}
 
 // CreateLoadBalancerListener calls POST /v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener: Create a listener
 //
@@ -69,7 +69,7 @@ func (s *Service) CreateLoadBalancerListener(ctx context.Context, projectID stri
 }
 
 // opCreateLoadBalancerPool is CreateLoadBalancerPool's entry in the operation registry (ovh.Operations).
-var opCreateLoadBalancerPool = &ovh.Operation{Name: "publiccloud.CreateLoadBalancerPool", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool", Summary: "Create a pool", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/pool/create"}}
+var opCreateLoadBalancerPool = &ovh.Operation{Name: "publiccloud.CreateLoadBalancerPool", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool", Summary: "Create a pool", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/pool/create"}, SchemasVersion: "1.0"}
 
 // CreateLoadBalancerPool calls POST /v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool: Create a pool
 //
@@ -87,7 +87,7 @@ func (s *Service) CreateLoadBalancerPool(ctx context.Context, projectID string, 
 }
 
 // opCreateLoadBalancerPoolMember is CreateLoadBalancerPoolMember's entry in the operation registry (ovh.Operations).
-var opCreateLoadBalancerPoolMember = &ovh.Operation{Name: "publiccloud.CreateLoadBalancerPoolMember", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool/{poolId}/member", Summary: "Create a pool member", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/pool/member/create"}}
+var opCreateLoadBalancerPoolMember = &ovh.Operation{Name: "publiccloud.CreateLoadBalancerPoolMember", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool/{poolId}/member", Summary: "Create a pool member", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/pool/member/create"}, SchemasVersion: "1.0"}
 
 // CreateLoadBalancerPoolMember calls POST /v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool/{poolId}/member: Create a pool member
 //
@@ -106,7 +106,7 @@ func (s *Service) CreateLoadBalancerPoolMember(ctx context.Context, projectID st
 }
 
 // opDeleteLoadBalancer is DeleteLoadBalancer's entry in the operation registry (ovh.Operations).
-var opDeleteLoadBalancer = &ovh.Operation{Name: "publiccloud.DeleteLoadBalancer", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}", Summary: "Delete a load balancer", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/delete"}}
+var opDeleteLoadBalancer = &ovh.Operation{Name: "publiccloud.DeleteLoadBalancer", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}", Summary: "Delete a load balancer", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/delete"}, SchemasVersion: "1.0"}
 
 // DeleteLoadBalancer calls DELETE /v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}: Delete a load balancer
 //
@@ -122,7 +122,7 @@ func (s *Service) DeleteLoadBalancer(ctx context.Context, projectID string, load
 }
 
 // opDeleteLoadBalancerL7Policy is DeleteLoadBalancerL7Policy's entry in the operation registry (ovh.Operations).
-var opDeleteLoadBalancerL7Policy = &ovh.Operation{Name: "publiccloud.DeleteLoadBalancerL7Policy", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener/{listenerId}/l7policy/{l7PolicyId}", Summary: "Delete an L7 policy", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/listener/L7policy/delete"}}
+var opDeleteLoadBalancerL7Policy = &ovh.Operation{Name: "publiccloud.DeleteLoadBalancerL7Policy", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener/{listenerId}/l7policy/{l7PolicyId}", Summary: "Delete an L7 policy", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/listener/L7policy/delete"}, SchemasVersion: "1.0"}
 
 // DeleteLoadBalancerL7Policy calls DELETE /v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener/{listenerId}/l7policy/{l7PolicyId}: Delete an L7 policy
 //
@@ -140,7 +140,7 @@ func (s *Service) DeleteLoadBalancerL7Policy(ctx context.Context, projectID stri
 }
 
 // opDeleteLoadBalancerListener is DeleteLoadBalancerListener's entry in the operation registry (ovh.Operations).
-var opDeleteLoadBalancerListener = &ovh.Operation{Name: "publiccloud.DeleteLoadBalancerListener", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener/{listenerId}", Summary: "Delete a listener", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/listener/delete"}}
+var opDeleteLoadBalancerListener = &ovh.Operation{Name: "publiccloud.DeleteLoadBalancerListener", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener/{listenerId}", Summary: "Delete a listener", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/listener/delete"}, SchemasVersion: "1.0"}
 
 // DeleteLoadBalancerListener calls DELETE /v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener/{listenerId}: Delete a listener
 //
@@ -157,7 +157,7 @@ func (s *Service) DeleteLoadBalancerListener(ctx context.Context, projectID stri
 }
 
 // opDeleteLoadBalancerPool is DeleteLoadBalancerPool's entry in the operation registry (ovh.Operations).
-var opDeleteLoadBalancerPool = &ovh.Operation{Name: "publiccloud.DeleteLoadBalancerPool", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool/{poolId}", Summary: "Delete a pool", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/pool/delete"}}
+var opDeleteLoadBalancerPool = &ovh.Operation{Name: "publiccloud.DeleteLoadBalancerPool", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool/{poolId}", Summary: "Delete a pool", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/pool/delete"}, SchemasVersion: "1.0"}
 
 // DeleteLoadBalancerPool calls DELETE /v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool/{poolId}: Delete a pool
 //
@@ -174,7 +174,7 @@ func (s *Service) DeleteLoadBalancerPool(ctx context.Context, projectID string, 
 }
 
 // opDeleteLoadBalancerPoolMember is DeleteLoadBalancerPoolMember's entry in the operation registry (ovh.Operations).
-var opDeleteLoadBalancerPoolMember = &ovh.Operation{Name: "publiccloud.DeleteLoadBalancerPoolMember", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool/{poolId}/member/{memberId}", Summary: "Delete a pool member", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/pool/member/delete"}}
+var opDeleteLoadBalancerPoolMember = &ovh.Operation{Name: "publiccloud.DeleteLoadBalancerPoolMember", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool/{poolId}/member/{memberId}", Summary: "Delete a pool member", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/pool/member/delete"}, SchemasVersion: "1.0"}
 
 // DeleteLoadBalancerPoolMember calls DELETE /v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool/{poolId}/member/{memberId}: Delete a pool member
 //
@@ -192,7 +192,7 @@ func (s *Service) DeleteLoadBalancerPoolMember(ctx context.Context, projectID st
 }
 
 // opEditLoadBalancer is EditLoadBalancer's entry in the operation registry (ovh.Operations).
-var opEditLoadBalancer = &ovh.Operation{Name: "publiccloud.EditLoadBalancer", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}", Summary: "Update a load balancer", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/edit"}}
+var opEditLoadBalancer = &ovh.Operation{Name: "publiccloud.EditLoadBalancer", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}", Summary: "Update a load balancer", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/edit"}, SchemasVersion: "1.0"}
 
 // EditLoadBalancer calls PUT /v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}: Update a load balancer
 //
@@ -212,7 +212,7 @@ func (s *Service) EditLoadBalancer(ctx context.Context, projectID string, loadba
 }
 
 // opEditLoadBalancerL7Policy is EditLoadBalancerL7Policy's entry in the operation registry (ovh.Operations).
-var opEditLoadBalancerL7Policy = &ovh.Operation{Name: "publiccloud.EditLoadBalancerL7Policy", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener/{listenerId}/l7policy/{l7PolicyId}", Summary: "Update an L7 policy", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/listener/L7policy/edit"}}
+var opEditLoadBalancerL7Policy = &ovh.Operation{Name: "publiccloud.EditLoadBalancerL7Policy", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener/{listenerId}/l7policy/{l7PolicyId}", Summary: "Update an L7 policy", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/listener/L7policy/edit"}, SchemasVersion: "1.0"}
 
 // EditLoadBalancerL7Policy calls PUT /v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener/{listenerId}/l7policy/{l7PolicyId}: Update an L7 policy
 //
@@ -232,7 +232,7 @@ func (s *Service) EditLoadBalancerL7Policy(ctx context.Context, projectID string
 }
 
 // opEditLoadBalancerListener is EditLoadBalancerListener's entry in the operation registry (ovh.Operations).
-var opEditLoadBalancerListener = &ovh.Operation{Name: "publiccloud.EditLoadBalancerListener", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener/{listenerId}", Summary: "Update a listener", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/listener/edit"}}
+var opEditLoadBalancerListener = &ovh.Operation{Name: "publiccloud.EditLoadBalancerListener", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener/{listenerId}", Summary: "Update a listener", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/listener/edit"}, SchemasVersion: "1.0"}
 
 // EditLoadBalancerListener calls PUT /v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener/{listenerId}: Update a listener
 //
@@ -269,7 +269,7 @@ func (s *Service) EditLoadBalancerListener(ctx context.Context, projectID string
 }
 
 // opEditLoadBalancerPool is EditLoadBalancerPool's entry in the operation registry (ovh.Operations).
-var opEditLoadBalancerPool = &ovh.Operation{Name: "publiccloud.EditLoadBalancerPool", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool/{poolId}", Summary: "Update a pool", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/pool/edit"}}
+var opEditLoadBalancerPool = &ovh.Operation{Name: "publiccloud.EditLoadBalancerPool", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool/{poolId}", Summary: "Update a pool", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/pool/edit"}, SchemasVersion: "1.0"}
 
 // EditLoadBalancerPool calls PUT /v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool/{poolId}: Update a pool
 //
@@ -304,7 +304,7 @@ func (s *Service) EditLoadBalancerPool(ctx context.Context, projectID string, lo
 }
 
 // opEditLoadBalancerPoolMember is EditLoadBalancerPoolMember's entry in the operation registry (ovh.Operations).
-var opEditLoadBalancerPoolMember = &ovh.Operation{Name: "publiccloud.EditLoadBalancerPoolMember", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool/{poolId}/member/{memberId}", Summary: "Update a pool member", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/pool/member/edit"}}
+var opEditLoadBalancerPoolMember = &ovh.Operation{Name: "publiccloud.EditLoadBalancerPoolMember", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool/{poolId}/member/{memberId}", Summary: "Update a pool member", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/pool/member/edit"}, SchemasVersion: "1.0"}
 
 // EditLoadBalancerPoolMember calls PUT /v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool/{poolId}/member/{memberId}: Update a pool member
 //
@@ -340,7 +340,7 @@ func (s *Service) EditLoadBalancerPoolMember(ctx context.Context, projectID stri
 }
 
 // opGetLoadBalancer is GetLoadBalancer's entry in the operation registry (ovh.Operations).
-var opGetLoadBalancer = &ovh.Operation{Name: "publiccloud.GetLoadBalancer", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}", Summary: "Get a load balancer", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/get"}}
+var opGetLoadBalancer = &ovh.Operation{Name: "publiccloud.GetLoadBalancer", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}", Summary: "Get a load balancer", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/get"}, SchemasVersion: "1.0"}
 
 // GetLoadBalancer calls GET /v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}: Get a load balancer
 //
@@ -356,7 +356,7 @@ func (s *Service) GetLoadBalancer(ctx context.Context, projectID string, loadbal
 }
 
 // opGetLoadBalancerL7Policies is AllLoadBalancerL7Policies's entry in the operation registry (ovh.Operations).
-var opGetLoadBalancerL7Policies = &ovh.Operation{Name: "publiccloud.AllLoadBalancerL7Policies", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener/{listenerId}/l7policy", Summary: "List L7 policies", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/listener/L7policy/get"}}
+var opGetLoadBalancerL7Policies = &ovh.Operation{Name: "publiccloud.AllLoadBalancerL7Policies", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener/{listenerId}/l7policy", Summary: "List L7 policies", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/listener/L7policy/get"}, SchemasVersion: "1.0"}
 
 // GetLoadBalancerL7PoliciesParams holds the optional parameters of GetLoadBalancerL7Policies.
 type GetLoadBalancerL7PoliciesParams struct {
@@ -392,7 +392,7 @@ func (s *Service) AllLoadBalancerL7Policies(ctx context.Context, projectID strin
 }
 
 // opGetLoadBalancerL7Policy is GetLoadBalancerL7Policy's entry in the operation registry (ovh.Operations).
-var opGetLoadBalancerL7Policy = &ovh.Operation{Name: "publiccloud.GetLoadBalancerL7Policy", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener/{listenerId}/l7policy/{l7PolicyId}", Summary: "Get an L7 policy", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/listener/L7policy/get"}}
+var opGetLoadBalancerL7Policy = &ovh.Operation{Name: "publiccloud.GetLoadBalancerL7Policy", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener/{listenerId}/l7policy/{l7PolicyId}", Summary: "Get an L7 policy", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/listener/L7policy/get"}, SchemasVersion: "1.0"}
 
 // GetLoadBalancerL7Policy calls GET /v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener/{listenerId}/l7policy/{l7PolicyId}: Get an L7 policy
 //
@@ -410,7 +410,7 @@ func (s *Service) GetLoadBalancerL7Policy(ctx context.Context, projectID string,
 }
 
 // opGetLoadBalancerListener is GetLoadBalancerListener's entry in the operation registry (ovh.Operations).
-var opGetLoadBalancerListener = &ovh.Operation{Name: "publiccloud.GetLoadBalancerListener", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener/{listenerId}", Summary: "Get a listener", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/listener/get"}}
+var opGetLoadBalancerListener = &ovh.Operation{Name: "publiccloud.GetLoadBalancerListener", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener/{listenerId}", Summary: "Get a listener", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/listener/get"}, SchemasVersion: "1.0"}
 
 // GetLoadBalancerListener calls GET /v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener/{listenerId}: Get a listener
 //
@@ -427,7 +427,7 @@ func (s *Service) GetLoadBalancerListener(ctx context.Context, projectID string,
 }
 
 // opGetLoadBalancerListeners is AllLoadBalancerListeners's entry in the operation registry (ovh.Operations).
-var opGetLoadBalancerListeners = &ovh.Operation{Name: "publiccloud.AllLoadBalancerListeners", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener", Summary: "List listeners", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/listener/get"}}
+var opGetLoadBalancerListeners = &ovh.Operation{Name: "publiccloud.AllLoadBalancerListeners", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/listener", Summary: "List listeners", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/listener/get"}, SchemasVersion: "1.0"}
 
 // GetLoadBalancerListenersParams holds the optional parameters of GetLoadBalancerListeners.
 type GetLoadBalancerListenersParams struct {
@@ -462,7 +462,7 @@ func (s *Service) AllLoadBalancerListeners(ctx context.Context, projectID string
 }
 
 // opGetLoadBalancerPool is GetLoadBalancerPool's entry in the operation registry (ovh.Operations).
-var opGetLoadBalancerPool = &ovh.Operation{Name: "publiccloud.GetLoadBalancerPool", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool/{poolId}", Summary: "Get a pool", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/pool/get"}}
+var opGetLoadBalancerPool = &ovh.Operation{Name: "publiccloud.GetLoadBalancerPool", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool/{poolId}", Summary: "Get a pool", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/pool/get"}, SchemasVersion: "1.0"}
 
 // GetLoadBalancerPool calls GET /v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool/{poolId}: Get a pool
 //
@@ -479,7 +479,7 @@ func (s *Service) GetLoadBalancerPool(ctx context.Context, projectID string, loa
 }
 
 // opGetLoadBalancerPoolMember is GetLoadBalancerPoolMember's entry in the operation registry (ovh.Operations).
-var opGetLoadBalancerPoolMember = &ovh.Operation{Name: "publiccloud.GetLoadBalancerPoolMember", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool/{poolId}/member/{memberId}", Summary: "Get a pool member", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/pool/member/get"}}
+var opGetLoadBalancerPoolMember = &ovh.Operation{Name: "publiccloud.GetLoadBalancerPoolMember", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool/{poolId}/member/{memberId}", Summary: "Get a pool member", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/pool/member/get"}, SchemasVersion: "1.0"}
 
 // GetLoadBalancerPoolMember calls GET /v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool/{poolId}/member/{memberId}: Get a pool member
 //
@@ -497,7 +497,7 @@ func (s *Service) GetLoadBalancerPoolMember(ctx context.Context, projectID strin
 }
 
 // opGetLoadBalancerPoolMembers is AllLoadBalancerPoolMembers's entry in the operation registry (ovh.Operations).
-var opGetLoadBalancerPoolMembers = &ovh.Operation{Name: "publiccloud.AllLoadBalancerPoolMembers", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool/{poolId}/member", Summary: "List pool members", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/pool/member/get"}}
+var opGetLoadBalancerPoolMembers = &ovh.Operation{Name: "publiccloud.AllLoadBalancerPoolMembers", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool/{poolId}/member", Summary: "List pool members", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/pool/member/get"}, SchemasVersion: "1.0"}
 
 // GetLoadBalancerPoolMembersParams holds the optional parameters of GetLoadBalancerPoolMembers.
 type GetLoadBalancerPoolMembersParams struct {
@@ -532,7 +532,7 @@ func (s *Service) AllLoadBalancerPoolMembers(ctx context.Context, projectID stri
 }
 
 // opGetLoadBalancerPools is AllLoadBalancerPools's entry in the operation registry (ovh.Operations).
-var opGetLoadBalancerPools = &ovh.Operation{Name: "publiccloud.AllLoadBalancerPools", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool", Summary: "List pools", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/pool/get"}}
+var opGetLoadBalancerPools = &ovh.Operation{Name: "publiccloud.AllLoadBalancerPools", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/loadbalancer/{loadbalancerId}/pool", Summary: "List pools", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/pool/get"}, SchemasVersion: "1.0"}
 
 // GetLoadBalancerPoolsParams holds the optional parameters of GetLoadBalancerPools.
 type GetLoadBalancerPoolsParams struct {
@@ -569,7 +569,7 @@ func (s *Service) AllLoadBalancerPools(ctx context.Context, projectID string, lo
 }
 
 // opGetLoadBalancers is AllLoadBalancers's entry in the operation registry (ovh.Operations).
-var opGetLoadBalancers = &ovh.Operation{Name: "publiccloud.AllLoadBalancers", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/loadbalancer", Summary: "List load balancers", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/get"}}
+var opGetLoadBalancers = &ovh.Operation{Name: "publiccloud.AllLoadBalancers", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/loadbalancer", Summary: "List load balancers", IAMActions: []string{"publicCloudProject:apiovh:loadbalancer/get"}, SchemasVersion: "1.0"}
 
 // GetLoadBalancersParams holds the optional parameters of GetLoadBalancers.
 type GetLoadBalancersParams struct {

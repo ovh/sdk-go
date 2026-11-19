@@ -15,9 +15,11 @@ import (
 )
 
 // opChangeIP is ChangeIP's entry in the operation registry (ovh.Operations).
-var opChangeIP = &ovh.Operation{Name: "licensedirectadmin.ChangeIP", Method: http.MethodPost, Path: "/v1/license/directadmin/{serviceName}/changeIp", Summary: "Move this license to another Ip", IAMActions: []string{"licenseDirectAdmin:apiovh:changeIp"}}
+var opChangeIP = &ovh.Operation{Name: "licensedirectadmin.ChangeIP", Method: http.MethodPost, Path: "/v1/license/directadmin/{serviceName}/changeIp", Summary: "Move a DirectAdmin license to another IP", IAMActions: []string{"licenseDirectAdmin:apiovh:changeIp"}}
 
-// ChangeIP calls POST /v1/license/directadmin/{serviceName}/changeIp: Move this license to another Ip
+// ChangeIP calls POST /v1/license/directadmin/{serviceName}/changeIp: Move a DirectAdmin license to another IP
+//
+// Starts the move of the license to the given IP and returns the task that performs it.
 //
 // Arguments:
 //   - serviceName: The name of your DirectAdmin license
@@ -29,9 +31,11 @@ func (s *Service) ChangeIP(ctx context.Context, serviceName string, body ChangeI
 }
 
 // opChangeOs is ChangeOs's entry in the operation registry (ovh.Operations).
-var opChangeOs = &ovh.Operation{Name: "licensedirectadmin.ChangeOs", Method: http.MethodPost, Path: "/v1/license/directadmin/{serviceName}/changeOs", Summary: "Change the Operating System for a license", IAMActions: []string{"licenseDirectAdmin:apiovh:changeOs"}}
+var opChangeOs = &ovh.Operation{Name: "licensedirectadmin.ChangeOs", Method: http.MethodPost, Path: "/v1/license/directadmin/{serviceName}/changeOs", Summary: "Change the operating system of a DirectAdmin license", IAMActions: []string{"licenseDirectAdmin:apiovh:changeOs"}}
 
-// ChangeOs calls POST /v1/license/directadmin/{serviceName}/changeOs: Change the Operating System for a license
+// ChangeOs calls POST /v1/license/directadmin/{serviceName}/changeOs: Change the operating system of a DirectAdmin license
+//
+// Sets the operating system and returns the task that performs the change.
 //
 // Arguments:
 //   - serviceName: The name of your DirectAdmin license
@@ -60,9 +64,11 @@ func (s *Service) ConfirmTermination(ctx context.Context, serviceName string, bo
 }
 
 // opGetCanLicenseBeMovedTo is GetCanLicenseBeMovedTo's entry in the operation registry (ovh.Operations).
-var opGetCanLicenseBeMovedTo = &ovh.Operation{Name: "licensedirectadmin.GetCanLicenseBeMovedTo", Method: http.MethodGet, Path: "/v1/license/directadmin/{serviceName}/canLicenseBeMovedTo", Summary: "Will tell if the ip can accept the license", IAMActions: []string{"licenseDirectAdmin:apiovh:canLicenseBeMovedTo/get"}}
+var opGetCanLicenseBeMovedTo = &ovh.Operation{Name: "licensedirectadmin.GetCanLicenseBeMovedTo", Method: http.MethodGet, Path: "/v1/license/directadmin/{serviceName}/canLicenseBeMovedTo", Summary: "Check whether a DirectAdmin license can be moved to an IP", IAMActions: []string{"licenseDirectAdmin:apiovh:canLicenseBeMovedTo/get"}}
 
-// GetCanLicenseBeMovedTo calls GET /v1/license/directadmin/{serviceName}/canLicenseBeMovedTo: Will tell if the ip can accept the license
+// GetCanLicenseBeMovedTo calls GET /v1/license/directadmin/{serviceName}/canLicenseBeMovedTo: Check whether a DirectAdmin license can be moved to an IP
+//
+// Returns whether the destination IP can receive the license, with the reason when it cannot.
 //
 // Arguments:
 //   - serviceName: The name of your DirectAdmin license
@@ -74,9 +80,12 @@ func (s *Service) GetCanLicenseBeMovedTo(ctx context.Context, serviceName string
 }
 
 // opGetDirectadmin is GetDirectadmin's entry in the operation registry (ovh.Operations).
-var opGetDirectadmin = &ovh.Operation{Name: "licensedirectadmin.GetDirectadmin", Method: http.MethodGet, Path: "/v1/license/directadmin/{serviceName}", Summary: "Get this object properties", IAMActions: []string{"licenseDirectAdmin:apiovh:get"}}
+var opGetDirectadmin = &ovh.Operation{Name: "licensedirectadmin.GetDirectadmin", Method: http.MethodGet, Path: "/v1/license/directadmin/{serviceName}", Summary: "Get a DirectAdmin license", IAMActions: []string{"licenseDirectAdmin:apiovh:get"}}
 
-// GetDirectadmin calls GET /v1/license/directadmin/{serviceName}: Get this object properties
+// GetDirectadmin calls GET /v1/license/directadmin/{serviceName}: Get a DirectAdmin license
+//
+// Returns the license ID, version, status, IP address, client ID, operating system and creation
+// date.
 //
 // Arguments:
 //   - serviceName: The name of your DirectAdmin license
@@ -115,9 +124,12 @@ func (s *Service) GetServiceInfos(ctx context.Context, serviceName string) (*Ser
 }
 
 // opGetTasks is GetTasks's entry in the operation registry (ovh.Operations).
-var opGetTasks = &ovh.Operation{Name: "licensedirectadmin.GetTasks", Method: http.MethodGet, Path: "/v1/license/directadmin/{serviceName}/tasks/{taskId}", Summary: "Get this object properties", IAMActions: []string{"licenseDirectAdmin:apiovh:tasks/get"}}
+var opGetTasks = &ovh.Operation{Name: "licensedirectadmin.GetTasks", Method: http.MethodGet, Path: "/v1/license/directadmin/{serviceName}/tasks/{taskId}", Summary: "Get a license task", IAMActions: []string{"licenseDirectAdmin:apiovh:tasks/get"}}
 
-// GetTasks calls GET /v1/license/directadmin/{serviceName}/tasks/{taskId}: Get this object properties
+// GetTasks calls GET /v1/license/directadmin/{serviceName}/tasks/{taskId}: Get a license task
+//
+// Returns the action, status, creation date, completion date and last update of a task linked to a
+// license.
 //
 // Arguments:
 //   - serviceName: The name of your DirectAdmin license
@@ -142,9 +154,11 @@ func (s *Service) AllTasks(ctx context.Context, serviceName string, params ...Li
 }
 
 // opListAllowedDestinationIPs is ListAllowedDestinationIPs's entry in the operation registry (ovh.Operations).
-var opListAllowedDestinationIPs = &ovh.Operation{Name: "licensedirectadmin.ListAllowedDestinationIPs", Method: http.MethodGet, Path: "/v1/license/directadmin/{serviceName}/allowedDestinationIp", Summary: "Returns an array of ips where the license can be moved to", IAMActions: []string{"licenseDirectAdmin:apiovh:allowedDestinationIp/get"}}
+var opListAllowedDestinationIPs = &ovh.Operation{Name: "licensedirectadmin.ListAllowedDestinationIPs", Method: http.MethodGet, Path: "/v1/license/directadmin/{serviceName}/allowedDestinationIp", Summary: "List the IPs a DirectAdmin license can be moved to", IAMActions: []string{"licenseDirectAdmin:apiovh:allowedDestinationIp/get"}}
 
-// ListAllowedDestinationIPs calls GET /v1/license/directadmin/{serviceName}/allowedDestinationIp: Returns an array of ips where the license can be moved to
+// ListAllowedDestinationIPs calls GET /v1/license/directadmin/{serviceName}/allowedDestinationIp: List the IPs a DirectAdmin license can be moved to
+//
+// Returns the IP blocks that can receive the license, so you can pick the destination of a move.
 //
 // Arguments:
 //   - serviceName: The name of your DirectAdmin license
@@ -155,7 +169,7 @@ func (s *Service) ListAllowedDestinationIPs(ctx context.Context, serviceName str
 }
 
 // opListDirectadmins is ListDirectadmins's entry in the operation registry (ovh.Operations).
-var opListDirectadmins = &ovh.Operation{Name: "licensedirectadmin.ListDirectadmins", Method: http.MethodGet, Path: "/v1/license/directadmin", Summary: "List available services", IAMActions: []string{"licenseDirectAdmin:apiovh:get"}}
+var opListDirectadmins = &ovh.Operation{Name: "licensedirectadmin.ListDirectadmins", Method: http.MethodGet, Path: "/v1/license/directadmin", Summary: "List your DirectAdmin licenses", IAMActions: []string{"licenseDirectAdmin:apiovh:get"}}
 
 // ListDirectadminsParams holds the optional parameters of ListDirectadmins.
 type ListDirectadminsParams struct {
@@ -163,7 +177,10 @@ type ListDirectadminsParams struct {
 	IAMTags map[string][]IAMResourceTagFilter `ovh:"query,iamTags"`
 }
 
-// ListDirectadmins calls GET /v1/license/directadmin: List available services
+// ListDirectadmins calls GET /v1/license/directadmin: List your DirectAdmin licenses
+//
+// Returns the names of the DirectAdmin licenses of the account; each name is the service name used
+// by the other calls.
 //
 // Requires the IAM action licenseDirectAdmin:apiovh:get.
 func (s *Service) ListDirectadmins(ctx context.Context, params ...ListDirectadminsParams) ([]string, error) {
@@ -175,6 +192,8 @@ var opListOrderableVersions = &ovh.Operation{Name: "licensedirectadmin.ListOrder
 
 // ListOrderableVersions calls GET /v1/license/directadmin/orderableVersions: Get the orderable DirectAdmin versions
 //
+// Returns the versions that can be ordered for the given IP, grouped by service type.
+//
 // Arguments:
 //   - ip: Your license Ip
 //
@@ -184,7 +203,7 @@ func (s *Service) ListOrderableVersions(ctx context.Context, ip string) ([]Licen
 }
 
 // opListTasks is ListTasks's entry in the operation registry (ovh.Operations).
-var opListTasks = &ovh.Operation{Name: "licensedirectadmin.ListTasks", Method: http.MethodGet, Path: "/v1/license/directadmin/{serviceName}/tasks", Summary: "tasks linked to this license", IAMActions: []string{"licenseDirectAdmin:apiovh:tasks/get"}}
+var opListTasks = &ovh.Operation{Name: "licensedirectadmin.ListTasks", Method: http.MethodGet, Path: "/v1/license/directadmin/{serviceName}/tasks", Summary: "List the tasks of a DirectAdmin license", IAMActions: []string{"licenseDirectAdmin:apiovh:tasks/get"}}
 
 // ListTasksParams holds the optional parameters of ListTasks.
 type ListTasksParams struct {
@@ -194,7 +213,9 @@ type ListTasksParams struct {
 	Status *LicenseTaskStateEnum `ovh:"query,status"`
 }
 
-// ListTasks calls GET /v1/license/directadmin/{serviceName}/tasks: tasks linked to this license
+// ListTasks calls GET /v1/license/directadmin/{serviceName}/tasks: List the tasks of a DirectAdmin license
+//
+// Returns the IDs of the tasks linked to the license, which can be filtered by status and action.
 //
 // Arguments:
 //   - serviceName: The name of your DirectAdmin license
@@ -221,9 +242,12 @@ func (s *Service) Terminate(ctx context.Context, serviceName string) (string, er
 }
 
 // opUpdateDirectadmin is UpdateDirectadmin's entry in the operation registry (ovh.Operations).
-var opUpdateDirectadmin = &ovh.Operation{Name: "licensedirectadmin.UpdateDirectadmin", Method: http.MethodPut, Path: "/v1/license/directadmin/{serviceName}", Summary: "Alter this object properties", IAMActions: []string{"licenseDirectAdmin:apiovh:put"}}
+var opUpdateDirectadmin = &ovh.Operation{Name: "licensedirectadmin.UpdateDirectadmin", Method: http.MethodPut, Path: "/v1/license/directadmin/{serviceName}", Summary: "Update a DirectAdmin license", IAMActions: []string{"licenseDirectAdmin:apiovh:put"}}
 
-// UpdateDirectadmin calls PUT /v1/license/directadmin/{serviceName}: Alter this object properties
+// UpdateDirectadmin calls PUT /v1/license/directadmin/{serviceName}: Update a DirectAdmin license
+//
+// Changes the settings that can be modified: the operating system and the automatic deletion at
+// expiration.
 //
 // Arguments:
 //   - serviceName: The name of your DirectAdmin license

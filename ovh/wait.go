@@ -80,7 +80,7 @@ func Wait[T any](ctx context.Context, get func(context.Context) (T, error), done
 	start := time.Now()
 	interval := cfg.first
 	var last T
-	state := "not read yet"
+	var state string
 	for {
 		v, err := get(ctx)
 		switch {

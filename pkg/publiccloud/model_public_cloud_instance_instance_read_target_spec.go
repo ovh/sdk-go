@@ -14,7 +14,7 @@ type PublicCloudInstanceInstanceReadTargetSpec struct {
 	// Optional reference to the instance (placement) group the instance is created into, controlling affinity/anti-affinity placement. Immutable: the group is set only at creation time. OpenStack/Nova server groups are immutable. There is no group change on PUT and membership cannot be changed after the instance exists.
 	// Read-only: the API sets it.
 	Group *PublicCloudInstanceInstanceGroupRef `json:"group,omitempty"`
-	// Reference to the image the instance boots from. Carries only the image id. Changing the referenced image on PUT triggers a rebuild of the instance from the new image. Null for boot-from-volume instances, which have no backing image.
+	// Reference to the image the instance boots from. Carries only the image id. Changing the referenced image on PUT triggers a rebuild of the instance from the new image. Null for boot-from-volume instances, which have no backing image: their boot volume is the entry of volumes with role BOOT.
 	// Read-only: the API sets it.
 	Image *PublicCloudInstanceInstanceImageRef `json:"image,omitempty"`
 	// Target location. Region (and optional availability zone) where the instance is provisioned. Immutable after creation. An instance cannot be moved to another region/zone, which is why location is absent from InstanceUpdateTargetSpec.
@@ -38,7 +38,7 @@ type PublicCloudInstanceInstanceReadTargetSpec struct {
 	// Name of the SSH key pair injected into the instance at boot for initial access. Immutable / create-only: the key is injected once during provisioning and cannot be changed afterward, which is why sshKeyName is absent from InstanceUpdateTargetSpec.
 	// Read-only: the API sets it.
 	SSHKeyName *string `json:"sshKeyName,omitempty"`
-	// Declarative list of block volumes attached to the instance, each referencing a volume by id (see InstanceVolumeRef). Attach/detach is driven by diffing this list on PUT. There is no imperative attach/detach sub-route. Adding a volume reference attaches that volume. Removing one detaches it.
+	// Declarative list of block volumes attached to the instance, each referencing a volume by id (see InstanceVolumeRef). For a boot-from-volume instance, the boot volume has role BOOT. For one created outside this API, every volume is DATA until its boot volume has been identified. Attach/detach is driven by diffing this list on PUT. There is no imperative attach/detach sub-route. Adding a volume reference attaches that volume. Removing one detaches it. The boot volume cannot be detached.
 	// Read-only: the API sets it.
 	Volumes []PublicCloudInstanceInstanceVolumeRef `json:"volumes,omitempty"`
 }

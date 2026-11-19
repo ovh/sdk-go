@@ -587,6 +587,9 @@ var opCreateDatacenterNsxtEdge = &ovh.Operation{Name: "dedicatedcloud.CreateData
 
 // CreateDatacenterNsxtEdge calls POST /v1/dedicatedCloud/{serviceName}/datacenter/{datacenterId}/nsxtEdge: Create an edge node
 //
+// Adds an NSX-T edge node to the datacenter, up to the maximum given by
+// `nsxtEdgesScalingCapabilities`. Returns a task to track progress.
+//
 // Arguments:
 //   - serviceName: Domain of the service
 //   - datacenterID: Id of the Datacenter
@@ -643,7 +646,8 @@ var opCreateLogSubscription = &ovh.Operation{Name: "dedicatedcloud.CreateLogSubs
 
 // CreateLogSubscription calls POST /v1/dedicatedCloud/{serviceName}/log/subscription: Create a log subscription
 //
-// Sends the logs of a kind to a Logs Data Platform stream. Returns the operation ID.
+// Sends the logs of a kind to a Logs Data Platform stream. The log forwarder option must be enabled
+// first. Returns the operation ID.
 //
 // Arguments:
 //   - serviceName: Domain of the service
@@ -925,6 +929,9 @@ var opDeleteUser = &ovh.Operation{Name: "dedicatedcloud.DeleteUser", Method: htt
 
 // DeleteUser calls DELETE /v1/dedicatedCloud/{serviceName}/user/{userId}: Delete a user
 //
+// Deletes the user. To block its access without deleting it, use `disable` instead. Returns a task
+// to track progress.
+//
 // Arguments:
 //   - serviceName: Domain of the service
 //   - userID: the userId path parameter
@@ -966,9 +973,9 @@ func (s *Service) DeleteVMEncryptionKMS(ctx context.Context, serviceName string,
 }
 
 // opDeleteVrack is DeleteVrack's entry in the operation registry (ovh.Operations).
-var opDeleteVrack = &ovh.Operation{Name: "dedicatedcloud.DeleteVrack", Method: http.MethodDelete, Path: "/v1/dedicatedCloud/{serviceName}/vrack/{vrack}", Summary: "Detach a service", IAMActions: []string{"pccVMware:apiovh:vrack/delete"}}
+var opDeleteVrack = &ovh.Operation{Name: "dedicatedcloud.DeleteVrack", Method: http.MethodDelete, Path: "/v1/dedicatedCloud/{serviceName}/vrack/{vrack}", Summary: "Detach a Managed VMware vSphere service", IAMActions: []string{"pccVMware:apiovh:vrack/delete"}}
 
-// DeleteVrack calls DELETE /v1/dedicatedCloud/{serviceName}/vrack/{vrack}: Detach a service
+// DeleteVrack calls DELETE /v1/dedicatedCloud/{serviceName}/vrack/{vrack}: Detach a Managed VMware vSphere service
 //
 // Detaches the Hosted Private Cloud service from the vRack. Returns the task that performs it.
 //
@@ -1149,6 +1156,9 @@ func (s *Service) DisableDatacenterVMBackupJob(ctx context.Context, serviceName 
 var opDisableHcx = &ovh.Operation{Name: "dedicatedcloud.DisableHcx", Method: http.MethodPost, Path: "/v1/dedicatedCloud/{serviceName}/hcx/disable", Summary: "Disable HCX", IAMActions: []string{"pccVMware:apiovh:hcx/disable"}}
 
 // DisableHcx calls POST /v1/dedicatedCloud/{serviceName}/hcx/disable: Disable HCX
+//
+// Disables the HCX option. To enable it again, order the option with
+// `/order/cart/{cartId}/privateCloud`. Returns a task to track progress.
 //
 // Arguments:
 //   - serviceName: Domain of the service
@@ -2294,6 +2304,8 @@ func (s *Service) GetDatacenterHostHourlyConsumption(ctx context.Context, servic
 var opGetDatacenterHostLocation = &ovh.Operation{Name: "dedicatedcloud.GetDatacenterHostLocation", Method: http.MethodGet, Path: "/v1/dedicatedCloud/{serviceName}/datacenter/{datacenterId}/host/{hostId}/location", Summary: "Get the host location", IAMActions: []string{"pccVMware:apiovh:datacenter/host/location/get"}}
 
 // GetDatacenterHostLocation calls GET /v1/dedicatedCloud/{serviceName}/datacenter/{datacenterId}/host/{hostId}/location: Get the host location
+//
+// Returns the OVHcloud datacenter, room and rack of the host, not its vSphere datacenter.
 //
 // Arguments:
 //   - serviceName: Domain of the service
@@ -3741,9 +3753,9 @@ func (s *Service) AllVlans(ctx context.Context, serviceName string) iter.Seq2[*D
 }
 
 // opGetVrack is GetVrack's entry in the operation registry (ovh.Operations).
-var opGetVrack = &ovh.Operation{Name: "dedicatedcloud.GetVrack", Method: http.MethodGet, Path: "/v1/dedicatedCloud/{serviceName}/vrack/{vrack}", Summary: "Get a service. Returns the attached Hosted Private Cloud service and its vRack.", IAMActions: []string{"pccVMware:apiovh:vrack/get"}}
+var opGetVrack = &ovh.Operation{Name: "dedicatedcloud.GetVrack", Method: http.MethodGet, Path: "/v1/dedicatedCloud/{serviceName}/vrack/{vrack}", Summary: "Get an attached Managed VMware vSphere service", IAMActions: []string{"pccVMware:apiovh:vrack/get"}}
 
-// GetVrack calls GET /v1/dedicatedCloud/{serviceName}/vrack/{vrack}: Get a service. Returns the attached Hosted Private Cloud service and its vRack.
+// GetVrack calls GET /v1/dedicatedCloud/{serviceName}/vrack/{vrack}: Get an attached Managed VMware vSphere service
 //
 // Arguments:
 //   - serviceName: Domain of the service
@@ -3910,6 +3922,9 @@ func (s *Service) ListAllowedNetworkTasks(ctx context.Context, serviceName strin
 var opListAllowedNetworks = &ovh.Operation{Name: "dedicatedcloud.ListAllowedNetworks", Method: http.MethodGet, Path: "/v1/dedicatedCloud/{serviceName}/allowedNetwork", Summary: "List allowed networks", IAMActions: []string{"pccVMware:apiovh:allowedNetwork/get"}}
 
 // ListAllowedNetworks calls GET /v1/dedicatedCloud/{serviceName}/allowedNetwork: List allowed networks
+//
+// Returns the IDs of the networks allowed through the infrastructure firewall. They apply only when
+// the service access policy is `filtered`.
 //
 // Arguments:
 //   - serviceName: Domain of the service
@@ -4360,7 +4375,7 @@ type ListDedicatedCloudsParams struct {
 
 // ListDedicatedClouds calls GET /v1/dedicatedCloud: List Managed VMware vSphere services
 //
-// Returns the names of your services. Filter by IAM tags with `iamTags`.
+// Returns the names of the services of the account. Filter by IAM tags with `iamTags`.
 //
 // Requires the IAM action pccVMware:apiovh:get.
 func (s *Service) ListDedicatedClouds(ctx context.Context, params ...ListDedicatedCloudsParams) ([]string, error) {
@@ -5083,6 +5098,9 @@ var opRemoveDatacenterFiler = &ovh.Operation{Name: "dedicatedcloud.RemoveDatacen
 
 // RemoveDatacenterFiler calls POST /v1/dedicatedCloud/{serviceName}/datacenter/{datacenterId}/filer/{filerId}/remove: Remove a datastore
 //
+// Removes the datastore and its data: move the virtual machines first. Returns a task to track
+// progress.
+//
 // Arguments:
 //   - serviceName: Domain of the service
 //   - datacenterID: Id of the Datacenter
@@ -5098,6 +5116,9 @@ var opRemoveDatacenterHost = &ovh.Operation{Name: "dedicatedcloud.RemoveDatacent
 
 // RemoveDatacenterHost calls POST /v1/dedicatedCloud/{serviceName}/datacenter/{datacenterId}/host/{hostId}/remove: Remove a host
 //
+// Removes the host from the datacenter. To replace a faulty host instead, request a spare with
+// `addHostSpare`. Returns a task to track progress.
+//
 // Arguments:
 //   - serviceName: Domain of the service
 //   - datacenterID: Id of the Datacenter
@@ -5112,6 +5133,9 @@ func (s *Service) RemoveDatacenterHost(ctx context.Context, serviceName string, 
 var opRemoveFiler = &ovh.Operation{Name: "dedicatedcloud.RemoveFiler", Method: http.MethodPost, Path: "/v1/dedicatedCloud/{serviceName}/filer/{filerId}/remove", Summary: "Remove a datastore", IAMActions: []string{"pccVMware:apiovh:filer/remove"}}
 
 // RemoveFiler calls POST /v1/dedicatedCloud/{serviceName}/filer/{filerId}/remove: Remove a datastore
+//
+// Removes the datastore and its data: move the virtual machines first. Returns a task to track
+// progress.
 //
 // Arguments:
 //   - serviceName: Domain of the service

@@ -17,7 +17,7 @@ import (
 )
 
 // opCreateResourcePolicy is CreateResourcePolicy's entry in the operation registry (ovh.Operations).
-var opCreateResourcePolicy = &ovh.Operation{Name: "networkdefense.CreateResourcePolicy", Method: http.MethodPost, Path: "/v2/networkDefense/vac/resource/{resourceName}/policy", Summary: "Create a VAC policy", IAMActions: []string{"vac:apiovh:resource/policy/create", "ip:apiovh:networkDefense/vac/protect"}}
+var opCreateResourcePolicy = &ovh.Operation{Name: "networkdefense.CreateResourcePolicy", Method: http.MethodPost, Path: "/v2/networkDefense/vac/resource/{resourceName}/policy", Summary: "Create a VAC policy", IAMActions: []string{"vac:apiovh:resource/policy/create", "ip:apiovh:networkDefense/vac/protect"}, SchemasVersion: "1.0"}
 
 // CreateResourcePolicyParams holds the optional parameters of CreateResourcePolicy.
 type CreateResourcePolicyParams struct {
@@ -42,7 +42,7 @@ func (s *Service) CreateResourcePolicy(ctx context.Context, resourceName string,
 }
 
 // opDeleteResourcePolicy is DeleteResourcePolicy's entry in the operation registry (ovh.Operations).
-var opDeleteResourcePolicy = &ovh.Operation{Name: "networkdefense.DeleteResourcePolicy", Method: http.MethodDelete, Path: "/v2/networkDefense/vac/resource/{resourceName}/policy/{policyId}", Summary: "Delete a VAC policy", IAMActions: []string{"vac:apiovh:resource/policy/delete"}}
+var opDeleteResourcePolicy = &ovh.Operation{Name: "networkdefense.DeleteResourcePolicy", Method: http.MethodDelete, Path: "/v2/networkDefense/vac/resource/{resourceName}/policy/{policyId}", Summary: "Delete a VAC policy", IAMActions: []string{"vac:apiovh:resource/policy/delete"}, SchemasVersion: "1.0"}
 
 // DeleteResourcePolicy calls DELETE /v2/networkDefense/vac/resource/{resourceName}/policy/{policyId}: Delete a VAC policy
 //
@@ -59,7 +59,7 @@ func (s *Service) DeleteResourcePolicy(ctx context.Context, resourceName string,
 }
 
 // opGetEvent is GetEvent's entry in the operation registry (ovh.Operations).
-var opGetEvent = &ovh.Operation{Name: "networkdefense.GetEvent", Method: http.MethodGet, Path: "/v2/networkDefense/vac/event", Summary: "List VAC detection events"}
+var opGetEvent = &ovh.Operation{Name: "networkdefense.GetEvent", Method: http.MethodGet, Path: "/v2/networkDefense/vac/event", Summary: "List VAC detection events", SchemasVersion: "1.0"}
 
 // GetEventParams holds the optional parameters of GetEvent.
 type GetEventParams struct {
@@ -91,7 +91,7 @@ func (s *Service) GetEvent(ctx context.Context, params ...GetEventParams) (*Netw
 }
 
 // opGetResource is GetResource's entry in the operation registry (ovh.Operations).
-var opGetResource = &ovh.Operation{Name: "networkdefense.GetResource", Method: http.MethodGet, Path: "/v2/networkDefense/vac/resource/{resourceName}", Summary: "Get a VAC resource", IAMActions: []string{"vac:apiovh:resource/get"}}
+var opGetResource = &ovh.Operation{Name: "networkdefense.GetResource", Method: http.MethodGet, Path: "/v2/networkDefense/vac/resource/{resourceName}", Summary: "Get a VAC resource", IAMActions: []string{"vac:apiovh:resource/get"}, SchemasVersion: "1.0"}
 
 // GetResource calls GET /v2/networkDefense/vac/resource/{resourceName}: Get a VAC resource
 //
@@ -107,7 +107,7 @@ func (s *Service) GetResource(ctx context.Context, resourceName string) (*Networ
 }
 
 // opGetResourcePolicy is GetResourcePolicy's entry in the operation registry (ovh.Operations).
-var opGetResourcePolicy = &ovh.Operation{Name: "networkdefense.GetResourcePolicy", Method: http.MethodGet, Path: "/v2/networkDefense/vac/resource/{resourceName}/policy/{policyId}", Summary: "Get a VAC policy", IAMActions: []string{"vac:apiovh:resource/policy/get"}}
+var opGetResourcePolicy = &ovh.Operation{Name: "networkdefense.GetResourcePolicy", Method: http.MethodGet, Path: "/v2/networkDefense/vac/resource/{resourceName}/policy/{policyId}", Summary: "Get a VAC policy", IAMActions: []string{"vac:apiovh:resource/policy/get"}, SchemasVersion: "1.0"}
 
 // GetResourcePolicy calls GET /v2/networkDefense/vac/resource/{resourceName}/policy/{policyId}: Get a VAC policy
 //
@@ -124,7 +124,7 @@ func (s *Service) GetResourcePolicy(ctx context.Context, resourceName string, po
 }
 
 // opGetTraffic is GetTraffic's entry in the operation registry (ovh.Operations).
-var opGetTraffic = &ovh.Operation{Name: "networkdefense.GetTraffic", Method: http.MethodGet, Path: "/v2/networkDefense/vac/traffic", Summary: "Get VAC traffic statistics"}
+var opGetTraffic = &ovh.Operation{Name: "networkdefense.GetTraffic", Method: http.MethodGet, Path: "/v2/networkDefense/vac/traffic", Summary: "Get VAC traffic statistics", SchemasVersion: "1.0"}
 
 // GetTrafficParams holds the optional parameters of GetTraffic.
 type GetTrafficParams struct {
@@ -151,7 +151,7 @@ func (s *Service) GetTraffic(ctx context.Context, after time.Time, subnet string
 }
 
 // opListResourcePolicies is AllResourcePolicies's entry in the operation registry (ovh.Operations).
-var opListResourcePolicies = &ovh.Operation{Name: "networkdefense.AllResourcePolicies", Method: http.MethodGet, Path: "/v2/networkDefense/vac/resource/{resourceName}/policy", Summary: "List VAC policies", IAMActions: []string{"vac:apiovh:resource/policy/get"}}
+var opListResourcePolicies = &ovh.Operation{Name: "networkdefense.AllResourcePolicies", Method: http.MethodGet, Path: "/v2/networkDefense/vac/resource/{resourceName}/policy", Summary: "List VAC policies", IAMActions: []string{"vac:apiovh:resource/policy/get"}, SchemasVersion: "1.0"}
 
 // ListResourcePoliciesParams holds the optional parameters of ListResourcePolicies.
 type ListResourcePoliciesParams struct {
@@ -176,7 +176,7 @@ func (s *Service) AllResourcePolicies(ctx context.Context, resourceName string, 
 }
 
 // opListResources is AllResources's entry in the operation registry (ovh.Operations).
-var opListResources = &ovh.Operation{Name: "networkdefense.AllResources", Method: http.MethodGet, Path: "/v2/networkDefense/vac/resource", Summary: "List VAC resources", IAMActions: []string{"vac:apiovh:resource/get"}}
+var opListResources = &ovh.Operation{Name: "networkdefense.AllResources", Method: http.MethodGet, Path: "/v2/networkDefense/vac/resource", Summary: "List VAC resources", IAMActions: []string{"vac:apiovh:resource/get"}, SchemasVersion: "1.0"}
 
 // ListResourcesParams holds the optional parameters of ListResources.
 type ListResourcesParams struct {
@@ -198,7 +198,7 @@ func (s *Service) AllResources(ctx context.Context, params ...ListResourcesParam
 }
 
 // opUpdateResource is UpdateResource's entry in the operation registry (ovh.Operations).
-var opUpdateResource = &ovh.Operation{Name: "networkdefense.UpdateResource", Method: http.MethodPut, Path: "/v2/networkDefense/vac/resource/{resourceName}", Summary: "Rename a VAC resource", IAMActions: []string{"vac:apiovh:resource/edit"}}
+var opUpdateResource = &ovh.Operation{Name: "networkdefense.UpdateResource", Method: http.MethodPut, Path: "/v2/networkDefense/vac/resource/{resourceName}", Summary: "Rename a VAC resource", IAMActions: []string{"vac:apiovh:resource/edit"}, SchemasVersion: "1.0"}
 
 // UpdateResource calls PUT /v2/networkDefense/vac/resource/{resourceName}: Rename a VAC resource
 //
@@ -215,7 +215,7 @@ func (s *Service) UpdateResource(ctx context.Context, resourceName string, body 
 }
 
 // opUpdateResourcePolicy is UpdateResourcePolicy's entry in the operation registry (ovh.Operations).
-var opUpdateResourcePolicy = &ovh.Operation{Name: "networkdefense.UpdateResourcePolicy", Method: http.MethodPut, Path: "/v2/networkDefense/vac/resource/{resourceName}/policy/{policyId}", Summary: "Update a VAC policy", IAMActions: []string{"vac:apiovh:resource/policy/edit", "ip:apiovh:networkDefense/vac/protect"}}
+var opUpdateResourcePolicy = &ovh.Operation{Name: "networkdefense.UpdateResourcePolicy", Method: http.MethodPut, Path: "/v2/networkDefense/vac/resource/{resourceName}/policy/{policyId}", Summary: "Update a VAC policy", IAMActions: []string{"vac:apiovh:resource/policy/edit", "ip:apiovh:networkDefense/vac/protect"}, SchemasVersion: "1.0"}
 
 // UpdateResourcePolicyParams holds the optional parameters of UpdateResourcePolicy.
 type UpdateResourcePolicyParams struct {

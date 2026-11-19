@@ -15,7 +15,7 @@ import (
 )
 
 // opGetReferenceSecretConfig is GetReferenceSecretConfig's entry in the operation registry (ovh.Operations).
-var opGetReferenceSecretConfig = &ovh.Operation{Name: "okms.GetReferenceSecretConfig", Method: http.MethodGet, Path: "/v2/okms/reference/secretConfig", Summary: "Get the default secret configuration"}
+var opGetReferenceSecretConfig = &ovh.Operation{Name: "okms.GetReferenceSecretConfig", Method: http.MethodGet, Path: "/v2/okms/reference/secretConfig", Summary: "Get the default secret configuration", SchemasVersion: "1.0"}
 
 // GetReferenceSecretConfig calls GET /v2/okms/reference/secretConfig: Get the default secret configuration
 //
@@ -29,7 +29,7 @@ func (s *Service) GetReferenceSecretConfig(ctx context.Context, region OkmsRegio
 }
 
 // opListReferenceRegions is AllReferenceRegions's entry in the operation registry (ovh.Operations).
-var opListReferenceRegions = &ovh.Operation{Name: "okms.AllReferenceRegions", Method: http.MethodGet, Path: "/v2/okms/reference/regions", Summary: "List regions"}
+var opListReferenceRegions = &ovh.Operation{Name: "okms.AllReferenceRegions", Method: http.MethodGet, Path: "/v2/okms/reference/regions", Summary: "List regions", SchemasVersion: "1.0"}
 
 // AllReferenceRegions iterates over GET /v2/okms/reference/regions (List regions),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -42,7 +42,7 @@ func (s *Service) AllReferenceRegions(ctx context.Context) iter.Seq2[*OkmsRefere
 }
 
 // opListReferenceServiceKeys is AllReferenceServiceKeys's entry in the operation registry (ovh.Operations).
-var opListReferenceServiceKeys = &ovh.Operation{Name: "okms.AllReferenceServiceKeys", Method: http.MethodGet, Path: "/v2/okms/reference/serviceKey", Summary: "Get valid service key parameters combinations"}
+var opListReferenceServiceKeys = &ovh.Operation{Name: "okms.AllReferenceServiceKeys", Method: http.MethodGet, Path: "/v2/okms/reference/serviceKey", Summary: "Get valid service key parameters combinations", SchemasVersion: "1.0"}
 
 // AllReferenceServiceKeys iterates over GET /v2/okms/reference/serviceKey (Get valid service key parameters combinations),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it

@@ -15,7 +15,7 @@ import (
 )
 
 // opCreatePermissionsGroup is CreatePermissionsGroup's entry in the operation registry (ovh.Operations).
-var opCreatePermissionsGroup = &ovh.Operation{Name: "iam.CreatePermissionsGroup", Method: http.MethodPost, Path: "/v2/iam/permissionsGroup", Summary: "Create a permissions group", IAMActions: []string{"account:apiovh:iam/permissionsGroup/create"}}
+var opCreatePermissionsGroup = &ovh.Operation{Name: "iam.CreatePermissionsGroup", Method: http.MethodPost, Path: "/v2/iam/permissionsGroup", Summary: "Create a permissions group", IAMActions: []string{"account:apiovh:iam/permissionsGroup/create"}, SchemasVersion: "1.0"}
 
 // CreatePermissionsGroup calls POST /v2/iam/permissionsGroup: Create a permissions group
 //
@@ -30,7 +30,7 @@ func (s *Service) CreatePermissionsGroup(ctx context.Context, body IAMPermission
 }
 
 // opCreatePolicy is CreatePolicy's entry in the operation registry (ovh.Operations).
-var opCreatePolicy = &ovh.Operation{Name: "iam.CreatePolicy", Method: http.MethodPost, Path: "/v2/iam/policy", Summary: "Create a policy", IAMActions: []string{"account:apiovh:iam/policy/create"}}
+var opCreatePolicy = &ovh.Operation{Name: "iam.CreatePolicy", Method: http.MethodPost, Path: "/v2/iam/policy", Summary: "Create a policy", IAMActions: []string{"account:apiovh:iam/policy/create"}, SchemasVersion: "1.0"}
 
 // CreatePolicy calls POST /v2/iam/policy: Create a policy
 //
@@ -61,7 +61,7 @@ func (s *Service) CreatePolicy(ctx context.Context, body IAMPolicyCreationWritab
 }
 
 // opDeletePermissionsGroup is DeletePermissionsGroup's entry in the operation registry (ovh.Operations).
-var opDeletePermissionsGroup = &ovh.Operation{Name: "iam.DeletePermissionsGroup", Method: http.MethodDelete, Path: "/v2/iam/permissionsGroup/{permissionsGroupURN}", Summary: "Delete a permissions group", IAMActions: []string{"account:apiovh:iam/permissionsGroup/delete"}}
+var opDeletePermissionsGroup = &ovh.Operation{Name: "iam.DeletePermissionsGroup", Method: http.MethodDelete, Path: "/v2/iam/permissionsGroup/{permissionsGroupURN}", Summary: "Delete a permissions group", IAMActions: []string{"account:apiovh:iam/permissionsGroup/delete"}, SchemasVersion: "1.0"}
 
 // DeletePermissionsGroup calls DELETE /v2/iam/permissionsGroup/{permissionsGroupURN}: Delete a permissions group
 //
@@ -76,7 +76,7 @@ func (s *Service) DeletePermissionsGroup(ctx context.Context, permissionsGroupUR
 }
 
 // opDeletePolicy is DeletePolicy's entry in the operation registry (ovh.Operations).
-var opDeletePolicy = &ovh.Operation{Name: "iam.DeletePolicy", Method: http.MethodDelete, Path: "/v2/iam/policy/{policyId}", Summary: "Delete a policy", IAMActions: []string{"account:apiovh:iam/policy/delete"}}
+var opDeletePolicy = &ovh.Operation{Name: "iam.DeletePolicy", Method: http.MethodDelete, Path: "/v2/iam/policy/{policyId}", Summary: "Delete a policy", IAMActions: []string{"account:apiovh:iam/policy/delete"}, SchemasVersion: "1.0"}
 
 // DeletePolicy calls DELETE /v2/iam/policy/{policyId}: Delete a policy
 //
@@ -91,7 +91,7 @@ func (s *Service) DeletePolicy(ctx context.Context, policyID string) error {
 }
 
 // opGetPermissionsGroup is GetPermissionsGroup's entry in the operation registry (ovh.Operations).
-var opGetPermissionsGroup = &ovh.Operation{Name: "iam.GetPermissionsGroup", Method: http.MethodGet, Path: "/v2/iam/permissionsGroup/{permissionsGroupURN}", Summary: "Get a permissions group", IAMActions: []string{"account:apiovh:iam/permissionsGroup/get"}}
+var opGetPermissionsGroup = &ovh.Operation{Name: "iam.GetPermissionsGroup", Method: http.MethodGet, Path: "/v2/iam/permissionsGroup/{permissionsGroupURN}", Summary: "Get a permissions group", IAMActions: []string{"account:apiovh:iam/permissionsGroup/get"}, SchemasVersion: "1.0"}
 
 // GetPermissionsGroup calls GET /v2/iam/permissionsGroup/{permissionsGroupURN}: Get a permissions group
 //
@@ -106,7 +106,7 @@ func (s *Service) GetPermissionsGroup(ctx context.Context, permissionsGroupURN s
 }
 
 // opGetPolicy is GetPolicy's entry in the operation registry (ovh.Operations).
-var opGetPolicy = &ovh.Operation{Name: "iam.GetPolicy", Method: http.MethodGet, Path: "/v2/iam/policy/{policyId}", Summary: "Get a policy", IAMActions: []string{"account:apiovh:iam/policy/get"}}
+var opGetPolicy = &ovh.Operation{Name: "iam.GetPolicy", Method: http.MethodGet, Path: "/v2/iam/policy/{policyId}", Summary: "Get a policy", IAMActions: []string{"account:apiovh:iam/policy/get"}, SchemasVersion: "1.0"}
 
 // GetPolicyParams holds the optional parameters of GetPolicy.
 type GetPolicyParams struct {
@@ -127,7 +127,7 @@ func (s *Service) GetPolicy(ctx context.Context, policyID string, params ...GetP
 }
 
 // opListPermissionsGroups is AllPermissionsGroups's entry in the operation registry (ovh.Operations).
-var opListPermissionsGroups = &ovh.Operation{Name: "iam.AllPermissionsGroups", Method: http.MethodGet, Path: "/v2/iam/permissionsGroup", Summary: "List permissions groups", IAMActions: []string{"account:apiovh:iam/permissionsGroup/get"}}
+var opListPermissionsGroups = &ovh.Operation{Name: "iam.AllPermissionsGroups", Method: http.MethodGet, Path: "/v2/iam/permissionsGroup", Summary: "List permissions groups", IAMActions: []string{"account:apiovh:iam/permissionsGroup/get"}, SchemasVersion: "1.0"}
 
 // AllPermissionsGroups iterates over GET /v2/iam/permissionsGroup (List permissions groups),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -142,7 +142,7 @@ func (s *Service) AllPermissionsGroups(ctx context.Context) iter.Seq2[*IAMPermis
 }
 
 // opListPolicies is AllPolicies's entry in the operation registry (ovh.Operations).
-var opListPolicies = &ovh.Operation{Name: "iam.AllPolicies", Method: http.MethodGet, Path: "/v2/iam/policy", Summary: "List policies", IAMActions: []string{"account:apiovh:iam/policy/get"}}
+var opListPolicies = &ovh.Operation{Name: "iam.AllPolicies", Method: http.MethodGet, Path: "/v2/iam/policy", Summary: "List policies", IAMActions: []string{"account:apiovh:iam/policy/get"}, SchemasVersion: "1.0"}
 
 // ListPoliciesParams holds the optional parameters of ListPolicies.
 type ListPoliciesParams struct {
@@ -172,7 +172,7 @@ func (s *Service) AllPolicies(ctx context.Context, params ...ListPoliciesParams)
 }
 
 // opUpdatePermissionsGroup is UpdatePermissionsGroup's entry in the operation registry (ovh.Operations).
-var opUpdatePermissionsGroup = &ovh.Operation{Name: "iam.UpdatePermissionsGroup", Method: http.MethodPut, Path: "/v2/iam/permissionsGroup/{permissionsGroupURN}", Summary: "Update a permissions group", IAMActions: []string{"account:apiovh:iam/permissionsGroup/edit"}}
+var opUpdatePermissionsGroup = &ovh.Operation{Name: "iam.UpdatePermissionsGroup", Method: http.MethodPut, Path: "/v2/iam/permissionsGroup/{permissionsGroupURN}", Summary: "Update a permissions group", IAMActions: []string{"account:apiovh:iam/permissionsGroup/edit"}, SchemasVersion: "1.0"}
 
 // UpdatePermissionsGroup calls PUT /v2/iam/permissionsGroup/{permissionsGroupURN}: Update a permissions group
 //
@@ -188,7 +188,7 @@ func (s *Service) UpdatePermissionsGroup(ctx context.Context, permissionsGroupUR
 }
 
 // opUpdatePolicy is UpdatePolicy's entry in the operation registry (ovh.Operations).
-var opUpdatePolicy = &ovh.Operation{Name: "iam.UpdatePolicy", Method: http.MethodPut, Path: "/v2/iam/policy/{policyId}", Summary: "Update a policy", IAMActions: []string{"account:apiovh:iam/policy/edit"}}
+var opUpdatePolicy = &ovh.Operation{Name: "iam.UpdatePolicy", Method: http.MethodPut, Path: "/v2/iam/policy/{policyId}", Summary: "Update a policy", IAMActions: []string{"account:apiovh:iam/policy/edit"}, SchemasVersion: "1.0"}
 
 // UpdatePolicy calls PUT /v2/iam/policy/{policyId}: Update a policy
 //

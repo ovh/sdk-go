@@ -32,9 +32,11 @@ func (s *Service) ConfirmTermination(ctx context.Context, serviceName string, bo
 }
 
 // opDeleteOption is DeleteOption's entry in the operation registry (ovh.Operations).
-var opDeleteOption = &ovh.Operation{Name: "licensewindows.DeleteOption", Method: http.MethodDelete, Path: "/v1/license/windows/{serviceName}/option/{label}", Summary: "release this Option", IAMActions: []string{"licenseWindows:apiovh:option/delete"}}
+var opDeleteOption = &ovh.Operation{Name: "licensewindows.DeleteOption", Method: http.MethodDelete, Path: "/v1/license/windows/{serviceName}/option/{label}", Summary: "Release an option from a license", IAMActions: []string{"licenseWindows:apiovh:option/delete"}}
 
-// DeleteOption calls DELETE /v1/license/windows/{serviceName}/option/{label}: release this Option
+// DeleteOption calls DELETE /v1/license/windows/{serviceName}/option/{label}: Release an option from a license
+//
+// Removes the option from the license and returns the task that performs the release.
 //
 // Arguments:
 //   - serviceName: The name of your Windows license
@@ -46,9 +48,11 @@ func (s *Service) DeleteOption(ctx context.Context, serviceName string, label Li
 }
 
 // opGetOption is GetOption's entry in the operation registry (ovh.Operations).
-var opGetOption = &ovh.Operation{Name: "licensewindows.GetOption", Method: http.MethodGet, Path: "/v1/license/windows/{serviceName}/option/{label}", Summary: "Get this object properties", IAMActions: []string{"licenseWindows:apiovh:option/get"}}
+var opGetOption = &ovh.Operation{Name: "licensewindows.GetOption", Method: http.MethodGet, Path: "/v1/license/windows/{serviceName}/option/{label}", Summary: "Get an option of a license", IAMActions: []string{"licenseWindows:apiovh:option/get"}}
 
-// GetOption calls GET /v1/license/windows/{serviceName}/option/{label}: Get this object properties
+// GetOption calls GET /v1/license/windows/{serviceName}/option/{label}: Get an option of a license
+//
+// Returns the label, version, quantity, expiration date and whether the option can be released.
 //
 // Arguments:
 //   - serviceName: The name of your Windows license
@@ -88,9 +92,12 @@ func (s *Service) GetServiceInfos(ctx context.Context, serviceName string) (*Ser
 }
 
 // opGetTasks is GetTasks's entry in the operation registry (ovh.Operations).
-var opGetTasks = &ovh.Operation{Name: "licensewindows.GetTasks", Method: http.MethodGet, Path: "/v1/license/windows/{serviceName}/tasks/{taskId}", Summary: "Get this object properties", IAMActions: []string{"licenseWindows:apiovh:tasks/get"}}
+var opGetTasks = &ovh.Operation{Name: "licensewindows.GetTasks", Method: http.MethodGet, Path: "/v1/license/windows/{serviceName}/tasks/{taskId}", Summary: "Get a license task", IAMActions: []string{"licenseWindows:apiovh:tasks/get"}}
 
-// GetTasks calls GET /v1/license/windows/{serviceName}/tasks/{taskId}: Get this object properties
+// GetTasks calls GET /v1/license/windows/{serviceName}/tasks/{taskId}: Get a license task
+//
+// Returns the action, status, creation date, completion date and last update of a task linked to a
+// license.
 //
 // Arguments:
 //   - serviceName: The name of your Windows license
@@ -115,9 +122,12 @@ func (s *Service) AllTasks(ctx context.Context, serviceName string, params ...Li
 }
 
 // opGetWindows is GetWindows's entry in the operation registry (ovh.Operations).
-var opGetWindows = &ovh.Operation{Name: "licensewindows.GetWindows", Method: http.MethodGet, Path: "/v1/license/windows/{serviceName}", Summary: "Get this object properties", IAMActions: []string{"licenseWindows:apiovh:get"}}
+var opGetWindows = &ovh.Operation{Name: "licensewindows.GetWindows", Method: http.MethodGet, Path: "/v1/license/windows/{serviceName}", Summary: "Get a Windows license", IAMActions: []string{"licenseWindows:apiovh:get"}}
 
-// GetWindows calls GET /v1/license/windows/{serviceName}: Get this object properties
+// GetWindows calls GET /v1/license/windows/{serviceName}: Get a Windows license
+//
+// Returns the license ID, version, status, the IP address the license is attached to, and the
+// creation date.
 //
 // Arguments:
 //   - serviceName: The name of your Windows license
@@ -141,9 +151,12 @@ func (s *Service) AllWindows(ctx context.Context, params ...ListWindowsParams) i
 }
 
 // opListOptions is ListOptions's entry in the operation registry (ovh.Operations).
-var opListOptions = &ovh.Operation{Name: "licensewindows.ListOptions", Method: http.MethodGet, Path: "/v1/license/windows/{serviceName}/option", Summary: "options attached to this license", IAMActions: []string{"licenseWindows:apiovh:option/get"}}
+var opListOptions = &ovh.Operation{Name: "licensewindows.ListOptions", Method: http.MethodGet, Path: "/v1/license/windows/{serviceName}/option", Summary: "List the options of a Windows license", IAMActions: []string{"licenseWindows:apiovh:option/get"}}
 
-// ListOptions calls GET /v1/license/windows/{serviceName}/option: options attached to this license
+// ListOptions calls GET /v1/license/windows/{serviceName}/option: List the options of a Windows license
+//
+// Returns the labels of the options attached to the license; get an option for its version,
+// quantity and expiration date.
 //
 // Arguments:
 //   - serviceName: The name of your Windows license
@@ -158,6 +171,9 @@ var opListOrderableVersions = &ovh.Operation{Name: "licensewindows.ListOrderable
 
 // ListOrderableVersions calls GET /v1/license/windows/orderableVersions: Get the orderable Windows versions
 //
+// Returns the versions that can be ordered for the given IP, with their compliant SQL Server
+// versions.
+//
 // Arguments:
 //   - ip: Your license Ip
 //
@@ -167,7 +183,7 @@ func (s *Service) ListOrderableVersions(ctx context.Context, ip string) ([]Licen
 }
 
 // opListTasks is ListTasks's entry in the operation registry (ovh.Operations).
-var opListTasks = &ovh.Operation{Name: "licensewindows.ListTasks", Method: http.MethodGet, Path: "/v1/license/windows/{serviceName}/tasks", Summary: "tasks linked to this license", IAMActions: []string{"licenseWindows:apiovh:tasks/get"}}
+var opListTasks = &ovh.Operation{Name: "licensewindows.ListTasks", Method: http.MethodGet, Path: "/v1/license/windows/{serviceName}/tasks", Summary: "List the tasks of a Windows license", IAMActions: []string{"licenseWindows:apiovh:tasks/get"}}
 
 // ListTasksParams holds the optional parameters of ListTasks.
 type ListTasksParams struct {
@@ -177,7 +193,10 @@ type ListTasksParams struct {
 	Status *LicenseTaskStateEnum `ovh:"query,status"`
 }
 
-// ListTasks calls GET /v1/license/windows/{serviceName}/tasks: tasks linked to this license
+// ListTasks calls GET /v1/license/windows/{serviceName}/tasks: List the tasks of a Windows license
+//
+// Returns the IDs of the tasks linked to the license, each task records an action such as a version
+// upgrade or an option change.
 //
 // Arguments:
 //   - serviceName: The name of your Windows license
@@ -188,7 +207,7 @@ func (s *Service) ListTasks(ctx context.Context, serviceName string, params ...L
 }
 
 // opListWindows is ListWindows's entry in the operation registry (ovh.Operations).
-var opListWindows = &ovh.Operation{Name: "licensewindows.ListWindows", Method: http.MethodGet, Path: "/v1/license/windows", Summary: "List available services", IAMActions: []string{"licenseWindows:apiovh:get"}}
+var opListWindows = &ovh.Operation{Name: "licensewindows.ListWindows", Method: http.MethodGet, Path: "/v1/license/windows", Summary: "List your Windows licenses", IAMActions: []string{"licenseWindows:apiovh:get"}}
 
 // ListWindowsParams holds the optional parameters of ListWindows.
 type ListWindowsParams struct {
@@ -196,7 +215,10 @@ type ListWindowsParams struct {
 	IAMTags map[string][]IAMResourceTagFilter `ovh:"query,iamTags"`
 }
 
-// ListWindows calls GET /v1/license/windows: List available services
+// ListWindows calls GET /v1/license/windows: List your Windows licenses
+//
+// Returns the names of the Windows licenses of the account; each name is the service name used by
+// the other calls.
 //
 // Requires the IAM action licenseWindows:apiovh:get.
 func (s *Service) ListWindows(ctx context.Context, params ...ListWindowsParams) ([]string, error) {
@@ -204,9 +226,11 @@ func (s *Service) ListWindows(ctx context.Context, params ...ListWindowsParams) 
 }
 
 // opSQLServer is SQLServer's entry in the operation registry (ovh.Operations).
-var opSQLServer = &ovh.Operation{Name: "licensewindows.SQLServer", Method: http.MethodPost, Path: "/v1/license/windows/{serviceName}/sqlServer", Summary: "Link your own sql server license to this Windows license", IAMActions: []string{"licenseWindows:apiovh:sqlServer/create"}}
+var opSQLServer = &ovh.Operation{Name: "licensewindows.SQLServer", Method: http.MethodPost, Path: "/v1/license/windows/{serviceName}/sqlServer", Summary: "Attach your own SQL Server license", IAMActions: []string{"licenseWindows:apiovh:sqlServer/create"}}
 
-// SQLServer calls POST /v1/license/windows/{serviceName}/sqlServer: Link your own sql server license to this Windows license
+// SQLServer calls POST /v1/license/windows/{serviceName}/sqlServer: Attach your own SQL Server license
+//
+// Links a SQL Server license, identified by its version and serial number, to the Windows license.
 //
 // Arguments:
 //   - serviceName: The name of your Windows license
@@ -251,9 +275,11 @@ func (s *Service) UpdateServiceInfos(ctx context.Context, serviceName string, bo
 }
 
 // opUpdateWindows is UpdateWindows's entry in the operation registry (ovh.Operations).
-var opUpdateWindows = &ovh.Operation{Name: "licensewindows.UpdateWindows", Method: http.MethodPut, Path: "/v1/license/windows/{serviceName}", Summary: "Alter this object properties", IAMActions: []string{"licenseWindows:apiovh:put"}}
+var opUpdateWindows = &ovh.Operation{Name: "licensewindows.UpdateWindows", Method: http.MethodPut, Path: "/v1/license/windows/{serviceName}", Summary: "Update a Windows license", IAMActions: []string{"licenseWindows:apiovh:put"}}
 
-// UpdateWindows calls PUT /v1/license/windows/{serviceName}: Alter this object properties
+// UpdateWindows calls PUT /v1/license/windows/{serviceName}: Update a Windows license
+//
+// Changes the settings that can be modified: the automatic deletion at expiration.
 //
 // Arguments:
 //   - serviceName: The name of your Windows license

@@ -14,6 +14,9 @@ type PublicCloudInstanceInstanceVolume struct {
 	// Display name of the attached volume
 	// Read-only: the API sets it.
 	Name *string `json:"name,omitempty"`
+	// Role of this volume for the instance: BOOT for the root volume of an instance booted from a volume, DATA for any other attached volume. For an instance booted from a volume but created outside this API, DATA on every volume until its boot volume has been identified.
+	// Read-only: the API sets it.
+	Role *PublicCloudInstanceInstanceVolumeRoleEnum `json:"role,omitempty"`
 	// Size of the attached volume in GB
 	// Read-only: the API sets it.
 	Size *int `json:"size,omitempty"`

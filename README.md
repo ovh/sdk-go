@@ -1,25 +1,32 @@
 # OVHcloud Go SDK
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/ovh/sdk-go.svg)](https://pkg.go.dev/github.com/ovh/sdk-go)
+
+> **Early version.** This SDK is in active development, and v0.x releases can include breaking
+> changes. Pin a version and read the [changelog](CHANGELOG.md) before you upgrade. We will release
+> v1.0 once the SDK is stable, in the coming weeks. From v1.0, every stable release follows semantic
+> versioning: a breaking change means a new major version.
+
 The Go SDK for the [OVHcloud API](https://developers.eu.ovhcloud.com/): a client for every
 public operation, with OAuth2 service-account authentication, retries, typed errors and
 iterators over paginated lists.
 
-**Status:** main project, actively maintained by OVHcloud. Most of the code under `pkg/` is
-generated from the API's OpenAPI specifications and regenerated at each release; see
-[CONTRIBUTING.md](CONTRIBUTING.md) before proposing a change.
-
-Install it, make your first call, and find the operation you need among the roughly 7 000 the
-API offers.
+**Status:** maintained by OVHcloud. Most of the code under `pkg/` is generated from the API's
+OpenAPI specifications at each release. Read [CONTRIBUTING.md](CONTRIBUTING.md) before you
+propose a change.
 
 - [1. Install](#1-install)
 - [2. Your first program](#2-your-first-program)
+  - [Coming from go-ovh](#coming-from-go-ovh)
 - [3. Finding the operation you need](#3-finding-the-operation-you-need)
 - [4. Calling an operation](#4-calling-an-operation)
 - [5. Lists and pagination](#5-lists-and-pagination)
 - [6. Handling errors](#6-handling-errors)
 - [7. Configuration reference](#7-configuration-reference)
 - [8. Calling any endpoint](#8-calling-any-endpoint)
-- [9. Troubleshooting](#9-troubleshooting)
+- [9. Testing your code](#9-testing-your-code)
+- [10. Observability](#10-observability)
+- [11. Troubleshooting](#11-troubleshooting)
 
 ---
 
@@ -28,6 +35,8 @@ API offers.
 ```shell
 go get github.com/ovh/sdk-go
 ```
+
+Go 1.25 or later (tested on 1.25, 1.26 and 1.27).
 
 You also need OAuth2 credentials: the client ID and secret of a service account.
 
@@ -38,14 +47,14 @@ You also need OAuth2 credentials: the client ID and secret of a service account.
    [How to use IAM policies using the OVHcloud Control Panel](https://docs.ovhcloud.com/en/guides/account-and-service-management/account-information/iam-policy-ui),
    or [using the API](https://docs.ovhcloud.com/en/guides/account-and-service-management/account-information/iam-policies-api).
 
-Keep the client ID and secret out of your source code — read them from the environment.
+Keep the client ID and secret out of your source code: read them from the environment.
 
 ---
 
 ## 2. Your first program
 
-This prints your account details and lists your vRacks. It is complete: copy it, set two
-environment variables, run it.
+This prints the details of your account: `GET /v1/me`. Copy it, set your credentials, run
+it.
 
 ```go
 package main
@@ -57,7 +66,6 @@ import (
 
 	"github.com/ovh/sdk-go/ovh"
 	"github.com/ovh/sdk-go/pkg/me"
-	"github.com/ovh/sdk-go/pkg/vrack"
 )
 
 func main() {
@@ -65,19 +73,14 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	ctx := context.Background()
 
-	account, err := me.New(client).GetAccountDetails(ctx)
+	account, err := me.New(client).GetAccountDetails(context.Background()) // GET /v1/me
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("account", ovh.Value(account.Nichandle))
-
-	ids, err := vrack.New(client).ListVracks(ctx)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println("vRacks:", ids)
+	fmt.Println("account:", ovh.Value(account.Nichandle))
+	fmt.Println("email:  ", ovh.Value(account.Email))
+	fmt.Println("country:", ovh.Value(account.Country))
 }
 ```
 
@@ -87,9 +90,11 @@ export OVH_REGION=eu    # eu (default), ca or us
 go run .
 ```
 
+More examples: [examples/](examples/README.md).
+
 Create **one** client and share it: it is safe for concurrent use, and it reuses connections and
-tokens. Each API section is a package under `pkg/`; `section.New(client)` gives you its
-operations.
+tokens. Each API section is a package under `pkg/`: `me.New(client)` gives you the operations
+of `me`.
 
 ### Choosing your region
 
@@ -102,6 +107,33 @@ others.
 | Europe | `ovh.EU` | `https://api.eu.ovhcloud.com` |
 | Canada | `ovh.CA` | `https://api.ca.ovhcloud.com` |
 | US | `ovh.US` | `https://api.us.ovhcloud.com` |
+
+### Coming from go-ovh
+
+This SDK is not [go-ovh](https://github.com/ovh/go-ovh) (`github.com/ovh/go-ovh/ovh`). It is a
+new module. Both packages are named `ovh`: to use both in one file, rename one import. The main
+differences:
+
+- **Module:** `go get github.com/ovh/sdk-go`, then import `github.com/ovh/sdk-go/ovh` and the
+  sections you call, under `github.com/ovh/sdk-go/pkg/`.
+- **Credentials:** an OAuth2 service account (`OVH_CLIENT_ID`, `OVH_CLIENT_SECRET`). There is
+  no application key, application secret or consumer key, and no `ovh.conf` file. See
+  [Install](#1-install) to create one.
+- **Region:** `OVH_REGION=eu`, `ca` or `us`, instead of the endpoint `ovh-eu`, `ovh-ca` or
+  `ovh-us`.
+- **Typed methods:** each API call has a method. The table below shows some of them.
+- **Errors:** `errors.Is(err, ovh.ErrNotFound)`, not a check of the `Code` of an `*ovh.APIError`.
+
+| go-ovh | This SDK |
+|---|---|
+| `ovh.NewOAuth2Client("ovh-eu", clientID, clientSecret)` | `ovh.NewClient(ovh.WithRegion(ovh.EU), ovh.WithOAuth2(clientID, clientSecret))` |
+| `client.Get("/me", &account)` | `me.New(client).GetAccountDetails(ctx)` |
+| `client.Get("/me/sshKey", &keys)` | `me.New(client).ListSSHKeys(ctx)` |
+| `client.Post("/vrack/pn-123456/cloudProject", body, &task)` | `vrack.New(client).CreateCloudProject(ctx, "pn-123456", body)` |
+| `apiErr.Code == 404` | `errors.Is(err, ovh.ErrNotFound)` |
+
+To find the method of a route you called with go-ovh, add `/v1` in front of the path and look
+it up in the index (see [section 3](#3-finding-the-operation-you-need)).
 
 ---
 
@@ -126,7 +158,7 @@ Method names follow the URL path, without the section's own prefix:
 | `PUT /vrack/{serviceName}` | `vrack.UpdateVrack` |
 | `POST /vrack/{serviceName}/cloudProject` | `vrack.CreateCloudProject` |
 | `DELETE /vrack/{serviceName}/cloudProject/{project}` | `vrack.DeleteCloudProject` |
-| `POST /vrack/{serviceName}/changeContact` (an action) | `vrack.ChangeContact` |
+| `POST /vrack/{serviceName}/terminate` (an action) | `vrack.Terminate` |
 
 Path parameters are left out of the name and become arguments.
 
@@ -252,6 +284,28 @@ ids, err := vracks.ListVracks(ctx, vrack.ListVracksParams{        // filtered on
 fmt.Println(ovh.Value(v.Name))
 ```
 
+### Request bodies have no read-only fields
+
+The API sets some fields itself: an ID, a creation date, a status. A type the API returns has
+them, marked `Read-only` in its documentation. A request body never does, so you cannot send one
+by mistake. A body whose type has read-only fields takes that type's **writable** form instead,
+named with `Writable` after it.
+
+To change an object, get it, then call its `Writable` method: it returns the object in that
+form, nested objects included. Change what you need, then send it:
+
+```go
+web := hostingweb.New(client)
+v, err := web.GetEnvVar(ctx, "example.com", "API_URL") // *HostingWebEnvVar: Key, Type and Status are read-only
+body := v.Writable()                                   // HostingWebEnvVarWritable
+body.Value = ovh.Ptr("https://api.example.com")
+task, err := web.UpdateEnvVar(ctx, "example.com", "API_URL", body)
+```
+
+`Writable` returns a deep copy: changing `body` leaves `v` as it was. You can also build the
+writable form yourself, with only the fields you set:
+`hostingweb.HostingWebEnvVarWritable{Value: ovh.Ptr("https://api.example.com")}`.
+
 ### Waiting for the work to finish
 
 Many operations only start the work. A v2 resource comes back `CREATING` or `UPDATING` and
@@ -281,28 +335,6 @@ sooner. A failed status (a resource in `ERROR`, a task in error, cancelled, or w
 action) ends the wait with an error matching `ovh.ErrWaitFailed`. A 429 or a 5xx is polled
 again; any other error ends the wait. Each returns the last value it read, with the error.
 
-### Request bodies have no read-only fields
-
-The API sets some fields itself: an ID, a creation date, a status. A type the API returns has
-them, marked `Read-only` in its documentation. A request body never does, so you cannot send one
-by mistake. A body whose type has read-only fields takes that type's **writable** form instead,
-named with `Writable` after it.
-
-To change an object, get it, then call its `Writable` method: it returns the object in that
-form, nested objects included. Change what you need, then send it:
-
-```go
-web := hostingweb.New(client)
-v, err := web.GetEnvVar(ctx, "example.com", "API_URL") // *HostingWebEnvVar: Key, Type and Status are read-only
-body := v.Writable()                                   // HostingWebEnvVarWritable
-body.Value = ovh.Ptr("https://api.example.com")
-task, err := web.UpdateEnvVar(ctx, "example.com", "API_URL", body)
-```
-
-`Writable` returns a deep copy: changing `body` leaves `v` as it was. You can also build the
-writable form yourself, with only the fields you set:
-`hostingweb.HostingWebEnvVarWritable{Value: ovh.Ptr("https://api.example.com")}`.
-
 ### `List` and `All`
 
 Many v1 lists return identifiers only. Their `All` twin is an iterator over the objects
@@ -322,6 +354,13 @@ for key, err := range me.New(client).AllSSHKeys(ctx) { // one *me.NichandleSSHKe
 Each object is one request, so a list of 900 items is 901 requests; `break` stops them. An
 object deleted between the list and its fetch is skipped. Any other error is yielded once, and
 ends the loop.
+
+### Deprecated operations
+
+The API deprecates operations before it removes them. Their doc comment says so in a
+`Deprecated:` paragraph, with the removal date and the route to use instead when the API gives
+them. Editors and linters show them as deprecated, and their `ovh.Operation` has `Deprecated`
+set. They still work, and never warn at run time.
 
 ---
 
@@ -425,11 +464,11 @@ Options are passed once, to `ovh.NewClient`. All are optional.
 | `WithOAuth2(id, secret)` | Credentials, instead of `OVH_CLIENT_ID` / `OVH_CLIENT_SECRET`. |
 | `WithTokenSource(ts)` | Use tokens you obtain yourself. |
 | `WithRegion(r)` | `ovh.EU`, `ovh.CA` or `ovh.US`, instead of `OVH_REGION`. |
-| `WithTimeout(d)` | Gives up after `d`, including the time spent reading the response. **No timeout by default** — set one. |
-| `WithRetry(ovh.DefaultRetryPolicy())` | Retry on 429, 503 and 504: at most 3 attempts, never sooner than 3 s apart, at most 2 minutes of waiting per call. Only `GET`, `HEAD` and `DELETE` are retried — never `POST`, `PUT` or `PATCH`, which can start tasks or place orders. Off by default; a policy outside these limits makes `NewClient` fail. |
+| `WithTimeout(d)` | Gives up after `d`, including the time spent reading the response. **No timeout by default**: set one. |
+| `WithRetry(ovh.DefaultRetryPolicy())` | Retry on 429, 503 and 504: at most 3 attempts, never sooner than 3 s apart, at most 2 minutes of waiting per call. Only `GET`, `HEAD` and `DELETE` are retried, never `POST`, `PUT` or `PATCH`, which can start tasks or place orders. Off by default; a policy outside these limits makes `NewClient` fail. |
 | `WithMaxResponseBytes(n)` | Refuse responses larger than this instead of reading them into memory. Unlimited by default. |
 | `WithDebug()` | Log every request and response. Passwords and tokens are blanked out. |
-| `WithDebugBodies()` | Also log request and response bodies. **These often contain secrets** — only with test data. |
+| `WithDebugBodies()` | Also log request and response bodies. **These often contain secrets**: use it only with test data. |
 | `WithRootCAs(pool)` / `WithRootCAsFromPEM(pem)` | Trust a private certificate authority, for corporate networks. |
 | `WithClientCertificates(...)` | Authenticate with a client certificate (mutual TLS). |
 | `WithProxy(fn)` | Choose a proxy. By default the SDK honours `HTTP_PROXY` / `HTTPS_PROXY`. |
@@ -533,12 +572,16 @@ client, err := ovh.NewClient(
 )
 ```
 
+**X-Schemas-Version.** The v2 API serves several versions of its contract. The SDK sends, with
+every v2 request, the version its types were generated from, so your account's own setting
+does not change what the SDK receives. `WithHeader` cannot set it.
+
 ---
 
 ## 8. Calling any endpoint
 
-The section packages are a convenience over one call, which you can make yourself — for a route
-newer than your SDK version, for example:
+The section packages are a convenience over one call, which you can make yourself, for a route
+newer than your SDK version for example:
 
 ```go
 var out map[string]any
@@ -550,25 +593,115 @@ err := client.Do(ctx, &ovh.Request{
 
 ---
 
-## 9. Troubleshooting
+## 9. Testing your code
 
-**`ovh: no credentials`** — `OVH_CLIENT_ID` and `OVH_CLIENT_SECRET` are not set in the
+Your tests do not need the network or real credentials. Serve the API from an
+[`httptest.Server`](https://pkg.go.dev/net/http/httptest), and give the client a fixed token:
+
+- `ovh.WithTokenSource(oauth2.StaticTokenSource(...))`: no credentials, and no call to the
+  token endpoint. `oauth2` is `golang.org/x/oauth2`, which the SDK already uses.
+- `ovh.WithEndpoint(server.URL)` points the client at the test server. Paths have their
+  version: `/v1/me`.
+
+```go
+func TestAccount(t *testing.T) {
+	api := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		switch r.URL.Path {
+		case "/v1/me":
+			fmt.Fprint(w, `{"nichandle":"ab12345-ovh"}`)
+		default:
+			w.WriteHeader(http.StatusNotFound)
+			fmt.Fprint(w, `{"message":"not found"}`)
+		}
+	}))
+	defer api.Close()
+
+	client, err := ovh.NewClient(
+		ovh.WithEndpoint(api.URL),
+		ovh.WithTokenSource(oauth2.StaticTokenSource(&oauth2.Token{AccessToken: "test-token"})),
+	)
+	if err != nil {
+		t.Fatal(err)
+	}
+	ctx := context.Background()
+
+	account, err := me.New(client).GetAccountDetails(ctx)
+	if err != nil || ovh.Value(account.Nichandle) != "ab12345-ovh" {
+		t.Fatalf("got %v, %v", account, err)
+	}
+	if _, err := me.New(client).ListSSHKeys(ctx); !errors.Is(err, ovh.ErrNotFound) {
+		t.Fatalf("got %v, want a 404", err)
+	}
+}
+```
+
+To test code that takes a result, build the struct yourself, with the fields your code reads:
+`&me.NichandleNichandle{Nichandle: ovh.Ptr("ab12345-ovh")}`.
+
+`ovh.WithDryRun()` is another way to test code that changes an account: it reads the real
+state, and returns what each change would send instead of sending it (see
+[Planning changes with a dry run](#7-configuration-reference)).
+
+---
+
+## 10. Observability
+
+The SDK has no tracing or metrics of its own. Two places see every call:
+
+- **Hooks** see each call with its operation. `ovh.WithAfterRequest` gives the status, the
+  duration, the number of attempts and the `X-Ovh-Queryid`, which identifies a call for
+  OVHcloud support, also when it succeeds. Use it for logs and metrics (see
+  [Watching every call with hooks](#7-configuration-reference)):
+
+  ```go
+  client, err := ovh.NewClient(ovh.WithAfterRequest(
+  	func(ctx context.Context, call *ovh.CallInfo, r ovh.CallResult) {
+  		slog.InfoContext(ctx, "ovh call", "method", call.Method, "path", call.Path,
+  			"status", r.StatusCode, "duration", r.Duration, "query_id", r.QueryID)
+  	}))
+  ```
+
+- **Your own HTTP client** sees each request, token requests included. Wrap its transport,
+  for example with the
+  [OpenTelemetry instrumentation](https://pkg.go.dev/go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp)
+  of `net/http`, which makes a span per request:
+
+  ```go
+  client, err := ovh.NewClient(ovh.WithHTTPClient(&http.Client{
+  	Transport: otelhttp.NewTransport(http.DefaultTransport),
+  }))
+  ```
+
+With your own HTTP client:
+
+- The SDK still sets on each request the `Authorization`, `User-Agent` and the other headers
+  it needs, and applies `ovh.WithTimeout` when you give it.
+- The TLS and proxy options (`WithRootCAs`, `WithClientCertificates`, `WithProxy`) need its
+  `Transport` to be an `*http.Transport`. With a wrapped transport, set them on the
+  `*http.Transport` inside.
+- Each retry is a new request, so the transport sees each attempt. A hook runs once per call.
+
+---
+
+## 11. Troubleshooting
+
+**`ovh: no credentials`**: `OVH_CLIENT_ID` and `OVH_CLIENT_SECRET` are not set in the
 environment the program runs in.
 
-**`401 You must login first`** — the API did not accept your token. Check that `OVH_REGION`
+**`401 You must login first`**: the API did not accept your token. Check that `OVH_REGION`
 matches the region your account and service account live in, then that the credentials are
 valid.
 
-**`403 This call has not been granted`** — you are authenticated, but your service account
+**`403 This call has not been granted`**: you are authenticated, but your service account
 lacks permission for that route. The method's documentation names the IAM actions it requires:
 grant them with an
 [IAM policy](https://docs.ovhcloud.com/en/guides/account-and-service-management/account-information/iam-policy-ui).
 
-**`404 Not Found`** — usually a wrong identifier, such as a project ID from another region.
+**`404 Not Found`**: usually a wrong identifier, such as a project ID from another region.
 
-**The call hangs** — you have no timeout. Add `ovh.WithTimeout(30 * time.Second)`.
+**The call hangs**: you have no timeout. Add `ovh.WithTimeout(30 * time.Second)`.
 
-**See exactly what is sent** — add `ovh.WithDebug()`. Credential headers are blanked, so the
+**See exactly what is sent**: add `ovh.WithDebug()`. Credential headers are blanked, so the
 output is safe to paste into a bug report.
 
 ---
@@ -588,6 +721,8 @@ Copyright 2026 OVH SAS. Licensed under the [Apache License 2.0](LICENSE); see
 - Contribute: [CONTRIBUTING.md](CONTRIBUTING.md)
 - Report bugs: <https://github.com/ovh/sdk-go/issues>
 - Releases and changes: [CHANGELOG.md](CHANGELOG.md), <https://github.com/ovh/sdk-go/releases>
+- The package and its API reference: <https://pkg.go.dev/github.com/ovh/sdk-go>
+- Examples: [examples/](examples/README.md)
 - The API itself: the OVHcloud developer hub, <https://developers.eu.ovhcloud.com/>, and its
   [API reference](https://developers.eu.ovhcloud.com/reference/)
 - Service accounts and IAM: [Managing OVHcloud service accounts](https://docs.ovhcloud.com/en/guides/manage-and-operate/api/manage-service-account),

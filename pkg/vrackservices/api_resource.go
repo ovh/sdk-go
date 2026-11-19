@@ -15,7 +15,7 @@ import (
 )
 
 // opGetResource is GetResource's entry in the operation registry (ovh.Operations).
-var opGetResource = &ovh.Operation{Name: "vrackservices.GetResource", Method: http.MethodGet, Path: "/v2/vrackServices/resource/{vrackServicesId}", Summary: "Get a vRack Services", IAMActions: []string{"vrackServices:apiovh:resource/get"}}
+var opGetResource = &ovh.Operation{Name: "vrackservices.GetResource", Method: http.MethodGet, Path: "/v2/vrackServices/resource/{vrackServicesId}", Summary: "Get a vRack Services", IAMActions: []string{"vrackServices:apiovh:resource/get"}, SchemasVersion: "1.0"}
 
 // GetResource calls GET /v2/vrackServices/resource/{vrackServicesId}: Get a vRack Services
 //
@@ -30,25 +30,8 @@ func (s *Service) GetResource(ctx context.Context, vrackServicesID string) (*Vra
 	return ovh.Call[*VrackServicesVrackServicesWithIAM](ctx, s.c, &ovh.Request{Operation: opGetResource, Method: http.MethodGet, Path: ovh.Path("/v2/vrackServices/resource/{vrackServicesId}", "vrackServicesId", vrackServicesID)})
 }
 
-// opGetResourceEligibleBgpAllowedPrefixes is GetResourceEligibleBgpAllowedPrefixes's entry in the operation registry (ovh.Operations).
-var opGetResourceEligibleBgpAllowedPrefixes = &ovh.Operation{Name: "vrackservices.GetResourceEligibleBgpAllowedPrefixes", Method: http.MethodGet, Path: "/v2/vrackServices/resource/{vrackServicesId}/eligibleBgpAllowedPrefixes", Summary: "List eligible IP prefixes for BGP Service", IAMActions: []string{"vrackServices:apiovh:resource/eligibleBgpAllowedPrefixes/get"}}
-
-// GetResourceEligibleBgpAllowedPrefixes calls GET /v2/vrackServices/resource/{vrackServicesId}/eligibleBgpAllowedPrefixes: List eligible IP prefixes for BGP Service
-//
-// Returns the Additional IPv4 and IPv6 blocks that can be used in the BGP Service of the vRack
-// Services: blocks in the same region that are not used elsewhere.
-//
-// Arguments:
-//   - vrackServicesID: Vrack services ID
-//
-// Requires the IAM action vrackServices:apiovh:resource/eligibleBgpAllowedPrefixes/get. May also
-// use vrackServices:apiovh:bgp/ip/additionalIp/move, ip:apiovh:move.
-func (s *Service) GetResourceEligibleBgpAllowedPrefixes(ctx context.Context, vrackServicesID string) (*VrackServicesEligibleBgpAllowedPrefixes, error) {
-	return ovh.Call[*VrackServicesEligibleBgpAllowedPrefixes](ctx, s.c, &ovh.Request{Operation: opGetResourceEligibleBgpAllowedPrefixes, Method: http.MethodGet, Path: ovh.Path("/v2/vrackServices/resource/{vrackServicesId}/eligibleBgpAllowedPrefixes", "vrackServicesId", vrackServicesID)})
-}
-
 // opGetResourceTask is GetResourceTask's entry in the operation registry (ovh.Operations).
-var opGetResourceTask = &ovh.Operation{Name: "vrackservices.GetResourceTask", Method: http.MethodGet, Path: "/v2/vrackServices/resource/{vrackServicesId}/task/{taskId}", Summary: "Get a task", IAMActions: []string{"vrackServices:apiovh:resource/task/get"}}
+var opGetResourceTask = &ovh.Operation{Name: "vrackservices.GetResourceTask", Method: http.MethodGet, Path: "/v2/vrackServices/resource/{vrackServicesId}/task/{taskId}", Summary: "Get a task", IAMActions: []string{"vrackServices:apiovh:resource/task/get"}, SchemasVersion: "1.0"}
 
 // GetResourceTask calls GET /v2/vrackServices/resource/{vrackServicesId}/task/{taskId}: Get a task
 //
@@ -63,28 +46,8 @@ func (s *Service) GetResourceTask(ctx context.Context, vrackServicesID string, t
 	return ovh.Call[*CommonTask](ctx, s.c, &ovh.Request{Operation: opGetResourceTask, Method: http.MethodGet, Path: ovh.Path("/v2/vrackServices/resource/{vrackServicesId}/task/{taskId}", "vrackServicesId", vrackServicesID, "taskId", taskID)})
 }
 
-// opGetVrackServiceEligibleDedicatedServerInterfaces is AllVrackServiceEligibleDedicatedServerInterfaces's entry in the operation registry (ovh.Operations).
-var opGetVrackServiceEligibleDedicatedServerInterfaces = &ovh.Operation{Name: "vrackservices.AllVrackServiceEligibleDedicatedServerInterfaces", Method: http.MethodGet, Path: "/v2/vrackServices/resource/{vrackServicesId}/eligibleDedicatedServerInterfaces", Summary: "List eligible server interfaces", IAMActions: []string{"vrackServices:apiovh:resource/eligibleDedicatedServerInterfaces/get"}}
-
-// AllVrackServiceEligibleDedicatedServerInterfaces iterates over GET /v2/vrackServices/resource/{vrackServicesId}/eligibleDedicatedServerInterfaces (List eligible server interfaces),
-// one item at a time, fetching the next page only when the loop reaches it. On an error it
-// yields the error and stops. Collect, filter or stop early in the loop as needed.
-//
-// Returns, by availability zone, the dedicated server interfaces that can be added to the vRack
-// Services, with the server each one belongs to.
-//
-// Arguments:
-//   - vrackServicesID: Vrack services ID
-//
-// Requires the IAM action vrackServices:apiovh:resource/eligibleDedicatedServerInterfaces/get. May
-// also use vrackServices:apiovh:dedicatedServer/vnicAttach,
-// dedicatedServer:apiovh:vrackServices/vnicAttach.
-func (s *Service) AllVrackServiceEligibleDedicatedServerInterfaces(ctx context.Context, vrackServicesID string) iter.Seq2[*VrackServicesEligibleDedicatedServerInterface, error] {
-	return ovh.Iterate[VrackServicesEligibleDedicatedServerInterface](ctx, s.c, &ovh.Request{Operation: opGetVrackServiceEligibleDedicatedServerInterfaces, Method: http.MethodGet, Path: ovh.Path("/v2/vrackServices/resource/{vrackServicesId}/eligibleDedicatedServerInterfaces", "vrackServicesId", vrackServicesID)})
-}
-
 // opListResourceEligibleManagedServices is AllResourceEligibleManagedServices's entry in the operation registry (ovh.Operations).
-var opListResourceEligibleManagedServices = &ovh.Operation{Name: "vrackservices.AllResourceEligibleManagedServices", Method: http.MethodGet, Path: "/v2/vrackServices/resource/{vrackServicesId}/eligibleManagedService", Summary: "List eligible managed services", IAMActions: []string{"vrackServices:apiovh:resource/eligibleManagedService/get"}}
+var opListResourceEligibleManagedServices = &ovh.Operation{Name: "vrackservices.AllResourceEligibleManagedServices", Method: http.MethodGet, Path: "/v2/vrackServices/resource/{vrackServicesId}/eligibleManagedService", Summary: "List eligible managed services", IAMActions: []string{"vrackServices:apiovh:resource/eligibleManagedService/get"}, SchemasVersion: "1.0"}
 
 // AllResourceEligibleManagedServices iterates over GET /v2/vrackServices/resource/{vrackServicesId}/eligibleManagedService (List eligible managed services),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -104,7 +67,7 @@ func (s *Service) AllResourceEligibleManagedServices(ctx context.Context, vrackS
 }
 
 // opListResourceTasks is AllResourceTasks's entry in the operation registry (ovh.Operations).
-var opListResourceTasks = &ovh.Operation{Name: "vrackservices.AllResourceTasks", Method: http.MethodGet, Path: "/v2/vrackServices/resource/{vrackServicesId}/task", Summary: "List tasks", IAMActions: []string{"vrackServices:apiovh:resource/task/get"}}
+var opListResourceTasks = &ovh.Operation{Name: "vrackservices.AllResourceTasks", Method: http.MethodGet, Path: "/v2/vrackServices/resource/{vrackServicesId}/task", Summary: "List tasks", IAMActions: []string{"vrackServices:apiovh:resource/task/get"}, SchemasVersion: "1.0"}
 
 // AllResourceTasks iterates over GET /v2/vrackServices/resource/{vrackServicesId}/task (List tasks),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -122,7 +85,7 @@ func (s *Service) AllResourceTasks(ctx context.Context, vrackServicesID string) 
 }
 
 // opListResources is AllResources's entry in the operation registry (ovh.Operations).
-var opListResources = &ovh.Operation{Name: "vrackservices.AllResources", Method: http.MethodGet, Path: "/v2/vrackServices/resource", Summary: "List vRack Services", IAMActions: []string{"vrackServices:apiovh:resource/get"}}
+var opListResources = &ovh.Operation{Name: "vrackservices.AllResources", Method: http.MethodGet, Path: "/v2/vrackServices/resource", Summary: "List vRack Services", IAMActions: []string{"vrackServices:apiovh:resource/get"}, SchemasVersion: "1.0"}
 
 // ListResourcesParams holds the optional parameters of ListResources.
 type ListResourcesParams struct {
@@ -144,7 +107,7 @@ func (s *Service) AllResources(ctx context.Context, params ...ListResourcesParam
 }
 
 // opUpdateResource is UpdateResource's entry in the operation registry (ovh.Operations).
-var opUpdateResource = &ovh.Operation{Name: "vrackservices.UpdateResource", Method: http.MethodPut, Path: "/v2/vrackServices/resource/{vrackServicesId}", Summary: "Update a vRack Services", IAMActions: []string{"vrackServices:apiovh:resource/edit"}}
+var opUpdateResource = &ovh.Operation{Name: "vrackservices.UpdateResource", Method: http.MethodPut, Path: "/v2/vrackServices/resource/{vrackServicesId}", Summary: "Update a vRack Services", IAMActions: []string{"vrackServices:apiovh:resource/edit"}, SchemasVersion: "1.0"}
 
 // UpdateResource calls PUT /v2/vrackServices/resource/{vrackServicesId}: Update a vRack Services
 //
@@ -238,5 +201,5 @@ func (s *Service) UpdateResource(ctx context.Context, vrackServicesID string, bo
 }
 
 func init() {
-	ovh.RegisterOperations(opGetResource, opGetResourceEligibleBgpAllowedPrefixes, opGetResourceTask, opGetVrackServiceEligibleDedicatedServerInterfaces, opListResourceEligibleManagedServices, opListResourceTasks, opListResources, opUpdateResource)
+	ovh.RegisterOperations(opGetResource, opGetResourceTask, opListResourceEligibleManagedServices, opListResourceTasks, opListResources, opUpdateResource)
 }

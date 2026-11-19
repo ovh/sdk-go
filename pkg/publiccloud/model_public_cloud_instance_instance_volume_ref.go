@@ -6,8 +6,10 @@
 
 package publiccloud
 
-// PublicCloudInstanceInstanceVolumeRef User-controlled reference to a block volume attached to the instance, used within the declarative volumes list of targetSpec. It carries only the volume id. The full observed volume is exposed in currentState through InstanceVolume.
+// PublicCloudInstanceInstanceVolumeRef User-controlled reference to a block volume attached to the instance, used within the declarative volumes list of targetSpec. It carries the volume id and its role for the instance, boot or data volume. The full observed volume is exposed in currentState through InstanceVolume.
 type PublicCloudInstanceInstanceVolumeRef struct {
 	// Identifier of the volume to attach. Adding this reference attaches the volume. Removing it from the volumes list detaches it.
 	ID string `json:"id"`
+	// Role of this volume for the instance: BOOT when the instance boots from it instead of an image, DATA otherwise. When omitted or null, the role is DATA. At most one entry of the volumes list may be BOOT, and only when targetSpec.image is omitted. The boot volume must be bootable (see the bootable field of the block storage volume), available, not multi-attach, and in the region of the instance. The boot volume can only be chosen at creation: on update, it must stay in the volumes list, with role omitted or BOOT, and no other volume can become BOOT. The boot volume cannot be detached, and it is kept when the instance is deleted.
+	Role *PublicCloudInstanceInstanceVolumeRoleEnum `json:"role,omitempty"`
 }

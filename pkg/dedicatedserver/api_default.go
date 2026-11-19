@@ -14,6 +14,23 @@ import (
 	"github.com/ovh/sdk-go/ovh"
 )
 
+// opAggregationOla is AggregationOla's entry in the operation registry (ovh.Operations).
+var opAggregationOla = &ovh.Operation{Name: "dedicatedserver.AggregationOla", Method: http.MethodPost, Path: "/v1/dedicated/server/{serviceName}/ola/aggregation", Summary: "Aggregate network interfaces", IAMActions: []string{"dedicatedServer:apiovh:ola/aggregation/create"}}
+
+// AggregationOla calls POST /v1/dedicated/server/{serviceName}/ola/aggregation: Aggregate network interfaces
+//
+// Groups virtual network interfaces into one link aggregation, under the given name. Returns a
+// task.
+//
+// Arguments:
+//   - serviceName: The internal name of your dedicated server
+//   - body: the request body
+//
+// Requires the IAM action dedicatedServer:apiovh:ola/aggregation/create.
+func (s *Service) AggregationOla(ctx context.Context, serviceName string, body AggregationOlaRequest) (*DedicatedServerTask, error) {
+	return ovh.Call[*DedicatedServerTask](ctx, s.c, &ovh.Request{Operation: opAggregationOla, Method: http.MethodPost, Path: ovh.Path("/v1/dedicated/server/{serviceName}/ola/aggregation", "serviceName", serviceName), Body: body})
+}
+
 // opAuthenticationSecret is AuthenticationSecret's entry in the operation registry (ovh.Operations).
 var opAuthenticationSecret = &ovh.Operation{Name: "dedicatedserver.AuthenticationSecret", Method: http.MethodPost, Path: "/v1/dedicated/server/{serviceName}/authenticationSecret", Summary: "Get access credentials", IAMActions: []string{"dedicatedServer:apiovh:authenticationSecret/create"}}
 
@@ -64,6 +81,23 @@ func (s *Service) ChangeContact(ctx context.Context, serviceName string, body Ch
 	return ovh.Call[[]int](ctx, s.c, &ovh.Request{Operation: opChangeContact, Method: http.MethodPost, Path: ovh.Path("/v1/dedicated/server/{serviceName}/changeContact", "serviceName", serviceName), Body: body})
 }
 
+// opConfigureBiosSettingsSgx is ConfigureBiosSettingsSgx's entry in the operation registry (ovh.Operations).
+var opConfigureBiosSettingsSgx = &ovh.Operation{Name: "dedicatedserver.ConfigureBiosSettingsSgx", Method: http.MethodPost, Path: "/v1/dedicated/server/{serviceName}/biosSettings/sgx/configure", Summary: "Configure SGX", IAMActions: []string{"dedicatedServer:apiovh:biosSettings/sgx/configure"}}
+
+// ConfigureBiosSettingsSgx calls POST /v1/dedicated/server/{serviceName}/biosSettings/sgx/configure: Configure SGX
+//
+// Enables or disables SGX and sets the size of the Processor Reserved Memory (PRMRR). The server
+// reboots one or several times. On a server without SGX BIOS settings, the call returns an error.
+//
+// Arguments:
+//   - serviceName: The internal name of your dedicated server
+//   - body: the request body
+//
+// Requires the IAM action dedicatedServer:apiovh:biosSettings/sgx/configure.
+func (s *Service) ConfigureBiosSettingsSgx(ctx context.Context, serviceName string, body ConfigureBiosSettingsSgxRequest) (*DedicatedServerTask, error) {
+	return ovh.Call[*DedicatedServerTask](ctx, s.c, &ovh.Request{Operation: opConfigureBiosSettingsSgx, Method: http.MethodPost, Path: ovh.Path("/v1/dedicated/server/{serviceName}/biosSettings/sgx/configure", "serviceName", serviceName), Body: body})
+}
+
 // opConfirmTermination is ConfirmTermination's entry in the operation registry (ovh.Operations).
 var opConfirmTermination = &ovh.Operation{Name: "dedicatedserver.ConfirmTermination", Method: http.MethodPost, Path: "/v1/dedicated/server/{serviceName}/confirmTermination", Summary: "Confirm service termination", IAMActions: []string{"dedicatedServer:apiovh:confirmTermination"}}
 
@@ -79,6 +113,24 @@ var opConfirmTermination = &ovh.Operation{Name: "dedicatedserver.ConfirmTerminat
 // Requires the IAM action dedicatedServer:apiovh:confirmTermination.
 func (s *Service) ConfirmTermination(ctx context.Context, serviceName string, body ConfirmTerminationRequest) (string, error) {
 	return ovh.Call[string](ctx, s.c, &ovh.Request{Operation: opConfirmTermination, Method: http.MethodPost, Path: ovh.Path("/v1/dedicated/server/{serviceName}/confirmTermination", "serviceName", serviceName), Body: body})
+}
+
+// opCreateFeaturesBackupCloud is CreateFeaturesBackupCloud's entry in the operation registry (ovh.Operations).
+var opCreateFeaturesBackupCloud = &ovh.Operation{Name: "dedicatedserver.CreateFeaturesBackupCloud", Method: http.MethodPost, Path: "/v1/dedicated/server/{serviceName}/features/backupCloud", Summary: "Create the cloud backup", IAMActions: []string{"dedicatedServer:apiovh:features/backupCloud/create"}}
+
+// CreateFeaturesBackupCloud calls POST /v1/dedicated/server/{serviceName}/features/backupCloud: Create the cloud backup
+//
+// Creates the cloud backup of the server, with storage and archive containers in a cloud project.
+// Set cloudProjectId to use an existing project; otherwise a project is created, described by
+// projectDescription.
+//
+// Arguments:
+//   - serviceName: The internal name of your dedicated server
+//   - body: the request body
+//
+// Requires the IAM action dedicatedServer:apiovh:features/backupCloud/create.
+func (s *Service) CreateFeaturesBackupCloud(ctx context.Context, serviceName string, body CreateFeaturesBackupCloudRequest) (*DedicatedServerBackupCloud, error) {
+	return ovh.Call[*DedicatedServerBackupCloud](ctx, s.c, &ovh.Request{Operation: opCreateFeaturesBackupCloud, Method: http.MethodPost, Path: ovh.Path("/v1/dedicated/server/{serviceName}/features/backupCloud", "serviceName", serviceName), Body: body})
 }
 
 // opCreateFeaturesBackupFTP is CreateFeaturesBackupFTP's entry in the operation registry (ovh.Operations).
@@ -151,6 +203,24 @@ func (s *Service) CreateFeaturesIpmiTest(ctx context.Context, serviceName string
 	return ovh.Call[*DedicatedServerTask](ctx, s.c, &ovh.Request{Operation: opCreateFeaturesIpmiTest, Method: http.MethodPost, Path: ovh.Path("/v1/dedicated/server/{serviceName}/features/ipmi/test", "serviceName", serviceName), Body: body})
 }
 
+// opCreateLogSubscription is CreateLogSubscription's entry in the operation registry (ovh.Operations).
+var opCreateLogSubscription = &ovh.Operation{Name: "dedicatedserver.CreateLogSubscription", Method: http.MethodPost, Path: "/v2/dedicated/server/{serviceName}/log/subscription", Summary: "Create a log subscription", IAMActions: []string{"dedicatedServer:apiovh:log/subscription", "ldp:apiovh:output/graylog/stream/forwardTo"}, SchemasVersion: "1.0"}
+
+// CreateLogSubscription calls POST /v2/dedicated/server/{serviceName}/log/subscription: Create a log subscription
+//
+// Forwards Dedicated Servers logs of one kind to a Logs Data Platform stream. The subscription is
+// created asynchronously and the response returns the operation identifier.
+//
+// Arguments:
+//   - serviceName: Service name
+//   - body: the request body
+//
+// Requires the IAM actions dedicatedServer:apiovh:log/subscription,
+// ldp:apiovh:output/graylog/stream/forwardTo.
+func (s *Service) CreateLogSubscription(ctx context.Context, serviceName string, body DbaasLogsLogSubscriptionCreation) (*DbaasLogsLogSubscriptionResponse, error) {
+	return ovh.Call[*DbaasLogsLogSubscriptionResponse](ctx, s.c, &ovh.Request{Operation: opCreateLogSubscription, Method: http.MethodPost, Path: ovh.Path("/v2/dedicated/server/{serviceName}/log/subscription", "serviceName", serviceName), Body: body})
+}
+
 // opCreateSecondaryDNSDomains is CreateSecondaryDNSDomains's entry in the operation registry (ovh.Operations).
 var opCreateSecondaryDNSDomains = &ovh.Operation{Name: "dedicatedserver.CreateSecondaryDNSDomains", Method: http.MethodPost, Path: "/v1/dedicated/server/{serviceName}/secondaryDnsDomains", Summary: "Create a secondary DNS domain", IAMActions: []string{"dedicatedServer:apiovh:secondaryDnsDomains/create"}}
 
@@ -221,6 +291,21 @@ func (s *Service) CreateVirtualMacVirtualAddress(ctx context.Context, serviceNam
 	return ovh.Call[*DedicatedServerTask](ctx, s.c, &ovh.Request{Operation: opCreateVirtualMacVirtualAddress, Method: http.MethodPost, Path: ovh.Path("/v1/dedicated/server/{serviceName}/virtualMac/{macAddress}/virtualAddress", "serviceName", serviceName, "macAddress", macAddress), Body: body})
 }
 
+// opDeleteFeaturesBackupCloud is DeleteFeaturesBackupCloud's entry in the operation registry (ovh.Operations).
+var opDeleteFeaturesBackupCloud = &ovh.Operation{Name: "dedicatedserver.DeleteFeaturesBackupCloud", Method: http.MethodDelete, Path: "/v1/dedicated/server/{serviceName}/features/backupCloud", Summary: "Deactivate the cloud backup", IAMActions: []string{"dedicatedServer:apiovh:features/backupCloud/delete"}}
+
+// DeleteFeaturesBackupCloud calls DELETE /v1/dedicated/server/{serviceName}/features/backupCloud: Deactivate the cloud backup
+//
+// Deactivates the cloud backup of the server. The container data is not deleted.
+//
+// Arguments:
+//   - serviceName: The internal name of your dedicated server
+//
+// Requires the IAM action dedicatedServer:apiovh:features/backupCloud/delete.
+func (s *Service) DeleteFeaturesBackupCloud(ctx context.Context, serviceName string) error {
+	return s.c.Do(ctx, &ovh.Request{Operation: opDeleteFeaturesBackupCloud, Method: http.MethodDelete, Path: ovh.Path("/v1/dedicated/server/{serviceName}/features/backupCloud", "serviceName", serviceName)}, nil)
+}
+
 // opDeleteFeaturesBackupFTP is DeleteFeaturesBackupFTP's entry in the operation registry (ovh.Operations).
 var opDeleteFeaturesBackupFTP = &ovh.Operation{Name: "dedicatedserver.DeleteFeaturesBackupFTP", Method: http.MethodDelete, Path: "/v1/dedicated/server/{serviceName}/features/backupFTP", Summary: "Delete the backup FTP space", IAMActions: []string{"dedicatedServer:apiovh:features/backupFTP/delete"}}
 
@@ -251,6 +336,22 @@ var opDeleteFeaturesBackupFTPAccess = &ovh.Operation{Name: "dedicatedserver.Dele
 // Requires the IAM action dedicatedServer:apiovh:features/backupFTP/access/delete.
 func (s *Service) DeleteFeaturesBackupFTPAccess(ctx context.Context, serviceName string, ipBlock string) (*DedicatedServerTask, error) {
 	return ovh.Call[*DedicatedServerTask](ctx, s.c, &ovh.Request{Operation: opDeleteFeaturesBackupFTPAccess, Method: http.MethodDelete, Path: ovh.Path("/v1/dedicated/server/{serviceName}/features/backupFTP/access/{ipBlock}", "serviceName", serviceName, "ipBlock", ipBlock)})
+}
+
+// opDeleteLogSubscription is DeleteLogSubscription's entry in the operation registry (ovh.Operations).
+var opDeleteLogSubscription = &ovh.Operation{Name: "dedicatedserver.DeleteLogSubscription", Method: http.MethodDelete, Path: "/v2/dedicated/server/{serviceName}/log/subscription/{subscriptionId}", Summary: "Delete a log subscription", IAMActions: []string{"dedicatedServer:apiovh:log/subscription/delete"}, SchemasVersion: "1.0"}
+
+// DeleteLogSubscription calls DELETE /v2/dedicated/server/{serviceName}/log/subscription/{subscriptionId}: Delete a log subscription
+//
+// Deletes the subscription and stops forwarding Dedicated Servers logs to the stream.
+//
+// Arguments:
+//   - serviceName: Service name
+//   - subscriptionID: Subscription ID
+//
+// Requires the IAM action dedicatedServer:apiovh:log/subscription/delete.
+func (s *Service) DeleteLogSubscription(ctx context.Context, serviceName string, subscriptionID string) (*DbaasLogsLogSubscriptionResponse, error) {
+	return ovh.Call[*DbaasLogsLogSubscriptionResponse](ctx, s.c, &ovh.Request{Operation: opDeleteLogSubscription, Method: http.MethodDelete, Path: ovh.Path("/v2/dedicated/server/{serviceName}/log/subscription/{subscriptionId}", "serviceName", serviceName, "subscriptionId", subscriptionID)})
 }
 
 // opDeleteOption is DeleteOption's entry in the operation registry (ovh.Operations).
@@ -305,9 +406,9 @@ func (s *Service) DeleteVirtualMacVirtualAddress(ctx context.Context, serviceNam
 }
 
 // opDeleteVrack is DeleteVrack's entry in the operation registry (ovh.Operations).
-var opDeleteVrack = &ovh.Operation{Name: "dedicatedserver.DeleteVrack", Method: http.MethodDelete, Path: "/v1/dedicated/server/{serviceName}/vrack/{vrack}", Summary: "Detach a server (legacy)", IAMActions: []string{"dedicatedServer:apiovh:vrack/delete"}}
+var opDeleteVrack = &ovh.Operation{Name: "dedicatedserver.DeleteVrack", Method: http.MethodDelete, Path: "/v1/dedicated/server/{serviceName}/vrack/{vrack}", Summary: "Detach a dedicated server (legacy)", IAMActions: []string{"dedicatedServer:apiovh:vrack/delete"}}
 
-// DeleteVrack calls DELETE /v1/dedicated/server/{serviceName}/vrack/{vrack}: Detach a server (legacy)
+// DeleteVrack calls DELETE /v1/dedicated/server/{serviceName}/vrack/{vrack}: Detach a dedicated server (legacy)
 //
 // Detaches a whole dedicated server from the vRack, in the legacy mode. Returns the task that
 // performs it.
@@ -336,7 +437,7 @@ var opDisableVirtualNetworkInterface = &ovh.Operation{Name: "dedicatedserver.Dis
 // Requires the IAM action dedicatedServer:apiovh:virtualNetworkInterface/disable.
 //
 // Deprecated: the API has deprecated this operation. Removal date: 2021-04-08. Use
-// /dedicated/server/{serviceName}/ola/aggregation instead.
+// /v1/dedicated/server/{serviceName}/ola/aggregation instead.
 func (s *Service) DisableVirtualNetworkInterface(ctx context.Context, serviceName string, uuid string) (*DedicatedServerTask, error) {
 	return ovh.Call[*DedicatedServerTask](ctx, s.c, &ovh.Request{Operation: opDisableVirtualNetworkInterface, Method: http.MethodPost, Path: ovh.Path("/v1/dedicated/server/{serviceName}/virtualNetworkInterface/{uuid}/disable", "serviceName", serviceName, "uuid", uuid)})
 }
@@ -356,9 +457,58 @@ var opEnableVirtualNetworkInterface = &ovh.Operation{Name: "dedicatedserver.Enab
 // Requires the IAM action dedicatedServer:apiovh:virtualNetworkInterface/enable.
 //
 // Deprecated: the API has deprecated this operation. Removal date: 2021-04-08. Use
-// /dedicated/server/{serviceName}/ola/aggregation instead.
+// /v1/dedicated/server/{serviceName}/ola/aggregation instead.
 func (s *Service) EnableVirtualNetworkInterface(ctx context.Context, serviceName string, uuid string) (*DedicatedServerTask, error) {
 	return ovh.Call[*DedicatedServerTask](ctx, s.c, &ovh.Request{Operation: opEnableVirtualNetworkInterface, Method: http.MethodPost, Path: ovh.Path("/v1/dedicated/server/{serviceName}/virtualNetworkInterface/{uuid}/enable", "serviceName", serviceName, "uuid", uuid)})
+}
+
+// opGetBackupCloudOfferDetails is GetBackupCloudOfferDetails's entry in the operation registry (ovh.Operations).
+var opGetBackupCloudOfferDetails = &ovh.Operation{Name: "dedicatedserver.GetBackupCloudOfferDetails", Method: http.MethodGet, Path: "/v1/dedicated/server/{serviceName}/backupCloudOfferDetails", Summary: "Get the cloud backup offer", IAMActions: []string{"dedicatedServer:apiovh:backupCloudOfferDetails/get"}}
+
+// GetBackupCloudOfferDetails calls GET /v1/dedicated/server/{serviceName}/backupCloudOfferDetails: Get the cloud backup offer
+//
+// Returns the cloud backup offer available for the server: the maximum size and the monthly
+// read/write volume of the storage and archive containers. When no offer is available, the call
+// returns an error.
+//
+// Arguments:
+//   - serviceName: The internal name of your dedicated server
+//
+// Requires the IAM action dedicatedServer:apiovh:backupCloudOfferDetails/get.
+func (s *Service) GetBackupCloudOfferDetails(ctx context.Context, serviceName string) (*DedicatedServerBackupBackupOffer, error) {
+	return ovh.Call[*DedicatedServerBackupBackupOffer](ctx, s.c, &ovh.Request{Operation: opGetBackupCloudOfferDetails, Method: http.MethodGet, Path: ovh.Path("/v1/dedicated/server/{serviceName}/backupCloudOfferDetails", "serviceName", serviceName)})
+}
+
+// opGetBiosSettings is GetBiosSettings's entry in the operation registry (ovh.Operations).
+var opGetBiosSettings = &ovh.Operation{Name: "dedicatedserver.GetBiosSettings", Method: http.MethodGet, Path: "/v1/dedicated/server/{serviceName}/biosSettings", Summary: "Get the BIOS settings", IAMActions: []string{"dedicatedServer:apiovh:biosSettings/get"}}
+
+// GetBiosSettings calls GET /v1/dedicated/server/{serviceName}/biosSettings: Get the BIOS settings
+//
+// Returns the configurable BIOS settings of the server. The response states whether SGX is
+// supported and lists the SGX statuses and PRMRR sizes the server accepts.
+//
+// Arguments:
+//   - serviceName: The internal name of your dedicated server
+//
+// Requires the IAM action dedicatedServer:apiovh:biosSettings/get.
+func (s *Service) GetBiosSettings(ctx context.Context, serviceName string) (*DedicatedBiosSettingsBiosSettings, error) {
+	return ovh.Call[*DedicatedBiosSettingsBiosSettings](ctx, s.c, &ovh.Request{Operation: opGetBiosSettings, Method: http.MethodGet, Path: ovh.Path("/v1/dedicated/server/{serviceName}/biosSettings", "serviceName", serviceName)})
+}
+
+// opGetBiosSettingsSgx is GetBiosSettingsSgx's entry in the operation registry (ovh.Operations).
+var opGetBiosSettingsSgx = &ovh.Operation{Name: "dedicatedserver.GetBiosSettingsSgx", Method: http.MethodGet, Path: "/v1/dedicated/server/{serviceName}/biosSettings/sgx", Summary: "Get the SGX settings", IAMActions: []string{"dedicatedServer:apiovh:biosSettings/sgx/get"}}
+
+// GetBiosSettingsSgx calls GET /v1/dedicated/server/{serviceName}/biosSettings/sgx: Get the SGX settings
+//
+// Returns the SGX configuration of the server: the SGX status and the size of the Processor
+// Reserved Memory (PRMRR). To change it, use the configure operation.
+//
+// Arguments:
+//   - serviceName: The internal name of your dedicated server
+//
+// Requires the IAM action dedicatedServer:apiovh:biosSettings/sgx/get.
+func (s *Service) GetBiosSettingsSgx(ctx context.Context, serviceName string) (*DedicatedBiosSettingsSgxBiosSettingsSgx, error) {
+	return ovh.Call[*DedicatedBiosSettingsSgxBiosSettingsSgx](ctx, s.c, &ovh.Request{Operation: opGetBiosSettingsSgx, Method: http.MethodGet, Path: ovh.Path("/v1/dedicated/server/{serviceName}/biosSettings/sgx", "serviceName", serviceName)})
 }
 
 // opGetBoot is GetBoot's entry in the operation registry (ovh.Operations).
@@ -435,6 +585,84 @@ var opGetBurst = &ovh.Operation{Name: "dedicatedserver.GetBurst", Method: http.M
 // Requires the IAM action dedicatedServer:apiovh:burst/get.
 func (s *Service) GetBurst(ctx context.Context, serviceName string) (*DedicatedServerServerBurst, error) {
 	return ovh.Call[*DedicatedServerServerBurst](ctx, s.c, &ovh.Request{Operation: opGetBurst, Method: http.MethodGet, Path: ovh.Path("/v1/dedicated/server/{serviceName}/burst", "serviceName", serviceName)})
+}
+
+// opGetByServiceNameVirtualNetworkInterfaceByUUID is GetByServiceNameVirtualNetworkInterfaceByUUID's entry in the operation registry (ovh.Operations).
+var opGetByServiceNameVirtualNetworkInterfaceByUUID = &ovh.Operation{Name: "dedicatedserver.GetByServiceNameVirtualNetworkInterfaceByUUID", Method: http.MethodGet, Path: "/v1/dedicated/server/{serviceName}/virtualNetworkInterface/{uuid}", Summary: "Get a virtual network interface", IAMActions: []string{"dedicatedServer:apiovh:virtualNetworkInterface/get"}}
+
+// GetByServiceNameVirtualNetworkInterfaceByUUID calls GET /v1/dedicated/server/{serviceName}/virtualNetworkInterface/{uuid}: Get a virtual network interface
+//
+// Returns the name, mode, activation state and vRack of a virtual network interface, and the
+// network interface controllers bound to it.
+//
+// Arguments:
+//   - serviceName: The internal name of your dedicated server
+//   - uuid: VirtualNetworkInterface unique id
+//
+// Requires the IAM action dedicatedServer:apiovh:virtualNetworkInterface/get.
+func (s *Service) GetByServiceNameVirtualNetworkInterfaceByUUID(ctx context.Context, serviceName string, uuid string) (*DedicatedVirtualNetworkInterfaceVirtualNetworkInterface, error) {
+	return ovh.Call[*DedicatedVirtualNetworkInterfaceVirtualNetworkInterface](ctx, s.c, &ovh.Request{Operation: opGetByServiceNameVirtualNetworkInterfaceByUUID, Method: http.MethodGet, Path: ovh.Path("/v1/dedicated/server/{serviceName}/virtualNetworkInterface/{uuid}", "serviceName", serviceName, "uuid", uuid)})
+}
+
+// AllVirtualNetworkInterfaces iterates over every object ListVirtualNetworkInterfaces lists, fetching each one with
+// GetByServiceNameVirtualNetworkInterfaceByUUID only when the loop reaches it. An object deleted in the meantime is skipped; on
+// any other error it yields the error and stops.
+func (s *Service) AllVirtualNetworkInterfaces(ctx context.Context, serviceName string, params ...ListVirtualNetworkInterfacesParams) iter.Seq2[*DedicatedVirtualNetworkInterfaceVirtualNetworkInterface, error] {
+	return ovh.Each(ctx,
+		func(ctx context.Context) ([]string, error) {
+			return s.ListVirtualNetworkInterfaces(ctx, serviceName, params...)
+		},
+		func(ctx context.Context, listedID string) (*DedicatedVirtualNetworkInterfaceVirtualNetworkInterface, error) {
+			return s.GetByServiceNameVirtualNetworkInterfaceByUUID(ctx, serviceName, listedID)
+		})
+}
+
+// opGetDedicatedServerRegionAvailabilities is GetDedicatedServerRegionAvailabilities's entry in the operation registry (ovh.Operations).
+var opGetDedicatedServerRegionAvailabilities = &ovh.Operation{Name: "dedicatedserver.GetDedicatedServerRegionAvailabilities", Method: http.MethodGet, Path: "/v1/dedicated/server/region/availabilities", Summary: "List server availability by region"}
+
+// GetDedicatedServerRegionAvailabilitiesParams holds the optional parameters of GetDedicatedServerRegionAvailabilities.
+type GetDedicatedServerRegionAvailabilitiesParams struct {
+	// If true, all regions are returned except those listed in regions parameter
+	ExcludeRegions *bool `ovh:"query,excludeRegions"`
+	// The name of the gpu hardware part
+	Gpu *string `ovh:"query,gpu"`
+	// The name of the memory hardware part
+	Memory *string `ovh:"query,memory"`
+	// The plan code in which the hardware is involved
+	PlanCode *string `ovh:"query,planCode"`
+	// The names of regions
+	Regions []DedicatedServerAvailabilityRegionalizationEnum `ovh:"query,regions"`
+	// The name of the base hardware
+	Server *string `ovh:"query,server"`
+	// The name of the storage hardware part
+	Storage *string `ovh:"query,storage"`
+	// The name of the system storage hardware part
+	SystemStorage *string `ovh:"query,systemStorage"`
+}
+
+// GetDedicatedServerRegionAvailabilities calls GET /v1/dedicated/server/region/availabilities: List server availability by region
+//
+// Returns the availability of each server hardware configuration in each region and its
+// availability zones. Filter by plan code or hardware part, and choose regions with regions and
+// excludeRegions. Unlike the datacenter route, this call requires authentication.
+func (s *Service) GetDedicatedServerRegionAvailabilities(ctx context.Context, params ...GetDedicatedServerRegionAvailabilitiesParams) ([]DedicatedServerRegionAvailability, error) {
+	return ovh.Call[[]DedicatedServerRegionAvailability](ctx, s.c, &ovh.Request{Operation: opGetDedicatedServerRegionAvailabilities, Method: http.MethodGet, Path: "/v1/dedicated/server/region/availabilities", Params: ovh.Optional(params)})
+}
+
+// opGetFeaturesBackupCloud is GetFeaturesBackupCloud's entry in the operation registry (ovh.Operations).
+var opGetFeaturesBackupCloud = &ovh.Operation{Name: "dedicatedserver.GetFeaturesBackupCloud", Method: http.MethodGet, Path: "/v1/dedicated/server/{serviceName}/features/backupCloud", Summary: "Get the cloud backup", IAMActions: []string{"dedicatedServer:apiovh:features/backupCloud/get"}}
+
+// GetFeaturesBackupCloud calls GET /v1/dedicated/server/{serviceName}/features/backupCloud: Get the cloud backup
+//
+// Returns the cloud backup of the server: its storage and archive containers, its status and the
+// agreements waiting for validation.
+//
+// Arguments:
+//   - serviceName: The internal name of your dedicated server
+//
+// Requires the IAM action dedicatedServer:apiovh:features/backupCloud/get.
+func (s *Service) GetFeaturesBackupCloud(ctx context.Context, serviceName string) (*DedicatedServerBackupCloud, error) {
+	return ovh.Call[*DedicatedServerBackupCloud](ctx, s.c, &ovh.Request{Operation: opGetFeaturesBackupCloud, Method: http.MethodGet, Path: ovh.Path("/v1/dedicated/server/{serviceName}/features/backupCloud", "serviceName", serviceName)})
 }
 
 // opGetFeaturesBackupFTP is GetFeaturesBackupFTP's entry in the operation registry (ovh.Operations).
@@ -691,6 +919,84 @@ func (s *Service) GetLog(ctx context.Context, params ...GetLogParams) (*Dedicate
 	return ovh.Call[*DedicatedPublicLog](ctx, s.c, &ovh.Request{Operation: opGetLog, Method: http.MethodGet, Path: "/v1/dedicated/server/log", Params: ovh.Optional(params)})
 }
 
+// opGetLogKind is GetLogKind's entry in the operation registry (ovh.Operations).
+var opGetLogKind = &ovh.Operation{Name: "dedicatedserver.GetLogKind", Method: http.MethodGet, Path: "/v2/dedicated/server/{serviceName}/log/kind/{name}", Summary: "Get a log kind", IAMActions: []string{"dedicatedServer:apiovh:log/kind/get"}, SchemasVersion: "1.0"}
+
+// GetLogKind calls GET /v2/dedicated/server/{serviceName}/log/kind/{name}: Get a log kind
+//
+// Returns a log kind and the additional fields its logs carry.
+//
+// Arguments:
+//   - serviceName: Service name
+//   - name: Name
+//
+// Requires the IAM action dedicatedServer:apiovh:log/kind/get.
+func (s *Service) GetLogKind(ctx context.Context, serviceName string, name string) (*DbaasLogsLogKind, error) {
+	return ovh.Call[*DbaasLogsLogKind](ctx, s.c, &ovh.Request{Operation: opGetLogKind, Method: http.MethodGet, Path: ovh.Path("/v2/dedicated/server/{serviceName}/log/kind/{name}", "serviceName", serviceName, "name", name)})
+}
+
+// opGetLogSubscription is GetLogSubscription's entry in the operation registry (ovh.Operations).
+var opGetLogSubscription = &ovh.Operation{Name: "dedicatedserver.GetLogSubscription", Method: http.MethodGet, Path: "/v2/dedicated/server/{serviceName}/log/subscription/{subscriptionId}", Summary: "Get a log subscription", IAMActions: []string{"dedicatedServer:apiovh:log/subscription/get"}, SchemasVersion: "1.0"}
+
+// GetLogSubscription calls GET /v2/dedicated/server/{serviceName}/log/subscription/{subscriptionId}: Get a log subscription
+//
+// Returns the log kind and the destination stream of a subscription.
+//
+// Arguments:
+//   - serviceName: Service name
+//   - subscriptionID: Subscription ID
+//
+// Requires the IAM action dedicatedServer:apiovh:log/subscription/get.
+func (s *Service) GetLogSubscription(ctx context.Context, serviceName string, subscriptionID string) (*DbaasLogsLogSubscription, error) {
+	return ovh.Call[*DbaasLogsLogSubscription](ctx, s.c, &ovh.Request{Operation: opGetLogSubscription, Method: http.MethodGet, Path: ovh.Path("/v2/dedicated/server/{serviceName}/log/subscription/{subscriptionId}", "serviceName", serviceName, "subscriptionId", subscriptionID)})
+}
+
+// opGetNetworkInterfaceController is GetNetworkInterfaceController's entry in the operation registry (ovh.Operations).
+var opGetNetworkInterfaceController = &ovh.Operation{Name: "dedicatedserver.GetNetworkInterfaceController", Method: http.MethodGet, Path: "/v1/dedicated/server/{serviceName}/networkInterfaceController/{mac}", Summary: "Get a network interface controller", IAMActions: []string{"dedicatedServer:apiovh:networkInterfaceController/get"}}
+
+// GetNetworkInterfaceController calls GET /v1/dedicated/server/{serviceName}/networkInterfaceController/{mac}: Get a network interface controller
+//
+// Returns the MAC address of a network interface controller, its link type, such as public, private
+// or isolated, and the virtual network interface bound to it.
+//
+// Arguments:
+//   - serviceName: The internal name of your dedicated server
+//   - mac: NetworkInterfaceController mac
+//
+// Requires the IAM action dedicatedServer:apiovh:networkInterfaceController/get.
+func (s *Service) GetNetworkInterfaceController(ctx context.Context, serviceName string, mac string) (*DedicatedNetworkInterfaceControllerNetworkInterfaceController, error) {
+	return ovh.Call[*DedicatedNetworkInterfaceControllerNetworkInterfaceController](ctx, s.c, &ovh.Request{Operation: opGetNetworkInterfaceController, Method: http.MethodGet, Path: ovh.Path("/v1/dedicated/server/{serviceName}/networkInterfaceController/{mac}", "serviceName", serviceName, "mac", mac)})
+}
+
+// AllNetworkInterfaceControllers iterates over every object ListNetworkInterfaceControllers lists, fetching each one with
+// GetNetworkInterfaceController only when the loop reaches it. An object deleted in the meantime is skipped; on
+// any other error it yields the error and stops.
+func (s *Service) AllNetworkInterfaceControllers(ctx context.Context, serviceName string, params ...ListNetworkInterfaceControllersParams) iter.Seq2[*DedicatedNetworkInterfaceControllerNetworkInterfaceController, error] {
+	return ovh.Each(ctx,
+		func(ctx context.Context) ([]string, error) {
+			return s.ListNetworkInterfaceControllers(ctx, serviceName, params...)
+		},
+		func(ctx context.Context, listedID string) (*DedicatedNetworkInterfaceControllerNetworkInterfaceController, error) {
+			return s.GetNetworkInterfaceController(ctx, serviceName, listedID)
+		})
+}
+
+// opGetNetworking is GetNetworking's entry in the operation registry (ovh.Operations).
+var opGetNetworking = &ovh.Operation{Name: "dedicatedserver.GetNetworking", Method: http.MethodGet, Path: "/v1/dedicated/server/{serviceName}/networking", Summary: "Get the network configuration", IAMActions: []string{"dedicatedServer:apiovh:networking/get"}}
+
+// GetNetworking calls GET /v1/dedicated/server/{serviceName}/networking: Get the network configuration
+//
+// Returns the network configuration of the server: its interfaces or interface aggregations, and
+// the status of the current operation, deploying or active.
+//
+// Arguments:
+//   - serviceName: The internal name of your dedicated server
+//
+// Requires the IAM action dedicatedServer:apiovh:networking/get.
+func (s *Service) GetNetworking(ctx context.Context, serviceName string) (*DedicatedServerNetworking, error) {
+	return ovh.Call[*DedicatedServerNetworking](ctx, s.c, &ovh.Request{Operation: opGetNetworking, Method: http.MethodGet, Path: ovh.Path("/v1/dedicated/server/{serviceName}/networking", "serviceName", serviceName)})
+}
+
 // opGetOption is GetOption's entry in the operation registry (ovh.Operations).
 var opGetOption = &ovh.Operation{Name: "dedicatedserver.GetOption", Method: http.MethodGet, Path: "/v1/dedicated/server/{serviceName}/option/{option}", Summary: "Get an option", IAMActions: []string{"dedicatedServer:apiovh:option/get"}}
 
@@ -881,6 +1187,66 @@ var opGetOrderableUsbKey = &ovh.Operation{Name: "dedicatedserver.GetOrderableUsb
 // Requires the IAM action dedicatedServer:apiovh:orderable/usbKey/get.
 func (s *Service) GetOrderableUsbKey(ctx context.Context, serviceName string) (*DedicatedServerUsbKeyOrderableDetails, error) {
 	return ovh.Call[*DedicatedServerUsbKeyOrderableDetails](ctx, s.c, &ovh.Request{Operation: opGetOrderableUsbKey, Method: http.MethodGet, Path: ovh.Path("/v1/dedicated/server/{serviceName}/orderable/usbKey", "serviceName", serviceName)})
+}
+
+// opGetPlannedChange is GetPlannedChange's entry in the operation registry (ovh.Operations).
+var opGetPlannedChange = &ovh.Operation{Name: "dedicatedserver.GetPlannedChange", Method: http.MethodGet, Path: "/v1/dedicated/server/{serviceName}/plannedChange/{changeUuid}", Summary: "Get a planned change", IAMActions: []string{"dedicatedServer:apiovh:plannedChange/get"}}
+
+// GetPlannedChange calls GET /v1/dedicated/server/{serviceName}/plannedChange/{changeUuid}: Get a planned change
+//
+// Returns a change planned on the server: its purpose, its status, its wanted start date and its
+// expected end date.
+//
+// Arguments:
+//   - serviceName: The internal name of your dedicated server
+//   - changeUUID: UUID of the change
+//
+// Requires the IAM action dedicatedServer:apiovh:plannedChange/get.
+func (s *Service) GetPlannedChange(ctx context.Context, serviceName string, changeUUID string) (*DedicatedServerPlannedChange, error) {
+	return ovh.Call[*DedicatedServerPlannedChange](ctx, s.c, &ovh.Request{Operation: opGetPlannedChange, Method: http.MethodGet, Path: ovh.Path("/v1/dedicated/server/{serviceName}/plannedChange/{changeUuid}", "serviceName", serviceName, "changeUuid", changeUUID)})
+}
+
+// AllPlannedChanges iterates over every object ListPlannedChanges lists, fetching each one with
+// GetPlannedChange only when the loop reaches it. An object deleted in the meantime is skipped; on
+// any other error it yields the error and stops.
+func (s *Service) AllPlannedChanges(ctx context.Context, serviceName string) iter.Seq2[*DedicatedServerPlannedChange, error] {
+	return ovh.Each(ctx,
+		func(ctx context.Context) ([]string, error) {
+			return s.ListPlannedChanges(ctx, serviceName)
+		},
+		func(ctx context.Context, listedID string) (*DedicatedServerPlannedChange, error) {
+			return s.GetPlannedChange(ctx, serviceName, listedID)
+		})
+}
+
+// opGetPlannedIntervention is GetPlannedIntervention's entry in the operation registry (ovh.Operations).
+var opGetPlannedIntervention = &ovh.Operation{Name: "dedicatedserver.GetPlannedIntervention", Method: http.MethodGet, Path: "/v1/dedicated/server/{serviceName}/plannedIntervention/{interventionId}", Summary: "Get a planned intervention", IAMActions: []string{"dedicatedServer:apiovh:plannedIntervention/get"}}
+
+// GetPlannedIntervention calls GET /v1/dedicated/server/{serviceName}/plannedIntervention/{interventionId}: Get a planned intervention
+//
+// Returns the type, status, wanted start date and expected end date of an intervention planned on
+// the server. The status is todo, doing or done.
+//
+// Arguments:
+//   - serviceName: The internal name of your dedicated server
+//   - interventionID: ID of the intervention
+//
+// Requires the IAM action dedicatedServer:apiovh:plannedIntervention/get.
+func (s *Service) GetPlannedIntervention(ctx context.Context, serviceName string, interventionID int) (*DedicatedServerPlannedIntervention, error) {
+	return ovh.Call[*DedicatedServerPlannedIntervention](ctx, s.c, &ovh.Request{Operation: opGetPlannedIntervention, Method: http.MethodGet, Path: ovh.Path("/v1/dedicated/server/{serviceName}/plannedIntervention/{interventionId}", "serviceName", serviceName, "interventionId", interventionID)})
+}
+
+// AllPlannedInterventions iterates over every object ListPlannedInterventions lists, fetching each one with
+// GetPlannedIntervention only when the loop reaches it. An object deleted in the meantime is skipped; on
+// any other error it yields the error and stops.
+func (s *Service) AllPlannedInterventions(ctx context.Context, serviceName string) iter.Seq2[*DedicatedServerPlannedIntervention, error] {
+	return ovh.Each(ctx,
+		func(ctx context.Context) ([]int, error) {
+			return s.ListPlannedInterventions(ctx, serviceName)
+		},
+		func(ctx context.Context, listedID int) (*DedicatedServerPlannedIntervention, error) {
+			return s.GetPlannedIntervention(ctx, serviceName, listedID)
+		})
 }
 
 // opGetSecondaryDNSDomains is GetSecondaryDNSDomains's entry in the operation registry (ovh.Operations).
@@ -1191,9 +1557,9 @@ func (s *Service) GetVirtualNetworkInterfaceByUUID(ctx context.Context, uuid str
 }
 
 // opGetVrack is GetVrack's entry in the operation registry (ovh.Operations).
-var opGetVrack = &ovh.Operation{Name: "dedicatedserver.GetVrack", Method: http.MethodGet, Path: "/v1/dedicated/server/{serviceName}/vrack/{vrack}", Summary: "Get a server link (legacy)", IAMActions: []string{"dedicatedServer:apiovh:vrack/get"}}
+var opGetVrack = &ovh.Operation{Name: "dedicatedserver.GetVrack", Method: http.MethodGet, Path: "/v1/dedicated/server/{serviceName}/vrack/{vrack}", Summary: "Get an attached dedicated server (legacy)", IAMActions: []string{"dedicatedServer:apiovh:vrack/get"}}
 
-// GetVrack calls GET /v1/dedicated/server/{serviceName}/vrack/{vrack}: Get a server link (legacy)
+// GetVrack calls GET /v1/dedicated/server/{serviceName}/vrack/{vrack}: Get an attached dedicated server (legacy)
 //
 // Returns the attached server and its vRack. This is the legacy whole-server link, not an interface
 // link.
@@ -1235,8 +1601,8 @@ var opGroupOla = &ovh.Operation{Name: "dedicatedserver.GroupOla", Method: http.M
 // Requires the IAM action dedicatedServer:apiovh:ola/group/create.
 //
 // Deprecated: the API has deprecated this operation. Removal date: 2021-04-08. Use
-// /dedicated/server/{serviceName}/ola/aggregation instead.
-func (s *Service) GroupOla(ctx context.Context, serviceName string, body GroupOlaRequest) (*DedicatedServerTask, error) {
+// /v1/dedicated/server/{serviceName}/ola/aggregation instead.
+func (s *Service) GroupOla(ctx context.Context, serviceName string, body AggregationOlaRequest) (*DedicatedServerTask, error) {
 	return ovh.Call[*DedicatedServerTask](ctx, s.c, &ovh.Request{Operation: opGroupOla, Method: http.MethodPost, Path: ovh.Path("/v1/dedicated/server/{serviceName}/ola/group", "serviceName", serviceName), Body: body})
 }
 
@@ -1471,6 +1837,47 @@ func (s *Service) ListLicenseCompliantWindowsSQLServers(ctx context.Context, ser
 	return ovh.Call[[]LicenseWindowsSQLVersionEnum](ctx, s.c, &ovh.Request{Operation: opListLicenseCompliantWindowsSQLServers, Method: http.MethodGet, Path: ovh.Path("/v1/dedicated/server/{serviceName}/license/compliantWindowsSqlServer", "serviceName", serviceName)})
 }
 
+// opListLogKinds is AllLogKinds's entry in the operation registry (ovh.Operations).
+var opListLogKinds = &ovh.Operation{Name: "dedicatedserver.AllLogKinds", Method: http.MethodGet, Path: "/v2/dedicated/server/{serviceName}/log/kind", Summary: "List log kinds", IAMActions: []string{"dedicatedServer:apiovh:log/kind/get"}, SchemasVersion: "1.0"}
+
+// AllLogKinds iterates over GET /v2/dedicated/server/{serviceName}/log/kind (List log kinds),
+// one item at a time, fetching the next page only when the loop reaches it. On an error it
+// yields the error and stops. Collect, filter or stop early in the loop as needed.
+//
+// Returns the names of the log kinds Dedicated Servers emits, which can be forwarded to a stream.
+//
+// Arguments:
+//   - serviceName: Service name
+//
+// Requires the IAM action dedicatedServer:apiovh:log/kind/get.
+func (s *Service) AllLogKinds(ctx context.Context, serviceName string) iter.Seq2[*string, error] {
+	return ovh.Iterate[string](ctx, s.c, &ovh.Request{Operation: opListLogKinds, Method: http.MethodGet, Path: ovh.Path("/v2/dedicated/server/{serviceName}/log/kind", "serviceName", serviceName)})
+}
+
+// opListLogSubscriptions is AllLogSubscriptions's entry in the operation registry (ovh.Operations).
+var opListLogSubscriptions = &ovh.Operation{Name: "dedicatedserver.AllLogSubscriptions", Method: http.MethodGet, Path: "/v2/dedicated/server/{serviceName}/log/subscription", Summary: "List log subscriptions", IAMActions: []string{"dedicatedServer:apiovh:log/subscription/get"}, SchemasVersion: "1.0"}
+
+// ListLogSubscriptionsParams holds the optional parameters of ListLogSubscriptions.
+type ListLogSubscriptionsParams struct {
+	// Filter on a specific kind
+	Kind *string `ovh:"query,kind"`
+}
+
+// AllLogSubscriptions iterates over GET /v2/dedicated/server/{serviceName}/log/subscription (List log subscriptions),
+// one item at a time, fetching the next page only when the loop reaches it. On an error it
+// yields the error and stops. Collect, filter or stop early in the loop as needed.
+//
+// Returns the identifiers of the Dedicated Servers log subscriptions. Set `kind` to restrict the
+// list to one log kind.
+//
+// Arguments:
+//   - serviceName: Service name
+//
+// Requires the IAM action dedicatedServer:apiovh:log/subscription/get.
+func (s *Service) AllLogSubscriptions(ctx context.Context, serviceName string, params ...ListLogSubscriptionsParams) iter.Seq2[*string, error] {
+	return ovh.Iterate[string](ctx, s.c, &ovh.Request{Operation: opListLogSubscriptions, Method: http.MethodGet, Path: ovh.Path("/v2/dedicated/server/{serviceName}/log/subscription", "serviceName", serviceName), Params: ovh.Optional(params)})
+}
+
 // opListMrtgs is ListMrtgs's entry in the operation registry (ovh.Operations).
 var opListMrtgs = &ovh.Operation{Name: "dedicatedserver.ListMrtgs", Method: http.MethodGet, Path: "/v1/dedicated/server/{serviceName}/mrtg", Summary: "Get server traffic statistics", IAMActions: []string{"dedicatedServer:apiovh:mrtg/get"}, Deprecated: true}
 
@@ -1487,9 +1894,50 @@ var opListMrtgs = &ovh.Operation{Name: "dedicatedserver.ListMrtgs", Method: http
 // Requires the IAM action dedicatedServer:apiovh:mrtg/get.
 //
 // Deprecated: the API has deprecated this operation. Removal date: 2018-04-23. Use
-// /dedicated/server/{serviceName}/networkInterfaceController instead.
+// /v1/dedicated/server/{serviceName}/networkInterfaceController instead.
 func (s *Service) ListMrtgs(ctx context.Context, serviceName string, period DedicatedServerMrtgPeriodEnum, typeParam DedicatedServerMrtgTypeEnum) ([]DedicatedServerMrtgTimestampValue, error) {
 	return ovh.Call[[]DedicatedServerMrtgTimestampValue](ctx, s.c, &ovh.Request{Operation: opListMrtgs, Method: http.MethodGet, Path: ovh.Path("/v1/dedicated/server/{serviceName}/mrtg", "serviceName", serviceName), Query: ovh.Values("period", period, "type", typeParam)})
+}
+
+// opListNetworkInterfaceControllerMrtgs is ListNetworkInterfaceControllerMrtgs's entry in the operation registry (ovh.Operations).
+var opListNetworkInterfaceControllerMrtgs = &ovh.Operation{Name: "dedicatedserver.ListNetworkInterfaceControllerMrtgs", Method: http.MethodGet, Path: "/v1/dedicated/server/{serviceName}/networkInterfaceController/{mac}/mrtg", Summary: "Get interface traffic statistics", IAMActions: []string{"dedicatedServer:apiovh:networkInterfaceController/mrtg/get"}}
+
+// ListNetworkInterfaceControllerMrtgs calls GET /v1/dedicated/server/{serviceName}/networkInterfaceController/{mac}/mrtg: Get interface traffic statistics
+//
+// Returns timestamped values for one network interface controller, for the requested type and
+// period. Types cover traffic, packets and errors, for download and upload.
+//
+// Arguments:
+//   - serviceName: The internal name of your dedicated server
+//   - mac: NetworkInterfaceController mac
+//   - period: mrtg period
+//   - typeParam: mrtg type
+//
+// Requires the IAM action dedicatedServer:apiovh:networkInterfaceController/mrtg/get.
+func (s *Service) ListNetworkInterfaceControllerMrtgs(ctx context.Context, serviceName string, mac string, period DedicatedServerMrtgPeriodEnum, typeParam DedicatedServerMrtgTypeEnum) ([]DedicatedServerMrtgTimestampValue, error) {
+	return ovh.Call[[]DedicatedServerMrtgTimestampValue](ctx, s.c, &ovh.Request{Operation: opListNetworkInterfaceControllerMrtgs, Method: http.MethodGet, Path: ovh.Path("/v1/dedicated/server/{serviceName}/networkInterfaceController/{mac}/mrtg", "serviceName", serviceName, "mac", mac), Query: ovh.Values("period", period, "type", typeParam)})
+}
+
+// opListNetworkInterfaceControllers is ListNetworkInterfaceControllers's entry in the operation registry (ovh.Operations).
+var opListNetworkInterfaceControllers = &ovh.Operation{Name: "dedicatedserver.ListNetworkInterfaceControllers", Method: http.MethodGet, Path: "/v1/dedicated/server/{serviceName}/networkInterfaceController", Summary: "List network interface controllers", IAMActions: []string{"dedicatedServer:apiovh:networkInterfaceController/get"}}
+
+// ListNetworkInterfaceControllersParams holds the optional parameters of ListNetworkInterfaceControllers.
+type ListNetworkInterfaceControllersParams struct {
+	// Filter the value of linkType property (=)
+	LinkType *DedicatedNetworkInterfaceControllerNetworkInterfaceControllerLinkTypeEnum `ovh:"query,linkType"`
+}
+
+// ListNetworkInterfaceControllers calls GET /v1/dedicated/server/{serviceName}/networkInterfaceController: List network interface controllers
+//
+// Returns the MAC addresses of the network interface controllers of the server. Filter them by link
+// type with the linkType parameter.
+//
+// Arguments:
+//   - serviceName: The internal name of your dedicated server
+//
+// Requires the IAM action dedicatedServer:apiovh:networkInterfaceController/get.
+func (s *Service) ListNetworkInterfaceControllers(ctx context.Context, serviceName string, params ...ListNetworkInterfaceControllersParams) ([]string, error) {
+	return ovh.Call[[]string](ctx, s.c, &ovh.Request{Operation: opListNetworkInterfaceControllers, Method: http.MethodGet, Path: ovh.Path("/v1/dedicated/server/{serviceName}/networkInterfaceController", "serviceName", serviceName), Params: ovh.Optional(params)})
 }
 
 // opListOptions is ListOptions's entry in the operation registry (ovh.Operations).
@@ -1520,6 +1968,38 @@ var opListOsAvailabilities = &ovh.Operation{Name: "dedicatedserver.ListOsAvailab
 //   - hardware: Hardware reference requested
 func (s *Service) ListOsAvailabilities(ctx context.Context, hardware string) ([]string, error) {
 	return ovh.Call[[]string](ctx, s.c, &ovh.Request{Operation: opListOsAvailabilities, Method: http.MethodGet, Path: "/v1/dedicated/server/osAvailabilities", Query: ovh.Values("hardware", hardware)})
+}
+
+// opListPlannedChanges is ListPlannedChanges's entry in the operation registry (ovh.Operations).
+var opListPlannedChanges = &ovh.Operation{Name: "dedicatedserver.ListPlannedChanges", Method: http.MethodGet, Path: "/v1/dedicated/server/{serviceName}/plannedChange", Summary: "List planned changes", IAMActions: []string{"dedicatedServer:apiovh:plannedChange/get"}}
+
+// ListPlannedChanges calls GET /v1/dedicated/server/{serviceName}/plannedChange: List planned changes
+//
+// Returns the UUIDs of the changes planned on the server. Get a change by its UUID to read its
+// purpose, status and expected dates.
+//
+// Arguments:
+//   - serviceName: The internal name of your dedicated server
+//
+// Requires the IAM action dedicatedServer:apiovh:plannedChange/get.
+func (s *Service) ListPlannedChanges(ctx context.Context, serviceName string) ([]string, error) {
+	return ovh.Call[[]string](ctx, s.c, &ovh.Request{Operation: opListPlannedChanges, Method: http.MethodGet, Path: ovh.Path("/v1/dedicated/server/{serviceName}/plannedChange", "serviceName", serviceName)})
+}
+
+// opListPlannedInterventions is ListPlannedInterventions's entry in the operation registry (ovh.Operations).
+var opListPlannedInterventions = &ovh.Operation{Name: "dedicatedserver.ListPlannedInterventions", Method: http.MethodGet, Path: "/v1/dedicated/server/{serviceName}/plannedIntervention", Summary: "List planned interventions", IAMActions: []string{"dedicatedServer:apiovh:plannedIntervention/get"}}
+
+// ListPlannedInterventions calls GET /v1/dedicated/server/{serviceName}/plannedIntervention: List planned interventions
+//
+// Returns the IDs of the interventions planned on the server. Get a planned intervention to read
+// its type, status and dates.
+//
+// Arguments:
+//   - serviceName: The internal name of your dedicated server
+//
+// Requires the IAM action dedicatedServer:apiovh:plannedIntervention/get.
+func (s *Service) ListPlannedInterventions(ctx context.Context, serviceName string) ([]int, error) {
+	return ovh.Call[[]int](ctx, s.c, &ovh.Request{Operation: opListPlannedInterventions, Method: http.MethodGet, Path: ovh.Path("/v1/dedicated/server/{serviceName}/plannedIntervention", "serviceName", serviceName)})
 }
 
 // opListSecondaryDNSDomains is ListSecondaryDNSDomains's entry in the operation registry (ovh.Operations).
@@ -1637,10 +2117,38 @@ func (s *Service) ListVirtualMacs(ctx context.Context, serviceName string) ([]st
 	return ovh.Call[[]string](ctx, s.c, &ovh.Request{Operation: opListVirtualMacs, Method: http.MethodGet, Path: ovh.Path("/v1/dedicated/server/{serviceName}/virtualMac", "serviceName", serviceName)})
 }
 
-// opListVrackMrtgs is ListVrackMrtgs's entry in the operation registry (ovh.Operations).
-var opListVrackMrtgs = &ovh.Operation{Name: "dedicatedserver.ListVrackMrtgs", Method: http.MethodGet, Path: "/v1/dedicated/server/{serviceName}/vrack/{vrack}/mrtg", Summary: "Get traffic graph values (deprecated)", IAMActions: []string{"dedicatedServer:apiovh:vrack/mrtg/get"}, Deprecated: true}
+// opListVirtualNetworkInterfaces is ListVirtualNetworkInterfaces's entry in the operation registry (ovh.Operations).
+var opListVirtualNetworkInterfaces = &ovh.Operation{Name: "dedicatedserver.ListVirtualNetworkInterfaces", Method: http.MethodGet, Path: "/v1/dedicated/server/{serviceName}/virtualNetworkInterface", Summary: "List virtual network interfaces", IAMActions: []string{"dedicatedServer:apiovh:virtualNetworkInterface/get"}}
 
-// ListVrackMrtgs calls GET /v1/dedicated/server/{serviceName}/vrack/{vrack}/mrtg: Get traffic graph values (deprecated)
+// ListVirtualNetworkInterfacesParams holds the optional parameters of ListVirtualNetworkInterfaces.
+type ListVirtualNetworkInterfacesParams struct {
+	// Filter the value of enabled property (=)
+	Enabled *bool `ovh:"query,enabled"`
+	// Filter the value of mode property (=)
+	Mode *DedicatedVirtualNetworkInterfaceVirtualNetworkInterfaceModeEnum `ovh:"query,mode"`
+	// Filter the value of name property (=)
+	Name *string `ovh:"query,name"`
+	// Filter the value of vrack property (=)
+	Vrack *string `ovh:"query,vrack"`
+}
+
+// ListVirtualNetworkInterfaces calls GET /v1/dedicated/server/{serviceName}/virtualNetworkInterface: List virtual network interfaces
+//
+// Returns the UUIDs of the virtual network interfaces of the server. Filter them by enabled, mode,
+// vrack or name.
+//
+// Arguments:
+//   - serviceName: The internal name of your dedicated server
+//
+// Requires the IAM action dedicatedServer:apiovh:virtualNetworkInterface/get.
+func (s *Service) ListVirtualNetworkInterfaces(ctx context.Context, serviceName string, params ...ListVirtualNetworkInterfacesParams) ([]string, error) {
+	return ovh.Call[[]string](ctx, s.c, &ovh.Request{Operation: opListVirtualNetworkInterfaces, Method: http.MethodGet, Path: ovh.Path("/v1/dedicated/server/{serviceName}/virtualNetworkInterface", "serviceName", serviceName), Params: ovh.Optional(params)})
+}
+
+// opListVrackMrtgs is ListVrackMrtgs's entry in the operation registry (ovh.Operations).
+var opListVrackMrtgs = &ovh.Operation{Name: "dedicatedserver.ListVrackMrtgs", Method: http.MethodGet, Path: "/v1/dedicated/server/{serviceName}/vrack/{vrack}/mrtg", Summary: "Get dedicated server traffic values (deprecated)", IAMActions: []string{"dedicatedServer:apiovh:vrack/mrtg/get"}, Deprecated: true}
+
+// ListVrackMrtgs calls GET /v1/dedicated/server/{serviceName}/vrack/{vrack}/mrtg: Get dedicated server traffic values (deprecated)
 //
 // Returns the traffic, packets or errors measured on the vRack port of the server, for a period
 // from hourly to yearly. Deprecated: use the dedicated server statistics instead.
@@ -1654,7 +2162,7 @@ var opListVrackMrtgs = &ovh.Operation{Name: "dedicatedserver.ListVrackMrtgs", Me
 // Requires the IAM action dedicatedServer:apiovh:vrack/mrtg/get.
 //
 // Deprecated: the API has deprecated this operation. Removal date: 2018-04-23. Use
-// /dedicated/server/{serviceName}/networkInterfaceController instead.
+// /v1/dedicated/server/{serviceName}/networkInterfaceController instead.
 func (s *Service) ListVrackMrtgs(ctx context.Context, serviceName string, vrack string, period DedicatedServerMrtgPeriodEnum, typeParam DedicatedServerMrtgTypeEnum) ([]DedicatedServerMrtgTimestampValue, error) {
 	return ovh.Call[[]DedicatedServerMrtgTimestampValue](ctx, s.c, &ovh.Request{Operation: opListVrackMrtgs, Method: http.MethodGet, Path: ovh.Path("/v1/dedicated/server/{serviceName}/vrack/{vrack}/mrtg", "serviceName", serviceName, "vrack", vrack), Query: ovh.Values("period", period, "type", typeParam)})
 }
@@ -1673,6 +2181,22 @@ var opListVracks = &ovh.Operation{Name: "dedicatedserver.ListVracks", Method: ht
 // Requires the IAM action dedicatedServer:apiovh:vrack/get.
 func (s *Service) ListVracks(ctx context.Context, serviceName string) ([]string, error) {
 	return ovh.Call[[]string](ctx, s.c, &ovh.Request{Operation: opListVracks, Method: http.MethodGet, Path: ovh.Path("/v1/dedicated/server/{serviceName}/vrack", "serviceName", serviceName)})
+}
+
+// opPasswordFeaturesBackupCloud is PasswordFeaturesBackupCloud's entry in the operation registry (ovh.Operations).
+var opPasswordFeaturesBackupCloud = &ovh.Operation{Name: "dedicatedserver.PasswordFeaturesBackupCloud", Method: http.MethodPost, Path: "/v1/dedicated/server/{serviceName}/features/backupCloud/password", Summary: "Regenerate cloud backup passwords", IAMActions: []string{"dedicatedServer:apiovh:features/backupCloud/password/create"}}
+
+// PasswordFeaturesBackupCloud calls POST /v1/dedicated/server/{serviceName}/features/backupCloud/password: Regenerate cloud backup passwords
+//
+// Regenerates the cloud backup passwords and returns them: the Swift and SFTP passwords of the
+// storage and archive containers.
+//
+// Arguments:
+//   - serviceName: The internal name of your dedicated server
+//
+// Requires the IAM action dedicatedServer:apiovh:features/backupCloud/password/create.
+func (s *Service) PasswordFeaturesBackupCloud(ctx context.Context, serviceName string) (*DedicatedServerBackupBackupPassword, error) {
+	return ovh.Call[*DedicatedServerBackupBackupPassword](ctx, s.c, &ovh.Request{Operation: opPasswordFeaturesBackupCloud, Method: http.MethodPost, Path: ovh.Path("/v1/dedicated/server/{serviceName}/features/backupCloud/password", "serviceName", serviceName)})
 }
 
 // opPasswordFeaturesBackupFTP is PasswordFeaturesBackupFTP's entry in the operation registry (ovh.Operations).
@@ -1742,6 +2266,22 @@ func (s *Service) ResetInterfaceFeaturesIpmi(ctx context.Context, serviceName st
 	return ovh.Call[*DedicatedServerTask](ctx, s.c, &ovh.Request{Operation: opResetInterfaceFeaturesIpmi, Method: http.MethodPost, Path: ovh.Path("/v1/dedicated/server/{serviceName}/features/ipmi/resetInterface", "serviceName", serviceName)})
 }
 
+// opResetOla is ResetOla's entry in the operation registry (ovh.Operations).
+var opResetOla = &ovh.Operation{Name: "dedicatedserver.ResetOla", Method: http.MethodPost, Path: "/v1/dedicated/server/{serviceName}/ola/reset", Summary: "Reset a network interface", IAMActions: []string{"dedicatedServer:apiovh:ola/reset"}}
+
+// ResetOla calls POST /v1/dedicated/server/{serviceName}/ola/reset: Reset a network interface
+//
+// Resets a virtual network interface to its default configuration. Returns a task.
+//
+// Arguments:
+//   - serviceName: The internal name of your dedicated server
+//   - body: the request body
+//
+// Requires the IAM action dedicatedServer:apiovh:ola/reset.
+func (s *Service) ResetOla(ctx context.Context, serviceName string, body ResetOlaRequest) (*DedicatedServerTask, error) {
+	return ovh.Call[*DedicatedServerTask](ctx, s.c, &ovh.Request{Operation: opResetOla, Method: http.MethodPost, Path: ovh.Path("/v1/dedicated/server/{serviceName}/ola/reset", "serviceName", serviceName), Body: body})
+}
+
 // opResetSessionsFeaturesIpmi is ResetSessionsFeaturesIpmi's entry in the operation registry (ovh.Operations).
 var opResetSessionsFeaturesIpmi = &ovh.Operation{Name: "dedicatedserver.ResetSessionsFeaturesIpmi", Method: http.MethodPost, Path: "/v1/dedicated/server/{serviceName}/features/ipmi/resetSessions", Summary: "Reset IPMI sessions", IAMActions: []string{"dedicatedServer:apiovh:features/ipmi/resetSessions"}}
 
@@ -1791,6 +2331,22 @@ func (s *Service) Terminate(ctx context.Context, serviceName string) (string, er
 	return ovh.Call[string](ctx, s.c, &ovh.Request{Operation: opTerminate, Method: http.MethodPost, Path: ovh.Path("/v1/dedicated/server/{serviceName}/terminate", "serviceName", serviceName)})
 }
 
+// opURLLog is URLLog's entry in the operation registry (ovh.Operations).
+var opURLLog = &ovh.Operation{Name: "dedicatedserver.URLLog", Method: http.MethodPost, Path: "/v2/dedicated/server/{serviceName}/log/url", Summary: "Generate a temporary log URL", IAMActions: []string{"dedicatedServer:apiovh:log/url"}, SchemasVersion: "1.0"}
+
+// URLLog calls POST /v2/dedicated/server/{serviceName}/log/url: Generate a temporary log URL
+//
+// Generates a temporary URL to read the logs of one kind. The URL expires.
+//
+// Arguments:
+//   - serviceName: Service name
+//   - body: the request body
+//
+// Requires the IAM action dedicatedServer:apiovh:log/url.
+func (s *Service) URLLog(ctx context.Context, serviceName string, body DbaasLogsLogURLCreation) (*DbaasLogsTemporaryLogsLink, error) {
+	return ovh.Call[*DbaasLogsTemporaryLogsLink](ctx, s.c, &ovh.Request{Operation: opURLLog, Method: http.MethodPost, Path: ovh.Path("/v2/dedicated/server/{serviceName}/log/url", "serviceName", serviceName), Body: body})
+}
+
 // opUngroupOla is UngroupOla's entry in the operation registry (ovh.Operations).
 var opUngroupOla = &ovh.Operation{Name: "dedicatedserver.UngroupOla", Method: http.MethodPost, Path: "/v1/dedicated/server/{serviceName}/ola/ungroup", Summary: "Ungroup a network interface", IAMActions: []string{"dedicatedServer:apiovh:ola/ungroup"}, Deprecated: true}
 
@@ -1806,7 +2362,7 @@ var opUngroupOla = &ovh.Operation{Name: "dedicatedserver.UngroupOla", Method: ht
 // Requires the IAM action dedicatedServer:apiovh:ola/ungroup.
 //
 // Deprecated: the API has deprecated this operation. Removal date: 2021-04-08. Use
-// /dedicated/server/{serviceName}/ola/reset instead.
+// /v1/dedicated/server/{serviceName}/ola/reset instead.
 func (s *Service) UngroupOla(ctx context.Context, serviceName string, body UngroupOlaRequest) ([]DedicatedServerTask, error) {
 	return ovh.Call[[]DedicatedServerTask](ctx, s.c, &ovh.Request{Operation: opUngroupOla, Method: http.MethodPost, Path: ovh.Path("/v1/dedicated/server/{serviceName}/ola/ungroup", "serviceName", serviceName), Body: body})
 }
@@ -1949,7 +2505,7 @@ var opUpdateVirtualNetworkInterface = &ovh.Operation{Name: "dedicatedserver.Upda
 // Requires the IAM action dedicatedServer:apiovh:virtualNetworkInterface/edit.
 //
 // Deprecated: the API has deprecated this operation. Removal date: 2021-04-08. Use
-// /dedicated/server/{serviceName}/ola/aggregation instead.
+// /v1/dedicated/server/{serviceName}/ola/aggregation instead.
 func (s *Service) UpdateVirtualNetworkInterface(ctx context.Context, serviceName string, uuid string, body DedicatedVirtualNetworkInterfaceVirtualNetworkInterfaceWritable) error {
 	return s.c.Do(ctx, &ovh.Request{Operation: opUpdateVirtualNetworkInterface, Method: http.MethodPut, Path: ovh.Path("/v1/dedicated/server/{serviceName}/virtualNetworkInterface/{uuid}", "serviceName", serviceName, "uuid", uuid), Body: body}, nil)
 }
@@ -1972,5 +2528,5 @@ func (s *Service) WindowsLicense(ctx context.Context, serviceName string, body W
 }
 
 func init() {
-	ovh.RegisterOperations(opAuthenticationSecret, opCancelTask, opChangeContact, opConfirmTermination, opCreateFeaturesBackupFTP, opCreateFeaturesBackupFTPAccess, opCreateFeaturesIpmiAccess, opCreateFeaturesIpmiTest, opCreateSecondaryDNSDomains, opCreateSpla, opCreateVirtualMac, opCreateVirtualMacVirtualAddress, opDeleteFeaturesBackupFTP, opDeleteFeaturesBackupFTPAccess, opDeleteOption, opDeleteSecondaryDNSDomains, opDeleteVirtualMacVirtualAddress, opDeleteVrack, opDisableVirtualNetworkInterface, opEnableVirtualNetworkInterface, opGetBoot, opGetBootOption, opGetBurst, opGetFeaturesBackupFTP, opGetFeaturesBackupFTPAccess, opGetFeaturesFirewall, opGetFeaturesIpmi, opGetFeaturesIpmiAccess, opGetFeaturesIpmiTest, opGetFeaturesKvm, opGetIPCanBeMovedTo, opGetInstallCompatibleTemplates, opGetInstallHardwareRaidProfile, opGetInstallStatus, opGetIntervention, opGetLog, opGetOption, opGetOrderableBackupStorage, opGetOrderableBandwidth, opGetOrderableBandwidthvRack, opGetOrderableFeature, opGetOrderableIP, opGetOrderableKvm, opGetOrderableKvmExpress, opGetOrderableProfessionalUse, opGetOrderableTraffic, opGetOrderableUsbKey, opGetSecondaryDNSDomains, opGetSecondaryDNSDomainsDNSServer, opGetSecondaryDNSNameDomainToken, opGetSecondaryDNSNameServerAvailable, opGetServer, opGetServiceInfos, opGetSpecificationsHardware, opGetSpecificationsIP, opGetSpecificationsNetwork, opGetSpla, opGetTask, opGetVirtualMac, opGetVirtualMacVirtualAddress, opGetVirtualNetworkInterfaceByUUID, opGetVrack, opGroupOla, opIPBlockMerge, opIPMove, opListBootOptions, opListBoots, opListDatacenterAvailabilities, opListFeaturesBackupFTPAccess, opListFeaturesBackupFTPAuthorizableBlocks, opListIPCountryAvailables, opListIPs, opListInstallCompatibleTemplatePartitionSchemes, opListInterventions, opListLicenseCompliantWindows, opListLicenseCompliantWindowsSQLServers, opListMrtgs, opListOptions, opListOsAvailabilities, opListSecondaryDNSDomains, opListServers, opListSplas, opListTasks, opListVirtualMacVirtualAddress, opListVirtualMacs, opListVrackMrtgs, opListVracks, opPasswordFeaturesBackupFTP, opReboot, opReinstall, opResetInterfaceFeaturesIpmi, opResetSessionsFeaturesIpmi, opRevokeSpla, opTerminate, opUngroupOla, opUpdateBurst, opUpdateFeaturesBackupFTPAccess, opUpdateFeaturesFirewall, opUpdateSecondaryDNSDomains, opUpdateServer, opUpdateServiceInfos, opUpdateSpla, opUpdateVirtualNetworkInterface, opWindowsLicense)
+	ovh.RegisterOperations(opAggregationOla, opAuthenticationSecret, opCancelTask, opChangeContact, opConfigureBiosSettingsSgx, opConfirmTermination, opCreateFeaturesBackupCloud, opCreateFeaturesBackupFTP, opCreateFeaturesBackupFTPAccess, opCreateFeaturesIpmiAccess, opCreateFeaturesIpmiTest, opCreateLogSubscription, opCreateSecondaryDNSDomains, opCreateSpla, opCreateVirtualMac, opCreateVirtualMacVirtualAddress, opDeleteFeaturesBackupCloud, opDeleteFeaturesBackupFTP, opDeleteFeaturesBackupFTPAccess, opDeleteLogSubscription, opDeleteOption, opDeleteSecondaryDNSDomains, opDeleteVirtualMacVirtualAddress, opDeleteVrack, opDisableVirtualNetworkInterface, opEnableVirtualNetworkInterface, opGetBackupCloudOfferDetails, opGetBiosSettings, opGetBiosSettingsSgx, opGetBoot, opGetBootOption, opGetBurst, opGetByServiceNameVirtualNetworkInterfaceByUUID, opGetDedicatedServerRegionAvailabilities, opGetFeaturesBackupCloud, opGetFeaturesBackupFTP, opGetFeaturesBackupFTPAccess, opGetFeaturesFirewall, opGetFeaturesIpmi, opGetFeaturesIpmiAccess, opGetFeaturesIpmiTest, opGetFeaturesKvm, opGetIPCanBeMovedTo, opGetInstallCompatibleTemplates, opGetInstallHardwareRaidProfile, opGetInstallStatus, opGetIntervention, opGetLog, opGetLogKind, opGetLogSubscription, opGetNetworkInterfaceController, opGetNetworking, opGetOption, opGetOrderableBackupStorage, opGetOrderableBandwidth, opGetOrderableBandwidthvRack, opGetOrderableFeature, opGetOrderableIP, opGetOrderableKvm, opGetOrderableKvmExpress, opGetOrderableProfessionalUse, opGetOrderableTraffic, opGetOrderableUsbKey, opGetPlannedChange, opGetPlannedIntervention, opGetSecondaryDNSDomains, opGetSecondaryDNSDomainsDNSServer, opGetSecondaryDNSNameDomainToken, opGetSecondaryDNSNameServerAvailable, opGetServer, opGetServiceInfos, opGetSpecificationsHardware, opGetSpecificationsIP, opGetSpecificationsNetwork, opGetSpla, opGetTask, opGetVirtualMac, opGetVirtualMacVirtualAddress, opGetVirtualNetworkInterfaceByUUID, opGetVrack, opGroupOla, opIPBlockMerge, opIPMove, opListBootOptions, opListBoots, opListDatacenterAvailabilities, opListFeaturesBackupFTPAccess, opListFeaturesBackupFTPAuthorizableBlocks, opListIPCountryAvailables, opListIPs, opListInstallCompatibleTemplatePartitionSchemes, opListInterventions, opListLicenseCompliantWindows, opListLicenseCompliantWindowsSQLServers, opListLogKinds, opListLogSubscriptions, opListMrtgs, opListNetworkInterfaceControllerMrtgs, opListNetworkInterfaceControllers, opListOptions, opListOsAvailabilities, opListPlannedChanges, opListPlannedInterventions, opListSecondaryDNSDomains, opListServers, opListSplas, opListTasks, opListVirtualMacVirtualAddress, opListVirtualMacs, opListVirtualNetworkInterfaces, opListVrackMrtgs, opListVracks, opPasswordFeaturesBackupCloud, opPasswordFeaturesBackupFTP, opReboot, opReinstall, opResetInterfaceFeaturesIpmi, opResetOla, opResetSessionsFeaturesIpmi, opRevokeSpla, opTerminate, opURLLog, opUngroupOla, opUpdateBurst, opUpdateFeaturesBackupFTPAccess, opUpdateFeaturesFirewall, opUpdateSecondaryDNSDomains, opUpdateServer, opUpdateServiceInfos, opUpdateSpla, opUpdateVirtualNetworkInterface, opWindowsLicense)
 }

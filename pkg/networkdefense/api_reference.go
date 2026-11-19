@@ -15,7 +15,7 @@ import (
 )
 
 // opGetReferenceProfile is GetReferenceProfile's entry in the operation registry (ovh.Operations).
-var opGetReferenceProfile = &ovh.Operation{Name: "networkdefense.GetReferenceProfile", Method: http.MethodGet, Path: "/v2/networkDefense/vac/reference/profile/{profileId}", Summary: "Get a VAC network traffic profile"}
+var opGetReferenceProfile = &ovh.Operation{Name: "networkdefense.GetReferenceProfile", Method: http.MethodGet, Path: "/v2/networkDefense/vac/reference/profile/{profileId}", Summary: "Get a VAC network traffic profile", SchemasVersion: "1.0"}
 
 // GetReferenceProfile calls GET /v2/networkDefense/vac/reference/profile/{profileId}: Get a VAC network traffic profile
 //
@@ -29,7 +29,7 @@ func (s *Service) GetReferenceProfile(ctx context.Context, profileID string) (*N
 }
 
 // opListReferenceProfiles is AllReferenceProfiles's entry in the operation registry (ovh.Operations).
-var opListReferenceProfiles = &ovh.Operation{Name: "networkdefense.AllReferenceProfiles", Method: http.MethodGet, Path: "/v2/networkDefense/vac/reference/profile", Summary: "List VAC network traffic profiles"}
+var opListReferenceProfiles = &ovh.Operation{Name: "networkdefense.AllReferenceProfiles", Method: http.MethodGet, Path: "/v2/networkDefense/vac/reference/profile", Summary: "List VAC network traffic profiles", SchemasVersion: "1.0"}
 
 // AllReferenceProfiles iterates over GET /v2/networkDefense/vac/reference/profile (List VAC network traffic profiles),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it

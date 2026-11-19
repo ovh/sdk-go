@@ -32,9 +32,12 @@ func (s *Service) ConfirmTermination(ctx context.Context, serviceName string, bo
 }
 
 // opGetCloudLinux is GetCloudLinux's entry in the operation registry (ovh.Operations).
-var opGetCloudLinux = &ovh.Operation{Name: "licensecloudlinux.GetCloudLinux", Method: http.MethodGet, Path: "/v1/license/cloudLinux/{serviceName}", Summary: "Get this object properties", IAMActions: []string{"licenseCloudLinux:apiovh:get"}}
+var opGetCloudLinux = &ovh.Operation{Name: "licensecloudlinux.GetCloudLinux", Method: http.MethodGet, Path: "/v1/license/cloudLinux/{serviceName}", Summary: "Get a CloudLinux license", IAMActions: []string{"licenseCloudLinux:apiovh:get"}}
 
-// GetCloudLinux calls GET /v1/license/cloudLinux/{serviceName}: Get this object properties
+// GetCloudLinux calls GET /v1/license/cloudLinux/{serviceName}: Get a CloudLinux license
+//
+// Returns the license ID, version, status, the IP address the license is attached to, and the
+// creation date.
 //
 // Arguments:
 //   - serviceName: The name of your CloudLinux license
@@ -73,9 +76,12 @@ func (s *Service) GetServiceInfos(ctx context.Context, serviceName string) (*Ser
 }
 
 // opGetTasks is GetTasks's entry in the operation registry (ovh.Operations).
-var opGetTasks = &ovh.Operation{Name: "licensecloudlinux.GetTasks", Method: http.MethodGet, Path: "/v1/license/cloudLinux/{serviceName}/tasks/{taskId}", Summary: "Get this object properties", IAMActions: []string{"licenseCloudLinux:apiovh:tasks/get"}}
+var opGetTasks = &ovh.Operation{Name: "licensecloudlinux.GetTasks", Method: http.MethodGet, Path: "/v1/license/cloudLinux/{serviceName}/tasks/{taskId}", Summary: "Get a license task", IAMActions: []string{"licenseCloudLinux:apiovh:tasks/get"}}
 
-// GetTasks calls GET /v1/license/cloudLinux/{serviceName}/tasks/{taskId}: Get this object properties
+// GetTasks calls GET /v1/license/cloudLinux/{serviceName}/tasks/{taskId}: Get a license task
+//
+// Returns the action, status, creation date, completion date and last update of a task linked to a
+// license.
 //
 // Arguments:
 //   - serviceName: The name of your CloudLinux license
@@ -100,7 +106,7 @@ func (s *Service) AllTasks(ctx context.Context, serviceName string, params ...Li
 }
 
 // opListCloudLinuxes is ListCloudLinuxes's entry in the operation registry (ovh.Operations).
-var opListCloudLinuxes = &ovh.Operation{Name: "licensecloudlinux.ListCloudLinuxes", Method: http.MethodGet, Path: "/v1/license/cloudLinux", Summary: "List available services", IAMActions: []string{"licenseCloudLinux:apiovh:get"}}
+var opListCloudLinuxes = &ovh.Operation{Name: "licensecloudlinux.ListCloudLinuxes", Method: http.MethodGet, Path: "/v1/license/cloudLinux", Summary: "List your CloudLinux licenses", IAMActions: []string{"licenseCloudLinux:apiovh:get"}}
 
 // ListCloudLinuxesParams holds the optional parameters of ListCloudLinuxes.
 type ListCloudLinuxesParams struct {
@@ -108,7 +114,10 @@ type ListCloudLinuxesParams struct {
 	IAMTags map[string][]IAMResourceTagFilter `ovh:"query,iamTags"`
 }
 
-// ListCloudLinuxes calls GET /v1/license/cloudLinux: List available services
+// ListCloudLinuxes calls GET /v1/license/cloudLinux: List your CloudLinux licenses
+//
+// Returns the names of the CloudLinux licenses of the account; each name is the service name used
+// by the other calls.
 //
 // Requires the IAM action licenseCloudLinux:apiovh:get.
 func (s *Service) ListCloudLinuxes(ctx context.Context, params ...ListCloudLinuxesParams) ([]string, error) {
@@ -120,6 +129,8 @@ var opListOrderableVersions = &ovh.Operation{Name: "licensecloudlinux.ListOrdera
 
 // ListOrderableVersions calls GET /v1/license/cloudLinux/orderableVersions: Get the orderable CloudLinux versions
 //
+// Returns the versions that can be ordered for the given IP, grouped by service type.
+//
 // Arguments:
 //   - ip: Your license Ip
 //
@@ -129,7 +140,7 @@ func (s *Service) ListOrderableVersions(ctx context.Context, ip string) ([]Licen
 }
 
 // opListTasks is ListTasks's entry in the operation registry (ovh.Operations).
-var opListTasks = &ovh.Operation{Name: "licensecloudlinux.ListTasks", Method: http.MethodGet, Path: "/v1/license/cloudLinux/{serviceName}/tasks", Summary: "Tasks linked to this license", IAMActions: []string{"licenseCloudLinux:apiovh:tasks/get"}}
+var opListTasks = &ovh.Operation{Name: "licensecloudlinux.ListTasks", Method: http.MethodGet, Path: "/v1/license/cloudLinux/{serviceName}/tasks", Summary: "List the tasks of a CloudLinux license", IAMActions: []string{"licenseCloudLinux:apiovh:tasks/get"}}
 
 // ListTasksParams holds the optional parameters of ListTasks.
 type ListTasksParams struct {
@@ -139,7 +150,9 @@ type ListTasksParams struct {
 	Status *LicenseTaskStateEnum `ovh:"query,status"`
 }
 
-// ListTasks calls GET /v1/license/cloudLinux/{serviceName}/tasks: Tasks linked to this license
+// ListTasks calls GET /v1/license/cloudLinux/{serviceName}/tasks: List the tasks of a CloudLinux license
+//
+// Returns the IDs of the tasks linked to the license, which can be filtered by status and action.
 //
 // Arguments:
 //   - serviceName: The name of your CloudLinux license

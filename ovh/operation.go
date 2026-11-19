@@ -32,6 +32,9 @@ type Operation struct {
 	IAMActions []string
 	// Deprecated is set when the API has deprecated the operation.
 	Deprecated bool
+	// SchemasVersion is the version of the /v2 contract the operation was generated from:
+	// "1.0". It is sent as the X-Schemas-Version header. Empty for a /v1 operation.
+	SchemasVersion string
 }
 
 // ReadOnly reports whether the operation only reads: its method is GET or HEAD.

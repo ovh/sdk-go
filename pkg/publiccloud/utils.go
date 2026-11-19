@@ -6,7 +6,12 @@
 
 package publiccloud
 
-import "github.com/ovh/sdk-go/ovh"
+import (
+	"encoding/json"
+	"fmt"
+
+	"github.com/ovh/sdk-go/ovh"
+)
 
 // Service calls the operations of this section through an ovh.Client.
 type Service struct {
@@ -16,4 +21,20 @@ type Service struct {
 // New returns a Service that sends its requests through c.
 func New(c *ovh.Client) *Service {
 	return &Service{c: c}
+}
+
+// writable copies x into W, its form without read-only fields, through JSON: W has the same
+// fields at every depth, minus those, so decoding leaves them out. A JSON round trip handles
+// every shape (pointers, slices and maps of nested types) and shares no memory with x.
+func writable[W any](x any) W {
+	var w W
+	b, err := json.Marshal(x)
+	if err == nil {
+		err = json.Unmarshal(b, &w)
+	}
+	if err != nil {
+		// Only a value JSON cannot encode, such as a NaN number, which no API answer has.
+		panic(fmt.Sprintf("%T.Writable: %v", x, err))
+	}
+	return w
 }

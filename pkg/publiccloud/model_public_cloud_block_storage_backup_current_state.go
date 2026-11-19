@@ -8,9 +8,15 @@ package publiccloud
 
 // PublicCloudBlockStorageBackupCurrentState Current state of a block storage backup as observed from the infrastructure
 type PublicCloudBlockStorageBackupCurrentState struct {
+	// Per-action availability for the current backup state
+	// Read-only: the API sets it.
+	Capabilities []PublicCloudBlockStorageBackupCapability `json:"capabilities,omitempty"`
 	// Backup description
 	// Read-only: the API sets it.
 	Description *string `json:"description,omitempty"`
+	// Encryption of the source volume at backup time. Null when `volumeType` is null and the backup records no customer key, or when the backup cannot be read.
+	// Read-only: the API sets it.
+	Encryption *PublicCloudBlockStorageBlockEncryption `json:"encryption,omitempty"`
 	// Current location
 	// Read-only: the API sets it.
 	Location *PublicCloudCommonLocation `json:"location,omitempty"`
@@ -20,7 +26,13 @@ type PublicCloudBlockStorageBackupCurrentState struct {
 	// Size of the backup in GB
 	// Read-only: the API sets it.
 	Size *int `json:"size,omitempty"`
+	// Backup status on the infrastructure
+	// Read-only: the API sets it.
+	Status *PublicCloudBlockStorageBackupStatusEnum `json:"status,omitempty"`
 	// Identifier of the source volume
 	// Read-only: the API sets it.
 	VolumeID *string `json:"volumeId,omitempty"`
+	// Volume type of the source volume at backup time. Null when the backup did not record it, when the type has no API value, or when the backup cannot be read.
+	// Read-only: the API sets it.
+	VolumeType *PublicCloudBlockStorageVolumeTypeEnum `json:"volumeType,omitempty"`
 }

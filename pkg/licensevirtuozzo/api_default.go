@@ -15,9 +15,11 @@ import (
 )
 
 // opChangeIP is ChangeIP's entry in the operation registry (ovh.Operations).
-var opChangeIP = &ovh.Operation{Name: "licensevirtuozzo.ChangeIP", Method: http.MethodPost, Path: "/v1/license/virtuozzo/{serviceName}/changeIp", Summary: "Move this license to another Ip", IAMActions: []string{"licenseVirtuozzo:apiovh:changeIp"}}
+var opChangeIP = &ovh.Operation{Name: "licensevirtuozzo.ChangeIP", Method: http.MethodPost, Path: "/v1/license/virtuozzo/{serviceName}/changeIp", Summary: "Move a Virtuozzo license to another IP", IAMActions: []string{"licenseVirtuozzo:apiovh:changeIp"}}
 
-// ChangeIP calls POST /v1/license/virtuozzo/{serviceName}/changeIp: Move this license to another Ip
+// ChangeIP calls POST /v1/license/virtuozzo/{serviceName}/changeIp: Move a Virtuozzo license to another IP
+//
+// Starts the move of the license to the given IP and returns the task that performs it.
 //
 // Arguments:
 //   - serviceName: The name of your Virtuozzo license
@@ -46,9 +48,11 @@ func (s *Service) ConfirmTermination(ctx context.Context, serviceName string, bo
 }
 
 // opDeleteOption is DeleteOption's entry in the operation registry (ovh.Operations).
-var opDeleteOption = &ovh.Operation{Name: "licensevirtuozzo.DeleteOption", Method: http.MethodDelete, Path: "/v1/license/virtuozzo/{serviceName}/option/{label}", Summary: "release this Option", IAMActions: []string{"licenseVirtuozzo:apiovh:option/delete"}}
+var opDeleteOption = &ovh.Operation{Name: "licensevirtuozzo.DeleteOption", Method: http.MethodDelete, Path: "/v1/license/virtuozzo/{serviceName}/option/{label}", Summary: "Release an option from a license", IAMActions: []string{"licenseVirtuozzo:apiovh:option/delete"}}
 
-// DeleteOption calls DELETE /v1/license/virtuozzo/{serviceName}/option/{label}: release this Option
+// DeleteOption calls DELETE /v1/license/virtuozzo/{serviceName}/option/{label}: Release an option from a license
+//
+// Removes the option from the license and returns the task that performs the release.
 //
 // Arguments:
 //   - serviceName: The name of your Virtuozzo license
@@ -60,9 +64,11 @@ func (s *Service) DeleteOption(ctx context.Context, serviceName string, label Li
 }
 
 // opGetCanLicenseBeMovedTo is GetCanLicenseBeMovedTo's entry in the operation registry (ovh.Operations).
-var opGetCanLicenseBeMovedTo = &ovh.Operation{Name: "licensevirtuozzo.GetCanLicenseBeMovedTo", Method: http.MethodGet, Path: "/v1/license/virtuozzo/{serviceName}/canLicenseBeMovedTo", Summary: "Will tell if the ip can accept the license", IAMActions: []string{"licenseVirtuozzo:apiovh:canLicenseBeMovedTo/get"}}
+var opGetCanLicenseBeMovedTo = &ovh.Operation{Name: "licensevirtuozzo.GetCanLicenseBeMovedTo", Method: http.MethodGet, Path: "/v1/license/virtuozzo/{serviceName}/canLicenseBeMovedTo", Summary: "Check whether a Virtuozzo license can be moved to an IP", IAMActions: []string{"licenseVirtuozzo:apiovh:canLicenseBeMovedTo/get"}}
 
-// GetCanLicenseBeMovedTo calls GET /v1/license/virtuozzo/{serviceName}/canLicenseBeMovedTo: Will tell if the ip can accept the license
+// GetCanLicenseBeMovedTo calls GET /v1/license/virtuozzo/{serviceName}/canLicenseBeMovedTo: Check whether a Virtuozzo license can be moved to an IP
+//
+// Returns whether the destination IP can receive the license, with the reason when it cannot.
 //
 // Arguments:
 //   - serviceName: The name of your Virtuozzo license
@@ -74,9 +80,11 @@ func (s *Service) GetCanLicenseBeMovedTo(ctx context.Context, serviceName string
 }
 
 // opGetOption is GetOption's entry in the operation registry (ovh.Operations).
-var opGetOption = &ovh.Operation{Name: "licensevirtuozzo.GetOption", Method: http.MethodGet, Path: "/v1/license/virtuozzo/{serviceName}/option/{label}", Summary: "Get this object properties", IAMActions: []string{"licenseVirtuozzo:apiovh:option/get"}}
+var opGetOption = &ovh.Operation{Name: "licensevirtuozzo.GetOption", Method: http.MethodGet, Path: "/v1/license/virtuozzo/{serviceName}/option/{label}", Summary: "Get an option of a license", IAMActions: []string{"licenseVirtuozzo:apiovh:option/get"}}
 
-// GetOption calls GET /v1/license/virtuozzo/{serviceName}/option/{label}: Get this object properties
+// GetOption calls GET /v1/license/virtuozzo/{serviceName}/option/{label}: Get an option of a license
+//
+// Returns the label, version, quantity, expiration date and whether the option can be released.
 //
 // Arguments:
 //   - serviceName: The name of your Virtuozzo license
@@ -116,9 +124,12 @@ func (s *Service) GetServiceInfos(ctx context.Context, serviceName string) (*Ser
 }
 
 // opGetTasks is GetTasks's entry in the operation registry (ovh.Operations).
-var opGetTasks = &ovh.Operation{Name: "licensevirtuozzo.GetTasks", Method: http.MethodGet, Path: "/v1/license/virtuozzo/{serviceName}/tasks/{taskId}", Summary: "Get this object properties", IAMActions: []string{"licenseVirtuozzo:apiovh:tasks/get"}}
+var opGetTasks = &ovh.Operation{Name: "licensevirtuozzo.GetTasks", Method: http.MethodGet, Path: "/v1/license/virtuozzo/{serviceName}/tasks/{taskId}", Summary: "Get a license task", IAMActions: []string{"licenseVirtuozzo:apiovh:tasks/get"}}
 
-// GetTasks calls GET /v1/license/virtuozzo/{serviceName}/tasks/{taskId}: Get this object properties
+// GetTasks calls GET /v1/license/virtuozzo/{serviceName}/tasks/{taskId}: Get a license task
+//
+// Returns the action, status, creation date, completion date and last update of a task linked to a
+// license.
 //
 // Arguments:
 //   - serviceName: The name of your Virtuozzo license
@@ -143,9 +154,12 @@ func (s *Service) AllTasks(ctx context.Context, serviceName string, params ...Li
 }
 
 // opGetVirtuozzo is GetVirtuozzo's entry in the operation registry (ovh.Operations).
-var opGetVirtuozzo = &ovh.Operation{Name: "licensevirtuozzo.GetVirtuozzo", Method: http.MethodGet, Path: "/v1/license/virtuozzo/{serviceName}", Summary: "Get this object properties", IAMActions: []string{"licenseVirtuozzo:apiovh:get"}}
+var opGetVirtuozzo = &ovh.Operation{Name: "licensevirtuozzo.GetVirtuozzo", Method: http.MethodGet, Path: "/v1/license/virtuozzo/{serviceName}", Summary: "Get a Virtuozzo license", IAMActions: []string{"licenseVirtuozzo:apiovh:get"}}
 
-// GetVirtuozzo calls GET /v1/license/virtuozzo/{serviceName}: Get this object properties
+// GetVirtuozzo calls GET /v1/license/virtuozzo/{serviceName}: Get a Virtuozzo license
+//
+// Returns the license ID, version, status, IP address, container number and the product and
+// information keys.
 //
 // Arguments:
 //   - serviceName: The name of your Virtuozzo license
@@ -169,9 +183,11 @@ func (s *Service) AllVirtuozzos(ctx context.Context, params ...ListVirtuozzosPar
 }
 
 // opListAllowedDestinationIPs is ListAllowedDestinationIPs's entry in the operation registry (ovh.Operations).
-var opListAllowedDestinationIPs = &ovh.Operation{Name: "licensevirtuozzo.ListAllowedDestinationIPs", Method: http.MethodGet, Path: "/v1/license/virtuozzo/{serviceName}/allowedDestinationIp", Summary: "Returns an array of ips where the license can be moved to", IAMActions: []string{"licenseVirtuozzo:apiovh:allowedDestinationIp/get"}}
+var opListAllowedDestinationIPs = &ovh.Operation{Name: "licensevirtuozzo.ListAllowedDestinationIPs", Method: http.MethodGet, Path: "/v1/license/virtuozzo/{serviceName}/allowedDestinationIp", Summary: "List the IPs a Virtuozzo license can be moved to", IAMActions: []string{"licenseVirtuozzo:apiovh:allowedDestinationIp/get"}}
 
-// ListAllowedDestinationIPs calls GET /v1/license/virtuozzo/{serviceName}/allowedDestinationIp: Returns an array of ips where the license can be moved to
+// ListAllowedDestinationIPs calls GET /v1/license/virtuozzo/{serviceName}/allowedDestinationIp: List the IPs a Virtuozzo license can be moved to
+//
+// Returns the IP blocks that can receive the license, so you can pick the destination of a move.
 //
 // Arguments:
 //   - serviceName: The name of your Virtuozzo license
@@ -182,7 +198,7 @@ func (s *Service) ListAllowedDestinationIPs(ctx context.Context, serviceName str
 }
 
 // opListOptions is ListOptions's entry in the operation registry (ovh.Operations).
-var opListOptions = &ovh.Operation{Name: "licensevirtuozzo.ListOptions", Method: http.MethodGet, Path: "/v1/license/virtuozzo/{serviceName}/option", Summary: "Options linked to this license", IAMActions: []string{"licenseVirtuozzo:apiovh:option/get"}}
+var opListOptions = &ovh.Operation{Name: "licensevirtuozzo.ListOptions", Method: http.MethodGet, Path: "/v1/license/virtuozzo/{serviceName}/option", Summary: "List the options of a Virtuozzo license", IAMActions: []string{"licenseVirtuozzo:apiovh:option/get"}}
 
 // ListOptionsParams holds the optional parameters of ListOptions.
 type ListOptionsParams struct {
@@ -190,7 +206,10 @@ type ListOptionsParams struct {
 	Label *LicenseOptionLabel `ovh:"query,label"`
 }
 
-// ListOptions calls GET /v1/license/virtuozzo/{serviceName}/option: Options linked to this license
+// ListOptions calls GET /v1/license/virtuozzo/{serviceName}/option: List the options of a Virtuozzo license
+//
+// Returns the labels of the options attached to the license; get an option for its version,
+// quantity and expiration date.
 //
 // Arguments:
 //   - serviceName: The name of your Virtuozzo license
@@ -205,6 +224,8 @@ var opListOrderableVersions = &ovh.Operation{Name: "licensevirtuozzo.ListOrderab
 
 // ListOrderableVersions calls GET /v1/license/virtuozzo/orderableVersions: Get the orderable Virtuozzo versions
 //
+// Returns the versions that can be ordered for the given IP, grouped by service type.
+//
 // Arguments:
 //   - ip: Your license Ip
 //
@@ -214,7 +235,7 @@ func (s *Service) ListOrderableVersions(ctx context.Context, ip string) ([]Licen
 }
 
 // opListTasks is ListTasks's entry in the operation registry (ovh.Operations).
-var opListTasks = &ovh.Operation{Name: "licensevirtuozzo.ListTasks", Method: http.MethodGet, Path: "/v1/license/virtuozzo/{serviceName}/tasks", Summary: "tasks linked to this license", IAMActions: []string{"licenseVirtuozzo:apiovh:tasks/get"}}
+var opListTasks = &ovh.Operation{Name: "licensevirtuozzo.ListTasks", Method: http.MethodGet, Path: "/v1/license/virtuozzo/{serviceName}/tasks", Summary: "List the tasks of a Virtuozzo license", IAMActions: []string{"licenseVirtuozzo:apiovh:tasks/get"}}
 
 // ListTasksParams holds the optional parameters of ListTasks.
 type ListTasksParams struct {
@@ -224,7 +245,10 @@ type ListTasksParams struct {
 	Status *LicenseTaskStateEnum `ovh:"query,status"`
 }
 
-// ListTasks calls GET /v1/license/virtuozzo/{serviceName}/tasks: tasks linked to this license
+// ListTasks calls GET /v1/license/virtuozzo/{serviceName}/tasks: List the tasks of a Virtuozzo license
+//
+// Returns the IDs of the tasks linked to the license, each task records an action such as a version
+// upgrade, an option change or an IP change.
 //
 // Arguments:
 //   - serviceName: The name of your Virtuozzo license
@@ -235,7 +259,7 @@ func (s *Service) ListTasks(ctx context.Context, serviceName string, params ...L
 }
 
 // opListVirtuozzos is ListVirtuozzos's entry in the operation registry (ovh.Operations).
-var opListVirtuozzos = &ovh.Operation{Name: "licensevirtuozzo.ListVirtuozzos", Method: http.MethodGet, Path: "/v1/license/virtuozzo", Summary: "List available services", IAMActions: []string{"licenseVirtuozzo:apiovh:get"}}
+var opListVirtuozzos = &ovh.Operation{Name: "licensevirtuozzo.ListVirtuozzos", Method: http.MethodGet, Path: "/v1/license/virtuozzo", Summary: "List your Virtuozzo licenses", IAMActions: []string{"licenseVirtuozzo:apiovh:get"}}
 
 // ListVirtuozzosParams holds the optional parameters of ListVirtuozzos.
 type ListVirtuozzosParams struct {
@@ -243,7 +267,10 @@ type ListVirtuozzosParams struct {
 	IAMTags map[string][]IAMResourceTagFilter `ovh:"query,iamTags"`
 }
 
-// ListVirtuozzos calls GET /v1/license/virtuozzo: List available services
+// ListVirtuozzos calls GET /v1/license/virtuozzo: List your Virtuozzo licenses
+//
+// Returns the names of the Virtuozzo licenses of the account; each name is the service name used by
+// the other calls.
 //
 // Requires the IAM action licenseVirtuozzo:apiovh:get.
 func (s *Service) ListVirtuozzos(ctx context.Context, params ...ListVirtuozzosParams) ([]string, error) {
@@ -284,9 +311,11 @@ func (s *Service) UpdateServiceInfos(ctx context.Context, serviceName string, bo
 }
 
 // opUpdateVirtuozzo is UpdateVirtuozzo's entry in the operation registry (ovh.Operations).
-var opUpdateVirtuozzo = &ovh.Operation{Name: "licensevirtuozzo.UpdateVirtuozzo", Method: http.MethodPut, Path: "/v1/license/virtuozzo/{serviceName}", Summary: "Alter this object properties", IAMActions: []string{"licenseVirtuozzo:apiovh:put"}}
+var opUpdateVirtuozzo = &ovh.Operation{Name: "licensevirtuozzo.UpdateVirtuozzo", Method: http.MethodPut, Path: "/v1/license/virtuozzo/{serviceName}", Summary: "Update a Virtuozzo license", IAMActions: []string{"licenseVirtuozzo:apiovh:put"}}
 
-// UpdateVirtuozzo calls PUT /v1/license/virtuozzo/{serviceName}: Alter this object properties
+// UpdateVirtuozzo calls PUT /v1/license/virtuozzo/{serviceName}: Update a Virtuozzo license
+//
+// Changes the settings that can be modified: the automatic deletion at expiration.
 //
 // Arguments:
 //   - serviceName: The name of your Virtuozzo license

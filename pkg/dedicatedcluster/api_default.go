@@ -8,10 +8,88 @@ package dedicatedcluster
 
 import (
 	"context"
+	"iter"
 	"net/http"
 
 	"github.com/ovh/sdk-go/ovh"
 )
+
+// opChangeContact is ChangeContact's entry in the operation registry (ovh.Operations).
+var opChangeContact = &ovh.Operation{Name: "dedicatedcluster.ChangeContact", Method: http.MethodPost, Path: "/v1/dedicated/cluster/{serviceName}/changeContact", Summary: "Launch a contact change procedure", IAMActions: []string{"clusterDelivery:apiovh:changeContact"}}
+
+// ChangeContact calls POST /v1/dedicated/cluster/{serviceName}/changeContact: Launch a contact change procedure
+//
+// Starts a contact change procedure for the admin, billing or tech contact of the cluster. Returns
+// the IDs of the contact change tasks.
+//
+// Arguments:
+//   - serviceName: Service name
+//   - body: the request body
+//
+// Requires the IAM action clusterDelivery:apiovh:changeContact.
+func (s *Service) ChangeContact(ctx context.Context, serviceName string, body ServicesChangeContact) ([]int, error) {
+	return ovh.Call[[]int](ctx, s.c, &ovh.Request{Operation: opChangeContact, Method: http.MethodPost, Path: ovh.Path("/v1/dedicated/cluster/{serviceName}/changeContact", "serviceName", serviceName), Body: body})
+}
+
+// opConfirmTermination is ConfirmTermination's entry in the operation registry (ovh.Operations).
+var opConfirmTermination = &ovh.Operation{Name: "dedicatedcluster.ConfirmTermination", Method: http.MethodPost, Path: "/v1/dedicated/cluster/{serviceName}/confirmTermination", Summary: "Confirm service termination", IAMActions: []string{"clusterDelivery:apiovh:confirmTermination"}}
+
+// ConfirmTermination calls POST /v1/dedicated/cluster/{serviceName}/confirmTermination: Confirm service termination
+//
+// Confirms the termination of the cluster with the token sent by email to the admin contact.
+//
+// Arguments:
+//   - serviceName: Service name
+//   - body: the request body
+//
+// Requires the IAM action clusterDelivery:apiovh:confirmTermination.
+func (s *Service) ConfirmTermination(ctx context.Context, serviceName string, body ServicesConfirmTermination) (string, error) {
+	return ovh.Call[string](ctx, s.c, &ovh.Request{Operation: opConfirmTermination, Method: http.MethodPost, Path: ovh.Path("/v1/dedicated/cluster/{serviceName}/confirmTermination", "serviceName", serviceName), Body: body})
+}
+
+// opGetCluster is GetCluster's entry in the operation registry (ovh.Operations).
+var opGetCluster = &ovh.Operation{Name: "dedicatedcluster.GetCluster", Method: http.MethodGet, Path: "/v1/dedicated/cluster/{serviceName}", Summary: "Get a dedicated cluster", IAMActions: []string{"clusterDelivery:apiovh:get"}}
+
+// GetCluster calls GET /v1/dedicated/cluster/{serviceName}: Get a dedicated cluster
+//
+// Returns the ID, model, region and status of a dedicated cluster, and its nodes.
+//
+// Arguments:
+//   - serviceName: Service name
+//
+// Requires the IAM action clusterDelivery:apiovh:get.
+func (s *Service) GetCluster(ctx context.Context, serviceName string) (*DedicatedClusterClusterWithIAM, error) {
+	return ovh.Call[*DedicatedClusterClusterWithIAM](ctx, s.c, &ovh.Request{Operation: opGetCluster, Method: http.MethodGet, Path: ovh.Path("/v1/dedicated/cluster/{serviceName}", "serviceName", serviceName)})
+}
+
+// AllClusters iterates over every object ListClusters lists, fetching each one with
+// GetCluster only when the loop reaches it. An object deleted in the meantime is skipped; on
+// any other error it yields the error and stops.
+func (s *Service) AllClusters(ctx context.Context, params ...ListClustersParams) iter.Seq2[*DedicatedClusterClusterWithIAM, error] {
+	return ovh.Each(ctx,
+		func(ctx context.Context) ([]string, error) {
+			return s.ListClusters(ctx, params...)
+		},
+		func(ctx context.Context, listedID string) (*DedicatedClusterClusterWithIAM, error) {
+			return s.GetCluster(ctx, listedID)
+		})
+}
+
+// opGetServiceInfos is GetServiceInfos's entry in the operation registry (ovh.Operations).
+var opGetServiceInfos = &ovh.Operation{Name: "dedicatedcluster.GetServiceInfos", Method: http.MethodGet, Path: "/v1/dedicated/cluster/{serviceName}/serviceInfos", Summary: "Get service information", IAMActions: []string{"clusterDelivery:apiovh:serviceInfos/get"}}
+
+// GetServiceInfos calls GET /v1/dedicated/cluster/{serviceName}/serviceInfos: Get service information
+//
+// Returns the billing information of the cluster, such as creation and expiration dates, contacts
+// and renewal settings.
+//
+// Arguments:
+//   - serviceName: Service name
+//
+// Requires the IAM action clusterDelivery:apiovh:serviceInfos/get.
+func (s *Service) GetServiceInfos(ctx context.Context, serviceName string) (*ServicesService, error) {
+	return ovh.Call[*ServicesService](ctx, s.c, &ovh.Request{Operation: opGetServiceInfos, Method: http.MethodGet, Path: ovh.Path("/v1/dedicated/cluster/{serviceName}/serviceInfos", "serviceName", serviceName)})
+}
 
 // opListAvailabilities is ListAvailabilities's entry in the operation registry (ovh.Operations).
 var opListAvailabilities = &ovh.Operation{Name: "dedicatedcluster.ListAvailabilities", Method: http.MethodGet, Path: "/v1/dedicated/cluster/availabilities", Summary: "List cluster configuration availability", Deprecated: true}
@@ -43,6 +121,89 @@ func (s *Service) ListAvailabilities(ctx context.Context, quantity int, params .
 	return ovh.Call[[]DedicatedClusterAvailability](ctx, s.c, &ovh.Request{Operation: opListAvailabilities, Method: http.MethodGet, Path: "/v1/dedicated/cluster/availabilities", Query: ovh.Values("quantity", quantity), Params: ovh.Optional(params)})
 }
 
+// opListAvailabilitiesRaws is ListAvailabilitiesRaws's entry in the operation registry (ovh.Operations).
+var opListAvailabilitiesRaws = &ovh.Operation{Name: "dedicatedcluster.ListAvailabilitiesRaws", Method: http.MethodGet, Path: "/v1/dedicated/cluster/availabilities/raw", Summary: "List the raw cluster hardware availability"}
+
+// ListAvailabilitiesRawsParams holds the optional parameters of ListAvailabilitiesRaws.
+type ListAvailabilitiesRawsParams struct {
+	// If true, all regions are returned except those listed in regions parameter
+	ExcludeRegions *bool `ovh:"query,excludeRegions"`
+	// The name of the memory hardware part
+	Memory *string `ovh:"query,memory"`
+	// The plan code in which the hardware is involved
+	PlanCode *string `ovh:"query,planCode"`
+	// The names of regions separated by commas
+	Regions *DedicatedServerAvailabilityRegionalizationEnum `ovh:"query,regions"`
+	// The name of the base hardware
+	Server *string `ovh:"query,server"`
+	// The name of the storage hardware part
+	Storage *string `ovh:"query,storage"`
+	// The name of the system storage hardware part
+	SystemStorage *string `ovh:"query,systemStorage"`
+}
+
+// ListAvailabilitiesRaws calls GET /v1/dedicated/cluster/availabilities/raw: List the raw cluster hardware availability
+//
+// Returns the raw availability of cluster hardware: for each region, the real stock, the real stock
+// including parent references, and the last rule applied. Filter by quantity, hardware parts, plan
+// code and regions, and set excludeRegions to return every region except those listed.
+//
+// Arguments:
+//   - quantity: Node quantity
+func (s *Service) ListAvailabilitiesRaws(ctx context.Context, quantity int, params ...ListAvailabilitiesRawsParams) ([]DedicatedClusterAvailabilitiesRaw, error) {
+	return ovh.Call[[]DedicatedClusterAvailabilitiesRaw](ctx, s.c, &ovh.Request{Operation: opListAvailabilitiesRaws, Method: http.MethodGet, Path: "/v1/dedicated/cluster/availabilities/raw", Query: ovh.Values("quantity", quantity), Params: ovh.Optional(params)})
+}
+
+// opListClusters is ListClusters's entry in the operation registry (ovh.Operations).
+var opListClusters = &ovh.Operation{Name: "dedicatedcluster.ListClusters", Method: http.MethodGet, Path: "/v1/dedicated/cluster", Summary: "List dedicated clusters", IAMActions: []string{"clusterDelivery:apiovh:get"}}
+
+// ListClustersParams holds the optional parameters of ListClusters.
+type ListClustersParams struct {
+	// Filter resources on IAM tags
+	IAMTags map[string][]IAMResourceTagFilter `ovh:"query,iamTags"`
+}
+
+// ListClusters calls GET /v1/dedicated/cluster: List dedicated clusters
+//
+// Returns the IDs of the dedicated clusters of the account.
+//
+// Requires the IAM action clusterDelivery:apiovh:get.
+func (s *Service) ListClusters(ctx context.Context, params ...ListClustersParams) ([]string, error) {
+	return ovh.Call[[]string](ctx, s.c, &ovh.Request{Operation: opListClusters, Method: http.MethodGet, Path: "/v1/dedicated/cluster", Params: ovh.Optional(params)})
+}
+
+// opTerminate is Terminate's entry in the operation registry (ovh.Operations).
+var opTerminate = &ovh.Operation{Name: "dedicatedcluster.Terminate", Method: http.MethodPost, Path: "/v1/dedicated/cluster/{serviceName}/terminate", Summary: "Ask for the termination of your service", IAMActions: []string{"clusterDelivery:apiovh:terminate"}}
+
+// Terminate calls POST /v1/dedicated/cluster/{serviceName}/terminate: Ask for the termination of your service
+//
+// Starts the termination of the cluster and sends a confirmation token by email to the admin
+// contact. Confirm it with the termination confirmation.
+//
+// Arguments:
+//   - serviceName: Service name
+//
+// Requires the IAM action clusterDelivery:apiovh:terminate.
+func (s *Service) Terminate(ctx context.Context, serviceName string) (string, error) {
+	return ovh.Call[string](ctx, s.c, &ovh.Request{Operation: opTerminate, Method: http.MethodPost, Path: ovh.Path("/v1/dedicated/cluster/{serviceName}/terminate", "serviceName", serviceName)})
+}
+
+// opUpdateServiceInfos is UpdateServiceInfos's entry in the operation registry (ovh.Operations).
+var opUpdateServiceInfos = &ovh.Operation{Name: "dedicatedcluster.UpdateServiceInfos", Method: http.MethodPut, Path: "/v1/dedicated/cluster/{serviceName}/serviceInfos", Summary: "Update service information", IAMActions: []string{"clusterDelivery:apiovh:serviceInfos/edit"}}
+
+// UpdateServiceInfos calls PUT /v1/dedicated/cluster/{serviceName}/serviceInfos: Update service information
+//
+// Updates the renewal settings of the cluster.
+//
+// Arguments:
+//   - serviceName: Service name
+//   - body: the request body
+//
+// Requires the IAM action clusterDelivery:apiovh:serviceInfos/edit.
+func (s *Service) UpdateServiceInfos(ctx context.Context, serviceName string, body ServicesServiceWritable) error {
+	return s.c.Do(ctx, &ovh.Request{Operation: opUpdateServiceInfos, Method: http.MethodPut, Path: ovh.Path("/v1/dedicated/cluster/{serviceName}/serviceInfos", "serviceName", serviceName), Body: body}, nil)
+}
+
 func init() {
-	ovh.RegisterOperations(opListAvailabilities)
+	ovh.RegisterOperations(opChangeContact, opConfirmTermination, opGetCluster, opGetServiceInfos, opListAvailabilities, opListAvailabilitiesRaws, opListClusters, opTerminate, opUpdateServiceInfos)
 }

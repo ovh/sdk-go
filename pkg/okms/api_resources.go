@@ -15,7 +15,7 @@ import (
 )
 
 // opGetResource is GetResource's entry in the operation registry (ovh.Operations).
-var opGetResource = &ovh.Operation{Name: "okms.GetResource", Method: http.MethodGet, Path: "/v2/okms/resource/{okmsId}", Summary: "Get an OKMS service", IAMActions: []string{"okms:apiovh:resource/get"}}
+var opGetResource = &ovh.Operation{Name: "okms.GetResource", Method: http.MethodGet, Path: "/v2/okms/resource/{okmsId}", Summary: "Get an OKMS service", IAMActions: []string{"okms:apiovh:resource/get"}, SchemasVersion: "1.0"}
 
 // GetResourceParams holds the optional parameters of GetResource.
 type GetResourceParams struct {
@@ -37,7 +37,7 @@ func (s *Service) GetResource(ctx context.Context, okmsID string, params ...GetR
 }
 
 // opListResources is AllResources's entry in the operation registry (ovh.Operations).
-var opListResources = &ovh.Operation{Name: "okms.AllResources", Method: http.MethodGet, Path: "/v2/okms/resource", Summary: "List OKMS services", IAMActions: []string{"okms:apiovh:resource/get"}}
+var opListResources = &ovh.Operation{Name: "okms.AllResources", Method: http.MethodGet, Path: "/v2/okms/resource", Summary: "List OKMS services", IAMActions: []string{"okms:apiovh:resource/get"}, SchemasVersion: "1.0"}
 
 // ListResourcesParams holds the optional parameters of ListResources.
 type ListResourcesParams struct {
@@ -58,7 +58,7 @@ func (s *Service) AllResources(ctx context.Context, params ...ListResourcesParam
 }
 
 // opUpdateResource is UpdateResource's entry in the operation registry (ovh.Operations).
-var opUpdateResource = &ovh.Operation{Name: "okms.UpdateResource", Method: http.MethodPut, Path: "/v2/okms/resource/{okmsId}", Summary: "Update an OKMS service", IAMActions: []string{"okms:apiovh:resource/update"}}
+var opUpdateResource = &ovh.Operation{Name: "okms.UpdateResource", Method: http.MethodPut, Path: "/v2/okms/resource/{okmsId}", Summary: "Update an OKMS service", IAMActions: []string{"okms:apiovh:resource/update"}, SchemasVersion: "1.0"}
 
 // UpdateResource calls PUT /v2/okms/resource/{okmsId}: Update an OKMS service
 //

@@ -15,7 +15,7 @@ import (
 )
 
 // opGetBackup is GetBackup's entry in the operation registry (ovh.Operations).
-var opGetBackup = &ovh.Operation{Name: "vmwareclouddirector.GetBackup", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/backup/{backupId}", Summary: "Get a backup service", IAMActions: []string{"vmwareCloudDirectorBackup:apiovh:get"}}
+var opGetBackup = &ovh.Operation{Name: "vmwareclouddirector.GetBackup", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/backup/{backupId}", Summary: "Get a backup service", IAMActions: []string{"vmwareCloudDirectorBackup:apiovh:get"}, SchemasVersion: "1.0"}
 
 // GetBackup calls GET /v2/vmwareCloudDirector/backup/{backupId}: Get a backup service
 //
@@ -30,7 +30,7 @@ func (s *Service) GetBackup(ctx context.Context, backupID string) (*VmwareCloudD
 }
 
 // opGetBackupTask is GetBackupTask's entry in the operation registry (ovh.Operations).
-var opGetBackupTask = &ovh.Operation{Name: "vmwareclouddirector.GetBackupTask", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/backup/{backupId}/task/{taskId}", Summary: "Get a backup task", IAMActions: []string{"vmwareCloudDirectorBackup:apiovh:task/get"}}
+var opGetBackupTask = &ovh.Operation{Name: "vmwareclouddirector.GetBackupTask", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/backup/{backupId}/task/{taskId}", Summary: "Get a backup task", IAMActions: []string{"vmwareCloudDirectorBackup:apiovh:task/get"}, SchemasVersion: "1.0"}
 
 // GetBackupTask calls GET /v2/vmwareCloudDirector/backup/{backupId}/task/{taskId}: Get a backup task
 //
@@ -46,7 +46,7 @@ func (s *Service) GetBackupTask(ctx context.Context, backupID string, taskID str
 }
 
 // opListBackupTasks is AllBackupTasks's entry in the operation registry (ovh.Operations).
-var opListBackupTasks = &ovh.Operation{Name: "vmwareclouddirector.AllBackupTasks", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/backup/{backupId}/task", Summary: "List backup tasks", IAMActions: []string{"vmwareCloudDirectorBackup:apiovh:task/get"}}
+var opListBackupTasks = &ovh.Operation{Name: "vmwareclouddirector.AllBackupTasks", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/backup/{backupId}/task", Summary: "List backup tasks", IAMActions: []string{"vmwareCloudDirectorBackup:apiovh:task/get"}, SchemasVersion: "1.0"}
 
 // AllBackupTasks iterates over GET /v2/vmwareCloudDirector/backup/{backupId}/task (List backup tasks),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -63,7 +63,7 @@ func (s *Service) AllBackupTasks(ctx context.Context, backupID string) iter.Seq2
 }
 
 // opListBackups is AllBackups's entry in the operation registry (ovh.Operations).
-var opListBackups = &ovh.Operation{Name: "vmwareclouddirector.AllBackups", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/backup", Summary: "List backup services", IAMActions: []string{"vmwareCloudDirectorBackup:apiovh:get"}}
+var opListBackups = &ovh.Operation{Name: "vmwareclouddirector.AllBackups", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/backup", Summary: "List backup services", IAMActions: []string{"vmwareCloudDirectorBackup:apiovh:get"}, SchemasVersion: "1.0"}
 
 // ListBackupsParams holds the optional parameters of ListBackups.
 type ListBackupsParams struct {
@@ -83,7 +83,7 @@ func (s *Service) AllBackups(ctx context.Context, params ...ListBackupsParams) i
 }
 
 // opUpdateBackup is UpdateBackup's entry in the operation registry (ovh.Operations).
-var opUpdateBackup = &ovh.Operation{Name: "vmwareclouddirector.UpdateBackup", Method: http.MethodPut, Path: "/v2/vmwareCloudDirector/backup/{backupId}", Summary: "Update a backup service", IAMActions: []string{"vmwareCloudDirectorBackup:apiovh:edit"}}
+var opUpdateBackup = &ovh.Operation{Name: "vmwareclouddirector.UpdateBackup", Method: http.MethodPut, Path: "/v2/vmwareCloudDirector/backup/{backupId}", Summary: "Update a backup service", IAMActions: []string{"vmwareCloudDirectorBackup:apiovh:edit"}, SchemasVersion: "1.0"}
 
 // UpdateBackup calls PUT /v2/vmwareCloudDirector/backup/{backupId}: Update a backup service
 //

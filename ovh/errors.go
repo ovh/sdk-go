@@ -43,6 +43,8 @@ type APIError struct {
 	Message string
 	// QueryID identifies the request to OVHcloud support (the X-Ovh-Queryid header).
 	QueryID string
+	// SchemasVersion is the X-Schemas-Version the API answered with (/v2 routes only), or "".
+	SchemasVersion string
 	// Body is the raw response body.
 	Body []byte
 }
@@ -85,12 +87,13 @@ func (e *APIError) Is(target error) bool {
 
 func newAPIError(op *Operation, req *Request, resp *http.Response, body []byte) *APIError {
 	e := &APIError{
-		Method:     req.Method,
-		Path:       req.Path,
-		StatusCode: resp.StatusCode,
-		Status:     resp.Status,
-		QueryID:    resp.Header.Get("X-Ovh-Queryid"),
-		Body:       body,
+		Method:         req.Method,
+		Path:           req.Path,
+		StatusCode:     resp.StatusCode,
+		Status:         resp.Status,
+		QueryID:        resp.Header.Get("X-Ovh-Queryid"),
+		SchemasVersion: resp.Header.Get(schemasVersionHeader),
+		Body:           body,
 	}
 	var payload struct {
 		Class   string `json:"class"`
@@ -126,6 +129,9 @@ func (e *APIError) Error() string {
 			s = "s"
 		}
 		fmt.Fprintf(&b, "; requires the IAM action%s %s", s, strings.Join(e.IAMActions, ", "))
+	}
+	if e.StatusCode == http.StatusBadRequest && strings.Contains(e.Message, "Unknown version") {
+		b.WriteString("; this SDK release targets an X-Schemas-Version the API no longer serves: upgrade the SDK")
 	}
 	return b.String()
 }

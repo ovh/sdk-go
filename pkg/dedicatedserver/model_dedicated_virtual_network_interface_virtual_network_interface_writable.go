@@ -6,7 +6,7 @@
 
 package dedicatedserver
 
-// DedicatedVirtualNetworkInterfaceVirtualNetworkInterfaceWritable Your VirtualNetworkInterface. Without the read-only fields, which the API sets.
+// DedicatedVirtualNetworkInterfaceVirtualNetworkInterfaceWritable is DedicatedVirtualNetworkInterfaceVirtualNetworkInterface without its read-only fields, which the API sets: the form a request body takes.
 type DedicatedVirtualNetworkInterfaceVirtualNetworkInterfaceWritable struct {
 	// VirtualNetworkInterface mode
 	Mode *DedicatedVirtualNetworkInterfaceVirtualNetworkInterfaceModeEnum `json:"mode,omitempty"`

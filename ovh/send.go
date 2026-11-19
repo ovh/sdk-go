@@ -60,8 +60,8 @@ func (c *Client) send(request *http.Request) (*http.Response, int, error) {
 		delay, ok := retryDelay(c.retry, attempt, resp)
 		if !ok || waited+delay > MaxRetryWait {
 			// The server asked us to wait longer than MaxDelay allows, or this request has
-			// waited long enough. Hand the response back untouched -- its body has not been
-			// consumed -- rather than retry too early.
+			// waited long enough. Hand the response back untouched (its body has not been
+			// consumed) rather than retry too early.
 			return c.capResponseBody(resp), attempt, nil
 		}
 		waited += delay

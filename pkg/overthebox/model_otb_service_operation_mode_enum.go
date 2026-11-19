@@ -13,5 +13,6 @@ type OtbServiceOperationModeEnum string
 const (
 	OtbServiceOperationModeEnumOverthebox       OtbServiceOperationModeEnum = "overthebox"
 	OtbServiceOperationModeEnumOvertheboxLegacy OtbServiceOperationModeEnum = "overthebox-legacy"
+	OtbServiceOperationModeEnumUpath            OtbServiceOperationModeEnum = "upath"
 	OtbServiceOperationModeEnumWireguard        OtbServiceOperationModeEnum = "wireguard"
 )

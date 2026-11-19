@@ -15,7 +15,7 @@ import (
 )
 
 // opGetOrganization is GetOrganization's entry in the operation registry (ovh.Operations).
-var opGetOrganization = &ovh.Operation{Name: "vmwareclouddirector.GetOrganization", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}", Summary: "Get an organization", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/get"}}
+var opGetOrganization = &ovh.Operation{Name: "vmwareclouddirector.GetOrganization", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}", Summary: "Get an organization", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/get"}, SchemasVersion: "1.0"}
 
 // GetOrganization calls GET /v2/vmwareCloudDirector/organization/{organizationId}: Get an organization
 //
@@ -31,7 +31,7 @@ func (s *Service) GetOrganization(ctx context.Context, organizationID string) (*
 }
 
 // opGetOrganizationTask is GetOrganizationTask's entry in the operation registry (ovh.Operations).
-var opGetOrganizationTask = &ovh.Operation{Name: "vmwareclouddirector.GetOrganizationTask", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/task/{taskId}", Summary: "Get an organization task", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/task/get"}}
+var opGetOrganizationTask = &ovh.Operation{Name: "vmwareclouddirector.GetOrganizationTask", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/task/{taskId}", Summary: "Get an organization task", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/task/get"}, SchemasVersion: "1.0"}
 
 // GetOrganizationTask calls GET /v2/vmwareCloudDirector/organization/{organizationId}/task/{taskId}: Get an organization task
 //
@@ -47,7 +47,7 @@ func (s *Service) GetOrganizationTask(ctx context.Context, organizationID string
 }
 
 // opListOrganizationTasks is AllOrganizationTasks's entry in the operation registry (ovh.Operations).
-var opListOrganizationTasks = &ovh.Operation{Name: "vmwareclouddirector.AllOrganizationTasks", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/task", Summary: "List organization tasks", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/task/get"}}
+var opListOrganizationTasks = &ovh.Operation{Name: "vmwareclouddirector.AllOrganizationTasks", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/task", Summary: "List organization tasks", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/task/get"}, SchemasVersion: "1.0"}
 
 // AllOrganizationTasks iterates over GET /v2/vmwareCloudDirector/organization/{organizationId}/task (List organization tasks),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -64,7 +64,7 @@ func (s *Service) AllOrganizationTasks(ctx context.Context, organizationID strin
 }
 
 // opListOrganizations is AllOrganizations's entry in the operation registry (ovh.Operations).
-var opListOrganizations = &ovh.Operation{Name: "vmwareclouddirector.AllOrganizations", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization", Summary: "List organizations", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/get"}}
+var opListOrganizations = &ovh.Operation{Name: "vmwareclouddirector.AllOrganizations", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization", Summary: "List organizations", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/get"}, SchemasVersion: "1.0"}
 
 // ListOrganizationsParams holds the optional parameters of ListOrganizations.
 type ListOrganizationsParams struct {
@@ -84,7 +84,7 @@ func (s *Service) AllOrganizations(ctx context.Context, params ...ListOrganizati
 }
 
 // opPasswordOrganization is PasswordOrganization's entry in the operation registry (ovh.Operations).
-var opPasswordOrganization = &ovh.Operation{Name: "vmwareclouddirector.PasswordOrganization", Method: http.MethodPost, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/password", Summary: "Reset the administrator password", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/resetPassword"}}
+var opPasswordOrganization = &ovh.Operation{Name: "vmwareclouddirector.PasswordOrganization", Method: http.MethodPost, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/password", Summary: "Reset the administrator password", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/resetPassword"}, SchemasVersion: "1.0"}
 
 // PasswordOrganization calls POST /v2/vmwareCloudDirector/organization/{organizationId}/password: Reset the administrator password
 //
@@ -100,7 +100,7 @@ func (s *Service) PasswordOrganization(ctx context.Context, organizationID strin
 }
 
 // opUpdateOrganization is UpdateOrganization's entry in the operation registry (ovh.Operations).
-var opUpdateOrganization = &ovh.Operation{Name: "vmwareclouddirector.UpdateOrganization", Method: http.MethodPut, Path: "/v2/vmwareCloudDirector/organization/{organizationId}", Summary: "Update an organization", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/edit"}}
+var opUpdateOrganization = &ovh.Operation{Name: "vmwareclouddirector.UpdateOrganization", Method: http.MethodPut, Path: "/v2/vmwareCloudDirector/organization/{organizationId}", Summary: "Update an organization", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/edit"}, SchemasVersion: "1.0"}
 
 // UpdateOrganization calls PUT /v2/vmwareCloudDirector/organization/{organizationId}: Update an organization
 //

@@ -47,9 +47,12 @@ func (s *Service) GetServiceInfos(ctx context.Context, serviceName string) (*Ser
 }
 
 // opGetSqlserver is GetSqlserver's entry in the operation registry (ovh.Operations).
-var opGetSqlserver = &ovh.Operation{Name: "licensesqlserver.GetSqlserver", Method: http.MethodGet, Path: "/v1/license/sqlserver/{serviceName}", Summary: "Get this object properties", IAMActions: []string{"licenseSqlServer:apiovh:get"}}
+var opGetSqlserver = &ovh.Operation{Name: "licensesqlserver.GetSqlserver", Method: http.MethodGet, Path: "/v1/license/sqlserver/{serviceName}", Summary: "Get a SQL Server license", IAMActions: []string{"licenseSqlServer:apiovh:get"}}
 
-// GetSqlserver calls GET /v1/license/sqlserver/{serviceName}: Get this object properties
+// GetSqlserver calls GET /v1/license/sqlserver/{serviceName}: Get a SQL Server license
+//
+// Returns the license ID, version, status, the IP address the license is attached to, and the
+// creation date.
 //
 // Arguments:
 //   - serviceName: The name of your SQL Server license
@@ -73,9 +76,12 @@ func (s *Service) AllSqlservers(ctx context.Context, params ...ListSqlserversPar
 }
 
 // opGetTasks is GetTasks's entry in the operation registry (ovh.Operations).
-var opGetTasks = &ovh.Operation{Name: "licensesqlserver.GetTasks", Method: http.MethodGet, Path: "/v1/license/sqlserver/{serviceName}/tasks/{taskId}", Summary: "Get this object properties", IAMActions: []string{"licenseSqlServer:apiovh:tasks/get"}}
+var opGetTasks = &ovh.Operation{Name: "licensesqlserver.GetTasks", Method: http.MethodGet, Path: "/v1/license/sqlserver/{serviceName}/tasks/{taskId}", Summary: "Get a license task", IAMActions: []string{"licenseSqlServer:apiovh:tasks/get"}}
 
-// GetTasks calls GET /v1/license/sqlserver/{serviceName}/tasks/{taskId}: Get this object properties
+// GetTasks calls GET /v1/license/sqlserver/{serviceName}/tasks/{taskId}: Get a license task
+//
+// Returns the action, status, creation date, completion date and last update of a task linked to a
+// license.
 //
 // Arguments:
 //   - serviceName: The name of your SQL Server license
@@ -100,9 +106,11 @@ func (s *Service) AllTasks(ctx context.Context, serviceName string, params ...Li
 }
 
 // opListOrderableVersions is ListOrderableVersions's entry in the operation registry (ovh.Operations).
-var opListOrderableVersions = &ovh.Operation{Name: "licensesqlserver.ListOrderableVersions", Method: http.MethodGet, Path: "/v1/license/sqlserver/orderableVersions", Summary: "Get the orderable Sql Server versions", IAMActions: []string{"account:apiovh:licenseSqlServer/orderableVersions/get"}}
+var opListOrderableVersions = &ovh.Operation{Name: "licensesqlserver.ListOrderableVersions", Method: http.MethodGet, Path: "/v1/license/sqlserver/orderableVersions", Summary: "Get the orderable SQL Server versions", IAMActions: []string{"account:apiovh:licenseSqlServer/orderableVersions/get"}}
 
-// ListOrderableVersions calls GET /v1/license/sqlserver/orderableVersions: Get the orderable Sql Server versions
+// ListOrderableVersions calls GET /v1/license/sqlserver/orderableVersions: Get the orderable SQL Server versions
+//
+// Returns the versions that can be ordered for the given IP, grouped by service type.
 //
 // Arguments:
 //   - ip: Your license Ip
@@ -113,7 +121,7 @@ func (s *Service) ListOrderableVersions(ctx context.Context, ip string) ([]Licen
 }
 
 // opListSqlservers is ListSqlservers's entry in the operation registry (ovh.Operations).
-var opListSqlservers = &ovh.Operation{Name: "licensesqlserver.ListSqlservers", Method: http.MethodGet, Path: "/v1/license/sqlserver", Summary: "List available services", IAMActions: []string{"licenseSqlServer:apiovh:get"}}
+var opListSqlservers = &ovh.Operation{Name: "licensesqlserver.ListSqlservers", Method: http.MethodGet, Path: "/v1/license/sqlserver", Summary: "List your SQL Server licenses", IAMActions: []string{"licenseSqlServer:apiovh:get"}}
 
 // ListSqlserversParams holds the optional parameters of ListSqlservers.
 type ListSqlserversParams struct {
@@ -121,7 +129,10 @@ type ListSqlserversParams struct {
 	IAMTags map[string][]IAMResourceTagFilter `ovh:"query,iamTags"`
 }
 
-// ListSqlservers calls GET /v1/license/sqlserver: List available services
+// ListSqlservers calls GET /v1/license/sqlserver: List your SQL Server licenses
+//
+// Returns the names of the SQL Server licenses of the account; each name is the service name used
+// by the other calls.
 //
 // Requires the IAM action licenseSqlServer:apiovh:get.
 func (s *Service) ListSqlservers(ctx context.Context, params ...ListSqlserversParams) ([]string, error) {
@@ -129,7 +140,7 @@ func (s *Service) ListSqlservers(ctx context.Context, params ...ListSqlserversPa
 }
 
 // opListTasks is ListTasks's entry in the operation registry (ovh.Operations).
-var opListTasks = &ovh.Operation{Name: "licensesqlserver.ListTasks", Method: http.MethodGet, Path: "/v1/license/sqlserver/{serviceName}/tasks", Summary: "Tasks linked to this license", IAMActions: []string{"licenseSqlServer:apiovh:tasks/get"}}
+var opListTasks = &ovh.Operation{Name: "licensesqlserver.ListTasks", Method: http.MethodGet, Path: "/v1/license/sqlserver/{serviceName}/tasks", Summary: "List the tasks of a SQL Server license", IAMActions: []string{"licenseSqlServer:apiovh:tasks/get"}}
 
 // ListTasksParams holds the optional parameters of ListTasks.
 type ListTasksParams struct {
@@ -139,7 +150,10 @@ type ListTasksParams struct {
 	Status *LicenseTaskStateEnum `ovh:"query,status"`
 }
 
-// ListTasks calls GET /v1/license/sqlserver/{serviceName}/tasks: Tasks linked to this license
+// ListTasks calls GET /v1/license/sqlserver/{serviceName}/tasks: List the tasks of a SQL Server license
+//
+// Returns the IDs of the tasks linked to the license, each task records an action such as a version
+// upgrade.
 //
 // Arguments:
 //   - serviceName: The name of your SQL Server license

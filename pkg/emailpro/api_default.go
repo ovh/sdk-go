@@ -8,6 +8,7 @@ package emailpro
 
 import (
 	"context"
+	"iter"
 	"net/http"
 
 	"github.com/ovh/sdk-go/ovh"
@@ -400,6 +401,392 @@ func (s *Service) EnableDomainDkim(ctx context.Context, service string, domainNa
 	return ovh.Call[*EmailProTask](ctx, s.c, &ovh.Request{Operation: opEnableDomainDkim, Method: http.MethodPost, Path: ovh.Path("/v1/email/pro/{service}/domain/{domainName}/dkim/{selectorName}/enable", "service", service, "domainName", domainName, "selectorName", selectorName)})
 }
 
+// opGetAccount is GetAccount's entry in the operation registry (ovh.Operations).
+var opGetAccount = &ovh.Operation{Name: "emailpro.GetAccount", Method: http.MethodGet, Path: "/v1/email/pro/{service}/account/{email}", Summary: "Get an email account", IAMActions: []string{"emailPro:apiovh:account/get"}}
+
+// GetAccount calls GET /v1/email/pro/{service}/account/{email}: Get an email account
+//
+// Returns the login, names, domain, state, quota and usage of the email account, its renewal and
+// expiration settings, and its spam and virus configuration.
+//
+// Arguments:
+//   - service: Service
+//   - email: Email
+//
+// Requires the IAM action emailPro:apiovh:account/get.
+func (s *Service) GetAccount(ctx context.Context, service string, email string) (*EmailProAccountNative, error) {
+	return ovh.Call[*EmailProAccountNative](ctx, s.c, &ovh.Request{Operation: opGetAccount, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/account/{email}", "service", service, "email", email)})
+}
+
+// AllAccounts iterates over every object ListAccounts lists, fetching each one with
+// GetAccount only when the loop reaches it. An object deleted in the meantime is skipped; on
+// any other error it yields the error and stops.
+func (s *Service) AllAccounts(ctx context.Context, service string, params ...ListAccountsParams) iter.Seq2[*EmailProAccountNative, error] {
+	return ovh.Each(ctx,
+		func(ctx context.Context) ([]string, error) {
+			return s.ListAccounts(ctx, service, params...)
+		},
+		func(ctx context.Context, listedID string) (*EmailProAccountNative, error) {
+			return s.GetAccount(ctx, service, listedID)
+		})
+}
+
+// opGetAccountAlias is GetAccountAlias's entry in the operation registry (ovh.Operations).
+var opGetAccountAlias = &ovh.Operation{Name: "emailpro.GetAccountAlias", Method: http.MethodGet, Path: "/v1/email/pro/{service}/account/{email}/alias/{alias}", Summary: "Get an account alias", IAMActions: []string{"emailPro:apiovh:account/alias/get"}}
+
+// GetAccountAlias calls GET /v1/email/pro/{service}/account/{email}/alias/{alias}: Get an account alias
+//
+// Returns the alias address, its creation date and the ID of its pending task, if any
+// (`taskPendingId`).
+//
+// Arguments:
+//   - service: Service
+//   - email: Email
+//   - alias: Alias
+//
+// Requires the IAM action emailPro:apiovh:account/alias/get.
+func (s *Service) GetAccountAlias(ctx context.Context, service string, email string, alias string) (*EmailProAccountAlias, error) {
+	return ovh.Call[*EmailProAccountAlias](ctx, s.c, &ovh.Request{Operation: opGetAccountAlias, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/account/{email}/alias/{alias}", "service", service, "email", email, "alias", alias)})
+}
+
+// AllAccountAlias iterates over every object ListAccountAlias lists, fetching each one with
+// GetAccountAlias only when the loop reaches it. An object deleted in the meantime is skipped; on
+// any other error it yields the error and stops.
+func (s *Service) AllAccountAlias(ctx context.Context, service string, email string) iter.Seq2[*EmailProAccountAlias, error] {
+	return ovh.Each(ctx,
+		func(ctx context.Context) ([]string, error) {
+			return s.ListAccountAlias(ctx, service, email)
+		},
+		func(ctx context.Context, listedID string) (*EmailProAccountAlias, error) {
+			return s.GetAccountAlias(ctx, service, email, listedID)
+		})
+}
+
+// opGetAccountDiagnostics is GetAccountDiagnostics's entry in the operation registry (ovh.Operations).
+var opGetAccountDiagnostics = &ovh.Operation{Name: "emailpro.GetAccountDiagnostics", Method: http.MethodGet, Path: "/v1/email/pro/{service}/account/{email}/diagnostics", Summary: "Get the account diagnosis", IAMActions: []string{"emailPro:apiovh:account/diagnostics/get"}}
+
+// GetAccountDiagnostics calls GET /v1/email/pro/{service}/account/{email}/diagnostics: Get the account diagnosis
+//
+// Returns the results of the last diagnosis of the email account: account locked, suspended or
+// flagged as spammer, login with its credentials, MX and SRV records, and sending and receiving of
+// emails.
+//
+// Arguments:
+//   - service: Service
+//   - email: Email
+//
+// Requires the IAM action emailPro:apiovh:account/diagnostics/get.
+func (s *Service) GetAccountDiagnostics(ctx context.Context, service string, email string) (*EmailProAccountDiagnosis, error) {
+	return ovh.Call[*EmailProAccountDiagnosis](ctx, s.c, &ovh.Request{Operation: opGetAccountDiagnostics, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/account/{email}/diagnostics", "service", service, "email", email)})
+}
+
+// opGetAccountFullAccess is GetAccountFullAccess's entry in the operation registry (ovh.Operations).
+var opGetAccountFullAccess = &ovh.Operation{Name: "emailpro.GetAccountFullAccess", Method: http.MethodGet, Path: "/v1/email/pro/{service}/account/{email}/fullAccess/{allowedAccountId}", Summary: "Get a full access permission", IAMActions: []string{"emailPro:apiovh:account/fullAccess/get"}}
+
+// GetAccountFullAccess calls GET /v1/email/pro/{service}/account/{email}/fullAccess/{allowedAccountId}: Get a full access permission
+//
+// Returns the ID of the account that has full access to the email account, and the creation date of
+// the permission.
+//
+// Arguments:
+//   - service: Service
+//   - email: Email
+//   - allowedAccountID: Allowed account ID
+//
+// Requires the IAM action emailPro:apiovh:account/fullAccess/get.
+func (s *Service) GetAccountFullAccess(ctx context.Context, service string, email string, allowedAccountID int) (*EmailProAccountFullAccess, error) {
+	return ovh.Call[*EmailProAccountFullAccess](ctx, s.c, &ovh.Request{Operation: opGetAccountFullAccess, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/account/{email}/fullAccess/{allowedAccountId}", "service", service, "email", email, "allowedAccountId", allowedAccountID)})
+}
+
+// AllAccountFullAccess iterates over every object ListAccountFullAccess lists, fetching each one with
+// GetAccountFullAccess only when the loop reaches it. An object deleted in the meantime is skipped; on
+// any other error it yields the error and stops.
+func (s *Service) AllAccountFullAccess(ctx context.Context, service string, email string) iter.Seq2[*EmailProAccountFullAccess, error] {
+	return ovh.Each(ctx,
+		func(ctx context.Context) ([]int, error) {
+			return s.ListAccountFullAccess(ctx, service, email)
+		},
+		func(ctx context.Context, listedID int) (*EmailProAccountFullAccess, error) {
+			return s.GetAccountFullAccess(ctx, service, email, listedID)
+		})
+}
+
+// opGetAccountSendAs is GetAccountSendAs's entry in the operation registry (ovh.Operations).
+var opGetAccountSendAs = &ovh.Operation{Name: "emailpro.GetAccountSendAs", Method: http.MethodGet, Path: "/v1/email/pro/{service}/account/{email}/sendAs/{allowedAccountId}", Summary: "Get a send as permission", IAMActions: []string{"emailPro:apiovh:account/sendAs/get"}}
+
+// GetAccountSendAs calls GET /v1/email/pro/{service}/account/{email}/sendAs/{allowedAccountId}: Get a send as permission
+//
+// Returns the ID of the account allowed to send emails as the email account, and the creation date
+// of the permission.
+//
+// Arguments:
+//   - service: Service
+//   - email: Email
+//   - allowedAccountID: Allowed account ID
+//
+// Requires the IAM action emailPro:apiovh:account/sendAs/get.
+func (s *Service) GetAccountSendAs(ctx context.Context, service string, email string, allowedAccountID int) (*EmailProAccountSendAs, error) {
+	return ovh.Call[*EmailProAccountSendAs](ctx, s.c, &ovh.Request{Operation: opGetAccountSendAs, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/account/{email}/sendAs/{allowedAccountId}", "service", service, "email", email, "allowedAccountId", allowedAccountID)})
+}
+
+// AllAccountSendAs iterates over every object ListAccountSendAs lists, fetching each one with
+// GetAccountSendAs only when the loop reaches it. An object deleted in the meantime is skipped; on
+// any other error it yields the error and stops.
+func (s *Service) AllAccountSendAs(ctx context.Context, service string, email string) iter.Seq2[*EmailProAccountSendAs, error] {
+	return ovh.Each(ctx,
+		func(ctx context.Context) ([]int, error) {
+			return s.ListAccountSendAs(ctx, service, email)
+		},
+		func(ctx context.Context, listedID int) (*EmailProAccountSendAs, error) {
+			return s.GetAccountSendAs(ctx, service, email, listedID)
+		})
+}
+
+// opGetAccountSendOnBehalfTo is GetAccountSendOnBehalfTo's entry in the operation registry (ovh.Operations).
+var opGetAccountSendOnBehalfTo = &ovh.Operation{Name: "emailpro.GetAccountSendOnBehalfTo", Method: http.MethodGet, Path: "/v1/email/pro/{service}/account/{email}/sendOnBehalfTo/{allowedAccountId}", Summary: "Get a send on behalf permission", IAMActions: []string{"emailPro:apiovh:account/sendOnBehalfTo/get"}}
+
+// GetAccountSendOnBehalfTo calls GET /v1/email/pro/{service}/account/{email}/sendOnBehalfTo/{allowedAccountId}: Get a send on behalf permission
+//
+// Returns the ID of the account allowed to send emails on behalf of the email account, and the
+// creation date of the permission.
+//
+// Arguments:
+//   - service: Service
+//   - email: Email
+//   - allowedAccountID: Allowed account ID
+//
+// Requires the IAM action emailPro:apiovh:account/sendOnBehalfTo/get.
+func (s *Service) GetAccountSendOnBehalfTo(ctx context.Context, service string, email string, allowedAccountID int) (*EmailProAccountSendOnBehalfTo, error) {
+	return ovh.Call[*EmailProAccountSendOnBehalfTo](ctx, s.c, &ovh.Request{Operation: opGetAccountSendOnBehalfTo, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/account/{email}/sendOnBehalfTo/{allowedAccountId}", "service", service, "email", email, "allowedAccountId", allowedAccountID)})
+}
+
+// AllAccountSendOnBehalfTos iterates over every object ListAccountSendOnBehalfTos lists, fetching each one with
+// GetAccountSendOnBehalfTo only when the loop reaches it. An object deleted in the meantime is skipped; on
+// any other error it yields the error and stops.
+func (s *Service) AllAccountSendOnBehalfTos(ctx context.Context, service string, email string) iter.Seq2[*EmailProAccountSendOnBehalfTo, error] {
+	return ovh.Each(ctx,
+		func(ctx context.Context) ([]int, error) {
+			return s.ListAccountSendOnBehalfTos(ctx, service, email)
+		},
+		func(ctx context.Context, listedID int) (*EmailProAccountSendOnBehalfTo, error) {
+			return s.GetAccountSendOnBehalfTo(ctx, service, email, listedID)
+		})
+}
+
+// opGetAccountTasks is GetAccountTasks's entry in the operation registry (ovh.Operations).
+var opGetAccountTasks = &ovh.Operation{Name: "emailpro.GetAccountTasks", Method: http.MethodGet, Path: "/v1/email/pro/{service}/account/{email}/tasks/{id}", Summary: "Get a task", IAMActions: []string{"emailPro:apiovh:account/tasks/get"}}
+
+// GetAccountTasks calls GET /v1/email/pro/{service}/account/{email}/tasks/{id}: Get a task
+//
+// Returns the function, status, creation date and completion date of the task. The status is todo,
+// doing, done, error or cancelled.
+//
+// Arguments:
+//   - service: Service
+//   - email: Email
+//   - id: Id
+//
+// Requires the IAM action emailPro:apiovh:account/tasks/get.
+func (s *Service) GetAccountTasks(ctx context.Context, service string, email string, id int) (*EmailProTask, error) {
+	return ovh.Call[*EmailProTask](ctx, s.c, &ovh.Request{Operation: opGetAccountTasks, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/account/{email}/tasks/{id}", "service", service, "email", email, "id", id)})
+}
+
+// AllAccountTasks iterates over every object ListAccountTasks lists, fetching each one with
+// GetAccountTasks only when the loop reaches it. An object deleted in the meantime is skipped; on
+// any other error it yields the error and stops.
+func (s *Service) AllAccountTasks(ctx context.Context, service string, email string) iter.Seq2[*EmailProTask, error] {
+	return ovh.Each(ctx,
+		func(ctx context.Context) ([]int, error) {
+			return s.ListAccountTasks(ctx, service, email)
+		},
+		func(ctx context.Context, listedID int) (*EmailProTask, error) {
+			return s.GetAccountTasks(ctx, service, email, listedID)
+		})
+}
+
+// opGetBillingMigrated is GetBillingMigrated's entry in the operation registry (ovh.Operations).
+var opGetBillingMigrated = &ovh.Operation{Name: "emailpro.GetBillingMigrated", Method: http.MethodGet, Path: "/v1/email/pro/{service}/billingMigrated", Summary: "Get the billing migration status", IAMActions: []string{"emailPro:apiovh:billingMigrated/get"}}
+
+// GetBillingMigrated calls GET /v1/email/pro/{service}/billingMigrated: Get the billing migration status
+//
+// Returns `true` when the service is billed by the new OVHcloud billing system.
+//
+// Arguments:
+//   - service: Service
+//
+// Requires the IAM action emailPro:apiovh:billingMigrated/get.
+func (s *Service) GetBillingMigrated(ctx context.Context, service string) (bool, error) {
+	return ovh.Call[bool](ctx, s.c, &ovh.Request{Operation: opGetBillingMigrated, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/billingMigrated", "service", service)})
+}
+
+// opGetBillingPlan is GetBillingPlan's entry in the operation registry (ovh.Operations).
+var opGetBillingPlan = &ovh.Operation{Name: "emailpro.GetBillingPlan", Method: http.MethodGet, Path: "/v1/email/pro/{service}/billingPlan", Summary: "Get the billing plan", IAMActions: []string{"emailPro:apiovh:billingPlan/get"}}
+
+// GetBillingPlan calls GET /v1/email/pro/{service}/billingPlan: Get the billing plan
+//
+// Returns the name of the billing plan of the service.
+//
+// Arguments:
+//   - service: Service
+//
+// Requires the IAM action emailPro:apiovh:billingPlan/get.
+func (s *Service) GetBillingPlan(ctx context.Context, service string) (string, error) {
+	return ovh.Call[string](ctx, s.c, &ovh.Request{Operation: opGetBillingPlan, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/billingPlan", "service", service)})
+}
+
+// opGetDomain is GetDomain's entry in the operation registry (ovh.Operations).
+var opGetDomain = &ovh.Operation{Name: "emailpro.GetDomain", Method: http.MethodGet, Path: "/v1/email/pro/{service}/domain/{domainName}", Summary: "Get a domain", IAMActions: []string{"emailPro:apiovh:domain/get"}}
+
+// GetDomain calls GET /v1/email/pro/{service}/domain/{domainName}: Get a domain
+//
+// Returns the type and state of the domain, its MX, SRV and SPF records with their validation
+// status, the expected records, its DKIM diagnostics, its MX relay and its aliases.
+//
+// Arguments:
+//   - service: Service
+//   - domainName: Domain name
+//
+// Requires the IAM action emailPro:apiovh:domain/get.
+func (s *Service) GetDomain(ctx context.Context, service string, domainName string) (*EmailProDomainNative, error) {
+	return ovh.Call[*EmailProDomainNative](ctx, s.c, &ovh.Request{Operation: opGetDomain, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/domain/{domainName}", "service", service, "domainName", domainName)})
+}
+
+// AllDomains iterates over every object ListDomains lists, fetching each one with
+// GetDomain only when the loop reaches it. An object deleted in the meantime is skipped; on
+// any other error it yields the error and stops.
+func (s *Service) AllDomains(ctx context.Context, service string, params ...ListDomainsParams) iter.Seq2[*EmailProDomainNative, error] {
+	return ovh.Each(ctx,
+		func(ctx context.Context) ([]string, error) {
+			return s.ListDomains(ctx, service, params...)
+		},
+		func(ctx context.Context, listedID string) (*EmailProDomainNative, error) {
+			return s.GetDomain(ctx, service, listedID)
+		})
+}
+
+// opGetDomainDisclaimer is GetDomainDisclaimer's entry in the operation registry (ovh.Operations).
+var opGetDomainDisclaimer = &ovh.Operation{Name: "emailpro.GetDomainDisclaimer", Method: http.MethodGet, Path: "/v1/email/pro/{service}/domain/{domainName}/disclaimer", Summary: "Get the disclaimer", IAMActions: []string{"emailPro:apiovh:domain/disclaimer/get"}}
+
+// GetDomainDisclaimer calls GET /v1/email/pro/{service}/domain/{domainName}/disclaimer: Get the disclaimer
+//
+// Returns the content of the disclaimer added at the bottom of the emails of the domain, and
+// whether it is added only to external emails.
+//
+// Arguments:
+//   - service: Service
+//   - domainName: Domain name
+//
+// Requires the IAM action emailPro:apiovh:domain/disclaimer/get.
+func (s *Service) GetDomainDisclaimer(ctx context.Context, service string, domainName string) (*EmailProDisclaimerNative, error) {
+	return ovh.Call[*EmailProDisclaimerNative](ctx, s.c, &ovh.Request{Operation: opGetDomainDisclaimer, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/domain/{domainName}/disclaimer", "service", service, "domainName", domainName)})
+}
+
+// opGetDomainDkim is GetDomainDkim's entry in the operation registry (ovh.Operations).
+var opGetDomainDkim = &ovh.Operation{Name: "emailpro.GetDomainDkim", Method: http.MethodGet, Path: "/v1/email/pro/{service}/domain/{domainName}/dkim/{selectorName}", Summary: "Get a DKIM selector", IAMActions: []string{"emailPro:apiovh:domain/dkim/get"}}
+
+// GetDomainDkim calls GET /v1/email/pro/{service}/domain/{domainName}/dkim/{selectorName}: Get a DKIM selector
+//
+// Returns the status of the DKIM selector, the CNAME record to add to the DNS zone with its target
+// and validation status, and the header used for the DKIM signature.
+//
+// Arguments:
+//   - service: Service
+//   - domainName: Domain name
+//   - selectorName: Selector name
+//
+// Requires the IAM action emailPro:apiovh:domain/dkim/get.
+func (s *Service) GetDomainDkim(ctx context.Context, service string, domainName string, selectorName string) (*EmailProDkim, error) {
+	return ovh.Call[*EmailProDkim](ctx, s.c, &ovh.Request{Operation: opGetDomainDkim, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/domain/{domainName}/dkim/{selectorName}", "service", service, "domainName", domainName, "selectorName", selectorName)})
+}
+
+// AllDomainDkims iterates over every object ListDomainDkims lists, fetching each one with
+// GetDomainDkim only when the loop reaches it. An object deleted in the meantime is skipped; on
+// any other error it yields the error and stops.
+func (s *Service) AllDomainDkims(ctx context.Context, service string, domainName string) iter.Seq2[*EmailProDkim, error] {
+	return ovh.Each(ctx,
+		func(ctx context.Context) ([]string, error) {
+			return s.ListDomainDkims(ctx, service, domainName)
+		},
+		func(ctx context.Context, listedID string) (*EmailProDkim, error) {
+			return s.GetDomainDkim(ctx, service, domainName, listedID)
+		})
+}
+
+// opGetExternalContact is GetExternalContact's entry in the operation registry (ovh.Operations).
+var opGetExternalContact = &ovh.Operation{Name: "emailpro.GetExternalContact", Method: http.MethodGet, Path: "/v1/email/pro/{service}/externalContact/{externalEmailAddress}", Summary: "Get an external contact", IAMActions: []string{"emailPro:apiovh:externalContact/get"}}
+
+// GetExternalContact calls GET /v1/email/pro/{service}/externalContact/{externalEmailAddress}: Get an external contact
+//
+// Returns the email address, names, state and Global Address List visibility of the external
+// contact.
+//
+// Arguments:
+//   - service: Service
+//   - externalEmailAddress: External email address
+//
+// Requires the IAM action emailPro:apiovh:externalContact/get.
+func (s *Service) GetExternalContact(ctx context.Context, service string, externalEmailAddress string) (*EmailProExternalContactNative, error) {
+	return ovh.Call[*EmailProExternalContactNative](ctx, s.c, &ovh.Request{Operation: opGetExternalContact, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/externalContact/{externalEmailAddress}", "service", service, "externalEmailAddress", externalEmailAddress)})
+}
+
+// AllExternalContacts iterates over every object ListExternalContacts lists, fetching each one with
+// GetExternalContact only when the loop reaches it. An object deleted in the meantime is skipped; on
+// any other error it yields the error and stops.
+func (s *Service) AllExternalContacts(ctx context.Context, service string, params ...ListExternalContactsParams) iter.Seq2[*EmailProExternalContactNative, error] {
+	return ovh.Each(ctx,
+		func(ctx context.Context) ([]string, error) {
+			return s.ListExternalContacts(ctx, service, params...)
+		},
+		func(ctx context.Context, listedID string) (*EmailProExternalContactNative, error) {
+			return s.GetExternalContact(ctx, service, listedID)
+		})
+}
+
+// opGetPro is GetPro's entry in the operation registry (ovh.Operations).
+var opGetPro = &ovh.Operation{Name: "emailpro.GetPro", Method: http.MethodGet, Path: "/v1/email/pro/{service}", Summary: "Get the Email Pro service", IAMActions: []string{"emailPro:apiovh:get"}}
+
+// GetPro calls GET /v1/email/pro/{service}: Get the Email Pro service
+//
+// Returns the state, offer, hostname and web interface URL of the service, its message size limits,
+// its password and lockout policy, and its spam and virus configuration.
+//
+// Arguments:
+//   - service: Service
+//
+// Requires the IAM action emailPro:apiovh:get.
+func (s *Service) GetPro(ctx context.Context, service string) (*EmailProServiceNativeWithIAM, error) {
+	return ovh.Call[*EmailProServiceNativeWithIAM](ctx, s.c, &ovh.Request{Operation: opGetPro, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}", "service", service)})
+}
+
+// AllPros iterates over every object ListPros lists, fetching each one with
+// GetPro only when the loop reaches it. An object deleted in the meantime is skipped; on
+// any other error it yields the error and stops.
+func (s *Service) AllPros(ctx context.Context, params ...ListProsParams) iter.Seq2[*EmailProServiceNativeWithIAM, error] {
+	return ovh.Each(ctx,
+		func(ctx context.Context) ([]string, error) {
+			return s.ListPros(ctx, params...)
+		},
+		func(ctx context.Context, listedID string) (*EmailProServiceNativeWithIAM, error) {
+			return s.GetPro(ctx, listedID)
+		})
+}
+
+// opGetServer is GetServer's entry in the operation registry (ovh.Operations).
+var opGetServer = &ovh.Operation{Name: "emailpro.GetServer", Method: http.MethodGet, Path: "/v1/email/pro/{service}/server", Summary: "Get the server", IAMActions: []string{"emailPro:apiovh:server/get"}}
+
+// GetServer calls GET /v1/email/pro/{service}/server: Get the server
+//
+// Returns the state, IPv4 and IPv6 addresses, version and disk usage of the server, and whether its
+// A, AAAA and PTR DNS records are valid.
+//
+// Arguments:
+//   - service: Service
+//
+// Requires the IAM action emailPro:apiovh:server/get.
+func (s *Service) GetServer(ctx context.Context, service string) (*EmailProServer, error) {
+	return ovh.Call[*EmailProServer](ctx, s.c, &ovh.Request{Operation: opGetServer, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/server", "service", service)})
+}
+
 // opGetServiceInfos is GetServiceInfos's entry in the operation registry (ovh.Operations).
 var opGetServiceInfos = &ovh.Operation{Name: "emailpro.GetServiceInfos", Method: http.MethodGet, Path: "/v1/email/pro/{service}/serviceInfos", Summary: "Get service information", IAMActions: []string{"emailPro:apiovh:serviceInfos/get"}}
 
@@ -413,6 +800,159 @@ var opGetServiceInfos = &ovh.Operation{Name: "emailpro.GetServiceInfos", Method:
 // Requires the IAM action emailPro:apiovh:serviceInfos/get.
 func (s *Service) GetServiceInfos(ctx context.Context, service string) (*ServicesService, error) {
 	return ovh.Call[*ServicesService](ctx, s.c, &ovh.Request{Operation: opGetServiceInfos, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/serviceInfos", "service", service)})
+}
+
+// opGetTask is GetTask's entry in the operation registry (ovh.Operations).
+var opGetTask = &ovh.Operation{Name: "emailpro.GetTask", Method: http.MethodGet, Path: "/v1/email/pro/{service}/task/{id}", Summary: "Get a task", IAMActions: []string{"emailPro:apiovh:task/get"}}
+
+// GetTask calls GET /v1/email/pro/{service}/task/{id}: Get a task
+//
+// Returns the function, status, creation date and completion date of the task. The status is todo,
+// doing, done, error or cancelled.
+//
+// Arguments:
+//   - service: Service
+//   - id: Id
+//
+// Requires the IAM action emailPro:apiovh:task/get.
+func (s *Service) GetTask(ctx context.Context, service string, id int) (*EmailProTask, error) {
+	return ovh.Call[*EmailProTask](ctx, s.c, &ovh.Request{Operation: opGetTask, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/task/{id}", "service", service, "id", id)})
+}
+
+// AllTasks iterates over every object ListTasks lists, fetching each one with
+// GetTask only when the loop reaches it. An object deleted in the meantime is skipped; on
+// any other error it yields the error and stops.
+func (s *Service) AllTasks(ctx context.Context, service string) iter.Seq2[*EmailProTask, error] {
+	return ovh.Each(ctx,
+		func(ctx context.Context) ([]int, error) {
+			return s.ListTasks(ctx, service)
+		},
+		func(ctx context.Context, listedID int) (*EmailProTask, error) {
+			return s.GetTask(ctx, service, listedID)
+		})
+}
+
+// opListAccountAlias is ListAccountAlias's entry in the operation registry (ovh.Operations).
+var opListAccountAlias = &ovh.Operation{Name: "emailpro.ListAccountAlias", Method: http.MethodGet, Path: "/v1/email/pro/{service}/account/{email}/alias", Summary: "List account aliases", IAMActions: []string{"emailPro:apiovh:account/alias/get"}}
+
+// ListAccountAlias calls GET /v1/email/pro/{service}/account/{email}/alias: List account aliases
+//
+// Returns the aliases of the email account: extra addresses that deliver to the same mailbox.
+//
+// Arguments:
+//   - service: Service
+//   - email: Email
+//
+// Requires the IAM action emailPro:apiovh:account/alias/get.
+func (s *Service) ListAccountAlias(ctx context.Context, service string, email string) ([]string, error) {
+	return ovh.Call[[]string](ctx, s.c, &ovh.Request{Operation: opListAccountAlias, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/account/{email}/alias", "service", service, "email", email)})
+}
+
+// opListAccountFullAccess is ListAccountFullAccess's entry in the operation registry (ovh.Operations).
+var opListAccountFullAccess = &ovh.Operation{Name: "emailpro.ListAccountFullAccess", Method: http.MethodGet, Path: "/v1/email/pro/{service}/account/{email}/fullAccess", Summary: "List full access permissions", IAMActions: []string{"emailPro:apiovh:account/fullAccess/get"}}
+
+// ListAccountFullAccess calls GET /v1/email/pro/{service}/account/{email}/fullAccess: List full access permissions
+//
+// Returns the IDs of the accounts that have full access to the email account.
+//
+// Arguments:
+//   - service: Service
+//   - email: Email
+//
+// Requires the IAM action emailPro:apiovh:account/fullAccess/get.
+func (s *Service) ListAccountFullAccess(ctx context.Context, service string, email string) ([]int, error) {
+	return ovh.Call[[]int](ctx, s.c, &ovh.Request{Operation: opListAccountFullAccess, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/account/{email}/fullAccess", "service", service, "email", email)})
+}
+
+// opListAccountSendAs is ListAccountSendAs's entry in the operation registry (ovh.Operations).
+var opListAccountSendAs = &ovh.Operation{Name: "emailpro.ListAccountSendAs", Method: http.MethodGet, Path: "/v1/email/pro/{service}/account/{email}/sendAs", Summary: "List send as permissions", IAMActions: []string{"emailPro:apiovh:account/sendAs/get"}}
+
+// ListAccountSendAs calls GET /v1/email/pro/{service}/account/{email}/sendAs: List send as permissions
+//
+// Returns the IDs of the accounts allowed to send emails as the email account.
+//
+// Arguments:
+//   - service: Service
+//   - email: Email
+//
+// Requires the IAM action emailPro:apiovh:account/sendAs/get.
+func (s *Service) ListAccountSendAs(ctx context.Context, service string, email string) ([]int, error) {
+	return ovh.Call[[]int](ctx, s.c, &ovh.Request{Operation: opListAccountSendAs, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/account/{email}/sendAs", "service", service, "email", email)})
+}
+
+// opListAccountSendOnBehalfTos is ListAccountSendOnBehalfTos's entry in the operation registry (ovh.Operations).
+var opListAccountSendOnBehalfTos = &ovh.Operation{Name: "emailpro.ListAccountSendOnBehalfTos", Method: http.MethodGet, Path: "/v1/email/pro/{service}/account/{email}/sendOnBehalfTo", Summary: "List send on behalf permissions", IAMActions: []string{"emailPro:apiovh:account/sendOnBehalfTo/get"}}
+
+// ListAccountSendOnBehalfTos calls GET /v1/email/pro/{service}/account/{email}/sendOnBehalfTo: List send on behalf permissions
+//
+// Returns the IDs of the accounts allowed to send emails on behalf of the email account.
+//
+// Arguments:
+//   - service: Service
+//   - email: Email
+//
+// Requires the IAM action emailPro:apiovh:account/sendOnBehalfTo/get.
+func (s *Service) ListAccountSendOnBehalfTos(ctx context.Context, service string, email string) ([]int, error) {
+	return ovh.Call[[]int](ctx, s.c, &ovh.Request{Operation: opListAccountSendOnBehalfTos, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/account/{email}/sendOnBehalfTo", "service", service, "email", email)})
+}
+
+// opListAccountTasks is ListAccountTasks's entry in the operation registry (ovh.Operations).
+var opListAccountTasks = &ovh.Operation{Name: "emailpro.ListAccountTasks", Method: http.MethodGet, Path: "/v1/email/pro/{service}/account/{email}/tasks", Summary: "List email account tasks", IAMActions: []string{"emailPro:apiovh:account/tasks/get"}}
+
+// ListAccountTasks calls GET /v1/email/pro/{service}/account/{email}/tasks: List email account tasks
+//
+// Returns the IDs of the tasks of the email account. Read one with `GET
+// /email/pro/{service}/task/{id}`.
+//
+// Arguments:
+//   - service: Service
+//   - email: Email
+//
+// Requires the IAM action emailPro:apiovh:account/tasks/get.
+func (s *Service) ListAccountTasks(ctx context.Context, service string, email string) ([]int, error) {
+	return ovh.Call[[]int](ctx, s.c, &ovh.Request{Operation: opListAccountTasks, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/account/{email}/tasks", "service", service, "email", email)})
+}
+
+// opListAccounts is ListAccounts's entry in the operation registry (ovh.Operations).
+var opListAccounts = &ovh.Operation{Name: "emailpro.ListAccounts", Method: http.MethodGet, Path: "/v1/email/pro/{service}/account", Summary: "List email accounts", IAMActions: []string{"emailPro:apiovh:account/get"}}
+
+// ListAccountsParams holds the optional parameters of ListAccounts.
+type ListAccountsParams struct {
+	// Filter the value of id property (like)
+	ID *int `ovh:"query,id"`
+	// Filter the value of primaryEmailAddress property (like)
+	PrimaryEmailAddress *string `ovh:"query,primaryEmailAddress"`
+}
+
+// ListAccounts calls GET /v1/email/pro/{service}/account: List email accounts
+//
+// Returns the email addresses of the email accounts of the service. Filter them by
+// `primaryEmailAddress` or `id`.
+//
+// Arguments:
+//   - service: Service
+//
+// Requires the IAM action emailPro:apiovh:account/get.
+func (s *Service) ListAccounts(ctx context.Context, service string, params ...ListAccountsParams) ([]string, error) {
+	return ovh.Call[[]string](ctx, s.c, &ovh.Request{Operation: opListAccounts, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/account", "service", service), Params: ovh.Optional(params)})
+}
+
+// opListDomainDisclaimerAttributes is ListDomainDisclaimerAttributes's entry in the operation registry (ovh.Operations).
+var opListDomainDisclaimerAttributes = &ovh.Operation{Name: "emailpro.ListDomainDisclaimerAttributes", Method: http.MethodGet, Path: "/v1/email/pro/{service}/domain/{domainName}/disclaimerAttribute", Summary: "List disclaimer attributes", IAMActions: []string{"emailPro:apiovh:domain/disclaimerAttribute/get"}}
+
+// ListDomainDisclaimerAttributes calls GET /v1/email/pro/{service}/domain/{domainName}/disclaimerAttribute: List disclaimer attributes
+//
+// Returns the Active Directory attributes that can be substituted in the disclaimer content, such
+// as DisplayName, Email or PhoneNumber. Insert one in the disclaimer content as
+// `%%AttributeName%%`.
+//
+// Arguments:
+//   - service: Service
+//   - domainName: Domain name
+//
+// Requires the IAM action emailPro:apiovh:domain/disclaimerAttribute/get.
+func (s *Service) ListDomainDisclaimerAttributes(ctx context.Context, service string, domainName string) ([]EmailProDisclaimerAttributeEnum, error) {
+	return ovh.Call[[]EmailProDisclaimerAttributeEnum](ctx, s.c, &ovh.Request{Operation: opListDomainDisclaimerAttributes, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/domain/{domainName}/disclaimerAttribute", "service", service, "domainName", domainName)})
 }
 
 // opListDomainDkimSelectors is ListDomainDkimSelectors's entry in the operation registry (ovh.Operations).
@@ -429,6 +969,109 @@ var opListDomainDkimSelectors = &ovh.Operation{Name: "emailpro.ListDomainDkimSel
 // Requires the IAM action emailPro:apiovh:domain/dkimSelector/get.
 func (s *Service) ListDomainDkimSelectors(ctx context.Context, service string, domainName string) ([]string, error) {
 	return ovh.Call[[]string](ctx, s.c, &ovh.Request{Operation: opListDomainDkimSelectors, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/domain/{domainName}/dkimSelector", "service", service, "domainName", domainName)})
+}
+
+// opListDomainDkims is ListDomainDkims's entry in the operation registry (ovh.Operations).
+var opListDomainDkims = &ovh.Operation{Name: "emailpro.ListDomainDkims", Method: http.MethodGet, Path: "/v1/email/pro/{service}/domain/{domainName}/dkim", Summary: "List DKIM selectors", IAMActions: []string{"emailPro:apiovh:domain/dkim/get"}}
+
+// ListDomainDkims calls GET /v1/email/pro/{service}/domain/{domainName}/dkim: List DKIM selectors
+//
+// Returns the names of the DKIM selectors of the domain. Get one to read its DNS record and its
+// status.
+//
+// Arguments:
+//   - service: Service
+//   - domainName: Domain name
+//
+// Requires the IAM action emailPro:apiovh:domain/dkim/get.
+func (s *Service) ListDomainDkims(ctx context.Context, service string, domainName string) ([]string, error) {
+	return ovh.Call[[]string](ctx, s.c, &ovh.Request{Operation: opListDomainDkims, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/domain/{domainName}/dkim", "service", service, "domainName", domainName)})
+}
+
+// opListDomains is ListDomains's entry in the operation registry (ovh.Operations).
+var opListDomains = &ovh.Operation{Name: "emailpro.ListDomains", Method: http.MethodGet, Path: "/v1/email/pro/{service}/domain", Summary: "List domains", IAMActions: []string{"emailPro:apiovh:domain/get"}}
+
+// ListDomainsParams holds the optional parameters of ListDomains.
+type ListDomainsParams struct {
+	// Filter the value of state property (=)
+	State *EmailProObjectStateEnum `ovh:"query,state"`
+}
+
+// ListDomains calls GET /v1/email/pro/{service}/domain: List domains
+//
+// Returns the names of the domains attached to the service. Filter them by `state`, such as ok or
+// suspended.
+//
+// Arguments:
+//   - service: Service
+//
+// Requires the IAM action emailPro:apiovh:domain/get.
+func (s *Service) ListDomains(ctx context.Context, service string, params ...ListDomainsParams) ([]string, error) {
+	return ovh.Call[[]string](ctx, s.c, &ovh.Request{Operation: opListDomains, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/domain", "service", service), Params: ovh.Optional(params)})
+}
+
+// opListExternalContacts is ListExternalContacts's entry in the operation registry (ovh.Operations).
+var opListExternalContacts = &ovh.Operation{Name: "emailpro.ListExternalContacts", Method: http.MethodGet, Path: "/v1/email/pro/{service}/externalContact", Summary: "List external contacts", IAMActions: []string{"emailPro:apiovh:externalContact/get"}}
+
+// ListExternalContactsParams holds the optional parameters of ListExternalContacts.
+type ListExternalContactsParams struct {
+	// Filter the value of displayName property (like)
+	DisplayName *string `ovh:"query,displayName"`
+	// Filter the value of externalEmailAddress property (like)
+	ExternalEmailAddress *string `ovh:"query,externalEmailAddress"`
+	// Filter the value of firstName property (like)
+	FirstName *string `ovh:"query,firstName"`
+	// Filter the value of id property (like)
+	ID *int `ovh:"query,id"`
+	// Filter the value of lastName property (like)
+	LastName *string `ovh:"query,lastName"`
+}
+
+// ListExternalContacts calls GET /v1/email/pro/{service}/externalContact: List external contacts
+//
+// Returns the email addresses of the external contacts of the service. Filter them by
+// `externalEmailAddress`, `firstName`, `lastName`, `displayName` or `id`.
+//
+// Arguments:
+//   - service: Service
+//
+// Requires the IAM action emailPro:apiovh:externalContact/get.
+func (s *Service) ListExternalContacts(ctx context.Context, service string, params ...ListExternalContactsParams) ([]string, error) {
+	return ovh.Call[[]string](ctx, s.c, &ovh.Request{Operation: opListExternalContacts, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/externalContact", "service", service), Params: ovh.Optional(params)})
+}
+
+// opListPros is ListPros's entry in the operation registry (ovh.Operations).
+var opListPros = &ovh.Operation{Name: "emailpro.ListPros", Method: http.MethodGet, Path: "/v1/email/pro", Summary: "List Email Pro services", IAMActions: []string{"emailPro:apiovh:get"}}
+
+// ListProsParams holds the optional parameters of ListPros.
+type ListProsParams struct {
+	// Filter resources on IAM tags
+	IAMTags map[string][]IAMResourceTagFilter `ovh:"query,iamTags"`
+}
+
+// ListPros calls GET /v1/email/pro: List Email Pro services
+//
+// Returns the names of the Email Pro services of the account. Filter them by IAM tags with
+// `iamTags`.
+//
+// Requires the IAM action emailPro:apiovh:get.
+func (s *Service) ListPros(ctx context.Context, params ...ListProsParams) ([]string, error) {
+	return ovh.Call[[]string](ctx, s.c, &ovh.Request{Operation: opListPros, Method: http.MethodGet, Path: "/v1/email/pro", Params: ovh.Optional(params)})
+}
+
+// opListTasks is ListTasks's entry in the operation registry (ovh.Operations).
+var opListTasks = &ovh.Operation{Name: "emailpro.ListTasks", Method: http.MethodGet, Path: "/v1/email/pro/{service}/task", Summary: "List service tasks", IAMActions: []string{"emailPro:apiovh:task/get"}}
+
+// ListTasks calls GET /v1/email/pro/{service}/task: List service tasks
+//
+// Returns the IDs of the tasks of the service. Get one to follow its function, status and dates.
+//
+// Arguments:
+//   - service: Service
+//
+// Requires the IAM action emailPro:apiovh:task/get.
+func (s *Service) ListTasks(ctx context.Context, service string) ([]int, error) {
+	return ovh.Call[[]int](ctx, s.c, &ovh.Request{Operation: opListTasks, Method: http.MethodGet, Path: ovh.Path("/v1/email/pro/{service}/task", "service", service)})
 }
 
 // opTerminateAccount is TerminateAccount's entry in the operation registry (ovh.Operations).
@@ -571,5 +1214,5 @@ func (s *Service) UpdateServiceInfos(ctx context.Context, service string, body S
 }
 
 func init() {
-	ovh.RegisterOperations(opChangeContact, opChangePasswordAccount, opCreateAccountAlias, opCreateAccountDiagnostics, opCreateAccountFullAccess, opCreateAccountSendAs, opCreateAccountSendOnBehalfTo, opCreateDomain, opCreateDomainDisclaimer, opCreateDomainDkim, opCreateExternalContact, opDeleteAccount, opDeleteAccountAlias, opDeleteAccountFullAccess, opDeleteAccountSendAs, opDeleteAccountSendOnBehalfTo, opDeleteDomain, opDeleteDomainDisclaimer, opDeleteDomainDkim, opDeleteExternalContact, opDisableDomainDkim, opEnableDomainDkim, opGetServiceInfos, opListDomainDkimSelectors, opTerminateAccount, opUpdateAccount, opUpdateDomain, opUpdateDomainDisclaimer, opUpdateExternalContact, opUpdateFlagsOnAllAccounts, opUpdatePro, opUpdateServiceInfos)
+	ovh.RegisterOperations(opChangeContact, opChangePasswordAccount, opCreateAccountAlias, opCreateAccountDiagnostics, opCreateAccountFullAccess, opCreateAccountSendAs, opCreateAccountSendOnBehalfTo, opCreateDomain, opCreateDomainDisclaimer, opCreateDomainDkim, opCreateExternalContact, opDeleteAccount, opDeleteAccountAlias, opDeleteAccountFullAccess, opDeleteAccountSendAs, opDeleteAccountSendOnBehalfTo, opDeleteDomain, opDeleteDomainDisclaimer, opDeleteDomainDkim, opDeleteExternalContact, opDisableDomainDkim, opEnableDomainDkim, opGetAccount, opGetAccountAlias, opGetAccountDiagnostics, opGetAccountFullAccess, opGetAccountSendAs, opGetAccountSendOnBehalfTo, opGetAccountTasks, opGetBillingMigrated, opGetBillingPlan, opGetDomain, opGetDomainDisclaimer, opGetDomainDkim, opGetExternalContact, opGetPro, opGetServer, opGetServiceInfos, opGetTask, opListAccountAlias, opListAccountFullAccess, opListAccountSendAs, opListAccountSendOnBehalfTos, opListAccountTasks, opListAccounts, opListDomainDisclaimerAttributes, opListDomainDkimSelectors, opListDomainDkims, opListDomains, opListExternalContacts, opListPros, opListTasks, opTerminateAccount, opUpdateAccount, opUpdateDomain, opUpdateDomainDisclaimer, opUpdateExternalContact, opUpdateFlagsOnAllAccounts, opUpdatePro, opUpdateServiceInfos)
 }

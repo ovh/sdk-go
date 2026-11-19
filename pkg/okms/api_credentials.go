@@ -15,7 +15,7 @@ import (
 )
 
 // opCreateResourceCredential is CreateResourceCredential's entry in the operation registry (ovh.Operations).
-var opCreateResourceCredential = &ovh.Operation{Name: "okms.CreateResourceCredential", Method: http.MethodPost, Path: "/v2/okms/resource/{okmsId}/credential", Summary: "Create an access credential", IAMActions: []string{"okms:apiovh:credential/create"}}
+var opCreateResourceCredential = &ovh.Operation{Name: "okms.CreateResourceCredential", Method: http.MethodPost, Path: "/v2/okms/resource/{okmsId}/credential", Summary: "Create an access credential", IAMActions: []string{"okms:apiovh:credential/create"}, SchemasVersion: "1.0"}
 
 // CreateResourceCredential calls POST /v2/okms/resource/{okmsId}/credential: Create an access credential
 //
@@ -34,7 +34,7 @@ func (s *Service) CreateResourceCredential(ctx context.Context, okmsID string, b
 }
 
 // opDeleteResourceCredential is DeleteResourceCredential's entry in the operation registry (ovh.Operations).
-var opDeleteResourceCredential = &ovh.Operation{Name: "okms.DeleteResourceCredential", Method: http.MethodDelete, Path: "/v2/okms/resource/{okmsId}/credential/{credentialId}", Summary: "Delete an access credential", IAMActions: []string{"okms:apiovh:credential/delete"}}
+var opDeleteResourceCredential = &ovh.Operation{Name: "okms.DeleteResourceCredential", Method: http.MethodDelete, Path: "/v2/okms/resource/{okmsId}/credential/{credentialId}", Summary: "Delete an access credential", IAMActions: []string{"okms:apiovh:credential/delete"}, SchemasVersion: "1.0"}
 
 // DeleteResourceCredential calls DELETE /v2/okms/resource/{okmsId}/credential/{credentialId}: Delete an access credential
 //
@@ -50,7 +50,7 @@ func (s *Service) DeleteResourceCredential(ctx context.Context, okmsID string, c
 }
 
 // opGetResourceCredential is GetResourceCredential's entry in the operation registry (ovh.Operations).
-var opGetResourceCredential = &ovh.Operation{Name: "okms.GetResourceCredential", Method: http.MethodGet, Path: "/v2/okms/resource/{okmsId}/credential/{credentialId}", Summary: "Get an access credential", IAMActions: []string{"okms:apiovh:credential/get"}}
+var opGetResourceCredential = &ovh.Operation{Name: "okms.GetResourceCredential", Method: http.MethodGet, Path: "/v2/okms/resource/{okmsId}/credential/{credentialId}", Summary: "Get an access credential", IAMActions: []string{"okms:apiovh:credential/get"}, SchemasVersion: "1.0"}
 
 // GetResourceCredential calls GET /v2/okms/resource/{okmsId}/credential/{credentialId}: Get an access credential
 //
@@ -67,7 +67,7 @@ func (s *Service) GetResourceCredential(ctx context.Context, okmsID string, cred
 }
 
 // opListResourceCredentials is AllResourceCredentials's entry in the operation registry (ovh.Operations).
-var opListResourceCredentials = &ovh.Operation{Name: "okms.AllResourceCredentials", Method: http.MethodGet, Path: "/v2/okms/resource/{okmsId}/credential", Summary: "List access credentials", IAMActions: []string{"okms:apiovh:credential/get"}}
+var opListResourceCredentials = &ovh.Operation{Name: "okms.AllResourceCredentials", Method: http.MethodGet, Path: "/v2/okms/resource/{okmsId}/credential", Summary: "List access credentials", IAMActions: []string{"okms:apiovh:credential/get"}, SchemasVersion: "1.0"}
 
 // AllResourceCredentials iterates over GET /v2/okms/resource/{okmsId}/credential (List access credentials),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it

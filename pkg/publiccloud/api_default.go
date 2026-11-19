@@ -15,7 +15,7 @@ import (
 )
 
 // opGetProject is GetProject's entry in the operation registry (ovh.Operations).
-var opGetProject = &ovh.Operation{Name: "publiccloud.GetProject", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}", Summary: "Get a project", IAMActions: []string{"publicCloudProject:apiovh:get"}}
+var opGetProject = &ovh.Operation{Name: "publiccloud.GetProject", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}", Summary: "Get a project", IAMActions: []string{"publicCloudProject:apiovh:get"}, SchemasVersion: "1.0"}
 
 // GetProject calls GET /v2/publicCloud/project/{projectId}: Get a project
 //
@@ -30,7 +30,7 @@ func (s *Service) GetProject(ctx context.Context, projectID string) (*PublicClou
 }
 
 // opListProjects is AllProjects's entry in the operation registry (ovh.Operations).
-var opListProjects = &ovh.Operation{Name: "publiccloud.AllProjects", Method: http.MethodGet, Path: "/v2/publicCloud/project", Summary: "List projects", IAMActions: []string{"publicCloudProject:apiovh:get"}}
+var opListProjects = &ovh.Operation{Name: "publiccloud.AllProjects", Method: http.MethodGet, Path: "/v2/publicCloud/project", Summary: "List projects", IAMActions: []string{"publicCloudProject:apiovh:get"}, SchemasVersion: "1.0"}
 
 // ListProjectsParams holds the optional parameters of ListProjects.
 type ListProjectsParams struct {

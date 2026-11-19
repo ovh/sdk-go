@@ -17,7 +17,7 @@ import (
 )
 
 // opCreateContactMean is CreateContactMean's entry in the operation registry (ovh.Operations).
-var opCreateContactMean = &ovh.Operation{Name: "notification.CreateContactMean", Method: http.MethodPost, Path: "/v2/notification/contactMean", Summary: "Create a contact mean", IAMActions: []string{"account:apiovh:notification/contactMean/create"}}
+var opCreateContactMean = &ovh.Operation{Name: "notification.CreateContactMean", Method: http.MethodPost, Path: "/v2/notification/contactMean", Summary: "Create a contact mean", IAMActions: []string{"account:apiovh:notification/contactMean/create"}, SchemasVersion: "1.0"}
 
 // CreateContactMean calls POST /v2/notification/contactMean: Create a contact mean
 //
@@ -30,7 +30,7 @@ func (s *Service) CreateContactMean(ctx context.Context, body NotificationContac
 }
 
 // opCreateRouting is CreateRouting's entry in the operation registry (ovh.Operations).
-var opCreateRouting = &ovh.Operation{Name: "notification.CreateRouting", Method: http.MethodPost, Path: "/v2/notification/routing", Summary: "Create a routing", IAMActions: []string{"account:apiovh:notification/routing/create"}}
+var opCreateRouting = &ovh.Operation{Name: "notification.CreateRouting", Method: http.MethodPost, Path: "/v2/notification/routing", Summary: "Create a routing", IAMActions: []string{"account:apiovh:notification/routing/create"}, SchemasVersion: "1.0"}
 
 // CreateRouting calls POST /v2/notification/routing: Create a routing
 //
@@ -43,7 +43,7 @@ func (s *Service) CreateRouting(ctx context.Context, body NotificationRoutingPos
 }
 
 // opDeleteContactMean is DeleteContactMean's entry in the operation registry (ovh.Operations).
-var opDeleteContactMean = &ovh.Operation{Name: "notification.DeleteContactMean", Method: http.MethodDelete, Path: "/v2/notification/contactMean/{contactMeanId}", Summary: "Delete the contact mean", IAMActions: []string{"account:apiovh:notification/contactMean/delete"}}
+var opDeleteContactMean = &ovh.Operation{Name: "notification.DeleteContactMean", Method: http.MethodDelete, Path: "/v2/notification/contactMean/{contactMeanId}", Summary: "Delete the contact mean", IAMActions: []string{"account:apiovh:notification/contactMean/delete"}, SchemasVersion: "1.0"}
 
 // DeleteContactMean calls DELETE /v2/notification/contactMean/{contactMeanId}: Delete the contact mean
 //
@@ -56,7 +56,7 @@ func (s *Service) DeleteContactMean(ctx context.Context, contactMeanID string) e
 }
 
 // opDeleteRouting is DeleteRouting's entry in the operation registry (ovh.Operations).
-var opDeleteRouting = &ovh.Operation{Name: "notification.DeleteRouting", Method: http.MethodDelete, Path: "/v2/notification/routing/{routingId}", Summary: "Delete the routing", IAMActions: []string{"account:apiovh:notification/routing/delete"}}
+var opDeleteRouting = &ovh.Operation{Name: "notification.DeleteRouting", Method: http.MethodDelete, Path: "/v2/notification/routing/{routingId}", Summary: "Delete the routing", IAMActions: []string{"account:apiovh:notification/routing/delete"}, SchemasVersion: "1.0"}
 
 // DeleteRouting calls DELETE /v2/notification/routing/{routingId}: Delete the routing
 //
@@ -69,7 +69,7 @@ func (s *Service) DeleteRouting(ctx context.Context, routingID string) error {
 }
 
 // opGetContactMean is GetContactMean's entry in the operation registry (ovh.Operations).
-var opGetContactMean = &ovh.Operation{Name: "notification.GetContactMean", Method: http.MethodGet, Path: "/v2/notification/contactMean/{contactMeanId}", Summary: "Retrieve information about a contact mean", IAMActions: []string{"account:apiovh:notification/contactMean/get"}}
+var opGetContactMean = &ovh.Operation{Name: "notification.GetContactMean", Method: http.MethodGet, Path: "/v2/notification/contactMean/{contactMeanId}", Summary: "Retrieve information about a contact mean", IAMActions: []string{"account:apiovh:notification/contactMean/get"}, SchemasVersion: "1.0"}
 
 // GetContactMean calls GET /v2/notification/contactMean/{contactMeanId}: Retrieve information about a contact mean
 //
@@ -82,7 +82,7 @@ func (s *Service) GetContactMean(ctx context.Context, contactMeanID string) (*No
 }
 
 // opGetContactMeanTask is GetContactMeanTask's entry in the operation registry (ovh.Operations).
-var opGetContactMeanTask = &ovh.Operation{Name: "notification.GetContactMeanTask", Method: http.MethodGet, Path: "/v2/notification/contactMean/{contactMeanId}/task/{taskId}", Summary: "Get a task on a contact mean", IAMActions: []string{"account:apiovh:notification/contactMean/task/get"}}
+var opGetContactMeanTask = &ovh.Operation{Name: "notification.GetContactMeanTask", Method: http.MethodGet, Path: "/v2/notification/contactMean/{contactMeanId}/task/{taskId}", Summary: "Get a task on a contact mean", IAMActions: []string{"account:apiovh:notification/contactMean/task/get"}, SchemasVersion: "1.0"}
 
 // GetContactMeanTask calls GET /v2/notification/contactMean/{contactMeanId}/task/{taskId}: Get a task on a contact mean
 //
@@ -96,7 +96,7 @@ func (s *Service) GetContactMeanTask(ctx context.Context, contactMeanID string, 
 }
 
 // opGetHistory is GetHistory's entry in the operation registry (ovh.Operations).
-var opGetHistory = &ovh.Operation{Name: "notification.GetHistory", Method: http.MethodGet, Path: "/v2/notification/history/{notificationId}", Summary: "Retrieve information about a notification sent to you", IAMActions: []string{"account:apiovh:notification/history/get"}}
+var opGetHistory = &ovh.Operation{Name: "notification.GetHistory", Method: http.MethodGet, Path: "/v2/notification/history/{notificationId}", Summary: "Retrieve information about a notification sent to you", IAMActions: []string{"account:apiovh:notification/history/get"}, SchemasVersion: "1.0"}
 
 // GetHistory calls GET /v2/notification/history/{notificationId}: Retrieve information about a notification sent to you
 //
@@ -109,7 +109,7 @@ func (s *Service) GetHistory(ctx context.Context, notificationID string) (*Notif
 }
 
 // opGetHistoryAttachment is GetHistoryAttachment's entry in the operation registry (ovh.Operations).
-var opGetHistoryAttachment = &ovh.Operation{Name: "notification.GetHistoryAttachment", Method: http.MethodGet, Path: "/v2/notification/history/{notificationId}/attachment/{attachmentName}", Summary: "Get a notification attachment", IAMActions: []string{"account:apiovh:notification/history/attachment/get"}}
+var opGetHistoryAttachment = &ovh.Operation{Name: "notification.GetHistoryAttachment", Method: http.MethodGet, Path: "/v2/notification/history/{notificationId}/attachment/{attachmentName}", Summary: "Get a notification attachment", IAMActions: []string{"account:apiovh:notification/history/attachment/get"}, SchemasVersion: "1.0"}
 
 // GetHistoryAttachment calls GET /v2/notification/history/{notificationId}/attachment/{attachmentName}: Get a notification attachment
 //
@@ -123,7 +123,7 @@ func (s *Service) GetHistoryAttachment(ctx context.Context, notificationID strin
 }
 
 // opGetReference is GetReference's entry in the operation registry (ovh.Operations).
-var opGetReference = &ovh.Operation{Name: "notification.GetReference", Method: http.MethodGet, Path: "/v2/notification/reference", Summary: "Retrieve data referential for /notification endpoints"}
+var opGetReference = &ovh.Operation{Name: "notification.GetReference", Method: http.MethodGet, Path: "/v2/notification/reference", Summary: "Retrieve data referential for /notification endpoints", SchemasVersion: "1.0"}
 
 // GetReference calls GET /v2/notification/reference: Retrieve data referential for /notification endpoints
 func (s *Service) GetReference(ctx context.Context) (*NotificationReferenceReference, error) {
@@ -131,7 +131,7 @@ func (s *Service) GetReference(ctx context.Context) (*NotificationReferenceRefer
 }
 
 // opGetRouting is GetRouting's entry in the operation registry (ovh.Operations).
-var opGetRouting = &ovh.Operation{Name: "notification.GetRouting", Method: http.MethodGet, Path: "/v2/notification/routing/{routingId}", Summary: "Retrieve information about a routing", IAMActions: []string{"account:apiovh:notification/routing/get"}}
+var opGetRouting = &ovh.Operation{Name: "notification.GetRouting", Method: http.MethodGet, Path: "/v2/notification/routing/{routingId}", Summary: "Retrieve information about a routing", IAMActions: []string{"account:apiovh:notification/routing/get"}, SchemasVersion: "1.0"}
 
 // GetRouting calls GET /v2/notification/routing/{routingId}: Retrieve information about a routing
 //
@@ -144,7 +144,7 @@ func (s *Service) GetRouting(ctx context.Context, routingID string) (*Notificati
 }
 
 // opListContactMeanTasks is AllContactMeanTasks's entry in the operation registry (ovh.Operations).
-var opListContactMeanTasks = &ovh.Operation{Name: "notification.AllContactMeanTasks", Method: http.MethodGet, Path: "/v2/notification/contactMean/{contactMeanId}/task", Summary: "Get the list of tasks on a contact mean", IAMActions: []string{"account:apiovh:notification/contactMean/task/get"}}
+var opListContactMeanTasks = &ovh.Operation{Name: "notification.AllContactMeanTasks", Method: http.MethodGet, Path: "/v2/notification/contactMean/{contactMeanId}/task", Summary: "Get the list of tasks on a contact mean", IAMActions: []string{"account:apiovh:notification/contactMean/task/get"}, SchemasVersion: "1.0"}
 
 // AllContactMeanTasks iterates over GET /v2/notification/contactMean/{contactMeanId}/task (Get the list of tasks on a contact mean),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -159,7 +159,7 @@ func (s *Service) AllContactMeanTasks(ctx context.Context, contactMeanID string)
 }
 
 // opListContactMeans is AllContactMeans's entry in the operation registry (ovh.Operations).
-var opListContactMeans = &ovh.Operation{Name: "notification.AllContactMeans", Method: http.MethodGet, Path: "/v2/notification/contactMean", Summary: "Retrieve every contact mean", IAMActions: []string{"account:apiovh:notification/contactMean/get"}}
+var opListContactMeans = &ovh.Operation{Name: "notification.AllContactMeans", Method: http.MethodGet, Path: "/v2/notification/contactMean", Summary: "Retrieve every contact mean", IAMActions: []string{"account:apiovh:notification/contactMean/get"}, SchemasVersion: "1.0"}
 
 // AllContactMeans iterates over GET /v2/notification/contactMean (Retrieve every contact mean),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -171,7 +171,7 @@ func (s *Service) AllContactMeans(ctx context.Context) iter.Seq2[*NotificationCo
 }
 
 // opListHistories is AllHistories's entry in the operation registry (ovh.Operations).
-var opListHistories = &ovh.Operation{Name: "notification.AllHistories", Method: http.MethodGet, Path: "/v2/notification/history", Summary: "Retrieve every notification sent to you", IAMActions: []string{"account:apiovh:notification/history/get"}}
+var opListHistories = &ovh.Operation{Name: "notification.AllHistories", Method: http.MethodGet, Path: "/v2/notification/history", Summary: "Retrieve every notification sent to you", IAMActions: []string{"account:apiovh:notification/history/get"}, SchemasVersion: "1.0"}
 
 // ListHistoriesParams holds the optional parameters of ListHistories.
 type ListHistoriesParams struct {
@@ -203,7 +203,7 @@ func (s *Service) AllHistories(ctx context.Context, params ...ListHistoriesParam
 }
 
 // opListRoutings is AllRoutings's entry in the operation registry (ovh.Operations).
-var opListRoutings = &ovh.Operation{Name: "notification.AllRoutings", Method: http.MethodGet, Path: "/v2/notification/routing", Summary: "Retrieve every routing", IAMActions: []string{"account:apiovh:notification/routing/get"}}
+var opListRoutings = &ovh.Operation{Name: "notification.AllRoutings", Method: http.MethodGet, Path: "/v2/notification/routing", Summary: "Retrieve every routing", IAMActions: []string{"account:apiovh:notification/routing/get"}, SchemasVersion: "1.0"}
 
 // AllRoutings iterates over GET /v2/notification/routing (Retrieve every routing),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -215,7 +215,7 @@ func (s *Service) AllRoutings(ctx context.Context) iter.Seq2[*NotificationRoutin
 }
 
 // opRestartValidationContactMean is RestartValidationContactMean's entry in the operation registry (ovh.Operations).
-var opRestartValidationContactMean = &ovh.Operation{Name: "notification.RestartValidationContactMean", Method: http.MethodPost, Path: "/v2/notification/contactMean/{contactMeanId}/restartValidation", Summary: "Restart the validation process for this contact mean, if you did not receive the OTP", IAMActions: []string{"account:apiovh:notification/contactMean/restartValidation"}}
+var opRestartValidationContactMean = &ovh.Operation{Name: "notification.RestartValidationContactMean", Method: http.MethodPost, Path: "/v2/notification/contactMean/{contactMeanId}/restartValidation", Summary: "Restart the validation process for this contact mean, if you did not receive the OTP", IAMActions: []string{"account:apiovh:notification/contactMean/restartValidation"}, SchemasVersion: "1.0"}
 
 // RestartValidationContactMean calls POST /v2/notification/contactMean/{contactMeanId}/restartValidation: Restart the validation process for this contact mean, if you did not receive the OTP
 //
@@ -228,7 +228,7 @@ func (s *Service) RestartValidationContactMean(ctx context.Context, contactMeanI
 }
 
 // opUpdateContactMean is UpdateContactMean's entry in the operation registry (ovh.Operations).
-var opUpdateContactMean = &ovh.Operation{Name: "notification.UpdateContactMean", Method: http.MethodPut, Path: "/v2/notification/contactMean/{contactMeanId}", Summary: "Update a contact mean", IAMActions: []string{"account:apiovh:notification/contactMean/edit"}}
+var opUpdateContactMean = &ovh.Operation{Name: "notification.UpdateContactMean", Method: http.MethodPut, Path: "/v2/notification/contactMean/{contactMeanId}", Summary: "Update a contact mean", IAMActions: []string{"account:apiovh:notification/contactMean/edit"}, SchemasVersion: "1.0"}
 
 // UpdateContactMean calls PUT /v2/notification/contactMean/{contactMeanId}: Update a contact mean
 //
@@ -242,7 +242,7 @@ func (s *Service) UpdateContactMean(ctx context.Context, contactMeanID string, b
 }
 
 // opUpdateContactMeanTask is UpdateContactMeanTask's entry in the operation registry (ovh.Operations).
-var opUpdateContactMeanTask = &ovh.Operation{Name: "notification.UpdateContactMeanTask", Method: http.MethodPut, Path: "/v2/notification/contactMean/{contactMeanId}/task/{taskId}", Summary: "Update a task on a contact mean", IAMActions: []string{"account:apiovh:notification/contactMean/task/edit"}}
+var opUpdateContactMeanTask = &ovh.Operation{Name: "notification.UpdateContactMeanTask", Method: http.MethodPut, Path: "/v2/notification/contactMean/{contactMeanId}/task/{taskId}", Summary: "Update a task on a contact mean", IAMActions: []string{"account:apiovh:notification/contactMean/task/edit"}, SchemasVersion: "1.0"}
 
 // UpdateContactMeanTask calls PUT /v2/notification/contactMean/{contactMeanId}/task/{taskId}: Update a task on a contact mean
 //
@@ -257,7 +257,7 @@ func (s *Service) UpdateContactMeanTask(ctx context.Context, contactMeanID strin
 }
 
 // opUpdateRouting is UpdateRouting's entry in the operation registry (ovh.Operations).
-var opUpdateRouting = &ovh.Operation{Name: "notification.UpdateRouting", Method: http.MethodPut, Path: "/v2/notification/routing/{routingId}", Summary: "Update a routing", IAMActions: []string{"account:apiovh:notification/routing/edit"}}
+var opUpdateRouting = &ovh.Operation{Name: "notification.UpdateRouting", Method: http.MethodPut, Path: "/v2/notification/routing/{routingId}", Summary: "Update a routing", IAMActions: []string{"account:apiovh:notification/routing/edit"}, SchemasVersion: "1.0"}
 
 // UpdateRouting calls PUT /v2/notification/routing/{routingId}: Update a routing
 //
@@ -271,7 +271,7 @@ func (s *Service) UpdateRouting(ctx context.Context, routingID string, body Noti
 }
 
 // opValidateContactMean is ValidateContactMean's entry in the operation registry (ovh.Operations).
-var opValidateContactMean = &ovh.Operation{Name: "notification.ValidateContactMean", Method: http.MethodPost, Path: "/v2/notification/contactMean/{contactMeanId}/validate", Summary: "Validate this contact mean", IAMActions: []string{"account:apiovh:notification/contactMean/validate"}}
+var opValidateContactMean = &ovh.Operation{Name: "notification.ValidateContactMean", Method: http.MethodPost, Path: "/v2/notification/contactMean/{contactMeanId}/validate", Summary: "Validate this contact mean", IAMActions: []string{"account:apiovh:notification/contactMean/validate"}, SchemasVersion: "1.0"}
 
 // ValidateContactMean calls POST /v2/notification/contactMean/{contactMeanId}/validate: Validate this contact mean
 //

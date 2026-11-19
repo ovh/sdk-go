@@ -2,6 +2,15 @@
 
 Notes for AI coding agents that write code with this SDK, or work in this repository.
 
+## Not go-ovh
+
+- This is not go-ovh (`github.com/ovh/go-ovh`). Do not mix them. Both name their package
+  `ovh`: check the import path. Here: `import "github.com/ovh/sdk-go/ovh"`.
+- Credentials are an OAuth2 service account (`OVH_CLIENT_ID`, `OVH_CLIENT_SECRET`,
+  `OVH_REGION`). No application key, application secret, consumer key or `ovh.conf`.
+- Each API call has a typed method: go-ovh's `client.Get("/me", &out)` is
+  `me.New(client).GetAccountDetails(ctx)`. Use the methods.
+
 ## Find the right method
 
 - Each API section is a package: `github.com/ovh/sdk-go/pkg/<section>`, in lowercase
@@ -13,18 +22,19 @@ Notes for AI coding agents that write code with this SDK, or work in this reposi
   From a project that uses the SDK, this searches the version it uses:
 
   ```shell
-  grep -h '"path":"/v1/vrack/{serviceName}"' "$(go list -m -f '{{.Dir}}' github.com/ovh/sdk-go)"/index/*.jsonl
+  grep -h '"path":"/v1/me"' "$(go list -m -f '{{.Dir}}' github.com/ovh/sdk-go)"/index/*.jsonl
   ```
 
 - The doc comment of each operation starts with its route:
-  `GetVrack calls GET /v1/vrack/{serviceName}`. It then gives the API's description, the
+  `GetAccountDetails calls GET /v1/me`. It then gives the API's description, the
   arguments, the IAM actions the call requires, and whether it is deprecated. A
   deprecated operation names its replacement route when the API gives one: look it up in the
   index too. `AllX` iterators say which list they walk.
 - Routes start with their API version, `/v1/` or `/v2/`. The same path can exist in both.
-- At run time, `ovh.LookupOperation("vrack.GetVrack")` returns an operation's route, summary
-  and required IAM actions, `ovh.MatchOperation("GET", "/v1/vrack/pn-1")` finds the operation
-  of a concrete path, and `ovh.Operations()` lists them all. Only imported packages are known.
+- At run time, `ovh.LookupOperation("me.GetAccountDetails")` returns an operation's route,
+  summary and required IAM actions, `ovh.MatchOperation("GET", "/v1/me/sshKey/my-key")` finds
+  the operation of a concrete path, and `ovh.Operations()` lists them all. Only imported
+  packages are known.
 
 ## Write the call
 
@@ -39,16 +49,15 @@ Notes for AI coding agents that write code with this SDK, or work in this reposi
   `HostingWebEnvVarWritable`). To change an object: get it, call `v.Writable()`, change the
   fields you need, send it. A field marked `Read-only` in a returned type is set by the API.
 - `go doc` on a package says which routes it calls and which lists to start from.
-- Names follow the Go conventions: an initialism is in one case (`VrackID`, `IPBlock`). Enum
-  constants are the type's name, then the value's: `vrack.IAMResourceTagFilterOperatorEnumEq`.
+- Names follow the Go conventions: an initialism is in one case (`NichandleSSHKey`, `IPBlock`).
+  Enum constants are the type's name, then the value's: `me.NichandleOvhSubsidiaryEnumFr`.
   Check the model file, or `go doc` on the type, before you use one.
 - `ListX` returns a slice, often of IDs only. `AllX` is an `iter.Seq2[*T, error]` over the
   objects: range over it and check `err` at each step.
 - Paginated v2 lists have only `AllX`. There is no method that loads every page at once.
 - A path parameter must not be empty: the call fails before sending anything, with an error
   matching `ovh.ErrInvalidRequest`.
-- No route in the SDK yet? Call it directly with
-  `client.Do(ctx, &ovh.Request{Method: ..., Path: ovh.Path("/v1/...", "name", value)}, &out)`.
+- No method for a route yet? See "Calling any endpoint" in [README.md](README.md).
 
 ## Wait for the work to finish
 
@@ -76,18 +85,21 @@ Notes for AI coding agents that write code with this SDK, or work in this reposi
 - Use `errors.As` to read `StatusCode`, `Class`, `Message` and `QueryID` (for support), and
   `Operation`, the method's name.
 - A 403 means the service account lacks an IAM action. The error's message ends with the
-  actions the call needs (`requires the IAM action vrack:apiovh:get`), also in `IAMActions`:
+  actions the call needs (`requires the IAM action account:apiovh:me/get`), also in `IAMActions`:
   report them to the user, who can grant them. Retrying does not help.
 - A request the client is configured to refuse returns an `*ovh.NotAllowedError`, matching
   `ovh.ErrNotAllowed`, and nothing is sent. Do not work around it: ask the user.
 - With `ovh.WithDryRun()`, a call that would change something returns an `*ovh.DryRunError`,
   matching `ovh.ErrDryRun`. It is not a failure: it tells what would have been sent.
+- A timeout returns the HTTP client's error, not an `*ovh.APIError`. It is a `net.Error` whose
+  `Timeout()` is true: check it with `errors.As`. It is never retried: the server may have
+  done the work.
 
 ## Configure the client
 
 - To explore an account safely, use a read-only client: `ovh.WithReadOnly()` sends only `GET`
   and `HEAD`. `ovh.WithReadOnly("cloud.RebootProjectInstance")` also allows that one operation.
-  `ovh.WithAllowedOperations("vrack.*", "*.Get*")` sends only the operations whose name
+  `ovh.WithAllowedOperations("me.*", "*.Get*")` sends only the operations whose name
   matches. A request must pass both when both are set.
 - To plan a change before making it, use `ovh.WithDryRun()`. Reads are sent, so you see the
   real state. Any other call is not sent: it returns an `*ovh.DryRunError` (`ovh.ErrDryRun`)
@@ -99,19 +111,37 @@ Notes for AI coding agents that write code with this SDK, or work in this reposi
   `call.Operation.ReadOnly()` tell what the call does. Each page of an `AllX` iterator is a
   separate call. Calls made at the same time run a hook at the same time, so a hook must be
   safe for concurrent use.
-
 - There is no timeout by default. Set one: `ovh.WithTimeout(30 * time.Second)`.
 - Retries are off by default. `ovh.WithRetry(ovh.DefaultRetryPolicy())` retries only `GET`,
   `HEAD` and `DELETE`, never `POST`, `PUT` or `PATCH`: those can start tasks or place orders.
 - `ovh.WithDebug()` logs requests with credentials hidden. `WithDebugBodies()` also logs
   bodies, which can contain secrets.
+- For tracing, metrics or the `X-Ovh-Queryid` of a call that succeeds, pass your own client:
+  `ovh.WithHTTPClient(&http.Client{Transport: yourTransport})`, for example the OpenTelemetry
+  `otelhttp` transport. `WithTimeout` then sets that client's `Timeout`. The TLS and proxy
+  options need its `Transport` to be an `*http.Transport`.
+
+## Test code that uses the SDK
+
+- No network and no credentials: serve the API with `httptest.NewServer`, and point the
+  client at it: `ovh.NewClient(ovh.WithEndpoint(srv.URL),
+  ovh.WithTokenSource(oauth2.StaticTokenSource(&oauth2.Token{AccessToken: "t"})))`. The
+  static token source sends that token and never calls the token endpoint.
+- The server gets the versioned path: `/v1/me`. Without `WithEndpoint`, the host is the
+  region's: `api.eu.ovhcloud.com`, `api.ca.ovhcloud.com` for `ovh.WithRegion(ovh.CA)`.
+- Answer with JSON, and an error status for an error: a 404 makes the call return an error
+  matching `ovh.ErrNotFound`.
+- A fake result is a value of the method's result type, with the fields your code reads.
+  Optional fields are pointers: `me.NichandleNichandle{Nichandle: ovh.Ptr("ab12345-ovh")}`.
 
 ## Change this repository
 
-- `pkg/` and `index/` are generated at each release. Do not edit them: the next release
-  overwrites the change. Report the problem instead, with the route involved.
-- `ovh/` is hand-written: changes there follow [CONTRIBUTING.md](CONTRIBUTING.md).
+- `pkg/`, `index/` and `llms.txt` are generated at each release. Do not edit them: the next
+  release overwrites the change. Report the problem instead, with the route.
+- `ovh/` is hand-written. Each export replaces this whole repository, so a change made here
+  is ported by the maintainers into the generator: see [CONTRIBUTING.md](CONTRIBUTING.md).
 - Check a change with `go build ./...` and `go vet ./...`. The SDK's tests are not part of this
   module.
+- [examples/](examples/README.md) has small programs that call real methods.
 
 More: [README.md](README.md) is the full guide.

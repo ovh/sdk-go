@@ -7,9 +7,11 @@
 //
 // Create one Client and hand it to the section packages under pkg/:
 //
-//	c, err := ovh.NewClient() // credentials from OVH_CLIENT_ID / OVH_CLIENT_SECRET
+//	client, err := ovh.NewClient() // reads OVH_CLIENT_ID, OVH_CLIENT_SECRET, OVH_REGION
 //	if err != nil { ... }
-//	ids, err := vrack.New(c).ListVracks(ctx)
+//	account, err := me.New(client).GetAccountDetails(ctx) // GET /v1/me
+//	if err != nil { ... }
+//	fmt.Println(ovh.Value(account.Nichandle))
 //
 // Any endpoint can also be called directly with Client.Do, which is what the section packages
 // do underneath.
@@ -282,7 +284,7 @@ func WithDebug() Option {
 
 // WithDebugBodies is WithDebug, with request and response bodies included.
 //
-// Bodies routinely carry secrets -- credentials being created, private keys, personal data --
+// Bodies routinely carry secrets (credentials being created, private keys, personal data),
 // and are printed verbatim. Headers stay redacted. Use it only against test data or when you
 // are certain the logs are not retained.
 func WithDebugBodies() Option {
@@ -307,11 +309,15 @@ func WithUserAgent(product string) Option {
 	}
 }
 
-// WithHeader adds a header to every request. It cannot set User-Agent: use WithUserAgent.
+// WithHeader adds a header to every request. It cannot set User-Agent: use WithUserAgent. It
+// cannot set X-Schemas-Version either: the SDK sends the version its types were generated from.
 func WithHeader(key, value string) Option {
 	return func(c *config) error {
 		if http.CanonicalHeaderKey(key) == "User-Agent" {
 			return fmt.Errorf("ovh: WithHeader cannot set User-Agent: use WithUserAgent")
+		}
+		if http.CanonicalHeaderKey(key) == schemasVersionHeader {
+			return fmt.Errorf("ovh: WithHeader cannot set %s: the SDK sends the version its types were generated from", schemasVersionHeader)
 		}
 		c.client.headers.Add(key, value)
 		return nil

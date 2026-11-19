@@ -15,7 +15,7 @@ import (
 )
 
 // opGetOffers is GetOffers's entry in the operation registry (ovh.Operations).
-var opGetOffers = &ovh.Operation{Name: "commercialcatalog.GetOffers", Method: http.MethodGet, Path: "/v2/commercialCatalog/offers/{id}", Summary: "Get details of an offer"}
+var opGetOffers = &ovh.Operation{Name: "commercialcatalog.GetOffers", Method: http.MethodGet, Path: "/v2/commercialCatalog/offers/{id}", Summary: "Get details of an offer", SchemasVersion: "1.0"}
 
 // GetOffers calls GET /v2/commercialCatalog/offers/{id}: Get details of an offer
 //
@@ -26,7 +26,7 @@ func (s *Service) GetOffers(ctx context.Context, id string) (*CommercialCatalogO
 }
 
 // opListOffers is AllOffers's entry in the operation registry (ovh.Operations).
-var opListOffers = &ovh.Operation{Name: "commercialcatalog.AllOffers", Method: http.MethodGet, Path: "/v2/commercialCatalog/offers", Summary: "List all offers"}
+var opListOffers = &ovh.Operation{Name: "commercialcatalog.AllOffers", Method: http.MethodGet, Path: "/v2/commercialCatalog/offers", Summary: "List all offers", SchemasVersion: "1.0"}
 
 // ListOffersParams holds the optional parameters of ListOffers.
 type ListOffersParams struct {

@@ -15,7 +15,7 @@ import (
 )
 
 // opCreateKeyManagerContainer is CreateKeyManagerContainer's entry in the operation registry (ovh.Operations).
-var opCreateKeyManagerContainer = &ovh.Operation{Name: "publiccloud.CreateKeyManagerContainer", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/keyManager/container", Summary: "Create a secret container", IAMActions: []string{"publicCloudProject:apiovh:keyManager/container/create"}}
+var opCreateKeyManagerContainer = &ovh.Operation{Name: "publiccloud.CreateKeyManagerContainer", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/keyManager/container", Summary: "Create a secret container", IAMActions: []string{"publicCloudProject:apiovh:keyManager/container/create"}, SchemasVersion: "1.0"}
 
 // CreateKeyManagerContainer calls POST /v2/publicCloud/project/{projectId}/keyManager/container: Create a secret container
 //
@@ -32,7 +32,7 @@ func (s *Service) CreateKeyManagerContainer(ctx context.Context, projectID strin
 }
 
 // opCreateKeyManagerContainerConsumer is CreateKeyManagerContainerConsumer's entry in the operation registry (ovh.Operations).
-var opCreateKeyManagerContainerConsumer = &ovh.Operation{Name: "publiccloud.CreateKeyManagerContainerConsumer", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/keyManager/container/{containerId}/consumer", Summary: "Register a container consumer", IAMActions: []string{"publicCloudProject:apiovh:keyManager/container/consumer/create"}}
+var opCreateKeyManagerContainerConsumer = &ovh.Operation{Name: "publiccloud.CreateKeyManagerContainerConsumer", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/keyManager/container/{containerId}/consumer", Summary: "Register a container consumer", IAMActions: []string{"publicCloudProject:apiovh:keyManager/container/consumer/create"}, SchemasVersion: "1.0"}
 
 // CreateKeyManagerContainerConsumer calls POST /v2/publicCloud/project/{projectId}/keyManager/container/{containerId}/consumer: Register a container consumer
 //
@@ -50,7 +50,7 @@ func (s *Service) CreateKeyManagerContainerConsumer(ctx context.Context, project
 }
 
 // opCreateKeyManagerSecret is CreateKeyManagerSecret's entry in the operation registry (ovh.Operations).
-var opCreateKeyManagerSecret = &ovh.Operation{Name: "publiccloud.CreateKeyManagerSecret", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/keyManager/secret", Summary: "Create a secret", IAMActions: []string{"publicCloudProject:apiovh:keyManager/secret/create"}}
+var opCreateKeyManagerSecret = &ovh.Operation{Name: "publiccloud.CreateKeyManagerSecret", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/keyManager/secret", Summary: "Create a secret", IAMActions: []string{"publicCloudProject:apiovh:keyManager/secret/create"}, SchemasVersion: "1.0"}
 
 // CreateKeyManagerSecret calls POST /v2/publicCloud/project/{projectId}/keyManager/secret: Create a secret
 //
@@ -67,7 +67,7 @@ func (s *Service) CreateKeyManagerSecret(ctx context.Context, projectID string, 
 }
 
 // opCreateKeyManagerSecretConsumer is CreateKeyManagerSecretConsumer's entry in the operation registry (ovh.Operations).
-var opCreateKeyManagerSecretConsumer = &ovh.Operation{Name: "publiccloud.CreateKeyManagerSecretConsumer", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/keyManager/secret/{secretId}/consumer", Summary: "Register a secret consumer", IAMActions: []string{"publicCloudProject:apiovh:keyManager/secret/consumer/create"}}
+var opCreateKeyManagerSecretConsumer = &ovh.Operation{Name: "publiccloud.CreateKeyManagerSecretConsumer", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/keyManager/secret/{secretId}/consumer", Summary: "Register a secret consumer", IAMActions: []string{"publicCloudProject:apiovh:keyManager/secret/consumer/create"}, SchemasVersion: "1.0"}
 
 // CreateKeyManagerSecretConsumer calls POST /v2/publicCloud/project/{projectId}/keyManager/secret/{secretId}/consumer: Register a secret consumer
 //
@@ -85,7 +85,7 @@ func (s *Service) CreateKeyManagerSecretConsumer(ctx context.Context, projectID 
 }
 
 // opDeleteKeyManagerContainer is DeleteKeyManagerContainer's entry in the operation registry (ovh.Operations).
-var opDeleteKeyManagerContainer = &ovh.Operation{Name: "publiccloud.DeleteKeyManagerContainer", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/keyManager/container/{containerId}", Summary: "Delete a secret container", IAMActions: []string{"publicCloudProject:apiovh:keyManager/container/delete"}}
+var opDeleteKeyManagerContainer = &ovh.Operation{Name: "publiccloud.DeleteKeyManagerContainer", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/keyManager/container/{containerId}", Summary: "Delete a secret container", IAMActions: []string{"publicCloudProject:apiovh:keyManager/container/delete"}, SchemasVersion: "1.0"}
 
 // DeleteKeyManagerContainer calls DELETE /v2/publicCloud/project/{projectId}/keyManager/container/{containerId}: Delete a secret container
 //
@@ -101,7 +101,7 @@ func (s *Service) DeleteKeyManagerContainer(ctx context.Context, projectID strin
 }
 
 // opDeleteKeyManagerContainerConsumer is DeleteKeyManagerContainerConsumer's entry in the operation registry (ovh.Operations).
-var opDeleteKeyManagerContainerConsumer = &ovh.Operation{Name: "publiccloud.DeleteKeyManagerContainerConsumer", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/keyManager/container/{containerId}/consumer/{consumerId}", Summary: "Remove a container consumer", IAMActions: []string{"publicCloudProject:apiovh:keyManager/container/consumer/delete"}}
+var opDeleteKeyManagerContainerConsumer = &ovh.Operation{Name: "publiccloud.DeleteKeyManagerContainerConsumer", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/keyManager/container/{containerId}/consumer/{consumerId}", Summary: "Remove a container consumer", IAMActions: []string{"publicCloudProject:apiovh:keyManager/container/consumer/delete"}, SchemasVersion: "1.0"}
 
 // DeleteKeyManagerContainerConsumer calls DELETE /v2/publicCloud/project/{projectId}/keyManager/container/{containerId}/consumer/{consumerId}: Remove a container consumer
 //
@@ -119,7 +119,7 @@ func (s *Service) DeleteKeyManagerContainerConsumer(ctx context.Context, project
 }
 
 // opDeleteKeyManagerSecret is DeleteKeyManagerSecret's entry in the operation registry (ovh.Operations).
-var opDeleteKeyManagerSecret = &ovh.Operation{Name: "publiccloud.DeleteKeyManagerSecret", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/keyManager/secret/{secretId}", Summary: "Delete a secret", IAMActions: []string{"publicCloudProject:apiovh:keyManager/secret/delete"}}
+var opDeleteKeyManagerSecret = &ovh.Operation{Name: "publiccloud.DeleteKeyManagerSecret", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/keyManager/secret/{secretId}", Summary: "Delete a secret", IAMActions: []string{"publicCloudProject:apiovh:keyManager/secret/delete"}, SchemasVersion: "1.0"}
 
 // DeleteKeyManagerSecret calls DELETE /v2/publicCloud/project/{projectId}/keyManager/secret/{secretId}: Delete a secret
 //
@@ -135,7 +135,7 @@ func (s *Service) DeleteKeyManagerSecret(ctx context.Context, projectID string, 
 }
 
 // opDeleteKeyManagerSecretConsumer is DeleteKeyManagerSecretConsumer's entry in the operation registry (ovh.Operations).
-var opDeleteKeyManagerSecretConsumer = &ovh.Operation{Name: "publiccloud.DeleteKeyManagerSecretConsumer", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/keyManager/secret/{secretId}/consumer/{consumerId}", Summary: "Remove a secret consumer", IAMActions: []string{"publicCloudProject:apiovh:keyManager/secret/consumer/delete"}}
+var opDeleteKeyManagerSecretConsumer = &ovh.Operation{Name: "publiccloud.DeleteKeyManagerSecretConsumer", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/keyManager/secret/{secretId}/consumer/{consumerId}", Summary: "Remove a secret consumer", IAMActions: []string{"publicCloudProject:apiovh:keyManager/secret/consumer/delete"}, SchemasVersion: "1.0"}
 
 // DeleteKeyManagerSecretConsumer calls DELETE /v2/publicCloud/project/{projectId}/keyManager/secret/{secretId}/consumer/{consumerId}: Remove a secret consumer
 //
@@ -153,7 +153,7 @@ func (s *Service) DeleteKeyManagerSecretConsumer(ctx context.Context, projectID 
 }
 
 // opEditKeyManagerContainer is EditKeyManagerContainer's entry in the operation registry (ovh.Operations).
-var opEditKeyManagerContainer = &ovh.Operation{Name: "publiccloud.EditKeyManagerContainer", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/keyManager/container/{containerId}", Summary: "Replace container secret references", IAMActions: []string{"publicCloudProject:apiovh:keyManager/container/edit"}}
+var opEditKeyManagerContainer = &ovh.Operation{Name: "publiccloud.EditKeyManagerContainer", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/keyManager/container/{containerId}", Summary: "Replace container secret references", IAMActions: []string{"publicCloudProject:apiovh:keyManager/container/edit"}, SchemasVersion: "1.0"}
 
 // EditKeyManagerContainer calls PUT /v2/publicCloud/project/{projectId}/keyManager/container/{containerId}: Replace container secret references
 //
@@ -171,7 +171,7 @@ func (s *Service) EditKeyManagerContainer(ctx context.Context, projectID string,
 }
 
 // opEditKeyManagerSecret is EditKeyManagerSecret's entry in the operation registry (ovh.Operations).
-var opEditKeyManagerSecret = &ovh.Operation{Name: "publiccloud.EditKeyManagerSecret", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/keyManager/secret/{secretId}", Summary: "Update secret metadata", IAMActions: []string{"publicCloudProject:apiovh:keyManager/secret/edit"}}
+var opEditKeyManagerSecret = &ovh.Operation{Name: "publiccloud.EditKeyManagerSecret", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/keyManager/secret/{secretId}", Summary: "Update secret metadata", IAMActions: []string{"publicCloudProject:apiovh:keyManager/secret/edit"}, SchemasVersion: "1.0"}
 
 // EditKeyManagerSecret calls PUT /v2/publicCloud/project/{projectId}/keyManager/secret/{secretId}: Update secret metadata
 //
@@ -189,7 +189,7 @@ func (s *Service) EditKeyManagerSecret(ctx context.Context, projectID string, se
 }
 
 // opGetKeyManagerContainer is GetKeyManagerContainer's entry in the operation registry (ovh.Operations).
-var opGetKeyManagerContainer = &ovh.Operation{Name: "publiccloud.GetKeyManagerContainer", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/keyManager/container/{containerId}", Summary: "Get a secret container", IAMActions: []string{"publicCloudProject:apiovh:keyManager/container/get"}}
+var opGetKeyManagerContainer = &ovh.Operation{Name: "publiccloud.GetKeyManagerContainer", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/keyManager/container/{containerId}", Summary: "Get a secret container", IAMActions: []string{"publicCloudProject:apiovh:keyManager/container/get"}, SchemasVersion: "1.0"}
 
 // GetKeyManagerContainer calls GET /v2/publicCloud/project/{projectId}/keyManager/container/{containerId}: Get a secret container
 //
@@ -206,7 +206,7 @@ func (s *Service) GetKeyManagerContainer(ctx context.Context, projectID string, 
 }
 
 // opGetKeyManagerContainerConsumer is GetKeyManagerContainerConsumer's entry in the operation registry (ovh.Operations).
-var opGetKeyManagerContainerConsumer = &ovh.Operation{Name: "publiccloud.GetKeyManagerContainerConsumer", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/keyManager/container/{containerId}/consumer/{consumerId}", Summary: "Get a container consumer", IAMActions: []string{"publicCloudProject:apiovh:keyManager/container/consumer/get"}}
+var opGetKeyManagerContainerConsumer = &ovh.Operation{Name: "publiccloud.GetKeyManagerContainerConsumer", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/keyManager/container/{containerId}/consumer/{consumerId}", Summary: "Get a container consumer", IAMActions: []string{"publicCloudProject:apiovh:keyManager/container/consumer/get"}, SchemasVersion: "1.0"}
 
 // GetKeyManagerContainerConsumer calls GET /v2/publicCloud/project/{projectId}/keyManager/container/{containerId}/consumer/{consumerId}: Get a container consumer
 //
@@ -224,7 +224,7 @@ func (s *Service) GetKeyManagerContainerConsumer(ctx context.Context, projectID 
 }
 
 // opGetKeyManagerContainerConsumers is AllKeyManagerContainerConsumers's entry in the operation registry (ovh.Operations).
-var opGetKeyManagerContainerConsumers = &ovh.Operation{Name: "publiccloud.AllKeyManagerContainerConsumers", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/keyManager/container/{containerId}/consumer", Summary: "List container consumers", IAMActions: []string{"publicCloudProject:apiovh:keyManager/container/consumer/get"}}
+var opGetKeyManagerContainerConsumers = &ovh.Operation{Name: "publiccloud.AllKeyManagerContainerConsumers", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/keyManager/container/{containerId}/consumer", Summary: "List container consumers", IAMActions: []string{"publicCloudProject:apiovh:keyManager/container/consumer/get"}, SchemasVersion: "1.0"}
 
 // AllKeyManagerContainerConsumers iterates over GET /v2/publicCloud/project/{projectId}/keyManager/container/{containerId}/consumer (List container consumers),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -243,7 +243,7 @@ func (s *Service) AllKeyManagerContainerConsumers(ctx context.Context, projectID
 }
 
 // opGetKeyManagerContainers is AllKeyManagerContainers's entry in the operation registry (ovh.Operations).
-var opGetKeyManagerContainers = &ovh.Operation{Name: "publiccloud.AllKeyManagerContainers", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/keyManager/container", Summary: "List secret containers", IAMActions: []string{"publicCloudProject:apiovh:keyManager/container/get"}}
+var opGetKeyManagerContainers = &ovh.Operation{Name: "publiccloud.AllKeyManagerContainers", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/keyManager/container", Summary: "List secret containers", IAMActions: []string{"publicCloudProject:apiovh:keyManager/container/get"}, SchemasVersion: "1.0"}
 
 // AllKeyManagerContainers iterates over GET /v2/publicCloud/project/{projectId}/keyManager/container (List secret containers),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -261,7 +261,7 @@ func (s *Service) AllKeyManagerContainers(ctx context.Context, projectID string)
 }
 
 // opGetKeyManagerSecret is GetKeyManagerSecret's entry in the operation registry (ovh.Operations).
-var opGetKeyManagerSecret = &ovh.Operation{Name: "publiccloud.GetKeyManagerSecret", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/keyManager/secret/{secretId}", Summary: "Get a secret", IAMActions: []string{"publicCloudProject:apiovh:keyManager/secret/get"}}
+var opGetKeyManagerSecret = &ovh.Operation{Name: "publiccloud.GetKeyManagerSecret", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/keyManager/secret/{secretId}", Summary: "Get a secret", IAMActions: []string{"publicCloudProject:apiovh:keyManager/secret/get"}, SchemasVersion: "1.0"}
 
 // GetKeyManagerSecret calls GET /v2/publicCloud/project/{projectId}/keyManager/secret/{secretId}: Get a secret
 //
@@ -278,7 +278,7 @@ func (s *Service) GetKeyManagerSecret(ctx context.Context, projectID string, sec
 }
 
 // opGetKeyManagerSecretConsumer is GetKeyManagerSecretConsumer's entry in the operation registry (ovh.Operations).
-var opGetKeyManagerSecretConsumer = &ovh.Operation{Name: "publiccloud.GetKeyManagerSecretConsumer", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/keyManager/secret/{secretId}/consumer/{consumerId}", Summary: "Get a secret consumer", IAMActions: []string{"publicCloudProject:apiovh:keyManager/secret/consumer/get"}}
+var opGetKeyManagerSecretConsumer = &ovh.Operation{Name: "publiccloud.GetKeyManagerSecretConsumer", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/keyManager/secret/{secretId}/consumer/{consumerId}", Summary: "Get a secret consumer", IAMActions: []string{"publicCloudProject:apiovh:keyManager/secret/consumer/get"}, SchemasVersion: "1.0"}
 
 // GetKeyManagerSecretConsumer calls GET /v2/publicCloud/project/{projectId}/keyManager/secret/{secretId}/consumer/{consumerId}: Get a secret consumer
 //
@@ -296,7 +296,7 @@ func (s *Service) GetKeyManagerSecretConsumer(ctx context.Context, projectID str
 }
 
 // opGetKeyManagerSecretConsumers is AllKeyManagerSecretConsumers's entry in the operation registry (ovh.Operations).
-var opGetKeyManagerSecretConsumers = &ovh.Operation{Name: "publiccloud.AllKeyManagerSecretConsumers", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/keyManager/secret/{secretId}/consumer", Summary: "List secret consumers", IAMActions: []string{"publicCloudProject:apiovh:keyManager/secret/consumer/get"}}
+var opGetKeyManagerSecretConsumers = &ovh.Operation{Name: "publiccloud.AllKeyManagerSecretConsumers", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/keyManager/secret/{secretId}/consumer", Summary: "List secret consumers", IAMActions: []string{"publicCloudProject:apiovh:keyManager/secret/consumer/get"}, SchemasVersion: "1.0"}
 
 // AllKeyManagerSecretConsumers iterates over GET /v2/publicCloud/project/{projectId}/keyManager/secret/{secretId}/consumer (List secret consumers),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -315,7 +315,7 @@ func (s *Service) AllKeyManagerSecretConsumers(ctx context.Context, projectID st
 }
 
 // opGetKeyManagerSecretPayload is GetKeyManagerSecretPayload's entry in the operation registry (ovh.Operations).
-var opGetKeyManagerSecretPayload = &ovh.Operation{Name: "publiccloud.GetKeyManagerSecretPayload", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/keyManager/secret/{secretId}/payload", Summary: "Get a secret payload", IAMActions: []string{"publicCloudProject:apiovh:keyManager/secret/payload/get"}}
+var opGetKeyManagerSecretPayload = &ovh.Operation{Name: "publiccloud.GetKeyManagerSecretPayload", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/keyManager/secret/{secretId}/payload", Summary: "Get a secret payload", IAMActions: []string{"publicCloudProject:apiovh:keyManager/secret/payload/get"}, SchemasVersion: "1.0"}
 
 // GetKeyManagerSecretPayload calls POST /v2/publicCloud/project/{projectId}/keyManager/secret/{secretId}/payload: Get a secret payload
 //
@@ -332,7 +332,7 @@ func (s *Service) GetKeyManagerSecretPayload(ctx context.Context, projectID stri
 }
 
 // opGetKeyManagerSecrets is AllKeyManagerSecrets's entry in the operation registry (ovh.Operations).
-var opGetKeyManagerSecrets = &ovh.Operation{Name: "publiccloud.AllKeyManagerSecrets", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/keyManager/secret", Summary: "List secrets", IAMActions: []string{"publicCloudProject:apiovh:keyManager/secret/get"}}
+var opGetKeyManagerSecrets = &ovh.Operation{Name: "publiccloud.AllKeyManagerSecrets", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/keyManager/secret", Summary: "List secrets", IAMActions: []string{"publicCloudProject:apiovh:keyManager/secret/get"}, SchemasVersion: "1.0"}
 
 // AllKeyManagerSecrets iterates over GET /v2/publicCloud/project/{projectId}/keyManager/secret (List secrets),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it

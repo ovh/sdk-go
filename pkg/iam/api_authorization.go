@@ -14,7 +14,7 @@ import (
 )
 
 // opCheckResourceAuthorization is CheckResourceAuthorization's entry in the operation registry (ovh.Operations).
-var opCheckResourceAuthorization = &ovh.Operation{Name: "iam.CheckResourceAuthorization", Method: http.MethodPost, Path: "/v2/iam/resource/{resourceURN}/authorization/check", Summary: "Check authorizations on a resource"}
+var opCheckResourceAuthorization = &ovh.Operation{Name: "iam.CheckResourceAuthorization", Method: http.MethodPost, Path: "/v2/iam/resource/{resourceURN}/authorization/check", Summary: "Check authorizations on a resource", SchemasVersion: "1.0"}
 
 // CheckResourceAuthorization calls POST /v2/iam/resource/{resourceURN}/authorization/check: Check authorizations on a resource
 //

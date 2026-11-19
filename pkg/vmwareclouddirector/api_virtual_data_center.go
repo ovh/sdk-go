@@ -15,7 +15,7 @@ import (
 )
 
 // opGetOrganizationVirtualDataCenter is GetOrganizationVirtualDataCenter's entry in the operation registry (ovh.Operations).
-var opGetOrganizationVirtualDataCenter = &ovh.Operation{Name: "vmwareclouddirector.GetOrganizationVirtualDataCenter", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}", Summary: "Get a virtual datacenter", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/get"}}
+var opGetOrganizationVirtualDataCenter = &ovh.Operation{Name: "vmwareclouddirector.GetOrganizationVirtualDataCenter", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}", Summary: "Get a virtual datacenter", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/get"}, SchemasVersion: "1.0"}
 
 // GetOrganizationVirtualDataCenter calls GET /v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}: Get a virtual datacenter
 //
@@ -32,7 +32,7 @@ func (s *Service) GetOrganizationVirtualDataCenter(ctx context.Context, organiza
 }
 
 // opGetOrganizationVirtualDataCenterOrderableResource is GetOrganizationVirtualDataCenterOrderableResource's entry in the operation registry (ovh.Operations).
-var opGetOrganizationVirtualDataCenterOrderableResource = &ovh.Operation{Name: "vmwareclouddirector.GetOrganizationVirtualDataCenterOrderableResource", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/orderableResource", Summary: "List orderable resources", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/orderableResource/get"}}
+var opGetOrganizationVirtualDataCenterOrderableResource = &ovh.Operation{Name: "vmwareclouddirector.GetOrganizationVirtualDataCenterOrderableResource", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/orderableResource", Summary: "List orderable resources", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/orderableResource/get"}, SchemasVersion: "1.0"}
 
 // GetOrganizationVirtualDataCenterOrderableResource calls GET /v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/orderableResource: List orderable resources
 //
@@ -50,7 +50,7 @@ func (s *Service) GetOrganizationVirtualDataCenterOrderableResource(ctx context.
 }
 
 // opGetOrganizationVirtualDataCenterTask is GetOrganizationVirtualDataCenterTask's entry in the operation registry (ovh.Operations).
-var opGetOrganizationVirtualDataCenterTask = &ovh.Operation{Name: "vmwareclouddirector.GetOrganizationVirtualDataCenterTask", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/task/{taskId}", Summary: "Get a virtual datacenter task", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/task/get"}}
+var opGetOrganizationVirtualDataCenterTask = &ovh.Operation{Name: "vmwareclouddirector.GetOrganizationVirtualDataCenterTask", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/task/{taskId}", Summary: "Get a virtual datacenter task", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/task/get"}, SchemasVersion: "1.0"}
 
 // GetOrganizationVirtualDataCenterTask calls GET /v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/task/{taskId}: Get a virtual datacenter task
 //
@@ -67,7 +67,7 @@ func (s *Service) GetOrganizationVirtualDataCenterTask(ctx context.Context, orga
 }
 
 // opGetOrganizationVirtualDataCenterVrackSegmentTask is GetOrganizationVirtualDataCenterVrackSegmentTask's entry in the operation registry (ovh.Operations).
-var opGetOrganizationVirtualDataCenterVrackSegmentTask = &ovh.Operation{Name: "vmwareclouddirector.GetOrganizationVirtualDataCenterVrackSegmentTask", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/vrackSegment/{id}/task/{taskId}", Summary: "Get a vRack segment task", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/vrackSegment/task/get"}}
+var opGetOrganizationVirtualDataCenterVrackSegmentTask = &ovh.Operation{Name: "vmwareclouddirector.GetOrganizationVirtualDataCenterVrackSegmentTask", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/vrackSegment/{id}/task/{taskId}", Summary: "Get a vRack segment task", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/vrackSegment/task/get"}, SchemasVersion: "1.0"}
 
 // GetOrganizationVirtualDataCenterVrackSegmentTask calls GET /v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/vrackSegment/{id}/task/{taskId}: Get a vRack segment task
 //
@@ -86,7 +86,7 @@ func (s *Service) GetOrganizationVirtualDataCenterVrackSegmentTask(ctx context.C
 }
 
 // opListOrganizationVirtualDataCenterTasks is AllOrganizationVirtualDataCenterTasks's entry in the operation registry (ovh.Operations).
-var opListOrganizationVirtualDataCenterTasks = &ovh.Operation{Name: "vmwareclouddirector.AllOrganizationVirtualDataCenterTasks", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/task", Summary: "List virtual datacenter tasks", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/task/get"}}
+var opListOrganizationVirtualDataCenterTasks = &ovh.Operation{Name: "vmwareclouddirector.AllOrganizationVirtualDataCenterTasks", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/task", Summary: "List virtual datacenter tasks", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/task/get"}, SchemasVersion: "1.0"}
 
 // AllOrganizationVirtualDataCenterTasks iterates over GET /v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/task (List virtual datacenter tasks),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -104,7 +104,7 @@ func (s *Service) AllOrganizationVirtualDataCenterTasks(ctx context.Context, org
 }
 
 // opListOrganizationVirtualDataCenterVrackSegmentTasks is AllOrganizationVirtualDataCenterVrackSegmentTasks's entry in the operation registry (ovh.Operations).
-var opListOrganizationVirtualDataCenterVrackSegmentTasks = &ovh.Operation{Name: "vmwareclouddirector.AllOrganizationVirtualDataCenterVrackSegmentTasks", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/vrackSegment/{id}/task", Summary: "List vRack segment tasks", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/vrackSegment/task/get"}}
+var opListOrganizationVirtualDataCenterVrackSegmentTasks = &ovh.Operation{Name: "vmwareclouddirector.AllOrganizationVirtualDataCenterVrackSegmentTasks", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/vrackSegment/{id}/task", Summary: "List vRack segment tasks", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/vrackSegment/task/get"}, SchemasVersion: "1.0"}
 
 // AllOrganizationVirtualDataCenterVrackSegmentTasks iterates over GET /v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/vrackSegment/{id}/task (List vRack segment tasks),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -124,7 +124,7 @@ func (s *Service) AllOrganizationVirtualDataCenterVrackSegmentTasks(ctx context.
 }
 
 // opListOrganizationVirtualDataCenters is AllOrganizationVirtualDataCenters's entry in the operation registry (ovh.Operations).
-var opListOrganizationVirtualDataCenters = &ovh.Operation{Name: "vmwareclouddirector.AllOrganizationVirtualDataCenters", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter", Summary: "List virtual datacenters", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/get"}}
+var opListOrganizationVirtualDataCenters = &ovh.Operation{Name: "vmwareclouddirector.AllOrganizationVirtualDataCenters", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter", Summary: "List virtual datacenters", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/get"}, SchemasVersion: "1.0"}
 
 // ListOrganizationVirtualDataCentersParams holds the optional parameters of ListOrganizationVirtualDataCenters.
 type ListOrganizationVirtualDataCentersParams struct {
@@ -147,7 +147,7 @@ func (s *Service) AllOrganizationVirtualDataCenters(ctx context.Context, organiz
 }
 
 // opUpdateOrganizationVirtualDataCenter is UpdateOrganizationVirtualDataCenter's entry in the operation registry (ovh.Operations).
-var opUpdateOrganizationVirtualDataCenter = &ovh.Operation{Name: "vmwareclouddirector.UpdateOrganizationVirtualDataCenter", Method: http.MethodPut, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}", Summary: "Update a virtual datacenter", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/edit"}}
+var opUpdateOrganizationVirtualDataCenter = &ovh.Operation{Name: "vmwareclouddirector.UpdateOrganizationVirtualDataCenter", Method: http.MethodPut, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}", Summary: "Update a virtual datacenter", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/edit"}, SchemasVersion: "1.0"}
 
 // UpdateOrganizationVirtualDataCenter calls PUT /v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}: Update a virtual datacenter
 //

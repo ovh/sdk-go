@@ -15,7 +15,7 @@ import (
 )
 
 // opCreateDomain is CreateDomain's entry in the operation registry (ovh.Operations).
-var opCreateDomain = &ovh.Operation{Name: "zimbra.CreateDomain", Method: http.MethodPost, Path: "/v2/zimbra/platform/{platformId}/domain", Summary: "Create a domain", IAMActions: []string{"zimbra:apiovh:platform/domain/create"}}
+var opCreateDomain = &ovh.Operation{Name: "zimbra.CreateDomain", Method: http.MethodPost, Path: "/v2/zimbra/platform/{platformId}/domain", Summary: "Create a domain", IAMActions: []string{"zimbra:apiovh:platform/domain/create"}, SchemasVersion: "1.0"}
 
 // CreateDomain calls POST /v2/zimbra/platform/{platformId}/domain: Create a domain
 //
@@ -34,7 +34,7 @@ func (s *Service) CreateDomain(ctx context.Context, platformID string, body Zimb
 }
 
 // opCreateOrganization is CreateOrganization's entry in the operation registry (ovh.Operations).
-var opCreateOrganization = &ovh.Operation{Name: "zimbra.CreateOrganization", Method: http.MethodPost, Path: "/v2/zimbra/platform/{platformId}/organization", Summary: "Create an organization", IAMActions: []string{"zimbra:apiovh:platform/organization/create"}}
+var opCreateOrganization = &ovh.Operation{Name: "zimbra.CreateOrganization", Method: http.MethodPost, Path: "/v2/zimbra/platform/{platformId}/organization", Summary: "Create an organization", IAMActions: []string{"zimbra:apiovh:platform/organization/create"}, SchemasVersion: "1.0"}
 
 // CreateOrganization calls POST /v2/zimbra/platform/{platformId}/organization: Create an organization
 //
@@ -51,8 +51,24 @@ func (s *Service) CreateOrganization(ctx context.Context, platformID string, bod
 	return ovh.Call[*ZimbraOrganizationResponse](ctx, s.c, &ovh.Request{Operation: opCreateOrganization, Method: http.MethodPost, Path: ovh.Path("/v2/zimbra/platform/{platformId}/organization", "platformId", platformID), Body: body})
 }
 
+// opCreateRedirection is CreateRedirection's entry in the operation registry (ovh.Operations).
+var opCreateRedirection = &ovh.Operation{Name: "zimbra.CreateRedirection", Method: http.MethodPost, Path: "/v2/zimbra/platform/{platformId}/redirection", Summary: "Create a redirection", IAMActions: []string{"zimbra:apiovh:platform/redirection/create"}, SchemasVersion: "1.0"}
+
+// CreateRedirection calls POST /v2/zimbra/platform/{platformId}/redirection: Create a redirection
+//
+// Creates a redirection from a `source` email address to a `destination` email address.
+//
+// Arguments:
+//   - platformID: Platform ID
+//   - body: the request body
+//
+// Requires the IAM action zimbra:apiovh:platform/redirection/create.
+func (s *Service) CreateRedirection(ctx context.Context, platformID string, body ZimbraRedirectionPostPayload) (*ZimbraRedirectionResponse, error) {
+	return ovh.Call[*ZimbraRedirectionResponse](ctx, s.c, &ovh.Request{Operation: opCreateRedirection, Method: http.MethodPost, Path: ovh.Path("/v2/zimbra/platform/{platformId}/redirection", "platformId", platformID), Body: body})
+}
+
 // opDeleteDomain is DeleteDomain's entry in the operation registry (ovh.Operations).
-var opDeleteDomain = &ovh.Operation{Name: "zimbra.DeleteDomain", Method: http.MethodDelete, Path: "/v2/zimbra/platform/{platformId}/domain/{domainId}", Summary: "Delete a domain", IAMActions: []string{"zimbra:apiovh:platform/domain/delete"}}
+var opDeleteDomain = &ovh.Operation{Name: "zimbra.DeleteDomain", Method: http.MethodDelete, Path: "/v2/zimbra/platform/{platformId}/domain/{domainId}", Summary: "Delete a domain", IAMActions: []string{"zimbra:apiovh:platform/domain/delete"}, SchemasVersion: "1.0"}
 
 // DeleteDomain calls DELETE /v2/zimbra/platform/{platformId}/domain/{domainId}: Delete a domain
 //
@@ -68,7 +84,7 @@ func (s *Service) DeleteDomain(ctx context.Context, platformID string, domainID 
 }
 
 // opDeleteOrganization is DeleteOrganization's entry in the operation registry (ovh.Operations).
-var opDeleteOrganization = &ovh.Operation{Name: "zimbra.DeleteOrganization", Method: http.MethodDelete, Path: "/v2/zimbra/platform/{platformId}/organization/{organizationId}", Summary: "Delete an organization", IAMActions: []string{"zimbra:apiovh:platform/organization/delete"}}
+var opDeleteOrganization = &ovh.Operation{Name: "zimbra.DeleteOrganization", Method: http.MethodDelete, Path: "/v2/zimbra/platform/{platformId}/organization/{organizationId}", Summary: "Delete an organization", IAMActions: []string{"zimbra:apiovh:platform/organization/delete"}, SchemasVersion: "1.0"}
 
 // DeleteOrganization calls DELETE /v2/zimbra/platform/{platformId}/organization/{organizationId}: Delete an organization
 //
@@ -83,8 +99,24 @@ func (s *Service) DeleteOrganization(ctx context.Context, platformID string, org
 	return s.c.Do(ctx, &ovh.Request{Operation: opDeleteOrganization, Method: http.MethodDelete, Path: ovh.Path("/v2/zimbra/platform/{platformId}/organization/{organizationId}", "platformId", platformID, "organizationId", organizationID)}, nil)
 }
 
+// opDeleteRedirection is DeleteRedirection's entry in the operation registry (ovh.Operations).
+var opDeleteRedirection = &ovh.Operation{Name: "zimbra.DeleteRedirection", Method: http.MethodDelete, Path: "/v2/zimbra/platform/{platformId}/redirection/{redirectionId}", Summary: "Delete a redirection", IAMActions: []string{"zimbra:apiovh:platform/redirection/delete"}, SchemasVersion: "1.0"}
+
+// DeleteRedirection calls DELETE /v2/zimbra/platform/{platformId}/redirection/{redirectionId}: Delete a redirection
+//
+// Deletes the redirection.
+//
+// Arguments:
+//   - platformID: Platform ID
+//   - redirectionID: Redirection ID
+//
+// Requires the IAM action zimbra:apiovh:platform/redirection/delete.
+func (s *Service) DeleteRedirection(ctx context.Context, platformID string, redirectionID string) error {
+	return s.c.Do(ctx, &ovh.Request{Operation: opDeleteRedirection, Method: http.MethodDelete, Path: ovh.Path("/v2/zimbra/platform/{platformId}/redirection/{redirectionId}", "platformId", platformID, "redirectionId", redirectionID)}, nil)
+}
+
 // opGetDomain is GetDomain's entry in the operation registry (ovh.Operations).
-var opGetDomain = &ovh.Operation{Name: "zimbra.GetDomain", Method: http.MethodGet, Path: "/v2/zimbra/platform/{platformId}/domain/{domainId}", Summary: "Get a domain", IAMActions: []string{"zimbra:apiovh:platform/domain/get"}}
+var opGetDomain = &ovh.Operation{Name: "zimbra.GetDomain", Method: http.MethodGet, Path: "/v2/zimbra/platform/{platformId}/domain/{domainId}", Summary: "Get a domain", IAMActions: []string{"zimbra:apiovh:platform/domain/get"}, SchemasVersion: "1.0"}
 
 // GetDomain calls GET /v2/zimbra/platform/{platformId}/domain/{domainId}: Get a domain
 //
@@ -101,7 +133,7 @@ func (s *Service) GetDomain(ctx context.Context, platformID string, domainID str
 }
 
 // opGetOrganization is GetOrganization's entry in the operation registry (ovh.Operations).
-var opGetOrganization = &ovh.Operation{Name: "zimbra.GetOrganization", Method: http.MethodGet, Path: "/v2/zimbra/platform/{platformId}/organization/{organizationId}", Summary: "Get an organization", IAMActions: []string{"zimbra:apiovh:platform/organization/get"}}
+var opGetOrganization = &ovh.Operation{Name: "zimbra.GetOrganization", Method: http.MethodGet, Path: "/v2/zimbra/platform/{platformId}/organization/{organizationId}", Summary: "Get an organization", IAMActions: []string{"zimbra:apiovh:platform/organization/get"}, SchemasVersion: "1.0"}
 
 // GetOrganization calls GET /v2/zimbra/platform/{platformId}/organization/{organizationId}: Get an organization
 //
@@ -118,7 +150,7 @@ func (s *Service) GetOrganization(ctx context.Context, platformID string, organi
 }
 
 // opGetPlatform is GetPlatform's entry in the operation registry (ovh.Operations).
-var opGetPlatform = &ovh.Operation{Name: "zimbra.GetPlatform", Method: http.MethodGet, Path: "/v2/zimbra/platform/{platformId}", Summary: "Get a platform", IAMActions: []string{"zimbra:apiovh:platform/get"}}
+var opGetPlatform = &ovh.Operation{Name: "zimbra.GetPlatform", Method: http.MethodGet, Path: "/v2/zimbra/platform/{platformId}", Summary: "Get a platform", IAMActions: []string{"zimbra:apiovh:platform/get"}, SchemasVersion: "1.0"}
 
 // GetPlatform calls GET /v2/zimbra/platform/{platformId}: Get a platform
 //
@@ -133,8 +165,25 @@ func (s *Service) GetPlatform(ctx context.Context, platformID string) (*ZimbraPl
 	return ovh.Call[*ZimbraPlatformResponseWithIAM](ctx, s.c, &ovh.Request{Operation: opGetPlatform, Method: http.MethodGet, Path: ovh.Path("/v2/zimbra/platform/{platformId}", "platformId", platformID)})
 }
 
+// opGetRedirection is GetRedirection's entry in the operation registry (ovh.Operations).
+var opGetRedirection = &ovh.Operation{Name: "zimbra.GetRedirection", Method: http.MethodGet, Path: "/v2/zimbra/platform/{platformId}/redirection/{redirectionId}", Summary: "Get a redirection", IAMActions: []string{"zimbra:apiovh:platform/redirection/get"}, SchemasVersion: "1.0"}
+
+// GetRedirection calls GET /v2/zimbra/platform/{platformId}/redirection/{redirectionId}: Get a redirection
+//
+// Returns the source and destination email addresses of the redirection, with its domain and
+// organization.
+//
+// Arguments:
+//   - platformID: Platform ID
+//   - redirectionID: Redirection ID
+//
+// Requires the IAM action zimbra:apiovh:platform/redirection/get.
+func (s *Service) GetRedirection(ctx context.Context, platformID string, redirectionID string) (*ZimbraRedirectionResponse, error) {
+	return ovh.Call[*ZimbraRedirectionResponse](ctx, s.c, &ovh.Request{Operation: opGetRedirection, Method: http.MethodGet, Path: ovh.Path("/v2/zimbra/platform/{platformId}/redirection/{redirectionId}", "platformId", platformID, "redirectionId", redirectionID)})
+}
+
 // opGetSlot is GetSlot's entry in the operation registry (ovh.Operations).
-var opGetSlot = &ovh.Operation{Name: "zimbra.GetSlot", Method: http.MethodGet, Path: "/v2/zimbra/platform/{platformId}/slot/{slotId}", Summary: "Get a slot", IAMActions: []string{"zimbra:apiovh:platform/slot/get"}}
+var opGetSlot = &ovh.Operation{Name: "zimbra.GetSlot", Method: http.MethodGet, Path: "/v2/zimbra/platform/{platformId}/slot/{slotId}", Summary: "Get a slot", IAMActions: []string{"zimbra:apiovh:platform/slot/get"}, SchemasVersion: "1.0"}
 
 // GetSlot calls GET /v2/zimbra/platform/{platformId}/slot/{slotId}: Get a slot
 //
@@ -151,7 +200,7 @@ func (s *Service) GetSlot(ctx context.Context, platformID string, slotID string)
 }
 
 // opListDomains is AllDomains's entry in the operation registry (ovh.Operations).
-var opListDomains = &ovh.Operation{Name: "zimbra.AllDomains", Method: http.MethodGet, Path: "/v2/zimbra/platform/{platformId}/domain", Summary: "List domains", IAMActions: []string{"zimbra:apiovh:platform/domain/get"}}
+var opListDomains = &ovh.Operation{Name: "zimbra.AllDomains", Method: http.MethodGet, Path: "/v2/zimbra/platform/{platformId}/domain", Summary: "List domains", IAMActions: []string{"zimbra:apiovh:platform/domain/get"}, SchemasVersion: "1.0"}
 
 // ListDomainsParams holds the optional parameters of ListDomains.
 type ListDomainsParams struct {
@@ -179,7 +228,7 @@ func (s *Service) AllDomains(ctx context.Context, platformID string, params ...L
 }
 
 // opListOrganizations is AllOrganizations's entry in the operation registry (ovh.Operations).
-var opListOrganizations = &ovh.Operation{Name: "zimbra.AllOrganizations", Method: http.MethodGet, Path: "/v2/zimbra/platform/{platformId}/organization", Summary: "List organizations", IAMActions: []string{"zimbra:apiovh:platform/organization/get"}}
+var opListOrganizations = &ovh.Operation{Name: "zimbra.AllOrganizations", Method: http.MethodGet, Path: "/v2/zimbra/platform/{platformId}/organization", Summary: "List organizations", IAMActions: []string{"zimbra:apiovh:platform/organization/get"}, SchemasVersion: "1.0"}
 
 // ListOrganizationsParams holds the optional parameters of ListOrganizations.
 type ListOrganizationsParams struct {
@@ -203,7 +252,7 @@ func (s *Service) AllOrganizations(ctx context.Context, platformID string, param
 }
 
 // opListPlatforms is AllPlatforms's entry in the operation registry (ovh.Operations).
-var opListPlatforms = &ovh.Operation{Name: "zimbra.AllPlatforms", Method: http.MethodGet, Path: "/v2/zimbra/platform", Summary: "List platforms", IAMActions: []string{"zimbra:apiovh:platform/get"}}
+var opListPlatforms = &ovh.Operation{Name: "zimbra.AllPlatforms", Method: http.MethodGet, Path: "/v2/zimbra/platform", Summary: "List platforms", IAMActions: []string{"zimbra:apiovh:platform/get"}, SchemasVersion: "1.0"}
 
 // ListPlatformsParams holds the optional parameters of ListPlatforms.
 type ListPlatformsParams struct {
@@ -224,8 +273,38 @@ func (s *Service) AllPlatforms(ctx context.Context, params ...ListPlatformsParam
 	return ovh.Iterate[ZimbraPlatformResponseWithIAM](ctx, s.c, &ovh.Request{Operation: opListPlatforms, Method: http.MethodGet, Path: "/v2/zimbra/platform", Params: ovh.Optional(params)})
 }
 
+// opListRedirections is AllRedirections's entry in the operation registry (ovh.Operations).
+var opListRedirections = &ovh.Operation{Name: "zimbra.AllRedirections", Method: http.MethodGet, Path: "/v2/zimbra/platform/{platformId}/redirection", Summary: "List redirections", IAMActions: []string{"zimbra:apiovh:platform/redirection/get"}, SchemasVersion: "1.0"}
+
+// ListRedirectionsParams holds the optional parameters of ListRedirections.
+type ListRedirectionsParams struct {
+	// Filter by destination
+	Destination *string `ovh:"query,destination"`
+	// Filter by domain id
+	DomainID *string `ovh:"query,domainId"`
+	// Filter by organization id
+	OrganizationID *string `ovh:"query,organizationId"`
+	// Filter by source
+	Source *string `ovh:"query,source"`
+}
+
+// AllRedirections iterates over GET /v2/zimbra/platform/{platformId}/redirection (List redirections),
+// one item at a time, fetching the next page only when the loop reaches it. On an error it
+// yields the error and stops. Collect, filter or stop early in the loop as needed.
+//
+// Returns the redirections of the platform with their current state. Filter them by `source`,
+// `destination`, `domainId` or `organizationId`.
+//
+// Arguments:
+//   - platformID: Platform ID
+//
+// Requires the IAM action zimbra:apiovh:platform/redirection/get.
+func (s *Service) AllRedirections(ctx context.Context, platformID string, params ...ListRedirectionsParams) iter.Seq2[*ZimbraRedirectionResponse, error] {
+	return ovh.Iterate[ZimbraRedirectionResponse](ctx, s.c, &ovh.Request{Operation: opListRedirections, Method: http.MethodGet, Path: ovh.Path("/v2/zimbra/platform/{platformId}/redirection", "platformId", platformID), Params: ovh.Optional(params)})
+}
+
 // opListSlots is AllSlots's entry in the operation registry (ovh.Operations).
-var opListSlots = &ovh.Operation{Name: "zimbra.AllSlots", Method: http.MethodGet, Path: "/v2/zimbra/platform/{platformId}/slot", Summary: "List slots", IAMActions: []string{"zimbra:apiovh:platform/slot/get"}}
+var opListSlots = &ovh.Operation{Name: "zimbra.AllSlots", Method: http.MethodGet, Path: "/v2/zimbra/platform/{platformId}/slot", Summary: "List slots", IAMActions: []string{"zimbra:apiovh:platform/slot/get"}, SchemasVersion: "1.0"}
 
 // ListSlotsParams holds the optional parameters of ListSlots.
 type ListSlotsParams struct {
@@ -257,7 +336,7 @@ func (s *Service) AllSlots(ctx context.Context, platformID string, params ...Lis
 }
 
 // opListTasks is AllTasks's entry in the operation registry (ovh.Operations).
-var opListTasks = &ovh.Operation{Name: "zimbra.AllTasks", Method: http.MethodGet, Path: "/v2/zimbra/platform/{platformId}/task", Summary: "List tasks", IAMActions: []string{"zimbra:apiovh:platform/task/get"}}
+var opListTasks = &ovh.Operation{Name: "zimbra.AllTasks", Method: http.MethodGet, Path: "/v2/zimbra/platform/{platformId}/task", Summary: "List tasks", IAMActions: []string{"zimbra:apiovh:platform/task/get"}, SchemasVersion: "1.0"}
 
 // ListTasksParams holds the optional parameters of ListTasks.
 type ListTasksParams struct {
@@ -282,7 +361,7 @@ func (s *Service) AllTasks(ctx context.Context, platformID string, params ...Lis
 }
 
 // opRefreshQuotaUsage is RefreshQuotaUsage's entry in the operation registry (ovh.Operations).
-var opRefreshQuotaUsage = &ovh.Operation{Name: "zimbra.RefreshQuotaUsage", Method: http.MethodPost, Path: "/v2/zimbra/platform/{platformId}/refreshQuotaUsage", Summary: "Refresh quota usage", IAMActions: []string{"zimbra:apiovh:platform/edit"}}
+var opRefreshQuotaUsage = &ovh.Operation{Name: "zimbra.RefreshQuotaUsage", Method: http.MethodPost, Path: "/v2/zimbra/platform/{platformId}/refreshQuotaUsage", Summary: "Refresh quota usage", IAMActions: []string{"zimbra:apiovh:platform/edit"}, SchemasVersion: "1.0"}
 
 // RefreshQuotaUsage calls POST /v2/zimbra/platform/{platformId}/refreshQuotaUsage: Refresh quota usage
 //
@@ -298,7 +377,7 @@ func (s *Service) RefreshQuotaUsage(ctx context.Context, platformID string) erro
 }
 
 // opUpdateDomain is UpdateDomain's entry in the operation registry (ovh.Operations).
-var opUpdateDomain = &ovh.Operation{Name: "zimbra.UpdateDomain", Method: http.MethodPut, Path: "/v2/zimbra/platform/{platformId}/domain/{domainId}", Summary: "Update a domain", IAMActions: []string{"zimbra:apiovh:platform/domain/edit"}}
+var opUpdateDomain = &ovh.Operation{Name: "zimbra.UpdateDomain", Method: http.MethodPut, Path: "/v2/zimbra/platform/{platformId}/domain/{domainId}", Summary: "Update a domain", IAMActions: []string{"zimbra:apiovh:platform/domain/edit"}, SchemasVersion: "1.0"}
 
 // UpdateDomain calls PUT /v2/zimbra/platform/{platformId}/domain/{domainId}: Update a domain
 //
@@ -317,7 +396,7 @@ func (s *Service) UpdateDomain(ctx context.Context, platformID string, domainID 
 }
 
 // opUpdateOrganization is UpdateOrganization's entry in the operation registry (ovh.Operations).
-var opUpdateOrganization = &ovh.Operation{Name: "zimbra.UpdateOrganization", Method: http.MethodPut, Path: "/v2/zimbra/platform/{platformId}/organization/{organizationId}", Summary: "Update an organization", IAMActions: []string{"zimbra:apiovh:platform/organization/edit"}}
+var opUpdateOrganization = &ovh.Operation{Name: "zimbra.UpdateOrganization", Method: http.MethodPut, Path: "/v2/zimbra/platform/{platformId}/organization/{organizationId}", Summary: "Update an organization", IAMActions: []string{"zimbra:apiovh:platform/organization/edit"}, SchemasVersion: "1.0"}
 
 // UpdateOrganization calls PUT /v2/zimbra/platform/{platformId}/organization/{organizationId}: Update an organization
 //
@@ -335,7 +414,7 @@ func (s *Service) UpdateOrganization(ctx context.Context, platformID string, org
 }
 
 // opUpdatePlatform is UpdatePlatform's entry in the operation registry (ovh.Operations).
-var opUpdatePlatform = &ovh.Operation{Name: "zimbra.UpdatePlatform", Method: http.MethodPut, Path: "/v2/zimbra/platform/{platformId}", Summary: "Update a platform", IAMActions: []string{"zimbra:apiovh:platform/edit"}}
+var opUpdatePlatform = &ovh.Operation{Name: "zimbra.UpdatePlatform", Method: http.MethodPut, Path: "/v2/zimbra/platform/{platformId}", Summary: "Update a platform", IAMActions: []string{"zimbra:apiovh:platform/edit"}, SchemasVersion: "1.0"}
 
 // UpdatePlatform calls PUT /v2/zimbra/platform/{platformId}: Update a platform
 //
@@ -352,5 +431,5 @@ func (s *Service) UpdatePlatform(ctx context.Context, platformID string, body Zi
 }
 
 func init() {
-	ovh.RegisterOperations(opCreateDomain, opCreateOrganization, opDeleteDomain, opDeleteOrganization, opGetDomain, opGetOrganization, opGetPlatform, opGetSlot, opListDomains, opListOrganizations, opListPlatforms, opListSlots, opListTasks, opRefreshQuotaUsage, opUpdateDomain, opUpdateOrganization, opUpdatePlatform)
+	ovh.RegisterOperations(opCreateDomain, opCreateOrganization, opCreateRedirection, opDeleteDomain, opDeleteOrganization, opDeleteRedirection, opGetDomain, opGetOrganization, opGetPlatform, opGetRedirection, opGetSlot, opListDomains, opListOrganizations, opListPlatforms, opListRedirections, opListSlots, opListTasks, opRefreshQuotaUsage, opUpdateDomain, opUpdateOrganization, opUpdatePlatform)
 }

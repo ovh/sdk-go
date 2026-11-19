@@ -15,7 +15,7 @@ import (
 )
 
 // opGetMigration is GetMigration's entry in the operation registry (ovh.Operations).
-var opGetMigration = &ovh.Operation{Name: "vmwareclouddirector.GetMigration", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/migration/{migrationId}", Summary: "Get a migration service", IAMActions: []string{"vmwareCloudDirectorMigration:apiovh:get"}}
+var opGetMigration = &ovh.Operation{Name: "vmwareclouddirector.GetMigration", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/migration/{migrationId}", Summary: "Get a migration service", IAMActions: []string{"vmwareCloudDirectorMigration:apiovh:get"}, SchemasVersion: "1.0"}
 
 // GetMigration calls GET /v2/vmwareCloudDirector/migration/{migrationId}: Get a migration service
 //
@@ -31,7 +31,7 @@ func (s *Service) GetMigration(ctx context.Context, migrationID string) (*Vmware
 }
 
 // opListMigrations is AllMigrations's entry in the operation registry (ovh.Operations).
-var opListMigrations = &ovh.Operation{Name: "vmwareclouddirector.AllMigrations", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/migration", Summary: "List migration services", IAMActions: []string{"vmwareCloudDirectorMigration:apiovh:get"}}
+var opListMigrations = &ovh.Operation{Name: "vmwareclouddirector.AllMigrations", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/migration", Summary: "List migration services", IAMActions: []string{"vmwareCloudDirectorMigration:apiovh:get"}, SchemasVersion: "1.0"}
 
 // ListMigrationsParams holds the optional parameters of ListMigrations.
 type ListMigrationsParams struct {
@@ -51,7 +51,7 @@ func (s *Service) AllMigrations(ctx context.Context, params ...ListMigrationsPar
 }
 
 // opUpdateMigration is UpdateMigration's entry in the operation registry (ovh.Operations).
-var opUpdateMigration = &ovh.Operation{Name: "vmwareclouddirector.UpdateMigration", Method: http.MethodPut, Path: "/v2/vmwareCloudDirector/migration/{migrationId}", Summary: "Update a migration service", IAMActions: []string{"vmwareCloudDirectorMigration:apiovh:edit"}}
+var opUpdateMigration = &ovh.Operation{Name: "vmwareclouddirector.UpdateMigration", Method: http.MethodPut, Path: "/v2/vmwareCloudDirector/migration/{migrationId}", Summary: "Update a migration service", IAMActions: []string{"vmwareCloudDirectorMigration:apiovh:edit"}, SchemasVersion: "1.0"}
 
 // UpdateMigration calls PUT /v2/vmwareCloudDirector/migration/{migrationId}: Update a migration service
 //

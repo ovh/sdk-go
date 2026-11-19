@@ -15,7 +15,7 @@ import (
 )
 
 // opCreateCustomerApproval is CreateCustomerApproval's entry in the operation registry (ovh.Operations).
-var opCreateCustomerApproval = &ovh.Operation{Name: "webhosting.CreateCustomerApproval", Method: http.MethodPost, Path: "/v2/webhosting/customerApproval", Summary: "Register a customer approval", IAMActions: []string{"account:apiovh:webHosting/customerApproval/create"}}
+var opCreateCustomerApproval = &ovh.Operation{Name: "webhosting.CreateCustomerApproval", Method: http.MethodPost, Path: "/v2/webhosting/customerApproval", Summary: "Register a customer approval", IAMActions: []string{"account:apiovh:webHosting/customerApproval/create"}, SchemasVersion: "1.0"}
 
 // CreateCustomerApproval calls POST /v2/webhosting/customerApproval: Register a customer approval
 //
@@ -28,7 +28,7 @@ func (s *Service) CreateCustomerApproval(ctx context.Context, body WebhostingCus
 }
 
 // opGetCustomerApproval is GetCustomerApproval's entry in the operation registry (ovh.Operations).
-var opGetCustomerApproval = &ovh.Operation{Name: "webhosting.GetCustomerApproval", Method: http.MethodGet, Path: "/v2/webhosting/customerApproval/{customerApprovalId}", Summary: "Get a customer approval", IAMActions: []string{"account:apiovh:webHosting/customerApproval/get"}}
+var opGetCustomerApproval = &ovh.Operation{Name: "webhosting.GetCustomerApproval", Method: http.MethodGet, Path: "/v2/webhosting/customerApproval/{customerApprovalId}", Summary: "Get a customer approval", IAMActions: []string{"account:apiovh:webHosting/customerApproval/get"}, SchemasVersion: "1.0"}
 
 // GetCustomerApproval calls GET /v2/webhosting/customerApproval/{customerApprovalId}: Get a customer approval
 //
@@ -41,7 +41,7 @@ func (s *Service) GetCustomerApproval(ctx context.Context, customerApprovalID in
 }
 
 // opListCustomerApprovals is AllCustomerApprovals's entry in the operation registry (ovh.Operations).
-var opListCustomerApprovals = &ovh.Operation{Name: "webhosting.AllCustomerApprovals", Method: http.MethodGet, Path: "/v2/webhosting/customerApproval", Summary: "List customer approvals, optionally filtered by approval code, resource type and resource id", IAMActions: []string{"account:apiovh:webHosting/customerApproval/get"}}
+var opListCustomerApprovals = &ovh.Operation{Name: "webhosting.AllCustomerApprovals", Method: http.MethodGet, Path: "/v2/webhosting/customerApproval", Summary: "List customer approvals, optionally filtered by approval code, resource type and resource id", IAMActions: []string{"account:apiovh:webHosting/customerApproval/get"}, SchemasVersion: "1.0"}
 
 // ListCustomerApprovalsParams holds the optional parameters of ListCustomerApprovals.
 type ListCustomerApprovalsParams struct {

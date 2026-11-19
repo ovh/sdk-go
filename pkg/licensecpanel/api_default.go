@@ -15,9 +15,11 @@ import (
 )
 
 // opChangeIP is ChangeIP's entry in the operation registry (ovh.Operations).
-var opChangeIP = &ovh.Operation{Name: "licensecpanel.ChangeIP", Method: http.MethodPost, Path: "/v1/license/cpanel/{serviceName}/changeIp", Summary: "Move this license to another Ip", IAMActions: []string{"licenseCpanel:apiovh:changeIp"}}
+var opChangeIP = &ovh.Operation{Name: "licensecpanel.ChangeIP", Method: http.MethodPost, Path: "/v1/license/cpanel/{serviceName}/changeIp", Summary: "Move a cPanel license to another IP", IAMActions: []string{"licenseCpanel:apiovh:changeIp"}}
 
-// ChangeIP calls POST /v1/license/cpanel/{serviceName}/changeIp: Move this license to another Ip
+// ChangeIP calls POST /v1/license/cpanel/{serviceName}/changeIp: Move a cPanel license to another IP
+//
+// Starts the move of the license to the given IP and returns the task that performs it.
 //
 // Arguments:
 //   - serviceName: The name of your Cpanel license
@@ -46,9 +48,11 @@ func (s *Service) ConfirmTermination(ctx context.Context, serviceName string, bo
 }
 
 // opGetCanLicenseBeMovedTo is GetCanLicenseBeMovedTo's entry in the operation registry (ovh.Operations).
-var opGetCanLicenseBeMovedTo = &ovh.Operation{Name: "licensecpanel.GetCanLicenseBeMovedTo", Method: http.MethodGet, Path: "/v1/license/cpanel/{serviceName}/canLicenseBeMovedTo", Summary: "Will tell if the ip can accept the license", IAMActions: []string{"licenseCpanel:apiovh:canLicenseBeMovedTo/get"}}
+var opGetCanLicenseBeMovedTo = &ovh.Operation{Name: "licensecpanel.GetCanLicenseBeMovedTo", Method: http.MethodGet, Path: "/v1/license/cpanel/{serviceName}/canLicenseBeMovedTo", Summary: "Check whether a cPanel license can be moved to an IP", IAMActions: []string{"licenseCpanel:apiovh:canLicenseBeMovedTo/get"}}
 
-// GetCanLicenseBeMovedTo calls GET /v1/license/cpanel/{serviceName}/canLicenseBeMovedTo: Will tell if the ip can accept the license
+// GetCanLicenseBeMovedTo calls GET /v1/license/cpanel/{serviceName}/canLicenseBeMovedTo: Check whether a cPanel license can be moved to an IP
+//
+// Returns whether the destination IP can receive the license, with the reason when it cannot.
 //
 // Arguments:
 //   - serviceName: The name of your Cpanel license
@@ -60,9 +64,12 @@ func (s *Service) GetCanLicenseBeMovedTo(ctx context.Context, serviceName string
 }
 
 // opGetCpanel is GetCpanel's entry in the operation registry (ovh.Operations).
-var opGetCpanel = &ovh.Operation{Name: "licensecpanel.GetCpanel", Method: http.MethodGet, Path: "/v1/license/cpanel/{serviceName}", Summary: "Get this object properties", IAMActions: []string{"licenseCpanel:apiovh:get"}}
+var opGetCpanel = &ovh.Operation{Name: "licensecpanel.GetCpanel", Method: http.MethodGet, Path: "/v1/license/cpanel/{serviceName}", Summary: "Get a cPanel license", IAMActions: []string{"licenseCpanel:apiovh:get"}}
 
-// GetCpanel calls GET /v1/license/cpanel/{serviceName}: Get this object properties
+// GetCpanel calls GET /v1/license/cpanel/{serviceName}: Get a cPanel license
+//
+// Returns the license ID, version, status, the IP address the license is attached to, and the
+// creation date.
 //
 // Arguments:
 //   - serviceName: The name of your Cpanel license
@@ -101,9 +108,12 @@ func (s *Service) GetServiceInfos(ctx context.Context, serviceName string) (*Ser
 }
 
 // opGetTasks is GetTasks's entry in the operation registry (ovh.Operations).
-var opGetTasks = &ovh.Operation{Name: "licensecpanel.GetTasks", Method: http.MethodGet, Path: "/v1/license/cpanel/{serviceName}/tasks/{taskId}", Summary: "Get this object properties", IAMActions: []string{"licenseCpanel:apiovh:tasks/get"}}
+var opGetTasks = &ovh.Operation{Name: "licensecpanel.GetTasks", Method: http.MethodGet, Path: "/v1/license/cpanel/{serviceName}/tasks/{taskId}", Summary: "Get a license task", IAMActions: []string{"licenseCpanel:apiovh:tasks/get"}}
 
-// GetTasks calls GET /v1/license/cpanel/{serviceName}/tasks/{taskId}: Get this object properties
+// GetTasks calls GET /v1/license/cpanel/{serviceName}/tasks/{taskId}: Get a license task
+//
+// Returns the action, status, creation date, completion date and last update of a task linked to a
+// license.
 //
 // Arguments:
 //   - serviceName: The name of your Cpanel license
@@ -128,9 +138,11 @@ func (s *Service) AllTasks(ctx context.Context, serviceName string, params ...Li
 }
 
 // opListAllowedDestinationIPs is ListAllowedDestinationIPs's entry in the operation registry (ovh.Operations).
-var opListAllowedDestinationIPs = &ovh.Operation{Name: "licensecpanel.ListAllowedDestinationIPs", Method: http.MethodGet, Path: "/v1/license/cpanel/{serviceName}/allowedDestinationIp", Summary: "Returns an array of ips where the license can be moved to", IAMActions: []string{"licenseCpanel:apiovh:allowedDestinationIp/get"}}
+var opListAllowedDestinationIPs = &ovh.Operation{Name: "licensecpanel.ListAllowedDestinationIPs", Method: http.MethodGet, Path: "/v1/license/cpanel/{serviceName}/allowedDestinationIp", Summary: "List the IPs a cPanel license can be moved to", IAMActions: []string{"licenseCpanel:apiovh:allowedDestinationIp/get"}}
 
-// ListAllowedDestinationIPs calls GET /v1/license/cpanel/{serviceName}/allowedDestinationIp: Returns an array of ips where the license can be moved to
+// ListAllowedDestinationIPs calls GET /v1/license/cpanel/{serviceName}/allowedDestinationIp: List the IPs a cPanel license can be moved to
+//
+// Returns the IP blocks that can receive the license, so you can pick the destination of a move.
 //
 // Arguments:
 //   - serviceName: The name of your Cpanel license
@@ -141,7 +153,7 @@ func (s *Service) ListAllowedDestinationIPs(ctx context.Context, serviceName str
 }
 
 // opListCpanels is ListCpanels's entry in the operation registry (ovh.Operations).
-var opListCpanels = &ovh.Operation{Name: "licensecpanel.ListCpanels", Method: http.MethodGet, Path: "/v1/license/cpanel", Summary: "List available services", IAMActions: []string{"licenseCpanel:apiovh:get"}}
+var opListCpanels = &ovh.Operation{Name: "licensecpanel.ListCpanels", Method: http.MethodGet, Path: "/v1/license/cpanel", Summary: "List your cPanel licenses", IAMActions: []string{"licenseCpanel:apiovh:get"}}
 
 // ListCpanelsParams holds the optional parameters of ListCpanels.
 type ListCpanelsParams struct {
@@ -149,7 +161,10 @@ type ListCpanelsParams struct {
 	IAMTags map[string][]IAMResourceTagFilter `ovh:"query,iamTags"`
 }
 
-// ListCpanels calls GET /v1/license/cpanel: List available services
+// ListCpanels calls GET /v1/license/cpanel: List your cPanel licenses
+//
+// Returns the names of the cPanel licenses of the account; each name is the service name used by
+// the other calls.
 //
 // Requires the IAM action licenseCpanel:apiovh:get.
 func (s *Service) ListCpanels(ctx context.Context, params ...ListCpanelsParams) ([]string, error) {
@@ -157,9 +172,11 @@ func (s *Service) ListCpanels(ctx context.Context, params ...ListCpanelsParams) 
 }
 
 // opListOrderableVersions is ListOrderableVersions's entry in the operation registry (ovh.Operations).
-var opListOrderableVersions = &ovh.Operation{Name: "licensecpanel.ListOrderableVersions", Method: http.MethodGet, Path: "/v1/license/cpanel/orderableVersions", Summary: "Get the orderable CPanel versions", IAMActions: []string{"account:apiovh:licenseCpanel/orderableVersions/get"}}
+var opListOrderableVersions = &ovh.Operation{Name: "licensecpanel.ListOrderableVersions", Method: http.MethodGet, Path: "/v1/license/cpanel/orderableVersions", Summary: "Get the orderable cPanel versions", IAMActions: []string{"account:apiovh:licenseCpanel/orderableVersions/get"}}
 
-// ListOrderableVersions calls GET /v1/license/cpanel/orderableVersions: Get the orderable CPanel versions
+// ListOrderableVersions calls GET /v1/license/cpanel/orderableVersions: Get the orderable cPanel versions
+//
+// Returns the versions that can be ordered for the given IP, grouped by service type.
 //
 // Arguments:
 //   - ip: Your license Ip
@@ -170,7 +187,7 @@ func (s *Service) ListOrderableVersions(ctx context.Context, ip string) ([]Licen
 }
 
 // opListTasks is ListTasks's entry in the operation registry (ovh.Operations).
-var opListTasks = &ovh.Operation{Name: "licensecpanel.ListTasks", Method: http.MethodGet, Path: "/v1/license/cpanel/{serviceName}/tasks", Summary: "tasks linked to this license", IAMActions: []string{"licenseCpanel:apiovh:tasks/get"}}
+var opListTasks = &ovh.Operation{Name: "licensecpanel.ListTasks", Method: http.MethodGet, Path: "/v1/license/cpanel/{serviceName}/tasks", Summary: "List the tasks of a cPanel license", IAMActions: []string{"licenseCpanel:apiovh:tasks/get"}}
 
 // ListTasksParams holds the optional parameters of ListTasks.
 type ListTasksParams struct {
@@ -180,7 +197,10 @@ type ListTasksParams struct {
 	Status *LicenseTaskStateEnum `ovh:"query,status"`
 }
 
-// ListTasks calls GET /v1/license/cpanel/{serviceName}/tasks: tasks linked to this license
+// ListTasks calls GET /v1/license/cpanel/{serviceName}/tasks: List the tasks of a cPanel license
+//
+// Returns the IDs of the tasks linked to the license, each task records an action such as a version
+// upgrade or an IP change.
 //
 // Arguments:
 //   - serviceName: The name of your Cpanel license
@@ -207,9 +227,11 @@ func (s *Service) Terminate(ctx context.Context, serviceName string) (string, er
 }
 
 // opUpdateCpanel is UpdateCpanel's entry in the operation registry (ovh.Operations).
-var opUpdateCpanel = &ovh.Operation{Name: "licensecpanel.UpdateCpanel", Method: http.MethodPut, Path: "/v1/license/cpanel/{serviceName}", Summary: "Alter this object properties", IAMActions: []string{"licenseCpanel:apiovh:put"}}
+var opUpdateCpanel = &ovh.Operation{Name: "licensecpanel.UpdateCpanel", Method: http.MethodPut, Path: "/v1/license/cpanel/{serviceName}", Summary: "Update a cPanel license", IAMActions: []string{"licenseCpanel:apiovh:put"}}
 
-// UpdateCpanel calls PUT /v1/license/cpanel/{serviceName}: Alter this object properties
+// UpdateCpanel calls PUT /v1/license/cpanel/{serviceName}: Update a cPanel license
+//
+// Changes the settings that can be modified: the automatic deletion at expiration.
 //
 // Arguments:
 //   - serviceName: The name of your Cpanel license

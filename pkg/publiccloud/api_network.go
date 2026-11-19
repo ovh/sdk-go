@@ -15,7 +15,7 @@ import (
 )
 
 // opCreateFloatingIP is CreateFloatingIP's entry in the operation registry (ovh.Operations).
-var opCreateFloatingIP = &ovh.Operation{Name: "publiccloud.CreateFloatingIP", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/publicIp/floating", Summary: "Create a floating IP", IAMActions: []string{"publicCloudProject:apiovh:publicIp/floating/create"}}
+var opCreateFloatingIP = &ovh.Operation{Name: "publiccloud.CreateFloatingIP", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/publicIp/floating", Summary: "Create a floating IP", IAMActions: []string{"publicCloudProject:apiovh:publicIp/floating/create"}, SchemasVersion: "1.0"}
 
 // CreateFloatingIP calls POST /v2/publicCloud/project/{projectId}/publicIp/floating: Create a floating IP
 //
@@ -31,7 +31,7 @@ func (s *Service) CreateFloatingIP(ctx context.Context, projectID string, body P
 }
 
 // opCreateGateway is CreateGateway's entry in the operation registry (ovh.Operations).
-var opCreateGateway = &ovh.Operation{Name: "publiccloud.CreateGateway", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/gateway", Summary: "Create a gateway", IAMActions: []string{"publicCloudProject:apiovh:gateway/create"}}
+var opCreateGateway = &ovh.Operation{Name: "publiccloud.CreateGateway", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/gateway", Summary: "Create a gateway", IAMActions: []string{"publicCloudProject:apiovh:gateway/create"}, SchemasVersion: "1.0"}
 
 // CreateGateway calls POST /v2/publicCloud/project/{projectId}/gateway: Create a gateway
 //
@@ -47,7 +47,7 @@ func (s *Service) CreateGateway(ctx context.Context, projectID string, body Publ
 }
 
 // opCreateNetwork is CreateNetwork's entry in the operation registry (ovh.Operations).
-var opCreateNetwork = &ovh.Operation{Name: "publiccloud.CreateNetwork", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/network", Summary: "Create a network", IAMActions: []string{"publicCloudProject:apiovh:network/create"}}
+var opCreateNetwork = &ovh.Operation{Name: "publiccloud.CreateNetwork", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/network", Summary: "Create a network", IAMActions: []string{"publicCloudProject:apiovh:network/create"}, SchemasVersion: "1.0"}
 
 // CreateNetwork calls POST /v2/publicCloud/project/{projectId}/network: Create a network
 //
@@ -64,7 +64,7 @@ func (s *Service) CreateNetwork(ctx context.Context, projectID string, body Publ
 }
 
 // opCreateSecurityGroup is CreateSecurityGroup's entry in the operation registry (ovh.Operations).
-var opCreateSecurityGroup = &ovh.Operation{Name: "publiccloud.CreateSecurityGroup", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/securityGroup", Summary: "Create a security group", IAMActions: []string{"publicCloudProject:apiovh:securityGroup/create"}}
+var opCreateSecurityGroup = &ovh.Operation{Name: "publiccloud.CreateSecurityGroup", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/securityGroup", Summary: "Create a security group", IAMActions: []string{"publicCloudProject:apiovh:securityGroup/create"}, SchemasVersion: "1.0"}
 
 // CreateSecurityGroup calls POST /v2/publicCloud/project/{projectId}/securityGroup: Create a security group
 //
@@ -80,7 +80,7 @@ func (s *Service) CreateSecurityGroup(ctx context.Context, projectID string, bod
 }
 
 // opCreateSubnet is CreateSubnet's entry in the operation registry (ovh.Operations).
-var opCreateSubnet = &ovh.Operation{Name: "publiccloud.CreateSubnet", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/network/{networkId}/subnet", Summary: "Create a subnet", IAMActions: []string{"publicCloudProject:apiovh:network/subnet/create"}}
+var opCreateSubnet = &ovh.Operation{Name: "publiccloud.CreateSubnet", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/network/{networkId}/subnet", Summary: "Create a subnet", IAMActions: []string{"publicCloudProject:apiovh:network/subnet/create"}, SchemasVersion: "1.0"}
 
 // CreateSubnet calls POST /v2/publicCloud/project/{projectId}/network/{networkId}/subnet: Create a subnet
 //
@@ -97,7 +97,7 @@ func (s *Service) CreateSubnet(ctx context.Context, projectID string, networkID 
 }
 
 // opDeleteExtNetIP is DeleteExtNetIP's entry in the operation registry (ovh.Operations).
-var opDeleteExtNetIP = &ovh.Operation{Name: "publiccloud.DeleteExtNetIP", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/publicIp/extNet/{id}", Summary: "Delete an Ext-Net IP", IAMActions: []string{"publicCloudProject:apiovh:publicIp/extNet/delete"}}
+var opDeleteExtNetIP = &ovh.Operation{Name: "publiccloud.DeleteExtNetIP", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/publicIp/extNet/{id}", Summary: "Delete an Ext-Net IP", IAMActions: []string{"publicCloudProject:apiovh:publicIp/extNet/delete"}, SchemasVersion: "1.0"}
 
 // DeleteExtNetIP calls DELETE /v2/publicCloud/project/{projectId}/publicIp/extNet/{id}: Delete an Ext-Net IP
 //
@@ -113,7 +113,7 @@ func (s *Service) DeleteExtNetIP(ctx context.Context, projectID string, id strin
 }
 
 // opDeleteFloatingIP is DeleteFloatingIP's entry in the operation registry (ovh.Operations).
-var opDeleteFloatingIP = &ovh.Operation{Name: "publiccloud.DeleteFloatingIP", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/publicIp/floating/{id}", Summary: "Delete a floating IP", IAMActions: []string{"publicCloudProject:apiovh:publicIp/floating/delete"}}
+var opDeleteFloatingIP = &ovh.Operation{Name: "publiccloud.DeleteFloatingIP", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/publicIp/floating/{id}", Summary: "Delete a floating IP", IAMActions: []string{"publicCloudProject:apiovh:publicIp/floating/delete"}, SchemasVersion: "1.0"}
 
 // DeleteFloatingIP calls DELETE /v2/publicCloud/project/{projectId}/publicIp/floating/{id}: Delete a floating IP
 //
@@ -129,7 +129,7 @@ func (s *Service) DeleteFloatingIP(ctx context.Context, projectID string, id str
 }
 
 // opDeleteGateway is DeleteGateway's entry in the operation registry (ovh.Operations).
-var opDeleteGateway = &ovh.Operation{Name: "publiccloud.DeleteGateway", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/gateway/{gatewayId}", Summary: "Delete a gateway", IAMActions: []string{"publicCloudProject:apiovh:gateway/delete"}}
+var opDeleteGateway = &ovh.Operation{Name: "publiccloud.DeleteGateway", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/gateway/{gatewayId}", Summary: "Delete a gateway", IAMActions: []string{"publicCloudProject:apiovh:gateway/delete"}, SchemasVersion: "1.0"}
 
 // DeleteGateway calls DELETE /v2/publicCloud/project/{projectId}/gateway/{gatewayId}: Delete a gateway
 //
@@ -145,7 +145,7 @@ func (s *Service) DeleteGateway(ctx context.Context, projectID string, gatewayID
 }
 
 // opDeleteNetwork is DeleteNetwork's entry in the operation registry (ovh.Operations).
-var opDeleteNetwork = &ovh.Operation{Name: "publiccloud.DeleteNetwork", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/network/{networkId}", Summary: "Delete a network", IAMActions: []string{"publicCloudProject:apiovh:network/delete"}}
+var opDeleteNetwork = &ovh.Operation{Name: "publiccloud.DeleteNetwork", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/network/{networkId}", Summary: "Delete a network", IAMActions: []string{"publicCloudProject:apiovh:network/delete"}, SchemasVersion: "1.0"}
 
 // DeleteNetwork calls DELETE /v2/publicCloud/project/{projectId}/network/{networkId}: Delete a network
 //
@@ -161,7 +161,7 @@ func (s *Service) DeleteNetwork(ctx context.Context, projectID string, networkID
 }
 
 // opDeleteSecurityGroup is DeleteSecurityGroup's entry in the operation registry (ovh.Operations).
-var opDeleteSecurityGroup = &ovh.Operation{Name: "publiccloud.DeleteSecurityGroup", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/securityGroup/{securityGroupId}", Summary: "Delete a security group", IAMActions: []string{"publicCloudProject:apiovh:securityGroup/delete"}}
+var opDeleteSecurityGroup = &ovh.Operation{Name: "publiccloud.DeleteSecurityGroup", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/securityGroup/{securityGroupId}", Summary: "Delete a security group", IAMActions: []string{"publicCloudProject:apiovh:securityGroup/delete"}, SchemasVersion: "1.0"}
 
 // DeleteSecurityGroup calls DELETE /v2/publicCloud/project/{projectId}/securityGroup/{securityGroupId}: Delete a security group
 //
@@ -178,7 +178,7 @@ func (s *Service) DeleteSecurityGroup(ctx context.Context, projectID string, sec
 }
 
 // opDeleteSubnet is DeleteSubnet's entry in the operation registry (ovh.Operations).
-var opDeleteSubnet = &ovh.Operation{Name: "publiccloud.DeleteSubnet", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/network/{networkId}/subnet/{subnetId}", Summary: "Delete a subnet", IAMActions: []string{"publicCloudProject:apiovh:network/subnet/delete"}}
+var opDeleteSubnet = &ovh.Operation{Name: "publiccloud.DeleteSubnet", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/network/{networkId}/subnet/{subnetId}", Summary: "Delete a subnet", IAMActions: []string{"publicCloudProject:apiovh:network/subnet/delete"}, SchemasVersion: "1.0"}
 
 // DeleteSubnet calls DELETE /v2/publicCloud/project/{projectId}/network/{networkId}/subnet/{subnetId}: Delete a subnet
 //
@@ -195,7 +195,7 @@ func (s *Service) DeleteSubnet(ctx context.Context, projectID string, networkID 
 }
 
 // opEditFloatingIP is EditFloatingIP's entry in the operation registry (ovh.Operations).
-var opEditFloatingIP = &ovh.Operation{Name: "publiccloud.EditFloatingIP", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/publicIp/floating/{id}", Summary: "Update a floating IP", IAMActions: []string{"publicCloudProject:apiovh:publicIp/floating/edit"}}
+var opEditFloatingIP = &ovh.Operation{Name: "publiccloud.EditFloatingIP", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/publicIp/floating/{id}", Summary: "Update a floating IP", IAMActions: []string{"publicCloudProject:apiovh:publicIp/floating/edit"}, SchemasVersion: "1.0"}
 
 // EditFloatingIP calls PUT /v2/publicCloud/project/{projectId}/publicIp/floating/{id}: Update a floating IP
 //
@@ -222,7 +222,7 @@ func (s *Service) EditFloatingIP(ctx context.Context, projectID string, id strin
 }
 
 // opEditGateway is EditGateway's entry in the operation registry (ovh.Operations).
-var opEditGateway = &ovh.Operation{Name: "publiccloud.EditGateway", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/gateway/{gatewayId}", Summary: "Update a gateway", IAMActions: []string{"publicCloudProject:apiovh:gateway/edit"}}
+var opEditGateway = &ovh.Operation{Name: "publiccloud.EditGateway", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/gateway/{gatewayId}", Summary: "Update a gateway", IAMActions: []string{"publicCloudProject:apiovh:gateway/edit"}, SchemasVersion: "1.0"}
 
 // EditGateway calls PUT /v2/publicCloud/project/{projectId}/gateway/{gatewayId}: Update a gateway
 //
@@ -240,7 +240,7 @@ func (s *Service) EditGateway(ctx context.Context, projectID string, gatewayID s
 }
 
 // opEditNetwork is EditNetwork's entry in the operation registry (ovh.Operations).
-var opEditNetwork = &ovh.Operation{Name: "publiccloud.EditNetwork", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/network/{networkId}", Summary: "Update a network", IAMActions: []string{"publicCloudProject:apiovh:network/edit"}}
+var opEditNetwork = &ovh.Operation{Name: "publiccloud.EditNetwork", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/network/{networkId}", Summary: "Update a network", IAMActions: []string{"publicCloudProject:apiovh:network/edit"}, SchemasVersion: "1.0"}
 
 // EditNetwork calls PUT /v2/publicCloud/project/{projectId}/network/{networkId}: Update a network
 //
@@ -257,7 +257,7 @@ func (s *Service) EditNetwork(ctx context.Context, projectID string, networkID s
 }
 
 // opEditSecurityGroup is EditSecurityGroup's entry in the operation registry (ovh.Operations).
-var opEditSecurityGroup = &ovh.Operation{Name: "publiccloud.EditSecurityGroup", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/securityGroup/{securityGroupId}", Summary: "Update a security group", IAMActions: []string{"publicCloudProject:apiovh:securityGroup/edit"}}
+var opEditSecurityGroup = &ovh.Operation{Name: "publiccloud.EditSecurityGroup", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/securityGroup/{securityGroupId}", Summary: "Update a security group", IAMActions: []string{"publicCloudProject:apiovh:securityGroup/edit"}, SchemasVersion: "1.0"}
 
 // EditSecurityGroup calls PUT /v2/publicCloud/project/{projectId}/securityGroup/{securityGroupId}: Update a security group
 //
@@ -274,7 +274,7 @@ func (s *Service) EditSecurityGroup(ctx context.Context, projectID string, secur
 }
 
 // opEditSubnet is EditSubnet's entry in the operation registry (ovh.Operations).
-var opEditSubnet = &ovh.Operation{Name: "publiccloud.EditSubnet", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/network/{networkId}/subnet/{subnetId}", Summary: "Update a subnet", IAMActions: []string{"publicCloudProject:apiovh:network/subnet/edit"}}
+var opEditSubnet = &ovh.Operation{Name: "publiccloud.EditSubnet", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/network/{networkId}/subnet/{subnetId}", Summary: "Update a subnet", IAMActions: []string{"publicCloudProject:apiovh:network/subnet/edit"}, SchemasVersion: "1.0"}
 
 // EditSubnet calls PUT /v2/publicCloud/project/{projectId}/network/{networkId}/subnet/{subnetId}: Update a subnet
 //
@@ -293,7 +293,7 @@ func (s *Service) EditSubnet(ctx context.Context, projectID string, networkID st
 }
 
 // opGetAdditionalIP is GetAdditionalIP's entry in the operation registry (ovh.Operations).
-var opGetAdditionalIP = &ovh.Operation{Name: "publiccloud.GetAdditionalIP", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/publicIp/additional/{id}", Summary: "Get an additional IP", IAMActions: []string{"publicCloudProject:apiovh:publicIp/additional/get"}}
+var opGetAdditionalIP = &ovh.Operation{Name: "publiccloud.GetAdditionalIP", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/publicIp/additional/{id}", Summary: "Get an additional IP", IAMActions: []string{"publicCloudProject:apiovh:publicIp/additional/get"}, SchemasVersion: "1.0"}
 
 // GetAdditionalIP calls GET /v2/publicCloud/project/{projectId}/publicIp/additional/{id}: Get an additional IP
 //
@@ -309,7 +309,7 @@ func (s *Service) GetAdditionalIP(ctx context.Context, projectID string, id stri
 }
 
 // opGetAdditionalIPs is AllAdditionalIPs's entry in the operation registry (ovh.Operations).
-var opGetAdditionalIPs = &ovh.Operation{Name: "publiccloud.AllAdditionalIPs", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/publicIp/additional", Summary: "List additional IPs", IAMActions: []string{"publicCloudProject:apiovh:publicIp/additional/get"}}
+var opGetAdditionalIPs = &ovh.Operation{Name: "publiccloud.AllAdditionalIPs", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/publicIp/additional", Summary: "List additional IPs", IAMActions: []string{"publicCloudProject:apiovh:publicIp/additional/get"}, SchemasVersion: "1.0"}
 
 // AllAdditionalIPs iterates over GET /v2/publicCloud/project/{projectId}/publicIp/additional (List additional IPs),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -326,7 +326,7 @@ func (s *Service) AllAdditionalIPs(ctx context.Context, projectID string) iter.S
 }
 
 // opGetExtNetIP is GetExtNetIP's entry in the operation registry (ovh.Operations).
-var opGetExtNetIP = &ovh.Operation{Name: "publiccloud.GetExtNetIP", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/publicIp/extNet/{id}", Summary: "Get an Ext-Net IP", IAMActions: []string{"publicCloudProject:apiovh:publicIp/extNet/get"}}
+var opGetExtNetIP = &ovh.Operation{Name: "publiccloud.GetExtNetIP", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/publicIp/extNet/{id}", Summary: "Get an Ext-Net IP", IAMActions: []string{"publicCloudProject:apiovh:publicIp/extNet/get"}, SchemasVersion: "1.0"}
 
 // GetExtNetIP calls GET /v2/publicCloud/project/{projectId}/publicIp/extNet/{id}: Get an Ext-Net IP
 //
@@ -342,7 +342,7 @@ func (s *Service) GetExtNetIP(ctx context.Context, projectID string, id string) 
 }
 
 // opGetExtNetIPs is AllExtNetIPs's entry in the operation registry (ovh.Operations).
-var opGetExtNetIPs = &ovh.Operation{Name: "publiccloud.AllExtNetIPs", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/publicIp/extNet", Summary: "List Ext-Net IPs", IAMActions: []string{"publicCloudProject:apiovh:publicIp/extNet/get"}}
+var opGetExtNetIPs = &ovh.Operation{Name: "publiccloud.AllExtNetIPs", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/publicIp/extNet", Summary: "List Ext-Net IPs", IAMActions: []string{"publicCloudProject:apiovh:publicIp/extNet/get"}, SchemasVersion: "1.0"}
 
 // AllExtNetIPs iterates over GET /v2/publicCloud/project/{projectId}/publicIp/extNet (List Ext-Net IPs),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -359,7 +359,7 @@ func (s *Service) AllExtNetIPs(ctx context.Context, projectID string) iter.Seq2[
 }
 
 // opGetFloatingIP is GetFloatingIP's entry in the operation registry (ovh.Operations).
-var opGetFloatingIP = &ovh.Operation{Name: "publiccloud.GetFloatingIP", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/publicIp/floating/{id}", Summary: "Get a floating IP", IAMActions: []string{"publicCloudProject:apiovh:publicIp/floating/get"}}
+var opGetFloatingIP = &ovh.Operation{Name: "publiccloud.GetFloatingIP", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/publicIp/floating/{id}", Summary: "Get a floating IP", IAMActions: []string{"publicCloudProject:apiovh:publicIp/floating/get"}, SchemasVersion: "1.0"}
 
 // GetFloatingIP calls GET /v2/publicCloud/project/{projectId}/publicIp/floating/{id}: Get a floating IP
 //
@@ -375,7 +375,7 @@ func (s *Service) GetFloatingIP(ctx context.Context, projectID string, id string
 }
 
 // opGetFloatingIPs is AllFloatingIPs's entry in the operation registry (ovh.Operations).
-var opGetFloatingIPs = &ovh.Operation{Name: "publiccloud.AllFloatingIPs", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/publicIp/floating", Summary: "List floating IPs", IAMActions: []string{"publicCloudProject:apiovh:publicIp/floating/get"}}
+var opGetFloatingIPs = &ovh.Operation{Name: "publiccloud.AllFloatingIPs", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/publicIp/floating", Summary: "List floating IPs", IAMActions: []string{"publicCloudProject:apiovh:publicIp/floating/get"}, SchemasVersion: "1.0"}
 
 // AllFloatingIPs iterates over GET /v2/publicCloud/project/{projectId}/publicIp/floating (List floating IPs),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -392,7 +392,7 @@ func (s *Service) AllFloatingIPs(ctx context.Context, projectID string) iter.Seq
 }
 
 // opGetGateway is GetGateway's entry in the operation registry (ovh.Operations).
-var opGetGateway = &ovh.Operation{Name: "publiccloud.GetGateway", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/gateway/{gatewayId}", Summary: "Get a gateway", IAMActions: []string{"publicCloudProject:apiovh:gateway/get"}}
+var opGetGateway = &ovh.Operation{Name: "publiccloud.GetGateway", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/gateway/{gatewayId}", Summary: "Get a gateway", IAMActions: []string{"publicCloudProject:apiovh:gateway/get"}, SchemasVersion: "1.0"}
 
 // GetGateway calls GET /v2/publicCloud/project/{projectId}/gateway/{gatewayId}: Get a gateway
 //
@@ -408,7 +408,7 @@ func (s *Service) GetGateway(ctx context.Context, projectID string, gatewayID st
 }
 
 // opGetGateways is AllGateways's entry in the operation registry (ovh.Operations).
-var opGetGateways = &ovh.Operation{Name: "publiccloud.AllGateways", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/gateway", Summary: "List gateways", IAMActions: []string{"publicCloudProject:apiovh:gateway/get"}}
+var opGetGateways = &ovh.Operation{Name: "publiccloud.AllGateways", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/gateway", Summary: "List gateways", IAMActions: []string{"publicCloudProject:apiovh:gateway/get"}, SchemasVersion: "1.0"}
 
 // GetGatewaysParams holds the optional parameters of GetGateways.
 type GetGatewaysParams struct {
@@ -431,7 +431,7 @@ func (s *Service) AllGateways(ctx context.Context, projectID string, params ...G
 }
 
 // opGetNetwork is GetNetwork's entry in the operation registry (ovh.Operations).
-var opGetNetwork = &ovh.Operation{Name: "publiccloud.GetNetwork", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/network/{networkId}", Summary: "Get a network", IAMActions: []string{"publicCloudProject:apiovh:network/get"}}
+var opGetNetwork = &ovh.Operation{Name: "publiccloud.GetNetwork", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/network/{networkId}", Summary: "Get a network", IAMActions: []string{"publicCloudProject:apiovh:network/get"}, SchemasVersion: "1.0"}
 
 // GetNetwork calls GET /v2/publicCloud/project/{projectId}/network/{networkId}: Get a network
 //
@@ -447,7 +447,7 @@ func (s *Service) GetNetwork(ctx context.Context, projectID string, networkID st
 }
 
 // opGetNetworks is AllNetworks's entry in the operation registry (ovh.Operations).
-var opGetNetworks = &ovh.Operation{Name: "publiccloud.AllNetworks", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/network", Summary: "List networks", IAMActions: []string{"publicCloudProject:apiovh:network/get"}}
+var opGetNetworks = &ovh.Operation{Name: "publiccloud.AllNetworks", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/network", Summary: "List networks", IAMActions: []string{"publicCloudProject:apiovh:network/get"}, SchemasVersion: "1.0"}
 
 // GetNetworksParams holds the optional parameters of GetNetworks.
 type GetNetworksParams struct {
@@ -470,7 +470,7 @@ func (s *Service) AllNetworks(ctx context.Context, projectID string, params ...G
 }
 
 // opGetPublicIPs is AllPublicIPs's entry in the operation registry (ovh.Operations).
-var opGetPublicIPs = &ovh.Operation{Name: "publiccloud.AllPublicIPs", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/publicIp", Summary: "List public IPs", IAMActions: []string{"publicCloudProject:apiovh:publicIp/get"}}
+var opGetPublicIPs = &ovh.Operation{Name: "publiccloud.AllPublicIPs", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/publicIp", Summary: "List public IPs", IAMActions: []string{"publicCloudProject:apiovh:publicIp/get"}, SchemasVersion: "1.0"}
 
 // AllPublicIPs iterates over GET /v2/publicCloud/project/{projectId}/publicIp (List public IPs),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -488,7 +488,7 @@ func (s *Service) AllPublicIPs(ctx context.Context, projectID string) iter.Seq2[
 }
 
 // opGetSecurityGroup is GetSecurityGroup's entry in the operation registry (ovh.Operations).
-var opGetSecurityGroup = &ovh.Operation{Name: "publiccloud.GetSecurityGroup", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/securityGroup/{securityGroupId}", Summary: "Get a security group", IAMActions: []string{"publicCloudProject:apiovh:securityGroup/get"}}
+var opGetSecurityGroup = &ovh.Operation{Name: "publiccloud.GetSecurityGroup", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/securityGroup/{securityGroupId}", Summary: "Get a security group", IAMActions: []string{"publicCloudProject:apiovh:securityGroup/get"}, SchemasVersion: "1.0"}
 
 // GetSecurityGroup calls GET /v2/publicCloud/project/{projectId}/securityGroup/{securityGroupId}: Get a security group
 //
@@ -504,7 +504,7 @@ func (s *Service) GetSecurityGroup(ctx context.Context, projectID string, securi
 }
 
 // opGetSecurityGroups is AllSecurityGroups's entry in the operation registry (ovh.Operations).
-var opGetSecurityGroups = &ovh.Operation{Name: "publiccloud.AllSecurityGroups", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/securityGroup", Summary: "List security groups", IAMActions: []string{"publicCloudProject:apiovh:securityGroup/get"}}
+var opGetSecurityGroups = &ovh.Operation{Name: "publiccloud.AllSecurityGroups", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/securityGroup", Summary: "List security groups", IAMActions: []string{"publicCloudProject:apiovh:securityGroup/get"}, SchemasVersion: "1.0"}
 
 // AllSecurityGroups iterates over GET /v2/publicCloud/project/{projectId}/securityGroup (List security groups),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -521,7 +521,7 @@ func (s *Service) AllSecurityGroups(ctx context.Context, projectID string) iter.
 }
 
 // opGetSubnet is GetSubnet's entry in the operation registry (ovh.Operations).
-var opGetSubnet = &ovh.Operation{Name: "publiccloud.GetSubnet", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/network/{networkId}/subnet/{subnetId}", Summary: "Get a subnet", IAMActions: []string{"publicCloudProject:apiovh:network/subnet/get"}}
+var opGetSubnet = &ovh.Operation{Name: "publiccloud.GetSubnet", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/network/{networkId}/subnet/{subnetId}", Summary: "Get a subnet", IAMActions: []string{"publicCloudProject:apiovh:network/subnet/get"}, SchemasVersion: "1.0"}
 
 // GetSubnet calls GET /v2/publicCloud/project/{projectId}/network/{networkId}/subnet/{subnetId}: Get a subnet
 //
@@ -538,7 +538,7 @@ func (s *Service) GetSubnet(ctx context.Context, projectID string, networkID str
 }
 
 // opGetSubnets is AllSubnets's entry in the operation registry (ovh.Operations).
-var opGetSubnets = &ovh.Operation{Name: "publiccloud.AllSubnets", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/network/{networkId}/subnet", Summary: "List subnets", IAMActions: []string{"publicCloudProject:apiovh:network/subnet/get"}}
+var opGetSubnets = &ovh.Operation{Name: "publiccloud.AllSubnets", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/network/{networkId}/subnet", Summary: "List subnets", IAMActions: []string{"publicCloudProject:apiovh:network/subnet/get"}, SchemasVersion: "1.0"}
 
 // AllSubnets iterates over GET /v2/publicCloud/project/{projectId}/network/{networkId}/subnet (List subnets),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it

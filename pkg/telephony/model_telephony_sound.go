@@ -10,7 +10,7 @@ import (
 	"time"
 )
 
-// TelephonySound List sounds
+// TelephonySound List sounds. Returns the identifiers of the sounds of the customer. Get a sound for its filename, description, size and download URL.
 type TelephonySound struct {
 	// Sound creation date
 	// Read-only: the API sets it.

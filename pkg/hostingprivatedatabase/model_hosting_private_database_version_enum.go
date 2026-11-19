@@ -14,7 +14,6 @@ const (
 	HostingPrivateDatabaseVersionEnumMariadb1011  HostingPrivateDatabaseVersionEnum = "mariadb_10.11"
 	HostingPrivateDatabaseVersionEnumMariadb114   HostingPrivateDatabaseVersionEnum = "mariadb_11.4"
 	HostingPrivateDatabaseVersionEnumMariadb118   HostingPrivateDatabaseVersionEnum = "mariadb_11.8"
-	HostingPrivateDatabaseVersionEnumMysql80      HostingPrivateDatabaseVersionEnum = "mysql_8.0"
 	HostingPrivateDatabaseVersionEnumMysql84      HostingPrivateDatabaseVersionEnum = "mysql_8.4"
 	HostingPrivateDatabaseVersionEnumPostgresql14 HostingPrivateDatabaseVersionEnum = "postgresql_14"
 	HostingPrivateDatabaseVersionEnumPostgresql15 HostingPrivateDatabaseVersionEnum = "postgresql_15"

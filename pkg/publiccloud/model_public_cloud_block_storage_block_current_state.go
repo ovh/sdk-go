@@ -14,6 +14,9 @@ type PublicCloudBlockStorageBlockCurrentState struct {
 	// Whether the volume is bootable
 	// Read-only: the API sets it.
 	Bootable *bool `json:"bootable,omitempty"`
+	// Per-action availability for the current volume state. Null in the response to an update of the volume.
+	// Read-only: the API sets it.
+	Capabilities []PublicCloudBlockStorageBlockCapability `json:"capabilities,omitempty"`
 	// Volume description
 	// Read-only: the API sets it.
 	Description *string `json:"description,omitempty"`

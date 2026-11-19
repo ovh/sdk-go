@@ -1,22 +1,29 @@
 # OVHcloud Go SDK
 
-> The Go client for the OVHcloud API (github.com/ovh/sdk-go): one package per API section under
-> pkg/, about 7 000 operations, OAuth2 service-account authentication, typed errors and
-> iterators over lists, helpers that wait for asynchronous work, and a read-only mode for
-> exploring an account safely. Most of the code is generated from the API's OpenAPI
-> specifications.
+> The Go client for the OVHcloud API (github.com/ovh/sdk-go): 80 API sections
+> and 6180 operations, as typed methods, one package per section under pkg/. OAuth2
+> service-account authentication, typed errors, iterators over lists, helpers that wait for
+> asynchronous work, and a read-only mode to explore an account safely. Most of the code is
+> generated from the API's OpenAPI specifications.
 
-Before you write a call, look up the method for its route in the operation index: guessing
-names from the URL is not reliable.
+Before you write a call, look up the method of its route in the operation index: guessing
+names from the URL is not reliable. The index also gives the IAM actions of each method: the
+ones the program calls are what its service account needs.
+
+This is not go-ovh (github.com/ovh/go-ovh). Both name their package `ovh`: check the import
+path. Here: `import "github.com/ovh/sdk-go/ovh"`, an OAuth2 service account instead of
+application keys and consumer keys, and a typed method for each API call:
+`me.New(client).GetAccountDetails(ctx)` for GET /v1/me.
 
 ## Docs
 
-- [Guide](README.md): install, first program, finding an operation, arguments, pagination, waiting for asynchronous work, errors, configuration
+- [Guide](README.md): install, first program, coming from go-ovh, finding an operation, arguments, pagination, waiting for asynchronous work, errors, configuration, calling any endpoint, testing, observability, troubleshooting
+- [Examples](examples/README.md): small programs to run or copy: GET /me, list with an iterator, create then wait, a DNS record, a cart order, error handling, vRack
 - [Agent notes](AGENTS.md): the conventions in short, for AI coding agents
-- [Operation index](index/README.md): one index/<section>.jsonl per section, each line a method with its route, Go signature and required IAM actions
+- [Operation index](index/README.md): one index/<section>.jsonl per section, 6962 methods in all, each line a method with its route, Go signature and IAM actions
 
 ## Optional
 
 - [Changelog](CHANGELOG.md): what changed in each release
-- [Contributing](CONTRIBUTING.md): pkg/ is generated, how to report a problem
+- [Contributing](CONTRIBUTING.md): the pkg/ directory is generated, how to report a problem
 - [OVHcloud API console](https://api.ovh.com): every route, with its parameters

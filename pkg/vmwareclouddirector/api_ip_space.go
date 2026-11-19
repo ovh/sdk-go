@@ -15,7 +15,7 @@ import (
 )
 
 // opGetOrganizationIPSpace is GetOrganizationIPSpace's entry in the operation registry (ovh.Operations).
-var opGetOrganizationIPSpace = &ovh.Operation{Name: "vmwareclouddirector.GetOrganizationIPSpace", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/ipSpace/{ipSpaceId}", Summary: "Get an IP space", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/ipSpace/get"}}
+var opGetOrganizationIPSpace = &ovh.Operation{Name: "vmwareclouddirector.GetOrganizationIPSpace", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/ipSpace/{ipSpaceId}", Summary: "Get an IP space", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/ipSpace/get"}, SchemasVersion: "1.0"}
 
 // GetOrganizationIPSpace calls GET /v2/vmwareCloudDirector/organization/{organizationId}/ipSpace/{ipSpaceId}: Get an IP space
 //
@@ -31,7 +31,7 @@ func (s *Service) GetOrganizationIPSpace(ctx context.Context, organizationID str
 }
 
 // opGetOrganizationIPSpaceTask is GetOrganizationIPSpaceTask's entry in the operation registry (ovh.Operations).
-var opGetOrganizationIPSpaceTask = &ovh.Operation{Name: "vmwareclouddirector.GetOrganizationIPSpaceTask", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/ipSpace/{ipSpaceId}/task/{taskId}", Summary: "Get an IP space task", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/ipSpace/task/get"}}
+var opGetOrganizationIPSpaceTask = &ovh.Operation{Name: "vmwareclouddirector.GetOrganizationIPSpaceTask", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/ipSpace/{ipSpaceId}/task/{taskId}", Summary: "Get an IP space task", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/ipSpace/task/get"}, SchemasVersion: "1.0"}
 
 // GetOrganizationIPSpaceTask calls GET /v2/vmwareCloudDirector/organization/{organizationId}/ipSpace/{ipSpaceId}/task/{taskId}: Get an IP space task
 //
@@ -48,7 +48,7 @@ func (s *Service) GetOrganizationIPSpaceTask(ctx context.Context, organizationID
 }
 
 // opListOrganizationIPSpaceTasks is AllOrganizationIPSpaceTasks's entry in the operation registry (ovh.Operations).
-var opListOrganizationIPSpaceTasks = &ovh.Operation{Name: "vmwareclouddirector.AllOrganizationIPSpaceTasks", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/ipSpace/{ipSpaceId}/task", Summary: "List IP space tasks", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/ipSpace/task/get"}}
+var opListOrganizationIPSpaceTasks = &ovh.Operation{Name: "vmwareclouddirector.AllOrganizationIPSpaceTasks", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/ipSpace/{ipSpaceId}/task", Summary: "List IP space tasks", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/ipSpace/task/get"}, SchemasVersion: "1.0"}
 
 // AllOrganizationIPSpaceTasks iterates over GET /v2/vmwareCloudDirector/organization/{organizationId}/ipSpace/{ipSpaceId}/task (List IP space tasks),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -66,7 +66,7 @@ func (s *Service) AllOrganizationIPSpaceTasks(ctx context.Context, organizationI
 }
 
 // opListOrganizationIPSpaces is AllOrganizationIPSpaces's entry in the operation registry (ovh.Operations).
-var opListOrganizationIPSpaces = &ovh.Operation{Name: "vmwareclouddirector.AllOrganizationIPSpaces", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/ipSpace", Summary: "List IP spaces", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/ipSpace/get"}}
+var opListOrganizationIPSpaces = &ovh.Operation{Name: "vmwareclouddirector.AllOrganizationIPSpaces", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/ipSpace", Summary: "List IP spaces", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/ipSpace/get"}, SchemasVersion: "1.0"}
 
 // AllOrganizationIPSpaces iterates over GET /v2/vmwareCloudDirector/organization/{organizationId}/ipSpace (List IP spaces),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -83,7 +83,7 @@ func (s *Service) AllOrganizationIPSpaces(ctx context.Context, organizationID st
 }
 
 // opUpdateOrganizationIPSpace is UpdateOrganizationIPSpace's entry in the operation registry (ovh.Operations).
-var opUpdateOrganizationIPSpace = &ovh.Operation{Name: "vmwareclouddirector.UpdateOrganizationIPSpace", Method: http.MethodPut, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/ipSpace/{ipSpaceId}", Summary: "Update an IP space", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/ipSpace/edit"}}
+var opUpdateOrganizationIPSpace = &ovh.Operation{Name: "vmwareclouddirector.UpdateOrganizationIPSpace", Method: http.MethodPut, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/ipSpace/{ipSpaceId}", Summary: "Update an IP space", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/ipSpace/edit"}, SchemasVersion: "1.0"}
 
 // UpdateOrganizationIPSpace calls PUT /v2/vmwareCloudDirector/organization/{organizationId}/ipSpace/{ipSpaceId}: Update an IP space
 //

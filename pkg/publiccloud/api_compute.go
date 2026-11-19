@@ -15,7 +15,7 @@ import (
 )
 
 // opCreateInstance is CreateInstance's entry in the operation registry (ovh.Operations).
-var opCreateInstance = &ovh.Operation{Name: "publiccloud.CreateInstance", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/compute/instance", Summary: "Create an instance", IAMActions: []string{"publicCloudProject:apiovh:instance/create"}}
+var opCreateInstance = &ovh.Operation{Name: "publiccloud.CreateInstance", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/compute/instance", Summary: "Create an instance", IAMActions: []string{"publicCloudProject:apiovh:instance/create"}, SchemasVersion: "1.0"}
 
 // CreateInstance calls POST /v2/publicCloud/project/{projectId}/compute/instance: Create an instance
 //
@@ -50,6 +50,22 @@ var opCreateInstance = &ovh.Operation{Name: "publiccloud.CreateInstance", Method
 // `targetSpec.volumes` is a declarative list of block-volume references attached to the instance.
 // Supply the volumes to attach at boot. On a subsequent `PUT` the list is diffed to attach or
 // detach volumes (see the `PUT` route). There is no imperative attach/detach endpoint.
+//
+// Boot source: image or volume.
+//
+// An instance needs exactly one boot source:
+//
+//   - `targetSpec.image` — the instance boots from that image on the local disk of its flavor.
+//   - one entry of `targetSpec.volumes` with `role: BOOT`, with `image` omitted — the instance
+//     boots from that existing block storage volume. The volume must be bootable, `available`, not
+//     multi-attach, and in the instance's region. A bootable volume can be created from an image
+//     with `createFrom.imageId` on the block storage volume route. At most one entry may be `BOOT`,
+//     and the other volumes of the list are attached once the instance is running.
+//
+// Setting both an image and a boot volume, or neither, is rejected. The boot volume is chosen at
+// creation only: it cannot be detached or replaced afterward, and it is kept when the instance is
+// deleted. An instance booted from a volume has `image` set to null and cannot be rebuilt: `PUT`
+// rejects a new `image` or a change of `userData` for it.
 //
 // Declarative `shares`
 //
@@ -100,7 +116,7 @@ func (s *Service) CreateInstance(ctx context.Context, projectID string, body Pub
 }
 
 // opCreateInstanceConsole is CreateInstanceConsole's entry in the operation registry (ovh.Operations).
-var opCreateInstanceConsole = &ovh.Operation{Name: "publiccloud.CreateInstanceConsole", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/compute/instance/{instanceId}/console", Summary: "Create a remote console", IAMActions: []string{"publicCloudProject:apiovh:instance/createConsole"}}
+var opCreateInstanceConsole = &ovh.Operation{Name: "publiccloud.CreateInstanceConsole", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/compute/instance/{instanceId}/console", Summary: "Create a remote console", IAMActions: []string{"publicCloudProject:apiovh:instance/createConsole"}, SchemasVersion: "1.0"}
 
 // CreateInstanceConsole calls POST /v2/publicCloud/project/{projectId}/compute/instance/{instanceId}/console: Create a remote console
 //
@@ -131,7 +147,7 @@ func (s *Service) CreateInstanceConsole(ctx context.Context, projectID string, i
 }
 
 // opCreateInstanceGroup is CreateInstanceGroup's entry in the operation registry (ovh.Operations).
-var opCreateInstanceGroup = &ovh.Operation{Name: "publiccloud.CreateInstanceGroup", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/compute/instanceGroup", Summary: "Create an instance group", IAMActions: []string{"publicCloudProject:apiovh:instanceGroup/create"}}
+var opCreateInstanceGroup = &ovh.Operation{Name: "publiccloud.CreateInstanceGroup", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/compute/instanceGroup", Summary: "Create an instance group", IAMActions: []string{"publicCloudProject:apiovh:instanceGroup/create"}, SchemasVersion: "1.0"}
 
 // CreateInstanceGroup calls POST /v2/publicCloud/project/{projectId}/compute/instanceGroup: Create an instance group
 //
@@ -163,7 +179,7 @@ func (s *Service) CreateInstanceGroup(ctx context.Context, projectID string, bod
 }
 
 // opCreateInstanceSnapshot is CreateInstanceSnapshot's entry in the operation registry (ovh.Operations).
-var opCreateInstanceSnapshot = &ovh.Operation{Name: "publiccloud.CreateInstanceSnapshot", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/compute/snapshot", Summary: "Create an instance snapshot", IAMActions: []string{"publicCloudProject:apiovh:instance/snapshot/create"}}
+var opCreateInstanceSnapshot = &ovh.Operation{Name: "publiccloud.CreateInstanceSnapshot", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/compute/snapshot", Summary: "Create an instance snapshot", IAMActions: []string{"publicCloudProject:apiovh:instance/snapshot/create"}, SchemasVersion: "1.0"}
 
 // CreateInstanceSnapshot calls POST /v2/publicCloud/project/{projectId}/compute/snapshot: Create an instance snapshot
 //
@@ -180,7 +196,7 @@ func (s *Service) CreateInstanceSnapshot(ctx context.Context, projectID string, 
 }
 
 // opCreateSSHKey is CreateSSHKey's entry in the operation registry (ovh.Operations).
-var opCreateSSHKey = &ovh.Operation{Name: "publiccloud.CreateSSHKey", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/sshKey", Summary: "Create an SSH key", IAMActions: []string{"publicCloudProject:apiovh:sshKey/create"}}
+var opCreateSSHKey = &ovh.Operation{Name: "publiccloud.CreateSSHKey", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/sshKey", Summary: "Create an SSH key", IAMActions: []string{"publicCloudProject:apiovh:sshKey/create"}, SchemasVersion: "1.0"}
 
 // CreateSSHKey calls POST /v2/publicCloud/project/{projectId}/sshKey: Create an SSH key
 //
@@ -197,7 +213,7 @@ func (s *Service) CreateSSHKey(ctx context.Context, projectID string, body Publi
 }
 
 // opDeleteInstance is DeleteInstance's entry in the operation registry (ovh.Operations).
-var opDeleteInstance = &ovh.Operation{Name: "publiccloud.DeleteInstance", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/compute/instance/{instanceId}", Summary: "Delete an instance", IAMActions: []string{"publicCloudProject:apiovh:instance/delete"}}
+var opDeleteInstance = &ovh.Operation{Name: "publiccloud.DeleteInstance", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/compute/instance/{instanceId}", Summary: "Delete an instance", IAMActions: []string{"publicCloudProject:apiovh:instance/delete"}, SchemasVersion: "1.0"}
 
 // DeleteInstance calls DELETE /v2/publicCloud/project/{projectId}/compute/instance/{instanceId}: Delete an instance
 //
@@ -224,7 +240,7 @@ func (s *Service) DeleteInstance(ctx context.Context, projectID string, instance
 }
 
 // opDeleteInstanceGroup is DeleteInstanceGroup's entry in the operation registry (ovh.Operations).
-var opDeleteInstanceGroup = &ovh.Operation{Name: "publiccloud.DeleteInstanceGroup", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/compute/instanceGroup/{instanceGroupId}", Summary: "Delete an instance group", IAMActions: []string{"publicCloudProject:apiovh:instanceGroup/delete"}}
+var opDeleteInstanceGroup = &ovh.Operation{Name: "publiccloud.DeleteInstanceGroup", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/compute/instanceGroup/{instanceGroupId}", Summary: "Delete an instance group", IAMActions: []string{"publicCloudProject:apiovh:instanceGroup/delete"}, SchemasVersion: "1.0"}
 
 // DeleteInstanceGroup calls DELETE /v2/publicCloud/project/{projectId}/compute/instanceGroup/{instanceGroupId}: Delete an instance group
 //
@@ -247,7 +263,7 @@ func (s *Service) DeleteInstanceGroup(ctx context.Context, projectID string, ins
 }
 
 // opDeleteInstanceSnapshot is DeleteInstanceSnapshot's entry in the operation registry (ovh.Operations).
-var opDeleteInstanceSnapshot = &ovh.Operation{Name: "publiccloud.DeleteInstanceSnapshot", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/compute/snapshot/{snapshotId}", Summary: "Delete an instance snapshot", IAMActions: []string{"publicCloudProject:apiovh:instance/snapshot/delete"}}
+var opDeleteInstanceSnapshot = &ovh.Operation{Name: "publiccloud.DeleteInstanceSnapshot", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/compute/snapshot/{snapshotId}", Summary: "Delete an instance snapshot", IAMActions: []string{"publicCloudProject:apiovh:instance/snapshot/delete"}, SchemasVersion: "1.0"}
 
 // DeleteInstanceSnapshot calls DELETE /v2/publicCloud/project/{projectId}/compute/snapshot/{snapshotId}: Delete an instance snapshot
 //
@@ -263,7 +279,7 @@ func (s *Service) DeleteInstanceSnapshot(ctx context.Context, projectID string, 
 }
 
 // opDeleteSSHKey is DeleteSSHKey's entry in the operation registry (ovh.Operations).
-var opDeleteSSHKey = &ovh.Operation{Name: "publiccloud.DeleteSSHKey", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/sshKey/{name}", Summary: "Delete an SSH key", IAMActions: []string{"publicCloudProject:apiovh:sshKey/delete"}}
+var opDeleteSSHKey = &ovh.Operation{Name: "publiccloud.DeleteSSHKey", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/sshKey/{name}", Summary: "Delete an SSH key", IAMActions: []string{"publicCloudProject:apiovh:sshKey/delete"}, SchemasVersion: "1.0"}
 
 // DeleteSSHKey calls DELETE /v2/publicCloud/project/{projectId}/sshKey/{name}: Delete an SSH key
 //
@@ -279,7 +295,7 @@ func (s *Service) DeleteSSHKey(ctx context.Context, projectID string, name strin
 }
 
 // opEditInstance is EditInstance's entry in the operation registry (ovh.Operations).
-var opEditInstance = &ovh.Operation{Name: "publiccloud.EditInstance", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/compute/instance/{instanceId}", Summary: "Update an instance", IAMActions: []string{"publicCloudProject:apiovh:instance/edit"}}
+var opEditInstance = &ovh.Operation{Name: "publiccloud.EditInstance", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/compute/instance/{instanceId}", Summary: "Update an instance", IAMActions: []string{"publicCloudProject:apiovh:instance/edit"}, SchemasVersion: "1.0"}
 
 // EditInstance calls PUT /v2/publicCloud/project/{projectId}/compute/instance/{instanceId}: Update an instance
 //
@@ -304,7 +320,9 @@ var opEditInstance = &ovh.Operation{Name: "publiccloud.EditInstance", Method: ht
 //   - Resize (flavor) — changing `flavor` migrates the instance to the new flavor.
 //   - Volume attach / detach — done declaratively by diffing the `volumes` list: adding a volume
 //     reference attaches that volume, removing one detaches it. There is no imperative
-//     attach/detach endpoint — the diff is the only mechanism.
+//     attach/detach endpoint — the diff is the only mechanism. The boot volume of an instance
+//     booted from a volume (`role: BOOT`) must stay in the list: it cannot be detached, and no
+//     other volume can become `BOOT`.
 //   - Network attach / detach — done declaratively by diffing the `networks` list, whose entries
 //     are `{id?, subnetId?, ip?, autoAssignPublicIp?}`: a platform-assigned Ext-Net IP
 //     (`{"autoAssignPublicIp": true}`, at most one entry), a public IP the project already owns —
@@ -325,7 +343,9 @@ var opEditInstance = &ovh.Operation{Name: "publiccloud.EditInstance", Method: ht
 //
 // `location`, `sshKeyName`, and `group` are set only at creation and are not part of the update. In
 // particular, placement-group (`group`) membership cannot change post-create. OpenStack/Nova server
-// groups are immutable and there is deliberately no group `PUT`.
+// groups are immutable and there is deliberately no group `PUT`. The boot source is fixed at
+// creation too: an instance booted from a volume keeps `image` null, so a `PUT` carrying an `image`
+// or changing `userData` is rejected for it, since both require a rebuild from an image.
 //
 // Destructive update (`userData`)
 //
@@ -356,7 +376,7 @@ func (s *Service) EditInstance(ctx context.Context, projectID string, instanceID
 }
 
 // opGetInstance is GetInstance's entry in the operation registry (ovh.Operations).
-var opGetInstance = &ovh.Operation{Name: "publiccloud.GetInstance", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/compute/instance/{instanceId}", Summary: "Get an instance", IAMActions: []string{"publicCloudProject:apiovh:instance/get"}}
+var opGetInstance = &ovh.Operation{Name: "publiccloud.GetInstance", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/compute/instance/{instanceId}", Summary: "Get an instance", IAMActions: []string{"publicCloudProject:apiovh:instance/get"}, SchemasVersion: "1.0"}
 
 // GetInstance calls GET /v2/publicCloud/project/{projectId}/compute/instance/{instanceId}: Get an instance
 //
@@ -385,7 +405,7 @@ func (s *Service) GetInstance(ctx context.Context, projectID string, instanceID 
 }
 
 // opGetInstanceCompatibleFlavors is AllInstanceCompatibleFlavors's entry in the operation registry (ovh.Operations).
-var opGetInstanceCompatibleFlavors = &ovh.Operation{Name: "publiccloud.AllInstanceCompatibleFlavors", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/compute/instance/{instanceId}/compatibleFlavor", Summary: "List compatible flavors", IAMActions: []string{"publicCloudProject:apiovh:instance/compatibleFlavor/get"}}
+var opGetInstanceCompatibleFlavors = &ovh.Operation{Name: "publiccloud.AllInstanceCompatibleFlavors", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/compute/instance/{instanceId}/compatibleFlavor", Summary: "List compatible flavors", IAMActions: []string{"publicCloudProject:apiovh:instance/compatibleFlavor/get"}, SchemasVersion: "1.0"}
 
 // AllInstanceCompatibleFlavors iterates over GET /v2/publicCloud/project/{projectId}/compute/instance/{instanceId}/compatibleFlavor (List compatible flavors),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -421,7 +441,7 @@ func (s *Service) AllInstanceCompatibleFlavors(ctx context.Context, projectID st
 }
 
 // opGetInstanceConsoleOutput is GetInstanceConsoleOutput's entry in the operation registry (ovh.Operations).
-var opGetInstanceConsoleOutput = &ovh.Operation{Name: "publiccloud.GetInstanceConsoleOutput", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/compute/instance/{instanceId}/consoleOutput", Summary: "Get console output", IAMActions: []string{"publicCloudProject:apiovh:instance/getConsoleOutput"}}
+var opGetInstanceConsoleOutput = &ovh.Operation{Name: "publiccloud.GetInstanceConsoleOutput", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/compute/instance/{instanceId}/consoleOutput", Summary: "Get console output", IAMActions: []string{"publicCloudProject:apiovh:instance/getConsoleOutput"}, SchemasVersion: "1.0"}
 
 // GetInstanceConsoleOutputParams holds the optional parameters of GetInstanceConsoleOutput.
 type GetInstanceConsoleOutputParams struct {
@@ -448,7 +468,7 @@ func (s *Service) GetInstanceConsoleOutput(ctx context.Context, projectID string
 }
 
 // opGetInstanceEvents is AllInstanceEvents's entry in the operation registry (ovh.Operations).
-var opGetInstanceEvents = &ovh.Operation{Name: "publiccloud.AllInstanceEvents", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/compute/instance/{instanceId}/events", Summary: "List instance events", IAMActions: []string{"publicCloudProject:apiovh:instance/event/get"}}
+var opGetInstanceEvents = &ovh.Operation{Name: "publiccloud.AllInstanceEvents", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/compute/instance/{instanceId}/events", Summary: "List instance events", IAMActions: []string{"publicCloudProject:apiovh:instance/event/get"}, SchemasVersion: "1.0"}
 
 // AllInstanceEvents iterates over GET /v2/publicCloud/project/{projectId}/compute/instance/{instanceId}/events (List instance events),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -469,7 +489,7 @@ func (s *Service) AllInstanceEvents(ctx context.Context, projectID string, insta
 }
 
 // opGetInstanceGroup is GetInstanceGroup's entry in the operation registry (ovh.Operations).
-var opGetInstanceGroup = &ovh.Operation{Name: "publiccloud.GetInstanceGroup", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/compute/instanceGroup/{instanceGroupId}", Summary: "Get an instance group", IAMActions: []string{"publicCloudProject:apiovh:instanceGroup/get"}}
+var opGetInstanceGroup = &ovh.Operation{Name: "publiccloud.GetInstanceGroup", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/compute/instanceGroup/{instanceGroupId}", Summary: "Get an instance group", IAMActions: []string{"publicCloudProject:apiovh:instanceGroup/get"}, SchemasVersion: "1.0"}
 
 // GetInstanceGroup calls GET /v2/publicCloud/project/{projectId}/compute/instanceGroup/{instanceGroupId}: Get an instance group
 //
@@ -495,7 +515,7 @@ func (s *Service) GetInstanceGroup(ctx context.Context, projectID string, instan
 }
 
 // opGetInstanceGroups is AllInstanceGroups's entry in the operation registry (ovh.Operations).
-var opGetInstanceGroups = &ovh.Operation{Name: "publiccloud.AllInstanceGroups", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/compute/instanceGroup", Summary: "List instance groups", IAMActions: []string{"publicCloudProject:apiovh:instanceGroup/get"}}
+var opGetInstanceGroups = &ovh.Operation{Name: "publiccloud.AllInstanceGroups", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/compute/instanceGroup", Summary: "List instance groups", IAMActions: []string{"publicCloudProject:apiovh:instanceGroup/get"}, SchemasVersion: "1.0"}
 
 // AllInstanceGroups iterates over GET /v2/publicCloud/project/{projectId}/compute/instanceGroup (List instance groups),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -519,7 +539,7 @@ func (s *Service) AllInstanceGroups(ctx context.Context, projectID string) iter.
 }
 
 // opGetInstanceSnapshot is GetInstanceSnapshot's entry in the operation registry (ovh.Operations).
-var opGetInstanceSnapshot = &ovh.Operation{Name: "publiccloud.GetInstanceSnapshot", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/compute/snapshot/{snapshotId}", Summary: "Get an instance snapshot", IAMActions: []string{"publicCloudProject:apiovh:instance/snapshot/get"}}
+var opGetInstanceSnapshot = &ovh.Operation{Name: "publiccloud.GetInstanceSnapshot", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/compute/snapshot/{snapshotId}", Summary: "Get an instance snapshot", IAMActions: []string{"publicCloudProject:apiovh:instance/snapshot/get"}, SchemasVersion: "1.0"}
 
 // GetInstanceSnapshot calls GET /v2/publicCloud/project/{projectId}/compute/snapshot/{snapshotId}: Get an instance snapshot
 //
@@ -535,7 +555,7 @@ func (s *Service) GetInstanceSnapshot(ctx context.Context, projectID string, sna
 }
 
 // opGetInstanceSnapshots is AllInstanceSnapshots's entry in the operation registry (ovh.Operations).
-var opGetInstanceSnapshots = &ovh.Operation{Name: "publiccloud.AllInstanceSnapshots", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/compute/snapshot", Summary: "List instance snapshots", IAMActions: []string{"publicCloudProject:apiovh:instance/snapshot/get"}}
+var opGetInstanceSnapshots = &ovh.Operation{Name: "publiccloud.AllInstanceSnapshots", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/compute/snapshot", Summary: "List instance snapshots", IAMActions: []string{"publicCloudProject:apiovh:instance/snapshot/get"}, SchemasVersion: "1.0"}
 
 // GetInstanceSnapshotsParams holds the optional parameters of GetInstanceSnapshots.
 type GetInstanceSnapshotsParams struct {
@@ -558,7 +578,7 @@ func (s *Service) AllInstanceSnapshots(ctx context.Context, projectID string, pa
 }
 
 // opGetInstances is AllInstances's entry in the operation registry (ovh.Operations).
-var opGetInstances = &ovh.Operation{Name: "publiccloud.AllInstances", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/compute/instance", Summary: "List instances", IAMActions: []string{"publicCloudProject:apiovh:instance/get"}}
+var opGetInstances = &ovh.Operation{Name: "publiccloud.AllInstances", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/compute/instance", Summary: "List instances", IAMActions: []string{"publicCloudProject:apiovh:instance/get"}, SchemasVersion: "1.0"}
 
 // GetInstancesParams holds the optional parameters of GetInstances.
 type GetInstancesParams struct {
@@ -601,7 +621,7 @@ func (s *Service) AllInstances(ctx context.Context, projectID string, params ...
 }
 
 // opGetSSHKey is GetSSHKey's entry in the operation registry (ovh.Operations).
-var opGetSSHKey = &ovh.Operation{Name: "publiccloud.GetSSHKey", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/sshKey/{name}", Summary: "Get an SSH key", IAMActions: []string{"publicCloudProject:apiovh:sshKey/get"}}
+var opGetSSHKey = &ovh.Operation{Name: "publiccloud.GetSSHKey", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/sshKey/{name}", Summary: "Get an SSH key", IAMActions: []string{"publicCloudProject:apiovh:sshKey/get"}, SchemasVersion: "1.0"}
 
 // GetSSHKey calls GET /v2/publicCloud/project/{projectId}/sshKey/{name}: Get an SSH key
 //
@@ -617,7 +637,7 @@ func (s *Service) GetSSHKey(ctx context.Context, projectID string, name string) 
 }
 
 // opGetSSHKeys is AllSSHKeys's entry in the operation registry (ovh.Operations).
-var opGetSSHKeys = &ovh.Operation{Name: "publiccloud.AllSSHKeys", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/sshKey", Summary: "List SSH keys", IAMActions: []string{"publicCloudProject:apiovh:sshKey/get"}}
+var opGetSSHKeys = &ovh.Operation{Name: "publiccloud.AllSSHKeys", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/sshKey", Summary: "List SSH keys", IAMActions: []string{"publicCloudProject:apiovh:sshKey/get"}, SchemasVersion: "1.0"}
 
 // AllSSHKeys iterates over GET /v2/publicCloud/project/{projectId}/sshKey (List SSH keys),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -634,7 +654,7 @@ func (s *Service) AllSSHKeys(ctx context.Context, projectID string) iter.Seq2[*P
 }
 
 // opPostInstanceAction is PostInstanceAction's entry in the operation registry (ovh.Operations).
-var opPostInstanceAction = &ovh.Operation{Name: "publiccloud.PostInstanceAction", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/compute/instance/{instanceId}/action", Summary: "Run an instance action", IAMActions: []string{"publicCloudProject:apiovh:instance/runAction"}}
+var opPostInstanceAction = &ovh.Operation{Name: "publiccloud.PostInstanceAction", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/compute/instance/{instanceId}/action", Summary: "Run an instance action", IAMActions: []string{"publicCloudProject:apiovh:instance/runAction"}, SchemasVersion: "1.0"}
 
 // PostInstanceAction calls POST /v2/publicCloud/project/{projectId}/compute/instance/{instanceId}/action: Run an instance action
 //

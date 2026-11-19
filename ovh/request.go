@@ -77,6 +77,12 @@ func (c *Client) do(ctx context.Context, req *Request, out any) (header http.Hea
 		}()
 	}
 
+	// Only an operation the caller gives sets X-Schemas-Version. A Request built by hand
+	// decodes into the caller's own types, so a matched operation does not change the contract.
+	schemasVersion := ""
+	if req.Operation != nil {
+		schemasVersion = req.Operation.SchemasVersion
+	}
 	op := req.Operation
 	if op == nil {
 		op, _ = MatchOperation(req.Method, req.Path)
@@ -94,6 +100,7 @@ func (c *Client) do(ctx context.Context, req *Request, out any) (header http.Hea
 	if err != nil {
 		return nil, err
 	}
+	prepared.schemasVersion = schemasVersion
 	call.Query = prepared.url.Query()
 
 	for _, hook := range c.beforeRequest {
@@ -155,6 +162,8 @@ type prepared struct {
 	url    *url.URL
 	header http.Header // the headers from Params
 	body   []byte      // the JSON body, nil when the request has none
+	// schemasVersion is the X-Schemas-Version to send, empty for none.
+	schemasVersion string
 }
 
 func (c *Client) prepare(req *Request) (*prepared, error) {
@@ -235,10 +244,18 @@ func (c *Client) headersFor(req *Request, p *prepared) http.Header {
 			}
 		}
 	}
+	if p.schemasVersion != "" {
+		// Set, not added: the API reads the first value.
+		header.Set(schemasVersionHeader, p.schemasVersion)
+	}
 	// Set last, so neither the client's headers nor a Request can replace it.
 	header.Set("User-Agent", c.userAgent)
 	return header
 }
+
+// schemasVersionHeader carries the version of the /v2 contract: the one a request asks for,
+// and the one the API answered with.
+const schemasVersionHeader = "X-Schemas-Version"
 
 // Call sends req and returns the decoded response. The section packages use it, one call per
 // operation.

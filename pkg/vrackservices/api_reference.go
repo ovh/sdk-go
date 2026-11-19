@@ -15,7 +15,7 @@ import (
 )
 
 // opListReferenceCompatibleManagedServiceTypes is AllReferenceCompatibleManagedServiceTypes's entry in the operation registry (ovh.Operations).
-var opListReferenceCompatibleManagedServiceTypes = &ovh.Operation{Name: "vrackservices.AllReferenceCompatibleManagedServiceTypes", Method: http.MethodGet, Path: "/v2/vrackServices/reference/compatibleManagedServiceType", Summary: "List compatible service types"}
+var opListReferenceCompatibleManagedServiceTypes = &ovh.Operation{Name: "vrackservices.AllReferenceCompatibleManagedServiceTypes", Method: http.MethodGet, Path: "/v2/vrackServices/reference/compatibleManagedServiceType", Summary: "List compatible service types", SchemasVersion: "1.0"}
 
 // AllReferenceCompatibleManagedServiceTypes iterates over GET /v2/vrackServices/reference/compatibleManagedServiceType (List compatible service types),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -27,7 +27,7 @@ func (s *Service) AllReferenceCompatibleManagedServiceTypes(ctx context.Context)
 }
 
 // opListReferenceFeatureAvailabilities is AllReferenceFeatureAvailabilities's entry in the operation registry (ovh.Operations).
-var opListReferenceFeatureAvailabilities = &ovh.Operation{Name: "vrackservices.AllReferenceFeatureAvailabilities", Method: http.MethodGet, Path: "/v2/vrackServices/reference/featureAvailability", Summary: "List feature availability"}
+var opListReferenceFeatureAvailabilities = &ovh.Operation{Name: "vrackservices.AllReferenceFeatureAvailabilities", Method: http.MethodGet, Path: "/v2/vrackServices/reference/featureAvailability", Summary: "List feature availability", SchemasVersion: "1.0"}
 
 // ListReferenceFeatureAvailabilitiesParams holds the optional parameters of ListReferenceFeatureAvailabilities.
 type ListReferenceFeatureAvailabilitiesParams struct {
@@ -47,7 +47,7 @@ func (s *Service) AllReferenceFeatureAvailabilities(ctx context.Context, params 
 }
 
 // opListReferenceRegions is AllReferenceRegions's entry in the operation registry (ovh.Operations).
-var opListReferenceRegions = &ovh.Operation{Name: "vrackservices.AllReferenceRegions", Method: http.MethodGet, Path: "/v2/vrackServices/reference/region", Summary: "List regions"}
+var opListReferenceRegions = &ovh.Operation{Name: "vrackservices.AllReferenceRegions", Method: http.MethodGet, Path: "/v2/vrackServices/reference/region", Summary: "List regions", SchemasVersion: "1.0"}
 
 // AllReferenceRegions iterates over GET /v2/vrackServices/reference/region (List regions),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it

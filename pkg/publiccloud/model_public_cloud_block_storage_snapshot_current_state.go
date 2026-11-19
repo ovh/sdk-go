@@ -8,6 +8,9 @@ package publiccloud
 
 // PublicCloudBlockStorageSnapshotCurrentState Current state of a block storage volume snapshot as observed from the infrastructure
 type PublicCloudBlockStorageSnapshotCurrentState struct {
+	// Per-action availability for the current snapshot state
+	// Read-only: the API sets it.
+	Capabilities []PublicCloudBlockStorageSnapshotCapability `json:"capabilities,omitempty"`
 	// Snapshot description
 	// Read-only: the API sets it.
 	Description *string `json:"description,omitempty"`
@@ -23,7 +26,7 @@ type PublicCloudBlockStorageSnapshotCurrentState struct {
 	// Snapshot status on the infrastructure
 	// Read-only: the API sets it.
 	Status *PublicCloudBlockStorageSnapshotStatusEnum `json:"status,omitempty"`
-	// ID of the volume this snapshot was created from
+	// Identifier of the source volume
 	// Read-only: the API sets it.
 	VolumeID *string `json:"volumeId,omitempty"`
 }

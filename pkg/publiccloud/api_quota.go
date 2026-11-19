@@ -14,7 +14,7 @@ import (
 )
 
 // opEditQuota is EditQuota's entry in the operation registry (ovh.Operations).
-var opEditQuota = &ovh.Operation{Name: "publiccloud.EditQuota", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/quota", Summary: "Update the project quota", IAMActions: []string{"publicCloudProject:apiovh:quota/edit"}}
+var opEditQuota = &ovh.Operation{Name: "publiccloud.EditQuota", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/quota", Summary: "Update the project quota", IAMActions: []string{"publicCloudProject:apiovh:quota/edit"}, SchemasVersion: "1.0"}
 
 // EditQuota calls PUT /v2/publicCloud/project/{projectId}/quota: Update the project quota
 //
@@ -33,7 +33,7 @@ func (s *Service) EditQuota(ctx context.Context, projectID string, body PublicCl
 }
 
 // opGetQuota is GetQuota's entry in the operation registry (ovh.Operations).
-var opGetQuota = &ovh.Operation{Name: "publiccloud.GetQuota", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/quota", Summary: "Get the project quota", IAMActions: []string{"publicCloudProject:apiovh:quota/get"}}
+var opGetQuota = &ovh.Operation{Name: "publiccloud.GetQuota", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/quota", Summary: "Get the project quota", IAMActions: []string{"publicCloudProject:apiovh:quota/get"}, SchemasVersion: "1.0"}
 
 // GetQuotaParams holds the optional parameters of GetQuota.
 type GetQuotaParams struct {

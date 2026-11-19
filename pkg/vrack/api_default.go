@@ -32,9 +32,9 @@ func (s *Service) ConfirmTermination(ctx context.Context, serviceName string, bo
 }
 
 // opCreateCloudProject is CreateCloudProject's entry in the operation registry (ovh.Operations).
-var opCreateCloudProject = &ovh.Operation{Name: "vrack.CreateCloudProject", Method: http.MethodPost, Path: "/v1/vrack/{serviceName}/cloudProject", Summary: "Attach a project. Attaches a Public Cloud project to the vRack. Returns the task that performs it.", IAMActions: []string{"vrack:apiovh:cloudProject/attach", "publicCloudProject:apiovh:vrack/attach"}}
+var opCreateCloudProject = &ovh.Operation{Name: "vrack.CreateCloudProject", Method: http.MethodPost, Path: "/v1/vrack/{serviceName}/cloudProject", Summary: "Attach a Public Cloud project", IAMActions: []string{"vrack:apiovh:cloudProject/attach", "publicCloudProject:apiovh:vrack/attach"}}
 
-// CreateCloudProject calls POST /v1/vrack/{serviceName}/cloudProject: Attach a project. Attaches a Public Cloud project to the vRack. Returns the task that performs it.
+// CreateCloudProject calls POST /v1/vrack/{serviceName}/cloudProject: Attach a Public Cloud project
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -47,9 +47,9 @@ func (s *Service) CreateCloudProject(ctx context.Context, serviceName string, bo
 }
 
 // opCreateDedicatedCloud is CreateDedicatedCloud's entry in the operation registry (ovh.Operations).
-var opCreateDedicatedCloud = &ovh.Operation{Name: "vrack.CreateDedicatedCloud", Method: http.MethodPost, Path: "/v1/vrack/{serviceName}/dedicatedCloud", Summary: "Attach a service", IAMActions: []string{"vrack:apiovh:pccVMware/attach", "pccVMware:apiovh:vrack/attach"}}
+var opCreateDedicatedCloud = &ovh.Operation{Name: "vrack.CreateDedicatedCloud", Method: http.MethodPost, Path: "/v1/vrack/{serviceName}/dedicatedCloud", Summary: "Attach a Managed VMware vSphere service", IAMActions: []string{"vrack:apiovh:pccVMware/attach", "pccVMware:apiovh:vrack/attach"}}
 
-// CreateDedicatedCloud calls POST /v1/vrack/{serviceName}/dedicatedCloud: Attach a service
+// CreateDedicatedCloud calls POST /v1/vrack/{serviceName}/dedicatedCloud: Attach a Managed VMware vSphere service
 //
 // Attaches a Hosted Private Cloud service to the vRack. Returns the task that performs it.
 //
@@ -63,9 +63,9 @@ func (s *Service) CreateDedicatedCloud(ctx context.Context, serviceName string, 
 }
 
 // opCreateDedicatedServer is CreateDedicatedServer's entry in the operation registry (ovh.Operations).
-var opCreateDedicatedServer = &ovh.Operation{Name: "vrack.CreateDedicatedServer", Method: http.MethodPost, Path: "/v1/vrack/{serviceName}/dedicatedServer", Summary: "Attach a server (legacy)", IAMActions: []string{"vrack:apiovh:dedicatedServer/attach", "dedicatedServer:apiovh:vrack/attach"}}
+var opCreateDedicatedServer = &ovh.Operation{Name: "vrack.CreateDedicatedServer", Method: http.MethodPost, Path: "/v1/vrack/{serviceName}/dedicatedServer", Summary: "Attach a dedicated server (legacy)", IAMActions: []string{"vrack:apiovh:dedicatedServer/attach", "dedicatedServer:apiovh:vrack/attach"}}
 
-// CreateDedicatedServer calls POST /v1/vrack/{serviceName}/dedicatedServer: Attach a server (legacy)
+// CreateDedicatedServer calls POST /v1/vrack/{serviceName}/dedicatedServer: Attach a dedicated server (legacy)
 //
 // Attaches a whole dedicated server to the vRack, in the legacy mode. Prefer attaching one of its
 // interfaces. Returns the task that performs it.
@@ -81,9 +81,9 @@ func (s *Service) CreateDedicatedServer(ctx context.Context, serviceName string,
 }
 
 // opCreateDedicatedServerInterface is CreateDedicatedServerInterface's entry in the operation registry (ovh.Operations).
-var opCreateDedicatedServerInterface = &ovh.Operation{Name: "vrack.CreateDedicatedServerInterface", Method: http.MethodPost, Path: "/v1/vrack/{serviceName}/dedicatedServerInterface", Summary: "Attach a server interface", IAMActions: []string{"vrack:apiovh:dedicatedServerInterface/attach", "dedicatedServer:apiovh:vrack/attach"}}
+var opCreateDedicatedServerInterface = &ovh.Operation{Name: "vrack.CreateDedicatedServerInterface", Method: http.MethodPost, Path: "/v1/vrack/{serviceName}/dedicatedServerInterface", Summary: "Attach a dedicated server interface", IAMActions: []string{"vrack:apiovh:dedicatedServerInterface/attach", "dedicatedServer:apiovh:vrack/attach"}}
 
-// CreateDedicatedServerInterface calls POST /v1/vrack/{serviceName}/dedicatedServerInterface: Attach a server interface
+// CreateDedicatedServerInterface calls POST /v1/vrack/{serviceName}/dedicatedServerInterface: Attach a dedicated server interface
 //
 // Attaches a dedicated server network interface to the vRack. Returns the task that performs it.
 //
@@ -98,9 +98,9 @@ func (s *Service) CreateDedicatedServerInterface(ctx context.Context, serviceNam
 }
 
 // opCreateIP is CreateIP's entry in the operation registry (ovh.Operations).
-var opCreateIP = &ovh.Operation{Name: "vrack.CreateIP", Method: http.MethodPost, Path: "/v1/vrack/{serviceName}/ip", Summary: "Attach a block", IAMActions: []string{"vrack:apiovh:ip/attach", "ip:apiovh:vrack/attach"}}
+var opCreateIP = &ovh.Operation{Name: "vrack.CreateIP", Method: http.MethodPost, Path: "/v1/vrack/{serviceName}/ip", Summary: "Attach an Additional IPv4 block", IAMActions: []string{"vrack:apiovh:ip/attach", "ip:apiovh:vrack/attach"}}
 
-// CreateIP calls POST /v1/vrack/{serviceName}/ip: Attach a block
+// CreateIP calls POST /v1/vrack/{serviceName}/ip: Attach an Additional IPv4 block
 //
 // Routes an Additional IPv4 block in the vRack, in the given region. Returns the task that performs
 // it.
@@ -115,9 +115,9 @@ func (s *Service) CreateIP(ctx context.Context, serviceName string, body CreateI
 }
 
 // opCreateIPLoadbalancing is CreateIPLoadbalancing's entry in the operation registry (ovh.Operations).
-var opCreateIPLoadbalancing = &ovh.Operation{Name: "vrack.CreateIPLoadbalancing", Method: http.MethodPost, Path: "/v1/vrack/{serviceName}/ipLoadbalancing", Summary: "Attach a load balancer", IAMActions: []string{"vrack:apiovh:ipLoadbalancing/attach", "ipLoadbalancing:apiovh:vrack/attach"}}
+var opCreateIPLoadbalancing = &ovh.Operation{Name: "vrack.CreateIPLoadbalancing", Method: http.MethodPost, Path: "/v1/vrack/{serviceName}/ipLoadbalancing", Summary: "Attach an IP Load Balancer service", IAMActions: []string{"vrack:apiovh:ipLoadbalancing/attach", "ipLoadbalancing:apiovh:vrack/attach"}}
 
-// CreateIPLoadbalancing calls POST /v1/vrack/{serviceName}/ipLoadbalancing: Attach a load balancer
+// CreateIPLoadbalancing calls POST /v1/vrack/{serviceName}/ipLoadbalancing: Attach an IP Load Balancer service
 //
 // Attaches an IP Load Balancer service to the vRack. Returns the task that performs it.
 //
@@ -132,9 +132,9 @@ func (s *Service) CreateIPLoadbalancing(ctx context.Context, serviceName string,
 }
 
 // opCreateIPv6 is CreateIPv6's entry in the operation registry (ovh.Operations).
-var opCreateIPv6 = &ovh.Operation{Name: "vrack.CreateIPv6", Method: http.MethodPost, Path: "/v1/vrack/{serviceName}/ipv6", Summary: "Attach a block. Attaches an Additional IPv6 block to the vRack. Returns the task that performs it.", IAMActions: []string{"vrack:apiovh:ipv6/attach", "ip:apiovh:vrack/attach"}}
+var opCreateIPv6 = &ovh.Operation{Name: "vrack.CreateIPv6", Method: http.MethodPost, Path: "/v1/vrack/{serviceName}/ipv6", Summary: "Attach an Additional IPv6 block", IAMActions: []string{"vrack:apiovh:ipv6/attach", "ip:apiovh:vrack/attach"}}
 
-// CreateIPv6 calls POST /v1/vrack/{serviceName}/ipv6: Attach a block. Attaches an Additional IPv6 block to the vRack. Returns the task that performs it.
+// CreateIPv6 calls POST /v1/vrack/{serviceName}/ipv6: Attach an Additional IPv6 block
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -146,9 +146,9 @@ func (s *Service) CreateIPv6(ctx context.Context, serviceName string, body Creat
 }
 
 // opCreateIPv6RoutedSubrange is CreateIPv6RoutedSubrange's entry in the operation registry (ovh.Operations).
-var opCreateIPv6RoutedSubrange = &ovh.Operation{Name: "vrack.CreateIPv6RoutedSubrange", Method: http.MethodPost, Path: "/v1/vrack/{serviceName}/ipv6/{ipv6}/routedSubrange", Summary: "Route a subrange", IAMActions: []string{"vrack:apiovh:ipv6/routedSubrange/create", "ip:apiovh:vrack/routedSubrange/create"}}
+var opCreateIPv6RoutedSubrange = &ovh.Operation{Name: "vrack.CreateIPv6RoutedSubrange", Method: http.MethodPost, Path: "/v1/vrack/{serviceName}/ipv6/{ipv6}/routedSubrange", Summary: "Route an IPv6 subrange", IAMActions: []string{"vrack:apiovh:ipv6/routedSubrange/create", "ip:apiovh:vrack/routedSubrange/create"}}
 
-// CreateIPv6RoutedSubrange calls POST /v1/vrack/{serviceName}/ipv6/{ipv6}/routedSubrange: Route a subrange
+// CreateIPv6RoutedSubrange calls POST /v1/vrack/{serviceName}/ipv6/{ipv6}/routedSubrange: Route an IPv6 subrange
 //
 // Routes a subrange of the block to a next hop. The next hop must belong to a bridged subrange.
 // Returns the task that performs it.
@@ -183,9 +183,9 @@ func (s *Service) CreateLegacyVrack(ctx context.Context, serviceName string, bod
 }
 
 // opCreateOvhCloudConnect is CreateOvhCloudConnect's entry in the operation registry (ovh.Operations).
-var opCreateOvhCloudConnect = &ovh.Operation{Name: "vrack.CreateOvhCloudConnect", Method: http.MethodPost, Path: "/v1/vrack/{serviceName}/ovhCloudConnect", Summary: "Attach a service", IAMActions: []string{"vrack:apiovh:ovhCloudConnect/attach", "ovhCloudConnect:apiovh:vrack/attach"}}
+var opCreateOvhCloudConnect = &ovh.Operation{Name: "vrack.CreateOvhCloudConnect", Method: http.MethodPost, Path: "/v1/vrack/{serviceName}/ovhCloudConnect", Summary: "Attach an OVHcloud Connect service", IAMActions: []string{"vrack:apiovh:ovhCloudConnect/attach", "ovhCloudConnect:apiovh:vrack/attach"}}
 
-// CreateOvhCloudConnect calls POST /v1/vrack/{serviceName}/ovhCloudConnect: Attach a service
+// CreateOvhCloudConnect calls POST /v1/vrack/{serviceName}/ovhCloudConnect: Attach an OVHcloud Connect service
 //
 // Attaches an OVHcloud Connect service to the vRack. Returns the task that performs it.
 //
@@ -236,9 +236,9 @@ func (s *Service) CreatePublicRoutingPriority(ctx context.Context, serviceName s
 }
 
 // opCreateVmwareCloudDirectorVirtualDataCenter is CreateVmwareCloudDirectorVirtualDataCenter's entry in the operation registry (ovh.Operations).
-var opCreateVmwareCloudDirectorVirtualDataCenter = &ovh.Operation{Name: "vrack.CreateVmwareCloudDirectorVirtualDataCenter", Method: http.MethodPost, Path: "/v1/vrack/{serviceName}/vmwareCloudDirectorVirtualDataCenter", Summary: "Attach a datacenter", IAMActions: []string{"vrack:apiovh:vmwareCloudDirectoryVirtualDataCenter/attach", "vmwareCloudDirector:apiovh:organization/virtualDataCenter/vrack/attach"}}
+var opCreateVmwareCloudDirectorVirtualDataCenter = &ovh.Operation{Name: "vrack.CreateVmwareCloudDirectorVirtualDataCenter", Method: http.MethodPost, Path: "/v1/vrack/{serviceName}/vmwareCloudDirectorVirtualDataCenter", Summary: "Attach a Public VCF virtual datacenter", IAMActions: []string{"vrack:apiovh:vmwareCloudDirectoryVirtualDataCenter/attach", "vmwareCloudDirector:apiovh:organization/virtualDataCenter/vrack/attach"}}
 
-// CreateVmwareCloudDirectorVirtualDataCenter calls POST /v1/vrack/{serviceName}/vmwareCloudDirectorVirtualDataCenter: Attach a datacenter
+// CreateVmwareCloudDirectorVirtualDataCenter calls POST /v1/vrack/{serviceName}/vmwareCloudDirectorVirtualDataCenter: Attach a Public VCF virtual datacenter
 //
 // Attaches a Public VCF as-a-Service virtual datacenter to the vRack. Returns the task that
 // performs it.
@@ -271,9 +271,9 @@ func (s *Service) CreateVrackServices(ctx context.Context, serviceName string, b
 }
 
 // opDeleteCloudProject is DeleteCloudProject's entry in the operation registry (ovh.Operations).
-var opDeleteCloudProject = &ovh.Operation{Name: "vrack.DeleteCloudProject", Method: http.MethodDelete, Path: "/v1/vrack/{serviceName}/cloudProject/{project}", Summary: "Detach a project", IAMActions: []string{"vrack:apiovh:cloudProject/detach"}}
+var opDeleteCloudProject = &ovh.Operation{Name: "vrack.DeleteCloudProject", Method: http.MethodDelete, Path: "/v1/vrack/{serviceName}/cloudProject/{project}", Summary: "Detach a Public Cloud project", IAMActions: []string{"vrack:apiovh:cloudProject/detach"}}
 
-// DeleteCloudProject calls DELETE /v1/vrack/{serviceName}/cloudProject/{project}: Detach a project
+// DeleteCloudProject calls DELETE /v1/vrack/{serviceName}/cloudProject/{project}: Detach a Public Cloud project
 //
 // Detaches the Public Cloud project from the vRack. Returns the task that performs it.
 //
@@ -287,9 +287,9 @@ func (s *Service) DeleteCloudProject(ctx context.Context, serviceName string, pr
 }
 
 // opDeleteDedicatedCloud is DeleteDedicatedCloud's entry in the operation registry (ovh.Operations).
-var opDeleteDedicatedCloud = &ovh.Operation{Name: "vrack.DeleteDedicatedCloud", Method: http.MethodDelete, Path: "/v1/vrack/{serviceName}/dedicatedCloud/{dedicatedCloud}", Summary: "Detach a service", IAMActions: []string{"vrack:apiovh:pccVMware/detach"}}
+var opDeleteDedicatedCloud = &ovh.Operation{Name: "vrack.DeleteDedicatedCloud", Method: http.MethodDelete, Path: "/v1/vrack/{serviceName}/dedicatedCloud/{dedicatedCloud}", Summary: "Detach a Managed VMware vSphere service", IAMActions: []string{"vrack:apiovh:pccVMware/detach"}}
 
-// DeleteDedicatedCloud calls DELETE /v1/vrack/{serviceName}/dedicatedCloud/{dedicatedCloud}: Detach a service
+// DeleteDedicatedCloud calls DELETE /v1/vrack/{serviceName}/dedicatedCloud/{dedicatedCloud}: Detach a Managed VMware vSphere service
 //
 // Detaches the Hosted Private Cloud service from the vRack. Returns the task that performs it.
 //
@@ -303,9 +303,9 @@ func (s *Service) DeleteDedicatedCloud(ctx context.Context, serviceName string, 
 }
 
 // opDeleteDedicatedServer is DeleteDedicatedServer's entry in the operation registry (ovh.Operations).
-var opDeleteDedicatedServer = &ovh.Operation{Name: "vrack.DeleteDedicatedServer", Method: http.MethodDelete, Path: "/v1/vrack/{serviceName}/dedicatedServer/{dedicatedServer}", Summary: "Detach a server (legacy)", IAMActions: []string{"vrack:apiovh:dedicatedServer/detach"}}
+var opDeleteDedicatedServer = &ovh.Operation{Name: "vrack.DeleteDedicatedServer", Method: http.MethodDelete, Path: "/v1/vrack/{serviceName}/dedicatedServer/{dedicatedServer}", Summary: "Detach a dedicated server (legacy)", IAMActions: []string{"vrack:apiovh:dedicatedServer/detach"}}
 
-// DeleteDedicatedServer calls DELETE /v1/vrack/{serviceName}/dedicatedServer/{dedicatedServer}: Detach a server (legacy)
+// DeleteDedicatedServer calls DELETE /v1/vrack/{serviceName}/dedicatedServer/{dedicatedServer}: Detach a dedicated server (legacy)
 //
 // Detaches a whole dedicated server from the vRack, in the legacy mode. Returns the task that
 // performs it.
@@ -320,9 +320,9 @@ func (s *Service) DeleteDedicatedServer(ctx context.Context, serviceName string,
 }
 
 // opDeleteDedicatedServerInterface is DeleteDedicatedServerInterface's entry in the operation registry (ovh.Operations).
-var opDeleteDedicatedServerInterface = &ovh.Operation{Name: "vrack.DeleteDedicatedServerInterface", Method: http.MethodDelete, Path: "/v1/vrack/{serviceName}/dedicatedServerInterface/{dedicatedServerInterface}", Summary: "Detach a server interface. Detaches the interface from the vRack. Returns the task that performs it.", IAMActions: []string{"vrack:apiovh:dedicatedServerInterface/detach"}}
+var opDeleteDedicatedServerInterface = &ovh.Operation{Name: "vrack.DeleteDedicatedServerInterface", Method: http.MethodDelete, Path: "/v1/vrack/{serviceName}/dedicatedServerInterface/{dedicatedServerInterface}", Summary: "Detach a dedicated server interface", IAMActions: []string{"vrack:apiovh:dedicatedServerInterface/detach"}}
 
-// DeleteDedicatedServerInterface calls DELETE /v1/vrack/{serviceName}/dedicatedServerInterface/{dedicatedServerInterface}: Detach a server interface. Detaches the interface from the vRack. Returns the task that performs it.
+// DeleteDedicatedServerInterface calls DELETE /v1/vrack/{serviceName}/dedicatedServerInterface/{dedicatedServerInterface}: Detach a dedicated server interface
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -334,9 +334,9 @@ func (s *Service) DeleteDedicatedServerInterface(ctx context.Context, serviceNam
 }
 
 // opDeleteIP is DeleteIP's entry in the operation registry (ovh.Operations).
-var opDeleteIP = &ovh.Operation{Name: "vrack.DeleteIP", Method: http.MethodDelete, Path: "/v1/vrack/{serviceName}/ip/{ip}", Summary: "Detach a block. Removes the Additional IPv4 block from the vRack. Returns the task that performs it.", IAMActions: []string{"vrack:apiovh:ip/detach"}}
+var opDeleteIP = &ovh.Operation{Name: "vrack.DeleteIP", Method: http.MethodDelete, Path: "/v1/vrack/{serviceName}/ip/{ip}", Summary: "Detach an Additional IPv4 block", IAMActions: []string{"vrack:apiovh:ip/detach"}}
 
-// DeleteIP calls DELETE /v1/vrack/{serviceName}/ip/{ip}: Detach a block. Removes the Additional IPv4 block from the vRack. Returns the task that performs it.
+// DeleteIP calls DELETE /v1/vrack/{serviceName}/ip/{ip}: Detach an Additional IPv4 block
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -348,9 +348,9 @@ func (s *Service) DeleteIP(ctx context.Context, serviceName string, ip string) (
 }
 
 // opDeleteIPLoadbalancing is DeleteIPLoadbalancing's entry in the operation registry (ovh.Operations).
-var opDeleteIPLoadbalancing = &ovh.Operation{Name: "vrack.DeleteIPLoadbalancing", Method: http.MethodDelete, Path: "/v1/vrack/{serviceName}/ipLoadbalancing/{ipLoadbalancing}", Summary: "Detach a load balancer", IAMActions: []string{"vrack:apiovh:ipLoadbalancing/detach"}}
+var opDeleteIPLoadbalancing = &ovh.Operation{Name: "vrack.DeleteIPLoadbalancing", Method: http.MethodDelete, Path: "/v1/vrack/{serviceName}/ipLoadbalancing/{ipLoadbalancing}", Summary: "Detach an IP Load Balancer service", IAMActions: []string{"vrack:apiovh:ipLoadbalancing/detach"}}
 
-// DeleteIPLoadbalancing calls DELETE /v1/vrack/{serviceName}/ipLoadbalancing/{ipLoadbalancing}: Detach a load balancer
+// DeleteIPLoadbalancing calls DELETE /v1/vrack/{serviceName}/ipLoadbalancing/{ipLoadbalancing}: Detach an IP Load Balancer service
 //
 // Detaches the IP Load Balancer service from the vRack. Returns the task that performs it.
 //
@@ -364,9 +364,9 @@ func (s *Service) DeleteIPLoadbalancing(ctx context.Context, serviceName string,
 }
 
 // opDeleteIPv6 is DeleteIPv6's entry in the operation registry (ovh.Operations).
-var opDeleteIPv6 = &ovh.Operation{Name: "vrack.DeleteIPv6", Method: http.MethodDelete, Path: "/v1/vrack/{serviceName}/ipv6/{ipv6}", Summary: "Detach a block. Removes the Additional IPv6 block from the vRack. Returns the task that performs it.", IAMActions: []string{"vrack:apiovh:ipv6/detach"}}
+var opDeleteIPv6 = &ovh.Operation{Name: "vrack.DeleteIPv6", Method: http.MethodDelete, Path: "/v1/vrack/{serviceName}/ipv6/{ipv6}", Summary: "Detach an Additional IPv6 block", IAMActions: []string{"vrack:apiovh:ipv6/detach"}}
 
-// DeleteIPv6 calls DELETE /v1/vrack/{serviceName}/ipv6/{ipv6}: Detach a block. Removes the Additional IPv6 block from the vRack. Returns the task that performs it.
+// DeleteIPv6 calls DELETE /v1/vrack/{serviceName}/ipv6/{ipv6}: Detach an Additional IPv6 block
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -378,9 +378,9 @@ func (s *Service) DeleteIPv6(ctx context.Context, serviceName string, ipv6 strin
 }
 
 // opDeleteIPv6RoutedSubrange is DeleteIPv6RoutedSubrange's entry in the operation registry (ovh.Operations).
-var opDeleteIPv6RoutedSubrange = &ovh.Operation{Name: "vrack.DeleteIPv6RoutedSubrange", Method: http.MethodDelete, Path: "/v1/vrack/{serviceName}/ipv6/{ipv6}/routedSubrange/{routedSubrange}", Summary: "Unroute a subrange. Removes the route of the subrange. Returns the task that performs it.", IAMActions: []string{"vrack:apiovh:ipv6/routedSubrange/delete", "ip:apiovh:vrack/routedSubrange/delete"}}
+var opDeleteIPv6RoutedSubrange = &ovh.Operation{Name: "vrack.DeleteIPv6RoutedSubrange", Method: http.MethodDelete, Path: "/v1/vrack/{serviceName}/ipv6/{ipv6}/routedSubrange/{routedSubrange}", Summary: "Unroute an IPv6 subrange", IAMActions: []string{"vrack:apiovh:ipv6/routedSubrange/delete", "ip:apiovh:vrack/routedSubrange/delete"}}
 
-// DeleteIPv6RoutedSubrange calls DELETE /v1/vrack/{serviceName}/ipv6/{ipv6}/routedSubrange/{routedSubrange}: Unroute a subrange. Removes the route of the subrange. Returns the task that performs it.
+// DeleteIPv6RoutedSubrange calls DELETE /v1/vrack/{serviceName}/ipv6/{ipv6}/routedSubrange/{routedSubrange}: Unroute an IPv6 subrange
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -412,9 +412,9 @@ func (s *Service) DeleteLegacyVrack(ctx context.Context, serviceName string, leg
 }
 
 // opDeleteOvhCloudConnect is DeleteOvhCloudConnect's entry in the operation registry (ovh.Operations).
-var opDeleteOvhCloudConnect = &ovh.Operation{Name: "vrack.DeleteOvhCloudConnect", Method: http.MethodDelete, Path: "/v1/vrack/{serviceName}/ovhCloudConnect/{ovhCloudConnect}", Summary: "Detach a service", IAMActions: []string{"vrack:apiovh:ovhCloudConnect/detach"}}
+var opDeleteOvhCloudConnect = &ovh.Operation{Name: "vrack.DeleteOvhCloudConnect", Method: http.MethodDelete, Path: "/v1/vrack/{serviceName}/ovhCloudConnect/{ovhCloudConnect}", Summary: "Detach an OVHcloud Connect service", IAMActions: []string{"vrack:apiovh:ovhCloudConnect/detach"}}
 
-// DeleteOvhCloudConnect calls DELETE /v1/vrack/{serviceName}/ovhCloudConnect/{ovhCloudConnect}: Detach a service
+// DeleteOvhCloudConnect calls DELETE /v1/vrack/{serviceName}/ovhCloudConnect/{ovhCloudConnect}: Detach an OVHcloud Connect service
 //
 // Detaches the OVHcloud Connect service from the vRack. Returns the task that performs it.
 //
@@ -445,9 +445,9 @@ func (s *Service) DeletePublicRoutingPriority(ctx context.Context, serviceName s
 }
 
 // opDeleteVmwareCloudDirectorVirtualDataCenter is DeleteVmwareCloudDirectorVirtualDataCenter's entry in the operation registry (ovh.Operations).
-var opDeleteVmwareCloudDirectorVirtualDataCenter = &ovh.Operation{Name: "vrack.DeleteVmwareCloudDirectorVirtualDataCenter", Method: http.MethodDelete, Path: "/v1/vrack/{serviceName}/vmwareCloudDirectorVirtualDataCenter/{vmwareCloudDirectorVirtualDataCenter}", Summary: "Detach a datacenter", IAMActions: []string{"vrack:apiovh:vmwareCloudDirectoryVirtualDataCenter/detach"}}
+var opDeleteVmwareCloudDirectorVirtualDataCenter = &ovh.Operation{Name: "vrack.DeleteVmwareCloudDirectorVirtualDataCenter", Method: http.MethodDelete, Path: "/v1/vrack/{serviceName}/vmwareCloudDirectorVirtualDataCenter/{vmwareCloudDirectorVirtualDataCenter}", Summary: "Detach a Public VCF virtual datacenter", IAMActions: []string{"vrack:apiovh:vmwareCloudDirectoryVirtualDataCenter/detach"}}
 
-// DeleteVmwareCloudDirectorVirtualDataCenter calls DELETE /v1/vrack/{serviceName}/vmwareCloudDirectorVirtualDataCenter/{vmwareCloudDirectorVirtualDataCenter}: Detach a datacenter
+// DeleteVmwareCloudDirectorVirtualDataCenter calls DELETE /v1/vrack/{serviceName}/vmwareCloudDirectorVirtualDataCenter/{vmwareCloudDirectorVirtualDataCenter}: Detach a Public VCF virtual datacenter
 //
 // Detaches the Public VCF virtual datacenter from the vRack. Returns the task that performs it.
 //
@@ -506,9 +506,9 @@ func (s *Service) GetAllowedServices(ctx context.Context, serviceName string, pa
 }
 
 // opGetCloudProject is GetCloudProject's entry in the operation registry (ovh.Operations).
-var opGetCloudProject = &ovh.Operation{Name: "vrack.GetCloudProject", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/cloudProject/{project}", Summary: "Get a project. Returns the attached Public Cloud project and its vRack.", IAMActions: []string{"vrack:apiovh:cloudProject/get"}}
+var opGetCloudProject = &ovh.Operation{Name: "vrack.GetCloudProject", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/cloudProject/{project}", Summary: "Get an attached Public Cloud project", IAMActions: []string{"vrack:apiovh:cloudProject/get"}}
 
-// GetCloudProject calls GET /v1/vrack/{serviceName}/cloudProject/{project}: Get a project. Returns the attached Public Cloud project and its vRack.
+// GetCloudProject calls GET /v1/vrack/{serviceName}/cloudProject/{project}: Get an attached Public Cloud project
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -533,9 +533,9 @@ func (s *Service) AllCloudProjects(ctx context.Context, serviceName string) iter
 }
 
 // opGetDedicatedCloud is GetDedicatedCloud's entry in the operation registry (ovh.Operations).
-var opGetDedicatedCloud = &ovh.Operation{Name: "vrack.GetDedicatedCloud", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/dedicatedCloud/{dedicatedCloud}", Summary: "Get a service. Returns the attached Hosted Private Cloud service and its vRack.", IAMActions: []string{"vrack:apiovh:pccVMware/get"}}
+var opGetDedicatedCloud = &ovh.Operation{Name: "vrack.GetDedicatedCloud", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/dedicatedCloud/{dedicatedCloud}", Summary: "Get an attached Managed VMware vSphere service", IAMActions: []string{"vrack:apiovh:pccVMware/get"}}
 
-// GetDedicatedCloud calls GET /v1/vrack/{serviceName}/dedicatedCloud/{dedicatedCloud}: Get a service. Returns the attached Hosted Private Cloud service and its vRack.
+// GetDedicatedCloud calls GET /v1/vrack/{serviceName}/dedicatedCloud/{dedicatedCloud}: Get an attached Managed VMware vSphere service
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -560,9 +560,9 @@ func (s *Service) AllDedicatedClouds(ctx context.Context, serviceName string) it
 }
 
 // opGetDedicatedCloudDatacenter is GetDedicatedCloudDatacenter's entry in the operation registry (ovh.Operations).
-var opGetDedicatedCloudDatacenter = &ovh.Operation{Name: "vrack.GetDedicatedCloudDatacenter", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/dedicatedCloudDatacenter/{datacenter}", Summary: "Get a datacenter. Returns the attached Private Cloud datacenter and its vRack.", IAMActions: []string{"vrack:apiovh:dedicatedCloudDatacenter/get"}}
+var opGetDedicatedCloudDatacenter = &ovh.Operation{Name: "vrack.GetDedicatedCloudDatacenter", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/dedicatedCloudDatacenter/{datacenter}", Summary: "Get an attached Managed VMware vSphere datacenter", IAMActions: []string{"vrack:apiovh:dedicatedCloudDatacenter/get"}}
 
-// GetDedicatedCloudDatacenter calls GET /v1/vrack/{serviceName}/dedicatedCloudDatacenter/{datacenter}: Get a datacenter. Returns the attached Private Cloud datacenter and its vRack.
+// GetDedicatedCloudDatacenter calls GET /v1/vrack/{serviceName}/dedicatedCloudDatacenter/{datacenter}: Get an attached Managed VMware vSphere datacenter
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -587,9 +587,9 @@ func (s *Service) AllDedicatedCloudDatacenters(ctx context.Context, serviceName 
 }
 
 // opGetDedicatedConnect is GetDedicatedConnect's entry in the operation registry (ovh.Operations).
-var opGetDedicatedConnect = &ovh.Operation{Name: "vrack.GetDedicatedConnect", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/dedicatedConnect/{name}", Summary: "Get a link. Returns the name of the Dedicated Connect link.", IAMActions: []string{"vrack:apiovh:dedicatedConnect/get"}}
+var opGetDedicatedConnect = &ovh.Operation{Name: "vrack.GetDedicatedConnect", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/dedicatedConnect/{name}", Summary: "Get a Dedicated Connect link", IAMActions: []string{"vrack:apiovh:dedicatedConnect/get"}}
 
-// GetDedicatedConnect calls GET /v1/vrack/{serviceName}/dedicatedConnect/{name}: Get a link. Returns the name of the Dedicated Connect link.
+// GetDedicatedConnect calls GET /v1/vrack/{serviceName}/dedicatedConnect/{name}: Get a Dedicated Connect link
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -614,9 +614,9 @@ func (s *Service) AllDedicatedConnects(ctx context.Context, serviceName string) 
 }
 
 // opGetDedicatedServer is GetDedicatedServer's entry in the operation registry (ovh.Operations).
-var opGetDedicatedServer = &ovh.Operation{Name: "vrack.GetDedicatedServer", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/dedicatedServer/{dedicatedServer}", Summary: "Get a server link (legacy)", IAMActions: []string{"vrack:apiovh:dedicatedServer/get"}}
+var opGetDedicatedServer = &ovh.Operation{Name: "vrack.GetDedicatedServer", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/dedicatedServer/{dedicatedServer}", Summary: "Get an attached dedicated server (legacy)", IAMActions: []string{"vrack:apiovh:dedicatedServer/get"}}
 
-// GetDedicatedServer calls GET /v1/vrack/{serviceName}/dedicatedServer/{dedicatedServer}: Get a server link (legacy)
+// GetDedicatedServer calls GET /v1/vrack/{serviceName}/dedicatedServer/{dedicatedServer}: Get an attached dedicated server (legacy)
 //
 // Returns the attached server and its vRack. This is the legacy whole-server link, not an interface
 // link.
@@ -644,9 +644,9 @@ func (s *Service) AllDedicatedServers(ctx context.Context, serviceName string) i
 }
 
 // opGetDedicatedServerInterface is GetDedicatedServerInterface's entry in the operation registry (ovh.Operations).
-var opGetDedicatedServerInterface = &ovh.Operation{Name: "vrack.GetDedicatedServerInterface", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/dedicatedServerInterface/{dedicatedServerInterface}", Summary: "Get a server interface. Returns the attached interface and its vRack.", IAMActions: []string{"vrack:apiovh:dedicatedServerInterface/get"}}
+var opGetDedicatedServerInterface = &ovh.Operation{Name: "vrack.GetDedicatedServerInterface", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/dedicatedServerInterface/{dedicatedServerInterface}", Summary: "Get an attached dedicated server interface", IAMActions: []string{"vrack:apiovh:dedicatedServerInterface/get"}}
 
-// GetDedicatedServerInterface calls GET /v1/vrack/{serviceName}/dedicatedServerInterface/{dedicatedServerInterface}: Get a server interface. Returns the attached interface and its vRack.
+// GetDedicatedServerInterface calls GET /v1/vrack/{serviceName}/dedicatedServerInterface/{dedicatedServerInterface}: Get an attached dedicated server interface
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -705,9 +705,9 @@ func (s *Service) GetEligibleServices(ctx context.Context, serviceName string, p
 }
 
 // opGetIP is GetIP's entry in the operation registry (ovh.Operations).
-var opGetIP = &ovh.Operation{Name: "vrack.GetIP", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/ip/{ip}", Summary: "Get a block. Returns the Additional IPv4 block, its gateway, its region and its public routing type.", IAMActions: []string{"vrack:apiovh:ip/get"}}
+var opGetIP = &ovh.Operation{Name: "vrack.GetIP", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/ip/{ip}", Summary: "Get an attached Additional IPv4 block", IAMActions: []string{"vrack:apiovh:ip/get"}}
 
-// GetIP calls GET /v1/vrack/{serviceName}/ip/{ip}: Get a block. Returns the Additional IPv4 block, its gateway, its region and its public routing type.
+// GetIP calls GET /v1/vrack/{serviceName}/ip/{ip}: Get an attached Additional IPv4 block
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -732,9 +732,9 @@ func (s *Service) AllIPs(ctx context.Context, serviceName string) iter.Seq2[*Vra
 }
 
 // opGetIPLoadbalancing is GetIPLoadbalancing's entry in the operation registry (ovh.Operations).
-var opGetIPLoadbalancing = &ovh.Operation{Name: "vrack.GetIPLoadbalancing", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/ipLoadbalancing/{ipLoadbalancing}", Summary: "Get a load balancer. Returns the attached IP Load Balancer service and its vRack.", IAMActions: []string{"vrack:apiovh:ipLoadbalancing/get"}}
+var opGetIPLoadbalancing = &ovh.Operation{Name: "vrack.GetIPLoadbalancing", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/ipLoadbalancing/{ipLoadbalancing}", Summary: "Get an attached IP Load Balancer service", IAMActions: []string{"vrack:apiovh:ipLoadbalancing/get"}}
 
-// GetIPLoadbalancing calls GET /v1/vrack/{serviceName}/ipLoadbalancing/{ipLoadbalancing}: Get a load balancer. Returns the attached IP Load Balancer service and its vRack.
+// GetIPLoadbalancing calls GET /v1/vrack/{serviceName}/ipLoadbalancing/{ipLoadbalancing}: Get an attached IP Load Balancer service
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -759,9 +759,9 @@ func (s *Service) AllIPLoadbalancings(ctx context.Context, serviceName string) i
 }
 
 // opGetIPv6 is GetIPv6's entry in the operation registry (ovh.Operations).
-var opGetIPv6 = &ovh.Operation{Name: "vrack.GetIPv6", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/ipv6/{ipv6}", Summary: "Get a block. Returns the attached Additional IPv6 block.", IAMActions: []string{"vrack:apiovh:ipv6/get"}}
+var opGetIPv6 = &ovh.Operation{Name: "vrack.GetIPv6", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/ipv6/{ipv6}", Summary: "Get an attached Additional IPv6 block", IAMActions: []string{"vrack:apiovh:ipv6/get"}}
 
-// GetIPv6 calls GET /v1/vrack/{serviceName}/ipv6/{ipv6}: Get a block. Returns the attached Additional IPv6 block.
+// GetIPv6 calls GET /v1/vrack/{serviceName}/ipv6/{ipv6}: Get an attached Additional IPv6 block
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -786,9 +786,9 @@ func (s *Service) AllIpv6s(ctx context.Context, serviceName string) iter.Seq2[*V
 }
 
 // opGetIPv6BridgedSubrange is GetIPv6BridgedSubrange's entry in the operation registry (ovh.Operations).
-var opGetIPv6BridgedSubrange = &ovh.Operation{Name: "vrack.GetIPv6BridgedSubrange", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/ipv6/{ipv6}/bridgedSubrange/{bridgedSubrange}", Summary: "Get a bridged subrange. Returns the subrange, its gateway and whether SLAAC is enabled.", IAMActions: []string{"vrack:apiovh:ipv6/get"}}
+var opGetIPv6BridgedSubrange = &ovh.Operation{Name: "vrack.GetIPv6BridgedSubrange", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/ipv6/{ipv6}/bridgedSubrange/{bridgedSubrange}", Summary: "Get a bridged IPv6 subrange", IAMActions: []string{"vrack:apiovh:ipv6/get"}}
 
-// GetIPv6BridgedSubrange calls GET /v1/vrack/{serviceName}/ipv6/{ipv6}/bridgedSubrange/{bridgedSubrange}: Get a bridged subrange. Returns the subrange, its gateway and whether SLAAC is enabled.
+// GetIPv6BridgedSubrange calls GET /v1/vrack/{serviceName}/ipv6/{ipv6}/bridgedSubrange/{bridgedSubrange}: Get a bridged IPv6 subrange
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -814,9 +814,9 @@ func (s *Service) AllIPv6BridgedSubranges(ctx context.Context, serviceName strin
 }
 
 // opGetIPv6RoutedSubrange is GetIPv6RoutedSubrange's entry in the operation registry (ovh.Operations).
-var opGetIPv6RoutedSubrange = &ovh.Operation{Name: "vrack.GetIPv6RoutedSubrange", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/ipv6/{ipv6}/routedSubrange/{routedSubrange}", Summary: "Get a routed subrange. Returns the subrange and its next hop.", IAMActions: []string{"vrack:apiovh:ipv6/get"}}
+var opGetIPv6RoutedSubrange = &ovh.Operation{Name: "vrack.GetIPv6RoutedSubrange", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/ipv6/{ipv6}/routedSubrange/{routedSubrange}", Summary: "Get a routed IPv6 subrange", IAMActions: []string{"vrack:apiovh:ipv6/get"}}
 
-// GetIPv6RoutedSubrange calls GET /v1/vrack/{serviceName}/ipv6/{ipv6}/routedSubrange/{routedSubrange}: Get a routed subrange. Returns the subrange and its next hop.
+// GetIPv6RoutedSubrange calls GET /v1/vrack/{serviceName}/ipv6/{ipv6}/routedSubrange/{routedSubrange}: Get a routed IPv6 subrange
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -842,9 +842,9 @@ func (s *Service) AllIPv6RoutedSubranges(ctx context.Context, serviceName string
 }
 
 // opGetLegacyVrack is GetLegacyVrack's entry in the operation registry (ovh.Operations).
-var opGetLegacyVrack = &ovh.Operation{Name: "vrack.GetLegacyVrack", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/legacyVrack/{legacyVrack}", Summary: "Get a legacy vRack (deprecated). Returns the bridged legacy vRack.", IAMActions: []string{"vrack:apiovh:legacyVrack/get"}, Deprecated: true}
+var opGetLegacyVrack = &ovh.Operation{Name: "vrack.GetLegacyVrack", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/legacyVrack/{legacyVrack}", Summary: "Get an attached legacy vRack (deprecated)", IAMActions: []string{"vrack:apiovh:legacyVrack/get"}, Deprecated: true}
 
-// GetLegacyVrack calls GET /v1/vrack/{serviceName}/legacyVrack/{legacyVrack}: Get a legacy vRack (deprecated). Returns the bridged legacy vRack.
+// GetLegacyVrack calls GET /v1/vrack/{serviceName}/legacyVrack/{legacyVrack}: Get an attached legacy vRack (deprecated)
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -871,9 +871,9 @@ func (s *Service) AllLegacyVracks(ctx context.Context, serviceName string) iter.
 }
 
 // opGetOvhCloudConnect is GetOvhCloudConnect's entry in the operation registry (ovh.Operations).
-var opGetOvhCloudConnect = &ovh.Operation{Name: "vrack.GetOvhCloudConnect", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/ovhCloudConnect/{ovhCloudConnect}", Summary: "Get a service. Returns the attached OVHcloud Connect service and its vRack.", IAMActions: []string{"vrack:apiovh:ovhCloudConnect/get"}}
+var opGetOvhCloudConnect = &ovh.Operation{Name: "vrack.GetOvhCloudConnect", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/ovhCloudConnect/{ovhCloudConnect}", Summary: "Get an attached OVHcloud Connect service", IAMActions: []string{"vrack:apiovh:ovhCloudConnect/get"}}
 
-// GetOvhCloudConnect calls GET /v1/vrack/{serviceName}/ovhCloudConnect/{ovhCloudConnect}: Get a service. Returns the attached OVHcloud Connect service and its vRack.
+// GetOvhCloudConnect calls GET /v1/vrack/{serviceName}/ovhCloudConnect/{ovhCloudConnect}: Get an attached OVHcloud Connect service
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -927,9 +927,9 @@ func (s *Service) AllPublicRoutingPriorities(ctx context.Context, serviceName st
 }
 
 // opGetTask is GetTask's entry in the operation registry (ovh.Operations).
-var opGetTask = &ovh.Operation{Name: "vrack.GetTask", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/task/{taskId}", Summary: "Get a task. Returns the function, status, target and dates of the task.", IAMActions: []string{"vrack:apiovh:task/get"}}
+var opGetTask = &ovh.Operation{Name: "vrack.GetTask", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/task/{taskId}", Summary: "Get a vRack task", IAMActions: []string{"vrack:apiovh:task/get"}}
 
-// GetTask calls GET /v1/vrack/{serviceName}/task/{taskId}: Get a task. Returns the function, status, target and dates of the task.
+// GetTask calls GET /v1/vrack/{serviceName}/task/{taskId}: Get a vRack task
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -954,9 +954,9 @@ func (s *Service) AllTasks(ctx context.Context, serviceName string) iter.Seq2[*V
 }
 
 // opGetVmwareCloudDirectorVirtualDataCenter is GetVmwareCloudDirectorVirtualDataCenter's entry in the operation registry (ovh.Operations).
-var opGetVmwareCloudDirectorVirtualDataCenter = &ovh.Operation{Name: "vrack.GetVmwareCloudDirectorVirtualDataCenter", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/vmwareCloudDirectorVirtualDataCenter/{vmwareCloudDirectorVirtualDataCenter}", Summary: "Get a datacenter. Returns the attached Public VCF virtual datacenter and its vRack.", IAMActions: []string{"vrack:apiovh:vmwareCloudDirectoryVirtualDataCenter/get"}}
+var opGetVmwareCloudDirectorVirtualDataCenter = &ovh.Operation{Name: "vrack.GetVmwareCloudDirectorVirtualDataCenter", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/vmwareCloudDirectorVirtualDataCenter/{vmwareCloudDirectorVirtualDataCenter}", Summary: "Get an attached Public VCF virtual datacenter", IAMActions: []string{"vrack:apiovh:vmwareCloudDirectoryVirtualDataCenter/get"}}
 
-// GetVmwareCloudDirectorVirtualDataCenter calls GET /v1/vrack/{serviceName}/vmwareCloudDirectorVirtualDataCenter/{vmwareCloudDirectorVirtualDataCenter}: Get a datacenter. Returns the attached Public VCF virtual datacenter and its vRack.
+// GetVmwareCloudDirectorVirtualDataCenter calls GET /v1/vrack/{serviceName}/vmwareCloudDirectorVirtualDataCenter/{vmwareCloudDirectorVirtualDataCenter}: Get an attached Public VCF virtual datacenter
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -981,9 +981,9 @@ func (s *Service) AllVmwareCloudDirectorVirtualDataCenters(ctx context.Context, 
 }
 
 // opGetVrack is GetVrack's entry in the operation registry (ovh.Operations).
-var opGetVrack = &ovh.Operation{Name: "vrack.GetVrack", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}", Summary: "Get a vRack. Returns the name and description of the vRack.", IAMActions: []string{"vrack:apiovh:get"}}
+var opGetVrack = &ovh.Operation{Name: "vrack.GetVrack", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}", Summary: "Get a vRack", IAMActions: []string{"vrack:apiovh:get"}}
 
-// GetVrack calls GET /v1/vrack/{serviceName}: Get a vRack. Returns the name and description of the vRack.
+// GetVrack calls GET /v1/vrack/{serviceName}: Get a vRack
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -1007,9 +1007,9 @@ func (s *Service) AllVracks(ctx context.Context, params ...ListVracksParams) ite
 }
 
 // opGetVrackServices is GetVrackServices's entry in the operation registry (ovh.Operations).
-var opGetVrackServices = &ovh.Operation{Name: "vrack.GetVrackServices", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/vrackServices/{vrackServices}", Summary: "Get a vRack Services. Returns the attached vRack Services and its vRack.", IAMActions: []string{"vrack:apiovh:vrackServices/get"}}
+var opGetVrackServices = &ovh.Operation{Name: "vrack.GetVrackServices", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/vrackServices/{vrackServices}", Summary: "Get an attached vRack Services", IAMActions: []string{"vrack:apiovh:vrackServices/get"}}
 
-// GetVrackServices calls GET /v1/vrack/{serviceName}/vrackServices/{vrackServices}: Get a vRack Services. Returns the attached vRack Services and its vRack.
+// GetVrackServices calls GET /v1/vrack/{serviceName}/vrackServices/{vrackServices}: Get an attached vRack Services
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -1034,9 +1034,9 @@ func (s *Service) AllVrackServices(ctx context.Context, serviceName string) iter
 }
 
 // opListCloudProjects is ListCloudProjects's entry in the operation registry (ovh.Operations).
-var opListCloudProjects = &ovh.Operation{Name: "vrack.ListCloudProjects", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/cloudProject", Summary: "List projects. Returns the identifiers of the Public Cloud projects attached to the vRack.", IAMActions: []string{"vrack:apiovh:cloudProject/get"}}
+var opListCloudProjects = &ovh.Operation{Name: "vrack.ListCloudProjects", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/cloudProject", Summary: "List attached Public Cloud projects", IAMActions: []string{"vrack:apiovh:cloudProject/get"}}
 
-// ListCloudProjects calls GET /v1/vrack/{serviceName}/cloudProject: List projects. Returns the identifiers of the Public Cloud projects attached to the vRack.
+// ListCloudProjects calls GET /v1/vrack/{serviceName}/cloudProject: List attached Public Cloud projects
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -1047,9 +1047,9 @@ func (s *Service) ListCloudProjects(ctx context.Context, serviceName string) ([]
 }
 
 // opListDedicatedCloudDatacenterAllowedVracks is ListDedicatedCloudDatacenterAllowedVracks's entry in the operation registry (ovh.Operations).
-var opListDedicatedCloudDatacenterAllowedVracks = &ovh.Operation{Name: "vrack.ListDedicatedCloudDatacenterAllowedVracks", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/dedicatedCloudDatacenter/{datacenter}/allowedVrack", Summary: "List target vRacks. Returns the vRacks the Private Cloud datacenter can be moved to.", IAMActions: []string{"vrack:apiovh:dedicatedCloudDatacenter/allowedVrack/get"}}
+var opListDedicatedCloudDatacenterAllowedVracks = &ovh.Operation{Name: "vrack.ListDedicatedCloudDatacenterAllowedVracks", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/dedicatedCloudDatacenter/{datacenter}/allowedVrack", Summary: "List vRacks a datacenter can move to", IAMActions: []string{"vrack:apiovh:dedicatedCloudDatacenter/allowedVrack/get"}}
 
-// ListDedicatedCloudDatacenterAllowedVracks calls GET /v1/vrack/{serviceName}/dedicatedCloudDatacenter/{datacenter}/allowedVrack: List target vRacks. Returns the vRacks the Private Cloud datacenter can be moved to.
+// ListDedicatedCloudDatacenterAllowedVracks calls GET /v1/vrack/{serviceName}/dedicatedCloudDatacenter/{datacenter}/allowedVrack: List vRacks a datacenter can move to
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -1061,9 +1061,9 @@ func (s *Service) ListDedicatedCloudDatacenterAllowedVracks(ctx context.Context,
 }
 
 // opListDedicatedCloudDatacenters is ListDedicatedCloudDatacenters's entry in the operation registry (ovh.Operations).
-var opListDedicatedCloudDatacenters = &ovh.Operation{Name: "vrack.ListDedicatedCloudDatacenters", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/dedicatedCloudDatacenter", Summary: "List datacenters. Returns the Private Cloud datacenters attached to the vRack.", IAMActions: []string{"vrack:apiovh:dedicatedCloudDatacenter/get"}}
+var opListDedicatedCloudDatacenters = &ovh.Operation{Name: "vrack.ListDedicatedCloudDatacenters", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/dedicatedCloudDatacenter", Summary: "List attached Managed VMware vSphere datacenters", IAMActions: []string{"vrack:apiovh:dedicatedCloudDatacenter/get"}}
 
-// ListDedicatedCloudDatacenters calls GET /v1/vrack/{serviceName}/dedicatedCloudDatacenter: List datacenters. Returns the Private Cloud datacenters attached to the vRack.
+// ListDedicatedCloudDatacenters calls GET /v1/vrack/{serviceName}/dedicatedCloudDatacenter: List attached Managed VMware vSphere datacenters
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -1074,9 +1074,9 @@ func (s *Service) ListDedicatedCloudDatacenters(ctx context.Context, serviceName
 }
 
 // opListDedicatedClouds is ListDedicatedClouds's entry in the operation registry (ovh.Operations).
-var opListDedicatedClouds = &ovh.Operation{Name: "vrack.ListDedicatedClouds", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/dedicatedCloud", Summary: "List services. Returns the Hosted Private Cloud services attached to the vRack.", IAMActions: []string{"vrack:apiovh:pccVMware/get"}}
+var opListDedicatedClouds = &ovh.Operation{Name: "vrack.ListDedicatedClouds", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/dedicatedCloud", Summary: "List attached Managed VMware vSphere services", IAMActions: []string{"vrack:apiovh:pccVMware/get"}}
 
-// ListDedicatedClouds calls GET /v1/vrack/{serviceName}/dedicatedCloud: List services. Returns the Hosted Private Cloud services attached to the vRack.
+// ListDedicatedClouds calls GET /v1/vrack/{serviceName}/dedicatedCloud: List attached Managed VMware vSphere services
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -1087,9 +1087,9 @@ func (s *Service) ListDedicatedClouds(ctx context.Context, serviceName string) (
 }
 
 // opListDedicatedConnects is ListDedicatedConnects's entry in the operation registry (ovh.Operations).
-var opListDedicatedConnects = &ovh.Operation{Name: "vrack.ListDedicatedConnects", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/dedicatedConnect", Summary: "List links. Returns the names of the Dedicated Connect links attached to the vRack.", IAMActions: []string{"vrack:apiovh:dedicatedConnect/get"}}
+var opListDedicatedConnects = &ovh.Operation{Name: "vrack.ListDedicatedConnects", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/dedicatedConnect", Summary: "List attached Dedicated Connect links", IAMActions: []string{"vrack:apiovh:dedicatedConnect/get"}}
 
-// ListDedicatedConnects calls GET /v1/vrack/{serviceName}/dedicatedConnect: List links. Returns the names of the Dedicated Connect links attached to the vRack.
+// ListDedicatedConnects calls GET /v1/vrack/{serviceName}/dedicatedConnect: List attached Dedicated Connect links
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -1100,9 +1100,9 @@ func (s *Service) ListDedicatedConnects(ctx context.Context, serviceName string)
 }
 
 // opListDedicatedServerInterfaceDetails is ListDedicatedServerInterfaceDetails's entry in the operation registry (ovh.Operations).
-var opListDedicatedServerInterfaceDetails = &ovh.Operation{Name: "vrack.ListDedicatedServerInterfaceDetails", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/dedicatedServerInterfaceDetails", Summary: "List server interface details. Returns the attached interfaces with the server each one belongs to.", IAMActions: []string{"vrack:apiovh:dedicatedServerInterfaceDetails/get"}}
+var opListDedicatedServerInterfaceDetails = &ovh.Operation{Name: "vrack.ListDedicatedServerInterfaceDetails", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/dedicatedServerInterfaceDetails", Summary: "List attached dedicated server interface details", IAMActions: []string{"vrack:apiovh:dedicatedServerInterfaceDetails/get"}}
 
-// ListDedicatedServerInterfaceDetails calls GET /v1/vrack/{serviceName}/dedicatedServerInterfaceDetails: List server interface details. Returns the attached interfaces with the server each one belongs to.
+// ListDedicatedServerInterfaceDetails calls GET /v1/vrack/{serviceName}/dedicatedServerInterfaceDetails: List attached dedicated server interface details
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -1113,9 +1113,9 @@ func (s *Service) ListDedicatedServerInterfaceDetails(ctx context.Context, servi
 }
 
 // opListDedicatedServerInterfaces is ListDedicatedServerInterfaces's entry in the operation registry (ovh.Operations).
-var opListDedicatedServerInterfaces = &ovh.Operation{Name: "vrack.ListDedicatedServerInterfaces", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/dedicatedServerInterface", Summary: "List server interfaces. Returns the dedicated server network interfaces attached to the vRack.", IAMActions: []string{"vrack:apiovh:dedicatedServerInterface/get"}}
+var opListDedicatedServerInterfaces = &ovh.Operation{Name: "vrack.ListDedicatedServerInterfaces", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/dedicatedServerInterface", Summary: "List attached dedicated server interfaces", IAMActions: []string{"vrack:apiovh:dedicatedServerInterface/get"}}
 
-// ListDedicatedServerInterfaces calls GET /v1/vrack/{serviceName}/dedicatedServerInterface: List server interfaces. Returns the dedicated server network interfaces attached to the vRack.
+// ListDedicatedServerInterfaces calls GET /v1/vrack/{serviceName}/dedicatedServerInterface: List attached dedicated server interfaces
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -1126,9 +1126,9 @@ func (s *Service) ListDedicatedServerInterfaces(ctx context.Context, serviceName
 }
 
 // opListDedicatedServerMrtgs is ListDedicatedServerMrtgs's entry in the operation registry (ovh.Operations).
-var opListDedicatedServerMrtgs = &ovh.Operation{Name: "vrack.ListDedicatedServerMrtgs", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/dedicatedServer/{dedicatedServer}/mrtg", Summary: "Get traffic graph values (deprecated)", IAMActions: []string{"vrack:apiovh:dedicatedServer/mrtg/get"}, Deprecated: true}
+var opListDedicatedServerMrtgs = &ovh.Operation{Name: "vrack.ListDedicatedServerMrtgs", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/dedicatedServer/{dedicatedServer}/mrtg", Summary: "Get dedicated server traffic values (deprecated)", IAMActions: []string{"vrack:apiovh:dedicatedServer/mrtg/get"}, Deprecated: true}
 
-// ListDedicatedServerMrtgs calls GET /v1/vrack/{serviceName}/dedicatedServer/{dedicatedServer}/mrtg: Get traffic graph values (deprecated)
+// ListDedicatedServerMrtgs calls GET /v1/vrack/{serviceName}/dedicatedServer/{dedicatedServer}/mrtg: Get dedicated server traffic values (deprecated)
 //
 // Returns the traffic, packets or errors measured on the vRack port of the server, for a period
 // from hourly to yearly. Deprecated: use the dedicated server statistics instead.
@@ -1148,9 +1148,9 @@ func (s *Service) ListDedicatedServerMrtgs(ctx context.Context, serviceName stri
 }
 
 // opListDedicatedServers is ListDedicatedServers's entry in the operation registry (ovh.Operations).
-var opListDedicatedServers = &ovh.Operation{Name: "vrack.ListDedicatedServers", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/dedicatedServer", Summary: "List servers (legacy)", IAMActions: []string{"vrack:apiovh:dedicatedServer/get"}}
+var opListDedicatedServers = &ovh.Operation{Name: "vrack.ListDedicatedServers", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/dedicatedServer", Summary: "List attached dedicated servers (legacy)", IAMActions: []string{"vrack:apiovh:dedicatedServer/get"}}
 
-// ListDedicatedServers calls GET /v1/vrack/{serviceName}/dedicatedServer: List servers (legacy)
+// ListDedicatedServers calls GET /v1/vrack/{serviceName}/dedicatedServer: List attached dedicated servers (legacy)
 //
 // Returns the dedicated servers attached as a whole to the vRack, in the legacy mode. Attaching by
 // interface replaces it.
@@ -1164,9 +1164,9 @@ func (s *Service) ListDedicatedServers(ctx context.Context, serviceName string) 
 }
 
 // opListIPLoadbalancings is ListIPLoadbalancings's entry in the operation registry (ovh.Operations).
-var opListIPLoadbalancings = &ovh.Operation{Name: "vrack.ListIPLoadbalancings", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/ipLoadbalancing", Summary: "List load balancers. Returns the IP Load Balancer services attached to the vRack.", IAMActions: []string{"vrack:apiovh:ipLoadbalancing/get"}}
+var opListIPLoadbalancings = &ovh.Operation{Name: "vrack.ListIPLoadbalancings", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/ipLoadbalancing", Summary: "List attached IP Load Balancer services", IAMActions: []string{"vrack:apiovh:ipLoadbalancing/get"}}
 
-// ListIPLoadbalancings calls GET /v1/vrack/{serviceName}/ipLoadbalancing: List load balancers. Returns the IP Load Balancer services attached to the vRack.
+// ListIPLoadbalancings calls GET /v1/vrack/{serviceName}/ipLoadbalancing: List attached IP Load Balancer services
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -1177,9 +1177,9 @@ func (s *Service) ListIPLoadbalancings(ctx context.Context, serviceName string) 
 }
 
 // opListIPs is ListIPs's entry in the operation registry (ovh.Operations).
-var opListIPs = &ovh.Operation{Name: "vrack.ListIPs", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/ip", Summary: "List blocks. Returns the Additional IPv4 blocks routed in the vRack.", IAMActions: []string{"vrack:apiovh:ip/get"}}
+var opListIPs = &ovh.Operation{Name: "vrack.ListIPs", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/ip", Summary: "List attached Additional IPv4 blocks", IAMActions: []string{"vrack:apiovh:ip/get"}}
 
-// ListIPs calls GET /v1/vrack/{serviceName}/ip: List blocks. Returns the Additional IPv4 blocks routed in the vRack.
+// ListIPs calls GET /v1/vrack/{serviceName}/ip: List attached Additional IPv4 blocks
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -1190,9 +1190,9 @@ func (s *Service) ListIPs(ctx context.Context, serviceName string) ([]string, er
 }
 
 // opListIPv6BridgedSubranges is ListIPv6BridgedSubranges's entry in the operation registry (ovh.Operations).
-var opListIPv6BridgedSubranges = &ovh.Operation{Name: "vrack.ListIPv6BridgedSubranges", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/ipv6/{ipv6}/bridgedSubrange", Summary: "List bridged subranges. Returns the subranges of the block bridged in the vRack.", IAMActions: []string{"vrack:apiovh:ipv6/get"}}
+var opListIPv6BridgedSubranges = &ovh.Operation{Name: "vrack.ListIPv6BridgedSubranges", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/ipv6/{ipv6}/bridgedSubrange", Summary: "List bridged IPv6 subranges", IAMActions: []string{"vrack:apiovh:ipv6/get"}}
 
-// ListIPv6BridgedSubranges calls GET /v1/vrack/{serviceName}/ipv6/{ipv6}/bridgedSubrange: List bridged subranges. Returns the subranges of the block bridged in the vRack.
+// ListIPv6BridgedSubranges calls GET /v1/vrack/{serviceName}/ipv6/{ipv6}/bridgedSubrange: List bridged IPv6 subranges
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -1204,9 +1204,9 @@ func (s *Service) ListIPv6BridgedSubranges(ctx context.Context, serviceName stri
 }
 
 // opListIPv6RoutedSubranges is ListIPv6RoutedSubranges's entry in the operation registry (ovh.Operations).
-var opListIPv6RoutedSubranges = &ovh.Operation{Name: "vrack.ListIPv6RoutedSubranges", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/ipv6/{ipv6}/routedSubrange", Summary: "List routed subranges. Returns the subranges of the block routed in the vRack.", IAMActions: []string{"vrack:apiovh:ipv6/get"}}
+var opListIPv6RoutedSubranges = &ovh.Operation{Name: "vrack.ListIPv6RoutedSubranges", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/ipv6/{ipv6}/routedSubrange", Summary: "List routed IPv6 subranges", IAMActions: []string{"vrack:apiovh:ipv6/get"}}
 
-// ListIPv6RoutedSubranges calls GET /v1/vrack/{serviceName}/ipv6/{ipv6}/routedSubrange: List routed subranges. Returns the subranges of the block routed in the vRack.
+// ListIPv6RoutedSubranges calls GET /v1/vrack/{serviceName}/ipv6/{ipv6}/routedSubrange: List routed IPv6 subranges
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -1218,9 +1218,9 @@ func (s *Service) ListIPv6RoutedSubranges(ctx context.Context, serviceName strin
 }
 
 // opListIpv6s is ListIpv6s's entry in the operation registry (ovh.Operations).
-var opListIpv6s = &ovh.Operation{Name: "vrack.ListIpv6s", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/ipv6", Summary: "List blocks. Returns the Additional IPv6 blocks attached to the vRack.", IAMActions: []string{"vrack:apiovh:ipv6/get"}}
+var opListIpv6s = &ovh.Operation{Name: "vrack.ListIpv6s", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/ipv6", Summary: "List attached Additional IPv6 blocks", IAMActions: []string{"vrack:apiovh:ipv6/get"}}
 
-// ListIpv6s calls GET /v1/vrack/{serviceName}/ipv6: List blocks. Returns the Additional IPv6 blocks attached to the vRack.
+// ListIpv6s calls GET /v1/vrack/{serviceName}/ipv6: List attached Additional IPv6 blocks
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -1231,9 +1231,9 @@ func (s *Service) ListIpv6s(ctx context.Context, serviceName string) ([]string, 
 }
 
 // opListLegacyVracks is ListLegacyVracks's entry in the operation registry (ovh.Operations).
-var opListLegacyVracks = &ovh.Operation{Name: "vrack.ListLegacyVracks", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/legacyVrack", Summary: "List legacy vRacks (deprecated). Returns the legacy vRacks (vrackXXXX) bridged in the vRack.", IAMActions: []string{"vrack:apiovh:legacyVrack/get"}, Deprecated: true}
+var opListLegacyVracks = &ovh.Operation{Name: "vrack.ListLegacyVracks", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/legacyVrack", Summary: "List attached legacy vRacks (deprecated)", IAMActions: []string{"vrack:apiovh:legacyVrack/get"}, Deprecated: true}
 
-// ListLegacyVracks calls GET /v1/vrack/{serviceName}/legacyVrack: List legacy vRacks (deprecated). Returns the legacy vRacks (vrackXXXX) bridged in the vRack.
+// ListLegacyVracks calls GET /v1/vrack/{serviceName}/legacyVrack: List attached legacy vRacks (deprecated)
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -1246,9 +1246,9 @@ func (s *Service) ListLegacyVracks(ctx context.Context, serviceName string) ([]s
 }
 
 // opListOvhCloudConnects is ListOvhCloudConnects's entry in the operation registry (ovh.Operations).
-var opListOvhCloudConnects = &ovh.Operation{Name: "vrack.ListOvhCloudConnects", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/ovhCloudConnect", Summary: "List services. Returns the identifiers of the OVHcloud Connect services attached to the vRack.", IAMActions: []string{"vrack:apiovh:ovhCloudConnect/get"}}
+var opListOvhCloudConnects = &ovh.Operation{Name: "vrack.ListOvhCloudConnects", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/ovhCloudConnect", Summary: "List attached OVHcloud Connect services", IAMActions: []string{"vrack:apiovh:ovhCloudConnect/get"}}
 
-// ListOvhCloudConnects calls GET /v1/vrack/{serviceName}/ovhCloudConnect: List services. Returns the identifiers of the OVHcloud Connect services attached to the vRack.
+// ListOvhCloudConnects calls GET /v1/vrack/{serviceName}/ovhCloudConnect: List attached OVHcloud Connect services
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -1281,9 +1281,9 @@ func (s *Service) ListPublicRoutingBandwidthLimits(ctx context.Context, serviceN
 }
 
 // opListPublicRoutingPriorities is ListPublicRoutingPriorities's entry in the operation registry (ovh.Operations).
-var opListPublicRoutingPriorities = &ovh.Operation{Name: "vrack.ListPublicRoutingPriorities", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/publicRoutingPriority", Summary: "List priorities. Returns the identifiers of the 3-AZ failover priorities of the vRack.", IAMActions: []string{"vrack:apiovh:publicRoutingPriority/get"}}
+var opListPublicRoutingPriorities = &ovh.Operation{Name: "vrack.ListPublicRoutingPriorities", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/publicRoutingPriority", Summary: "List 3-AZ failover priorities", IAMActions: []string{"vrack:apiovh:publicRoutingPriority/get"}}
 
-// ListPublicRoutingPriorities calls GET /v1/vrack/{serviceName}/publicRoutingPriority: List priorities. Returns the identifiers of the 3-AZ failover priorities of the vRack.
+// ListPublicRoutingPriorities calls GET /v1/vrack/{serviceName}/publicRoutingPriority: List 3-AZ failover priorities
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -1311,9 +1311,9 @@ func (s *Service) ListPublicRoutingRegions(ctx context.Context, params ...ListPu
 }
 
 // opListTasks is ListTasks's entry in the operation registry (ovh.Operations).
-var opListTasks = &ovh.Operation{Name: "vrack.ListTasks", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/task", Summary: "List tasks. Returns the identifiers of the tasks run on the vRack.", IAMActions: []string{"vrack:apiovh:task/get"}}
+var opListTasks = &ovh.Operation{Name: "vrack.ListTasks", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/task", Summary: "List vRack tasks", IAMActions: []string{"vrack:apiovh:task/get"}}
 
-// ListTasks calls GET /v1/vrack/{serviceName}/task: List tasks. Returns the identifiers of the tasks run on the vRack.
+// ListTasks calls GET /v1/vrack/{serviceName}/task: List vRack tasks
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -1324,9 +1324,9 @@ func (s *Service) ListTasks(ctx context.Context, serviceName string) ([]int, err
 }
 
 // opListVmwareCloudDirectorVirtualDataCenters is ListVmwareCloudDirectorVirtualDataCenters's entry in the operation registry (ovh.Operations).
-var opListVmwareCloudDirectorVirtualDataCenters = &ovh.Operation{Name: "vrack.ListVmwareCloudDirectorVirtualDataCenters", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/vmwareCloudDirectorVirtualDataCenter", Summary: "List datacenters. Returns the Public VCF as-a-Service virtual datacenters attached to the vRack.", IAMActions: []string{"vrack:apiovh:vmwareCloudDirectoryVirtualDataCenter/get"}}
+var opListVmwareCloudDirectorVirtualDataCenters = &ovh.Operation{Name: "vrack.ListVmwareCloudDirectorVirtualDataCenters", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/vmwareCloudDirectorVirtualDataCenter", Summary: "List attached Public VCF virtual datacenters", IAMActions: []string{"vrack:apiovh:vmwareCloudDirectoryVirtualDataCenter/get"}}
 
-// ListVmwareCloudDirectorVirtualDataCenters calls GET /v1/vrack/{serviceName}/vmwareCloudDirectorVirtualDataCenter: List datacenters. Returns the Public VCF as-a-Service virtual datacenters attached to the vRack.
+// ListVmwareCloudDirectorVirtualDataCenters calls GET /v1/vrack/{serviceName}/vmwareCloudDirectorVirtualDataCenter: List attached Public VCF virtual datacenters
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -1337,9 +1337,9 @@ func (s *Service) ListVmwareCloudDirectorVirtualDataCenters(ctx context.Context,
 }
 
 // opListVrackServices is ListVrackServices's entry in the operation registry (ovh.Operations).
-var opListVrackServices = &ovh.Operation{Name: "vrack.ListVrackServices", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/vrackServices", Summary: "List vRack Services. Returns the vRack Services attached to the vRack.", IAMActions: []string{"vrack:apiovh:vrackServices/get"}}
+var opListVrackServices = &ovh.Operation{Name: "vrack.ListVrackServices", Method: http.MethodGet, Path: "/v1/vrack/{serviceName}/vrackServices", Summary: "List attached vRack Services", IAMActions: []string{"vrack:apiovh:vrackServices/get"}}
 
-// ListVrackServices calls GET /v1/vrack/{serviceName}/vrackServices: List vRack Services. Returns the vRack Services attached to the vRack.
+// ListVrackServices calls GET /v1/vrack/{serviceName}/vrackServices: List attached vRack Services
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -1350,7 +1350,7 @@ func (s *Service) ListVrackServices(ctx context.Context, serviceName string) ([]
 }
 
 // opListVracks is ListVracks's entry in the operation registry (ovh.Operations).
-var opListVracks = &ovh.Operation{Name: "vrack.ListVracks", Method: http.MethodGet, Path: "/v1/vrack", Summary: "List vRacks. Returns the service names of the vRacks of the account.", IAMActions: []string{"vrack:apiovh:get"}}
+var opListVracks = &ovh.Operation{Name: "vrack.ListVracks", Method: http.MethodGet, Path: "/v1/vrack", Summary: "List vRacks", IAMActions: []string{"vrack:apiovh:get"}}
 
 // ListVracksParams holds the optional parameters of ListVracks.
 type ListVracksParams struct {
@@ -1358,7 +1358,7 @@ type ListVracksParams struct {
 	IAMTags map[string][]IAMResourceTagFilter `ovh:"query,iamTags"`
 }
 
-// ListVracks calls GET /v1/vrack: List vRacks. Returns the service names of the vRacks of the account.
+// ListVracks calls GET /v1/vrack: List vRacks
 //
 // Requires the IAM action vrack:apiovh:get.
 func (s *Service) ListVracks(ctx context.Context, params ...ListVracksParams) ([]string, error) {
@@ -1366,9 +1366,9 @@ func (s *Service) ListVracks(ctx context.Context, params ...ListVracksParams) ([
 }
 
 // opMoveDedicatedCloudDatacenter is MoveDedicatedCloudDatacenter's entry in the operation registry (ovh.Operations).
-var opMoveDedicatedCloudDatacenter = &ovh.Operation{Name: "vrack.MoveDedicatedCloudDatacenter", Method: http.MethodPost, Path: "/v1/vrack/{serviceName}/dedicatedCloudDatacenter/{datacenter}/move", Summary: "Move a datacenter", IAMActions: []string{"vrack:apiovh:dedicatedCloudDatacenter/move"}}
+var opMoveDedicatedCloudDatacenter = &ovh.Operation{Name: "vrack.MoveDedicatedCloudDatacenter", Method: http.MethodPost, Path: "/v1/vrack/{serviceName}/dedicatedCloudDatacenter/{datacenter}/move", Summary: "Move a Managed VMware vSphere datacenter", IAMActions: []string{"vrack:apiovh:dedicatedCloudDatacenter/move"}}
 
-// MoveDedicatedCloudDatacenter calls POST /v1/vrack/{serviceName}/dedicatedCloudDatacenter/{datacenter}/move: Move a datacenter
+// MoveDedicatedCloudDatacenter calls POST /v1/vrack/{serviceName}/dedicatedCloudDatacenter/{datacenter}/move: Move a Managed VMware vSphere datacenter
 //
 // Moves the Private Cloud datacenter to another vRack. Returns the task that performs it.
 //
@@ -1399,9 +1399,9 @@ func (s *Service) Terminate(ctx context.Context, serviceName string) (string, er
 }
 
 // opUpdateDedicatedConnect is UpdateDedicatedConnect's entry in the operation registry (ovh.Operations).
-var opUpdateDedicatedConnect = &ovh.Operation{Name: "vrack.UpdateDedicatedConnect", Method: http.MethodPut, Path: "/v1/vrack/{serviceName}/dedicatedConnect/{name}", Summary: "Update a link. Updates the name of the Dedicated Connect link.", IAMActions: []string{"vrack:apiovh:dedicatedConnect/edit"}}
+var opUpdateDedicatedConnect = &ovh.Operation{Name: "vrack.UpdateDedicatedConnect", Method: http.MethodPut, Path: "/v1/vrack/{serviceName}/dedicatedConnect/{name}", Summary: "Update a Dedicated Connect link", IAMActions: []string{"vrack:apiovh:dedicatedConnect/edit"}}
 
-// UpdateDedicatedConnect calls PUT /v1/vrack/{serviceName}/dedicatedConnect/{name}: Update a link. Updates the name of the Dedicated Connect link.
+// UpdateDedicatedConnect calls PUT /v1/vrack/{serviceName}/dedicatedConnect/{name}: Update a Dedicated Connect link
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack
@@ -1450,9 +1450,9 @@ func (s *Service) UpdatePublicRoutingPriority(ctx context.Context, serviceName s
 }
 
 // opUpdateVrack is UpdateVrack's entry in the operation registry (ovh.Operations).
-var opUpdateVrack = &ovh.Operation{Name: "vrack.UpdateVrack", Method: http.MethodPut, Path: "/v1/vrack/{serviceName}", Summary: "Update a vRack. Updates the name or description of the vRack.", IAMActions: []string{"vrack:apiovh:put"}}
+var opUpdateVrack = &ovh.Operation{Name: "vrack.UpdateVrack", Method: http.MethodPut, Path: "/v1/vrack/{serviceName}", Summary: "Update a vRack", IAMActions: []string{"vrack:apiovh:put"}}
 
-// UpdateVrack calls PUT /v1/vrack/{serviceName}: Update a vRack. Updates the name or description of the vRack.
+// UpdateVrack calls PUT /v1/vrack/{serviceName}: Update a vRack
 //
 // Arguments:
 //   - serviceName: The internal name of your vrack

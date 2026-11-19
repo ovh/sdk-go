@@ -15,7 +15,7 @@ import (
 )
 
 // opDeleteOrganizationVirtualDataCenterCompute is DeleteOrganizationVirtualDataCenterCompute's entry in the operation registry (ovh.Operations).
-var opDeleteOrganizationVirtualDataCenterCompute = &ovh.Operation{Name: "vmwareclouddirector.DeleteOrganizationVirtualDataCenterCompute", Method: http.MethodDelete, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/compute/{computeId}", Summary: "Delete a compute resource", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/compute/delete"}}
+var opDeleteOrganizationVirtualDataCenterCompute = &ovh.Operation{Name: "vmwareclouddirector.DeleteOrganizationVirtualDataCenterCompute", Method: http.MethodDelete, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/compute/{computeId}", Summary: "Delete a compute resource", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/compute/delete"}, SchemasVersion: "1.0"}
 
 // DeleteOrganizationVirtualDataCenterCompute calls DELETE /v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/compute/{computeId}: Delete a compute resource
 //
@@ -32,7 +32,7 @@ func (s *Service) DeleteOrganizationVirtualDataCenterCompute(ctx context.Context
 }
 
 // opDeleteOrganizationVirtualDataCenterStorage is DeleteOrganizationVirtualDataCenterStorage's entry in the operation registry (ovh.Operations).
-var opDeleteOrganizationVirtualDataCenterStorage = &ovh.Operation{Name: "vmwareclouddirector.DeleteOrganizationVirtualDataCenterStorage", Method: http.MethodDelete, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/storage/{storageId}", Summary: "Delete a storage resource", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/storage/delete"}}
+var opDeleteOrganizationVirtualDataCenterStorage = &ovh.Operation{Name: "vmwareclouddirector.DeleteOrganizationVirtualDataCenterStorage", Method: http.MethodDelete, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/storage/{storageId}", Summary: "Delete a storage resource", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/storage/delete"}, SchemasVersion: "1.0"}
 
 // DeleteOrganizationVirtualDataCenterStorage calls DELETE /v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/storage/{storageId}: Delete a storage resource
 //
@@ -49,7 +49,7 @@ func (s *Service) DeleteOrganizationVirtualDataCenterStorage(ctx context.Context
 }
 
 // opGetOrganizationVirtualDataCenterCompute is GetOrganizationVirtualDataCenterCompute's entry in the operation registry (ovh.Operations).
-var opGetOrganizationVirtualDataCenterCompute = &ovh.Operation{Name: "vmwareclouddirector.GetOrganizationVirtualDataCenterCompute", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/compute/{computeId}", Summary: "Get a compute resource", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/compute/get"}}
+var opGetOrganizationVirtualDataCenterCompute = &ovh.Operation{Name: "vmwareclouddirector.GetOrganizationVirtualDataCenterCompute", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/compute/{computeId}", Summary: "Get a compute resource", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/compute/get"}, SchemasVersion: "1.0"}
 
 // GetOrganizationVirtualDataCenterCompute calls GET /v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/compute/{computeId}: Get a compute resource
 //
@@ -66,7 +66,7 @@ func (s *Service) GetOrganizationVirtualDataCenterCompute(ctx context.Context, o
 }
 
 // opGetOrganizationVirtualDataCenterStorage is GetOrganizationVirtualDataCenterStorage's entry in the operation registry (ovh.Operations).
-var opGetOrganizationVirtualDataCenterStorage = &ovh.Operation{Name: "vmwareclouddirector.GetOrganizationVirtualDataCenterStorage", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/storage/{storageId}", Summary: "Get a storage resource", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/storage/get"}}
+var opGetOrganizationVirtualDataCenterStorage = &ovh.Operation{Name: "vmwareclouddirector.GetOrganizationVirtualDataCenterStorage", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/storage/{storageId}", Summary: "Get a storage resource", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/storage/get"}, SchemasVersion: "1.0"}
 
 // GetOrganizationVirtualDataCenterStorage calls GET /v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/storage/{storageId}: Get a storage resource
 //
@@ -83,7 +83,7 @@ func (s *Service) GetOrganizationVirtualDataCenterStorage(ctx context.Context, o
 }
 
 // opListOrganizationVirtualDataCenterComputes is AllOrganizationVirtualDataCenterComputes's entry in the operation registry (ovh.Operations).
-var opListOrganizationVirtualDataCenterComputes = &ovh.Operation{Name: "vmwareclouddirector.AllOrganizationVirtualDataCenterComputes", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/compute", Summary: "List compute resources", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/compute/get"}}
+var opListOrganizationVirtualDataCenterComputes = &ovh.Operation{Name: "vmwareclouddirector.AllOrganizationVirtualDataCenterComputes", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/compute", Summary: "List compute resources", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/compute/get"}, SchemasVersion: "1.0"}
 
 // AllOrganizationVirtualDataCenterComputes iterates over GET /v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/compute (List compute resources),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -101,7 +101,7 @@ func (s *Service) AllOrganizationVirtualDataCenterComputes(ctx context.Context, 
 }
 
 // opListOrganizationVirtualDataCenterStorages is AllOrganizationVirtualDataCenterStorages's entry in the operation registry (ovh.Operations).
-var opListOrganizationVirtualDataCenterStorages = &ovh.Operation{Name: "vmwareclouddirector.AllOrganizationVirtualDataCenterStorages", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/storage", Summary: "List storage resources", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/storage/get"}}
+var opListOrganizationVirtualDataCenterStorages = &ovh.Operation{Name: "vmwareclouddirector.AllOrganizationVirtualDataCenterStorages", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/storage", Summary: "List storage resources", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/storage/get"}, SchemasVersion: "1.0"}
 
 // AllOrganizationVirtualDataCenterStorages iterates over GET /v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/storage (List storage resources),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it

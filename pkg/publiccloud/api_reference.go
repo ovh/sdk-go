@@ -15,7 +15,7 @@ import (
 )
 
 // opGetFlavor is GetFlavor's entry in the operation registry (ovh.Operations).
-var opGetFlavor = &ovh.Operation{Name: "publiccloud.GetFlavor", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/instance/flavor/{id}", Summary: "Get an instance flavor", IAMActions: []string{"publicCloudProject:apiovh:reference/instance/flavor/get"}}
+var opGetFlavor = &ovh.Operation{Name: "publiccloud.GetFlavor", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/instance/flavor/{id}", Summary: "Get an instance flavor", IAMActions: []string{"publicCloudProject:apiovh:reference/instance/flavor/get"}, SchemasVersion: "1.0"}
 
 // GetFlavor calls GET /v2/publicCloud/project/{projectId}/reference/instance/flavor/{id}: Get an instance flavor
 //
@@ -35,7 +35,7 @@ func (s *Service) GetFlavor(ctx context.Context, projectID string, id string) (*
 }
 
 // opGetFlavors is AllFlavors's entry in the operation registry (ovh.Operations).
-var opGetFlavors = &ovh.Operation{Name: "publiccloud.AllFlavors", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/instance/flavor", Summary: "List instance flavors", IAMActions: []string{"publicCloudProject:apiovh:reference/instance/flavor/get"}}
+var opGetFlavors = &ovh.Operation{Name: "publiccloud.AllFlavors", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/instance/flavor", Summary: "List instance flavors", IAMActions: []string{"publicCloudProject:apiovh:reference/instance/flavor/get"}, SchemasVersion: "1.0"}
 
 // GetFlavorsParams holds the optional parameters of GetFlavors.
 type GetFlavorsParams struct {
@@ -68,7 +68,7 @@ func (s *Service) AllFlavors(ctx context.Context, projectID string, params ...Ge
 }
 
 // opGetGatewayModels is AllGatewayModels's entry in the operation registry (ovh.Operations).
-var opGetGatewayModels = &ovh.Operation{Name: "publiccloud.AllGatewayModels", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/gateway/model", Summary: "List gateway models", IAMActions: []string{"publicCloudProject:apiovh:reference/gateway/model/get"}}
+var opGetGatewayModels = &ovh.Operation{Name: "publiccloud.AllGatewayModels", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/gateway/model", Summary: "List gateway models", IAMActions: []string{"publicCloudProject:apiovh:reference/gateway/model/get"}, SchemasVersion: "1.0"}
 
 // GetGatewayModelsParams holds the optional parameters of GetGatewayModels.
 type GetGatewayModelsParams struct {
@@ -101,7 +101,7 @@ func (s *Service) AllGatewayModels(ctx context.Context, projectID string, params
 }
 
 // opGetImage is GetImage's entry in the operation registry (ovh.Operations).
-var opGetImage = &ovh.Operation{Name: "publiccloud.GetImage", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/instance/image/{id}", Summary: "Get an instance image", IAMActions: []string{"publicCloudProject:apiovh:reference/instance/image/get"}}
+var opGetImage = &ovh.Operation{Name: "publiccloud.GetImage", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/instance/image/{id}", Summary: "Get an instance image", IAMActions: []string{"publicCloudProject:apiovh:reference/instance/image/get"}, SchemasVersion: "1.0"}
 
 // GetImage calls GET /v2/publicCloud/project/{projectId}/reference/instance/image/{id}: Get an instance image
 //
@@ -118,7 +118,7 @@ func (s *Service) GetImage(ctx context.Context, projectID string, id string) (*P
 }
 
 // opGetImages is AllImages's entry in the operation registry (ovh.Operations).
-var opGetImages = &ovh.Operation{Name: "publiccloud.AllImages", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/instance/image", Summary: "List instance images", IAMActions: []string{"publicCloudProject:apiovh:reference/instance/image/get"}}
+var opGetImages = &ovh.Operation{Name: "publiccloud.AllImages", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/instance/image", Summary: "List instance images", IAMActions: []string{"publicCloudProject:apiovh:reference/instance/image/get"}, SchemasVersion: "1.0"}
 
 // GetImagesParams holds the optional parameters of GetImages.
 type GetImagesParams struct {
@@ -142,7 +142,7 @@ func (s *Service) AllImages(ctx context.Context, projectID string, params ...Get
 }
 
 // opGetLoadBalancerFlavors is AllLoadBalancerFlavors's entry in the operation registry (ovh.Operations).
-var opGetLoadBalancerFlavors = &ovh.Operation{Name: "publiccloud.AllLoadBalancerFlavors", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/loadbalancer/flavor", Summary: "List load balancer flavors", IAMActions: []string{"publicCloudProject:apiovh:reference/loadbalancer/flavor/get"}}
+var opGetLoadBalancerFlavors = &ovh.Operation{Name: "publiccloud.AllLoadBalancerFlavors", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/loadbalancer/flavor", Summary: "List load balancer flavors", IAMActions: []string{"publicCloudProject:apiovh:reference/loadbalancer/flavor/get"}, SchemasVersion: "1.0"}
 
 // GetLoadBalancerFlavorsParams holds the optional parameters of GetLoadBalancerFlavors.
 type GetLoadBalancerFlavorsParams struct {
@@ -174,7 +174,7 @@ func (s *Service) AllLoadBalancerFlavors(ctx context.Context, projectID string, 
 }
 
 // opGetObjectStorageReference is GetObjectStorageReference's entry in the operation registry (ovh.Operations).
-var opGetObjectStorageReference = &ovh.Operation{Name: "publiccloud.GetObjectStorageReference", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/storage/object", Summary: "Get object storage reference data", IAMActions: []string{"publicCloudProject:apiovh:reference/storage/object/get"}}
+var opGetObjectStorageReference = &ovh.Operation{Name: "publiccloud.GetObjectStorageReference", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/storage/object", Summary: "Get object storage reference data", IAMActions: []string{"publicCloudProject:apiovh:reference/storage/object/get"}, SchemasVersion: "1.0"}
 
 // GetObjectStorageReference calls GET /v2/publicCloud/project/{projectId}/reference/storage/object: Get object storage reference data
 //
@@ -191,7 +191,7 @@ func (s *Service) GetObjectStorageReference(ctx context.Context, projectID strin
 }
 
 // opGetProductAvailability is AllProductAvailability's entry in the operation registry (ovh.Operations).
-var opGetProductAvailability = &ovh.Operation{Name: "publiccloud.AllProductAvailability", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/productAvailability", Summary: "Get product availability", IAMActions: []string{"publicCloudProject:apiovh:reference/productAvailability/get"}}
+var opGetProductAvailability = &ovh.Operation{Name: "publiccloud.AllProductAvailability", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/productAvailability", Summary: "Get product availability", IAMActions: []string{"publicCloudProject:apiovh:reference/productAvailability/get"}, SchemasVersion: "1.0"}
 
 // GetProductAvailabilityParams holds the optional parameters of GetProductAvailability.
 type GetProductAvailabilityParams struct {
@@ -240,8 +240,24 @@ func (s *Service) AllProductAvailability(ctx context.Context, projectID string, 
 	return ovh.Iterate[PublicCloudReferenceProductAvailability](ctx, s.c, &ovh.Request{Operation: opGetProductAvailability, Method: http.MethodGet, Path: ovh.Path("/v2/publicCloud/project/{projectId}/reference/productAvailability", "projectId", projectID), Params: ovh.Optional(params)})
 }
 
+// opGetProjectReferenceManagedKubernetesVersion is GetProjectReferenceManagedKubernetesVersion's entry in the operation registry (ovh.Operations).
+var opGetProjectReferenceManagedKubernetesVersion = &ovh.Operation{Name: "publiccloud.GetProjectReferenceManagedKubernetesVersion", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/managedKubernetes/version", Summary: "List Kubernetes versions", IAMActions: []string{"publicCloudProject:apiovh:reference/managedKubernetes/version/get"}, SchemasVersion: "1.0"}
+
+// GetProjectReferenceManagedKubernetesVersion calls GET /v2/publicCloud/project/{projectId}/reference/managedKubernetes/version: List Kubernetes versions
+//
+// Returns the minor versions available for cluster creation, newest first, and the default version.
+// Creation resolves a minor version to its latest patch.
+//
+// Arguments:
+//   - projectID: Project ID
+//
+// Requires the IAM action publicCloudProject:apiovh:reference/managedKubernetes/version/get.
+func (s *Service) GetProjectReferenceManagedKubernetesVersion(ctx context.Context, projectID string) (*PublicCloudManagedKubernetesVersionCatalog, error) {
+	return ovh.Call[*PublicCloudManagedKubernetesVersionCatalog](ctx, s.c, &ovh.Request{Operation: opGetProjectReferenceManagedKubernetesVersion, Method: http.MethodGet, Path: ovh.Path("/v2/publicCloud/project/{projectId}/reference/managedKubernetes/version", "projectId", projectID)})
+}
+
 // opGetProjectReferenceRancherEligibility is GetProjectReferenceRancherEligibility's entry in the operation registry (ovh.Operations).
-var opGetProjectReferenceRancherEligibility = &ovh.Operation{Name: "publiccloud.GetProjectReferenceRancherEligibility", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/rancher/eligibility", Summary: "Get managed Rancher eligibility", IAMActions: []string{"publicCloudProject:apiovh:reference/rancher/eligibility/get"}}
+var opGetProjectReferenceRancherEligibility = &ovh.Operation{Name: "publiccloud.GetProjectReferenceRancherEligibility", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/rancher/eligibility", Summary: "Get managed Rancher eligibility", IAMActions: []string{"publicCloudProject:apiovh:reference/rancher/eligibility/get"}, SchemasVersion: "1.0"}
 
 // GetProjectReferenceRancherEligibility calls GET /v2/publicCloud/project/{projectId}/reference/rancher/eligibility: Get managed Rancher eligibility
 //
@@ -255,8 +271,38 @@ func (s *Service) GetProjectReferenceRancherEligibility(ctx context.Context, pro
 	return ovh.Call[*PublicCloudRancherEligibilityReference](ctx, s.c, &ovh.Request{Operation: opGetProjectReferenceRancherEligibility, Method: http.MethodGet, Path: ovh.Path("/v2/publicCloud/project/{projectId}/reference/rancher/eligibility", "projectId", projectID)})
 }
 
+// opGetRegistryPlans is AllRegistryPlans's entry in the operation registry (ovh.Operations).
+var opGetRegistryPlans = &ovh.Operation{Name: "publiccloud.AllRegistryPlans", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/managedRegistry/plan", Summary: "List plans available to create a Managed Private Registry service", IAMActions: []string{"publicCloudProject:apiovh:reference/managedRegistry/plan/get"}, SchemasVersion: "1.0"}
+
+// AllRegistryPlans iterates over GET /v2/publicCloud/project/{projectId}/reference/managedRegistry/plan (List plans available to create a Managed Private Registry service),
+// one item at a time, fetching the next page only when the loop reaches it. On an error it
+// yields the error and stops. Collect, filter or stop early in the loop as needed.
+//
+// Arguments:
+//   - projectID: Project ID
+//
+// Requires the IAM action publicCloudProject:apiovh:reference/managedRegistry/plan/get.
+func (s *Service) AllRegistryPlans(ctx context.Context, projectID string) iter.Seq2[*PublicCloudManagedRegistryPlan, error] {
+	return ovh.Iterate[PublicCloudManagedRegistryPlan](ctx, s.c, &ovh.Request{Operation: opGetRegistryPlans, Method: http.MethodGet, Path: ovh.Path("/v2/publicCloud/project/{projectId}/reference/managedRegistry/plan", "projectId", projectID)})
+}
+
+// opGetRegistryRegions is AllRegistryRegions's entry in the operation registry (ovh.Operations).
+var opGetRegistryRegions = &ovh.Operation{Name: "publiccloud.AllRegistryRegions", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/managedRegistry/region", Summary: "List regions available to create a Managed Private Registry service", IAMActions: []string{"publicCloudProject:apiovh:reference/managedRegistry/region/get"}, SchemasVersion: "1.0"}
+
+// AllRegistryRegions iterates over GET /v2/publicCloud/project/{projectId}/reference/managedRegistry/region (List regions available to create a Managed Private Registry service),
+// one item at a time, fetching the next page only when the loop reaches it. On an error it
+// yields the error and stops. Collect, filter or stop early in the loop as needed.
+//
+// Arguments:
+//   - projectID: Project ID
+//
+// Requires the IAM action publicCloudProject:apiovh:reference/managedRegistry/region/get.
+func (s *Service) AllRegistryRegions(ctx context.Context, projectID string) iter.Seq2[*PublicCloudManagedRegistryRegion, error] {
+	return ovh.Iterate[PublicCloudManagedRegistryRegion](ctx, s.c, &ovh.Request{Operation: opGetRegistryRegions, Method: http.MethodGet, Path: ovh.Path("/v2/publicCloud/project/{projectId}/reference/managedRegistry/region", "projectId", projectID)})
+}
+
 // opGetShareTypes is AllShareTypes's entry in the operation registry (ovh.Operations).
-var opGetShareTypes = &ovh.Operation{Name: "publiccloud.AllShareTypes", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/storage/file/shareType", Summary: "List file storage share types", IAMActions: []string{"publicCloudProject:apiovh:reference/storage/file/shareType/get"}}
+var opGetShareTypes = &ovh.Operation{Name: "publiccloud.AllShareTypes", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/storage/file/shareType", Summary: "List file storage share types", IAMActions: []string{"publicCloudProject:apiovh:reference/storage/file/shareType/get"}, SchemasVersion: "1.0"}
 
 // GetShareTypesParams holds the optional parameters of GetShareTypes.
 type GetShareTypesParams struct {
@@ -289,7 +335,7 @@ func (s *Service) AllShareTypes(ctx context.Context, projectID string, params ..
 }
 
 // opGetVolumeTypes is AllVolumeTypes's entry in the operation registry (ovh.Operations).
-var opGetVolumeTypes = &ovh.Operation{Name: "publiccloud.AllVolumeTypes", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/storage/block/volumeType", Summary: "List block storage volume types", IAMActions: []string{"publicCloudProject:apiovh:reference/storage/block/volumeType/get"}}
+var opGetVolumeTypes = &ovh.Operation{Name: "publiccloud.AllVolumeTypes", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/storage/block/volumeType", Summary: "List block storage volume types", IAMActions: []string{"publicCloudProject:apiovh:reference/storage/block/volumeType/get"}, SchemasVersion: "1.0"}
 
 // GetVolumeTypesParams holds the optional parameters of GetVolumeTypes.
 type GetVolumeTypesParams struct {
@@ -320,8 +366,64 @@ func (s *Service) AllVolumeTypes(ctx context.Context, projectID string, params .
 	return ovh.Iterate[PublicCloudReferenceStorageBlockVolumeType](ctx, s.c, &ovh.Request{Operation: opGetVolumeTypes, Method: http.MethodGet, Path: ovh.Path("/v2/publicCloud/project/{projectId}/reference/storage/block/volumeType", "projectId", projectID), Params: ovh.Optional(params)})
 }
 
+// opListProjectReferenceManagedKubernetesFlavors is AllProjectReferenceManagedKubernetesFlavors's entry in the operation registry (ovh.Operations).
+var opListProjectReferenceManagedKubernetesFlavors = &ovh.Operation{Name: "publiccloud.AllProjectReferenceManagedKubernetesFlavors", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/managedKubernetes/flavor", Summary: "List Kubernetes node flavors", IAMActions: []string{"publicCloudProject:apiovh:reference/managedKubernetes/flavor/get"}, SchemasVersion: "1.0"}
+
+// AllProjectReferenceManagedKubernetesFlavors iterates over GET /v2/publicCloud/project/{projectId}/reference/managedKubernetes/flavor (List Kubernetes node flavors),
+// one item at a time, fetching the next page only when the loop reaches it. On an error it
+// yields the error and stops. Collect, filter or stop early in the loop as needed.
+//
+// Returns the node flavors available for node pools in a region, with their category, resources and
+// status. Requires a region.
+//
+// Arguments:
+//   - projectID: Project ID
+//   - region: Region to list flavors for. Flavor availability varies by region. An unknown region returns 404.
+//
+// Requires the IAM action publicCloudProject:apiovh:reference/managedKubernetes/flavor/get.
+func (s *Service) AllProjectReferenceManagedKubernetesFlavors(ctx context.Context, projectID string, region string) iter.Seq2[*PublicCloudManagedKubernetesFlavor, error] {
+	return ovh.Iterate[PublicCloudManagedKubernetesFlavor](ctx, s.c, &ovh.Request{Operation: opListProjectReferenceManagedKubernetesFlavors, Method: http.MethodGet, Path: ovh.Path("/v2/publicCloud/project/{projectId}/reference/managedKubernetes/flavor", "projectId", projectID), Query: ovh.Values("region", region)})
+}
+
+// opListProjectReferenceManagedKubernetesPlans is AllProjectReferenceManagedKubernetesPlans's entry in the operation registry (ovh.Operations).
+var opListProjectReferenceManagedKubernetesPlans = &ovh.Operation{Name: "publiccloud.AllProjectReferenceManagedKubernetesPlans", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/managedKubernetes/plan", Summary: "List Kubernetes cluster plans", IAMActions: []string{"publicCloudProject:apiovh:reference/managedKubernetes/plan/get"}, SchemasVersion: "1.0"}
+
+// AllProjectReferenceManagedKubernetesPlans iterates over GET /v2/publicCloud/project/{projectId}/reference/managedKubernetes/plan (List Kubernetes cluster plans),
+// one item at a time, fetching the next page only when the loop reaches it. On an error it
+// yields the error and stops. Collect, filter or stop early in the loop as needed.
+//
+// Returns the plans available for cluster creation in a region, with their control plane
+// characteristics and limits. Requires a region.
+//
+// Arguments:
+//   - projectID: Project ID
+//   - region: Region to list plans for. Plan availability varies by region. An unknown region returns 404.
+//
+// Requires the IAM action publicCloudProject:apiovh:reference/managedKubernetes/plan/get.
+func (s *Service) AllProjectReferenceManagedKubernetesPlans(ctx context.Context, projectID string, region string) iter.Seq2[*PublicCloudManagedKubernetesPlan, error] {
+	return ovh.Iterate[PublicCloudManagedKubernetesPlan](ctx, s.c, &ovh.Request{Operation: opListProjectReferenceManagedKubernetesPlans, Method: http.MethodGet, Path: ovh.Path("/v2/publicCloud/project/{projectId}/reference/managedKubernetes/plan", "projectId", projectID), Query: ovh.Values("region", region)})
+}
+
+// opListProjectReferenceManagedKubernetesRegions is AllProjectReferenceManagedKubernetesRegions's entry in the operation registry (ovh.Operations).
+var opListProjectReferenceManagedKubernetesRegions = &ovh.Operation{Name: "publiccloud.AllProjectReferenceManagedKubernetesRegions", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/managedKubernetes/region", Summary: "List Kubernetes cluster regions", IAMActions: []string{"publicCloudProject:apiovh:reference/managedKubernetes/region/get"}, SchemasVersion: "1.0"}
+
+// AllProjectReferenceManagedKubernetesRegions iterates over GET /v2/publicCloud/project/{projectId}/reference/managedKubernetes/region (List Kubernetes cluster regions),
+// one item at a time, fetching the next page only when the loop reaches it. On an error it
+// yields the error and stops. Collect, filter or stop early in the loop as needed.
+//
+// Returns the regions where a cluster can be created, with their availability zones and the plans
+// offered there.
+//
+// Arguments:
+//   - projectID: Project ID
+//
+// Requires the IAM action publicCloudProject:apiovh:reference/managedKubernetes/region/get.
+func (s *Service) AllProjectReferenceManagedKubernetesRegions(ctx context.Context, projectID string) iter.Seq2[*PublicCloudManagedKubernetesRegion, error] {
+	return ovh.Iterate[PublicCloudManagedKubernetesRegion](ctx, s.c, &ovh.Request{Operation: opListProjectReferenceManagedKubernetesRegions, Method: http.MethodGet, Path: ovh.Path("/v2/publicCloud/project/{projectId}/reference/managedKubernetes/region", "projectId", projectID)})
+}
+
 // opListProjectReferenceRancherPlans is AllProjectReferenceRancherPlans's entry in the operation registry (ovh.Operations).
-var opListProjectReferenceRancherPlans = &ovh.Operation{Name: "publiccloud.AllProjectReferenceRancherPlans", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/rancher/plan", Summary: "List managed Rancher plans", IAMActions: []string{"publicCloudProject:apiovh:reference/rancher/plan/get"}}
+var opListProjectReferenceRancherPlans = &ovh.Operation{Name: "publiccloud.AllProjectReferenceRancherPlans", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/rancher/plan", Summary: "List managed Rancher plans", IAMActions: []string{"publicCloudProject:apiovh:reference/rancher/plan/get"}, SchemasVersion: "1.0"}
 
 // AllProjectReferenceRancherPlans iterates over GET /v2/publicCloud/project/{projectId}/reference/rancher/plan (List managed Rancher plans),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -339,7 +441,7 @@ func (s *Service) AllProjectReferenceRancherPlans(ctx context.Context, projectID
 }
 
 // opListProjectReferenceRancherVersions is AllProjectReferenceRancherVersions's entry in the operation registry (ovh.Operations).
-var opListProjectReferenceRancherVersions = &ovh.Operation{Name: "publiccloud.AllProjectReferenceRancherVersions", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/rancher/version", Summary: "List managed Rancher versions", IAMActions: []string{"publicCloudProject:apiovh:reference/rancher/version/get"}}
+var opListProjectReferenceRancherVersions = &ovh.Operation{Name: "publiccloud.AllProjectReferenceRancherVersions", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/reference/rancher/version", Summary: "List managed Rancher versions", IAMActions: []string{"publicCloudProject:apiovh:reference/rancher/version/get"}, SchemasVersion: "1.0"}
 
 // AllProjectReferenceRancherVersions iterates over GET /v2/publicCloud/project/{projectId}/reference/rancher/version (List managed Rancher versions),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -357,7 +459,7 @@ func (s *Service) AllProjectReferenceRancherVersions(ctx context.Context, projec
 }
 
 // opListReferenceRancherPlans is AllReferenceRancherPlans's entry in the operation registry (ovh.Operations).
-var opListReferenceRancherPlans = &ovh.Operation{Name: "publiccloud.AllReferenceRancherPlans", Method: http.MethodGet, Path: "/v2/publicCloud/reference/rancher/plan", Summary: "List available plans for creating a managed Rancher service", Deprecated: true}
+var opListReferenceRancherPlans = &ovh.Operation{Name: "publiccloud.AllReferenceRancherPlans", Method: http.MethodGet, Path: "/v2/publicCloud/reference/rancher/plan", Summary: "List available plans for creating a managed Rancher service", Deprecated: true, SchemasVersion: "1.0"}
 
 // AllReferenceRancherPlans iterates over GET /v2/publicCloud/reference/rancher/plan (List available plans for creating a managed Rancher service),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -370,7 +472,7 @@ func (s *Service) AllReferenceRancherPlans(ctx context.Context) iter.Seq2[*Publi
 }
 
 // opListReferenceRancherVersions is AllReferenceRancherVersions's entry in the operation registry (ovh.Operations).
-var opListReferenceRancherVersions = &ovh.Operation{Name: "publiccloud.AllReferenceRancherVersions", Method: http.MethodGet, Path: "/v2/publicCloud/reference/rancher/version", Summary: "List available versions for creating a managed Rancher service", Deprecated: true}
+var opListReferenceRancherVersions = &ovh.Operation{Name: "publiccloud.AllReferenceRancherVersions", Method: http.MethodGet, Path: "/v2/publicCloud/reference/rancher/version", Summary: "List available versions for creating a managed Rancher service", Deprecated: true, SchemasVersion: "1.0"}
 
 // AllReferenceRancherVersions iterates over GET /v2/publicCloud/reference/rancher/version (List available versions for creating a managed Rancher service),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -383,5 +485,5 @@ func (s *Service) AllReferenceRancherVersions(ctx context.Context) iter.Seq2[*Pu
 }
 
 func init() {
-	ovh.RegisterOperations(opGetFlavor, opGetFlavors, opGetGatewayModels, opGetImage, opGetImages, opGetLoadBalancerFlavors, opGetObjectStorageReference, opGetProductAvailability, opGetProjectReferenceRancherEligibility, opGetShareTypes, opGetVolumeTypes, opListProjectReferenceRancherPlans, opListProjectReferenceRancherVersions, opListReferenceRancherPlans, opListReferenceRancherVersions)
+	ovh.RegisterOperations(opGetFlavor, opGetFlavors, opGetGatewayModels, opGetImage, opGetImages, opGetLoadBalancerFlavors, opGetObjectStorageReference, opGetProductAvailability, opGetProjectReferenceManagedKubernetesVersion, opGetProjectReferenceRancherEligibility, opGetRegistryPlans, opGetRegistryRegions, opGetShareTypes, opGetVolumeTypes, opListProjectReferenceManagedKubernetesFlavors, opListProjectReferenceManagedKubernetesPlans, opListProjectReferenceManagedKubernetesRegions, opListProjectReferenceRancherPlans, opListProjectReferenceRancherVersions, opListReferenceRancherPlans, opListReferenceRancherVersions)
 }

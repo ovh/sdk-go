@@ -15,7 +15,7 @@ import (
 )
 
 // opAdminCredentialsProjectRancher is AdminCredentialsProjectRancher's entry in the operation registry (ovh.Operations).
-var opAdminCredentialsProjectRancher = &ovh.Operation{Name: "publiccloud.AdminCredentialsProjectRancher", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/rancher/{rancherId}/adminCredentials", Summary: "Reset the admin password", IAMActions: []string{"publicCloudProject:apiovh:rancher/adminCredentials/reset"}}
+var opAdminCredentialsProjectRancher = &ovh.Operation{Name: "publiccloud.AdminCredentialsProjectRancher", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/rancher/{rancherId}/adminCredentials", Summary: "Reset the admin password", IAMActions: []string{"publicCloudProject:apiovh:rancher/adminCredentials/reset"}, SchemasVersion: "1.0"}
 
 // AdminCredentialsProjectRancher calls POST /v2/publicCloud/project/{projectId}/rancher/{rancherId}/adminCredentials: Reset the admin password
 //
@@ -29,7 +29,7 @@ func (s *Service) AdminCredentialsProjectRancher(ctx context.Context, projectID 
 }
 
 // opCreateProjectRancher is CreateProjectRancher's entry in the operation registry (ovh.Operations).
-var opCreateProjectRancher = &ovh.Operation{Name: "publiccloud.CreateProjectRancher", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/rancher", Summary: "Create a new managed Rancher service", IAMActions: []string{"publicCloudProject:apiovh:rancher/create"}}
+var opCreateProjectRancher = &ovh.Operation{Name: "publiccloud.CreateProjectRancher", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/rancher", Summary: "Create a new managed Rancher service", IAMActions: []string{"publicCloudProject:apiovh:rancher/create"}, SchemasVersion: "1.0"}
 
 // CreateProjectRancher calls POST /v2/publicCloud/project/{projectId}/rancher: Create a new managed Rancher service
 //
@@ -43,7 +43,7 @@ func (s *Service) CreateProjectRancher(ctx context.Context, projectID string, bo
 }
 
 // opDeleteProjectRancher is DeleteProjectRancher's entry in the operation registry (ovh.Operations).
-var opDeleteProjectRancher = &ovh.Operation{Name: "publiccloud.DeleteProjectRancher", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/rancher/{rancherId}", Summary: "Delete a managed Rancher service", IAMActions: []string{"publicCloudProject:apiovh:rancher/delete"}}
+var opDeleteProjectRancher = &ovh.Operation{Name: "publiccloud.DeleteProjectRancher", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/rancher/{rancherId}", Summary: "Delete a managed Rancher service", IAMActions: []string{"publicCloudProject:apiovh:rancher/delete"}, SchemasVersion: "1.0"}
 
 // DeleteProjectRancher calls DELETE /v2/publicCloud/project/{projectId}/rancher/{rancherId}: Delete a managed Rancher service
 //
@@ -57,7 +57,7 @@ func (s *Service) DeleteProjectRancher(ctx context.Context, projectID string, ra
 }
 
 // opGetProjectRancher is GetProjectRancher's entry in the operation registry (ovh.Operations).
-var opGetProjectRancher = &ovh.Operation{Name: "publiccloud.GetProjectRancher", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/rancher/{rancherId}", Summary: "Get a managed Rancher service", IAMActions: []string{"publicCloudProject:apiovh:rancher/get"}}
+var opGetProjectRancher = &ovh.Operation{Name: "publiccloud.GetProjectRancher", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/rancher/{rancherId}", Summary: "Get a managed Rancher service", IAMActions: []string{"publicCloudProject:apiovh:rancher/get"}, SchemasVersion: "1.0"}
 
 // GetProjectRancher calls GET /v2/publicCloud/project/{projectId}/rancher/{rancherId}: Get a managed Rancher service
 //
@@ -71,7 +71,7 @@ func (s *Service) GetProjectRancher(ctx context.Context, projectID string, ranch
 }
 
 // opGetProjectRancherTask is GetProjectRancherTask's entry in the operation registry (ovh.Operations).
-var opGetProjectRancherTask = &ovh.Operation{Name: "publiccloud.GetProjectRancherTask", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/rancher/{rancherId}/task/{taskId}", Summary: "Get a specific task related to the managed Rancher service", IAMActions: []string{"publicCloudProject:apiovh:rancher/task/get"}}
+var opGetProjectRancherTask = &ovh.Operation{Name: "publiccloud.GetProjectRancherTask", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/rancher/{rancherId}/task/{taskId}", Summary: "Get a specific task related to the managed Rancher service", IAMActions: []string{"publicCloudProject:apiovh:rancher/task/get"}, SchemasVersion: "1.0"}
 
 // GetProjectRancherTask calls GET /v2/publicCloud/project/{projectId}/rancher/{rancherId}/task/{taskId}: Get a specific task related to the managed Rancher service
 //
@@ -86,7 +86,7 @@ func (s *Service) GetProjectRancherTask(ctx context.Context, projectID string, r
 }
 
 // opListProjectRancherCapabilitiesPlans is AllProjectRancherCapabilitiesPlans's entry in the operation registry (ovh.Operations).
-var opListProjectRancherCapabilitiesPlans = &ovh.Operation{Name: "publiccloud.AllProjectRancherCapabilitiesPlans", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/rancher/{rancherId}/capabilities/plan", Summary: "List available and current plans for the given managed Rancher service", IAMActions: []string{"publicCloudProject:apiovh:rancher/capabilities/plan/get"}}
+var opListProjectRancherCapabilitiesPlans = &ovh.Operation{Name: "publiccloud.AllProjectRancherCapabilitiesPlans", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/rancher/{rancherId}/capabilities/plan", Summary: "List available and current plans for the given managed Rancher service", IAMActions: []string{"publicCloudProject:apiovh:rancher/capabilities/plan/get"}, SchemasVersion: "1.0"}
 
 // AllProjectRancherCapabilitiesPlans iterates over GET /v2/publicCloud/project/{projectId}/rancher/{rancherId}/capabilities/plan (List available and current plans for the given managed Rancher service),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -102,7 +102,7 @@ func (s *Service) AllProjectRancherCapabilitiesPlans(ctx context.Context, projec
 }
 
 // opListProjectRancherCapabilitiesVersions is AllProjectRancherCapabilitiesVersions's entry in the operation registry (ovh.Operations).
-var opListProjectRancherCapabilitiesVersions = &ovh.Operation{Name: "publiccloud.AllProjectRancherCapabilitiesVersions", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/rancher/{rancherId}/capabilities/version", Summary: "List available and current versions for the given managed Rancher service", IAMActions: []string{"publicCloudProject:apiovh:rancher/capabilities/version/get"}}
+var opListProjectRancherCapabilitiesVersions = &ovh.Operation{Name: "publiccloud.AllProjectRancherCapabilitiesVersions", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/rancher/{rancherId}/capabilities/version", Summary: "List available and current versions for the given managed Rancher service", IAMActions: []string{"publicCloudProject:apiovh:rancher/capabilities/version/get"}, SchemasVersion: "1.0"}
 
 // AllProjectRancherCapabilitiesVersions iterates over GET /v2/publicCloud/project/{projectId}/rancher/{rancherId}/capabilities/version (List available and current versions for the given managed Rancher service),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -118,7 +118,7 @@ func (s *Service) AllProjectRancherCapabilitiesVersions(ctx context.Context, pro
 }
 
 // opListProjectRancherEvents is AllProjectRancherEvents's entry in the operation registry (ovh.Operations).
-var opListProjectRancherEvents = &ovh.Operation{Name: "publiccloud.AllProjectRancherEvents", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/rancher/{rancherId}/event", Summary: "List all events related to the managed Rancher service", IAMActions: []string{"publicCloudProject:apiovh:rancher/event/get"}}
+var opListProjectRancherEvents = &ovh.Operation{Name: "publiccloud.AllProjectRancherEvents", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/rancher/{rancherId}/event", Summary: "List all events related to the managed Rancher service", IAMActions: []string{"publicCloudProject:apiovh:rancher/event/get"}, SchemasVersion: "1.0"}
 
 // AllProjectRancherEvents iterates over GET /v2/publicCloud/project/{projectId}/rancher/{rancherId}/event (List all events related to the managed Rancher service),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -134,7 +134,7 @@ func (s *Service) AllProjectRancherEvents(ctx context.Context, projectID string,
 }
 
 // opListProjectRancherTasks is AllProjectRancherTasks's entry in the operation registry (ovh.Operations).
-var opListProjectRancherTasks = &ovh.Operation{Name: "publiccloud.AllProjectRancherTasks", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/rancher/{rancherId}/task", Summary: "List all asynchronous operations related to the managed Rancher service", IAMActions: []string{"publicCloudProject:apiovh:rancher/task/get"}}
+var opListProjectRancherTasks = &ovh.Operation{Name: "publiccloud.AllProjectRancherTasks", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/rancher/{rancherId}/task", Summary: "List all asynchronous operations related to the managed Rancher service", IAMActions: []string{"publicCloudProject:apiovh:rancher/task/get"}, SchemasVersion: "1.0"}
 
 // AllProjectRancherTasks iterates over GET /v2/publicCloud/project/{projectId}/rancher/{rancherId}/task (List all asynchronous operations related to the managed Rancher service),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -150,7 +150,7 @@ func (s *Service) AllProjectRancherTasks(ctx context.Context, projectID string, 
 }
 
 // opListProjectRanchers is AllProjectRanchers's entry in the operation registry (ovh.Operations).
-var opListProjectRanchers = &ovh.Operation{Name: "publiccloud.AllProjectRanchers", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/rancher", Summary: "List managed Rancher services", IAMActions: []string{"publicCloudProject:apiovh:rancher/get"}}
+var opListProjectRanchers = &ovh.Operation{Name: "publiccloud.AllProjectRanchers", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/rancher", Summary: "List managed Rancher services", IAMActions: []string{"publicCloudProject:apiovh:rancher/get"}, SchemasVersion: "1.0"}
 
 // AllProjectRanchers iterates over GET /v2/publicCloud/project/{projectId}/rancher (List managed Rancher services),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -165,7 +165,7 @@ func (s *Service) AllProjectRanchers(ctx context.Context, projectID string) iter
 }
 
 // opUpdateProjectRancher is UpdateProjectRancher's entry in the operation registry (ovh.Operations).
-var opUpdateProjectRancher = &ovh.Operation{Name: "publiccloud.UpdateProjectRancher", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/rancher/{rancherId}", Summary: "Update an existing managed Rancher service", IAMActions: []string{"publicCloudProject:apiovh:rancher/edit"}}
+var opUpdateProjectRancher = &ovh.Operation{Name: "publiccloud.UpdateProjectRancher", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/rancher/{rancherId}", Summary: "Update an existing managed Rancher service", IAMActions: []string{"publicCloudProject:apiovh:rancher/edit"}, SchemasVersion: "1.0"}
 
 // UpdateProjectRancher calls PUT /v2/publicCloud/project/{projectId}/rancher/{rancherId}: Update an existing managed Rancher service
 //

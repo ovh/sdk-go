@@ -15,7 +15,7 @@ import (
 )
 
 // opCreateResourceServiceKey is CreateResourceServiceKey's entry in the operation registry (ovh.Operations).
-var opCreateResourceServiceKey = &ovh.Operation{Name: "okms.CreateResourceServiceKey", Method: http.MethodPost, Path: "/v2/okms/resource/{okmsId}/serviceKey", Summary: "Create or import a service key", IAMActions: []string{"okms:apiovh:serviceKey/create"}}
+var opCreateResourceServiceKey = &ovh.Operation{Name: "okms.CreateResourceServiceKey", Method: http.MethodPost, Path: "/v2/okms/resource/{okmsId}/serviceKey", Summary: "Create or import a service key", IAMActions: []string{"okms:apiovh:serviceKey/create"}, SchemasVersion: "1.0"}
 
 // CreateResourceServiceKey calls POST /v2/okms/resource/{okmsId}/serviceKey: Create or import a service key
 //
@@ -40,7 +40,7 @@ func (s *Service) CreateResourceServiceKey(ctx context.Context, okmsID string, b
 }
 
 // opDeleteResourceServiceKey is DeleteResourceServiceKey's entry in the operation registry (ovh.Operations).
-var opDeleteResourceServiceKey = &ovh.Operation{Name: "okms.DeleteResourceServiceKey", Method: http.MethodDelete, Path: "/v2/okms/resource/{okmsId}/serviceKey/{keyId}", Summary: "Delete a service key", IAMActions: []string{"okms:apiovh:serviceKey/delete"}}
+var opDeleteResourceServiceKey = &ovh.Operation{Name: "okms.DeleteResourceServiceKey", Method: http.MethodDelete, Path: "/v2/okms/resource/{okmsId}/serviceKey/{keyId}", Summary: "Delete a service key", IAMActions: []string{"okms:apiovh:serviceKey/delete"}, SchemasVersion: "1.0"}
 
 // DeleteResourceServiceKeyParams holds the optional parameters of DeleteResourceServiceKey.
 type DeleteResourceServiceKeyParams struct {
@@ -65,7 +65,7 @@ func (s *Service) DeleteResourceServiceKey(ctx context.Context, okmsID string, k
 }
 
 // opGetResourceServiceKey is GetResourceServiceKey's entry in the operation registry (ovh.Operations).
-var opGetResourceServiceKey = &ovh.Operation{Name: "okms.GetResourceServiceKey", Method: http.MethodGet, Path: "/v2/okms/resource/{okmsId}/serviceKey/{keyId}", Summary: "Get a service key", IAMActions: []string{"okms:apiovh:serviceKey/get"}}
+var opGetResourceServiceKey = &ovh.Operation{Name: "okms.GetResourceServiceKey", Method: http.MethodGet, Path: "/v2/okms/resource/{okmsId}/serviceKey/{keyId}", Summary: "Get a service key", IAMActions: []string{"okms:apiovh:serviceKey/get"}, SchemasVersion: "1.0"}
 
 // GetResourceServiceKeyParams holds the optional parameters of GetResourceServiceKey.
 type GetResourceServiceKeyParams struct {
@@ -88,7 +88,7 @@ func (s *Service) GetResourceServiceKey(ctx context.Context, okmsID string, keyI
 }
 
 // opListResourceServiceKeys is AllResourceServiceKeys's entry in the operation registry (ovh.Operations).
-var opListResourceServiceKeys = &ovh.Operation{Name: "okms.AllResourceServiceKeys", Method: http.MethodGet, Path: "/v2/okms/resource/{okmsId}/serviceKey", Summary: "List service keys", IAMActions: []string{"okms:apiovh:serviceKey/get"}}
+var opListResourceServiceKeys = &ovh.Operation{Name: "okms.AllResourceServiceKeys", Method: http.MethodGet, Path: "/v2/okms/resource/{okmsId}/serviceKey", Summary: "List service keys", IAMActions: []string{"okms:apiovh:serviceKey/get"}, SchemasVersion: "1.0"}
 
 // ListResourceServiceKeysParams holds the optional parameters of ListResourceServiceKeys.
 type ListResourceServiceKeysParams struct {
@@ -111,7 +111,7 @@ func (s *Service) AllResourceServiceKeys(ctx context.Context, okmsID string, par
 }
 
 // opUpdateResourceServiceKey is UpdateResourceServiceKey's entry in the operation registry (ovh.Operations).
-var opUpdateResourceServiceKey = &ovh.Operation{Name: "okms.UpdateResourceServiceKey", Method: http.MethodPut, Path: "/v2/okms/resource/{okmsId}/serviceKey/{keyId}", Summary: "Update a service key", IAMActions: []string{"okms:apiovh:serviceKey/update"}}
+var opUpdateResourceServiceKey = &ovh.Operation{Name: "okms.UpdateResourceServiceKey", Method: http.MethodPut, Path: "/v2/okms/resource/{okmsId}/serviceKey/{keyId}", Summary: "Update a service key", IAMActions: []string{"okms:apiovh:serviceKey/update"}, SchemasVersion: "1.0"}
 
 // UpdateResourceServiceKey calls PUT /v2/okms/resource/{okmsId}/serviceKey/{keyId}: Update a service key
 //

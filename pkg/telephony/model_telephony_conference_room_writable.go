@@ -28,6 +28,8 @@ type TelephonyConferenceRoomWritable struct {
 	Pin *string `json:"pin,omitempty"`
 	// Whether conference is recorded
 	RecordStatus *bool `json:"recordStatus,omitempty"`
+	// AI generated content (summary and/or transcript) appended to the conference report mail. Requires recordStatus and a reportStatus other than none; set it back to none before disabling them
+	ReportAiContent *TelephonyConferenceReportAiContentEnum `json:"reportAiContent,omitempty"`
 	// The email address to send conference report to
 	ReportEmail *string `json:"reportEmail,omitempty"`
 	// The status of the reporting

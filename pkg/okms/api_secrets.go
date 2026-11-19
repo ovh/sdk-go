@@ -15,7 +15,7 @@ import (
 )
 
 // opCreateResourceSecret is CreateResourceSecret's entry in the operation registry (ovh.Operations).
-var opCreateResourceSecret = &ovh.Operation{Name: "okms.CreateResourceSecret", Method: http.MethodPost, Path: "/v2/okms/resource/{okmsId}/secret", Summary: "Create a secret", IAMActions: []string{"okms:apiovh:secret/create"}}
+var opCreateResourceSecret = &ovh.Operation{Name: "okms.CreateResourceSecret", Method: http.MethodPost, Path: "/v2/okms/resource/{okmsId}/secret", Summary: "Create a secret", IAMActions: []string{"okms:apiovh:secret/create"}, SchemasVersion: "1.0"}
 
 // CreateResourceSecret calls POST /v2/okms/resource/{okmsId}/secret: Create a secret
 //
@@ -32,7 +32,7 @@ func (s *Service) CreateResourceSecret(ctx context.Context, okmsID string, body 
 }
 
 // opCreateResourceSecretVersion is CreateResourceSecretVersion's entry in the operation registry (ovh.Operations).
-var opCreateResourceSecretVersion = &ovh.Operation{Name: "okms.CreateResourceSecretVersion", Method: http.MethodPost, Path: "/v2/okms/resource/{okmsId}/secret/{path}/version", Summary: "Create a secret version", IAMActions: []string{"okms:apiovh:secret/version/create"}}
+var opCreateResourceSecretVersion = &ovh.Operation{Name: "okms.CreateResourceSecretVersion", Method: http.MethodPost, Path: "/v2/okms/resource/{okmsId}/secret/{path}/version", Summary: "Create a secret version", IAMActions: []string{"okms:apiovh:secret/version/create"}, SchemasVersion: "1.0"}
 
 // CreateResourceSecretVersionParams holds the optional parameters of CreateResourceSecretVersion.
 type CreateResourceSecretVersionParams struct {
@@ -56,7 +56,7 @@ func (s *Service) CreateResourceSecretVersion(ctx context.Context, okmsID string
 }
 
 // opDeleteResourceSecret is DeleteResourceSecret's entry in the operation registry (ovh.Operations).
-var opDeleteResourceSecret = &ovh.Operation{Name: "okms.DeleteResourceSecret", Method: http.MethodDelete, Path: "/v2/okms/resource/{okmsId}/secret/{path}", Summary: "Delete a secret", IAMActions: []string{"okms:apiovh:secret/delete"}}
+var opDeleteResourceSecret = &ovh.Operation{Name: "okms.DeleteResourceSecret", Method: http.MethodDelete, Path: "/v2/okms/resource/{okmsId}/secret/{path}", Summary: "Delete a secret", IAMActions: []string{"okms:apiovh:secret/delete"}, SchemasVersion: "1.0"}
 
 // DeleteResourceSecret calls DELETE /v2/okms/resource/{okmsId}/secret/{path}: Delete a secret
 //
@@ -72,7 +72,7 @@ func (s *Service) DeleteResourceSecret(ctx context.Context, okmsID string, path 
 }
 
 // opGetResourceSecret is GetResourceSecret's entry in the operation registry (ovh.Operations).
-var opGetResourceSecret = &ovh.Operation{Name: "okms.GetResourceSecret", Method: http.MethodGet, Path: "/v2/okms/resource/{okmsId}/secret/{path}", Summary: "Get a secret", IAMActions: []string{"okms:apiovh:secret/get"}}
+var opGetResourceSecret = &ovh.Operation{Name: "okms.GetResourceSecret", Method: http.MethodGet, Path: "/v2/okms/resource/{okmsId}/secret/{path}", Summary: "Get a secret", IAMActions: []string{"okms:apiovh:secret/get"}, SchemasVersion: "1.0"}
 
 // GetResourceSecretParams holds the optional parameters of GetResourceSecret.
 type GetResourceSecretParams struct {
@@ -99,7 +99,7 @@ func (s *Service) GetResourceSecret(ctx context.Context, okmsID string, path str
 }
 
 // opGetResourceSecretConfig is GetResourceSecretConfig's entry in the operation registry (ovh.Operations).
-var opGetResourceSecretConfig = &ovh.Operation{Name: "okms.GetResourceSecretConfig", Method: http.MethodGet, Path: "/v2/okms/resource/{okmsId}/secretConfig", Summary: "Get the secret configuration", IAMActions: []string{"okms:apiovh:secretConfig/get"}}
+var opGetResourceSecretConfig = &ovh.Operation{Name: "okms.GetResourceSecretConfig", Method: http.MethodGet, Path: "/v2/okms/resource/{okmsId}/secretConfig", Summary: "Get the secret configuration", IAMActions: []string{"okms:apiovh:secretConfig/get"}, SchemasVersion: "1.0"}
 
 // GetResourceSecretConfig calls GET /v2/okms/resource/{okmsId}/secretConfig: Get the secret configuration
 //
@@ -115,7 +115,7 @@ func (s *Service) GetResourceSecretConfig(ctx context.Context, okmsID string) (*
 }
 
 // opGetResourceSecretVersion is GetResourceSecretVersion's entry in the operation registry (ovh.Operations).
-var opGetResourceSecretVersion = &ovh.Operation{Name: "okms.GetResourceSecretVersion", Method: http.MethodGet, Path: "/v2/okms/resource/{okmsId}/secret/{path}/version/{version}", Summary: "Get a secret version", IAMActions: []string{"okms:apiovh:secret/get"}}
+var opGetResourceSecretVersion = &ovh.Operation{Name: "okms.GetResourceSecretVersion", Method: http.MethodGet, Path: "/v2/okms/resource/{okmsId}/secret/{path}/version/{version}", Summary: "Get a secret version", IAMActions: []string{"okms:apiovh:secret/get"}, SchemasVersion: "1.0"}
 
 // GetResourceSecretVersionParams holds the optional parameters of GetResourceSecretVersion.
 type GetResourceSecretVersionParams struct {
@@ -140,7 +140,7 @@ func (s *Service) GetResourceSecretVersion(ctx context.Context, okmsID string, p
 }
 
 // opListResourceSecretVersions is AllResourceSecretVersions's entry in the operation registry (ovh.Operations).
-var opListResourceSecretVersions = &ovh.Operation{Name: "okms.AllResourceSecretVersions", Method: http.MethodGet, Path: "/v2/okms/resource/{okmsId}/secret/{path}/version", Summary: "List secret versions", IAMActions: []string{"okms:apiovh:secret/get"}}
+var opListResourceSecretVersions = &ovh.Operation{Name: "okms.AllResourceSecretVersions", Method: http.MethodGet, Path: "/v2/okms/resource/{okmsId}/secret/{path}/version", Summary: "List secret versions", IAMActions: []string{"okms:apiovh:secret/get"}, SchemasVersion: "1.0"}
 
 // AllResourceSecretVersions iterates over GET /v2/okms/resource/{okmsId}/secret/{path}/version (List secret versions),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -158,7 +158,7 @@ func (s *Service) AllResourceSecretVersions(ctx context.Context, okmsID string, 
 }
 
 // opListResourceSecrets is AllResourceSecrets's entry in the operation registry (ovh.Operations).
-var opListResourceSecrets = &ovh.Operation{Name: "okms.AllResourceSecrets", Method: http.MethodGet, Path: "/v2/okms/resource/{okmsId}/secret", Summary: "List secrets", IAMActions: []string{"okms:apiovh:secret/get"}}
+var opListResourceSecrets = &ovh.Operation{Name: "okms.AllResourceSecrets", Method: http.MethodGet, Path: "/v2/okms/resource/{okmsId}/secret", Summary: "List secrets", IAMActions: []string{"okms:apiovh:secret/get"}, SchemasVersion: "1.0"}
 
 // ListResourceSecretsParams holds the optional parameters of ListResourceSecrets.
 type ListResourceSecretsParams struct {
@@ -182,7 +182,7 @@ func (s *Service) AllResourceSecrets(ctx context.Context, okmsID string, params 
 }
 
 // opUpdateResourceSecret is UpdateResourceSecret's entry in the operation registry (ovh.Operations).
-var opUpdateResourceSecret = &ovh.Operation{Name: "okms.UpdateResourceSecret", Method: http.MethodPut, Path: "/v2/okms/resource/{okmsId}/secret/{path}", Summary: "Update a secret", IAMActions: []string{"okms:apiovh:secret/edit"}}
+var opUpdateResourceSecret = &ovh.Operation{Name: "okms.UpdateResourceSecret", Method: http.MethodPut, Path: "/v2/okms/resource/{okmsId}/secret/{path}", Summary: "Update a secret", IAMActions: []string{"okms:apiovh:secret/edit"}, SchemasVersion: "1.0"}
 
 // UpdateResourceSecretParams holds the optional parameters of UpdateResourceSecret.
 type UpdateResourceSecretParams struct {
@@ -208,7 +208,7 @@ func (s *Service) UpdateResourceSecret(ctx context.Context, okmsID string, path 
 }
 
 // opUpdateResourceSecretConfig is UpdateResourceSecretConfig's entry in the operation registry (ovh.Operations).
-var opUpdateResourceSecretConfig = &ovh.Operation{Name: "okms.UpdateResourceSecretConfig", Method: http.MethodPut, Path: "/v2/okms/resource/{okmsId}/secretConfig", Summary: "Update the secret configuration", IAMActions: []string{"okms:apiovh:secretConfig/update"}}
+var opUpdateResourceSecretConfig = &ovh.Operation{Name: "okms.UpdateResourceSecretConfig", Method: http.MethodPut, Path: "/v2/okms/resource/{okmsId}/secretConfig", Summary: "Update the secret configuration", IAMActions: []string{"okms:apiovh:secretConfig/update"}, SchemasVersion: "1.0"}
 
 // UpdateResourceSecretConfig calls PUT /v2/okms/resource/{okmsId}/secretConfig: Update the secret configuration
 //
@@ -225,7 +225,7 @@ func (s *Service) UpdateResourceSecretConfig(ctx context.Context, okmsID string,
 }
 
 // opUpdateResourceSecretVersion is UpdateResourceSecretVersion's entry in the operation registry (ovh.Operations).
-var opUpdateResourceSecretVersion = &ovh.Operation{Name: "okms.UpdateResourceSecretVersion", Method: http.MethodPut, Path: "/v2/okms/resource/{okmsId}/secret/{path}/version/{version}", Summary: "Update the state of a secret version", IAMActions: []string{"okms:apiovh:secret/version/edit"}}
+var opUpdateResourceSecretVersion = &ovh.Operation{Name: "okms.UpdateResourceSecretVersion", Method: http.MethodPut, Path: "/v2/okms/resource/{okmsId}/secret/{path}/version/{version}", Summary: "Update the state of a secret version", IAMActions: []string{"okms:apiovh:secret/version/edit"}, SchemasVersion: "1.0"}
 
 // UpdateResourceSecretVersion calls PUT /v2/okms/resource/{okmsId}/secret/{path}/version/{version}: Update the state of a secret version
 //

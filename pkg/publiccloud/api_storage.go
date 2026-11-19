@@ -15,7 +15,7 @@ import (
 )
 
 // opCreateBucket is CreateBucket's entry in the operation registry (ovh.Operations).
-var opCreateBucket = &ovh.Operation{Name: "publiccloud.CreateBucket", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/storage/object/bucket", Summary: "Create a bucket", IAMActions: []string{"publicCloudProject:apiovh:bucket/create"}}
+var opCreateBucket = &ovh.Operation{Name: "publiccloud.CreateBucket", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/storage/object/bucket", Summary: "Create a bucket", IAMActions: []string{"publicCloudProject:apiovh:bucket/create"}, SchemasVersion: "1.0"}
 
 // CreateBucket calls POST /v2/publicCloud/project/{projectId}/storage/object/bucket: Create a bucket
 //
@@ -32,7 +32,7 @@ func (s *Service) CreateBucket(ctx context.Context, projectID string, body Publi
 }
 
 // opCreateShare is CreateShare's entry in the operation registry (ovh.Operations).
-var opCreateShare = &ovh.Operation{Name: "publiccloud.CreateShare", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/storage/file/share", Summary: "Create a file storage", IAMActions: []string{"publicCloudProject:apiovh:share/create"}}
+var opCreateShare = &ovh.Operation{Name: "publiccloud.CreateShare", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/storage/file/share", Summary: "Create a file storage", IAMActions: []string{"publicCloudProject:apiovh:share/create"}, SchemasVersion: "1.0"}
 
 // CreateShare calls POST /v2/publicCloud/project/{projectId}/storage/file/share: Create a file storage
 //
@@ -64,7 +64,7 @@ func (s *Service) CreateShare(ctx context.Context, projectID string, body Public
 }
 
 // opCreateShareACL is CreateShareACL's entry in the operation registry (ovh.Operations).
-var opCreateShareACL = &ovh.Operation{Name: "publiccloud.CreateShareACL", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/storage/file/share/{fileStorageId}/acl", Summary: "Create an ACL", IAMActions: []string{"publicCloudProject:apiovh:share/acl/create"}}
+var opCreateShareACL = &ovh.Operation{Name: "publiccloud.CreateShareACL", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/storage/file/share/{fileStorageId}/acl", Summary: "Create an ACL", IAMActions: []string{"publicCloudProject:apiovh:share/acl/create"}, SchemasVersion: "1.0"}
 
 // CreateShareACL calls POST /v2/publicCloud/project/{projectId}/storage/file/share/{fileStorageId}/acl: Create an ACL
 //
@@ -81,7 +81,7 @@ func (s *Service) CreateShareACL(ctx context.Context, projectID string, fileStor
 }
 
 // opCreateShareNetwork is CreateShareNetwork's entry in the operation registry (ovh.Operations).
-var opCreateShareNetwork = &ovh.Operation{Name: "publiccloud.CreateShareNetwork", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/storage/file/network", Summary: "Create a share network", IAMActions: []string{"publicCloudProject:apiovh:storage/file/network/create"}}
+var opCreateShareNetwork = &ovh.Operation{Name: "publiccloud.CreateShareNetwork", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/storage/file/network", Summary: "Create a share network", IAMActions: []string{"publicCloudProject:apiovh:storage/file/network/create"}, SchemasVersion: "1.0"}
 
 // CreateShareNetwork calls POST /v2/publicCloud/project/{projectId}/storage/file/network: Create a share network
 //
@@ -98,7 +98,7 @@ func (s *Service) CreateShareNetwork(ctx context.Context, projectID string, body
 }
 
 // opCreateShareSnapshot is CreateShareSnapshot's entry in the operation registry (ovh.Operations).
-var opCreateShareSnapshot = &ovh.Operation{Name: "publiccloud.CreateShareSnapshot", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/storage/file/snapshot", Summary: "Create a snapshot", IAMActions: []string{"publicCloudProject:apiovh:storage/file/snapshot/create"}}
+var opCreateShareSnapshot = &ovh.Operation{Name: "publiccloud.CreateShareSnapshot", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/storage/file/snapshot", Summary: "Create a snapshot", IAMActions: []string{"publicCloudProject:apiovh:storage/file/snapshot/create"}, SchemasVersion: "1.0"}
 
 // CreateShareSnapshot calls POST /v2/publicCloud/project/{projectId}/storage/file/snapshot: Create a snapshot
 //
@@ -114,7 +114,7 @@ func (s *Service) CreateShareSnapshot(ctx context.Context, projectID string, bod
 }
 
 // opCreateSwiftContainer is CreateSwiftContainer's entry in the operation registry (ovh.Operations).
-var opCreateSwiftContainer = &ovh.Operation{Name: "publiccloud.CreateSwiftContainer", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/storage/swift/container", Summary: "Create a container", IAMActions: []string{"publicCloudProject:apiovh:storage/swift/container/create"}}
+var opCreateSwiftContainer = &ovh.Operation{Name: "publiccloud.CreateSwiftContainer", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/storage/swift/container", Summary: "Create a container", IAMActions: []string{"publicCloudProject:apiovh:storage/swift/container/create"}, SchemasVersion: "1.0"}
 
 // CreateSwiftContainer calls POST /v2/publicCloud/project/{projectId}/storage/swift/container: Create a container
 //
@@ -131,7 +131,7 @@ func (s *Service) CreateSwiftContainer(ctx context.Context, projectID string, bo
 }
 
 // opCreateSwiftContainerPresignedURL is CreateSwiftContainerPresignedURL's entry in the operation registry (ovh.Operations).
-var opCreateSwiftContainerPresignedURL = &ovh.Operation{Name: "publiccloud.CreateSwiftContainerPresignedURL", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/storage/swift/container/{containerId}/presign", Summary: "Create a presigned URL", IAMActions: []string{"publicCloudProject:apiovh:storage/swift/container/presign/create"}}
+var opCreateSwiftContainerPresignedURL = &ovh.Operation{Name: "publiccloud.CreateSwiftContainerPresignedURL", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/storage/swift/container/{containerId}/presign", Summary: "Create a presigned URL", IAMActions: []string{"publicCloudProject:apiovh:storage/swift/container/presign/create"}, SchemasVersion: "1.0"}
 
 // CreateSwiftContainerPresignedURL calls POST /v2/publicCloud/project/{projectId}/storage/swift/container/{containerId}/presign: Create a presigned URL
 //
@@ -149,7 +149,7 @@ func (s *Service) CreateSwiftContainerPresignedURL(ctx context.Context, projectI
 }
 
 // opCreateVolume is CreateVolume's entry in the operation registry (ovh.Operations).
-var opCreateVolume = &ovh.Operation{Name: "publiccloud.CreateVolume", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/storage/block/volume", Summary: "Create a volume", IAMActions: []string{"publicCloudProject:apiovh:volume/create"}}
+var opCreateVolume = &ovh.Operation{Name: "publiccloud.CreateVolume", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/storage/block/volume", Summary: "Create a volume", IAMActions: []string{"publicCloudProject:apiovh:volume/create"}, SchemasVersion: "1.0"}
 
 // CreateVolume calls POST /v2/publicCloud/project/{projectId}/storage/block/volume: Create a volume
 //
@@ -167,7 +167,7 @@ func (s *Service) CreateVolume(ctx context.Context, projectID string, body Publi
 }
 
 // opCreateVolumeBackup is CreateVolumeBackup's entry in the operation registry (ovh.Operations).
-var opCreateVolumeBackup = &ovh.Operation{Name: "publiccloud.CreateVolumeBackup", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/storage/block/backup", Summary: "Create a backup", IAMActions: []string{"publicCloudProject:apiovh:volume/backup/create"}}
+var opCreateVolumeBackup = &ovh.Operation{Name: "publiccloud.CreateVolumeBackup", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/storage/block/backup", Summary: "Create a backup", IAMActions: []string{"publicCloudProject:apiovh:volume/backup/create"}, SchemasVersion: "1.0"}
 
 // CreateVolumeBackup calls POST /v2/publicCloud/project/{projectId}/storage/block/backup: Create a backup
 //
@@ -183,7 +183,7 @@ func (s *Service) CreateVolumeBackup(ctx context.Context, projectID string, body
 }
 
 // opCreateVolumeSnapshot is CreateVolumeSnapshot's entry in the operation registry (ovh.Operations).
-var opCreateVolumeSnapshot = &ovh.Operation{Name: "publiccloud.CreateVolumeSnapshot", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/storage/block/snapshot", Summary: "Create a snapshot", IAMActions: []string{"publicCloudProject:apiovh:volume/snapshot/create"}}
+var opCreateVolumeSnapshot = &ovh.Operation{Name: "publiccloud.CreateVolumeSnapshot", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/storage/block/snapshot", Summary: "Create a snapshot", IAMActions: []string{"publicCloudProject:apiovh:volume/snapshot/create"}, SchemasVersion: "1.0"}
 
 // CreateVolumeSnapshot calls POST /v2/publicCloud/project/{projectId}/storage/block/snapshot: Create a snapshot
 //
@@ -199,7 +199,7 @@ func (s *Service) CreateVolumeSnapshot(ctx context.Context, projectID string, bo
 }
 
 // opDeleteBucket is DeleteBucket's entry in the operation registry (ovh.Operations).
-var opDeleteBucket = &ovh.Operation{Name: "publiccloud.DeleteBucket", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/storage/object/bucket/{bucketName}", Summary: "Delete a bucket", IAMActions: []string{"publicCloudProject:apiovh:bucket/delete"}}
+var opDeleteBucket = &ovh.Operation{Name: "publiccloud.DeleteBucket", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/storage/object/bucket/{bucketName}", Summary: "Delete a bucket", IAMActions: []string{"publicCloudProject:apiovh:bucket/delete"}, SchemasVersion: "1.0"}
 
 // DeleteBucket calls DELETE /v2/publicCloud/project/{projectId}/storage/object/bucket/{bucketName}: Delete a bucket
 //
@@ -215,7 +215,7 @@ func (s *Service) DeleteBucket(ctx context.Context, projectID string, bucketName
 }
 
 // opDeleteShare is DeleteShare's entry in the operation registry (ovh.Operations).
-var opDeleteShare = &ovh.Operation{Name: "publiccloud.DeleteShare", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/storage/file/share/{fileStorageId}", Summary: "Delete a file storage", IAMActions: []string{"publicCloudProject:apiovh:share/delete"}}
+var opDeleteShare = &ovh.Operation{Name: "publiccloud.DeleteShare", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/storage/file/share/{fileStorageId}", Summary: "Delete a file storage", IAMActions: []string{"publicCloudProject:apiovh:share/delete"}, SchemasVersion: "1.0"}
 
 // DeleteShare calls DELETE /v2/publicCloud/project/{projectId}/storage/file/share/{fileStorageId}: Delete a file storage
 //
@@ -232,7 +232,7 @@ func (s *Service) DeleteShare(ctx context.Context, projectID string, fileStorage
 }
 
 // opDeleteShareACL is DeleteShareACL's entry in the operation registry (ovh.Operations).
-var opDeleteShareACL = &ovh.Operation{Name: "publiccloud.DeleteShareACL", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/storage/file/share/{fileStorageId}/acl/{aclId}", Summary: "Delete an ACL", IAMActions: []string{"publicCloudProject:apiovh:share/acl/delete"}}
+var opDeleteShareACL = &ovh.Operation{Name: "publiccloud.DeleteShareACL", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/storage/file/share/{fileStorageId}/acl/{aclId}", Summary: "Delete an ACL", IAMActions: []string{"publicCloudProject:apiovh:share/acl/delete"}, SchemasVersion: "1.0"}
 
 // DeleteShareACL calls DELETE /v2/publicCloud/project/{projectId}/storage/file/share/{fileStorageId}/acl/{aclId}: Delete an ACL
 //
@@ -249,7 +249,7 @@ func (s *Service) DeleteShareACL(ctx context.Context, projectID string, fileStor
 }
 
 // opDeleteShareNetwork is DeleteShareNetwork's entry in the operation registry (ovh.Operations).
-var opDeleteShareNetwork = &ovh.Operation{Name: "publiccloud.DeleteShareNetwork", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/storage/file/network/{networkId}", Summary: "Delete a share network", IAMActions: []string{"publicCloudProject:apiovh:storage/file/network/delete"}}
+var opDeleteShareNetwork = &ovh.Operation{Name: "publiccloud.DeleteShareNetwork", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/storage/file/network/{networkId}", Summary: "Delete a share network", IAMActions: []string{"publicCloudProject:apiovh:storage/file/network/delete"}, SchemasVersion: "1.0"}
 
 // DeleteShareNetwork calls DELETE /v2/publicCloud/project/{projectId}/storage/file/network/{networkId}: Delete a share network
 //
@@ -265,7 +265,7 @@ func (s *Service) DeleteShareNetwork(ctx context.Context, projectID string, netw
 }
 
 // opDeleteShareSnapshot is DeleteShareSnapshot's entry in the operation registry (ovh.Operations).
-var opDeleteShareSnapshot = &ovh.Operation{Name: "publiccloud.DeleteShareSnapshot", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/storage/file/snapshot/{snapshotId}", Summary: "Delete a snapshot", IAMActions: []string{"publicCloudProject:apiovh:storage/file/snapshot/delete"}}
+var opDeleteShareSnapshot = &ovh.Operation{Name: "publiccloud.DeleteShareSnapshot", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/storage/file/snapshot/{snapshotId}", Summary: "Delete a snapshot", IAMActions: []string{"publicCloudProject:apiovh:storage/file/snapshot/delete"}, SchemasVersion: "1.0"}
 
 // DeleteShareSnapshot calls DELETE /v2/publicCloud/project/{projectId}/storage/file/snapshot/{snapshotId}: Delete a snapshot
 //
@@ -281,7 +281,7 @@ func (s *Service) DeleteShareSnapshot(ctx context.Context, projectID string, sna
 }
 
 // opDeleteSwiftContainer is DeleteSwiftContainer's entry in the operation registry (ovh.Operations).
-var opDeleteSwiftContainer = &ovh.Operation{Name: "publiccloud.DeleteSwiftContainer", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/storage/swift/container/{containerId}", Summary: "Delete a container", IAMActions: []string{"publicCloudProject:apiovh:storage/swift/container/delete"}}
+var opDeleteSwiftContainer = &ovh.Operation{Name: "publiccloud.DeleteSwiftContainer", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/storage/swift/container/{containerId}", Summary: "Delete a container", IAMActions: []string{"publicCloudProject:apiovh:storage/swift/container/delete"}, SchemasVersion: "1.0"}
 
 // DeleteSwiftContainer calls DELETE /v2/publicCloud/project/{projectId}/storage/swift/container/{containerId}: Delete a container
 //
@@ -298,7 +298,7 @@ func (s *Service) DeleteSwiftContainer(ctx context.Context, projectID string, co
 }
 
 // opDeleteSwiftObject is DeleteSwiftObject's entry in the operation registry (ovh.Operations).
-var opDeleteSwiftObject = &ovh.Operation{Name: "publiccloud.DeleteSwiftObject", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/storage/swift/container/{containerId}/object/{key}", Summary: "Delete an object", IAMActions: []string{"publicCloudProject:apiovh:storage/swift/container/object/delete"}}
+var opDeleteSwiftObject = &ovh.Operation{Name: "publiccloud.DeleteSwiftObject", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/storage/swift/container/{containerId}/object/{key}", Summary: "Delete an object", IAMActions: []string{"publicCloudProject:apiovh:storage/swift/container/object/delete"}, SchemasVersion: "1.0"}
 
 // DeleteSwiftObject calls DELETE /v2/publicCloud/project/{projectId}/storage/swift/container/{containerId}/object/{key}: Delete an object
 //
@@ -315,7 +315,7 @@ func (s *Service) DeleteSwiftObject(ctx context.Context, projectID string, conta
 }
 
 // opDeleteVolume is DeleteVolume's entry in the operation registry (ovh.Operations).
-var opDeleteVolume = &ovh.Operation{Name: "publiccloud.DeleteVolume", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/storage/block/volume/{id}", Summary: "Delete a volume", IAMActions: []string{"publicCloudProject:apiovh:volume/delete"}}
+var opDeleteVolume = &ovh.Operation{Name: "publiccloud.DeleteVolume", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/storage/block/volume/{id}", Summary: "Delete a volume", IAMActions: []string{"publicCloudProject:apiovh:volume/delete"}, SchemasVersion: "1.0"}
 
 // DeleteVolume calls DELETE /v2/publicCloud/project/{projectId}/storage/block/volume/{id}: Delete a volume
 //
@@ -331,7 +331,7 @@ func (s *Service) DeleteVolume(ctx context.Context, projectID string, id string)
 }
 
 // opDeleteVolumeBackup is DeleteVolumeBackup's entry in the operation registry (ovh.Operations).
-var opDeleteVolumeBackup = &ovh.Operation{Name: "publiccloud.DeleteVolumeBackup", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/storage/block/backup/{id}", Summary: "Delete a backup", IAMActions: []string{"publicCloudProject:apiovh:volume/backup/delete"}}
+var opDeleteVolumeBackup = &ovh.Operation{Name: "publiccloud.DeleteVolumeBackup", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/storage/block/backup/{id}", Summary: "Delete a backup", IAMActions: []string{"publicCloudProject:apiovh:volume/backup/delete"}, SchemasVersion: "1.0"}
 
 // DeleteVolumeBackup calls DELETE /v2/publicCloud/project/{projectId}/storage/block/backup/{id}: Delete a backup
 //
@@ -347,7 +347,7 @@ func (s *Service) DeleteVolumeBackup(ctx context.Context, projectID string, id s
 }
 
 // opDeleteVolumeSnapshot is DeleteVolumeSnapshot's entry in the operation registry (ovh.Operations).
-var opDeleteVolumeSnapshot = &ovh.Operation{Name: "publiccloud.DeleteVolumeSnapshot", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/storage/block/snapshot/{id}", Summary: "Delete a snapshot", IAMActions: []string{"publicCloudProject:apiovh:volume/snapshot/delete"}}
+var opDeleteVolumeSnapshot = &ovh.Operation{Name: "publiccloud.DeleteVolumeSnapshot", Method: http.MethodDelete, Path: "/v2/publicCloud/project/{projectId}/storage/block/snapshot/{id}", Summary: "Delete a snapshot", IAMActions: []string{"publicCloudProject:apiovh:volume/snapshot/delete"}, SchemasVersion: "1.0"}
 
 // DeleteVolumeSnapshot calls DELETE /v2/publicCloud/project/{projectId}/storage/block/snapshot/{id}: Delete a snapshot
 //
@@ -363,7 +363,7 @@ func (s *Service) DeleteVolumeSnapshot(ctx context.Context, projectID string, id
 }
 
 // opEditBucket is EditBucket's entry in the operation registry (ovh.Operations).
-var opEditBucket = &ovh.Operation{Name: "publiccloud.EditBucket", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/storage/object/bucket/{bucketName}", Summary: "Update a bucket", IAMActions: []string{"publicCloudProject:apiovh:bucket/edit"}}
+var opEditBucket = &ovh.Operation{Name: "publiccloud.EditBucket", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/storage/object/bucket/{bucketName}", Summary: "Update a bucket", IAMActions: []string{"publicCloudProject:apiovh:bucket/edit"}, SchemasVersion: "1.0"}
 
 // EditBucket calls PUT /v2/publicCloud/project/{projectId}/storage/object/bucket/{bucketName}: Update a bucket
 //
@@ -381,7 +381,7 @@ func (s *Service) EditBucket(ctx context.Context, projectID string, bucketName s
 }
 
 // opEditShare is EditShare's entry in the operation registry (ovh.Operations).
-var opEditShare = &ovh.Operation{Name: "publiccloud.EditShare", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/storage/file/share/{fileStorageId}", Summary: "Update a file storage", IAMActions: []string{"publicCloudProject:apiovh:share/edit"}}
+var opEditShare = &ovh.Operation{Name: "publiccloud.EditShare", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/storage/file/share/{fileStorageId}", Summary: "Update a file storage", IAMActions: []string{"publicCloudProject:apiovh:share/edit"}, SchemasVersion: "1.0"}
 
 // EditShare calls PUT /v2/publicCloud/project/{projectId}/storage/file/share/{fileStorageId}: Update a file storage
 //
@@ -413,7 +413,7 @@ func (s *Service) EditShare(ctx context.Context, projectID string, fileStorageID
 }
 
 // opEditShareSnapshot is EditShareSnapshot's entry in the operation registry (ovh.Operations).
-var opEditShareSnapshot = &ovh.Operation{Name: "publiccloud.EditShareSnapshot", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/storage/file/snapshot/{snapshotId}", Summary: "Update a snapshot", IAMActions: []string{"publicCloudProject:apiovh:storage/file/snapshot/edit"}}
+var opEditShareSnapshot = &ovh.Operation{Name: "publiccloud.EditShareSnapshot", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/storage/file/snapshot/{snapshotId}", Summary: "Update a snapshot", IAMActions: []string{"publicCloudProject:apiovh:storage/file/snapshot/edit"}, SchemasVersion: "1.0"}
 
 // EditShareSnapshot calls PUT /v2/publicCloud/project/{projectId}/storage/file/snapshot/{snapshotId}: Update a snapshot
 //
@@ -431,7 +431,7 @@ func (s *Service) EditShareSnapshot(ctx context.Context, projectID string, snaps
 }
 
 // opEditSwiftContainer is EditSwiftContainer's entry in the operation registry (ovh.Operations).
-var opEditSwiftContainer = &ovh.Operation{Name: "publiccloud.EditSwiftContainer", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/storage/swift/container/{containerId}", Summary: "Update a container", IAMActions: []string{"publicCloudProject:apiovh:storage/swift/container/edit"}}
+var opEditSwiftContainer = &ovh.Operation{Name: "publiccloud.EditSwiftContainer", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/storage/swift/container/{containerId}", Summary: "Update a container", IAMActions: []string{"publicCloudProject:apiovh:storage/swift/container/edit"}, SchemasVersion: "1.0"}
 
 // EditSwiftContainer calls PUT /v2/publicCloud/project/{projectId}/storage/swift/container/{containerId}: Update a container
 //
@@ -449,7 +449,7 @@ func (s *Service) EditSwiftContainer(ctx context.Context, projectID string, cont
 }
 
 // opEditVolume is EditVolume's entry in the operation registry (ovh.Operations).
-var opEditVolume = &ovh.Operation{Name: "publiccloud.EditVolume", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/storage/block/volume/{id}", Summary: "Update a volume", IAMActions: []string{"publicCloudProject:apiovh:volume/edit"}}
+var opEditVolume = &ovh.Operation{Name: "publiccloud.EditVolume", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/storage/block/volume/{id}", Summary: "Update a volume", IAMActions: []string{"publicCloudProject:apiovh:volume/edit"}, SchemasVersion: "1.0"}
 
 // EditVolume calls PUT /v2/publicCloud/project/{projectId}/storage/block/volume/{id}: Update a volume
 //
@@ -482,7 +482,7 @@ func (s *Service) EditVolume(ctx context.Context, projectID string, id string, b
 }
 
 // opEditVolumeBackup is EditVolumeBackup's entry in the operation registry (ovh.Operations).
-var opEditVolumeBackup = &ovh.Operation{Name: "publiccloud.EditVolumeBackup", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/storage/block/backup/{id}", Summary: "Update a backup", IAMActions: []string{"publicCloudProject:apiovh:volume/backup/edit"}}
+var opEditVolumeBackup = &ovh.Operation{Name: "publiccloud.EditVolumeBackup", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/storage/block/backup/{id}", Summary: "Update a backup", IAMActions: []string{"publicCloudProject:apiovh:volume/backup/edit"}, SchemasVersion: "1.0"}
 
 // EditVolumeBackup calls PUT /v2/publicCloud/project/{projectId}/storage/block/backup/{id}: Update a backup
 //
@@ -500,7 +500,7 @@ func (s *Service) EditVolumeBackup(ctx context.Context, projectID string, id str
 }
 
 // opEditVolumeSnapshot is EditVolumeSnapshot's entry in the operation registry (ovh.Operations).
-var opEditVolumeSnapshot = &ovh.Operation{Name: "publiccloud.EditVolumeSnapshot", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/storage/block/snapshot/{id}", Summary: "Update a snapshot", IAMActions: []string{"publicCloudProject:apiovh:volume/snapshot/edit"}}
+var opEditVolumeSnapshot = &ovh.Operation{Name: "publiccloud.EditVolumeSnapshot", Method: http.MethodPut, Path: "/v2/publicCloud/project/{projectId}/storage/block/snapshot/{id}", Summary: "Update a snapshot", IAMActions: []string{"publicCloudProject:apiovh:volume/snapshot/edit"}, SchemasVersion: "1.0"}
 
 // EditVolumeSnapshot calls PUT /v2/publicCloud/project/{projectId}/storage/block/snapshot/{id}: Update a snapshot
 //
@@ -518,7 +518,7 @@ func (s *Service) EditVolumeSnapshot(ctx context.Context, projectID string, id s
 }
 
 // opGetBucket is GetBucket's entry in the operation registry (ovh.Operations).
-var opGetBucket = &ovh.Operation{Name: "publiccloud.GetBucket", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/object/bucket/{bucketName}", Summary: "Get a bucket", IAMActions: []string{"publicCloudProject:apiovh:bucket/get"}}
+var opGetBucket = &ovh.Operation{Name: "publiccloud.GetBucket", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/object/bucket/{bucketName}", Summary: "Get a bucket", IAMActions: []string{"publicCloudProject:apiovh:bucket/get"}, SchemasVersion: "1.0"}
 
 // GetBucket calls GET /v2/publicCloud/project/{projectId}/storage/object/bucket/{bucketName}: Get a bucket
 //
@@ -534,7 +534,7 @@ func (s *Service) GetBucket(ctx context.Context, projectID string, bucketName st
 }
 
 // opGetBuckets is AllBuckets's entry in the operation registry (ovh.Operations).
-var opGetBuckets = &ovh.Operation{Name: "publiccloud.AllBuckets", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/object/bucket", Summary: "List buckets", IAMActions: []string{"publicCloudProject:apiovh:bucket/get"}}
+var opGetBuckets = &ovh.Operation{Name: "publiccloud.AllBuckets", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/object/bucket", Summary: "List buckets", IAMActions: []string{"publicCloudProject:apiovh:bucket/get"}, SchemasVersion: "1.0"}
 
 // AllBuckets iterates over GET /v2/publicCloud/project/{projectId}/storage/object/bucket (List buckets),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -551,7 +551,7 @@ func (s *Service) AllBuckets(ctx context.Context, projectID string) iter.Seq2[*P
 }
 
 // opGetShare is GetShare's entry in the operation registry (ovh.Operations).
-var opGetShare = &ovh.Operation{Name: "publiccloud.GetShare", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/file/share/{fileStorageId}", Summary: "Get a file storage", IAMActions: []string{"publicCloudProject:apiovh:share/get"}}
+var opGetShare = &ovh.Operation{Name: "publiccloud.GetShare", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/file/share/{fileStorageId}", Summary: "Get a file storage", IAMActions: []string{"publicCloudProject:apiovh:share/get"}, SchemasVersion: "1.0"}
 
 // GetShare calls GET /v2/publicCloud/project/{projectId}/storage/file/share/{fileStorageId}: Get a file storage
 //
@@ -568,7 +568,7 @@ func (s *Service) GetShare(ctx context.Context, projectID string, fileStorageID 
 }
 
 // opGetShareACL is GetShareACL's entry in the operation registry (ovh.Operations).
-var opGetShareACL = &ovh.Operation{Name: "publiccloud.GetShareACL", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/file/share/{fileStorageId}/acl/{aclId}", Summary: "Get an ACL", IAMActions: []string{"publicCloudProject:apiovh:share/acl/get"}}
+var opGetShareACL = &ovh.Operation{Name: "publiccloud.GetShareACL", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/file/share/{fileStorageId}/acl/{aclId}", Summary: "Get an ACL", IAMActions: []string{"publicCloudProject:apiovh:share/acl/get"}, SchemasVersion: "1.0"}
 
 // GetShareACL calls GET /v2/publicCloud/project/{projectId}/storage/file/share/{fileStorageId}/acl/{aclId}: Get an ACL
 //
@@ -585,7 +585,7 @@ func (s *Service) GetShareACL(ctx context.Context, projectID string, fileStorage
 }
 
 // opGetShareACLs is AllShareACLs's entry in the operation registry (ovh.Operations).
-var opGetShareACLs = &ovh.Operation{Name: "publiccloud.AllShareACLs", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/file/share/{fileStorageId}/acl", Summary: "List ACLs", IAMActions: []string{"publicCloudProject:apiovh:share/acl/get"}}
+var opGetShareACLs = &ovh.Operation{Name: "publiccloud.AllShareACLs", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/file/share/{fileStorageId}/acl", Summary: "List ACLs", IAMActions: []string{"publicCloudProject:apiovh:share/acl/get"}, SchemasVersion: "1.0"}
 
 // AllShareACLs iterates over GET /v2/publicCloud/project/{projectId}/storage/file/share/{fileStorageId}/acl (List ACLs),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -603,7 +603,7 @@ func (s *Service) AllShareACLs(ctx context.Context, projectID string, fileStorag
 }
 
 // opGetShareNetwork is GetShareNetwork's entry in the operation registry (ovh.Operations).
-var opGetShareNetwork = &ovh.Operation{Name: "publiccloud.GetShareNetwork", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/file/network/{networkId}", Summary: "Get a share network", IAMActions: []string{"publicCloudProject:apiovh:storage/file/network/get"}}
+var opGetShareNetwork = &ovh.Operation{Name: "publiccloud.GetShareNetwork", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/file/network/{networkId}", Summary: "Get a share network", IAMActions: []string{"publicCloudProject:apiovh:storage/file/network/get"}, SchemasVersion: "1.0"}
 
 // GetShareNetwork calls GET /v2/publicCloud/project/{projectId}/storage/file/network/{networkId}: Get a share network
 //
@@ -619,7 +619,7 @@ func (s *Service) GetShareNetwork(ctx context.Context, projectID string, network
 }
 
 // opGetShareNetworks is AllShareNetworks's entry in the operation registry (ovh.Operations).
-var opGetShareNetworks = &ovh.Operation{Name: "publiccloud.AllShareNetworks", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/file/network", Summary: "List share networks", IAMActions: []string{"publicCloudProject:apiovh:storage/file/network/get"}}
+var opGetShareNetworks = &ovh.Operation{Name: "publiccloud.AllShareNetworks", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/file/network", Summary: "List share networks", IAMActions: []string{"publicCloudProject:apiovh:storage/file/network/get"}, SchemasVersion: "1.0"}
 
 // AllShareNetworks iterates over GET /v2/publicCloud/project/{projectId}/storage/file/network (List share networks),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -636,7 +636,7 @@ func (s *Service) AllShareNetworks(ctx context.Context, projectID string) iter.S
 }
 
 // opGetShareSnapshot is GetShareSnapshot's entry in the operation registry (ovh.Operations).
-var opGetShareSnapshot = &ovh.Operation{Name: "publiccloud.GetShareSnapshot", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/file/snapshot/{snapshotId}", Summary: "Get a snapshot", IAMActions: []string{"publicCloudProject:apiovh:storage/file/snapshot/get"}}
+var opGetShareSnapshot = &ovh.Operation{Name: "publiccloud.GetShareSnapshot", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/file/snapshot/{snapshotId}", Summary: "Get a snapshot", IAMActions: []string{"publicCloudProject:apiovh:storage/file/snapshot/get"}, SchemasVersion: "1.0"}
 
 // GetShareSnapshot calls GET /v2/publicCloud/project/{projectId}/storage/file/snapshot/{snapshotId}: Get a snapshot
 //
@@ -652,7 +652,7 @@ func (s *Service) GetShareSnapshot(ctx context.Context, projectID string, snapsh
 }
 
 // opGetShareSnapshots is AllShareSnapshots's entry in the operation registry (ovh.Operations).
-var opGetShareSnapshots = &ovh.Operation{Name: "publiccloud.AllShareSnapshots", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/file/snapshot", Summary: "List snapshots", IAMActions: []string{"publicCloudProject:apiovh:storage/file/snapshot/get"}}
+var opGetShareSnapshots = &ovh.Operation{Name: "publiccloud.AllShareSnapshots", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/file/snapshot", Summary: "List snapshots", IAMActions: []string{"publicCloudProject:apiovh:storage/file/snapshot/get"}, SchemasVersion: "1.0"}
 
 // GetShareSnapshotsParams holds the optional parameters of GetShareSnapshots.
 type GetShareSnapshotsParams struct {
@@ -675,7 +675,7 @@ func (s *Service) AllShareSnapshots(ctx context.Context, projectID string, param
 }
 
 // opGetShares is AllShares's entry in the operation registry (ovh.Operations).
-var opGetShares = &ovh.Operation{Name: "publiccloud.AllShares", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/file/share", Summary: "List file storages", IAMActions: []string{"publicCloudProject:apiovh:share/get"}}
+var opGetShares = &ovh.Operation{Name: "publiccloud.AllShares", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/file/share", Summary: "List file storages", IAMActions: []string{"publicCloudProject:apiovh:share/get"}, SchemasVersion: "1.0"}
 
 // AllShares iterates over GET /v2/publicCloud/project/{projectId}/storage/file/share (List file storages),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -692,7 +692,7 @@ func (s *Service) AllShares(ctx context.Context, projectID string) iter.Seq2[*Pu
 }
 
 // opGetSwiftContainer is GetSwiftContainer's entry in the operation registry (ovh.Operations).
-var opGetSwiftContainer = &ovh.Operation{Name: "publiccloud.GetSwiftContainer", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/swift/container/{containerId}", Summary: "Get a container", IAMActions: []string{"publicCloudProject:apiovh:storage/swift/container/get"}}
+var opGetSwiftContainer = &ovh.Operation{Name: "publiccloud.GetSwiftContainer", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/swift/container/{containerId}", Summary: "Get a container", IAMActions: []string{"publicCloudProject:apiovh:storage/swift/container/get"}, SchemasVersion: "1.0"}
 
 // GetSwiftContainer calls GET /v2/publicCloud/project/{projectId}/storage/swift/container/{containerId}: Get a container
 //
@@ -709,7 +709,7 @@ func (s *Service) GetSwiftContainer(ctx context.Context, projectID string, conta
 }
 
 // opGetSwiftContainers is AllSwiftContainers's entry in the operation registry (ovh.Operations).
-var opGetSwiftContainers = &ovh.Operation{Name: "publiccloud.AllSwiftContainers", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/swift/container", Summary: "List containers", IAMActions: []string{"publicCloudProject:apiovh:storage/swift/container/get"}}
+var opGetSwiftContainers = &ovh.Operation{Name: "publiccloud.AllSwiftContainers", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/swift/container", Summary: "List containers", IAMActions: []string{"publicCloudProject:apiovh:storage/swift/container/get"}, SchemasVersion: "1.0"}
 
 // AllSwiftContainers iterates over GET /v2/publicCloud/project/{projectId}/storage/swift/container (List containers),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -726,7 +726,7 @@ func (s *Service) AllSwiftContainers(ctx context.Context, projectID string) iter
 }
 
 // opGetSwiftObject is GetSwiftObject's entry in the operation registry (ovh.Operations).
-var opGetSwiftObject = &ovh.Operation{Name: "publiccloud.GetSwiftObject", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/swift/container/{containerId}/object/{key}", Summary: "Get object metadata", IAMActions: []string{"publicCloudProject:apiovh:storage/swift/container/object/get"}}
+var opGetSwiftObject = &ovh.Operation{Name: "publiccloud.GetSwiftObject", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/swift/container/{containerId}/object/{key}", Summary: "Get object metadata", IAMActions: []string{"publicCloudProject:apiovh:storage/swift/container/object/get"}, SchemasVersion: "1.0"}
 
 // GetSwiftObject calls GET /v2/publicCloud/project/{projectId}/storage/swift/container/{containerId}/object/{key}: Get object metadata
 //
@@ -743,7 +743,7 @@ func (s *Service) GetSwiftObject(ctx context.Context, projectID string, containe
 }
 
 // opGetSwiftObjects is AllSwiftObjects's entry in the operation registry (ovh.Operations).
-var opGetSwiftObjects = &ovh.Operation{Name: "publiccloud.AllSwiftObjects", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/swift/container/{containerId}/object", Summary: "List objects", IAMActions: []string{"publicCloudProject:apiovh:storage/swift/container/object/get"}}
+var opGetSwiftObjects = &ovh.Operation{Name: "publiccloud.AllSwiftObjects", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/swift/container/{containerId}/object", Summary: "List objects", IAMActions: []string{"publicCloudProject:apiovh:storage/swift/container/object/get"}, SchemasVersion: "1.0"}
 
 // GetSwiftObjectsParams holds the optional parameters of GetSwiftObjects.
 type GetSwiftObjectsParams struct {
@@ -772,7 +772,7 @@ func (s *Service) AllSwiftObjects(ctx context.Context, projectID string, contain
 }
 
 // opGetVolume is GetVolume's entry in the operation registry (ovh.Operations).
-var opGetVolume = &ovh.Operation{Name: "publiccloud.GetVolume", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/block/volume/{id}", Summary: "Get a volume", IAMActions: []string{"publicCloudProject:apiovh:volume/get"}}
+var opGetVolume = &ovh.Operation{Name: "publiccloud.GetVolume", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/block/volume/{id}", Summary: "Get a volume", IAMActions: []string{"publicCloudProject:apiovh:volume/get"}, SchemasVersion: "1.0"}
 
 // GetVolume calls GET /v2/publicCloud/project/{projectId}/storage/block/volume/{id}: Get a volume
 //
@@ -789,7 +789,7 @@ func (s *Service) GetVolume(ctx context.Context, projectID string, id string) (*
 }
 
 // opGetVolumeBackup is GetVolumeBackup's entry in the operation registry (ovh.Operations).
-var opGetVolumeBackup = &ovh.Operation{Name: "publiccloud.GetVolumeBackup", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/block/backup/{id}", Summary: "Get a backup", IAMActions: []string{"publicCloudProject:apiovh:volume/backup/get"}}
+var opGetVolumeBackup = &ovh.Operation{Name: "publiccloud.GetVolumeBackup", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/block/backup/{id}", Summary: "Get a backup", IAMActions: []string{"publicCloudProject:apiovh:volume/backup/get"}, SchemasVersion: "1.0"}
 
 // GetVolumeBackup calls GET /v2/publicCloud/project/{projectId}/storage/block/backup/{id}: Get a backup
 //
@@ -805,7 +805,7 @@ func (s *Service) GetVolumeBackup(ctx context.Context, projectID string, id stri
 }
 
 // opGetVolumeBackups is AllVolumeBackups's entry in the operation registry (ovh.Operations).
-var opGetVolumeBackups = &ovh.Operation{Name: "publiccloud.AllVolumeBackups", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/block/backup", Summary: "List backups", IAMActions: []string{"publicCloudProject:apiovh:volume/backup/get"}}
+var opGetVolumeBackups = &ovh.Operation{Name: "publiccloud.AllVolumeBackups", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/block/backup", Summary: "List backups", IAMActions: []string{"publicCloudProject:apiovh:volume/backup/get"}, SchemasVersion: "1.0"}
 
 // GetVolumeBackupsParams holds the optional parameters of GetVolumeBackups.
 type GetVolumeBackupsParams struct {
@@ -828,7 +828,7 @@ func (s *Service) AllVolumeBackups(ctx context.Context, projectID string, params
 }
 
 // opGetVolumeSnapshot is GetVolumeSnapshot's entry in the operation registry (ovh.Operations).
-var opGetVolumeSnapshot = &ovh.Operation{Name: "publiccloud.GetVolumeSnapshot", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/block/snapshot/{id}", Summary: "Get a snapshot", IAMActions: []string{"publicCloudProject:apiovh:volume/snapshot/get"}}
+var opGetVolumeSnapshot = &ovh.Operation{Name: "publiccloud.GetVolumeSnapshot", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/block/snapshot/{id}", Summary: "Get a snapshot", IAMActions: []string{"publicCloudProject:apiovh:volume/snapshot/get"}, SchemasVersion: "1.0"}
 
 // GetVolumeSnapshot calls GET /v2/publicCloud/project/{projectId}/storage/block/snapshot/{id}: Get a snapshot
 //
@@ -844,7 +844,7 @@ func (s *Service) GetVolumeSnapshot(ctx context.Context, projectID string, id st
 }
 
 // opGetVolumeSnapshots is AllVolumeSnapshots's entry in the operation registry (ovh.Operations).
-var opGetVolumeSnapshots = &ovh.Operation{Name: "publiccloud.AllVolumeSnapshots", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/block/snapshot", Summary: "List snapshots", IAMActions: []string{"publicCloudProject:apiovh:volume/snapshot/get"}}
+var opGetVolumeSnapshots = &ovh.Operation{Name: "publiccloud.AllVolumeSnapshots", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/block/snapshot", Summary: "List snapshots", IAMActions: []string{"publicCloudProject:apiovh:volume/snapshot/get"}, SchemasVersion: "1.0"}
 
 // GetVolumeSnapshotsParams holds the optional parameters of GetVolumeSnapshots.
 type GetVolumeSnapshotsParams struct {
@@ -867,7 +867,7 @@ func (s *Service) AllVolumeSnapshots(ctx context.Context, projectID string, para
 }
 
 // opGetVolumes is AllVolumes's entry in the operation registry (ovh.Operations).
-var opGetVolumes = &ovh.Operation{Name: "publiccloud.AllVolumes", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/block/volume", Summary: "List volumes", IAMActions: []string{"publicCloudProject:apiovh:volume/get"}}
+var opGetVolumes = &ovh.Operation{Name: "publiccloud.AllVolumes", Method: http.MethodGet, Path: "/v2/publicCloud/project/{projectId}/storage/block/volume", Summary: "List volumes", IAMActions: []string{"publicCloudProject:apiovh:volume/get"}, SchemasVersion: "1.0"}
 
 // AllVolumes iterates over GET /v2/publicCloud/project/{projectId}/storage/block/volume (List volumes),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -884,7 +884,7 @@ func (s *Service) AllVolumes(ctx context.Context, projectID string) iter.Seq2[*P
 }
 
 // opPostVolumeAction is PostVolumeAction's entry in the operation registry (ovh.Operations).
-var opPostVolumeAction = &ovh.Operation{Name: "publiccloud.PostVolumeAction", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/storage/block/volume/{id}/action", Summary: "Run an action on a volume", IAMActions: []string{"publicCloudProject:apiovh:volume/runAction"}}
+var opPostVolumeAction = &ovh.Operation{Name: "publiccloud.PostVolumeAction", Method: http.MethodPost, Path: "/v2/publicCloud/project/{projectId}/storage/block/volume/{id}/action", Summary: "Run an action on a volume", IAMActions: []string{"publicCloudProject:apiovh:volume/runAction"}, SchemasVersion: "1.0"}
 
 // PostVolumeAction calls POST /v2/publicCloud/project/{projectId}/storage/block/volume/{id}/action: Run an action on a volume
 //

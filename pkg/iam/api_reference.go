@@ -15,7 +15,7 @@ import (
 )
 
 // opListReferenceActions is AllReferenceActions's entry in the operation registry (ovh.Operations).
-var opListReferenceActions = &ovh.Operation{Name: "iam.AllReferenceActions", Method: http.MethodGet, Path: "/v2/iam/reference/action", Summary: "List actions"}
+var opListReferenceActions = &ovh.Operation{Name: "iam.AllReferenceActions", Method: http.MethodGet, Path: "/v2/iam/reference/action", Summary: "List actions", SchemasVersion: "1.0"}
 
 // ListReferenceActionsParams holds the optional parameters of ListReferenceActions.
 type ListReferenceActionsParams struct {
@@ -34,7 +34,7 @@ func (s *Service) AllReferenceActions(ctx context.Context, params ...ListReferen
 }
 
 // opListReferenceResourceTypes is AllReferenceResourceTypes's entry in the operation registry (ovh.Operations).
-var opListReferenceResourceTypes = &ovh.Operation{Name: "iam.AllReferenceResourceTypes", Method: http.MethodGet, Path: "/v2/iam/reference/resource/type", Summary: "List resource types"}
+var opListReferenceResourceTypes = &ovh.Operation{Name: "iam.AllReferenceResourceTypes", Method: http.MethodGet, Path: "/v2/iam/reference/resource/type", Summary: "List resource types", SchemasVersion: "1.0"}
 
 // AllReferenceResourceTypes iterates over GET /v2/iam/reference/resource/type (List resource types),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it

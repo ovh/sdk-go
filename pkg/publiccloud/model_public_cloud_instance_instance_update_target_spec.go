@@ -10,7 +10,7 @@ package publiccloud
 type PublicCloudInstanceInstanceUpdateTargetSpec struct {
 	// Reference to the desired flavor (vCPUs, RAM, local disk). Carries only the flavor id. Sending a different flavor triggers a resize of the instance.
 	Flavor PublicCloudInstanceInstanceFlavorRef `json:"flavor"`
-	// Reference to the desired image. Carries only the image id. Sending a different image triggers a rebuild of the instance from the new image.
+	// Reference to the desired image. Carries only the image id. Sending a different image triggers a rebuild of the instance from the new image. Rejected on an instance booted from a volume, which has no image and cannot be rebuilt: leave image null for such an instance.
 	Image *PublicCloudInstanceInstanceImageRef `json:"image,omitempty"`
 	// Desired display name of the instance. Changing it triggers a rename.
 	Name string `json:"name"`
@@ -22,8 +22,8 @@ type PublicCloudInstanceInstanceUpdateTargetSpec struct {
 	SecurityGroups []PublicCloudSecurityGroupSecurityGroupRef `json:"securityGroups,omitempty"`
 	// Declarative list of file storage (shares) attached to the instance, managed exactly like volumes: the diff of this list drives attach/detach. Attaching a share creates a Manila IP access rule for the instance's interface on the share's network. The instance must have an interface on that network or the operation errors. Detaching (removing an entry from this list) deletes the matching access rule and is idempotent. Each entry's accessLevel defaults to READ_WRITE when omitted (see InstanceShareRef).
 	Shares []PublicCloudInstanceInstanceShareRef `json:"shares,omitempty"`
-	// User data (cloud-init). Base64-encoded (strict standard encoding) cloud-init payload, at most 65535 bytes once base64-encoded. Write-only: never returned by GET/LIST. Not persisted or stored by the Public Cloud API: the payload is handed to the compute service, which makes it available to the instance via the metadata service on boot/rebuild. Only a non-reversible fingerprint of the value is retained, for change detection. Tri-state: omitted or null keeps the current value unchanged. An empty string clears it. A non-empty value replaces it. Destructive: any change (clear or replace) REINSTALLS the instance — a Nova rebuild on the current image — wiping the root disk and all data on it.
+	// User data (cloud-init). Base64-encoded (strict standard encoding) cloud-init payload, at most 65535 bytes once base64-encoded. Write-only: never returned by GET/LIST. Not persisted or stored by the Public Cloud API: the payload is handed to the compute service, which makes it available to the instance via the metadata service on boot/rebuild. Only a non-reversible fingerprint of the value is retained, for change detection. Tri-state: omitted or null keeps the current value unchanged. An empty string clears it. A non-empty value replaces it. Destructive: any change (clear or replace) REINSTALLS the instance — a Nova rebuild on the current image — wiping the root disk and all data on it. Rejected on an instance booted from a volume, which has no image to rebuild from.
 	UserData *string `json:"userData,omitempty"`
-	// Declarative list of block volumes attached to the instance (see InstanceVolumeRef). Attach/detach is driven by diffing this list. Adding a reference attaches the volume, removing one detaches it. There is no imperative attach/detach sub-route.
+	// Declarative list of block volumes attached to the instance (see InstanceVolumeRef). Attach/detach is driven by diffing this list. Adding a reference attaches the volume, removing one detaches it. There is no imperative attach/detach sub-route. The boot volume of an instance booted from a volume must stay in the list, with role omitted or BOOT. It cannot be detached, and no other volume can become BOOT after creation.
 	Volumes []PublicCloudInstanceInstanceVolumeRef `json:"volumes,omitempty"`
 }

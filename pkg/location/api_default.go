@@ -15,7 +15,7 @@ import (
 )
 
 // opGetLocation is GetLocation's entry in the operation registry (ovh.Operations).
-var opGetLocation = &ovh.Operation{Name: "location.GetLocation", Method: http.MethodGet, Path: "/v2/location/{name}", Summary: "Get available region and its availability zones"}
+var opGetLocation = &ovh.Operation{Name: "location.GetLocation", Method: http.MethodGet, Path: "/v2/location/{name}", Summary: "Get available region and its availability zones", SchemasVersion: "1.0"}
 
 // GetLocation calls GET /v2/location/{name}: Get available region and its availability zones
 //
@@ -26,7 +26,7 @@ func (s *Service) GetLocation(ctx context.Context, name string) (*LocationLocati
 }
 
 // opListLocations is AllLocations's entry in the operation registry (ovh.Operations).
-var opListLocations = &ovh.Operation{Name: "location.AllLocations", Method: http.MethodGet, Path: "/v2/location", Summary: "List available regions and their availability zones"}
+var opListLocations = &ovh.Operation{Name: "location.AllLocations", Method: http.MethodGet, Path: "/v2/location", Summary: "List available regions and their availability zones", SchemasVersion: "1.0"}
 
 // ListLocationsParams holds the optional parameters of ListLocations.
 type ListLocationsParams struct {

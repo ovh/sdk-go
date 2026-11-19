@@ -53,7 +53,7 @@ type PublicCloudInstanceInstanceCurrentState struct {
 	// Identifier of the OpenStack user that owns the instance
 	// Read-only: the API sets it.
 	UserID *string `json:"userId,omitempty"`
-	// Observed block volumes attached to the instance, with details (name, size). See InstanceVolume.
+	// Observed block volumes attached to the instance, with details (name, size) and their role for the instance (role). See InstanceVolume.
 	// Read-only: the API sets it.
 	Volumes []PublicCloudInstanceInstanceVolume `json:"volumes,omitempty"`
 }

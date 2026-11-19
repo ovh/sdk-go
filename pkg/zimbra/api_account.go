@@ -15,7 +15,7 @@ import (
 )
 
 // opCreateAccount is CreateAccount's entry in the operation registry (ovh.Operations).
-var opCreateAccount = &ovh.Operation{Name: "zimbra.CreateAccount", Method: http.MethodPost, Path: "/v2/zimbra/platform/{platformId}/account", Summary: "Create an email account", IAMActions: []string{"zimbra:apiovh:platform/account/create"}}
+var opCreateAccount = &ovh.Operation{Name: "zimbra.CreateAccount", Method: http.MethodPost, Path: "/v2/zimbra/platform/{platformId}/account", Summary: "Create an email account", IAMActions: []string{"zimbra:apiovh:platform/account/create"}, SchemasVersion: "1.0"}
 
 // CreateAccount calls POST /v2/zimbra/platform/{platformId}/account: Create an email account
 //
@@ -33,7 +33,7 @@ func (s *Service) CreateAccount(ctx context.Context, platformID string, body Zim
 }
 
 // opCreateAlias is CreateAlias's entry in the operation registry (ovh.Operations).
-var opCreateAlias = &ovh.Operation{Name: "zimbra.CreateAlias", Method: http.MethodPost, Path: "/v2/zimbra/platform/{platformId}/alias", Summary: "Create an alias", IAMActions: []string{"zimbra:apiovh:platform/alias/create"}}
+var opCreateAlias = &ovh.Operation{Name: "zimbra.CreateAlias", Method: http.MethodPost, Path: "/v2/zimbra/platform/{platformId}/alias", Summary: "Create an alias", IAMActions: []string{"zimbra:apiovh:platform/alias/create"}, SchemasVersion: "1.0"}
 
 // CreateAlias calls POST /v2/zimbra/platform/{platformId}/alias: Create an alias
 //
@@ -50,7 +50,7 @@ func (s *Service) CreateAlias(ctx context.Context, platformID string, body Zimbr
 }
 
 // opDeleteAccount is DeleteAccount's entry in the operation registry (ovh.Operations).
-var opDeleteAccount = &ovh.Operation{Name: "zimbra.DeleteAccount", Method: http.MethodDelete, Path: "/v2/zimbra/platform/{platformId}/account/{accountId}", Summary: "Delete an email account", IAMActions: []string{"zimbra:apiovh:platform/account/delete"}}
+var opDeleteAccount = &ovh.Operation{Name: "zimbra.DeleteAccount", Method: http.MethodDelete, Path: "/v2/zimbra/platform/{platformId}/account/{accountId}", Summary: "Delete an email account", IAMActions: []string{"zimbra:apiovh:platform/account/delete"}, SchemasVersion: "1.0"}
 
 // DeleteAccount calls DELETE /v2/zimbra/platform/{platformId}/account/{accountId}: Delete an email account
 //
@@ -66,7 +66,7 @@ func (s *Service) DeleteAccount(ctx context.Context, platformID string, accountI
 }
 
 // opDeleteAlias is DeleteAlias's entry in the operation registry (ovh.Operations).
-var opDeleteAlias = &ovh.Operation{Name: "zimbra.DeleteAlias", Method: http.MethodDelete, Path: "/v2/zimbra/platform/{platformId}/alias/{aliasId}", Summary: "Delete an alias", IAMActions: []string{"zimbra:apiovh:platform/alias/delete"}}
+var opDeleteAlias = &ovh.Operation{Name: "zimbra.DeleteAlias", Method: http.MethodDelete, Path: "/v2/zimbra/platform/{platformId}/alias/{aliasId}", Summary: "Delete an alias", IAMActions: []string{"zimbra:apiovh:platform/alias/delete"}, SchemasVersion: "1.0"}
 
 // DeleteAlias calls DELETE /v2/zimbra/platform/{platformId}/alias/{aliasId}: Delete an alias
 //
@@ -82,7 +82,7 @@ func (s *Service) DeleteAlias(ctx context.Context, platformID string, aliasID st
 }
 
 // opGetAccount is GetAccount's entry in the operation registry (ovh.Operations).
-var opGetAccount = &ovh.Operation{Name: "zimbra.GetAccount", Method: http.MethodGet, Path: "/v2/zimbra/platform/{platformId}/account/{accountId}", Summary: "Get an email account", IAMActions: []string{"zimbra:apiovh:platform/account/get"}}
+var opGetAccount = &ovh.Operation{Name: "zimbra.GetAccount", Method: http.MethodGet, Path: "/v2/zimbra/platform/{platformId}/account/{accountId}", Summary: "Get an email account", IAMActions: []string{"zimbra:apiovh:platform/account/get"}, SchemasVersion: "1.0"}
 
 // GetAccount calls GET /v2/zimbra/platform/{platformId}/account/{accountId}: Get an email account
 //
@@ -99,7 +99,7 @@ func (s *Service) GetAccount(ctx context.Context, platformID string, accountID s
 }
 
 // opGetAlias is GetAlias's entry in the operation registry (ovh.Operations).
-var opGetAlias = &ovh.Operation{Name: "zimbra.GetAlias", Method: http.MethodGet, Path: "/v2/zimbra/platform/{platformId}/alias/{aliasId}", Summary: "Get an alias", IAMActions: []string{"zimbra:apiovh:platform/alias/get"}}
+var opGetAlias = &ovh.Operation{Name: "zimbra.GetAlias", Method: http.MethodGet, Path: "/v2/zimbra/platform/{platformId}/alias/{aliasId}", Summary: "Get an alias", IAMActions: []string{"zimbra:apiovh:platform/alias/get"}, SchemasVersion: "1.0"}
 
 // GetAlias calls GET /v2/zimbra/platform/{platformId}/alias/{aliasId}: Get an alias
 //
@@ -116,7 +116,7 @@ func (s *Service) GetAlias(ctx context.Context, platformID string, aliasID strin
 }
 
 // opListAccounts is AllAccounts's entry in the operation registry (ovh.Operations).
-var opListAccounts = &ovh.Operation{Name: "zimbra.AllAccounts", Method: http.MethodGet, Path: "/v2/zimbra/platform/{platformId}/account", Summary: "List email accounts", IAMActions: []string{"zimbra:apiovh:platform/account/get"}}
+var opListAccounts = &ovh.Operation{Name: "zimbra.AllAccounts", Method: http.MethodGet, Path: "/v2/zimbra/platform/{platformId}/account", Summary: "List email accounts", IAMActions: []string{"zimbra:apiovh:platform/account/get"}, SchemasVersion: "1.0"}
 
 // ListAccountsParams holds the optional parameters of ListAccounts.
 type ListAccountsParams struct {
@@ -148,7 +148,7 @@ func (s *Service) AllAccounts(ctx context.Context, platformID string, params ...
 }
 
 // opListAlias is AllAlias's entry in the operation registry (ovh.Operations).
-var opListAlias = &ovh.Operation{Name: "zimbra.AllAlias", Method: http.MethodGet, Path: "/v2/zimbra/platform/{platformId}/alias", Summary: "List aliases", IAMActions: []string{"zimbra:apiovh:platform/alias/get"}}
+var opListAlias = &ovh.Operation{Name: "zimbra.AllAlias", Method: http.MethodGet, Path: "/v2/zimbra/platform/{platformId}/alias", Summary: "List aliases", IAMActions: []string{"zimbra:apiovh:platform/alias/get"}, SchemasVersion: "1.0"}
 
 // ListAliasParams holds the optional parameters of ListAlias.
 type ListAliasParams struct {
@@ -178,7 +178,7 @@ func (s *Service) AllAlias(ctx context.Context, platformID string, params ...Lis
 }
 
 // opUpdateAccount is UpdateAccount's entry in the operation registry (ovh.Operations).
-var opUpdateAccount = &ovh.Operation{Name: "zimbra.UpdateAccount", Method: http.MethodPut, Path: "/v2/zimbra/platform/{platformId}/account/{accountId}", Summary: "Update an email account", IAMActions: []string{"zimbra:apiovh:platform/account/edit"}}
+var opUpdateAccount = &ovh.Operation{Name: "zimbra.UpdateAccount", Method: http.MethodPut, Path: "/v2/zimbra/platform/{platformId}/account/{accountId}", Summary: "Update an email account", IAMActions: []string{"zimbra:apiovh:platform/account/edit"}, SchemasVersion: "1.0"}
 
 // UpdateAccount calls PUT /v2/zimbra/platform/{platformId}/account/{accountId}: Update an email account
 //

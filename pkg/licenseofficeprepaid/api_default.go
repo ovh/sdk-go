@@ -8,10 +8,195 @@ package licenseofficeprepaid
 
 import (
 	"context"
+	"iter"
 	"net/http"
+
+	"time"
 
 	"github.com/ovh/sdk-go/ovh"
 )
+
+// opAcceptAgreementParentTenant is AcceptAgreementParentTenant's entry in the operation registry (ovh.Operations).
+var opAcceptAgreementParentTenant = &ovh.Operation{Name: "licenseofficeprepaid.AcceptAgreementParentTenant", Method: http.MethodPost, Path: "/v1/license/officePrepaid/{serviceName}/parentTenant/acceptAgreement", Summary: "Accept the Microsoft Customer Agreement", IAMActions: []string{"licenseOfficePrepaid:apiovh:acceptAgreement"}}
+
+// AcceptAgreementParentTenant calls POST /v1/license/officePrepaid/{serviceName}/parentTenant/acceptAgreement: Accept the Microsoft Customer Agreement
+//
+// Accepts the Microsoft Customer Agreement (MCA) for the parent tenant.
+//
+// Arguments:
+//   - serviceName: Service name
+//
+// Requires the IAM action licenseOfficePrepaid:apiovh:acceptAgreement.
+func (s *Service) AcceptAgreementParentTenant(ctx context.Context, serviceName string) error {
+	return s.c.Do(ctx, &ovh.Request{Operation: opAcceptAgreementParentTenant, Method: http.MethodPost, Path: ovh.Path("/v1/license/officePrepaid/{serviceName}/parentTenant/acceptAgreement", "serviceName", serviceName)}, nil)
+}
+
+// opChangePassword is ChangePassword's entry in the operation registry (ovh.Operations).
+var opChangePassword = &ovh.Operation{Name: "licenseofficeprepaid.ChangePassword", Method: http.MethodPost, Path: "/v1/license/officePrepaid/{serviceName}/changePassword", Summary: "Change a prepaid user password", IAMActions: []string{"licenseOfficePrepaid:apiovh:changePassword"}}
+
+// ChangePassword calls POST /v1/license/officePrepaid/{serviceName}/changePassword: Change a prepaid user password
+//
+// Changes the password of the prepaid user and returns the task. Leave `password` empty to receive
+// a generated password by email. Set `shouldSendMail` to send the new password to `notifyEmail`,
+// the admin contact email by default.
+//
+// Arguments:
+//   - serviceName: Service name
+//   - body: the request body
+//
+// Requires the IAM action licenseOfficePrepaid:apiovh:changePassword.
+func (s *Service) ChangePassword(ctx context.Context, serviceName string, body LicenseOfficePrepaidOfficeTenantPostChangePassword) (*LicenseOfficePrepaidOfficeTaskNative, error) {
+	return ovh.Call[*LicenseOfficePrepaidOfficeTaskNative](ctx, s.c, &ovh.Request{Operation: opChangePassword, Method: http.MethodPost, Path: ovh.Path("/v1/license/officePrepaid/{serviceName}/changePassword", "serviceName", serviceName), Body: body})
+}
+
+// opCreateAttestationParentTenant is CreateAttestationParentTenant's entry in the operation registry (ovh.Operations).
+var opCreateAttestationParentTenant = &ovh.Operation{Name: "licenseofficeprepaid.CreateAttestationParentTenant", Method: http.MethodPost, Path: "/v1/license/officePrepaid/{serviceName}/parentTenant/createAttestation", Summary: "Create an MCA attestation", IAMActions: []string{"licenseOfficePrepaid:apiovh:createAttestation"}}
+
+// CreateAttestationParentTenant calls POST /v1/license/officePrepaid/{serviceName}/parentTenant/createAttestation: Create an MCA attestation
+//
+// Creates a Microsoft Customer Agreement attestation for the parent tenant from the signatory
+// company, names, email address, phone number, country and language. Returns the attestation ID and
+// a link to the attestation that can be embedded in an iframe.
+//
+// Arguments:
+//   - serviceName: Service name
+//   - body: the request body
+//
+// Requires the IAM action licenseOfficePrepaid:apiovh:createAttestation.
+func (s *Service) CreateAttestationParentTenant(ctx context.Context, serviceName string, body LicenseOfficePrepaidCreateAttestationPostPayload) (*LicenseOfficePrepaidCreateAttestationResponse, error) {
+	return ovh.Call[*LicenseOfficePrepaidCreateAttestationResponse](ctx, s.c, &ovh.Request{Operation: opCreateAttestationParentTenant, Method: http.MethodPost, Path: ovh.Path("/v1/license/officePrepaid/{serviceName}/parentTenant/createAttestation", "serviceName", serviceName), Body: body})
+}
+
+// opGetOfficePrepaid is GetOfficePrepaid's entry in the operation registry (ovh.Operations).
+var opGetOfficePrepaid = &ovh.Operation{Name: "licenseofficeprepaid.GetOfficePrepaid", Method: http.MethodGet, Path: "/v1/license/officePrepaid/{serviceName}", Summary: "Get a prepaid user", IAMActions: []string{"licenseOfficePrepaid:apiovh:get"}}
+
+// GetOfficePrepaid calls GET /v1/license/officePrepaid/{serviceName}: Get a prepaid user
+//
+// Returns the names, activation email, licenses and state of the prepaid user, and the service
+// names of the user and of its tenant. `isVirtual` tells whether it is a user slot or a real user.
+//
+// Arguments:
+//   - serviceName: Service name
+//
+// Requires the IAM action licenseOfficePrepaid:apiovh:get.
+func (s *Service) GetOfficePrepaid(ctx context.Context, serviceName string) (*LicenseOfficePrepaidOfficeUserNativeWithIAM, error) {
+	return ovh.Call[*LicenseOfficePrepaidOfficeUserNativeWithIAM](ctx, s.c, &ovh.Request{Operation: opGetOfficePrepaid, Method: http.MethodGet, Path: ovh.Path("/v1/license/officePrepaid/{serviceName}", "serviceName", serviceName)})
+}
+
+// AllOfficePrepaids iterates over every object ListOfficePrepaids lists, fetching each one with
+// GetOfficePrepaid only when the loop reaches it. An object deleted in the meantime is skipped; on
+// any other error it yields the error and stops.
+func (s *Service) AllOfficePrepaids(ctx context.Context, params ...ListOfficePrepaidsParams) iter.Seq2[*LicenseOfficePrepaidOfficeUserNativeWithIAM, error] {
+	return ovh.Each(ctx,
+		func(ctx context.Context) ([]string, error) {
+			return s.ListOfficePrepaids(ctx, params...)
+		},
+		func(ctx context.Context, listedID string) (*LicenseOfficePrepaidOfficeUserNativeWithIAM, error) {
+			return s.GetOfficePrepaid(ctx, listedID)
+		})
+}
+
+// opGetParentTenant is GetParentTenant's entry in the operation registry (ovh.Operations).
+var opGetParentTenant = &ovh.Operation{Name: "licenseofficeprepaid.GetParentTenant", Method: http.MethodGet, Path: "/v1/license/officePrepaid/{serviceName}/parentTenant", Summary: "Get the parent tenant", IAMActions: []string{"licenseOfficePrepaid:apiovh:parentTenant/get"}}
+
+// GetParentTenant calls GET /v1/license/officePrepaid/{serviceName}/parentTenant: Get the parent tenant
+//
+// Returns the tenant of the prepaid user: display name, contact details, service type, status, and
+// whether the Microsoft Customer Agreement (MCA) is accepted.
+//
+// Arguments:
+//   - serviceName: Service name
+//
+// Requires the IAM action licenseOfficePrepaid:apiovh:parentTenant/get.
+func (s *Service) GetParentTenant(ctx context.Context, serviceName string) (*LicenseOfficePrepaidOfficeTenantNative, error) {
+	return ovh.Call[*LicenseOfficePrepaidOfficeTenantNative](ctx, s.c, &ovh.Request{Operation: opGetParentTenant, Method: http.MethodGet, Path: ovh.Path("/v1/license/officePrepaid/{serviceName}/parentTenant", "serviceName", serviceName)})
+}
+
+// opGetTenantPendingTask is GetTenantPendingTask's entry in the operation registry (ovh.Operations).
+var opGetTenantPendingTask = &ovh.Operation{Name: "licenseofficeprepaid.GetTenantPendingTask", Method: http.MethodGet, Path: "/v1/license/officePrepaid/{serviceName}/tenantPendingTask/{id}", Summary: "Get a parent tenant task", IAMActions: []string{"licenseOfficePrepaid:apiovh:tenantPendingTask/get"}}
+
+// GetTenantPendingTask calls GET /v1/license/officePrepaid/{serviceName}/tenantPendingTask/{id}: Get a parent tenant task
+//
+// Returns the function, status, creation date and completion date of the task.
+//
+// Arguments:
+//   - serviceName: Service name
+//   - id: Id
+//
+// Requires the IAM action licenseOfficePrepaid:apiovh:tenantPendingTask/get.
+func (s *Service) GetTenantPendingTask(ctx context.Context, serviceName string, id int) (*LicenseOfficePrepaidOfficeTaskNative, error) {
+	return ovh.Call[*LicenseOfficePrepaidOfficeTaskNative](ctx, s.c, &ovh.Request{Operation: opGetTenantPendingTask, Method: http.MethodGet, Path: ovh.Path("/v1/license/officePrepaid/{serviceName}/tenantPendingTask/{id}", "serviceName", serviceName, "id", id)})
+}
+
+// AllTenantPendingTasks iterates over every object ListTenantPendingTasks lists, fetching each one with
+// GetTenantPendingTask only when the loop reaches it. An object deleted in the meantime is skipped; on
+// any other error it yields the error and stops.
+func (s *Service) AllTenantPendingTasks(ctx context.Context, serviceName string) iter.Seq2[*LicenseOfficePrepaidOfficeTaskNative, error] {
+	return ovh.Each(ctx,
+		func(ctx context.Context) ([]int, error) {
+			return s.ListTenantPendingTasks(ctx, serviceName)
+		},
+		func(ctx context.Context, listedID int) (*LicenseOfficePrepaidOfficeTaskNative, error) {
+			return s.GetTenantPendingTask(ctx, serviceName, listedID)
+		})
+}
+
+// opListOfficePrepaids is ListOfficePrepaids's entry in the operation registry (ovh.Operations).
+var opListOfficePrepaids = &ovh.Operation{Name: "licenseofficeprepaid.ListOfficePrepaids", Method: http.MethodGet, Path: "/v1/license/officePrepaid", Summary: "List prepaid users", IAMActions: []string{"licenseOfficePrepaid:apiovh:get"}}
+
+// ListOfficePrepaidsParams holds the optional parameters of ListOfficePrepaids.
+type ListOfficePrepaidsParams struct {
+	// Filter resources on IAM tags
+	IAMTags map[string][]IAMResourceTagFilter `ovh:"query,iamTags"`
+}
+
+// ListOfficePrepaids calls GET /v1/license/officePrepaid: List prepaid users
+//
+// Returns the service names of the prepaid users.
+//
+// Requires the IAM action licenseOfficePrepaid:apiovh:get.
+func (s *Service) ListOfficePrepaids(ctx context.Context, params ...ListOfficePrepaidsParams) ([]string, error) {
+	return ovh.Call[[]string](ctx, s.c, &ovh.Request{Operation: opListOfficePrepaids, Method: http.MethodGet, Path: "/v1/license/officePrepaid", Params: ovh.Optional(params)})
+}
+
+// opListTenantPendingTasks is ListTenantPendingTasks's entry in the operation registry (ovh.Operations).
+var opListTenantPendingTasks = &ovh.Operation{Name: "licenseofficeprepaid.ListTenantPendingTasks", Method: http.MethodGet, Path: "/v1/license/officePrepaid/{serviceName}/tenantPendingTask", Summary: "List parent tenant tasks", IAMActions: []string{"licenseOfficePrepaid:apiovh:tenantPendingTask/get"}}
+
+// ListTenantPendingTasks calls GET /v1/license/officePrepaid/{serviceName}/tenantPendingTask: List parent tenant tasks
+//
+// Returns the IDs of the pending tasks of the parent tenant.
+//
+// Arguments:
+//   - serviceName: Service name
+//
+// Requires the IAM action licenseOfficePrepaid:apiovh:tenantPendingTask/get.
+func (s *Service) ListTenantPendingTasks(ctx context.Context, serviceName string) ([]int, error) {
+	return ovh.Call[[]int](ctx, s.c, &ovh.Request{Operation: opListTenantPendingTasks, Method: http.MethodGet, Path: ovh.Path("/v1/license/officePrepaid/{serviceName}/tenantPendingTask", "serviceName", serviceName)})
+}
+
+// opListTenantUsageStatistics is ListTenantUsageStatistics's entry in the operation registry (ovh.Operations).
+var opListTenantUsageStatistics = &ovh.Operation{Name: "licenseofficeprepaid.ListTenantUsageStatistics", Method: http.MethodGet, Path: "/v1/license/officePrepaid/{serviceName}/tenantUsageStatistics", Summary: "Get parent tenant usage statistics", IAMActions: []string{"licenseOfficePrepaid:apiovh:tenantUsageStatistics/get"}}
+
+// ListTenantUsageStatisticsParams holds the optional parameters of ListTenantUsageStatistics.
+type ListTenantUsageStatisticsParams struct {
+	// Period's start point.
+	From *time.Time `ovh:"query,from"`
+	// Period's end point.
+	To *time.Time `ovh:"query,to"`
+}
+
+// ListTenantUsageStatistics calls GET /v1/license/officePrepaid/{serviceName}/tenantUsageStatistics: Get parent tenant usage statistics
+//
+// Returns, for each day between `from` and `to`, the peak and end-of-day counts of activated
+// licenses of the parent tenant, by license type.
+//
+// Arguments:
+//   - serviceName: Service name
+//
+// Requires the IAM action licenseOfficePrepaid:apiovh:tenantUsageStatistics/get.
+func (s *Service) ListTenantUsageStatistics(ctx context.Context, serviceName string, params ...ListTenantUsageStatisticsParams) ([]LicenseOfficePrepaidOfficeCurrentStatisticsNative, error) {
+	return ovh.Call[[]LicenseOfficePrepaidOfficeCurrentStatisticsNative](ctx, s.c, &ovh.Request{Operation: opListTenantUsageStatistics, Method: http.MethodGet, Path: ovh.Path("/v1/license/officePrepaid/{serviceName}/tenantUsageStatistics", "serviceName", serviceName), Params: ovh.Optional(params)})
+}
 
 // opUnconfigure is Unconfigure's entry in the operation registry (ovh.Operations).
 var opUnconfigure = &ovh.Operation{Name: "licenseofficeprepaid.Unconfigure", Method: http.MethodPost, Path: "/v1/license/officePrepaid/{serviceName}/unconfigure", Summary: "Unconfigure a prepaid user", IAMActions: []string{"licenseOfficePrepaid:apiovh:unconfigure"}}
@@ -29,6 +214,38 @@ func (s *Service) Unconfigure(ctx context.Context, serviceName string) (*License
 	return ovh.Call[*LicenseOfficePrepaidOfficeTaskNative](ctx, s.c, &ovh.Request{Operation: opUnconfigure, Method: http.MethodPost, Path: ovh.Path("/v1/license/officePrepaid/{serviceName}/unconfigure", "serviceName", serviceName)})
 }
 
+// opUpdateOfficePrepaid is UpdateOfficePrepaid's entry in the operation registry (ovh.Operations).
+var opUpdateOfficePrepaid = &ovh.Operation{Name: "licenseofficeprepaid.UpdateOfficePrepaid", Method: http.MethodPut, Path: "/v1/license/officePrepaid/{serviceName}", Summary: "Update a prepaid user", IAMActions: []string{"licenseOfficePrepaid:apiovh:put"}}
+
+// UpdateOfficePrepaid calls PUT /v1/license/officePrepaid/{serviceName}: Update a prepaid user
+//
+// Updates the first name, last name and activation email of the prepaid user.
+//
+// Arguments:
+//   - serviceName: Service name
+//   - body: the request body
+//
+// Requires the IAM action licenseOfficePrepaid:apiovh:put.
+func (s *Service) UpdateOfficePrepaid(ctx context.Context, serviceName string, body LicenseOfficePrepaidPutOfficeUserNative) error {
+	return s.c.Do(ctx, &ovh.Request{Operation: opUpdateOfficePrepaid, Method: http.MethodPut, Path: ovh.Path("/v1/license/officePrepaid/{serviceName}", "serviceName", serviceName), Body: body}, nil)
+}
+
+// opUpdateParentTenant is UpdateParentTenant's entry in the operation registry (ovh.Operations).
+var opUpdateParentTenant = &ovh.Operation{Name: "licenseofficeprepaid.UpdateParentTenant", Method: http.MethodPut, Path: "/v1/license/officePrepaid/{serviceName}/parentTenant", Summary: "Update the parent tenant", IAMActions: []string{"licenseOfficePrepaid:apiovh:parentTenant/edit"}}
+
+// UpdateParentTenant calls PUT /v1/license/officePrepaid/{serviceName}/parentTenant: Update the parent tenant
+//
+// Updates the display name of the tenant of the prepaid user.
+//
+// Arguments:
+//   - serviceName: Service name
+//   - body: the request body
+//
+// Requires the IAM action licenseOfficePrepaid:apiovh:parentTenant/edit.
+func (s *Service) UpdateParentTenant(ctx context.Context, serviceName string, body LicenseOfficePrepaidOfficeTenantPutParentTenantWritable) error {
+	return s.c.Do(ctx, &ovh.Request{Operation: opUpdateParentTenant, Method: http.MethodPut, Path: ovh.Path("/v1/license/officePrepaid/{serviceName}/parentTenant", "serviceName", serviceName), Body: body}, nil)
+}
+
 func init() {
-	ovh.RegisterOperations(opUnconfigure)
+	ovh.RegisterOperations(opAcceptAgreementParentTenant, opChangePassword, opCreateAttestationParentTenant, opGetOfficePrepaid, opGetParentTenant, opGetTenantPendingTask, opListOfficePrepaids, opListTenantPendingTasks, opListTenantUsageStatistics, opUnconfigure, opUpdateOfficePrepaid, opUpdateParentTenant)
 }

@@ -14,6 +14,8 @@ type CloudProjectDatabaseServiceCreationWritable struct {
 	BackupTime *string `json:"backupTime,omitempty"`
 	// Information related to the backups, null if the engine does not support backups
 	Backups *CloudProjectDatabaseServiceBackupWritable `json:"backups,omitempty"`
+	// Whether to protect the cluster from deletion. Defaults to false.
+	DeletionProtection *bool `json:"deletionProtection,omitempty"`
 	// Description of the cluster
 	Description *string `json:"description,omitempty"`
 	// Disk attributes of the cluster

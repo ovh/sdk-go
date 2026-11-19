@@ -11,6 +11,8 @@ import (
 	"iter"
 	"net/http"
 
+	"time"
+
 	"github.com/ovh/sdk-go/ovh"
 )
 
@@ -66,6 +68,94 @@ func (s *Service) DeleteUser(ctx context.Context, serviceName string, activation
 	return ovh.Call[*LicenseOfficeOfficeTaskNative](ctx, s.c, &ovh.Request{Operation: opDeleteUser, Method: http.MethodDelete, Path: ovh.Path("/v1/license/office/{serviceName}/user/{activationEmail}", "serviceName", serviceName, "activationEmail", activationEmail)})
 }
 
+// opGetDomain is GetDomain's entry in the operation registry (ovh.Operations).
+var opGetDomain = &ovh.Operation{Name: "licenseoffice.GetDomain", Method: http.MethodGet, Path: "/v1/license/office/{serviceName}/domain/{domainName}", Summary: "Get a domain", IAMActions: []string{"licenseOffice:apiovh:domain/get"}}
+
+// GetDomain calls GET /v1/license/office/{serviceName}/domain/{domainName}: Get a domain
+//
+// Returns the status of the domain, `ok` or `unverified`, and the TXT record required to validate
+// it.
+//
+// Arguments:
+//   - serviceName: Service name
+//   - domainName: Domain name
+//
+// Requires the IAM action licenseOffice:apiovh:domain/get.
+func (s *Service) GetDomain(ctx context.Context, serviceName string, domainName string) (*LicenseOfficeDomainNative, error) {
+	return ovh.Call[*LicenseOfficeDomainNative](ctx, s.c, &ovh.Request{Operation: opGetDomain, Method: http.MethodGet, Path: ovh.Path("/v1/license/office/{serviceName}/domain/{domainName}", "serviceName", serviceName, "domainName", domainName)})
+}
+
+// AllDomains iterates over every object ListDomains lists, fetching each one with
+// GetDomain only when the loop reaches it. An object deleted in the meantime is skipped; on
+// any other error it yields the error and stops.
+func (s *Service) AllDomains(ctx context.Context, serviceName string) iter.Seq2[*LicenseOfficeDomainNative, error] {
+	return ovh.Each(ctx,
+		func(ctx context.Context) ([]string, error) {
+			return s.ListDomains(ctx, serviceName)
+		},
+		func(ctx context.Context, listedID string) (*LicenseOfficeDomainNative, error) {
+			return s.GetDomain(ctx, serviceName, listedID)
+		})
+}
+
+// opGetOffice is GetOffice's entry in the operation registry (ovh.Operations).
+var opGetOffice = &ovh.Operation{Name: "licenseoffice.GetOffice", Method: http.MethodGet, Path: "/v1/license/office/{serviceName}", Summary: "Get a tenant", IAMActions: []string{"licenseOffice:apiovh:get"}}
+
+// GetOffice calls GET /v1/license/office/{serviceName}: Get a tenant
+//
+// Returns the display name, contact details, service type, status and creation date of the tenant,
+// and whether the Microsoft Customer Agreement (MCA) is accepted.
+//
+// Arguments:
+//   - serviceName: Service name
+//
+// Requires the IAM action licenseOffice:apiovh:get.
+func (s *Service) GetOffice(ctx context.Context, serviceName string) (*LicenseOfficeOfficeTenantNativeWithIAM, error) {
+	return ovh.Call[*LicenseOfficeOfficeTenantNativeWithIAM](ctx, s.c, &ovh.Request{Operation: opGetOffice, Method: http.MethodGet, Path: ovh.Path("/v1/license/office/{serviceName}", "serviceName", serviceName)})
+}
+
+// AllOffices iterates over every object ListOffices lists, fetching each one with
+// GetOffice only when the loop reaches it. An object deleted in the meantime is skipped; on
+// any other error it yields the error and stops.
+func (s *Service) AllOffices(ctx context.Context, params ...ListOfficesParams) iter.Seq2[*LicenseOfficeOfficeTenantNativeWithIAM, error] {
+	return ovh.Each(ctx,
+		func(ctx context.Context) ([]string, error) {
+			return s.ListOffices(ctx, params...)
+		},
+		func(ctx context.Context, listedID string) (*LicenseOfficeOfficeTenantNativeWithIAM, error) {
+			return s.GetOffice(ctx, listedID)
+		})
+}
+
+// opGetPendingTask is GetPendingTask's entry in the operation registry (ovh.Operations).
+var opGetPendingTask = &ovh.Operation{Name: "licenseoffice.GetPendingTask", Method: http.MethodGet, Path: "/v1/license/office/{serviceName}/pendingTask/{id}", Summary: "Get a tenant task", IAMActions: []string{"licenseOffice:apiovh:pendingTask/get"}}
+
+// GetPendingTask calls GET /v1/license/office/{serviceName}/pendingTask/{id}: Get a tenant task
+//
+// Returns the function, status, creation date and completion date of the task.
+//
+// Arguments:
+//   - serviceName: Service name
+//   - id: Id
+//
+// Requires the IAM action licenseOffice:apiovh:pendingTask/get.
+func (s *Service) GetPendingTask(ctx context.Context, serviceName string, id int) (*LicenseOfficeOfficeTaskNative, error) {
+	return ovh.Call[*LicenseOfficeOfficeTaskNative](ctx, s.c, &ovh.Request{Operation: opGetPendingTask, Method: http.MethodGet, Path: ovh.Path("/v1/license/office/{serviceName}/pendingTask/{id}", "serviceName", serviceName, "id", id)})
+}
+
+// AllPendingTasks iterates over every object ListPendingTasks lists, fetching each one with
+// GetPendingTask only when the loop reaches it. An object deleted in the meantime is skipped; on
+// any other error it yields the error and stops.
+func (s *Service) AllPendingTasks(ctx context.Context, serviceName string) iter.Seq2[*LicenseOfficeOfficeTaskNative, error] {
+	return ovh.Each(ctx,
+		func(ctx context.Context) ([]int, error) {
+			return s.ListPendingTasks(ctx, serviceName)
+		},
+		func(ctx context.Context, listedID int) (*LicenseOfficeOfficeTaskNative, error) {
+			return s.GetPendingTask(ctx, serviceName, listedID)
+		})
+}
+
 // opGetServiceInfos is GetServiceInfos's entry in the operation registry (ovh.Operations).
 var opGetServiceInfos = &ovh.Operation{Name: "licenseoffice.GetServiceInfos", Method: http.MethodGet, Path: "/v1/license/office/{serviceName}/serviceInfos", Summary: "Get service information", IAMActions: []string{"licenseOffice:apiovh:serviceInfos/get"}}
 
@@ -111,6 +201,78 @@ func (s *Service) AllUsers(ctx context.Context, serviceName string, params ...Li
 		})
 }
 
+// opListDomains is ListDomains's entry in the operation registry (ovh.Operations).
+var opListDomains = &ovh.Operation{Name: "licenseoffice.ListDomains", Method: http.MethodGet, Path: "/v1/license/office/{serviceName}/domain", Summary: "List domains", IAMActions: []string{"licenseOffice:apiovh:domain/get"}}
+
+// ListDomains calls GET /v1/license/office/{serviceName}/domain: List domains
+//
+// Returns the names of the domains of the tenant.
+//
+// Arguments:
+//   - serviceName: Service name
+//
+// Requires the IAM action licenseOffice:apiovh:domain/get.
+func (s *Service) ListDomains(ctx context.Context, serviceName string) ([]string, error) {
+	return ovh.Call[[]string](ctx, s.c, &ovh.Request{Operation: opListDomains, Method: http.MethodGet, Path: ovh.Path("/v1/license/office/{serviceName}/domain", "serviceName", serviceName)})
+}
+
+// opListOffices is ListOffices's entry in the operation registry (ovh.Operations).
+var opListOffices = &ovh.Operation{Name: "licenseoffice.ListOffices", Method: http.MethodGet, Path: "/v1/license/office", Summary: "List tenants", IAMActions: []string{"licenseOffice:apiovh:get"}}
+
+// ListOfficesParams holds the optional parameters of ListOffices.
+type ListOfficesParams struct {
+	// Filter resources on IAM tags
+	IAMTags map[string][]IAMResourceTagFilter `ovh:"query,iamTags"`
+}
+
+// ListOffices calls GET /v1/license/office: List tenants
+//
+// Returns the service names of the tenants.
+//
+// Requires the IAM action licenseOffice:apiovh:get.
+func (s *Service) ListOffices(ctx context.Context, params ...ListOfficesParams) ([]string, error) {
+	return ovh.Call[[]string](ctx, s.c, &ovh.Request{Operation: opListOffices, Method: http.MethodGet, Path: "/v1/license/office", Params: ovh.Optional(params)})
+}
+
+// opListPendingTasks is ListPendingTasks's entry in the operation registry (ovh.Operations).
+var opListPendingTasks = &ovh.Operation{Name: "licenseoffice.ListPendingTasks", Method: http.MethodGet, Path: "/v1/license/office/{serviceName}/pendingTask", Summary: "List tenant tasks", IAMActions: []string{"licenseOffice:apiovh:pendingTask/get"}}
+
+// ListPendingTasks calls GET /v1/license/office/{serviceName}/pendingTask: List tenant tasks
+//
+// Returns the IDs of the pending tasks of the tenant.
+//
+// Arguments:
+//   - serviceName: Service name
+//
+// Requires the IAM action licenseOffice:apiovh:pendingTask/get.
+func (s *Service) ListPendingTasks(ctx context.Context, serviceName string) ([]int, error) {
+	return ovh.Call[[]int](ctx, s.c, &ovh.Request{Operation: opListPendingTasks, Method: http.MethodGet, Path: ovh.Path("/v1/license/office/{serviceName}/pendingTask", "serviceName", serviceName)})
+}
+
+// opListUsageStatistics is ListUsageStatistics's entry in the operation registry (ovh.Operations).
+var opListUsageStatistics = &ovh.Operation{Name: "licenseoffice.ListUsageStatistics", Method: http.MethodGet, Path: "/v1/license/office/{serviceName}/usageStatistics", Summary: "Get tenant usage statistics", IAMActions: []string{"licenseOffice:apiovh:usageStatistics/get"}}
+
+// ListUsageStatisticsParams holds the optional parameters of ListUsageStatistics.
+type ListUsageStatisticsParams struct {
+	// Period's start point
+	From *time.Time `ovh:"query,from"`
+	// Period's end point
+	To *time.Time `ovh:"query,to"`
+}
+
+// ListUsageStatistics calls GET /v1/license/office/{serviceName}/usageStatistics: Get tenant usage statistics
+//
+// Returns, for each day between `from` and `to`, the peak and end-of-day counts of activated
+// licenses of the tenant, by license type.
+//
+// Arguments:
+//   - serviceName: Service name
+//
+// Requires the IAM action licenseOffice:apiovh:usageStatistics/get.
+func (s *Service) ListUsageStatistics(ctx context.Context, serviceName string, params ...ListUsageStatisticsParams) ([]LicenseOfficeOfficeCurrentStatisticsNative, error) {
+	return ovh.Call[[]LicenseOfficeOfficeCurrentStatisticsNative](ctx, s.c, &ovh.Request{Operation: opListUsageStatistics, Method: http.MethodGet, Path: ovh.Path("/v1/license/office/{serviceName}/usageStatistics", "serviceName", serviceName), Params: ovh.Optional(params)})
+}
+
 // opListUsers is ListUsers's entry in the operation registry (ovh.Operations).
 var opListUsers = &ovh.Operation{Name: "licenseoffice.ListUsers", Method: http.MethodGet, Path: "/v1/license/office/{serviceName}/user", Summary: "List users", IAMActions: []string{"licenseOffice:apiovh:user/get"}}
 
@@ -133,6 +295,23 @@ type ListUsersParams struct {
 // Requires the IAM action licenseOffice:apiovh:user/get.
 func (s *Service) ListUsers(ctx context.Context, serviceName string, params ...ListUsersParams) ([]string, error) {
 	return ovh.Call[[]string](ctx, s.c, &ovh.Request{Operation: opListUsers, Method: http.MethodGet, Path: ovh.Path("/v1/license/office/{serviceName}/user", "serviceName", serviceName), Params: ovh.Optional(params)})
+}
+
+// opUpdateOffice is UpdateOffice's entry in the operation registry (ovh.Operations).
+var opUpdateOffice = &ovh.Operation{Name: "licenseoffice.UpdateOffice", Method: http.MethodPut, Path: "/v1/license/office/{serviceName}", Summary: "Update a tenant", IAMActions: []string{"licenseOffice:apiovh:edit"}}
+
+// UpdateOffice calls PUT /v1/license/office/{serviceName}: Update a tenant
+//
+// Updates the display name and the contact details of the tenant: first name, last name, address,
+// zip code, city and phone number.
+//
+// Arguments:
+//   - serviceName: Service name
+//   - body: the request body
+//
+// Requires the IAM action licenseOffice:apiovh:edit.
+func (s *Service) UpdateOffice(ctx context.Context, serviceName string, body LicenseOfficeOfficeTenantNativeWritable) error {
+	return s.c.Do(ctx, &ovh.Request{Operation: opUpdateOffice, Method: http.MethodPut, Path: ovh.Path("/v1/license/office/{serviceName}", "serviceName", serviceName), Body: body}, nil)
 }
 
 // opUpdateServiceInfos is UpdateServiceInfos's entry in the operation registry (ovh.Operations).
@@ -171,5 +350,5 @@ func (s *Service) UpdateUser(ctx context.Context, serviceName string, activation
 }
 
 func init() {
-	ovh.RegisterOperations(opChangePasswordUser, opCreateUser, opDeleteUser, opGetServiceInfos, opGetUser, opListUsers, opUpdateServiceInfos, opUpdateUser)
+	ovh.RegisterOperations(opChangePasswordUser, opCreateUser, opDeleteUser, opGetDomain, opGetOffice, opGetPendingTask, opGetServiceInfos, opGetUser, opListDomains, opListOffices, opListPendingTasks, opListUsageStatistics, opListUsers, opUpdateOffice, opUpdateServiceInfos, opUpdateUser)
 }

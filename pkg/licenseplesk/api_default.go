@@ -15,9 +15,11 @@ import (
 )
 
 // opChangeIP is ChangeIP's entry in the operation registry (ovh.Operations).
-var opChangeIP = &ovh.Operation{Name: "licenseplesk.ChangeIP", Method: http.MethodPost, Path: "/v1/license/plesk/{serviceName}/changeIp", Summary: "Move this license to another Ip", IAMActions: []string{"licensePlesk:apiovh:changeIp"}}
+var opChangeIP = &ovh.Operation{Name: "licenseplesk.ChangeIP", Method: http.MethodPost, Path: "/v1/license/plesk/{serviceName}/changeIp", Summary: "Move a Plesk license to another IP", IAMActions: []string{"licensePlesk:apiovh:changeIp"}}
 
-// ChangeIP calls POST /v1/license/plesk/{serviceName}/changeIp: Move this license to another Ip
+// ChangeIP calls POST /v1/license/plesk/{serviceName}/changeIp: Move a Plesk license to another IP
+//
+// Starts the move of the license to the given IP and returns the task that performs it.
 //
 // Arguments:
 //   - serviceName: The name of your Plesk license
@@ -46,9 +48,11 @@ func (s *Service) ConfirmTermination(ctx context.Context, serviceName string, bo
 }
 
 // opDeleteOption is DeleteOption's entry in the operation registry (ovh.Operations).
-var opDeleteOption = &ovh.Operation{Name: "licenseplesk.DeleteOption", Method: http.MethodDelete, Path: "/v1/license/plesk/{serviceName}/option/{label}", Summary: "release this Option", IAMActions: []string{"licensePlesk:apiovh:option/delete"}}
+var opDeleteOption = &ovh.Operation{Name: "licenseplesk.DeleteOption", Method: http.MethodDelete, Path: "/v1/license/plesk/{serviceName}/option/{label}", Summary: "Release an option from a license", IAMActions: []string{"licensePlesk:apiovh:option/delete"}}
 
-// DeleteOption calls DELETE /v1/license/plesk/{serviceName}/option/{label}: release this Option
+// DeleteOption calls DELETE /v1/license/plesk/{serviceName}/option/{label}: Release an option from a license
+//
+// Removes the option from the license and returns the task that performs the release.
 //
 // Arguments:
 //   - serviceName: The name of your Plesk license
@@ -60,9 +64,11 @@ func (s *Service) DeleteOption(ctx context.Context, serviceName string, label Li
 }
 
 // opGetCanLicenseBeMovedTo is GetCanLicenseBeMovedTo's entry in the operation registry (ovh.Operations).
-var opGetCanLicenseBeMovedTo = &ovh.Operation{Name: "licenseplesk.GetCanLicenseBeMovedTo", Method: http.MethodGet, Path: "/v1/license/plesk/{serviceName}/canLicenseBeMovedTo", Summary: "Will tell if the ip can accept the license", IAMActions: []string{"licensePlesk:apiovh:canLicenseBeMovedTo/get"}}
+var opGetCanLicenseBeMovedTo = &ovh.Operation{Name: "licenseplesk.GetCanLicenseBeMovedTo", Method: http.MethodGet, Path: "/v1/license/plesk/{serviceName}/canLicenseBeMovedTo", Summary: "Check whether a Plesk license can be moved to an IP", IAMActions: []string{"licensePlesk:apiovh:canLicenseBeMovedTo/get"}}
 
-// GetCanLicenseBeMovedTo calls GET /v1/license/plesk/{serviceName}/canLicenseBeMovedTo: Will tell if the ip can accept the license
+// GetCanLicenseBeMovedTo calls GET /v1/license/plesk/{serviceName}/canLicenseBeMovedTo: Check whether a Plesk license can be moved to an IP
+//
+// Returns whether the destination IP can receive the license, with the reason when it cannot.
 //
 // Arguments:
 //   - serviceName: The name of your Plesk license
@@ -74,9 +80,11 @@ func (s *Service) GetCanLicenseBeMovedTo(ctx context.Context, serviceName string
 }
 
 // opGetOption is GetOption's entry in the operation registry (ovh.Operations).
-var opGetOption = &ovh.Operation{Name: "licenseplesk.GetOption", Method: http.MethodGet, Path: "/v1/license/plesk/{serviceName}/option/{label}", Summary: "Get this object properties", IAMActions: []string{"licensePlesk:apiovh:option/get"}}
+var opGetOption = &ovh.Operation{Name: "licenseplesk.GetOption", Method: http.MethodGet, Path: "/v1/license/plesk/{serviceName}/option/{label}", Summary: "Get an option of a license", IAMActions: []string{"licensePlesk:apiovh:option/get"}}
 
-// GetOption calls GET /v1/license/plesk/{serviceName}/option/{label}: Get this object properties
+// GetOption calls GET /v1/license/plesk/{serviceName}/option/{label}: Get an option of a license
+//
+// Returns the label, version, quantity, expiration date and whether the option can be released.
 //
 // Arguments:
 //   - serviceName: The name of your Plesk license
@@ -101,9 +109,12 @@ func (s *Service) AllOptions(ctx context.Context, serviceName string) iter.Seq2[
 }
 
 // opGetPlesk is GetPlesk's entry in the operation registry (ovh.Operations).
-var opGetPlesk = &ovh.Operation{Name: "licenseplesk.GetPlesk", Method: http.MethodGet, Path: "/v1/license/plesk/{serviceName}", Summary: "Get this object properties", IAMActions: []string{"licensePlesk:apiovh:get"}}
+var opGetPlesk = &ovh.Operation{Name: "licenseplesk.GetPlesk", Method: http.MethodGet, Path: "/v1/license/plesk/{serviceName}", Summary: "Get a Plesk license", IAMActions: []string{"licensePlesk:apiovh:get"}}
 
-// GetPlesk calls GET /v1/license/plesk/{serviceName}: Get this object properties
+// GetPlesk calls GET /v1/license/plesk/{serviceName}: Get a Plesk license
+//
+// Returns the license ID, version, status, IP address, domain number and the license, product and
+// information keys.
 //
 // Arguments:
 //   - serviceName: The name of your Plesk license
@@ -142,9 +153,12 @@ func (s *Service) GetServiceInfos(ctx context.Context, serviceName string) (*Ser
 }
 
 // opGetTasks is GetTasks's entry in the operation registry (ovh.Operations).
-var opGetTasks = &ovh.Operation{Name: "licenseplesk.GetTasks", Method: http.MethodGet, Path: "/v1/license/plesk/{serviceName}/tasks/{taskId}", Summary: "Get this object properties", IAMActions: []string{"licensePlesk:apiovh:tasks/get"}}
+var opGetTasks = &ovh.Operation{Name: "licenseplesk.GetTasks", Method: http.MethodGet, Path: "/v1/license/plesk/{serviceName}/tasks/{taskId}", Summary: "Get a license task", IAMActions: []string{"licensePlesk:apiovh:tasks/get"}}
 
-// GetTasks calls GET /v1/license/plesk/{serviceName}/tasks/{taskId}: Get this object properties
+// GetTasks calls GET /v1/license/plesk/{serviceName}/tasks/{taskId}: Get a license task
+//
+// Returns the action, status, creation date, completion date and last update of a task linked to a
+// license.
 //
 // Arguments:
 //   - serviceName: The name of your Plesk license
@@ -169,9 +183,11 @@ func (s *Service) AllTasks(ctx context.Context, serviceName string, params ...Li
 }
 
 // opListAllowedDestinationIPs is ListAllowedDestinationIPs's entry in the operation registry (ovh.Operations).
-var opListAllowedDestinationIPs = &ovh.Operation{Name: "licenseplesk.ListAllowedDestinationIPs", Method: http.MethodGet, Path: "/v1/license/plesk/{serviceName}/allowedDestinationIp", Summary: "Returns an array of ips where the license can be moved to", IAMActions: []string{"licensePlesk:apiovh:allowedDestinationIp/get"}}
+var opListAllowedDestinationIPs = &ovh.Operation{Name: "licenseplesk.ListAllowedDestinationIPs", Method: http.MethodGet, Path: "/v1/license/plesk/{serviceName}/allowedDestinationIp", Summary: "List the IPs a Plesk license can be moved to", IAMActions: []string{"licensePlesk:apiovh:allowedDestinationIp/get"}}
 
-// ListAllowedDestinationIPs calls GET /v1/license/plesk/{serviceName}/allowedDestinationIp: Returns an array of ips where the license can be moved to
+// ListAllowedDestinationIPs calls GET /v1/license/plesk/{serviceName}/allowedDestinationIp: List the IPs a Plesk license can be moved to
+//
+// Returns the IP blocks that can receive the license, so you can pick the destination of a move.
 //
 // Arguments:
 //   - serviceName: The name of your Plesk license
@@ -182,9 +198,12 @@ func (s *Service) ListAllowedDestinationIPs(ctx context.Context, serviceName str
 }
 
 // opListOptions is ListOptions's entry in the operation registry (ovh.Operations).
-var opListOptions = &ovh.Operation{Name: "licenseplesk.ListOptions", Method: http.MethodGet, Path: "/v1/license/plesk/{serviceName}/option", Summary: "options attached to this license", IAMActions: []string{"licensePlesk:apiovh:option/get"}}
+var opListOptions = &ovh.Operation{Name: "licenseplesk.ListOptions", Method: http.MethodGet, Path: "/v1/license/plesk/{serviceName}/option", Summary: "List the options of a Plesk license", IAMActions: []string{"licensePlesk:apiovh:option/get"}}
 
-// ListOptions calls GET /v1/license/plesk/{serviceName}/option: options attached to this license
+// ListOptions calls GET /v1/license/plesk/{serviceName}/option: List the options of a Plesk license
+//
+// Returns the labels of the options attached to the license; get an option for its version,
+// quantity and expiration date.
 //
 // Arguments:
 //   - serviceName: The name of your Plesk license
@@ -195,9 +214,12 @@ func (s *Service) ListOptions(ctx context.Context, serviceName string) ([]Licens
 }
 
 // opListOrderableVersions is ListOrderableVersions's entry in the operation registry (ovh.Operations).
-var opListOrderableVersions = &ovh.Operation{Name: "licenseplesk.ListOrderableVersions", Method: http.MethodGet, Path: "/v1/license/plesk/orderableVersions", Summary: "Get the orderable Plesk versions and their associated compatibilities", IAMActions: []string{"account:apiovh:licensePlesk/orderableVersions/get"}}
+var opListOrderableVersions = &ovh.Operation{Name: "licenseplesk.ListOrderableVersions", Method: http.MethodGet, Path: "/v1/license/plesk/orderableVersions", Summary: "Get the orderable Plesk versions", IAMActions: []string{"account:apiovh:licensePlesk/orderableVersions/get"}}
 
-// ListOrderableVersions calls GET /v1/license/plesk/orderableVersions: Get the orderable Plesk versions and their associated compatibilities
+// ListOrderableVersions calls GET /v1/license/plesk/orderableVersions: Get the orderable Plesk versions
+//
+// Returns, for the given IP, the versions and their compliant domain numbers, language packs,
+// antivirus, application sets and potential problems.
 //
 // Arguments:
 //   - ip: Your license Ip
@@ -208,7 +230,7 @@ func (s *Service) ListOrderableVersions(ctx context.Context, ip string) ([]Licen
 }
 
 // opListPlesks is ListPlesks's entry in the operation registry (ovh.Operations).
-var opListPlesks = &ovh.Operation{Name: "licenseplesk.ListPlesks", Method: http.MethodGet, Path: "/v1/license/plesk", Summary: "List available services", IAMActions: []string{"licensePlesk:apiovh:get"}}
+var opListPlesks = &ovh.Operation{Name: "licenseplesk.ListPlesks", Method: http.MethodGet, Path: "/v1/license/plesk", Summary: "List your Plesk licenses", IAMActions: []string{"licensePlesk:apiovh:get"}}
 
 // ListPlesksParams holds the optional parameters of ListPlesks.
 type ListPlesksParams struct {
@@ -216,7 +238,10 @@ type ListPlesksParams struct {
 	IAMTags map[string][]IAMResourceTagFilter `ovh:"query,iamTags"`
 }
 
-// ListPlesks calls GET /v1/license/plesk: List available services
+// ListPlesks calls GET /v1/license/plesk: List your Plesk licenses
+//
+// Returns the names of the Plesk licenses of the account; each name is the service name used by the
+// other calls.
 //
 // Requires the IAM action licensePlesk:apiovh:get.
 func (s *Service) ListPlesks(ctx context.Context, params ...ListPlesksParams) ([]string, error) {
@@ -224,7 +249,7 @@ func (s *Service) ListPlesks(ctx context.Context, params ...ListPlesksParams) ([
 }
 
 // opListTasks is ListTasks's entry in the operation registry (ovh.Operations).
-var opListTasks = &ovh.Operation{Name: "licenseplesk.ListTasks", Method: http.MethodGet, Path: "/v1/license/plesk/{serviceName}/tasks", Summary: "tasks linked to this license", IAMActions: []string{"licensePlesk:apiovh:tasks/get"}}
+var opListTasks = &ovh.Operation{Name: "licenseplesk.ListTasks", Method: http.MethodGet, Path: "/v1/license/plesk/{serviceName}/tasks", Summary: "List the tasks of a Plesk license", IAMActions: []string{"licensePlesk:apiovh:tasks/get"}}
 
 // ListTasksParams holds the optional parameters of ListTasks.
 type ListTasksParams struct {
@@ -234,7 +259,10 @@ type ListTasksParams struct {
 	Status *LicenseTaskStateEnum `ovh:"query,status"`
 }
 
-// ListTasks calls GET /v1/license/plesk/{serviceName}/tasks: tasks linked to this license
+// ListTasks calls GET /v1/license/plesk/{serviceName}/tasks: List the tasks of a Plesk license
+//
+// Returns the IDs of the tasks linked to the license, each task records an action such as a version
+// upgrade, an option change or an IP change.
 //
 // Arguments:
 //   - serviceName: The name of your Plesk license
@@ -261,9 +289,11 @@ func (s *Service) Terminate(ctx context.Context, serviceName string) (string, er
 }
 
 // opUpdatePlesk is UpdatePlesk's entry in the operation registry (ovh.Operations).
-var opUpdatePlesk = &ovh.Operation{Name: "licenseplesk.UpdatePlesk", Method: http.MethodPut, Path: "/v1/license/plesk/{serviceName}", Summary: "Alter this object properties", IAMActions: []string{"licensePlesk:apiovh:put"}}
+var opUpdatePlesk = &ovh.Operation{Name: "licenseplesk.UpdatePlesk", Method: http.MethodPut, Path: "/v1/license/plesk/{serviceName}", Summary: "Update a Plesk license", IAMActions: []string{"licensePlesk:apiovh:put"}}
 
-// UpdatePlesk calls PUT /v1/license/plesk/{serviceName}: Alter this object properties
+// UpdatePlesk calls PUT /v1/license/plesk/{serviceName}: Update a Plesk license
+//
+// Changes the settings that can be modified: the automatic deletion at expiration.
 //
 // Arguments:
 //   - serviceName: The name of your Plesk license

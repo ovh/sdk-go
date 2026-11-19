@@ -1,58 +1,57 @@
 # Contributing to sdk-go
 
-This project accepts contributions. In order to contribute, you should pay attention to a few
-things:
-
-1. your code must follow the coding style rules
-2. your code must be unit-tested
-3. your code must be documented
-4. your work must be signed (see below)
-5. you may contribute through GitHub Pull Requests
+This project accepts contributions: issues and pull requests on GitHub. Your work must be
+signed off (see the DCO below).
 
 # How this repository is built
 
-Most of this repository is **generated** from the OVHcloud API's OpenAPI specifications, and
-regenerated on every release:
+This repository is an **export**. The maintainers build it from a private generator at each
+release, and each export **replaces the whole tree**:
 
-- `pkg/` — one package per API section: **generated**. Do not edit these files: a change made
-  here is overwritten by the next release.
-- `ovh/` — the SDK core (client, authentication, retries, errors, pagination): hand-written.
+- `pkg/`: one package per API section, generated from the OVHcloud API's OpenAPI
+  specifications.
+- `index/` and `llms.txt`: generated with the code.
+- `ovh/`: the SDK core (client, authentication, retries, errors, pagination). It is
+  hand-written, but it lives in the generator too, with its tests.
+
+The tests are not exported. So a change merged here would be lost at the next export. This
+is why the maintainers do not merge pull requests here. They port the change into the
+generator instead, with tests, and close the pull request with a link to the release that
+has it.
 
 So the most useful contributions are:
 
 - **Issues**: a wrong type, a missing operation, a confusing name, a bug in the core. Please
-  include the API route involved (every method's documentation starts with it, e.g.
-  `GetVrack calls GET /v1/vrack/{serviceName}`).
-- **Pull requests on `ovh/`** are reviewed and merged as usual.
-- **Pull requests on `pkg/`** are welcome as a precise description of a problem. The
-  maintainers carry the fix into the generator, so the change survives regeneration, and
-  close the pull request with a link to the release that includes it.
+  give the API route (every method's doc comment starts with it, for example
+  `GetAccountDetails calls GET /v1/me`).
+- **Pull requests**, on `ovh/` or on `pkg/`, as a precise description of a fix. Say what was
+  wrong and how to see it: a short program or the failing call helps most.
 
-A problem in the API's own behaviour or documentation is not something this repository can fix:
-report it through OVHcloud support.
+A problem in the API's own behaviour or documentation is not something this repository can
+fix: report it to OVHcloud support.
 
-# Coding and documentation Style
+# Coding and documentation style
 
 Go code follows the usual Go conventions: `gofmt`, `go vet`, and the guidelines in
-[Effective Go](https://go.dev/doc/effective_go). Every exported identifier is documented. Run:
+[Effective Go](https://go.dev/doc/effective_go). Every exported name has a doc comment.
+Before you open a pull request, check that the module still builds:
 
 ```bash
+go build ./...
 go vet ./...
-go test -race ./ovh/...
 ```
 
-# Submitting Modifications
+# Submitting modifications
 
-The contributions should be submitted through Github Pull Requests and follow the DCO which is
-defined below.
+Contributions are submitted through GitHub Pull Requests and follow the DCO defined below.
 
 # Licensing for new files
 
-sdk-go is licensed under the Apache License 2.0. Anything contributed to sdk-go must be released
-under this license.
+sdk-go is licensed under the Apache License 2.0. Anything contributed to sdk-go must be
+released under this license.
 
-When introducing a new file into the project, please make sure it has a copyright header making
-clear under which license it's being released:
+When you add a new file to the project, make sure it has a copyright header that says under
+which license it is released:
 
 ```go
 // SPDX-FileCopyrightText: 2026 OVH SAS

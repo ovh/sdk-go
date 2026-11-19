@@ -15,7 +15,7 @@ import (
 )
 
 // opCreateOrganizationVirtualDataCenterEdgeGateway is CreateOrganizationVirtualDataCenterEdgeGateway's entry in the operation registry (ovh.Operations).
-var opCreateOrganizationVirtualDataCenterEdgeGateway = &ovh.Operation{Name: "vmwareclouddirector.CreateOrganizationVirtualDataCenterEdgeGateway", Method: http.MethodPost, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/edgeGateway", Summary: "Create an edge gateway", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/edgeGateway/create"}}
+var opCreateOrganizationVirtualDataCenterEdgeGateway = &ovh.Operation{Name: "vmwareclouddirector.CreateOrganizationVirtualDataCenterEdgeGateway", Method: http.MethodPost, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/edgeGateway", Summary: "Create an edge gateway", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/edgeGateway/create"}, SchemasVersion: "1.0"}
 
 // CreateOrganizationVirtualDataCenterEdgeGateway calls POST /v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/edgeGateway: Create an edge gateway
 //
@@ -33,7 +33,7 @@ func (s *Service) CreateOrganizationVirtualDataCenterEdgeGateway(ctx context.Con
 }
 
 // opDeleteOrganizationVirtualDataCenterEdgeGateway is DeleteOrganizationVirtualDataCenterEdgeGateway's entry in the operation registry (ovh.Operations).
-var opDeleteOrganizationVirtualDataCenterEdgeGateway = &ovh.Operation{Name: "vmwareclouddirector.DeleteOrganizationVirtualDataCenterEdgeGateway", Method: http.MethodDelete, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/edgeGateway/{edgeGatewayId}", Summary: "Delete an edge gateway", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/edgeGateway/delete"}}
+var opDeleteOrganizationVirtualDataCenterEdgeGateway = &ovh.Operation{Name: "vmwareclouddirector.DeleteOrganizationVirtualDataCenterEdgeGateway", Method: http.MethodDelete, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/edgeGateway/{edgeGatewayId}", Summary: "Delete an edge gateway", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/edgeGateway/delete"}, SchemasVersion: "1.0"}
 
 // DeleteOrganizationVirtualDataCenterEdgeGateway calls DELETE /v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/edgeGateway/{edgeGatewayId}: Delete an edge gateway
 //
@@ -51,7 +51,7 @@ func (s *Service) DeleteOrganizationVirtualDataCenterEdgeGateway(ctx context.Con
 }
 
 // opGetOrganizationVirtualDataCenterEdgeGateway is GetOrganizationVirtualDataCenterEdgeGateway's entry in the operation registry (ovh.Operations).
-var opGetOrganizationVirtualDataCenterEdgeGateway = &ovh.Operation{Name: "vmwareclouddirector.GetOrganizationVirtualDataCenterEdgeGateway", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/edgeGateway/{edgeGatewayId}", Summary: "Get an edge gateway", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/edgeGateway/get"}}
+var opGetOrganizationVirtualDataCenterEdgeGateway = &ovh.Operation{Name: "vmwareclouddirector.GetOrganizationVirtualDataCenterEdgeGateway", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/edgeGateway/{edgeGatewayId}", Summary: "Get an edge gateway", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/edgeGateway/get"}, SchemasVersion: "1.0"}
 
 // GetOrganizationVirtualDataCenterEdgeGateway calls GET /v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/edgeGateway/{edgeGatewayId}: Get an edge gateway
 //
@@ -69,7 +69,7 @@ func (s *Service) GetOrganizationVirtualDataCenterEdgeGateway(ctx context.Contex
 }
 
 // opGetOrganizationVirtualDataCenterEdgeGatewayTask is GetOrganizationVirtualDataCenterEdgeGatewayTask's entry in the operation registry (ovh.Operations).
-var opGetOrganizationVirtualDataCenterEdgeGatewayTask = &ovh.Operation{Name: "vmwareclouddirector.GetOrganizationVirtualDataCenterEdgeGatewayTask", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/edgeGateway/{edgeGatewayId}/task/{taskId}", Summary: "Get an edge gateway task", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/edgeGateway/task/get"}}
+var opGetOrganizationVirtualDataCenterEdgeGatewayTask = &ovh.Operation{Name: "vmwareclouddirector.GetOrganizationVirtualDataCenterEdgeGatewayTask", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/edgeGateway/{edgeGatewayId}/task/{taskId}", Summary: "Get an edge gateway task", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/edgeGateway/task/get"}, SchemasVersion: "1.0"}
 
 // GetOrganizationVirtualDataCenterEdgeGatewayTask calls GET /v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/edgeGateway/{edgeGatewayId}/task/{taskId}: Get an edge gateway task
 //
@@ -88,7 +88,7 @@ func (s *Service) GetOrganizationVirtualDataCenterEdgeGatewayTask(ctx context.Co
 }
 
 // opListOrganizationVirtualDataCenterEdgeGatewayTasks is AllOrganizationVirtualDataCenterEdgeGatewayTasks's entry in the operation registry (ovh.Operations).
-var opListOrganizationVirtualDataCenterEdgeGatewayTasks = &ovh.Operation{Name: "vmwareclouddirector.AllOrganizationVirtualDataCenterEdgeGatewayTasks", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/edgeGateway/{edgeGatewayId}/task", Summary: "List edge gateway tasks", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/edgeGateway/task/get"}}
+var opListOrganizationVirtualDataCenterEdgeGatewayTasks = &ovh.Operation{Name: "vmwareclouddirector.AllOrganizationVirtualDataCenterEdgeGatewayTasks", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/edgeGateway/{edgeGatewayId}/task", Summary: "List edge gateway tasks", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/edgeGateway/task/get"}, SchemasVersion: "1.0"}
 
 // AllOrganizationVirtualDataCenterEdgeGatewayTasks iterates over GET /v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/edgeGateway/{edgeGatewayId}/task (List edge gateway tasks),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -108,7 +108,7 @@ func (s *Service) AllOrganizationVirtualDataCenterEdgeGatewayTasks(ctx context.C
 }
 
 // opListOrganizationVirtualDataCenterEdgeGateways is AllOrganizationVirtualDataCenterEdgeGateways's entry in the operation registry (ovh.Operations).
-var opListOrganizationVirtualDataCenterEdgeGateways = &ovh.Operation{Name: "vmwareclouddirector.AllOrganizationVirtualDataCenterEdgeGateways", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/edgeGateway", Summary: "List edge gateways", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/edgeGateway/get"}}
+var opListOrganizationVirtualDataCenterEdgeGateways = &ovh.Operation{Name: "vmwareclouddirector.AllOrganizationVirtualDataCenterEdgeGateways", Method: http.MethodGet, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/edgeGateway", Summary: "List edge gateways", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/edgeGateway/get"}, SchemasVersion: "1.0"}
 
 // AllOrganizationVirtualDataCenterEdgeGateways iterates over GET /v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/edgeGateway (List edge gateways),
 // one item at a time, fetching the next page only when the loop reaches it. On an error it
@@ -127,7 +127,7 @@ func (s *Service) AllOrganizationVirtualDataCenterEdgeGateways(ctx context.Conte
 }
 
 // opUpdateOrganizationVirtualDataCenterEdgeGateway is UpdateOrganizationVirtualDataCenterEdgeGateway's entry in the operation registry (ovh.Operations).
-var opUpdateOrganizationVirtualDataCenterEdgeGateway = &ovh.Operation{Name: "vmwareclouddirector.UpdateOrganizationVirtualDataCenterEdgeGateway", Method: http.MethodPut, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/edgeGateway/{edgeGatewayId}", Summary: "Update an edge gateway", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/edgeGateway/edit"}}
+var opUpdateOrganizationVirtualDataCenterEdgeGateway = &ovh.Operation{Name: "vmwareclouddirector.UpdateOrganizationVirtualDataCenterEdgeGateway", Method: http.MethodPut, Path: "/v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/edgeGateway/{edgeGatewayId}", Summary: "Update an edge gateway", IAMActions: []string{"vmwareCloudDirector:apiovh:organization/virtualDataCenter/edgeGateway/edit"}, SchemasVersion: "1.0"}
 
 // UpdateOrganizationVirtualDataCenterEdgeGateway calls PUT /v2/vmwareCloudDirector/organization/{organizationId}/virtualDataCenter/{virtualDataCenterId}/edgeGateway/{edgeGatewayId}: Update an edge gateway
 //

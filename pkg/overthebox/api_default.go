@@ -838,6 +838,22 @@ func (s *Service) UpdateAutoMTU(ctx context.Context, serviceName string, body Up
 	return s.c.Do(ctx, &ovh.Request{Operation: opUpdateAutoMTU, Method: http.MethodPut, Path: ovh.Path("/v1/overTheBox/{serviceName}/autoMTU", "serviceName", serviceName), Body: body}, nil)
 }
 
+// opUpdateIPv6 is UpdateIPv6's entry in the operation registry (ovh.Operations).
+var opUpdateIPv6 = &ovh.Operation{Name: "overthebox.UpdateIPv6", Method: http.MethodPut, Path: "/v1/overTheBox/{serviceName}/ipv6", Summary: "Update the IPv6 status of an OverTheBox service", IAMActions: []string{"overTheBox:apiovh:ipv6/edit"}}
+
+// UpdateIPv6 calls PUT /v1/overTheBox/{serviceName}/ipv6: Update the IPv6 status of an OverTheBox service
+//
+// Enables or disables IPv6 on the service and returns the task that performs the change.
+//
+// Arguments:
+//   - serviceName: The internal name of your overTheBox offer
+//   - body: the request body
+//
+// Requires the IAM action overTheBox:apiovh:ipv6/edit.
+func (s *Service) UpdateIPv6(ctx context.Context, serviceName string, body UpdateIPv6Request) (*OverTheBoxTask, error) {
+	return ovh.Call[*OverTheBoxTask](ctx, s.c, &ovh.Request{Operation: opUpdateIPv6, Method: http.MethodPut, Path: ovh.Path("/v1/overTheBox/{serviceName}/ipv6", "serviceName", serviceName), Body: body})
+}
+
 // opUpdateOverTheBox is UpdateOverTheBox's entry in the operation registry (ovh.Operations).
 var opUpdateOverTheBox = &ovh.Operation{Name: "overthebox.UpdateOverTheBox", Method: http.MethodPut, Path: "/v1/overTheBox/{serviceName}", Summary: "Update an OverTheBox service", IAMActions: []string{"overTheBox:apiovh:put"}}
 
@@ -873,5 +889,5 @@ func (s *Service) UpdateServiceInfos(ctx context.Context, serviceName string, bo
 }
 
 func init() {
-	ovh.RegisterOperations(opAuthorizeRemoteAccesses, opBackupDevice, opCancelResiliation, opChangeContact, opChangeOffersMigration, opCreateDeviceActions, opCreateLogSubscription, opCreateRemoteAccesses, opDeleteBackups, opDeleteDevice, opDeleteLogSubscription, opDeleteOverTheBox, opDeleteRemoteAccesses, opDevices, opGetBackups, opGetDevice, opGetDeviceActions, opGetDeviceHardware, opGetHardware, opGetLogKind, opGetLogSubscription, opGetOverTheBox, opGetRemoteAccesses, opGetServiceInfos, opGetTasks, opLinkDevice, opLinkHardware, opListAvailableOffers, opListAvailableReleaseChannels, opListBackups, opListDeviceActions, opListDeviceAvailableActions, opListHardwareAvailables, opListHardwares, opListLogKinds, opListLogSubscriptions, opListMigrationOffers, opListOverTheBoxes, opListRemoteAccesses, opListTasks, opLogsDevice, opRestoreBackupDevice, opURLLog, opUpdateAutoMTU, opUpdateOverTheBox, opUpdateServiceInfos)
+	ovh.RegisterOperations(opAuthorizeRemoteAccesses, opBackupDevice, opCancelResiliation, opChangeContact, opChangeOffersMigration, opCreateDeviceActions, opCreateLogSubscription, opCreateRemoteAccesses, opDeleteBackups, opDeleteDevice, opDeleteLogSubscription, opDeleteOverTheBox, opDeleteRemoteAccesses, opDevices, opGetBackups, opGetDevice, opGetDeviceActions, opGetDeviceHardware, opGetHardware, opGetLogKind, opGetLogSubscription, opGetOverTheBox, opGetRemoteAccesses, opGetServiceInfos, opGetTasks, opLinkDevice, opLinkHardware, opListAvailableOffers, opListAvailableReleaseChannels, opListBackups, opListDeviceActions, opListDeviceAvailableActions, opListHardwareAvailables, opListHardwares, opListLogKinds, opListLogSubscriptions, opListMigrationOffers, opListOverTheBoxes, opListRemoteAccesses, opListTasks, opLogsDevice, opRestoreBackupDevice, opURLLog, opUpdateAutoMTU, opUpdateIPv6, opUpdateOverTheBox, opUpdateServiceInfos)
 }

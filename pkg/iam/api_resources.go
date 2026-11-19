@@ -15,7 +15,7 @@ import (
 )
 
 // opCreateResourceGroup is CreateResourceGroup's entry in the operation registry (ovh.Operations).
-var opCreateResourceGroup = &ovh.Operation{Name: "iam.CreateResourceGroup", Method: http.MethodPost, Path: "/v2/iam/resourceGroup", Summary: "Create a resource group", IAMActions: []string{"account:apiovh:iam/resourceGroup/create"}}
+var opCreateResourceGroup = &ovh.Operation{Name: "iam.CreateResourceGroup", Method: http.MethodPost, Path: "/v2/iam/resourceGroup", Summary: "Create a resource group", IAMActions: []string{"account:apiovh:iam/resourceGroup/create"}, SchemasVersion: "1.0"}
 
 // CreateResourceGroup calls POST /v2/iam/resourceGroup: Create a resource group
 //
@@ -30,7 +30,7 @@ func (s *Service) CreateResourceGroup(ctx context.Context, body IAMGroupCreation
 }
 
 // opDeleteResourceGroup is DeleteResourceGroup's entry in the operation registry (ovh.Operations).
-var opDeleteResourceGroup = &ovh.Operation{Name: "iam.DeleteResourceGroup", Method: http.MethodDelete, Path: "/v2/iam/resourceGroup/{groupId}", Summary: "Delete a resource group", IAMActions: []string{"account:apiovh:iam/resourceGroup/delete"}}
+var opDeleteResourceGroup = &ovh.Operation{Name: "iam.DeleteResourceGroup", Method: http.MethodDelete, Path: "/v2/iam/resourceGroup/{groupId}", Summary: "Delete a resource group", IAMActions: []string{"account:apiovh:iam/resourceGroup/delete"}, SchemasVersion: "1.0"}
 
 // DeleteResourceGroup calls DELETE /v2/iam/resourceGroup/{groupId}: Delete a resource group
 //
@@ -45,7 +45,7 @@ func (s *Service) DeleteResourceGroup(ctx context.Context, groupID string) error
 }
 
 // opDeleteResourceTag is DeleteResourceTag's entry in the operation registry (ovh.Operations).
-var opDeleteResourceTag = &ovh.Operation{Name: "iam.DeleteResourceTag", Method: http.MethodDelete, Path: "/v2/iam/resource/{resourceURN}/tag/{key}", Summary: "Delete a resource tag", IAMActions: []string{"account:apiovh:iam/resource/tag/remove"}}
+var opDeleteResourceTag = &ovh.Operation{Name: "iam.DeleteResourceTag", Method: http.MethodDelete, Path: "/v2/iam/resource/{resourceURN}/tag/{key}", Summary: "Delete a resource tag", IAMActions: []string{"account:apiovh:iam/resource/tag/remove"}, SchemasVersion: "1.0"}
 
 // DeleteResourceTag calls DELETE /v2/iam/resource/{resourceURN}/tag/{key}: Delete a resource tag
 //
@@ -62,7 +62,7 @@ func (s *Service) DeleteResourceTag(ctx context.Context, resourceURN string, key
 }
 
 // opGetResource is GetResource's entry in the operation registry (ovh.Operations).
-var opGetResource = &ovh.Operation{Name: "iam.GetResource", Method: http.MethodGet, Path: "/v2/iam/resource/{resourceURN}", Summary: "Get a resource"}
+var opGetResource = &ovh.Operation{Name: "iam.GetResource", Method: http.MethodGet, Path: "/v2/iam/resource/{resourceURN}", Summary: "Get a resource", SchemasVersion: "1.0"}
 
 // GetResource calls GET /v2/iam/resource/{resourceURN}: Get a resource
 //
@@ -75,7 +75,7 @@ func (s *Service) GetResource(ctx context.Context, resourceURN string) (*IAMReso
 }
 
 // opGetResourceGroup is GetResourceGroup's entry in the operation registry (ovh.Operations).
-var opGetResourceGroup = &ovh.Operation{Name: "iam.GetResourceGroup", Method: http.MethodGet, Path: "/v2/iam/resourceGroup/{groupId}", Summary: "Get a resource group", IAMActions: []string{"account:apiovh:iam/resourceGroup/get"}}
+var opGetResourceGroup = &ovh.Operation{Name: "iam.GetResourceGroup", Method: http.MethodGet, Path: "/v2/iam/resourceGroup/{groupId}", Summary: "Get a resource group", IAMActions: []string{"account:apiovh:iam/resourceGroup/get"}, SchemasVersion: "1.0"}
 
 // GetResourceGroupParams holds the optional parameters of GetResourceGroup.
 type GetResourceGroupParams struct {
@@ -97,7 +97,7 @@ func (s *Service) GetResourceGroup(ctx context.Context, groupID string, params .
 }
 
 // opListResourceGroups is AllResourceGroups's entry in the operation registry (ovh.Operations).
-var opListResourceGroups = &ovh.Operation{Name: "iam.AllResourceGroups", Method: http.MethodGet, Path: "/v2/iam/resourceGroup", Summary: "List resource groups", IAMActions: []string{"account:apiovh:iam/resourceGroup/get"}}
+var opListResourceGroups = &ovh.Operation{Name: "iam.AllResourceGroups", Method: http.MethodGet, Path: "/v2/iam/resourceGroup", Summary: "List resource groups", IAMActions: []string{"account:apiovh:iam/resourceGroup/get"}, SchemasVersion: "1.0"}
 
 // ListResourceGroupsParams holds the optional parameters of ListResourceGroups.
 type ListResourceGroupsParams struct {
@@ -117,7 +117,7 @@ func (s *Service) AllResourceGroups(ctx context.Context, params ...ListResourceG
 }
 
 // opListResources is AllResources's entry in the operation registry (ovh.Operations).
-var opListResources = &ovh.Operation{Name: "iam.AllResources", Method: http.MethodGet, Path: "/v2/iam/resource", Summary: "List resources"}
+var opListResources = &ovh.Operation{Name: "iam.AllResources", Method: http.MethodGet, Path: "/v2/iam/resource", Summary: "List resources", SchemasVersion: "1.0"}
 
 // ListResourcesParams holds the optional parameters of ListResources.
 type ListResourcesParams struct {
@@ -142,7 +142,7 @@ func (s *Service) AllResources(ctx context.Context, params ...ListResourcesParam
 }
 
 // opTagResource is TagResource's entry in the operation registry (ovh.Operations).
-var opTagResource = &ovh.Operation{Name: "iam.TagResource", Method: http.MethodPost, Path: "/v2/iam/resource/{resourceURN}/tag", Summary: "Add a resource tag", IAMActions: []string{"account:apiovh:iam/resource/tag/add"}}
+var opTagResource = &ovh.Operation{Name: "iam.TagResource", Method: http.MethodPost, Path: "/v2/iam/resource/{resourceURN}/tag", Summary: "Add a resource tag", IAMActions: []string{"account:apiovh:iam/resource/tag/add"}, SchemasVersion: "1.0"}
 
 // TagResource calls POST /v2/iam/resource/{resourceURN}/tag: Add a resource tag
 //
@@ -159,7 +159,7 @@ func (s *Service) TagResource(ctx context.Context, resourceURN string, body IAMR
 }
 
 // opUpdateResource is UpdateResource's entry in the operation registry (ovh.Operations).
-var opUpdateResource = &ovh.Operation{Name: "iam.UpdateResource", Method: http.MethodPut, Path: "/v2/iam/resource/{resourceURN}", Summary: "Update a resource", IAMActions: []string{"account:apiovh:iam/resource/edit"}}
+var opUpdateResource = &ovh.Operation{Name: "iam.UpdateResource", Method: http.MethodPut, Path: "/v2/iam/resource/{resourceURN}", Summary: "Update a resource", IAMActions: []string{"account:apiovh:iam/resource/edit"}, SchemasVersion: "1.0"}
 
 // UpdateResource calls PUT /v2/iam/resource/{resourceURN}: Update a resource
 //
@@ -177,7 +177,7 @@ func (s *Service) UpdateResource(ctx context.Context, resourceURN string, body I
 }
 
 // opUpdateResourceGroup is UpdateResourceGroup's entry in the operation registry (ovh.Operations).
-var opUpdateResourceGroup = &ovh.Operation{Name: "iam.UpdateResourceGroup", Method: http.MethodPut, Path: "/v2/iam/resourceGroup/{groupId}", Summary: "Update a resource group", IAMActions: []string{"account:apiovh:iam/resourceGroup/edit"}}
+var opUpdateResourceGroup = &ovh.Operation{Name: "iam.UpdateResourceGroup", Method: http.MethodPut, Path: "/v2/iam/resourceGroup/{groupId}", Summary: "Update a resource group", IAMActions: []string{"account:apiovh:iam/resourceGroup/edit"}, SchemasVersion: "1.0"}
 
 // UpdateResourceGroup calls PUT /v2/iam/resourceGroup/{groupId}: Update a resource group
 //

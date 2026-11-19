@@ -1,0 +1,9 @@
+{
+  "version": "0.8.1",
+  "sections": 80,
+  "operations": 6180,
+  "methods": 6962,
+  "models": 8878,
+  "snapshot": "snapshot/2026.11.18-1654",
+  "generator": "v0.6.4"
+}

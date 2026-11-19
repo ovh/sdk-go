@@ -21,6 +21,8 @@ var opAnnounceUploadConference = &ovh.Operation{Name: "telephony.AnnounceUploadC
 
 // AnnounceUploadConference calls POST /v1/telephony/{billingAccount}/conference/{serviceName}/announceUpload: Upload the welcome announcement
 //
+// Uploads the sound played to participants when they join the conference.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -35,6 +37,9 @@ func (s *Service) AnnounceUploadConference(ctx context.Context, billingAccount s
 var opAssociateDeviceLine = &ovh.Operation{Name: "telephony.AssociateDeviceLine", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/associateDevice", Summary: "Associate a device", IAMActions: []string{"voip:apiovh:line/associateDevice/create"}}
 
 // AssociateDeviceLine calls POST /v1/telephony/{billingAccount}/line/{serviceName}/associateDevice: Associate a device
+//
+// Associates a phone with the line, using the phone MAC address (AABBCCDDEEFF), its public IP
+// address and the slot of the line on the phone.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -51,6 +56,9 @@ var opBlockLine = &ovh.Operation{Name: "telephony.BlockLine", Method: http.Metho
 
 // BlockLine calls POST /v1/telephony/{billingAccount}/line/{serviceName}/block: Block the line
 //
+// Blocks the incoming calls, the outgoing calls or both, depending on the mode. Without a mode,
+// both directions are blocked.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -66,6 +74,9 @@ var opCanTransferSecurityDeposit = &ovh.Operation{Name: "telephony.CanTransferSe
 
 // CanTransferSecurityDeposit calls POST /v1/telephony/{billingAccount}/canTransferSecurityDeposit: Check a security deposit transfer
 //
+// Checks whether the security deposit can be transferred to another billing account, given by its
+// name.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - body: the request body
@@ -79,6 +90,8 @@ func (s *Service) CanTransferSecurityDeposit(ctx context.Context, billingAccount
 var opCancelConvertToLineNumber = &ovh.Operation{Name: "telephony.CancelConvertToLineNumber", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/number/{serviceName}/cancelConvertToLine", Summary: "Cancel a scheduled conversion to line", IAMActions: []string{"voip:apiovh:number/cancelConvertToLine"}}
 
 // CancelConvertToLineNumber calls POST /v1/telephony/{billingAccount}/number/{serviceName}/cancelConvertToLine: Cancel a scheduled conversion to line
+//
+// Cancels the scheduled conversion of the number to a line. The number keeps its current feature.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -94,6 +107,8 @@ var opCancelConvertToNumberLine = &ovh.Operation{Name: "telephony.CancelConvertT
 
 // CancelConvertToNumberLine calls POST /v1/telephony/{billingAccount}/line/{serviceName}/cancelConvertToNumber: Cancel a scheduled conversion to number
 //
+// Cancels the scheduled conversion of the line to a number without a phone.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -107,6 +122,9 @@ func (s *Service) CancelConvertToNumberLine(ctx context.Context, billingAccount 
 var opCancelPortability = &ovh.Operation{Name: "telephony.CancelPortability", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/portability/{id}/cancel", Summary: "Cancel the porting", IAMActions: []string{"voip:apiovh:portability/cancel"}}
 
 // CancelPortability calls POST /v1/telephony/{billingAccount}/portability/{id}/cancel: Cancel the porting
+//
+// Requests the cancellation of the number porting, with a reason. Check first that the porting can
+// still be canceled.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -123,6 +141,9 @@ var opCancelProcedure = &ovh.Operation{Name: "telephony.CancelProcedure", Method
 
 // CancelProcedure calls POST /v1/telephony/procedure/{id}/cancel: Cancel a procedure
 //
+// Cancels the procedure linked to the account. Its status becomes cancel and it is no longer
+// processed.
+//
 // Arguments:
 //   - id: Procedure ID
 //
@@ -135,6 +156,9 @@ func (s *Service) CancelProcedure(ctx context.Context, id int) error {
 var opCancelScheduledRateCodeRsva = &ovh.Operation{Name: "telephony.CancelScheduledRateCodeRsva", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/rsva/{serviceName}/cancelScheduledRateCode", Summary: "Cancel the scheduled rate code", IAMActions: []string{"voip:apiovh:rsva/cancelScheduledRateCode"}}
 
 // CancelScheduledRateCodeRsva calls POST /v1/telephony/{billingAccount}/rsva/{serviceName}/cancelScheduledRateCode: Cancel the scheduled rate code
+//
+// Cancels the scheduled change of rate code. It must be done before the cancellation limit date of
+// the scheduled rate code.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -150,6 +174,8 @@ var opCancelTermination = &ovh.Operation{Name: "telephony.CancelTermination", Me
 
 // CancelTermination calls POST /v1/telephony/{billingAccount}/cancelTermination: Cancel the billing account termination
 //
+// Cancels the termination requested on the billing account, before it is executed.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //
@@ -162,6 +188,8 @@ func (s *Service) CancelTermination(ctx context.Context, billingAccount string) 
 var opCancelTerminationService = &ovh.Operation{Name: "telephony.CancelTerminationService", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/service/{serviceName}/cancelTermination", Summary: "Cancel the service termination", IAMActions: []string{"voip:apiovh:service/cancelTermination"}}
 
 // CancelTerminationService calls POST /v1/telephony/{billingAccount}/service/{serviceName}/cancelTermination: Cancel the service termination
+//
+// Cancels the termination requested on the service, before it is executed.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -241,6 +269,9 @@ var opChangeDatePortability = &ovh.Operation{Name: "telephony.ChangeDatePortabil
 
 // ChangeDatePortability calls POST /v1/telephony/{billingAccount}/portability/{id}/changeDate: Change the porting date
 //
+// Requests a new date for the number porting. Check first that the porting date can still be
+// changed.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - id: The ID of the portability
@@ -255,6 +286,8 @@ func (s *Service) ChangeDatePortability(ctx context.Context, billingAccount stri
 var opChangeDestinationDdi = &ovh.Operation{Name: "telephony.ChangeDestinationDdi", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/ddi/{serviceName}/changeDestination", Summary: "Change the DDI destination", IAMActions: []string{"voip:apiovh:ddi/changeDestination"}}
 
 // ChangeDestinationDdi calls POST /v1/telephony/{billingAccount}/ddi/{serviceName}/changeDestination: Change the DDI destination
+//
+// Changes the number calls to the DDI number are forwarded to. Returns the task that performs it.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -271,6 +304,8 @@ var opChangeDestinationRedirect = &ovh.Operation{Name: "telephony.ChangeDestinat
 
 // ChangeDestinationRedirect calls POST /v1/telephony/{billingAccount}/redirect/{serviceName}/changeDestination: Change the redirect destination
 //
+// Changes the number calls are forwarded to. Returns the task that performs it.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -286,6 +321,9 @@ var opChangeFeatureTypeNumber = &ovh.Operation{Name: "telephony.ChangeFeatureTyp
 
 // ChangeFeatureTypeNumber calls POST /v1/telephony/{billingAccount}/number/{serviceName}/changeFeatureType: Change the number feature type
 //
+// Changes the feature of the number, such as redirect, conference, contact center or PBX. The
+// previous configuration is lost.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: Name of the service
@@ -300,6 +338,8 @@ func (s *Service) ChangeFeatureTypeNumber(ctx context.Context, billingAccount st
 var opChangeOfBillingAccountService = &ovh.Operation{Name: "telephony.ChangeOfBillingAccountService", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/service/{serviceName}/changeOfBillingAccount", Summary: "Move a service to another billing account", IAMActions: []string{"voip:apiovh:service/changeOfBillingAccount"}}
 
 // ChangeOfBillingAccountService calls POST /v1/telephony/{billingAccount}/service/{serviceName}/changeOfBillingAccount: Move a service to another billing account
+//
+// Moves the service to another billing account of the same customer, given by its name.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -334,6 +374,9 @@ var opChangePasswordLine = &ovh.Operation{Name: "telephony.ChangePasswordLine", 
 
 // ChangePasswordLine calls POST /v1/telephony/{billingAccount}/line/{serviceName}/changePassword: Change the SIP password
 //
+// Changes the SIP password of the line, used by the phone or softphone to register. The new
+// password is given in the password parameter.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -348,6 +391,8 @@ func (s *Service) ChangePasswordLine(ctx context.Context, billingAccount string,
 var opChangePasswordLineClick2CallUser = &ovh.Operation{Name: "telephony.ChangePasswordLineClick2CallUser", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/click2CallUser/{id}/changePassword", Summary: "Change the user password", IAMActions: []string{"voip:apiovh:line/click2CallUser/changePassword"}}
 
 // ChangePasswordLineClick2CallUser calls POST /v1/telephony/{billingAccount}/line/{serviceName}/click2CallUser/{id}/changePassword: Change the user password
+//
+// Changes the password of the click2call user, used with its login to start calls from the line.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -365,6 +410,8 @@ var opChangePasswordVoicemailSettings = &ovh.Operation{Name: "telephony.ChangePa
 
 // ChangePasswordVoicemailSettings calls POST /v1/telephony/{billingAccount}/voicemail/{serviceName}/settings/changePassword: Change the voicemail password
 //
+// Changes the password used to access the voicemail panel. The password must be 4 digits.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -379,6 +426,9 @@ func (s *Service) ChangePasswordVoicemailSettings(ctx context.Context, billingAc
 var opChangePhoneConfigurationLinePhone = &ovh.Operation{Name: "telephony.ChangePhoneConfigurationLinePhone", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/phone/changePhoneConfiguration", Summary: "Change the phone configuration", IAMActions: []string{"voip:apiovh:line/phone/changePhoneConfiguration"}}
 
 // ChangePhoneConfigurationLinePhone calls POST /v1/telephony/{billingAccount}/line/{serviceName}/phone/changePhoneConfiguration: Change the phone configuration
+//
+// Changes the phone configuration remotely with name value pairs of provisioning options, and can
+// reboot the phone to apply them.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -395,6 +445,9 @@ var opChangeRoutingVoicemailSettings = &ovh.Operation{Name: "telephony.ChangeRou
 
 // ChangeRoutingVoicemailSettings calls POST /v1/telephony/{billingAccount}/voicemail/{serviceName}/settings/changeRouting: Enable or disable the voicemail
 //
+// Routes the calls of the line to the voicemail or to the fax. Available only on a line with fax
+// capabilities.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -409,6 +462,8 @@ func (s *Service) ChangeRoutingVoicemailSettings(ctx context.Context, billingAcc
 var opChangeTypeLinePhoneRma = &ovh.Operation{Name: "telephony.ChangeTypeLinePhoneRma", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/phone/rma/{id}/changeType", Summary: "Change the RMA type", IAMActions: []string{"voip:apiovh:line/phone/rma/changeType"}}
 
 // ChangeTypeLinePhoneRma calls POST /v1/telephony/{billingAccount}/line/{serviceName}/phone/rma/{id}/changeType: Change the RMA type
+//
+// Changes the type of the RMA to a termination (resiliate) or a phone restitution (toSip).
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -426,6 +481,9 @@ var opClick2CallLine = &ovh.Operation{Name: "telephony.Click2CallLine", Method: 
 
 // Click2CallLine calls POST /v1/telephony/{billingAccount}/line/{serviceName}/click2Call: Start a call from the line
 //
+// Calls a number from the line: the line rings first, then the call is placed. Intercom mode can
+// pick up and enable the speaker automatically.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -440,6 +498,9 @@ func (s *Service) Click2CallLine(ctx context.Context, billingAccount string, ser
 var opClick2CallLineClick2CallUser = &ovh.Operation{Name: "telephony.Click2CallLineClick2CallUser", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/click2CallUser/{id}/click2Call", Summary: "Start a call from the line", IAMActions: []string{"voip:apiovh:line/click2CallUser/click2Call/create"}}
 
 // Click2CallLineClick2CallUser calls POST /v1/telephony/{billingAccount}/line/{serviceName}/click2CallUser/{id}/click2Call: Start a call from the line
+//
+// Calls a number from the line, as the click2call user: the line rings first, then the call is
+// placed.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -457,6 +518,8 @@ var opConvertToLineNumber = &ovh.Operation{Name: "telephony.ConvertToLineNumber"
 
 // ConvertToLineNumber calls POST /v1/telephony/{billingAccount}/number/{serviceName}/convertToLine: Schedule a conversion to line
 //
+// Schedules the conversion of the number to a line with a phone. Returns the offer task.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: Name of the service
@@ -472,6 +535,8 @@ var opConvertToNumberLine = &ovh.Operation{Name: "telephony.ConvertToNumberLine"
 
 // ConvertToNumberLine calls POST /v1/telephony/{billingAccount}/line/{serviceName}/convertToNumber: Schedule a conversion to number
 //
+// Schedules the conversion of the line to a number without a phone. Returns the offer task.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -485,6 +550,9 @@ func (s *Service) ConvertToNumberLine(ctx context.Context, billingAccount string
 var opCreateAbbreviatedNumber = &ovh.Operation{Name: "telephony.CreateAbbreviatedNumber", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/abbreviatedNumber", Summary: "Create a speed dial number", IAMActions: []string{"voip:apiovh:abbreviatedNumber/create"}}
 
 // CreateAbbreviatedNumber calls POST /v1/telephony/{billingAccount}/abbreviatedNumber: Create a speed dial number
+//
+// Creates a speed dial number shared by all the lines of the billing account. The short code starts
+// with 7 and has 3 or 4 digits.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -500,6 +568,8 @@ var opCreateBillingAccountSite = &ovh.Operation{Name: "telephony.CreateBillingAc
 
 // CreateBillingAccountSite calls POST /v1/telephony/{billingAccount}/billingAccountSite: Set the billing account site
 //
+// Attaches a site to the billing account. The site settings override the billing account settings.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - body: the request body
@@ -513,6 +583,9 @@ func (s *Service) CreateBillingAccountSite(ctx context.Context, billingAccount s
 var opCreateConferenceRooms = &ovh.Operation{Name: "telephony.CreateConferenceRooms", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/conference/{serviceName}/rooms", Summary: "Create a conference room", IAMActions: []string{"voip:apiovh:conference/rooms/create"}}
 
 // CreateConferenceRooms calls POST /v1/telephony/{billingAccount}/conference/{serviceName}/rooms: Create a conference room
+//
+// Creates a conference room with the given room number, or a random one if not specified. Returns
+// the room.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -528,6 +601,8 @@ func (s *Service) CreateConferenceRooms(ctx context.Context, billingAccount stri
 var opCreateConferenceRoomsWebAccess = &ovh.Operation{Name: "telephony.CreateConferenceRoomsWebAccess", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/webAccess", Summary: "Create a web access", IAMActions: []string{"voip:apiovh:conference/rooms/webAccess/create"}}
 
 // CreateConferenceRoomsWebAccess calls POST /v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/webAccess: Create a web access
+//
+// Creates a public web access to follow and manage the conference. Returns its URL.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -545,6 +620,8 @@ var opCreateConferenceWebAccess = &ovh.Operation{Name: "telephony.CreateConferen
 
 // CreateConferenceWebAccess calls POST /v1/telephony/{billingAccount}/conference/{serviceName}/webAccess: Create a web access
 //
+// Creates a public web access to follow and manage the conference. Returns its URL.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -559,6 +636,9 @@ func (s *Service) CreateConferenceWebAccess(ctx context.Context, billingAccount 
 var opCreateEasyHuntingHuntingAgent = &ovh.Operation{Name: "telephony.CreateEasyHuntingHuntingAgent", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent", Summary: "Create an agent", IAMActions: []string{"voip:apiovh:easyHunting/hunting/agent/create"}}
 
 // CreateEasyHuntingHuntingAgent calls POST /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent: Create an agent
+//
+// Creates an agent: a number that answers calls from the queues. Sets its status, ring timeout,
+// wrap-up time and maximum simultaneous calls.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -575,6 +655,8 @@ var opCreateEasyHuntingHuntingAgentBannerAccess = &ovh.Operation{Name: "telephon
 
 // CreateEasyHuntingHuntingAgentBannerAccess calls POST /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/bannerAccess: Create the agent banner access
 //
+// Creates a web access to the agent banner application. Returns its URL.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -589,6 +671,9 @@ func (s *Service) CreateEasyHuntingHuntingAgentBannerAccess(ctx context.Context,
 var opCreateEasyHuntingHuntingAgentEventToken = &ovh.Operation{Name: "telephony.CreateEasyHuntingHuntingAgentEventToken", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/eventToken", Summary: "Create an event token", IAMActions: []string{"voip:apiovh:easyHunting/hunting/agent/eventToken/create"}}
 
 // CreateEasyHuntingHuntingAgentEventToken calls POST /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/eventToken: Create an event token
+//
+// Creates a token to receive real-time call events, valid 5 minutes, 1 hour, 1 day, 30 days or
+// without limit. Returns the token.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -606,6 +691,9 @@ var opCreateEasyHuntingHuntingAgentQueue = &ovh.Operation{Name: "telephony.Creat
 
 // CreateEasyHuntingHuntingAgentQueue calls POST /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/queue: Assign an agent to a queue
 //
+// Adds an agent to a queue, with a position. The position sets the order in which agents receive
+// calls, depending on the queue strategy.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -622,6 +710,9 @@ var opCreateEasyHuntingHuntingCustomStatus = &ovh.Operation{Name: "telephony.Cre
 
 // CreateEasyHuntingHuntingCustomStatus calls POST /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/customStatus: Create a custom status
 //
+// Creates a custom status agents can set, such as a break. Sets its name, short description and the
+// color shown on the agent banner.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -636,6 +727,9 @@ func (s *Service) CreateEasyHuntingHuntingCustomStatus(ctx context.Context, bill
 var opCreateEasyHuntingHuntingEventToken = &ovh.Operation{Name: "telephony.CreateEasyHuntingHuntingEventToken", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/eventToken", Summary: "Create an event token", IAMActions: []string{"voip:apiovh:easyHunting/hunting/eventToken/create"}}
 
 // CreateEasyHuntingHuntingEventToken calls POST /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/eventToken: Create an event token
+//
+// Creates a token to receive real-time call events, valid 5 minutes, 1 hour, 1 day, 30 days or
+// without limit. Returns the token.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -652,6 +746,9 @@ var opCreateEasyHuntingHuntingQueue = &ovh.Operation{Name: "telephony.CreateEasy
 
 // CreateEasyHuntingHuntingQueue calls POST /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue: Create a queue
 //
+// Creates a queue that distributes calls to its agents. Sets the dispatching strategy, the maximum
+// wait time and callers, and the overflow and closure actions.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -666,6 +763,9 @@ func (s *Service) CreateEasyHuntingHuntingQueue(ctx context.Context, billingAcco
 var opCreateEasyHuntingScreenListConditionsConditions = &ovh.Operation{Name: "telephony.CreateEasyHuntingScreenListConditionsConditions", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/screenListConditions/conditions", Summary: "Create a filtering condition", IAMActions: []string{"voip:apiovh:easyHunting/screenListConditions/conditions/create"}}
 
 // CreateEasyHuntingScreenListConditionsConditions calls POST /v1/telephony/{billingAccount}/easyHunting/{serviceName}/screenListConditions/conditions: Create a filtering condition
+//
+// Creates a filtering condition based on the caller or the called number. The screen list type sets
+// whether matching calls are allowed or blocked.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -682,6 +782,9 @@ var opCreateEasyHuntingTimeConditionsConditions = &ovh.Operation{Name: "telephon
 
 // CreateEasyHuntingTimeConditionsConditions calls POST /v1/telephony/{billingAccount}/easyHunting/{serviceName}/timeConditions/conditions: Create a time condition
 //
+// Creates a time condition on the contact center: a day of the week, start and end times, and the
+// policy to apply during it.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -696,6 +799,9 @@ func (s *Service) CreateEasyHuntingTimeConditionsConditions(ctx context.Context,
 var opCreateEventToken = &ovh.Operation{Name: "telephony.CreateEventToken", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/eventToken", Summary: "Create an event token", IAMActions: []string{"voip:apiovh:eventToken/create"}}
 
 // CreateEventToken calls POST /v1/telephony/{billingAccount}/eventToken: Create an event token
+//
+// Creates a token to receive real-time call events, valid 5 minutes, 1 hour, 1 day, 30 days or
+// without limit. Returns the token.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -746,6 +852,9 @@ var opCreateHistoryRepaymentConsumption = &ovh.Operation{Name: "telephony.Create
 
 // CreateHistoryRepaymentConsumption calls POST /v1/telephony/{billingAccount}/historyRepaymentConsumption: Request a repayment
 //
+// Requests a repayment for the repayable calls, with the number of the bill. Returns the repayment
+// bill.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - body: the request body
@@ -759,6 +868,8 @@ func (s *Service) CreateHistoryRepaymentConsumption(ctx context.Context, billing
 var opCreateLineAbbreviatedNumber = &ovh.Operation{Name: "telephony.CreateLineAbbreviatedNumber", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/abbreviatedNumber", Summary: "Create a speed dial number", IAMActions: []string{"voip:apiovh:line/abbreviatedNumber/create"}}
 
 // CreateLineAbbreviatedNumber calls POST /v1/telephony/{billingAccount}/line/{serviceName}/abbreviatedNumber: Create a speed dial number
+//
+// Creates a speed dial number: a short code that calls a full number from the line.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -775,6 +886,9 @@ var opCreateLineActivateNewPhone = &ovh.Operation{Name: "telephony.CreateLineAct
 
 // CreateLineActivateNewPhone calls POST /v1/telephony/{billingAccount}/line/{serviceName}/activateNewPhone: Activate a new phone
 //
+// Activates the new phone on the line, after a phone switch. Check first that a new phone is
+// waiting to be activated.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -788,6 +902,9 @@ func (s *Service) CreateLineActivateNewPhone(ctx context.Context, billingAccount
 var opCreateLineAntihack = &ovh.Operation{Name: "telephony.CreateLineAntihack", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/antihack", Summary: "Clean antihack restrictions", IAMActions: []string{"voip:apiovh:line/antihack/create"}}
 
 // CreateLineAntihack calls POST /v1/telephony/{billingAccount}/line/{serviceName}/antihack: Clean antihack restrictions
+//
+// Authorizes or blocks one number, or all the numbers, restricted by the antihack protection of the
+// line.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -804,6 +921,9 @@ var opCreateLineAutomaticCall = &ovh.Operation{Name: "telephony.CreateLineAutoma
 
 // CreateLineAutomaticCall calls POST /v1/telephony/{billingAccount}/line/{serviceName}/automaticCall: Make an automatic call
 //
+// Calls a number from the line with a dialplan, such as a text read by TTS, an audio file or a
+// transfer. Returns the call identifier.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -818,6 +938,8 @@ func (s *Service) CreateLineAutomaticCall(ctx context.Context, billingAccount st
 var opCreateLineClick2CallUser = &ovh.Operation{Name: "telephony.CreateLineClick2CallUser", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/click2CallUser", Summary: "Create a click2call user", IAMActions: []string{"voip:apiovh:line/click2CallUser/create"}}
 
 // CreateLineClick2CallUser calls POST /v1/telephony/{billingAccount}/line/{serviceName}/click2CallUser: Create a click2call user
+//
+// Creates a user that can make click2call calls from the line. Returns its identifier.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -834,6 +956,9 @@ var opCreateLinePhonePhonebook = &ovh.Operation{Name: "telephony.CreateLinePhone
 
 // CreateLinePhonePhonebook calls POST /v1/telephony/{billingAccount}/line/{serviceName}/phone/phonebook: Create a phonebook
 //
+// Creates a phonebook on the phone of the line, if the phone supports phonebooks. Returns its
+// identifier (bookKey).
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -848,6 +973,9 @@ func (s *Service) CreateLinePhonePhonebook(ctx context.Context, billingAccount s
 var opCreateLinePhonePhonebookPhonebookContact = &ovh.Operation{Name: "telephony.CreateLinePhonePhonebookPhonebookContact", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/phone/phonebook/{bookKey}/phonebookContact", Summary: "Create a contact", IAMActions: []string{"voip:apiovh:line/phone/phonebook/phonebookContact/create"}}
 
 // CreateLinePhonePhonebookPhonebookContact calls POST /v1/telephony/{billingAccount}/line/{serviceName}/phone/phonebook/{bookKey}/phonebookContact: Create a contact
+//
+// Creates a contact in the phonebook with a name, surname, group and phone numbers. Returns its
+// identifier.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -865,6 +993,9 @@ var opCreateLinePhoneRma = &ovh.Operation{Name: "telephony.CreateLinePhoneRma", 
 
 // CreateLinePhoneRma calls POST /v1/telephony/{billingAccount}/line/{serviceName}/phone/rma: Create an RMA
 //
+// Creates an RMA to return the phone and keep the service, or to exchange it for another phone.
+// Returns the RMA identifier.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -879,6 +1010,9 @@ func (s *Service) CreateLinePhoneRma(ctx context.Context, billingAccount string,
 var opCreateLineTrafficExtracts = &ovh.Operation{Name: "telephony.CreateLineTrafficExtracts", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/trafficExtracts", Summary: "Start a traffic extract", IAMActions: []string{"voip:apiovh:line/trafficExtracts/create"}}
 
 // CreateLineTrafficExtracts calls POST /v1/telephony/{billingAccount}/line/{serviceName}/trafficExtracts: Start a traffic extract
+//
+// Starts capturing the SIP traffic of the line between a start date and an end date. The result is
+// a PCAP file.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -895,6 +1029,9 @@ var opCreateOutplanNotification = &ovh.Operation{Name: "telephony.CreateOutplanN
 
 // CreateOutplanNotification calls POST /v1/telephony/{billingAccount}/outplanNotification: Create an out-of-plan alert
 //
+// Creates an alert at a percentage of the maximum out-of-plan, with a block (none, incoming,
+// outgoing or all calls) and an optional email.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - body: the request body
@@ -908,6 +1045,9 @@ func (s *Service) CreateOutplanNotification(ctx context.Context, billingAccount 
 var opCreateOvhPabxDialplan = &ovh.Operation{Name: "telephony.CreateOvhPabxDialplan", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan", Summary: "Create a dialplan", IAMActions: []string{"voip:apiovh:ovhPabx/dialplan/create"}}
 
 // CreateOvhPabxDialplan calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan: Create a dialplan
+//
+// Creates a dialplan on the PABX with a name, a transfer timeout, anonymous call rejection and the
+// number presented when bridging calls.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -924,6 +1064,9 @@ var opCreateOvhPabxDialplanExtension = &ovh.Operation{Name: "telephony.CreateOvh
 
 // CreateOvhPabxDialplanExtension calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension: Create an extension
 //
+// Creates an extension in the dialplan at a position, enabled or not, with a scheduler category and
+// a screen list type. Extensions run in order.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -939,6 +1082,9 @@ func (s *Service) CreateOvhPabxDialplanExtension(ctx context.Context, billingAcc
 var opCreateOvhPabxDialplanExtensionConditionScreenList = &ovh.Operation{Name: "telephony.CreateOvhPabxDialplanExtensionConditionScreenList", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}/conditionScreenList", Summary: "Create a filtering condition", IAMActions: []string{"voip:apiovh:ovhPabx/dialplan/extension/conditionScreenList/create"}}
 
 // CreateOvhPabxDialplanExtensionConditionScreenList calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}/conditionScreenList: Create a filtering condition
+//
+// Creates a filtering condition on the caller or the called number. The screen list type sets
+// whether matching calls are allowed or blocked.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -957,6 +1103,9 @@ var opCreateOvhPabxDialplanExtensionConditionTime = &ovh.Operation{Name: "teleph
 
 // CreateOvhPabxDialplanExtensionConditionTime calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}/conditionTime: Create a time condition
 //
+// Creates a time condition on the extension: a day of the week and the start and end times when the
+// extension runs.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -973,6 +1122,9 @@ func (s *Service) CreateOvhPabxDialplanExtensionConditionTime(ctx context.Contex
 var opCreateOvhPabxDialplanExtensionRule = &ovh.Operation{Name: "telephony.CreateOvhPabxDialplanExtensionRule", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}/rule", Summary: "Create an extension rule", IAMActions: []string{"voip:apiovh:ovhPabx/dialplan/extension/rule/create"}}
 
 // CreateOvhPabxDialplanExtensionRule calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}/rule: Create an extension rule
+//
+// Creates a rule in the extension: an action such as playback, bridge, IVR, voicemail or TTS, its
+// parameter and its position.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -991,6 +1143,9 @@ var opCreateOvhPabxHuntingAgent = &ovh.Operation{Name: "telephony.CreateOvhPabxH
 
 // CreateOvhPabxHuntingAgent calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent: Create an agent
 //
+// Creates an agent: a number that answers calls from the queues. Sets its status, ring timeout,
+// wrap-up time and maximum simultaneous calls.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1006,6 +1161,8 @@ var opCreateOvhPabxHuntingAgentBannerAccess = &ovh.Operation{Name: "telephony.Cr
 
 // CreateOvhPabxHuntingAgentBannerAccess calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/bannerAccess: Create the agent banner access
 //
+// Creates a web access to the agent banner application. Returns its URL.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1020,6 +1177,9 @@ func (s *Service) CreateOvhPabxHuntingAgentBannerAccess(ctx context.Context, bil
 var opCreateOvhPabxHuntingAgentEventToken = &ovh.Operation{Name: "telephony.CreateOvhPabxHuntingAgentEventToken", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/eventToken", Summary: "Create an event token", IAMActions: []string{"voip:apiovh:ovhPabx/hunting/agent/eventToken/create"}}
 
 // CreateOvhPabxHuntingAgentEventToken calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/eventToken: Create an event token
+//
+// Creates a token to receive real-time call events, valid 5 minutes, 1 hour, 1 day, 30 days or
+// without limit. Returns the token.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -1037,6 +1197,9 @@ var opCreateOvhPabxHuntingAgentQueue = &ovh.Operation{Name: "telephony.CreateOvh
 
 // CreateOvhPabxHuntingAgentQueue calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/queue: Assign an agent to a queue
 //
+// Adds an agent to a queue, with a position. The position sets the order in which agents receive
+// calls, depending on the queue strategy.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1053,6 +1216,9 @@ var opCreateOvhPabxHuntingCustomStatus = &ovh.Operation{Name: "telephony.CreateO
 
 // CreateOvhPabxHuntingCustomStatus calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/customStatus: Create a custom status
 //
+// Creates a custom status agents can set, such as a break. Sets its name, short description and the
+// color shown on the agent banner.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1067,6 +1233,9 @@ func (s *Service) CreateOvhPabxHuntingCustomStatus(ctx context.Context, billingA
 var opCreateOvhPabxHuntingEventToken = &ovh.Operation{Name: "telephony.CreateOvhPabxHuntingEventToken", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/eventToken", Summary: "Create an event token", IAMActions: []string{"voip:apiovh:ovhPabx/hunting/eventToken/create"}}
 
 // CreateOvhPabxHuntingEventToken calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/eventToken: Create an event token
+//
+// Creates a token to receive real-time call events, valid 5 minutes, 1 hour, 1 day, 30 days or
+// without limit. Returns the token.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -1083,6 +1252,9 @@ var opCreateOvhPabxHuntingQueue = &ovh.Operation{Name: "telephony.CreateOvhPabxH
 
 // CreateOvhPabxHuntingQueue calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue: Create a queue
 //
+// Creates a queue that distributes calls to its agents. Sets the dispatching strategy, the maximum
+// wait time and callers, and the overflow and closure actions.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1098,6 +1270,9 @@ var opCreateOvhPabxMenu = &ovh.Operation{Name: "telephony.CreateOvhPabxMenu", Me
 
 // CreateOvhPabxMenu calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/menu: Create a menu
 //
+// Creates a voice menu: a greeting and the keys callers can press. Add the keys and their actions
+// afterwards with menu entries.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1112,6 +1287,9 @@ func (s *Service) CreateOvhPabxMenu(ctx context.Context, billingAccount string, 
 var opCreateOvhPabxMenuEntry = &ovh.Operation{Name: "telephony.CreateOvhPabxMenuEntry", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/menu/{menuId}/entry", Summary: "Create a menu entry", IAMActions: []string{"voip:apiovh:ovhPabx/menu/entry/create"}}
 
 // CreateOvhPabxMenuEntry calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/menu/{menuId}/entry: Create a menu entry
+//
+// Creates an entry: the key pressed by the caller and the action to run, such as bridge, playback,
+// sub menu or call center, with its parameter.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -1129,6 +1307,9 @@ var opCreateOvhPabxTts = &ovh.Operation{Name: "telephony.CreateOvhPabxTts", Meth
 
 // CreateOvhPabxTts calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/tts: Create a TTS prompt
 //
+// Creates a text to speech prompt: a text read by a synthetic voice. The voice is Helene, Loic,
+// Jenny or Bruce.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1144,6 +1325,8 @@ var opCreatePhonebook = &ovh.Operation{Name: "telephony.CreatePhonebook", Method
 
 // CreatePhonebook calls POST /v1/telephony/{billingAccount}/phonebook: Create a phonebook
 //
+// Creates a phonebook shared by the billing account. Returns its identifier (bookKey).
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - body: the request body
@@ -1157,6 +1340,9 @@ func (s *Service) CreatePhonebook(ctx context.Context, billingAccount string, bo
 var opCreatePhonebookPhonebookContact = &ovh.Operation{Name: "telephony.CreatePhonebookPhonebookContact", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/phonebook/{bookKey}/phonebookContact", Summary: "Create a contact", IAMActions: []string{"voip:apiovh:phonebook/phonebookContact/create"}}
 
 // CreatePhonebookPhonebookContact calls POST /v1/telephony/{billingAccount}/phonebook/{bookKey}/phonebookContact: Create a contact
+//
+// Creates a contact in the phonebook with a name, surname, group and phone numbers. Returns its
+// identifier.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -1173,6 +1359,8 @@ var opCreatePortabilityDocument = &ovh.Operation{Name: "telephony.CreatePortabil
 
 // CreatePortabilityDocument calls POST /v1/telephony/{billingAccount}/portability/{id}/document: Create a porting document
 //
+// Creates a document for the number porting. Returns the URL to upload the file.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - id: The ID of the portability
@@ -1187,6 +1375,8 @@ func (s *Service) CreatePortabilityDocument(ctx context.Context, billingAccount 
 var opCreatePortabilityRelaunch = &ovh.Operation{Name: "telephony.CreatePortabilityRelaunch", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/portability/{id}/relaunch", Summary: "Relaunch the porting", IAMActions: []string{"voip:apiovh:portability/relaunch/create"}}
 
 // CreatePortabilityRelaunch calls POST /v1/telephony/{billingAccount}/portability/{id}/relaunch: Relaunch the porting
+//
+// Fixes the porting error with the given values and relaunches the number porting.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -1203,6 +1393,9 @@ var opCreateProcedure = &ovh.Operation{Name: "telephony.CreateProcedure", Method
 
 // CreateProcedure calls POST /v1/telephony/procedure: Create a procedure
 //
+// Creates a procedure needed to order telephony products. A SEPA payment mean is given by its ID,
+// or by the owner name, address, IBAN and BIC.
+//
 // Arguments:
 //   - body: the request body
 //
@@ -1217,6 +1410,9 @@ func (s *Service) CreateProcedure(ctx context.Context, body CreateProcedureReque
 var opCreateSchedulerEvents = &ovh.Operation{Name: "telephony.CreateSchedulerEvents", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/scheduler/{serviceName}/events", Summary: "Create a scheduler event", IAMActions: []string{"voip:apiovh:scheduler/events/create"}}
 
 // CreateSchedulerEvents calls POST /v1/telephony/{billingAccount}/scheduler/{serviceName}/events: Create a scheduler event
+//
+// Creates an event in the scheduler, such as a closing day, with a title, start and end dates and a
+// category (holidays or scheduler1 to scheduler3).
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -1233,6 +1429,9 @@ var opCreateScreenScreenLists = &ovh.Operation{Name: "telephony.CreateScreenScre
 
 // CreateScreenScreenLists calls POST /v1/telephony/{billingAccount}/screen/{serviceName}/screenLists: Create a filtering rule
 //
+// Creates a call filtering rule that allows or blocks a number or a nature of numbers (special,
+// international, voicemail, services or fax), for incoming or outgoing calls.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1247,6 +1446,9 @@ func (s *Service) CreateScreenScreenLists(ctx context.Context, billingAccount st
 var opCreateServiceEventToken = &ovh.Operation{Name: "telephony.CreateServiceEventToken", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/service/{serviceName}/eventToken", Summary: "Create an event token", IAMActions: []string{"voip:apiovh:service/eventToken/create"}}
 
 // CreateServiceEventToken calls POST /v1/telephony/{billingAccount}/service/{serviceName}/eventToken: Create an event token
+//
+// Creates a token to receive real-time call events, valid 5 minutes, 1 hour, 1 day, 30 days or
+// without limit. Returns the token.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -1263,6 +1465,9 @@ var opCreateServiceOfferChange = &ovh.Operation{Name: "telephony.CreateServiceOf
 
 // CreateServiceOfferChange calls POST /v1/telephony/{billingAccount}/service/{serviceName}/offerChange: Schedule an offer change
 //
+// Schedules a change of offer for the service. The new offer replaces the current one on the next
+// renewal.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1278,6 +1483,9 @@ var opCreateSounds = &ovh.Operation{Name: "telephony.CreateSounds", Method: http
 
 // CreateSounds calls POST /v1/telephony/sounds: Create a sound
 //
+// Creates a sound from an uploaded file. Sets its filename and description, and returns the sound
+// with the URL to upload the file.
+//
 // Arguments:
 //   - body: the request body
 //
@@ -1290,6 +1498,9 @@ func (s *Service) CreateSounds(ctx context.Context, body CreateSoundsRequest) (*
 var opCreateTimeConditionCondition = &ovh.Operation{Name: "telephony.CreateTimeConditionCondition", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/timeCondition/{serviceName}/condition", Summary: "Create a time condition", IAMActions: []string{"voip:apiovh:timeCondition/condition/create"}}
 
 // CreateTimeConditionCondition calls POST /v1/telephony/{billingAccount}/timeCondition/{serviceName}/condition: Create a time condition
+//
+// Creates a time condition: a day (or holiday), start and end hours in hhmm format, and the routing
+// policy to apply during that time slot.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -1306,6 +1517,8 @@ var opCreateTrunkExternalDisplayedNumber = &ovh.Operation{Name: "telephony.Creat
 
 // CreateTrunkExternalDisplayedNumber calls POST /v1/telephony/{billingAccount}/trunk/{serviceName}/externalDisplayedNumber: Create an external displayed number
 //
+// Adds an external number the trunk can display to callees. The number must then be validated.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: Name of the service
@@ -1320,6 +1533,9 @@ func (s *Service) CreateTrunkExternalDisplayedNumber(ctx context.Context, billin
 var opCreateVoicemailGreetings = &ovh.Operation{Name: "telephony.CreateVoicemailGreetings", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/voicemail/{serviceName}/greetings", Summary: "Upload a greeting", IAMActions: []string{"voip:apiovh:voicemail/greetings/create"}}
 
 // CreateVoicemailGreetings calls POST /v1/telephony/{billingAccount}/voicemail/{serviceName}/greetings: Upload a greeting
+//
+// Uploads a sound file from /me/document as a custom greeting, in the given greeting folder.
+// Returns the task identifier.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -1336,6 +1552,8 @@ var opDeafConferenceParticipants = &ovh.Operation{Name: "telephony.DeafConferenc
 
 // DeafConferenceParticipants calls POST /v1/telephony/{billingAccount}/conference/{serviceName}/participants/{id}/deaf: Deafen a participant
 //
+// Stops the participant from hearing the conference. Returns the task that performs it.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1350,6 +1568,8 @@ func (s *Service) DeafConferenceParticipants(ctx context.Context, billingAccount
 var opDeafConferenceRoomsParticipants = &ovh.Operation{Name: "telephony.DeafConferenceRoomsParticipants", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/participants/{id}/deaf", Summary: "Deafen a participant", IAMActions: []string{"voip:apiovh:conference/rooms/participants/deaf"}}
 
 // DeafConferenceRoomsParticipants calls POST /v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/participants/{id}/deaf: Deafen a participant
+//
+// Stops the participant from hearing the conference. Returns the task that performs it.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -1367,6 +1587,9 @@ var opDeleteAbbreviatedNumber = &ovh.Operation{Name: "telephony.DeleteAbbreviate
 
 // DeleteAbbreviatedNumber calls DELETE /v1/telephony/{billingAccount}/abbreviatedNumber/{abbreviatedNumber}: Delete a speed dial number
 //
+// Deletes the speed dial number of the billing account. Its short code no longer calls the
+// destination number from the lines.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - abbreviatedNumber: The abbreviated number which must start with "7" and must have a length of 3 or 4 digits
@@ -1380,6 +1603,8 @@ func (s *Service) DeleteAbbreviatedNumber(ctx context.Context, billingAccount st
 var opDeleteConferenceRoomsWebAccess = &ovh.Operation{Name: "telephony.DeleteConferenceRoomsWebAccess", Method: http.MethodDelete, Path: "/v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/webAccess/{id}", Summary: "Delete a web access", IAMActions: []string{"voip:apiovh:conference/rooms/webAccess/delete"}}
 
 // DeleteConferenceRoomsWebAccess calls DELETE /v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/webAccess/{id}: Delete a web access
+//
+// Deletes the public web access. Its URL no longer gives access to the conference.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -1397,6 +1622,8 @@ var opDeleteConferenceWebAccess = &ovh.Operation{Name: "telephony.DeleteConferen
 
 // DeleteConferenceWebAccess calls DELETE /v1/telephony/{billingAccount}/conference/{serviceName}/webAccess/{id}: Delete a web access
 //
+// Deletes the public web access. Its URL no longer gives access to the conference.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1411,6 +1638,9 @@ func (s *Service) DeleteConferenceWebAccess(ctx context.Context, billingAccount 
 var opDeleteEasyHuntingHuntingAgent = &ovh.Operation{Name: "telephony.DeleteEasyHuntingHuntingAgent", Method: http.MethodDelete, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}", Summary: "Delete an agent", IAMActions: []string{"voip:apiovh:easyHunting/hunting/agent/delete"}}
 
 // DeleteEasyHuntingHuntingAgent calls DELETE /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}: Delete an agent
+//
+// Deletes the agent. It is removed from all its queues and no longer receives calls from the queue
+// system.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -1427,6 +1657,9 @@ var opDeleteEasyHuntingHuntingAgentBannerAccess = &ovh.Operation{Name: "telephon
 
 // DeleteEasyHuntingHuntingAgentBannerAccess calls DELETE /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/bannerAccess: Delete the agent banner access
 //
+// Deletes the web access to the agent banner application. Its URL no longer gives access to the
+// banner.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1442,6 +1675,8 @@ var opDeleteEasyHuntingHuntingAgentEventToken = &ovh.Operation{Name: "telephony.
 
 // DeleteEasyHuntingHuntingAgentEventToken calls DELETE /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/eventToken: Delete the event token
 //
+// Deletes the event token. It can no longer be used to receive real-time call events.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1456,6 +1691,9 @@ func (s *Service) DeleteEasyHuntingHuntingAgentEventToken(ctx context.Context, b
 var opDeleteEasyHuntingHuntingAgentQueue = &ovh.Operation{Name: "telephony.DeleteEasyHuntingHuntingAgentQueue", Method: http.MethodDelete, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/queue/{queueId}", Summary: "Remove an agent from a queue", IAMActions: []string{"voip:apiovh:easyHunting/hunting/agent/queue/delete"}}
 
 // DeleteEasyHuntingHuntingAgentQueue calls DELETE /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/queue/{queueId}: Remove an agent from a queue
+//
+// Removes the agent from the queue. The agent no longer receives calls from this queue but stays
+// assigned to its other queues.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -1473,6 +1711,8 @@ var opDeleteEasyHuntingHuntingCustomStatus = &ovh.Operation{Name: "telephony.Del
 
 // DeleteEasyHuntingHuntingCustomStatus calls DELETE /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/customStatus/{id}: Delete a custom status
 //
+// Deletes the custom status. Agents can no longer select it on the agent banner web application.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1488,6 +1728,8 @@ var opDeleteEasyHuntingHuntingEventToken = &ovh.Operation{Name: "telephony.Delet
 
 // DeleteEasyHuntingHuntingEventToken calls DELETE /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/eventToken: Delete the event token
 //
+// Deletes the event token. It can no longer be used to receive real-time call events.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1501,6 +1743,9 @@ func (s *Service) DeleteEasyHuntingHuntingEventToken(ctx context.Context, billin
 var opDeleteEasyHuntingHuntingQueue = &ovh.Operation{Name: "telephony.DeleteEasyHuntingHuntingQueue", Method: http.MethodDelete, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue/{queueId}", Summary: "Delete a queue", IAMActions: []string{"voip:apiovh:easyHunting/hunting/queue/delete"}}
 
 // DeleteEasyHuntingHuntingQueue calls DELETE /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue/{queueId}: Delete a queue
+//
+// Deletes the queue. Its agents are no longer assigned to it, and calls are no longer dispatched
+// through it.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -1516,6 +1761,9 @@ func (s *Service) DeleteEasyHuntingHuntingQueue(ctx context.Context, billingAcco
 var opDeleteEasyHuntingHuntingQueueAgent = &ovh.Operation{Name: "telephony.DeleteEasyHuntingHuntingQueueAgent", Method: http.MethodDelete, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue/{queueId}/agent/{agentId}", Summary: "Remove an agent from a queue", IAMActions: []string{"voip:apiovh:easyHunting/hunting/queue/agent/delete"}}
 
 // DeleteEasyHuntingHuntingQueueAgent calls DELETE /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue/{queueId}/agent/{agentId}: Remove an agent from a queue
+//
+// Removes the agent from the queue. The agent no longer receives calls from this queue but stays
+// assigned to its other queues.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -1533,6 +1781,9 @@ var opDeleteEasyHuntingRecords = &ovh.Operation{Name: "telephony.DeleteEasyHunti
 
 // DeleteEasyHuntingRecords calls DELETE /v1/telephony/{billingAccount}/easyHunting/{serviceName}/records/{id}: Delete a call recording
 //
+// Deletes the call recording of the service. Its sound file can no longer be downloaded from its
+// URL.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1547,6 +1798,9 @@ func (s *Service) DeleteEasyHuntingRecords(ctx context.Context, billingAccount s
 var opDeleteEasyHuntingScreenListConditionsConditions = &ovh.Operation{Name: "telephony.DeleteEasyHuntingScreenListConditionsConditions", Method: http.MethodDelete, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/screenListConditions/conditions/{conditionId}", Summary: "Delete a filtering condition", IAMActions: []string{"voip:apiovh:easyHunting/screenListConditions/conditions/delete"}}
 
 // DeleteEasyHuntingScreenListConditionsConditions calls DELETE /v1/telephony/{billingAccount}/easyHunting/{serviceName}/screenListConditions/conditions/{conditionId}: Delete a filtering condition
+//
+// Deletes the filtering condition. Calls are no longer checked against its caller number or
+// destination number.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -1563,6 +1817,9 @@ var opDeleteEasyHuntingSound = &ovh.Operation{Name: "telephony.DeleteEasyHunting
 
 // DeleteEasyHuntingSound calls DELETE /v1/telephony/{billingAccount}/easyHunting/{serviceName}/sound/{soundId}: Delete a sound
 //
+// Deletes the sound of the service, identified by its ID. Queues and voice menus can no longer play
+// it.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1578,6 +1835,9 @@ var opDeleteEasyHuntingTimeConditionsConditions = &ovh.Operation{Name: "telephon
 
 // DeleteEasyHuntingTimeConditionsConditions calls DELETE /v1/telephony/{billingAccount}/easyHunting/{serviceName}/timeConditions/conditions/{conditionId}: Delete a time condition
 //
+// Deletes the time condition of the contact center. Its time slot no longer applies to the calls
+// received.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1592,6 +1852,8 @@ func (s *Service) DeleteEasyHuntingTimeConditionsConditions(ctx context.Context,
 var opDeleteEventToken = &ovh.Operation{Name: "telephony.DeleteEventToken", Method: http.MethodDelete, Path: "/v1/telephony/{billingAccount}/eventToken", Summary: "Delete the event token", IAMActions: []string{"voip:apiovh:eventToken/delete"}}
 
 // DeleteEventToken calls DELETE /v1/telephony/{billingAccount}/eventToken: Delete the event token
+//
+// Deletes the event token. It can no longer be used to receive real-time call events.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -1640,6 +1902,8 @@ var opDeleteLineAbbreviatedNumber = &ovh.Operation{Name: "telephony.DeleteLineAb
 
 // DeleteLineAbbreviatedNumber calls DELETE /v1/telephony/{billingAccount}/line/{serviceName}/abbreviatedNumber/{abbreviatedNumber}: Delete a speed dial number
 //
+// Deletes the speed dial number of the line. Its short code no longer calls the destination number.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1654,6 +1918,8 @@ func (s *Service) DeleteLineAbbreviatedNumber(ctx context.Context, billingAccoun
 var opDeleteLineClick2CallUser = &ovh.Operation{Name: "telephony.DeleteLineClick2CallUser", Method: http.MethodDelete, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/click2CallUser/{id}", Summary: "Delete a click2call user", IAMActions: []string{"voip:apiovh:line/click2CallUser/delete"}}
 
 // DeleteLineClick2CallUser calls DELETE /v1/telephony/{billingAccount}/line/{serviceName}/click2CallUser/{id}: Delete a click2call user
+//
+// Deletes the click2call user. Its login can no longer start calls from the line.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -1670,6 +1936,8 @@ var opDeleteLinePhonePhonebook = &ovh.Operation{Name: "telephony.DeleteLinePhone
 
 // DeleteLinePhonePhonebook calls DELETE /v1/telephony/{billingAccount}/line/{serviceName}/phone/phonebook/{bookKey}: Delete a phonebook
 //
+// Deletes the phonebook of the phone and its contacts. Export the contacts first to keep a copy.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1684,6 +1952,8 @@ func (s *Service) DeleteLinePhonePhonebook(ctx context.Context, billingAccount s
 var opDeleteLinePhonePhonebookPhonebookContact = &ovh.Operation{Name: "telephony.DeleteLinePhonePhonebookPhonebookContact", Method: http.MethodDelete, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/phone/phonebook/{bookKey}/phonebookContact/{id}", Summary: "Delete a contact", IAMActions: []string{"voip:apiovh:line/phone/phonebook/phonebookContact/delete"}}
 
 // DeleteLinePhonePhonebookPhonebookContact calls DELETE /v1/telephony/{billingAccount}/line/{serviceName}/phone/phonebook/{bookKey}/phonebookContact/{id}: Delete a contact
+//
+// Deletes the contact from the phonebook, with its name, group and office and home phone numbers.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -1701,6 +1971,9 @@ var opDeleteLinePhoneRma = &ovh.Operation{Name: "telephony.DeleteLinePhoneRma", 
 
 // DeleteLinePhoneRma calls DELETE /v1/telephony/{billingAccount}/line/{serviceName}/phone/rma/{id}: Cancel an RMA
 //
+// Cancels the RMA of the phone. Only an RMA marked as cancellable, as returned when getting the
+// RMA, can be cancelled.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1715,6 +1988,9 @@ func (s *Service) DeleteLinePhoneRma(ctx context.Context, billingAccount string,
 var opDeleteLineRecords = &ovh.Operation{Name: "telephony.DeleteLineRecords", Method: http.MethodDelete, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/records/{id}", Summary: "Delete a call recording", IAMActions: []string{"voip:apiovh:line/records/delete"}}
 
 // DeleteLineRecords calls DELETE /v1/telephony/{billingAccount}/line/{serviceName}/records/{id}: Delete a call recording
+//
+// Deletes the call recording of the service. Its sound file can no longer be downloaded from its
+// URL.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -1780,6 +2056,8 @@ var opDeleteLineTrafficExtracts = &ovh.Operation{Name: "telephony.DeleteLineTraf
 
 // DeleteLineTrafficExtracts calls DELETE /v1/telephony/{billingAccount}/line/{serviceName}/trafficExtracts/{id}: Delete a traffic extract
 //
+// Deletes the traffic extract and its PCAP file of the SIP traffic of the line.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1795,6 +2073,9 @@ var opDeleteOutplanNotification = &ovh.Operation{Name: "telephony.DeleteOutplanN
 
 // DeleteOutplanNotification calls DELETE /v1/telephony/{billingAccount}/outplanNotification/{id}: Delete an out-of-plan alert
 //
+// Deletes the out-of-plan alert. No notification or block is applied any more when its threshold is
+// reached.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - id: Id of the object
@@ -1808,6 +2089,9 @@ func (s *Service) DeleteOutplanNotification(ctx context.Context, billingAccount 
 var opDeleteOvhPabxDialplan = &ovh.Operation{Name: "telephony.DeleteOvhPabxDialplan", Method: http.MethodDelete, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}", Summary: "Delete a dialplan", IAMActions: []string{"voip:apiovh:ovhPabx/dialplan/delete"}}
 
 // DeleteOvhPabxDialplan calls DELETE /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}: Delete a dialplan
+//
+// Deletes the dialplan and its extensions from the PABX. A dialplan holds the extensions applied to
+// the calls received.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -1824,6 +2108,9 @@ var opDeleteOvhPabxDialplanExtension = &ovh.Operation{Name: "telephony.DeleteOvh
 
 // DeleteOvhPabxDialplanExtension calls DELETE /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}: Delete an extension
 //
+// Deletes the extension from the dialplan. The extension and its rules no longer apply to the calls
+// received.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1839,6 +2126,9 @@ func (s *Service) DeleteOvhPabxDialplanExtension(ctx context.Context, billingAcc
 var opDeleteOvhPabxDialplanExtensionConditionScreenList = &ovh.Operation{Name: "telephony.DeleteOvhPabxDialplanExtensionConditionScreenList", Method: http.MethodDelete, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}/conditionScreenList/{conditionId}", Summary: "Delete a filtering condition", IAMActions: []string{"voip:apiovh:ovhPabx/dialplan/extension/conditionScreenList/delete"}}
 
 // DeleteOvhPabxDialplanExtensionConditionScreenList calls DELETE /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}/conditionScreenList/{conditionId}: Delete a filtering condition
+//
+// Deletes the filtering condition. Calls are no longer checked against its caller number or
+// destination number.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -1857,6 +2147,9 @@ var opDeleteOvhPabxDialplanExtensionConditionTime = &ovh.Operation{Name: "teleph
 
 // DeleteOvhPabxDialplanExtensionConditionTime calls DELETE /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}/conditionTime/{conditionId}: Delete a time condition
 //
+// Deletes the time condition of the extension. Its day and time slot no longer restrict when the
+// extension runs.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1873,6 +2166,9 @@ func (s *Service) DeleteOvhPabxDialplanExtensionConditionTime(ctx context.Contex
 var opDeleteOvhPabxDialplanExtensionRule = &ovh.Operation{Name: "telephony.DeleteOvhPabxDialplanExtensionRule", Method: http.MethodDelete, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}/rule/{ruleId}", Summary: "Delete an extension rule", IAMActions: []string{"voip:apiovh:ovhPabx/dialplan/extension/rule/delete"}}
 
 // DeleteOvhPabxDialplanExtensionRule calls DELETE /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}/rule/{ruleId}: Delete an extension rule
+//
+// Deletes the rule from the extension of the dialplan. Its action no longer runs when the extension
+// is executed.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -1891,6 +2187,9 @@ var opDeleteOvhPabxHuntingAgent = &ovh.Operation{Name: "telephony.DeleteOvhPabxH
 
 // DeleteOvhPabxHuntingAgent calls DELETE /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}: Delete an agent
 //
+// Deletes the agent. It is removed from all its queues and no longer receives calls from the queue
+// system.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1905,6 +2204,9 @@ func (s *Service) DeleteOvhPabxHuntingAgent(ctx context.Context, billingAccount 
 var opDeleteOvhPabxHuntingAgentBannerAccess = &ovh.Operation{Name: "telephony.DeleteOvhPabxHuntingAgentBannerAccess", Method: http.MethodDelete, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/bannerAccess", Summary: "Delete the agent banner access", IAMActions: []string{"voip:apiovh:ovhPabx/hunting/agent/bannerAccess/delete"}}
 
 // DeleteOvhPabxHuntingAgentBannerAccess calls DELETE /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/bannerAccess: Delete the agent banner access
+//
+// Deletes the web access to the agent banner application. Its URL no longer gives access to the
+// banner.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -1921,6 +2223,8 @@ var opDeleteOvhPabxHuntingAgentEventToken = &ovh.Operation{Name: "telephony.Dele
 
 // DeleteOvhPabxHuntingAgentEventToken calls DELETE /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/eventToken: Delete the event token
 //
+// Deletes the event token. It can no longer be used to receive real-time call events.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1935,6 +2239,9 @@ func (s *Service) DeleteOvhPabxHuntingAgentEventToken(ctx context.Context, billi
 var opDeleteOvhPabxHuntingAgentQueue = &ovh.Operation{Name: "telephony.DeleteOvhPabxHuntingAgentQueue", Method: http.MethodDelete, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/queue/{queueId}", Summary: "Remove an agent from a queue", IAMActions: []string{"voip:apiovh:ovhPabx/hunting/agent/queue/delete"}}
 
 // DeleteOvhPabxHuntingAgentQueue calls DELETE /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/queue/{queueId}: Remove an agent from a queue
+//
+// Removes the agent from the queue. The agent no longer receives calls from this queue but stays
+// assigned to its other queues.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -1952,6 +2259,8 @@ var opDeleteOvhPabxHuntingCustomStatus = &ovh.Operation{Name: "telephony.DeleteO
 
 // DeleteOvhPabxHuntingCustomStatus calls DELETE /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/customStatus/{id}: Delete a custom status
 //
+// Deletes the custom status. Agents can no longer select it on the agent banner web application.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1967,6 +2276,8 @@ var opDeleteOvhPabxHuntingEventToken = &ovh.Operation{Name: "telephony.DeleteOvh
 
 // DeleteOvhPabxHuntingEventToken calls DELETE /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/eventToken: Delete the event token
 //
+// Deletes the event token. It can no longer be used to receive real-time call events.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -1980,6 +2291,9 @@ func (s *Service) DeleteOvhPabxHuntingEventToken(ctx context.Context, billingAcc
 var opDeleteOvhPabxHuntingQueue = &ovh.Operation{Name: "telephony.DeleteOvhPabxHuntingQueue", Method: http.MethodDelete, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}", Summary: "Delete a queue", IAMActions: []string{"voip:apiovh:ovhPabx/hunting/queue/delete"}}
 
 // DeleteOvhPabxHuntingQueue calls DELETE /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}: Delete a queue
+//
+// Deletes the queue. Its agents are no longer assigned to it, and calls are no longer dispatched
+// through it.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -1995,6 +2309,9 @@ func (s *Service) DeleteOvhPabxHuntingQueue(ctx context.Context, billingAccount 
 var opDeleteOvhPabxHuntingQueueAgent = &ovh.Operation{Name: "telephony.DeleteOvhPabxHuntingQueueAgent", Method: http.MethodDelete, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}/agent/{agentId}", Summary: "Remove an agent from a queue", IAMActions: []string{"voip:apiovh:ovhPabx/hunting/queue/agent/delete"}}
 
 // DeleteOvhPabxHuntingQueueAgent calls DELETE /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}/agent/{agentId}: Remove an agent from a queue
+//
+// Removes the agent from the queue. The agent no longer receives calls from this queue but stays
+// assigned to its other queues.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -2012,6 +2329,8 @@ var opDeleteOvhPabxMenu = &ovh.Operation{Name: "telephony.DeleteOvhPabxMenu", Me
 
 // DeleteOvhPabxMenu calls DELETE /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/menu/{menuId}: Delete a menu
 //
+// Deletes the voice menu and its entries. Callers no longer hear its greeting or reach its actions.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -2026,6 +2345,8 @@ func (s *Service) DeleteOvhPabxMenu(ctx context.Context, billingAccount string, 
 var opDeleteOvhPabxMenuEntry = &ovh.Operation{Name: "telephony.DeleteOvhPabxMenuEntry", Method: http.MethodDelete, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/menu/{menuId}/entry/{entryId}", Summary: "Delete a menu entry", IAMActions: []string{"voip:apiovh:ovhPabx/menu/entry/delete"}}
 
 // DeleteOvhPabxMenuEntry calls DELETE /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/menu/{menuId}/entry/{entryId}: Delete a menu entry
+//
+// Deletes the menu entry. The key it used no longer triggers an action in the voice menu.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -2043,6 +2364,9 @@ var opDeleteOvhPabxRecords = &ovh.Operation{Name: "telephony.DeleteOvhPabxRecord
 
 // DeleteOvhPabxRecords calls DELETE /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/records/{id}: Delete a call recording
 //
+// Deletes the call recording of the service. Its sound file can no longer be downloaded from its
+// URL.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -2057,6 +2381,9 @@ func (s *Service) DeleteOvhPabxRecords(ctx context.Context, billingAccount strin
 var opDeleteOvhPabxSound = &ovh.Operation{Name: "telephony.DeleteOvhPabxSound", Method: http.MethodDelete, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/sound/{soundId}", Summary: "Delete a sound", IAMActions: []string{"voip:apiovh:ovhPabx/sound/delete"}}
 
 // DeleteOvhPabxSound calls DELETE /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/sound/{soundId}: Delete a sound
+//
+// Deletes the sound of the service, identified by its ID. Queues and voice menus can no longer play
+// it.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -2073,6 +2400,8 @@ var opDeleteOvhPabxTts = &ovh.Operation{Name: "telephony.DeleteOvhPabxTts", Meth
 
 // DeleteOvhPabxTts calls DELETE /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/tts/{id}: Delete a TTS prompt
 //
+// Deletes the text to speech prompt. It can no longer be played by the voice menus of the PBX.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -2088,6 +2417,9 @@ var opDeletePhonebook = &ovh.Operation{Name: "telephony.DeletePhonebook", Method
 
 // DeletePhonebook calls DELETE /v1/telephony/{billingAccount}/phonebook/{bookKey}: Delete a phonebook
 //
+// Deletes the phonebook shared by the billing account and its contacts. Export the contacts first
+// to keep a copy.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - bookKey: Identifier of the phonebook
@@ -2101,6 +2433,8 @@ func (s *Service) DeletePhonebook(ctx context.Context, billingAccount string, bo
 var opDeletePhonebookPhonebookContact = &ovh.Operation{Name: "telephony.DeletePhonebookPhonebookContact", Method: http.MethodDelete, Path: "/v1/telephony/{billingAccount}/phonebook/{bookKey}/phonebookContact/{id}", Summary: "Delete a contact", IAMActions: []string{"voip:apiovh:phonebook/phonebookContact/delete"}}
 
 // DeletePhonebookPhonebookContact calls DELETE /v1/telephony/{billingAccount}/phonebook/{bookKey}/phonebookContact/{id}: Delete a contact
+//
+// Deletes the contact from the phonebook, with its name, group and office and home phone numbers.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -2117,6 +2451,8 @@ var opDeletePortabilityDocument = &ovh.Operation{Name: "telephony.DeletePortabil
 
 // DeletePortabilityDocument calls DELETE /v1/telephony/{billingAccount}/portability/{id}/document/{documentId}: Delete a porting document
 //
+// Deletes the porting document and its file. It is no longer attached to the number porting.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - id: The ID of the portability
@@ -2132,6 +2468,8 @@ var opDeleteSchedulerEvents = &ovh.Operation{Name: "telephony.DeleteSchedulerEve
 
 // DeleteSchedulerEvents calls DELETE /v1/telephony/{billingAccount}/scheduler/{serviceName}/events/{uid}: Delete a scheduler event
 //
+// Deletes the scheduler event. It no longer applies to the calls of the service.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -2146,6 +2484,9 @@ func (s *Service) DeleteSchedulerEvents(ctx context.Context, billingAccount stri
 var opDeleteScreenScreenLists = &ovh.Operation{Name: "telephony.DeleteScreenScreenLists", Method: http.MethodDelete, Path: "/v1/telephony/{billingAccount}/screen/{serviceName}/screenLists/{id}", Summary: "Delete a filtering rule", IAMActions: []string{"voip:apiovh:screen/screenLists/delete"}}
 
 // DeleteScreenScreenLists calls DELETE /v1/telephony/{billingAccount}/screen/{serviceName}/screenLists/{id}: Delete a filtering rule
+//
+// Deletes the call filtering rule. The number or nature of numbers it covered is no longer allowed
+// or blocked by it.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -2168,6 +2509,9 @@ type DeleteServiceParams struct {
 
 // DeleteService calls DELETE /v1/telephony/{billingAccount}/service/{serviceName}: Terminate a service
 //
+// Requests the termination of the service, with a reason and optional details. The termination can
+// be cancelled until it is executed.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -2183,6 +2527,8 @@ var opDeleteServiceEventToken = &ovh.Operation{Name: "telephony.DeleteServiceEve
 
 // DeleteServiceEventToken calls DELETE /v1/telephony/{billingAccount}/service/{serviceName}/eventToken: Delete the event token
 //
+// Deletes the event token. It can no longer be used to receive real-time call events.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -2196,6 +2542,8 @@ func (s *Service) DeleteServiceEventToken(ctx context.Context, billingAccount st
 var opDeleteServiceOfferChange = &ovh.Operation{Name: "telephony.DeleteServiceOfferChange", Method: http.MethodDelete, Path: "/v1/telephony/{billingAccount}/service/{serviceName}/offerChange", Summary: "Cancel the scheduled offer change", IAMActions: []string{"voip:apiovh:service/offerChange/delete"}}
 
 // DeleteServiceOfferChange calls DELETE /v1/telephony/{billingAccount}/service/{serviceName}/offerChange: Cancel the scheduled offer change
+//
+// Cancels the scheduled offer change. The service keeps its current offer on the next renewal.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -2226,6 +2574,8 @@ var opDeleteSounds = &ovh.Operation{Name: "telephony.DeleteSounds", Method: http
 
 // DeleteSounds calls DELETE /v1/telephony/sounds/{id}: Delete a sound
 //
+// Deletes the sound and its file. It can no longer be played by the telephony services.
+//
 // Arguments:
 //   - id: Sound ID
 //
@@ -2238,6 +2588,8 @@ func (s *Service) DeleteSounds(ctx context.Context, id int) error {
 var opDeleteSpare = &ovh.Operation{Name: "telephony.DeleteSpare", Method: http.MethodDelete, Path: "/v1/telephony/spare/{spare}", Summary: "Delete a spare phone", IAMActions: []string{"voip:apiovh:spare/delete"}}
 
 // DeleteSpare calls DELETE /v1/telephony/spare/{spare}: Delete a spare phone
+//
+// Removes the spare phone from the customer account, as if it no longer belonged to OVHcloud.
 //
 // Arguments:
 //   - spare: The internal name of your spare
@@ -2258,6 +2610,9 @@ type DeleteTelephonyParams struct {
 
 // DeleteTelephony calls DELETE /v1/telephony/{billingAccount}: Terminate a billing account
 //
+// Requests the termination of the billing account, with a reason and optional details. The
+// termination can be cancelled until it is executed.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - reason: Termination reason
@@ -2271,6 +2626,9 @@ func (s *Service) DeleteTelephony(ctx context.Context, billingAccount string, re
 var opDeleteTimeConditionCondition = &ovh.Operation{Name: "telephony.DeleteTimeConditionCondition", Method: http.MethodDelete, Path: "/v1/telephony/{billingAccount}/timeCondition/{serviceName}/condition/{id}", Summary: "Delete a time condition", IAMActions: []string{"voip:apiovh:timeCondition/condition/delete"}}
 
 // DeleteTimeConditionCondition calls DELETE /v1/telephony/{billingAccount}/timeCondition/{serviceName}/condition/{id}: Delete a time condition
+//
+// Deletes the time condition. Calls received during its time slot are no longer routed by its
+// policy.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -2287,6 +2645,8 @@ var opDeleteTrunkExternalDisplayedNumber = &ovh.Operation{Name: "telephony.Delet
 
 // DeleteTrunkExternalDisplayedNumber calls DELETE /v1/telephony/{billingAccount}/trunk/{serviceName}/externalDisplayedNumber/{number}: Delete an external displayed number
 //
+// Deletes the external displayed number. The trunk can no longer display it to callees.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: Name of the service
@@ -2302,6 +2662,8 @@ var opDeleteVoicemailDirectories = &ovh.Operation{Name: "telephony.DeleteVoicema
 
 // DeleteVoicemailDirectories calls DELETE /v1/telephony/{billingAccount}/voicemail/{serviceName}/directories/{id}: Delete a voicemail message
 //
+// Deletes the voicemail message. It no longer appears in the folders of the voicemail.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -2316,6 +2678,8 @@ func (s *Service) DeleteVoicemailDirectories(ctx context.Context, billingAccount
 var opDeleteVoicemailGreetings = &ovh.Operation{Name: "telephony.DeleteVoicemailGreetings", Method: http.MethodDelete, Path: "/v1/telephony/{billingAccount}/voicemail/{serviceName}/greetings/{id}", Summary: "Delete a greeting", IAMActions: []string{"voip:apiovh:voicemail/greetings/delete"}}
 
 // DeleteVoicemailGreetings calls DELETE /v1/telephony/{billingAccount}/voicemail/{serviceName}/greetings/{id}: Delete a greeting
+//
+// Deletes the custom greeting. It is no longer played to callers who reach the voicemail.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -2348,6 +2712,9 @@ var opDissociateDeviceLine = &ovh.Operation{Name: "telephony.DissociateDeviceLin
 
 // DissociateDeviceLine calls POST /v1/telephony/{billingAccount}/line/{serviceName}/dissociateDevice: Dissociate a device
 //
+// Dissociates a phone from the line, using the phone MAC address (AABBCCDDEEFF) and its public IP
+// address.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -2362,6 +2729,9 @@ func (s *Service) DissociateDeviceLine(ctx context.Context, billingAccount strin
 var opEavesdropEasyHuntingHuntingAgentCalls = &ovh.Operation{Name: "telephony.EavesdropEasyHuntingHuntingAgentCalls", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/calls/{id}/eavesdrop", Summary: "Eavesdrop on a call", IAMActions: []string{"voip:apiovh:easyHunting/hunting/agent/calls/eavesdrop/create"}}
 
 // EavesdropEasyHuntingHuntingAgentCalls calls POST /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/calls/{id}/eavesdrop: Eavesdrop on a call
+//
+// Listens to the live call without being heard. The given phone number is called and bridged in the
+// communication. Returns the task that performs it.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -2380,6 +2750,9 @@ var opEavesdropEasyHuntingHuntingQueueLiveCalls = &ovh.Operation{Name: "telephon
 
 // EavesdropEasyHuntingHuntingQueueLiveCalls calls POST /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue/{queueId}/liveCalls/{id}/eavesdrop: Eavesdrop on a call
 //
+// Listens to the live call without being heard. The given phone number is called and bridged in the
+// communication. Returns the task that performs it.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -2396,6 +2769,9 @@ func (s *Service) EavesdropEasyHuntingHuntingQueueLiveCalls(ctx context.Context,
 var opEavesdropLineCalls = &ovh.Operation{Name: "telephony.EavesdropLineCalls", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/calls/{id}/eavesdrop", Summary: "Eavesdrop on a call", IAMActions: []string{"voip:apiovh:line/calls/eavesdrop"}, Deprecated: true}
 
 // EavesdropLineCalls calls POST /v1/telephony/{billingAccount}/line/{serviceName}/calls/{id}/eavesdrop: Eavesdrop on a call
+//
+// Listens to the live call without being heard. The given phone number is called and bridged in the
+// communication. Returns the task that performs it.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -2415,6 +2791,9 @@ var opEavesdropOvhPabxHuntingAgentCalls = &ovh.Operation{Name: "telephony.Eavesd
 
 // EavesdropOvhPabxHuntingAgentCalls calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/calls/{id}/eavesdrop: Eavesdrop on a call
 //
+// Listens to the live call without being heard. The given phone number is called and bridged in the
+// communication. Returns the task that performs it.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -2431,6 +2810,9 @@ func (s *Service) EavesdropOvhPabxHuntingAgentCalls(ctx context.Context, billing
 var opEavesdropOvhPabxHuntingQueueLiveCalls = &ovh.Operation{Name: "telephony.EavesdropOvhPabxHuntingQueueLiveCalls", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}/liveCalls/{id}/eavesdrop", Summary: "Eavesdrop on a call", IAMActions: []string{"voip:apiovh:ovhPabx/hunting/queue/liveCalls/eavesdrop"}}
 
 // EavesdropOvhPabxHuntingQueueLiveCalls calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}/liveCalls/{id}/eavesdrop: Eavesdrop on a call
+//
+// Listens to the live call without being heard. The given phone number is called and bridged in the
+// communication. Returns the task that performs it.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -2449,6 +2831,9 @@ var opEnergyConferenceParticipants = &ovh.Operation{Name: "telephony.EnergyConfe
 
 // EnergyConferenceParticipants calls POST /v1/telephony/{billingAccount}/conference/{serviceName}/participants/{id}/energy: Change a participant audio level
 //
+// Changes the audio level (energy) the participant must reach to be heard. Returns the task that
+// performs it.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -2464,6 +2849,9 @@ func (s *Service) EnergyConferenceParticipants(ctx context.Context, billingAccou
 var opEnergyConferenceRoomsParticipants = &ovh.Operation{Name: "telephony.EnergyConferenceRoomsParticipants", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/participants/{id}/energy", Summary: "Change a participant audio level", IAMActions: []string{"voip:apiovh:conference/rooms/participants/energy/create"}}
 
 // EnergyConferenceRoomsParticipants calls POST /v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/participants/{id}/energy: Change a participant audio level
+//
+// Changes the audio level (energy) the participant must reach to be heard. Returns the task that
+// performs it.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -2482,6 +2870,9 @@ var opExecutePortability = &ovh.Operation{Name: "telephony.ExecutePortability", 
 
 // ExecutePortability calls POST /v1/telephony/{billingAccount}/portability/{id}/execute: Execute the porting
 //
+// Executes the number porting now, without waiting for the planned date. Check first that the
+// porting can be executed.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - id: The ID of the portability
@@ -2495,6 +2886,9 @@ func (s *Service) ExecutePortability(ctx context.Context, billingAccount string,
 var opFetchEntrepriseInformationsServiceDirectory = &ovh.Operation{Name: "telephony.FetchEntrepriseInformationsServiceDirectory", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/service/{serviceName}/directory/fetchEntrepriseInformations", Summary: "Fetch company information", IAMActions: []string{"voip:apiovh:service/directory/fetchEntrepriseInformations"}}
 
 // FetchEntrepriseInformationsServiceDirectory calls POST /v1/telephony/{billingAccount}/service/{serviceName}/directory/fetchEntrepriseInformations: Fetch company information
+//
+// Returns the company information for a company registration number. The result is given by a task
+// to check until it ends.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -2511,6 +2905,9 @@ var opGeneratePasswordResellerPanel = &ovh.Operation{Name: "telephony.GeneratePa
 
 // GeneratePasswordResellerPanel calls POST /v1/telephony/resellerPanel/generatePassword: Generate a reseller panel password
 //
+// Generates a new password for the reseller panel. Follow the update with the reseller panel
+// status.
+//
 // Requires the IAM action account:apiovh:voip/resellerPanel/generatePassword.
 func (s *Service) GeneratePasswordResellerPanel(ctx context.Context) error {
 	return s.c.Do(ctx, &ovh.Request{Operation: opGeneratePasswordResellerPanel, Method: http.MethodPost, Path: "/v1/telephony/resellerPanel/generatePassword"}, nil)
@@ -2520,6 +2917,9 @@ func (s *Service) GeneratePasswordResellerPanel(ctx context.Context) error {
 var opGetAbbreviatedNumber = &ovh.Operation{Name: "telephony.GetAbbreviatedNumber", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/abbreviatedNumber/{abbreviatedNumber}", Summary: "Get a speed dial number", IAMActions: []string{"voip:apiovh:abbreviatedNumber/get"}}
 
 // GetAbbreviatedNumber calls GET /v1/telephony/{billingAccount}/abbreviatedNumber/{abbreviatedNumber}: Get a speed dial number
+//
+// Returns the speed dial number of the billing account: short code, destination number, name and
+// surname. The short code starts with 7.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -2547,6 +2947,9 @@ func (s *Service) AllAbbreviatedNumbers(ctx context.Context, billingAccount stri
 var opGetAliases = &ovh.Operation{Name: "telephony.GetAliases", Method: http.MethodGet, Path: "/v1/telephony/aliases/{serviceName}", Summary: "Get a number service", IAMActions: []string{"voip:apiovh:aliases/get"}}
 
 // GetAliases calls GET /v1/telephony/aliases/{serviceName}: Get a number service
+//
+// Returns the number service, without its billing account. Use it to find a number across all
+// billing accounts.
 //
 // Arguments:
 //   - serviceName: Your line number
@@ -2589,6 +2992,9 @@ var opGetBillingAccountSite = &ovh.Operation{Name: "telephony.GetBillingAccountS
 
 // GetBillingAccountSite calls GET /v1/telephony/{billingAccount}/billingAccountSite: Get the billing account site
 //
+// Returns the site attached to the billing account. The site settings override the billing account
+// settings.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //
@@ -2601,6 +3007,9 @@ func (s *Service) GetBillingAccountSite(ctx context.Context, billingAccount stri
 var opGetCarrierSIP = &ovh.Operation{Name: "telephony.GetCarrierSIP", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/carrierSip/{serviceName}", Summary: "Get a Carrier SIP service", IAMActions: []string{"voip:apiovh:carrierSip/get"}}
 
 // GetCarrierSIP calls GET /v1/telephony/{billingAccount}/carrierSip/{serviceName}: Get a Carrier SIP service
+//
+// Returns the Carrier SIP service and its description. Settings, SIP endpoints and VNO mandates
+// have their own routes.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -2635,6 +3044,9 @@ type GetCarrierSIPCdrsParams struct {
 
 // GetCarrierSIPCdrs calls GET /v1/telephony/{billingAccount}/carrierSip/{serviceName}/cdrs: Get call detail records
 //
+// Returns the call detail records (CDR) of the Carrier SIP service for a month (YYYY-MM), the
+// current month by default, as a document.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -2649,6 +3061,8 @@ var opGetCarrierSIPClusterDetails = &ovh.Operation{Name: "telephony.GetCarrierSI
 
 // GetCarrierSIPClusterDetails calls GET /v1/telephony/{billingAccount}/carrierSip/{serviceName}/clusterDetails: Get the cluster details
 //
+// Returns the details of the Carrier SIP cluster the service runs on: its name and its zones.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -2662,6 +3076,9 @@ func (s *Service) GetCarrierSIPClusterDetails(ctx context.Context, billingAccoun
 var opGetCarrierSIPEndpoints = &ovh.Operation{Name: "telephony.GetCarrierSIPEndpoints", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/carrierSip/{serviceName}/endpoints/{id}", Summary: "Get a SIP endpoint", IAMActions: []string{"voip:apiovh:carrierSip/endpoints/get"}}
 
 // GetCarrierSIPEndpoints calls GET /v1/telephony/{billingAccount}/carrierSip/{serviceName}/endpoints/{id}: Get a SIP endpoint
+//
+// Returns the remote SIP endpoint: IP address, port, protocol (udp, tcp or tls), DNS SRV priority
+// and weight, and whether it receives incoming calls.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -2691,6 +3108,9 @@ var opGetCarrierSIPSettings = &ovh.Operation{Name: "telephony.GetCarrierSIPSetti
 
 // GetCarrierSIPSettings calls GET /v1/telephony/{billingAccount}/carrierSip/{serviceName}/settings: Get the settings
 //
+// Returns the Carrier SIP settings: description, maximum call establishments per second and maximum
+// concurrent calls.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -2704,6 +3124,9 @@ func (s *Service) GetCarrierSIPSettings(ctx context.Context, billingAccount stri
 var opGetCarrierSIPVno = &ovh.Operation{Name: "telephony.GetCarrierSIPVno", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/carrierSip/{serviceName}/vno/{contractReference}", Summary: "Get a VNO mandate", IAMActions: []string{"voip:apiovh:carrierSip/vno/mandates/get"}}
 
 // GetCarrierSIPVno calls GET /v1/telephony/{billingAccount}/carrierSip/{serviceName}/vno/{contractReference}: Get a VNO mandate
+//
+// Returns the VNO mandate: the reference written on the VNO contract and the date from which its
+// ranges are routed.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -2732,6 +3155,9 @@ func (s *Service) AllCarrierSIPVnos(ctx context.Context, billingAccount string, 
 var opGetCarrierSIPVnoRanges = &ovh.Operation{Name: "telephony.GetCarrierSIPVnoRanges", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/carrierSip/{serviceName}/vno/{contractReference}/ranges/{prefix}", Summary: "Get a number range", IAMActions: []string{"voip:apiovh:carrierSip/vno/ranges/get"}}
 
 // GetCarrierSIPVnoRanges calls GET /v1/telephony/{billingAccount}/carrierSip/{serviceName}/vno/{contractReference}/ranges/{prefix}: Get a number range
+//
+// Returns the number range of the mandate: its phone range prefix and its description, which can be
+// updated.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -2762,6 +3188,9 @@ var opGetConference = &ovh.Operation{Name: "telephony.GetConference", Method: ht
 
 // GetConference calls GET /v1/telephony/{billingAccount}/conference/{serviceName}: Get a conference service
 //
+// Returns the conference service: description and offers. Settings, rooms and participants have
+// their own routes.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -2788,6 +3217,9 @@ func (s *Service) AllConferences(ctx context.Context, billingAccount string) ite
 var opGetConferenceHistories = &ovh.Operation{Name: "telephony.GetConferenceHistories", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/conference/{serviceName}/histories/{id}", Summary: "Get a past conference", IAMActions: []string{"voip:apiovh:conference/histories/get"}}
 
 // GetConferenceHistories calls GET /v1/telephony/{billingAccount}/conference/{serviceName}/histories/{id}: Get a past conference
+//
+// Returns the past conference: start and end dates, duration, participants and connections, events,
+// and the recording URL if recorded.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -2817,6 +3249,8 @@ var opGetConferenceInformations = &ovh.Operation{Name: "telephony.GetConferenceI
 
 // GetConferenceInformations calls GET /v1/telephony/{billingAccount}/conference/{serviceName}/informations: Get live conference information
 //
+// Returns live information about the conference: start date, lock state and number of members.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -2830,6 +3264,9 @@ func (s *Service) GetConferenceInformations(ctx context.Context, billingAccount 
 var opGetConferenceParticipants = &ovh.Operation{Name: "telephony.GetConferenceParticipants", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/conference/{serviceName}/participants/{id}", Summary: "Get a participant", IAMActions: []string{"voip:apiovh:conference/participants/get"}}
 
 // GetConferenceParticipants calls GET /v1/telephony/{billingAccount}/conference/{serviceName}/participants/{id}: Get a participant
+//
+// Returns the participant: number, name, arrival time and audio state (talking, can speak, can
+// hear, audio level).
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -2859,6 +3296,9 @@ var opGetConferenceRooms = &ovh.Operation{Name: "telephony.GetConferenceRooms", 
 
 // GetConferenceRooms calls GET /v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}: Get a conference room
 //
+// Returns the conference room and its settings: PIN, language, recording, announcement, report and
+// expiration date.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -2886,6 +3326,9 @@ func (s *Service) AllConferenceRooms(ctx context.Context, billingAccount string,
 var opGetConferenceRoomsHistories = &ovh.Operation{Name: "telephony.GetConferenceRoomsHistories", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/histories/{id}", Summary: "Get a past conference", IAMActions: []string{"voip:apiovh:conference/rooms/histories/get"}}
 
 // GetConferenceRoomsHistories calls GET /v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/histories/{id}: Get a past conference
+//
+// Returns the past conference: start and end dates, duration, participants and connections, events,
+// and the recording URL if recorded.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -2916,6 +3359,9 @@ var opGetConferenceRoomsParticipants = &ovh.Operation{Name: "telephony.GetConfer
 
 // GetConferenceRoomsParticipants calls GET /v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/participants/{id}: Get a participant
 //
+// Returns the participant: number, name, arrival time and audio state (talking, can speak, can
+// hear, audio level).
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -2945,6 +3391,9 @@ var opGetConferenceRoomsStats = &ovh.Operation{Name: "telephony.GetConferenceRoo
 
 // GetConferenceRoomsStats calls GET /v1/telephony/{billingAccount}/conference/{serviceName}/roomsStats: Get live room statistics
 //
+// Returns live statistics for all the rooms of the conference service: number of rooms, active
+// rooms and participants.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -2958,6 +3407,8 @@ func (s *Service) GetConferenceRoomsStats(ctx context.Context, billingAccount st
 var opGetConferenceRoomsWebAccess = &ovh.Operation{Name: "telephony.GetConferenceRoomsWebAccess", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/webAccess/{id}", Summary: "Get a web access", IAMActions: []string{"voip:apiovh:conference/rooms/webAccess/get"}}
 
 // GetConferenceRoomsWebAccess calls GET /v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/webAccess/{id}: Get a web access
+//
+// Returns the public web access to the conference: its type (read or write) and its URL.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -2988,6 +3439,8 @@ var opGetConferenceSettings = &ovh.Operation{Name: "telephony.GetConferenceSetti
 
 // GetConferenceSettings calls GET /v1/telephony/{billingAccount}/conference/{serviceName}/settings: Get the conference settings
 //
+// Returns the conference settings: PIN, language, announcements and other options.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -3001,6 +3454,8 @@ func (s *Service) GetConferenceSettings(ctx context.Context, billingAccount stri
 var opGetConferenceWebAccess = &ovh.Operation{Name: "telephony.GetConferenceWebAccess", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/conference/{serviceName}/webAccess/{id}", Summary: "Get a web access", IAMActions: []string{"voip:apiovh:conference/webAccess/get"}}
 
 // GetConferenceWebAccess calls GET /v1/telephony/{billingAccount}/conference/{serviceName}/webAccess/{id}: Get a web access
+//
+// Returns the public web access to the conference: its type (read or write) and its URL.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -3030,6 +3485,9 @@ var opGetDdi = &ovh.Operation{Name: "telephony.GetDdi", Method: http.MethodGet, 
 
 // GetDdi calls GET /v1/telephony/{billingAccount}/ddi/{serviceName}: Get a DDI number
 //
+// Returns the DDI (direct dial-in) number: feature type and description. The destination is changed
+// with the changeDestination call.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -3056,6 +3514,9 @@ func (s *Service) AllDdis(ctx context.Context, billingAccount string) iter.Seq2[
 var opGetEasyHunting = &ovh.Operation{Name: "telephony.GetEasyHunting", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}", Summary: "Get a contact center service", IAMActions: []string{"voip:apiovh:easyHunting/get"}}
 
 // GetEasyHunting calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}: Get a contact center service
+//
+// Returns the contact center service: queue strategy and size, maximum wait time, tones, voicemail
+// and caller number presentation.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -3084,6 +3545,9 @@ var opGetEasyHuntingHunting = &ovh.Operation{Name: "telephony.GetEasyHuntingHunt
 
 // GetEasyHuntingHunting calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting: Get the queue system settings
 //
+// Returns the queue system settings of the service: offer name, CRM URL template opened by the
+// agent banner, G729 codec and status change IVR.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -3097,6 +3561,9 @@ func (s *Service) GetEasyHuntingHunting(ctx context.Context, billingAccount stri
 var opGetEasyHuntingHuntingAgent = &ovh.Operation{Name: "telephony.GetEasyHuntingHuntingAgent", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}", Summary: "Get an agent", IAMActions: []string{"voip:apiovh:easyHunting/hunting/agent/get"}}
 
 // GetEasyHuntingHuntingAgent calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}: Get an agent
+//
+// Returns the agent: number, description, status, break status, type (internal or external), ring
+// timeout, wrap-up time and simultaneous calls.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -3126,6 +3593,8 @@ var opGetEasyHuntingHuntingAgentBannerAccess = &ovh.Operation{Name: "telephony.G
 
 // GetEasyHuntingHuntingAgentBannerAccess calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/bannerAccess: Get the agent banner access
 //
+// Returns the web access to the agent banner application: its URL and creation date.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -3140,6 +3609,9 @@ func (s *Service) GetEasyHuntingHuntingAgentBannerAccess(ctx context.Context, bi
 var opGetEasyHuntingHuntingAgentCalls = &ovh.Operation{Name: "telephony.GetEasyHuntingHuntingAgentCalls", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/calls/{id}", Summary: "Get a live call", IAMActions: []string{"voip:apiovh:easyHunting/hunting/agent/calls/get"}}
 
 // GetEasyHuntingHuntingAgentCalls calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/calls/{id}: Get a live call
+//
+// Returns the live call: caller number and name, destination number, agent, queue, state (waiting
+// or answered), hold status and begin, answer and end dates.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -3170,6 +3642,9 @@ var opGetEasyHuntingHuntingAgentEventToken = &ovh.Operation{Name: "telephony.Get
 
 // GetEasyHuntingHuntingAgentEventToken calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/eventToken: Get the event token
 //
+// Returns the token used to receive real-time call events. Create a new token when it is missing or
+// expired.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -3185,6 +3660,9 @@ var opGetEasyHuntingHuntingAgentLiveStatus = &ovh.Operation{Name: "telephony.Get
 
 // GetEasyHuntingHuntingAgentLiveStatus calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/liveStatus: Get the agent live status
 //
+// Returns the live status of the agent: state, last status change, and the number and total
+// duration of the calls taken on the current day.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -3199,6 +3677,9 @@ func (s *Service) GetEasyHuntingHuntingAgentLiveStatus(ctx context.Context, bill
 var opGetEasyHuntingHuntingAgentQueue = &ovh.Operation{Name: "telephony.GetEasyHuntingHuntingAgentQueue", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/queue/{queueId}", Summary: "Get an agent position in a queue", IAMActions: []string{"voip:apiovh:easyHunting/hunting/agent/queue/get"}}
 
 // GetEasyHuntingHuntingAgentQueue calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/queue/{queueId}: Get an agent position in a queue
+//
+// Returns the position of the agent in the queue. The position sets the order in which agents
+// receive calls, depending on the queue strategy.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -3229,6 +3710,9 @@ var opGetEasyHuntingHuntingAgentQueueLiveStatus = &ovh.Operation{Name: "telephon
 
 // GetEasyHuntingHuntingAgentQueueLiveStatus calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/queue/{queueId}/liveStatus: Get the agent live status
 //
+// Returns the live status of the agent: state, last status change, and the number and total
+// duration of the calls taken on the current day.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -3244,6 +3728,9 @@ func (s *Service) GetEasyHuntingHuntingAgentQueueLiveStatus(ctx context.Context,
 var opGetEasyHuntingHuntingCustomStatus = &ovh.Operation{Name: "telephony.GetEasyHuntingHuntingCustomStatus", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/customStatus/{id}", Summary: "Get a custom status", IAMActions: []string{"voip:apiovh:easyHunting/hunting/customStatus/get"}}
 
 // GetEasyHuntingHuntingCustomStatus calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/customStatus/{id}: Get a custom status
+//
+// Returns the custom status: name, short description and color displayed on the agent banner web
+// application.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -3273,6 +3760,9 @@ var opGetEasyHuntingHuntingEventToken = &ovh.Operation{Name: "telephony.GetEasyH
 
 // GetEasyHuntingHuntingEventToken calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/eventToken: Get the event token
 //
+// Returns the token used to receive real-time call events. Create a new token when it is missing or
+// expired.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -3286,6 +3776,9 @@ func (s *Service) GetEasyHuntingHuntingEventToken(ctx context.Context, billingAc
 var opGetEasyHuntingHuntingQueue = &ovh.Operation{Name: "telephony.GetEasyHuntingHuntingQueue", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue/{queueId}", Summary: "Get a queue", IAMActions: []string{"voip:apiovh:easyHunting/hunting/queue/get"}}
 
 // GetEasyHuntingHuntingQueue calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue/{queueId}: Get a queue
+//
+// Returns the queue: name, strategy, maximum waiting callers and wait time, sound on hold, call
+// recording, and actions on overflow and on closure.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -3314,6 +3807,9 @@ func (s *Service) AllEasyHuntingHuntingQueues(ctx context.Context, billingAccoun
 var opGetEasyHuntingHuntingQueueAgent = &ovh.Operation{Name: "telephony.GetEasyHuntingHuntingQueueAgent", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue/{queueId}/agent/{agentId}", Summary: "Get an agent position in a queue", IAMActions: []string{"voip:apiovh:easyHunting/hunting/queue/agent/get"}}
 
 // GetEasyHuntingHuntingQueueAgent calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue/{queueId}/agent/{agentId}: Get an agent position in a queue
+//
+// Returns the position of the agent in the queue. The position sets the order in which agents
+// receive calls, depending on the queue strategy.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -3344,6 +3840,9 @@ var opGetEasyHuntingHuntingQueueAgentLiveStatus = &ovh.Operation{Name: "telephon
 
 // GetEasyHuntingHuntingQueueAgentLiveStatus calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue/{queueId}/agent/{agentId}/liveStatus: Get the agent live status
 //
+// Returns the live status of the agent: state, last status change, and the number and total
+// duration of the calls taken on the current day.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -3359,6 +3858,9 @@ func (s *Service) GetEasyHuntingHuntingQueueAgentLiveStatus(ctx context.Context,
 var opGetEasyHuntingHuntingQueueLiveCalls = &ovh.Operation{Name: "telephony.GetEasyHuntingHuntingQueueLiveCalls", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue/{queueId}/liveCalls/{id}", Summary: "Get a live call", IAMActions: []string{"voip:apiovh:easyHunting/hunting/queue/liveCalls/get"}}
 
 // GetEasyHuntingHuntingQueueLiveCalls calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue/{queueId}/liveCalls/{id}: Get a live call
+//
+// Returns the live call: caller number and name, destination number, agent, queue, state (waiting
+// or answered), hold status and begin, answer and end dates.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -3389,6 +3891,9 @@ var opGetEasyHuntingHuntingQueueLiveStatistics = &ovh.Operation{Name: "telephony
 
 // GetEasyHuntingHuntingQueueLiveStatistics calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue/{queueId}/liveStatistics: Get queue live statistics
 //
+// Returns the live statistics of the queue since the last reset at midnight: total, answered and
+// lost calls, and total waiting and call durations.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -3403,6 +3908,9 @@ func (s *Service) GetEasyHuntingHuntingQueueLiveStatistics(ctx context.Context, 
 var opGetEasyHuntingRecords = &ovh.Operation{Name: "telephony.GetEasyHuntingRecords", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/records/{id}", Summary: "Get a call recording", IAMActions: []string{"voip:apiovh:easyHunting/records/get"}}
 
 // GetEasyHuntingRecords calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/records/{id}: Get a call recording
+//
+// Returns the call recording and the URL to download it, with the caller and destination numbers,
+// agent, start and end dates and duration.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -3432,6 +3940,9 @@ var opGetEasyHuntingScreenListConditions = &ovh.Operation{Name: "telephony.GetEa
 
 // GetEasyHuntingScreenListConditions calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/screenListConditions: Get the filtering condition settings
 //
+// Returns the call filtering settings of the contact center: whether filtering is disabled, or uses
+// the incoming whitelist or the incoming blacklist.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -3445,6 +3956,9 @@ func (s *Service) GetEasyHuntingScreenListConditions(ctx context.Context, billin
 var opGetEasyHuntingScreenListConditionsConditions = &ovh.Operation{Name: "telephony.GetEasyHuntingScreenListConditionsConditions", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/screenListConditions/conditions/{conditionId}", Summary: "Get a filtering condition", IAMActions: []string{"voip:apiovh:easyHunting/screenListConditions/conditions/get"}}
 
 // GetEasyHuntingScreenListConditionsConditions calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/screenListConditions/conditions/{conditionId}: Get a filtering condition
+//
+// Returns the filtering condition of the contact center: caller number or destination number, and
+// screen list type (whitelist or blacklist).
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -3474,6 +3988,9 @@ var opGetEasyHuntingSound = &ovh.Operation{Name: "telephony.GetEasyHuntingSound"
 
 // GetEasyHuntingSound calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/sound/{soundId}: Get a sound
 //
+// Returns the sound of the service: its identifier and filename. Sounds are played by queues and
+// voice menus.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -3502,6 +4019,9 @@ var opGetEasyHuntingTimeConditions = &ovh.Operation{Name: "telephony.GetEasyHunt
 
 // GetEasyHuntingTimeConditions calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/timeConditions: Get the time condition settings
 //
+// Returns the time condition settings of the contact center: status, and the action (number or
+// voicemail) of each slot and of the unavailable slot.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -3515,6 +4035,9 @@ func (s *Service) GetEasyHuntingTimeConditions(ctx context.Context, billingAccou
 var opGetEasyHuntingTimeConditionsConditions = &ovh.Operation{Name: "telephony.GetEasyHuntingTimeConditionsConditions", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/timeConditions/conditions/{conditionId}", Summary: "Get a time condition", IAMActions: []string{"voip:apiovh:easyHunting/timeConditions/conditions/get"}}
 
 // GetEasyHuntingTimeConditionsConditions calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/timeConditions/conditions/{conditionId}: Get a time condition
+//
+// Returns the time condition of the contact center: day of the week, start and end times, and
+// policy (slot1, slot2, slot3 or available).
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -3543,6 +4066,9 @@ func (s *Service) AllEasyHuntingTimeConditionsConditions(ctx context.Context, bi
 var opGetEventToken = &ovh.Operation{Name: "telephony.GetEventToken", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/eventToken", Summary: "Get the event token", IAMActions: []string{"voip:apiovh:eventToken/get"}}
 
 // GetEventToken calls GET /v1/telephony/{billingAccount}/eventToken: Get the event token
+//
+// Returns the token used to receive real-time call events. Create a new token when it is missing or
+// expired.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -3668,6 +4194,9 @@ var opGetHasSpecialNumbers = &ovh.Operation{Name: "telephony.GetHasSpecialNumber
 
 // GetHasSpecialNumbers calls GET /v1/telephony/{billingAccount}/hasSpecialNumbers: Check for special numbers
 //
+// Returns true when the billing account has at least one special number, such as a premium rate
+// number.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //
@@ -3680,6 +4209,8 @@ func (s *Service) GetHasSpecialNumbers(ctx context.Context, billingAccount strin
 var opGetHistoryConsumption = &ovh.Operation{Name: "telephony.GetHistoryConsumption", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/historyConsumption/{date}", Summary: "Get a billed consumption", IAMActions: []string{"voip:apiovh:historyConsumption/get"}}
 
 // GetHistoryConsumption calls GET /v1/telephony/{billingAccount}/historyConsumption/{date}: Get a billed consumption
+//
+// Returns the billed consumption: date, price, out-of-plan price and status of the bill.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -3708,6 +4239,8 @@ var opGetHistoryConsumptionFile = &ovh.Operation{Name: "telephony.GetHistoryCons
 
 // GetHistoryConsumptionFile calls GET /v1/telephony/{billingAccount}/historyConsumption/{date}/file: Get billed consumption files
 //
+// Returns a file of the billed consumption to download, in received.csv, csv, pdf or xml format.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - date: the date path parameter
@@ -3722,6 +4255,8 @@ func (s *Service) GetHistoryConsumptionFile(ctx context.Context, billingAccount 
 var opGetHistoryRepaymentConsumption = &ovh.Operation{Name: "telephony.GetHistoryRepaymentConsumption", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/historyRepaymentConsumption/{date}", Summary: "Get a repayment bill", IAMActions: []string{"voip:apiovh:historyRepaymentConsumption/get"}}
 
 // GetHistoryRepaymentConsumption calls GET /v1/telephony/{billingAccount}/historyRepaymentConsumption/{date}: Get a repayment bill
+//
+// Returns the repayment bill: date, amount repaid, bill number and status of the repayment.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -3750,6 +4285,9 @@ var opGetHistoryRepaymentConsumptionDocument = &ovh.Operation{Name: "telephony.G
 
 // GetHistoryRepaymentConsumptionDocument calls GET /v1/telephony/{billingAccount}/historyRepaymentConsumption/{date}/document: Get the bill as CSV
 //
+// Returns a file to download the repayment bill as a CSV document, with its URL and expiration
+// date.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - date: date of the bill
@@ -3763,6 +4301,8 @@ func (s *Service) GetHistoryRepaymentConsumptionDocument(ctx context.Context, bi
 var opGetHistoryTollfreeConsumption = &ovh.Operation{Name: "telephony.GetHistoryTollfreeConsumption", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/historyTollfreeConsumption/{date}", Summary: "Get a toll-free bill", IAMActions: []string{"voip:apiovh:historyTollfreeConsumption/get"}}
 
 // GetHistoryTollfreeConsumption calls GET /v1/telephony/{billingAccount}/historyTollfreeConsumption/{date}: Get a toll-free bill
+//
+// Returns the toll-free bill: date, amount paid by the called number, and status of the bill.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -3791,6 +4331,9 @@ var opGetHistoryTollfreeConsumptionDocument = &ovh.Operation{Name: "telephony.Ge
 
 // GetHistoryTollfreeConsumptionDocument calls GET /v1/telephony/{billingAccount}/historyTollfreeConsumption/{date}/document: Get the bill as CSV
 //
+// Returns a file to download the toll-free bill as a CSV document, with its URL and expiration
+// date.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - date: date of the bill
@@ -3804,6 +4347,9 @@ func (s *Service) GetHistoryTollfreeConsumptionDocument(ctx context.Context, bil
 var opGetLine = &ovh.Operation{Name: "telephony.GetLine", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/line/{serviceName}", Summary: "Get a line", IAMActions: []string{"voip:apiovh:line/get"}}
 
 // GetLine calls GET /v1/telephony/{billingAccount}/line/{serviceName}: Get a line
+//
+// Returns the line: description, offer, number of simultaneous lines, infrastructure, diagnostic
+// notification settings and position on its phone.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -3831,6 +4377,9 @@ func (s *Service) AllByBillingAccountLine(ctx context.Context, billingAccount st
 var opGetLineAbbreviatedNumber = &ovh.Operation{Name: "telephony.GetLineAbbreviatedNumber", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/abbreviatedNumber/{abbreviatedNumber}", Summary: "Get a speed dial number", IAMActions: []string{"voip:apiovh:line/abbreviatedNumber/get"}}
 
 // GetLineAbbreviatedNumber calls GET /v1/telephony/{billingAccount}/line/{serviceName}/abbreviatedNumber/{abbreviatedNumber}: Get a speed dial number
+//
+// Returns the speed dial number of the line: short code, destination number, name and surname. The
+// short code starts with 2 and has 3 or 4 digits.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -3860,6 +4409,8 @@ var opGetLineActivateNewPhone = &ovh.Operation{Name: "telephony.GetLineActivateN
 
 // GetLineActivateNewPhone calls GET /v1/telephony/{billingAccount}/line/{serviceName}/activateNewPhone: Check for a new phone to activate
 //
+// Checks whether a new phone is waiting to be activated on the line, after a phone switch.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -3873,6 +4424,9 @@ func (s *Service) GetLineActivateNewPhone(ctx context.Context, billingAccount st
 var opGetLineAutomaticCall = &ovh.Operation{Name: "telephony.GetLineAutomaticCall", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/automaticCall/{identifier}", Summary: "Get an automatic call", IAMActions: []string{"voip:apiovh:line/automaticCall/get"}}
 
 // GetLineAutomaticCall calls GET /v1/telephony/{billingAccount}/line/{serviceName}/automaticCall/{identifier}: Get an automatic call
+//
+// Returns the automatic call: caller, callee, creation, answer and hangup dates, duration, hangup
+// cause, DTMF received and application result.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -3901,6 +4455,9 @@ func (s *Service) AllLineAutomaticCalls(ctx context.Context, billingAccount stri
 var opGetLineCalls = &ovh.Operation{Name: "telephony.GetLineCalls", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/calls/{id}", Summary: "Get a live call", IAMActions: []string{"voip:apiovh:line/calls/get"}, Deprecated: true}
 
 // GetLineCalls calls GET /v1/telephony/{billingAccount}/line/{serviceName}/calls/{id}: Get a live call
+//
+// Returns the live call: caller number and name, destination number, agent, queue, state (waiting
+// or answered), hold status and begin, answer and end dates.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -3932,6 +4489,9 @@ var opGetLineCanChangePassword = &ovh.Operation{Name: "telephony.GetLineCanChang
 
 // GetLineCanChangePassword calls GET /v1/telephony/{billingAccount}/line/{serviceName}/canChangePassword: Check if the SIP password can change
 //
+// Returns whether the SIP password of the line can be changed. Change it with the changePassword
+// call.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -3948,6 +4508,9 @@ func (s *Service) GetLineCanChangePassword(ctx context.Context, billingAccount s
 var opGetLineClick2CallUser = &ovh.Operation{Name: "telephony.GetLineClick2CallUser", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/click2CallUser/{id}", Summary: "Get a click2call user", IAMActions: []string{"voip:apiovh:line/click2CallUser/get"}}
 
 // GetLineClick2CallUser calls GET /v1/telephony/{billingAccount}/line/{serviceName}/click2CallUser/{id}: Get a click2call user
+//
+// Returns the click2call user: identifier, login and creation date. The user starts calls from the
+// line with its login and password.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -3977,6 +4540,9 @@ var opGetLineMaximumAvailableSimultaneousLines = &ovh.Operation{Name: "telephony
 
 // GetLineMaximumAvailableSimultaneousLines calls GET /v1/telephony/{billingAccount}/line/{serviceName}/maximumAvailableSimultaneousLines: Get the maximum simultaneous lines
 //
+// Returns the maximum number of simultaneous calls available for the line. The current, basic and
+// extra channels are in the simultaneous channels details.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -3990,6 +4556,9 @@ func (s *Service) GetLineMaximumAvailableSimultaneousLines(ctx context.Context, 
 var opGetLineOffer = &ovh.Operation{Name: "telephony.GetLineOffer", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/offer", Summary: "Get the line offer", IAMActions: []string{"voip:apiovh:line/offer/get"}}
 
 // GetLineOffer calls GET /v1/telephony/{billingAccount}/line/{serviceName}/offer: Get the line offer
+//
+// Returns the public offer of the line: its name, its description and its price. It replaces the
+// deprecated offers property of the line.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -4005,6 +4574,9 @@ var opGetLineOptions = &ovh.Operation{Name: "telephony.GetLineOptions", Method: 
 
 // GetLineOptions calls GET /v1/telephony/{billingAccount}/line/{serviceName}/options: Get the line options
 //
+// Returns the line options: codecs, caller identification, forwarding, do not disturb and other
+// call options.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -4018,6 +4590,9 @@ func (s *Service) GetLineOptions(ctx context.Context, billingAccount string, ser
 var opGetLineOptionsDefaultCodecs = &ovh.Operation{Name: "telephony.GetLineOptionsDefaultCodecs", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/options/defaultCodecs", Summary: "Get the default codecs", IAMActions: []string{"voip:apiovh:line/options/defaultCodecs/get"}}
 
 // GetLineOptionsDefaultCodecs calls GET /v1/telephony/{billingAccount}/line/{serviceName}/options/defaultCodecs: Get the default codecs
+//
+// Returns the codecs used when none are set on the line. Set the codecs preferences in the line
+// options.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -4033,6 +4608,9 @@ var opGetLinePhone = &ovh.Operation{Name: "telephony.GetLinePhone", Method: http
 
 // GetLinePhone calls GET /v1/telephony/{billingAccount}/line/{serviceName}/phone: Get the phone
 //
+// Returns the phone attached to the line: brand, MAC address, protocol, description, maximum lines
+// and simultaneous calls, and configuration.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -4047,6 +4625,8 @@ var opGetLinePhoneAdminCredentials = &ovh.Operation{Name: "telephony.GetLinePhon
 
 // GetLinePhoneAdminCredentials calls GET /v1/telephony/{billingAccount}/line/{serviceName}/phone/adminCredentials: Get the phone admin credentials
 //
+// Returns the administration login and password of the phone. Available to VIP customers only.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -4060,6 +4640,9 @@ func (s *Service) GetLinePhoneAdminCredentials(ctx context.Context, billingAccou
 var opGetLinePhoneFunctionKey = &ovh.Operation{Name: "telephony.GetLinePhoneFunctionKey", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/phone/functionKey/{keyNum}", Summary: "Get a function key", IAMActions: []string{"voip:apiovh:line/phone/functionKey/get"}}
 
 // GetLinePhoneFunctionKey calls GET /v1/telephony/{billingAccount}/line/{serviceName}/phone/functionKey/{keyNum}: Get a function key
+//
+// Returns the function key of the phone: number, label, type, default function, active function and
+// its parameter.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -4089,6 +4672,9 @@ var opGetLinePhonePhonebook = &ovh.Operation{Name: "telephony.GetLinePhonePhoneb
 
 // GetLinePhonePhonebook calls GET /v1/telephony/{billingAccount}/line/{serviceName}/phone/phonebook/{bookKey}: Get a phonebook
 //
+// Returns the phonebook of the phone: name, identifier (bookKey), phone key and whether it is
+// read-only.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -4117,6 +4703,8 @@ var opGetLinePhonePhonebookExport = &ovh.Operation{Name: "telephony.GetLinePhone
 
 // GetLinePhonePhonebookExport calls GET /v1/telephony/{billingAccount}/line/{serviceName}/phone/phonebook/{bookKey}/export: Export contacts
 //
+// Exports the contacts of the phonebook to a file in CSV format. Returns the file to download.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -4132,6 +4720,9 @@ func (s *Service) GetLinePhonePhonebookExport(ctx context.Context, billingAccoun
 var opGetLinePhonePhonebookPhonebookContact = &ovh.Operation{Name: "telephony.GetLinePhonePhonebookPhonebookContact", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/phone/phonebook/{bookKey}/phonebookContact/{id}", Summary: "Get a contact", IAMActions: []string{"voip:apiovh:line/phone/phonebook/phonebookContact/get"}}
 
 // GetLinePhonePhonebookPhonebookContact calls GET /v1/telephony/{billingAccount}/line/{serviceName}/phone/phonebook/{bookKey}/phonebookContact/{id}: Get a contact
+//
+// Returns the contact of the phonebook: name, surname, group, and office and home phone numbers,
+// landline and mobile.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -4162,6 +4753,9 @@ var opGetLinePhoneRma = &ovh.Operation{Name: "telephony.GetLinePhoneRma", Method
 
 // GetLinePhoneRma calls GET /v1/telephony/{billingAccount}/line/{serviceName}/phone/rma/{id}: Get an RMA
 //
+// Returns the RMA: type, process, status and steps, creation, reception and termination dates,
+// equipment reference and shipping contact.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -4190,6 +4784,9 @@ var opGetLinePhoneSupportsPhonebook = &ovh.Operation{Name: "telephony.GetLinePho
 
 // GetLinePhoneSupportsPhonebook calls GET /v1/telephony/{billingAccount}/line/{serviceName}/phone/supportsPhonebook: Check phonebook support
 //
+// Returns whether the phone supports phonebooks. Phonebooks can be created on the phone only when
+// it does.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -4203,6 +4800,9 @@ func (s *Service) GetLinePhoneSupportsPhonebook(ctx context.Context, billingAcco
 var opGetLineRecords = &ovh.Operation{Name: "telephony.GetLineRecords", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/records/{id}", Summary: "Get a call recording", IAMActions: []string{"voip:apiovh:line/records/get"}}
 
 // GetLineRecords calls GET /v1/telephony/{billingAccount}/line/{serviceName}/records/{id}: Get a call recording
+//
+// Returns the call recording and the URL to download it, with the caller and destination numbers,
+// agent, start and end dates and duration.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -4231,6 +4831,9 @@ func (s *Service) AllLineRecords(ctx context.Context, billingAccount string, ser
 var opGetLineSimultaneousChannelsDetails = &ovh.Operation{Name: "telephony.GetLineSimultaneousChannelsDetails", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/simultaneousChannelsDetails", Summary: "Get simultaneous channels details", IAMActions: []string{"voip:apiovh:line/simultaneousChannelsDetails/get"}}
 
 // GetLineSimultaneousChannelsDetails calls GET /v1/telephony/{billingAccount}/line/{serviceName}/simultaneousChannelsDetails: Get simultaneous channels details
+//
+// Returns the simultaneous call channels of the line: current, basic, extra, to be deleted and
+// maximum.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -4310,6 +4913,9 @@ var opGetLineStatistics = &ovh.Operation{Name: "telephony.GetLineStatistics", Me
 
 // GetLineStatistics calls GET /v1/telephony/{billingAccount}/line/{serviceName}/statistics: Get line statistics
 //
+// Returns quality statistics of the line over an hourly to yearly timeframe: maximum jitter,
+// maximum delay, lost RTP packets or MOS score.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -4328,6 +4934,9 @@ var opGetLineTones = &ovh.Operation{Name: "telephony.GetLineTones", Method: http
 
 // GetLineTones calls GET /v1/telephony/{billingAccount}/line/{serviceName}/tones: Get the tones
 //
+// Returns the tones of the line: ringback, on hold, call waiting and end of call. Each tone is a
+// default sound, none or a custom sound.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -4341,6 +4950,8 @@ func (s *Service) GetLineTones(ctx context.Context, billingAccount string, servi
 var opGetLineTrafficExtracts = &ovh.Operation{Name: "telephony.GetLineTrafficExtracts", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/trafficExtracts/{id}", Summary: "Get a traffic extract", IAMActions: []string{"voip:apiovh:line/trafficExtracts/get"}}
 
 // GetLineTrafficExtracts calls GET /v1/telephony/{billingAccount}/line/{serviceName}/trafficExtracts/{id}: Get a traffic extract
+//
+// Returns the traffic extract: start and end dates, status, and the URL and size of the PCAP file.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -4369,6 +4980,9 @@ func (s *Service) AllLineTrafficExtracts(ctx context.Context, billingAccount str
 var opGetLines = &ovh.Operation{Name: "telephony.GetLines", Method: http.MethodGet, Path: "/v1/telephony/lines/{serviceName}", Summary: "Get a line or trunk", IAMActions: []string{"voip:apiovh:lines/get"}}
 
 // GetLines calls GET /v1/telephony/lines/{serviceName}: Get a line or trunk
+//
+// Returns the line or trunk service, without its billing account. Use it to find a service across
+// all billing accounts.
 //
 // Arguments:
 //   - serviceName: Your line number
@@ -4411,6 +5025,9 @@ var opGetNumber = &ovh.Operation{Name: "telephony.GetNumber", Method: http.Metho
 
 // GetNumber calls GET /v1/telephony/{billingAccount}/number/{serviceName}: Get a number
 //
+// Returns the number: feature type, description, service type, and the pool it belongs to if it is
+// part of one.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: Name of the service
@@ -4438,6 +5055,8 @@ var opGetNumberConvertToLineAvailableOffers = &ovh.Operation{Name: "telephony.Ge
 
 // GetNumberConvertToLineAvailableOffers calls GET /v1/telephony/{billingAccount}/number/{serviceName}/convertToLineAvailableOffers: List line offers for conversion
 //
+// Returns the line offers and contracts available to convert the number to a line.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: Name of the service
@@ -4451,6 +5070,9 @@ func (s *Service) GetNumberConvertToLineAvailableOffers(ctx context.Context, bil
 var opGetOfferTask = &ovh.Operation{Name: "telephony.GetOfferTask", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/offerTask/{taskId}", Summary: "Get an offer task", IAMActions: []string{"voip:apiovh:offerTask/get"}}
 
 // GetOfferTask calls GET /v1/telephony/{billingAccount}/offerTask/{taskId}: Get an offer task
+//
+// Returns the offer operation: type, action such as termination or upgrade, planned execution date
+// and status.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -4479,6 +5101,9 @@ var opGetOutplanNotification = &ovh.Operation{Name: "telephony.GetOutplanNotific
 
 // GetOutplanNotification calls GET /v1/telephony/{billingAccount}/outplanNotification/{id}: Get an out-of-plan alert
 //
+// Returns the out-of-plan alert: percentage of the maximum out-of-plan, block applied to the lines
+// and notification email.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - id: Id of the object
@@ -4506,6 +5131,9 @@ var opGetOvhPabx = &ovh.Operation{Name: "telephony.GetOvhPabx", Method: http.Met
 
 // GetOvhPabx calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}: Get a PBX service
 //
+// Returns the PBX service (call queues and IVR): feature type, description and whether the extended
+// CCS options are enabled.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -4532,6 +5160,9 @@ func (s *Service) AllOvhPabxes(ctx context.Context, billingAccount string) iter.
 var opGetOvhPabxDialplan = &ovh.Operation{Name: "telephony.GetOvhPabxDialplan", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}", Summary: "Get a dialplan", IAMActions: []string{"voip:apiovh:ovhPabx/dialplan/get"}}
 
 // GetOvhPabxDialplan calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}: Get a dialplan
+//
+// Returns the dialplan: name, last update, transfer timeout, anonymous call rejection and number
+// presented when bridging calls.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -4561,6 +5192,8 @@ var opGetOvhPabxDialplanExtension = &ovh.Operation{Name: "telephony.GetOvhPabxDi
 
 // GetOvhPabxDialplanExtension calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}: Get an extension
 //
+// Returns the extension: position in the dialplan, status, scheduler category and screen list type.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -4589,6 +5222,9 @@ func (s *Service) AllOvhPabxDialplanExtensions(ctx context.Context, billingAccou
 var opGetOvhPabxDialplanExtensionConditionScreenList = &ovh.Operation{Name: "telephony.GetOvhPabxDialplanExtensionConditionScreenList", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}/conditionScreenList/{conditionId}", Summary: "Get a filtering condition", IAMActions: []string{"voip:apiovh:ovhPabx/dialplan/extension/conditionScreenList/get"}}
 
 // GetOvhPabxDialplanExtensionConditionScreenList calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}/conditionScreenList/{conditionId}: Get a filtering condition
+//
+// Returns the filtering condition of the extension: caller number or destination number, and screen
+// list type (whitelist or blacklist).
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -4620,6 +5256,9 @@ var opGetOvhPabxDialplanExtensionConditionTime = &ovh.Operation{Name: "telephony
 
 // GetOvhPabxDialplanExtensionConditionTime calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}/conditionTime/{conditionId}: Get a time condition
 //
+// Returns the time condition of the extension: day of the week and the start and end times when the
+// extension runs.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -4649,6 +5288,9 @@ func (s *Service) AllOvhPabxDialplanExtensionConditionTimes(ctx context.Context,
 var opGetOvhPabxDialplanExtensionRule = &ovh.Operation{Name: "telephony.GetOvhPabxDialplanExtensionRule", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}/rule/{ruleId}", Summary: "Get an extension rule", IAMActions: []string{"voip:apiovh:ovhPabx/dialplan/extension/rule/get"}}
 
 // GetOvhPabxDialplanExtensionRule calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}/rule/{ruleId}: Get an extension rule
+//
+// Returns the rule: action (such as playback, bridge, voicemail or TTS), parameter, position and
+// whether it runs when the conditions are false.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -4680,6 +5322,9 @@ var opGetOvhPabxHunting = &ovh.Operation{Name: "telephony.GetOvhPabxHunting", Me
 
 // GetOvhPabxHunting calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting: Get the queue system settings
 //
+// Returns the queue system settings of the service: offer name, CRM URL template opened by the
+// agent banner, G729 codec and status change IVR.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -4693,6 +5338,9 @@ func (s *Service) GetOvhPabxHunting(ctx context.Context, billingAccount string, 
 var opGetOvhPabxHuntingAgent = &ovh.Operation{Name: "telephony.GetOvhPabxHuntingAgent", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}", Summary: "Get an agent", IAMActions: []string{"voip:apiovh:ovhPabx/hunting/agent/get"}}
 
 // GetOvhPabxHuntingAgent calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}: Get an agent
+//
+// Returns the agent: number, description, status, break status, type (internal or external), ring
+// timeout, wrap-up time and simultaneous calls.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -4722,6 +5370,8 @@ var opGetOvhPabxHuntingAgentBannerAccess = &ovh.Operation{Name: "telephony.GetOv
 
 // GetOvhPabxHuntingAgentBannerAccess calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/bannerAccess: Get the agent banner access
 //
+// Returns the web access to the agent banner application: its URL and creation date.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -4736,6 +5386,9 @@ func (s *Service) GetOvhPabxHuntingAgentBannerAccess(ctx context.Context, billin
 var opGetOvhPabxHuntingAgentCalls = &ovh.Operation{Name: "telephony.GetOvhPabxHuntingAgentCalls", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/calls/{id}", Summary: "Get a live call", IAMActions: []string{"voip:apiovh:ovhPabx/hunting/agent/calls/get"}}
 
 // GetOvhPabxHuntingAgentCalls calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/calls/{id}: Get a live call
+//
+// Returns the live call: caller number and name, destination number, agent, queue, state (waiting
+// or answered), hold status and begin, answer and end dates.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -4766,6 +5419,9 @@ var opGetOvhPabxHuntingAgentEventToken = &ovh.Operation{Name: "telephony.GetOvhP
 
 // GetOvhPabxHuntingAgentEventToken calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/eventToken: Get the event token
 //
+// Returns the token used to receive real-time call events. Create a new token when it is missing or
+// expired.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -4781,6 +5437,9 @@ var opGetOvhPabxHuntingAgentLiveStatus = &ovh.Operation{Name: "telephony.GetOvhP
 
 // GetOvhPabxHuntingAgentLiveStatus calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/liveStatus: Get the agent live status
 //
+// Returns the live status of the agent: state, last status change, and the number and total
+// duration of the calls taken on the current day.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -4795,6 +5454,9 @@ func (s *Service) GetOvhPabxHuntingAgentLiveStatus(ctx context.Context, billingA
 var opGetOvhPabxHuntingAgentQueue = &ovh.Operation{Name: "telephony.GetOvhPabxHuntingAgentQueue", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/queue/{queueId}", Summary: "Get an agent position in a queue", IAMActions: []string{"voip:apiovh:ovhPabx/hunting/agent/queue/get"}}
 
 // GetOvhPabxHuntingAgentQueue calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/queue/{queueId}: Get an agent position in a queue
+//
+// Returns the position of the agent in the queue. The position sets the order in which agents
+// receive calls, depending on the queue strategy.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -4825,6 +5487,9 @@ var opGetOvhPabxHuntingAgentQueueLiveStatus = &ovh.Operation{Name: "telephony.Ge
 
 // GetOvhPabxHuntingAgentQueueLiveStatus calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/queue/{queueId}/liveStatus: Get the agent live status
 //
+// Returns the live status of the agent: state, last status change, and the number and total
+// duration of the calls taken on the current day.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -4840,6 +5505,9 @@ func (s *Service) GetOvhPabxHuntingAgentQueueLiveStatus(ctx context.Context, bil
 var opGetOvhPabxHuntingCustomStatus = &ovh.Operation{Name: "telephony.GetOvhPabxHuntingCustomStatus", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/customStatus/{id}", Summary: "Get a custom status", IAMActions: []string{"voip:apiovh:ovhPabx/hunting/customStatus/get"}}
 
 // GetOvhPabxHuntingCustomStatus calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/customStatus/{id}: Get a custom status
+//
+// Returns the custom status: name, short description and color displayed on the agent banner web
+// application.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -4869,6 +5537,9 @@ var opGetOvhPabxHuntingEventToken = &ovh.Operation{Name: "telephony.GetOvhPabxHu
 
 // GetOvhPabxHuntingEventToken calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/eventToken: Get the event token
 //
+// Returns the token used to receive real-time call events. Create a new token when it is missing or
+// expired.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -4882,6 +5553,9 @@ func (s *Service) GetOvhPabxHuntingEventToken(ctx context.Context, billingAccoun
 var opGetOvhPabxHuntingQueue = &ovh.Operation{Name: "telephony.GetOvhPabxHuntingQueue", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}", Summary: "Get a queue", IAMActions: []string{"voip:apiovh:ovhPabx/hunting/queue/get"}}
 
 // GetOvhPabxHuntingQueue calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}: Get a queue
+//
+// Returns the queue: name, strategy, maximum waiting callers and wait time, sound on hold, call
+// recording, and actions on overflow and on closure.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -4910,6 +5584,9 @@ func (s *Service) AllOvhPabxHuntingQueues(ctx context.Context, billingAccount st
 var opGetOvhPabxHuntingQueueAgent = &ovh.Operation{Name: "telephony.GetOvhPabxHuntingQueueAgent", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}/agent/{agentId}", Summary: "Get an agent position in a queue", IAMActions: []string{"voip:apiovh:ovhPabx/hunting/queue/agent/get"}}
 
 // GetOvhPabxHuntingQueueAgent calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}/agent/{agentId}: Get an agent position in a queue
+//
+// Returns the position of the agent in the queue. The position sets the order in which agents
+// receive calls, depending on the queue strategy.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -4940,6 +5617,9 @@ var opGetOvhPabxHuntingQueueAgentLiveStatus = &ovh.Operation{Name: "telephony.Ge
 
 // GetOvhPabxHuntingQueueAgentLiveStatus calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}/agent/{agentId}/liveStatus: Get the agent live status
 //
+// Returns the live status of the agent: state, last status change, and the number and total
+// duration of the calls taken on the current day.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -4955,6 +5635,9 @@ func (s *Service) GetOvhPabxHuntingQueueAgentLiveStatus(ctx context.Context, bil
 var opGetOvhPabxHuntingQueueLiveCalls = &ovh.Operation{Name: "telephony.GetOvhPabxHuntingQueueLiveCalls", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}/liveCalls/{id}", Summary: "Get a live call", IAMActions: []string{"voip:apiovh:ovhPabx/hunting/queue/liveCalls/get"}}
 
 // GetOvhPabxHuntingQueueLiveCalls calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}/liveCalls/{id}: Get a live call
+//
+// Returns the live call: caller number and name, destination number, agent, queue, state (waiting
+// or answered), hold status and begin, answer and end dates.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -4985,6 +5668,9 @@ var opGetOvhPabxHuntingQueueLiveStatistics = &ovh.Operation{Name: "telephony.Get
 
 // GetOvhPabxHuntingQueueLiveStatistics calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}/liveStatistics: Get queue live statistics
 //
+// Returns the live statistics of the queue since the last reset at midnight: total, answered and
+// lost calls, and total waiting and call durations.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -4999,6 +5685,9 @@ func (s *Service) GetOvhPabxHuntingQueueLiveStatistics(ctx context.Context, bill
 var opGetOvhPabxMenu = &ovh.Operation{Name: "telephony.GetOvhPabxMenu", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/menu/{menuId}", Summary: "Get a menu", IAMActions: []string{"voip:apiovh:ovhPabx/menu/get"}}
 
 // GetOvhPabxMenu calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/menu/{menuId}: Get a menu
+//
+// Returns the voice menu: name, greeting sound or text to speech, invalid key sound or text to
+// speech, and the key entry and menu timeouts.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -5027,6 +5716,9 @@ func (s *Service) AllOvhPabxMenus(ctx context.Context, billingAccount string, se
 var opGetOvhPabxMenuEntry = &ovh.Operation{Name: "telephony.GetOvhPabxMenuEntry", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/menu/{menuId}/entry/{entryId}", Summary: "Get a menu entry", IAMActions: []string{"voip:apiovh:ovhPabx/menu/entry/get"}}
 
 // GetOvhPabxMenuEntry calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/menu/{menuId}/entry/{entryId}: Get a menu entry
+//
+// Returns the menu entry: position, key (DTMF) pressed by the caller, action triggered and its
+// additional parameter.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -5057,6 +5749,9 @@ var opGetOvhPabxRecords = &ovh.Operation{Name: "telephony.GetOvhPabxRecords", Me
 
 // GetOvhPabxRecords calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/records/{id}: Get a call recording
 //
+// Returns the call recording and the URL to download it, with the caller and destination numbers,
+// agent, start and end dates and duration.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -5084,6 +5779,9 @@ func (s *Service) AllOvhPabxRecords(ctx context.Context, billingAccount string, 
 var opGetOvhPabxSound = &ovh.Operation{Name: "telephony.GetOvhPabxSound", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/sound/{soundId}", Summary: "Get a sound", IAMActions: []string{"voip:apiovh:ovhPabx/sound/get"}}
 
 // GetOvhPabxSound calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/sound/{soundId}: Get a sound
+//
+// Returns the sound of the service: its identifier and filename. Sounds are played by queues and
+// voice menus.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -5113,6 +5811,9 @@ var opGetOvhPabxTts = &ovh.Operation{Name: "telephony.GetOvhPabxTts", Method: ht
 
 // GetOvhPabxTts calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/tts/{id}: Get a TTS prompt
 //
+// Returns the text to speech prompt: the text played and the voice that reads it (Helene, Loic,
+// Jenny or Bruce).
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -5141,6 +5842,8 @@ var opGetPhonebook = &ovh.Operation{Name: "telephony.GetPhonebook", Method: http
 
 // GetPhonebook calls GET /v1/telephony/{billingAccount}/phonebook/{bookKey}: Get a phonebook
 //
+// Returns the name and the identifier (bookKey) of the phonebook shared by the billing account.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - bookKey: Identifier of the phonebook
@@ -5168,6 +5871,8 @@ var opGetPhonebookExport = &ovh.Operation{Name: "telephony.GetPhonebookExport", 
 
 // GetPhonebookExport calls GET /v1/telephony/{billingAccount}/phonebook/{bookKey}/export: Export contacts
 //
+// Exports the contacts of the phonebook to a file in CSV format. Returns the file to download.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - bookKey: Identifier of the phonebook
@@ -5182,6 +5887,9 @@ func (s *Service) GetPhonebookExport(ctx context.Context, billingAccount string,
 var opGetPhonebookPhonebookContact = &ovh.Operation{Name: "telephony.GetPhonebookPhonebookContact", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/phonebook/{bookKey}/phonebookContact/{id}", Summary: "Get a contact", IAMActions: []string{"voip:apiovh:phonebook/phonebookContact/get"}}
 
 // GetPhonebookPhonebookContact calls GET /v1/telephony/{billingAccount}/phonebook/{bookKey}/phonebookContact/{id}: Get a contact
+//
+// Returns the contact of the phonebook: name, surname, group, and office and home phone numbers,
+// landline and mobile.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -5211,6 +5919,9 @@ var opGetPortability = &ovh.Operation{Name: "telephony.GetPortability", Method: 
 
 // GetPortability calls GET /v1/telephony/{billingAccount}/portability/{id}: Get a number porting
 //
+// Returns the number porting: numbers, current operator, desired execution date, redirection, error
+// codes, customer information and RIO (France only).
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - id: The ID of the portability
@@ -5238,6 +5949,9 @@ var opGetPortabilityCanBeCancelled = &ovh.Operation{Name: "telephony.GetPortabil
 
 // GetPortabilityCanBeCancelled calls GET /v1/telephony/{billingAccount}/portability/{id}/canBeCancelled: Check if the porting can be canceled
 //
+// Returns whether the number porting can still be canceled. Cancel the porting with the cancel
+// call.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - id: The ID of the portability
@@ -5251,6 +5965,9 @@ func (s *Service) GetPortabilityCanBeCancelled(ctx context.Context, billingAccou
 var opGetPortabilityCanBeExecuted = &ovh.Operation{Name: "telephony.GetPortabilityCanBeExecuted", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/portability/{id}/canBeExecuted", Summary: "Check if the porting can be executed", IAMActions: []string{"voip:apiovh:portability/canBeExecuted/get"}}
 
 // GetPortabilityCanBeExecuted calls GET /v1/telephony/{billingAccount}/portability/{id}/canBeExecuted: Check if the porting can be executed
+//
+// Returns whether the number porting can be executed now. Execute the porting with the execute
+// call.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -5266,6 +5983,9 @@ var opGetPortabilityDateCanBeChanged = &ovh.Operation{Name: "telephony.GetPortab
 
 // GetPortabilityDateCanBeChanged calls GET /v1/telephony/{billingAccount}/portability/{id}/dateCanBeChanged: Check if the porting date can change
 //
+// Returns whether the date of the number porting can be changed. Request a new date with the change
+// date call.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - id: The ID of the portability
@@ -5279,6 +5999,9 @@ func (s *Service) GetPortabilityDateCanBeChanged(ctx context.Context, billingAcc
 var opGetPortabilityDocument = &ovh.Operation{Name: "telephony.GetPortabilityDocument", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/portability/{id}/document/{documentId}", Summary: "Get a porting document", IAMActions: []string{"voip:apiovh:portability/document/get"}}
 
 // GetPortabilityDocument calls GET /v1/telephony/{billingAccount}/portability/{id}/document/{documentId}: Get a porting document
+//
+// Returns the porting document: name, description, size, and the URLs to download and upload the
+// file.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -5308,6 +6031,8 @@ var opGetPortabilityRelaunch = &ovh.Operation{Name: "telephony.GetPortabilityRel
 
 // GetPortabilityRelaunch calls GET /v1/telephony/{billingAccount}/portability/{id}/relaunch: Check if the porting can be relaunched
 //
+// Returns whether the porting error can be fixed, and the fields to correct.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - id: The ID of the portability
@@ -5321,6 +6046,9 @@ func (s *Service) GetPortabilityRelaunch(ctx context.Context, billingAccount str
 var opGetProcedure = &ovh.Operation{Name: "telephony.GetProcedure", Method: http.MethodGet, Path: "/v1/telephony/procedure/{id}", Summary: "Get a procedure", IAMActions: []string{"account:apiovh:voip/procedure/get"}}
 
 // GetProcedure calls GET /v1/telephony/procedure/{id}: Get a procedure
+//
+// Returns the procedure: status (pretodo, todo, doing, done, stop or cancel), request date, finish
+// date and the URL of its document.
 //
 // Arguments:
 //   - id: Procedure ID
@@ -5348,6 +6076,9 @@ var opGetProcedureRequired = &ovh.Operation{Name: "telephony.GetProcedureRequire
 
 // GetProcedureRequired calls GET /v1/telephony/procedure/required: Check if a procedure is required
 //
+// Returns true when a procedure, such as an identity check, is required before ordering telephony
+// products.
+//
 // Requires the IAM action account:apiovh:voip/procedure/required/get.
 func (s *Service) GetProcedureRequired(ctx context.Context) (bool, error) {
 	return ovh.Call[bool](ctx, s.c, &ovh.Request{Operation: opGetProcedureRequired, Method: http.MethodGet, Path: "/v1/telephony/procedure/required"})
@@ -5357,6 +6088,9 @@ func (s *Service) GetProcedureRequired(ctx context.Context) (bool, error) {
 var opGetRedirect = &ovh.Operation{Name: "telephony.GetRedirect", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/redirect/{serviceName}", Summary: "Get a redirect number", IAMActions: []string{"voip:apiovh:redirect/get"}}
 
 // GetRedirect calls GET /v1/telephony/{billingAccount}/redirect/{serviceName}: Get a redirect number
+//
+// Returns the redirect number: feature type and description. The destination is changed with the
+// changeDestination call.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -5385,6 +6119,9 @@ var opGetResellerPanelStatus = &ovh.Operation{Name: "telephony.GetResellerPanelS
 
 // GetResellerPanelStatus calls GET /v1/telephony/resellerPanel/status: Get the reseller panel status
 //
+// Returns whether the reseller panel of the customer is enabled, and the status of the last
+// password update.
+//
 // Requires the IAM action account:apiovh:voip/resellerPanel/status/get.
 func (s *Service) GetResellerPanelStatus(ctx context.Context) (*TelephonyResellerPanelStatus, error) {
 	return ovh.Call[*TelephonyResellerPanelStatus](ctx, s.c, &ovh.Request{Operation: opGetResellerPanelStatus, Method: http.MethodGet, Path: "/v1/telephony/resellerPanel/status"})
@@ -5394,6 +6131,9 @@ func (s *Service) GetResellerPanelStatus(ctx context.Context) (*TelephonyReselle
 var opGetRsva = &ovh.Operation{Name: "telephony.GetRsva", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/rsva/{serviceName}", Summary: "Get a premium rate number", IAMActions: []string{"voip:apiovh:rsva/get"}}
 
 // GetRsva calls GET /v1/telephony/{billingAccount}/rsva/{serviceName}: Get a premium rate number
+//
+// Returns the premium rate number (French SVA numbers subject to the RSVA reform) and its typology,
+// the category of the service.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -5422,6 +6162,9 @@ var opGetRsvaCurrentRateCode = &ovh.Operation{Name: "telephony.GetRsvaCurrentRat
 
 // GetRsvaCurrentRateCode calls GET /v1/telephony/{billingAccount}/rsva/{serviceName}/currentRateCode: Get the current rate code
 //
+// Returns the rate code currently applied to the premium rate number, with its prices and repayment
+// prices without tax.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -5436,6 +6179,9 @@ var opGetRsvaScheduledRateCode = &ovh.Operation{Name: "telephony.GetRsvaSchedule
 
 // GetRsvaScheduledRateCode calls GET /v1/telephony/{billingAccount}/rsva/{serviceName}/scheduledRateCode: Get the scheduled rate code
 //
+// Returns the rate code scheduled for the premium rate number, with its effective date and the date
+// until which it can be cancelled.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -5449,6 +6195,9 @@ func (s *Service) GetRsvaScheduledRateCode(ctx context.Context, billingAccount s
 var opGetScheduler = &ovh.Operation{Name: "telephony.GetScheduler", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/scheduler/{serviceName}", Summary: "Get a scheduler", IAMActions: []string{"voip:apiovh:scheduler/get"}}
 
 // GetScheduler calls GET /v1/telephony/{billingAccount}/scheduler/{serviceName}: Get a scheduler
+//
+// Returns the scheduler of the service and its timezone. The scheduler holds calendar events, such
+// as closing days.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -5476,6 +6225,8 @@ func (s *Service) AllSchedulers(ctx context.Context, billingAccount string) iter
 var opGetSchedulerEvents = &ovh.Operation{Name: "telephony.GetSchedulerEvents", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/scheduler/{serviceName}/events/{uid}", Summary: "Get a scheduler event", IAMActions: []string{"voip:apiovh:scheduler/events/get"}}
 
 // GetSchedulerEvents calls GET /v1/telephony/{billingAccount}/scheduler/{serviceName}/events/{uid}: Get a scheduler event
+//
+// Returns the scheduler event: title, description, start and end dates, and category.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -5505,6 +6256,8 @@ var opGetScreen = &ovh.Operation{Name: "telephony.GetScreen", Method: http.Metho
 
 // GetScreen calls GET /v1/telephony/{billingAccount}/screen/{serviceName}: Get call filtering settings
 //
+// Returns the call filtering settings of the service: incoming and outgoing filtering mode.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -5531,6 +6284,9 @@ func (s *Service) AllScreens(ctx context.Context, billingAccount string) iter.Se
 var opGetScreenScreenLists = &ovh.Operation{Name: "telephony.GetScreenScreenLists", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/screen/{serviceName}/screenLists/{id}", Summary: "Get a filtering rule", IAMActions: []string{"voip:apiovh:screen/screenLists/get"}}
 
 // GetScreenScreenLists calls GET /v1/telephony/{billingAccount}/screen/{serviceName}/screenLists/{id}: Get a filtering rule
+//
+// Returns the call filtering rule: number, nature, list type (incoming or outgoing, whitelist or
+// blacklist) and status.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -5560,6 +6316,9 @@ var opGetService = &ovh.Operation{Name: "telephony.GetService", Method: http.Met
 
 // GetService calls GET /v1/telephony/{billingAccount}/service/{serviceName}: Get a service
 //
+// Returns the service: type, feature type, description, offers, properties, fax capabilities,
+// associated device and country.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -5587,6 +6346,8 @@ var opGetServiceDirectory = &ovh.Operation{Name: "telephony.GetServiceDirectory"
 
 // GetServiceDirectory calls GET /v1/telephony/{billingAccount}/service/{serviceName}/directory: Get the directory listing
 //
+// Returns the directory listing of the service: name, address and display options.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -5601,6 +6362,9 @@ var opGetServiceEventToken = &ovh.Operation{Name: "telephony.GetServiceEventToke
 
 // GetServiceEventToken calls GET /v1/telephony/{billingAccount}/service/{serviceName}/eventToken: Get the event token
 //
+// Returns the token used to receive real-time call events. Create a new token when it is missing or
+// expired.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -5614,6 +6378,9 @@ func (s *Service) GetServiceEventToken(ctx context.Context, billingAccount strin
 var opGetServiceFaxConsumption = &ovh.Operation{Name: "telephony.GetServiceFaxConsumption", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/service/{serviceName}/faxConsumption/{consumptionId}", Summary: "Get a fax record", IAMActions: []string{"voip:apiovh:service/faxConsumption/get"}}
 
 // GetServiceFaxConsumption calls GET /v1/telephony/{billingAccount}/service/{serviceName}/faxConsumption/{consumptionId}: Get a fax record
+//
+// Returns the fax record: date, calling and called numbers, direction (sent or received), pages and
+// price without tax.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -5658,6 +6425,8 @@ var opGetServiceOfferChange = &ovh.Operation{Name: "telephony.GetServiceOfferCha
 
 // GetServiceOfferChange calls GET /v1/telephony/{billingAccount}/service/{serviceName}/offerChange: Get the scheduled offer change
 //
+// Returns the offer that will replace the current offer of the service on the next renewal.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -5671,6 +6440,9 @@ func (s *Service) GetServiceOfferChange(ctx context.Context, billingAccount stri
 var opGetServiceOfferTask = &ovh.Operation{Name: "telephony.GetServiceOfferTask", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/service/{serviceName}/offerTask/{taskId}", Summary: "Get an offer task", IAMActions: []string{"voip:apiovh:service/offerTask/get"}}
 
 // GetServiceOfferTask calls GET /v1/telephony/{billingAccount}/service/{serviceName}/offerTask/{taskId}: Get an offer task
+//
+// Returns the offer operation: type, action such as termination or upgrade, planned execution date
+// and status.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -5700,6 +6472,9 @@ var opGetServicePreviousVoiceConsumption = &ovh.Operation{Name: "telephony.GetSe
 
 // GetServicePreviousVoiceConsumption calls GET /v1/telephony/{billingAccount}/service/{serviceName}/previousVoiceConsumption/{consumptionId}: Get a last month call record
 //
+// Returns the call record of the previous month: date, numbers, destination, duration, hangup cause
+// and price without tax.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -5727,6 +6502,9 @@ func (s *Service) AllServicePreviousVoiceConsumptions(ctx context.Context, billi
 var opGetServiceRepaymentConsumption = &ovh.Operation{Name: "telephony.GetServiceRepaymentConsumption", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/service/{serviceName}/repaymentConsumption/{consumptionId}", Summary: "Get a repayable call", IAMActions: []string{"voip:apiovh:service/repaymentConsumption/get"}}
 
 // GetServiceRepaymentConsumption calls GET /v1/telephony/{billingAccount}/service/{serviceName}/repaymentConsumption/{consumptionId}: Get a repayable call
+//
+// Returns the repayable call: date, calling, called and dialed numbers, operator, duration, repaid
+// price and whether it is repayable now.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -5756,6 +6534,9 @@ var opGetServiceTask = &ovh.Operation{Name: "telephony.GetServiceTask", Method: 
 
 // GetServiceTask calls GET /v1/telephony/{billingAccount}/service/{serviceName}/task/{taskId}: Get a task
 //
+// Returns the operation on the telephony service: action, status (todo, doing, done, error or
+// pause), created object and failure message.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -5783,6 +6564,9 @@ func (s *Service) AllServiceTasks(ctx context.Context, billingAccount string, se
 var opGetServiceVoiceConsumption = &ovh.Operation{Name: "telephony.GetServiceVoiceConsumption", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/service/{serviceName}/voiceConsumption/{consumptionId}", Summary: "Get a call record", IAMActions: []string{"voip:apiovh:service/voiceConsumption/get"}}
 
 // GetServiceVoiceConsumption calls GET /v1/telephony/{billingAccount}/service/{serviceName}/voiceConsumption/{consumptionId}: Get a call record
+//
+// Returns the call record: date, calling, called and dialed numbers, destination, duration, hangup
+// cause, plan and price without tax.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -5878,6 +6662,9 @@ var opGetSounds = &ovh.Operation{Name: "telephony.GetSounds", Method: http.Metho
 
 // GetSounds calls GET /v1/telephony/sounds/{id}: Get a sound
 //
+// Returns the sound: filename, description, creation date, size, and the URLs to download and
+// upload the sound file.
+//
 // Arguments:
 //   - id: Sound ID
 //
@@ -5903,6 +6690,8 @@ func (s *Service) AllSounds(ctx context.Context) iter.Seq2[*TelephonySound, erro
 var opGetSpare = &ovh.Operation{Name: "telephony.GetSpare", Method: http.MethodGet, Path: "/v1/telephony/spare/{spare}", Summary: "Get a spare phone", IAMActions: []string{"voip:apiovh:spare/get"}}
 
 // GetSpare calls GET /v1/telephony/spare/{spare}: Get a spare phone
+//
+// Returns the spare phone: MAC address, brand and model, and its telephony protocol.
 //
 // Arguments:
 //   - spare: The internal name of your spare
@@ -5945,6 +6734,9 @@ var opGetTask = &ovh.Operation{Name: "telephony.GetTask", Method: http.MethodGet
 
 // GetTask calls GET /v1/telephony/{billingAccount}/task/{taskId}: Get a task
 //
+// Returns the operation on the telephony service: action, status (todo, doing, done, error or
+// pause), created object and failure message.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - taskID: the taskId path parameter
@@ -5972,6 +6764,9 @@ var opGetTelephony = &ovh.Operation{Name: "telephony.GetTelephony", Method: http
 
 // GetTelephony calls GET /v1/telephony/{billingAccount}: Get a billing account
 //
+// Returns the billing account: description, status, credit threshold, security deposit and current
+// out-of-plan amount.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //
@@ -5997,6 +6792,8 @@ func (s *Service) AllTelephonies(ctx context.Context, params ...ListTelephoniesP
 var opGetTimeCondition = &ovh.Operation{Name: "telephony.GetTimeCondition", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/timeCondition/{serviceName}", Summary: "Get a time condition service", IAMActions: []string{"voip:apiovh:timeCondition/get"}}
 
 // GetTimeCondition calls GET /v1/telephony/{billingAccount}/timeCondition/{serviceName}: Get a time condition service
+//
+// Returns the time condition service. Its time conditions route calls by time slot.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -6024,6 +6821,9 @@ func (s *Service) AllTimeConditions(ctx context.Context, billingAccount string) 
 var opGetTimeConditionCondition = &ovh.Operation{Name: "telephony.GetTimeConditionCondition", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/timeCondition/{serviceName}/condition/{id}", Summary: "Get a time condition", IAMActions: []string{"voip:apiovh:timeCondition/condition/get"}}
 
 // GetTimeConditionCondition calls GET /v1/telephony/{billingAccount}/timeCondition/{serviceName}/condition/{id}: Get a time condition
+//
+// Returns the time condition: day, start and end hours (hhmm), status, and the routing policy
+// applied during the time slot.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -6053,6 +6853,8 @@ var opGetTimeConditionOptions = &ovh.Operation{Name: "telephony.GetTimeCondition
 
 // GetTimeConditionOptions calls GET /v1/telephony/{billingAccount}/timeCondition/{serviceName}/options: Get time condition options
 //
+// Returns the time condition options of the service: status and routing outside time slots.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -6066,6 +6868,9 @@ func (s *Service) GetTimeConditionOptions(ctx context.Context, billingAccount st
 var opGetTrunk = &ovh.Operation{Name: "telephony.GetTrunk", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/trunk/{serviceName}", Summary: "Get a trunk", IAMActions: []string{"voip:apiovh:trunk/get"}}
 
 // GetTrunk calls GET /v1/telephony/{billingAccount}/trunk/{serviceName}: Get a trunk
+//
+// Returns the trunk service: service name, service type and description. External displayed numbers
+// and channel packs have their own calls.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -6094,6 +6899,8 @@ var opGetTrunkChannelsPacksRepartition = &ovh.Operation{Name: "telephony.GetTrun
 
 // GetTrunkChannelsPacksRepartition calls GET /v1/telephony/{billingAccount}/trunk/{serviceName}/channelsPacksRepartition: Get the best channel packs
 //
+// Returns the best combination of channel packs for a number of simultaneous channels.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: Name of the service
@@ -6108,6 +6915,9 @@ func (s *Service) GetTrunkChannelsPacksRepartition(ctx context.Context, billingA
 var opGetTrunkExternalDisplayedNumber = &ovh.Operation{Name: "telephony.GetTrunkExternalDisplayedNumber", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/trunk/{serviceName}/externalDisplayedNumber/{number}", Summary: "Get an external displayed number", IAMActions: []string{"voip:apiovh:trunk/externalDisplayedNumber/get"}}
 
 // GetTrunkExternalDisplayedNumber calls GET /v1/telephony/{billingAccount}/trunk/{serviceName}/externalDisplayedNumber/{number}: Get an external displayed number
+//
+// Returns the external displayed number, its creation and validation dates and its status:
+// waitingValidation, enabled, toDelete or refused.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -6136,6 +6946,9 @@ func (s *Service) AllTrunkExternalDisplayedNumbers(ctx context.Context, billingA
 var opGetTrunks = &ovh.Operation{Name: "telephony.GetTrunks", Method: http.MethodGet, Path: "/v1/telephony/trunks/{serviceName}", Summary: "Get a line or trunk", IAMActions: []string{"voip:apiovh:trunks/get"}}
 
 // GetTrunks calls GET /v1/telephony/trunks/{serviceName}: Get a line or trunk
+//
+// Returns the line or trunk service, without its billing account. Use it to find a service across
+// all billing accounts.
 //
 // Arguments:
 //   - serviceName: Your trunk number
@@ -6178,6 +6991,9 @@ var opGetVoicemail = &ovh.Operation{Name: "telephony.GetVoicemail", Method: http
 
 // GetVoicemail calls GET /v1/telephony/{billingAccount}/voicemail/{serviceName}: Get a voicemail
 //
+// Returns the voicemail service: description and offers. Settings, messages and greetings have
+// their own routes.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -6204,6 +7020,9 @@ func (s *Service) AllVoicemails(ctx context.Context, billingAccount string) iter
 var opGetVoicemailDirectories = &ovh.Operation{Name: "telephony.GetVoicemailDirectories", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/voicemail/{serviceName}/directories/{id}", Summary: "Get a voicemail message", IAMActions: []string{"voip:apiovh:voicemail/directories/get"}}
 
 // GetVoicemailDirectories calls GET /v1/telephony/{billingAccount}/voicemail/{serviceName}/directories/{id}: Get a voicemail message
+//
+// Returns the voicemail message: caller and callee numbers, folder, creation date and duration in
+// seconds.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -6239,6 +7058,9 @@ type GetVoicemailDirectoriesDownloadParams struct {
 
 // GetVoicemailDirectoriesDownload calls GET /v1/telephony/{billingAccount}/voicemail/{serviceName}/directories/{id}/download: Download a voicemail message
 //
+// Returns a file to download the voicemail message as a sound file, in wav, mp3, aiff, flac, ogg or
+// au format.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -6253,6 +7075,9 @@ func (s *Service) GetVoicemailDirectoriesDownload(ctx context.Context, billingAc
 var opGetVoicemailGreetings = &ovh.Operation{Name: "telephony.GetVoicemailGreetings", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/voicemail/{serviceName}/greetings/{id}", Summary: "Get a greeting", IAMActions: []string{"voip:apiovh:voicemail/greetings/get"}}
 
 // GetVoicemailGreetings calls GET /v1/telephony/{billingAccount}/voicemail/{serviceName}/greetings/{id}: Get a greeting
+//
+// Returns the custom greeting: its identifier, the callee number and the greeting folder (unavail,
+// busy, greet or temp).
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -6288,6 +7113,9 @@ type GetVoicemailGreetingsDownloadParams struct {
 
 // GetVoicemailGreetingsDownload calls GET /v1/telephony/{billingAccount}/voicemail/{serviceName}/greetings/{id}/download: Download a greeting
 //
+// Returns a file to download the greeting as a sound file, in wav, mp3, aiff, flac, ogg or au
+// format.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -6303,6 +7131,8 @@ var opGetVoicemailSettings = &ovh.Operation{Name: "telephony.GetVoicemailSetting
 
 // GetVoicemailSettings calls GET /v1/telephony/{billingAccount}/voicemail/{serviceName}/settings: Get the voicemail settings
 //
+// Returns the voicemail settings: greeting, email notification, audio format and other options.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -6316,6 +7146,9 @@ func (s *Service) GetVoicemailSettings(ctx context.Context, billingAccount strin
 var opGetVoicemailSettingsRouting = &ovh.Operation{Name: "telephony.GetVoicemailSettingsRouting", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/voicemail/{serviceName}/settings/routing", Summary: "Get the voicemail status", IAMActions: []string{"voip:apiovh:voicemail/settings/routing/get"}}
 
 // GetVoicemailSettingsRouting calls GET /v1/telephony/{billingAccount}/voicemail/{serviceName}/settings/routing: Get the voicemail status
+//
+// Returns whether calls are routed to the voicemail or to the fax. Available only on a line with
+// fax capabilities.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -6331,6 +7164,8 @@ var opGetVoicemailSettingsVoicemailNumbers = &ovh.Operation{Name: "telephony.Get
 
 // GetVoicemailSettingsVoicemailNumbers calls GET /v1/telephony/{billingAccount}/voicemail/{serviceName}/settings/voicemailNumbers: Get the voicemail numbers
 //
+// Returns the numbers to call the voicemail from inside and outside the network.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -6344,6 +7179,8 @@ func (s *Service) GetVoicemailSettingsVoicemailNumbers(ctx context.Context, bill
 var opGetVxml = &ovh.Operation{Name: "telephony.GetVxml", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/vxml/{serviceName}", Summary: "Get a VXML service", IAMActions: []string{"voip:apiovh:vxml/get"}}
 
 // GetVxml calls GET /v1/telephony/{billingAccount}/vxml/{serviceName}: Get a VXML service
+//
+// Returns the VXML service: description and offers. The VXML application URLs are in its settings.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -6372,6 +7209,8 @@ var opGetVxmlSettings = &ovh.Operation{Name: "telephony.GetVxmlSettings", Method
 
 // GetVxmlSettings calls GET /v1/telephony/{billingAccount}/vxml/{serviceName}/settings: Get the VXML settings
 //
+// Returns the VXML settings: URL of the VXML application and URL used for recordings.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -6385,6 +7224,9 @@ func (s *Service) GetVxmlSettings(ctx context.Context, billingAccount string, se
 var opHangupEasyHuntingHuntingAgentCalls = &ovh.Operation{Name: "telephony.HangupEasyHuntingHuntingAgentCalls", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/calls/{id}/hangup", Summary: "Hang up a call", IAMActions: []string{"voip:apiovh:easyHunting/hunting/agent/calls/hangup"}}
 
 // HangupEasyHuntingHuntingAgentCalls calls POST /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/calls/{id}/hangup: Hang up a call
+//
+// Ends the live call for all participants, the caller and the agent. Returns the task that performs
+// the hang up.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -6402,6 +7244,9 @@ var opHangupEasyHuntingHuntingQueueLiveCalls = &ovh.Operation{Name: "telephony.H
 
 // HangupEasyHuntingHuntingQueueLiveCalls calls POST /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue/{queueId}/liveCalls/{id}/hangup: Hang up a call
 //
+// Ends the live call for all participants, the caller and the agent. Returns the task that performs
+// the hang up.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -6417,6 +7262,9 @@ func (s *Service) HangupEasyHuntingHuntingQueueLiveCalls(ctx context.Context, bi
 var opHangupLineCalls = &ovh.Operation{Name: "telephony.HangupLineCalls", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/calls/{id}/hangup", Summary: "Hang up a call", IAMActions: []string{"voip:apiovh:line/calls/hangup"}, Deprecated: true}
 
 // HangupLineCalls calls POST /v1/telephony/{billingAccount}/line/{serviceName}/calls/{id}/hangup: Hang up a call
+//
+// Ends the live call for all participants, the caller and the agent. Returns the task that performs
+// the hang up.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -6435,6 +7283,9 @@ var opHangupOvhPabxHuntingAgentCalls = &ovh.Operation{Name: "telephony.HangupOvh
 
 // HangupOvhPabxHuntingAgentCalls calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/calls/{id}/hangup: Hang up a call
 //
+// Ends the live call for all participants, the caller and the agent. Returns the task that performs
+// the hang up.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -6450,6 +7301,9 @@ func (s *Service) HangupOvhPabxHuntingAgentCalls(ctx context.Context, billingAcc
 var opHangupOvhPabxHuntingQueueLiveCalls = &ovh.Operation{Name: "telephony.HangupOvhPabxHuntingQueueLiveCalls", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}/liveCalls/{id}/hangup", Summary: "Hang up a call", IAMActions: []string{"voip:apiovh:ovhPabx/hunting/queue/liveCalls/hangup"}}
 
 // HangupOvhPabxHuntingQueueLiveCalls calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}/liveCalls/{id}/hangup: Hang up a call
+//
+// Ends the live call for all participants, the caller and the agent. Returns the task that performs
+// the hang up.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -6467,6 +7321,9 @@ var opHoldEasyHuntingHuntingAgentCalls = &ovh.Operation{Name: "telephony.HoldEas
 
 // HoldEasyHuntingHuntingAgentCalls calls POST /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/calls/{id}/hold: Toggle hold on a call
 //
+// Puts the live call on hold, or resumes it if it is already on hold. Returns the task that
+// performs it.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -6483,6 +7340,9 @@ var opHoldEasyHuntingHuntingQueueLiveCalls = &ovh.Operation{Name: "telephony.Hol
 
 // HoldEasyHuntingHuntingQueueLiveCalls calls POST /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue/{queueId}/liveCalls/{id}/hold: Toggle hold on a call
 //
+// Puts the live call on hold, or resumes it if it is already on hold. Returns the task that
+// performs it.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -6498,6 +7358,9 @@ func (s *Service) HoldEasyHuntingHuntingQueueLiveCalls(ctx context.Context, bill
 var opHoldLineCalls = &ovh.Operation{Name: "telephony.HoldLineCalls", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/calls/{id}/hold", Summary: "Toggle hold on a call", IAMActions: []string{"voip:apiovh:line/calls/hold"}, Deprecated: true}
 
 // HoldLineCalls calls POST /v1/telephony/{billingAccount}/line/{serviceName}/calls/{id}/hold: Toggle hold on a call
+//
+// Puts the live call on hold, or resumes it if it is already on hold. Returns the task that
+// performs it.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -6516,6 +7379,9 @@ var opHoldOvhPabxHuntingAgentCalls = &ovh.Operation{Name: "telephony.HoldOvhPabx
 
 // HoldOvhPabxHuntingAgentCalls calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/calls/{id}/hold: Toggle hold on a call
 //
+// Puts the live call on hold, or resumes it if it is already on hold. Returns the task that
+// performs it.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -6531,6 +7397,9 @@ func (s *Service) HoldOvhPabxHuntingAgentCalls(ctx context.Context, billingAccou
 var opHoldOvhPabxHuntingQueueLiveCalls = &ovh.Operation{Name: "telephony.HoldOvhPabxHuntingQueueLiveCalls", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}/liveCalls/{id}/hold", Summary: "Toggle hold on a call", IAMActions: []string{"voip:apiovh:ovhPabx/hunting/queue/liveCalls/hold"}}
 
 // HoldOvhPabxHuntingQueueLiveCalls calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}/liveCalls/{id}/hold: Toggle hold on a call
+//
+// Puts the live call on hold, or resumes it if it is already on hold. Returns the task that
+// performs it.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -6548,6 +7417,9 @@ var opImportIcsCalendarScheduler = &ovh.Operation{Name: "telephony.ImportIcsCale
 
 // ImportIcsCalendarScheduler calls POST /v1/telephony/{billingAccount}/scheduler/{serviceName}/importIcsCalendar: Import an ICS calendar
 //
+// Imports scheduler events from a calendar file in ICS format, given by its URL. Returns the task
+// that performs the import.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -6562,6 +7434,9 @@ func (s *Service) ImportIcsCalendarScheduler(ctx context.Context, billingAccount
 var opImportLinePhonePhonebook = &ovh.Operation{Name: "telephony.ImportLinePhonePhonebook", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/phone/phonebook/{bookKey}/import", Summary: "Import contacts", IAMActions: []string{"voip:apiovh:line/phone/phonebook/import"}}
 
 // ImportLinePhonePhonebook calls POST /v1/telephony/{billingAccount}/line/{serviceName}/phone/phonebook/{bookKey}/import: Import contacts
+//
+// Imports contacts into the phonebook from an Excel (.xls, .xlsx) or CSV file in /me/document.
+// Returns the task that performs the import.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -6579,6 +7454,9 @@ var opImportPhonebook = &ovh.Operation{Name: "telephony.ImportPhonebook", Method
 
 // ImportPhonebook calls POST /v1/telephony/{billingAccount}/phonebook/{bookKey}/import: Import contacts
 //
+// Imports contacts into the phonebook from an Excel (.xls, .xlsx) or CSV file in /me/document.
+// Returns the task that performs the import.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - bookKey: Identifier of the phonebook
@@ -6593,6 +7471,9 @@ func (s *Service) ImportPhonebook(ctx context.Context, billingAccount string, bo
 var opInterceptEasyHuntingHuntingAgentCalls = &ovh.Operation{Name: "telephony.InterceptEasyHuntingHuntingAgentCalls", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/calls/{id}/intercept", Summary: "Intercept an unanswered call", IAMActions: []string{"voip:apiovh:easyHunting/hunting/agent/calls/intercept"}}
 
 // InterceptEasyHuntingHuntingAgentCalls calls POST /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/calls/{id}/intercept: Intercept an unanswered call
+//
+// Answers a call that is ringing on another line. The given phone number is called and takes the
+// communication. Returns the task that performs it.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -6611,6 +7492,9 @@ var opInterceptEasyHuntingHuntingQueueLiveCalls = &ovh.Operation{Name: "telephon
 
 // InterceptEasyHuntingHuntingQueueLiveCalls calls POST /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue/{queueId}/liveCalls/{id}/intercept: Intercept an unanswered call
 //
+// Answers a call that is ringing on another line. The given phone number is called and takes the
+// communication. Returns the task that performs it.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -6627,6 +7511,9 @@ func (s *Service) InterceptEasyHuntingHuntingQueueLiveCalls(ctx context.Context,
 var opInterceptLineCalls = &ovh.Operation{Name: "telephony.InterceptLineCalls", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/calls/{id}/intercept", Summary: "Intercept an unanswered call", IAMActions: []string{"voip:apiovh:line/calls/intercept"}, Deprecated: true}
 
 // InterceptLineCalls calls POST /v1/telephony/{billingAccount}/line/{serviceName}/calls/{id}/intercept: Intercept an unanswered call
+//
+// Answers a call that is ringing on another line. The given phone number is called and takes the
+// communication. Returns the task that performs it.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -6646,6 +7533,9 @@ var opInterceptOvhPabxHuntingAgentCalls = &ovh.Operation{Name: "telephony.Interc
 
 // InterceptOvhPabxHuntingAgentCalls calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/calls/{id}/intercept: Intercept an unanswered call
 //
+// Answers a call that is ringing on another line. The given phone number is called and takes the
+// communication. Returns the task that performs it.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -6662,6 +7552,9 @@ func (s *Service) InterceptOvhPabxHuntingAgentCalls(ctx context.Context, billing
 var opInterceptOvhPabxHuntingQueueLiveCalls = &ovh.Operation{Name: "telephony.InterceptOvhPabxHuntingQueueLiveCalls", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}/liveCalls/{id}/intercept", Summary: "Intercept an unanswered call", IAMActions: []string{"voip:apiovh:ovhPabx/hunting/queue/liveCalls/intercept"}}
 
 // InterceptOvhPabxHuntingQueueLiveCalls calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}/liveCalls/{id}/intercept: Intercept an unanswered call
+//
+// Answers a call that is ringing on another line. The given phone number is called and takes the
+// communication. Returns the task that performs it.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -6680,6 +7573,8 @@ var opKickConferenceParticipants = &ovh.Operation{Name: "telephony.KickConferenc
 
 // KickConferenceParticipants calls POST /v1/telephony/{billingAccount}/conference/{serviceName}/participants/{id}/kick: Eject a participant
 //
+// Removes the participant from the conference room. Returns the task that performs it.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -6694,6 +7589,8 @@ func (s *Service) KickConferenceParticipants(ctx context.Context, billingAccount
 var opKickConferenceRoomsParticipants = &ovh.Operation{Name: "telephony.KickConferenceRoomsParticipants", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/participants/{id}/kick", Summary: "Eject a participant", IAMActions: []string{"voip:apiovh:conference/rooms/participants/kick"}}
 
 // KickConferenceRoomsParticipants calls POST /v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/participants/{id}/kick: Eject a participant
+//
+// Removes the participant from the conference room. Returns the task that performs it.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -6710,6 +7607,9 @@ func (s *Service) KickConferenceRoomsParticipants(ctx context.Context, billingAc
 var opListAbbreviatedNumbers = &ovh.Operation{Name: "telephony.ListAbbreviatedNumbers", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/abbreviatedNumber", Summary: "List speed dial numbers", IAMActions: []string{"voip:apiovh:abbreviatedNumber/get"}}
 
 // ListAbbreviatedNumbers calls GET /v1/telephony/{billingAccount}/abbreviatedNumber: List speed dial numbers
+//
+// Returns the speed dial numbers shared by all the lines of the billing account. A speed dial
+// number is a short code for a number.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -6747,6 +7647,9 @@ type ListAliasesParams struct {
 
 // ListAliases calls GET /v1/telephony/aliases: List numbers
 //
+// Returns the numbers of the customer, across all billing accounts. Get a number service for its
+// billing account and settings.
+//
 // Requires the IAM action voip:apiovh:aliases/get.
 func (s *Service) ListAliases(ctx context.Context, params ...ListAliasesParams) ([]string, error) {
 	return ovh.Call[[]string](ctx, s.c, &ovh.Request{Operation: opListAliases, Method: http.MethodGet, Path: "/v1/telephony/aliases", Params: ovh.Optional(params)})
@@ -6756,6 +7659,9 @@ func (s *Service) ListAliases(ctx context.Context, params ...ListAliasesParams) 
 var opListAllowedCreditThresholds = &ovh.Operation{Name: "telephony.ListAllowedCreditThresholds", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/allowedCreditThreshold", Summary: "List allowed credit thresholds", IAMActions: []string{"voip:apiovh:allowedCreditThreshold/get"}}
 
 // ListAllowedCreditThresholds calls GET /v1/telephony/{billingAccount}/allowedCreditThreshold: List allowed credit thresholds
+//
+// Returns the credit thresholds allowed for the billing account. Use one of them to update the
+// billing account.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -6769,6 +7675,8 @@ func (s *Service) ListAllowedCreditThresholds(ctx context.Context, billingAccoun
 var opListAmountSecurityDeposits = &ovh.Operation{Name: "telephony.ListAmountSecurityDeposits", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/amountSecurityDeposit", Summary: "List security deposit amounts", IAMActions: []string{"voip:apiovh:amountSecurityDeposit/get"}}
 
 // ListAmountSecurityDeposits calls GET /v1/telephony/{billingAccount}/amountSecurityDeposit: List security deposit amounts
+//
+// Returns the security deposit amounts that can be ordered for the billing account, as prices.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -6794,6 +7702,9 @@ var opListAvailableDevices = &ovh.Operation{Name: "telephony.ListAvailableDevice
 
 // ListAvailableDevices calls GET /v1/telephony/{billingAccount}/availableDevices: List phone devices
 //
+// Returns the phone devices of the billing account: brand, MAC address, maximum and available
+// lines, and the lines assigned to each one.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //
@@ -6806,6 +7717,9 @@ func (s *Service) ListAvailableDevices(ctx context.Context, billingAccount strin
 var opListByBillingAccountLine = &ovh.Operation{Name: "telephony.ListByBillingAccountLine", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/line", Summary: "List lines", IAMActions: []string{"voip:apiovh:line/get"}}
 
 // ListByBillingAccountLine calls GET /v1/telephony/{billingAccount}/line: List lines
+//
+// Returns the lines of the billing account. Get a line for its settings, phone, options and
+// simultaneous calls.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -6820,6 +7734,8 @@ var opListByBillingAccountTrunk = &ovh.Operation{Name: "telephony.ListByBillingA
 
 // ListByBillingAccountTrunk calls GET /v1/telephony/{billingAccount}/trunk: List trunks
 //
+// Returns the trunks of the billing account. A trunk connects a customer PBX to OVHcloud over SIP.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //
@@ -6832,6 +7748,9 @@ func (s *Service) ListByBillingAccountTrunk(ctx context.Context, billingAccount 
 var opListCarrierSIPEndpoints = &ovh.Operation{Name: "telephony.ListCarrierSIPEndpoints", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/carrierSip/{serviceName}/endpoints", Summary: "List SIP endpoints", IAMActions: []string{"voip:apiovh:carrierSip/endpoints/get"}}
 
 // ListCarrierSIPEndpoints calls GET /v1/telephony/{billingAccount}/carrierSip/{serviceName}/endpoints: List SIP endpoints
+//
+// Returns the identifiers of the remote SIP endpoints of the service. Get an endpoint for its IP
+// address, port, protocol and priority.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -6846,6 +7765,9 @@ func (s *Service) ListCarrierSIPEndpoints(ctx context.Context, billingAccount st
 var opListCarrierSIPVnoRanges = &ovh.Operation{Name: "telephony.ListCarrierSIPVnoRanges", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/carrierSip/{serviceName}/vno/{contractReference}/ranges", Summary: "List mandate number ranges", IAMActions: []string{"voip:apiovh:carrierSip/vno/ranges/get"}}
 
 // ListCarrierSIPVnoRanges calls GET /v1/telephony/{billingAccount}/carrierSip/{serviceName}/vno/{contractReference}/ranges: List mandate number ranges
+//
+// Returns the prefixes of the number ranges covered by the VNO mandate. Get a range for its
+// description.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -6862,6 +7784,9 @@ var opListCarrierSIPVnos = &ovh.Operation{Name: "telephony.ListCarrierSIPVnos", 
 
 // ListCarrierSIPVnos calls GET /v1/telephony/{billingAccount}/carrierSip/{serviceName}/vno: List VNO mandates
 //
+// Returns the references of the VNO mandates of the service. A mandate covers number ranges routed
+// from its application date.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -6875,6 +7800,9 @@ func (s *Service) ListCarrierSIPVnos(ctx context.Context, billingAccount string,
 var opListCarrierSIPs = &ovh.Operation{Name: "telephony.ListCarrierSIPs", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/carrierSip", Summary: "List Carrier SIP services", IAMActions: []string{"voip:apiovh:carrierSip/get"}}
 
 // ListCarrierSIPs calls GET /v1/telephony/{billingAccount}/carrierSip: List Carrier SIP services
+//
+// Returns the Carrier SIP services of the billing account. Carrier SIP connects an operator network
+// to OVHcloud over SIP.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -6897,6 +7825,9 @@ type ListConferenceHistoriesParams struct {
 
 // ListConferenceHistories calls GET /v1/telephony/{billingAccount}/conference/{serviceName}/histories: List past conferences
 //
+// Returns the identifiers of the past conferences, filtered by start date. Get one for its
+// duration, participants and recording.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -6911,6 +7842,9 @@ var opListConferenceParticipants = &ovh.Operation{Name: "telephony.ListConferenc
 
 // ListConferenceParticipants calls GET /v1/telephony/{billingAccount}/conference/{serviceName}/participants: List participants
 //
+// Returns the identifiers of the participants currently in the conference. Get a participant for
+// its number, name and audio state.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -6924,6 +7858,9 @@ func (s *Service) ListConferenceParticipants(ctx context.Context, billingAccount
 var opListConferenceRooms = &ovh.Operation{Name: "telephony.ListConferenceRooms", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/conference/{serviceName}/rooms", Summary: "List conference rooms", IAMActions: []string{"voip:apiovh:conference/rooms/get"}}
 
 // ListConferenceRooms calls GET /v1/telephony/{billingAccount}/conference/{serviceName}/rooms: List conference rooms
+//
+// Returns the room numbers of the conference service. Each room has its own PIN, language and
+// recording settings.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -6947,6 +7884,9 @@ type ListConferenceRoomsHistoriesParams struct {
 
 // ListConferenceRoomsHistories calls GET /v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/histories: List past conferences
 //
+// Returns the identifiers of the past conferences, filtered by start date. Get one for its
+// duration, participants and recording.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -6961,6 +7901,9 @@ func (s *Service) ListConferenceRoomsHistories(ctx context.Context, billingAccou
 var opListConferenceRoomsParticipants = &ovh.Operation{Name: "telephony.ListConferenceRoomsParticipants", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/participants", Summary: "List participants", IAMActions: []string{"voip:apiovh:conference/rooms/participants/get"}}
 
 // ListConferenceRoomsParticipants calls GET /v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/participants: List participants
+//
+// Returns the identifiers of the participants currently in the conference. Get a participant for
+// its number, name and audio state.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -6977,6 +7920,9 @@ var opListConferenceRoomsWebAccess = &ovh.Operation{Name: "telephony.ListConfere
 
 // ListConferenceRoomsWebAccess calls GET /v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/webAccess: List web accesses
 //
+// Returns the identifiers of the public web accesses to the conference. A web access gives a read
+// or write URL to follow the conference.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -6992,6 +7938,9 @@ var opListConferenceWebAccess = &ovh.Operation{Name: "telephony.ListConferenceWe
 
 // ListConferenceWebAccess calls GET /v1/telephony/{billingAccount}/conference/{serviceName}/webAccess: List web accesses
 //
+// Returns the identifiers of the public web accesses to the conference. A web access gives a read
+// or write URL to follow the conference.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7006,6 +7955,9 @@ var opListConferences = &ovh.Operation{Name: "telephony.ListConferences", Method
 
 // ListConferences calls GET /v1/telephony/{billingAccount}/conference: List conference services
 //
+// Returns the conference services of the billing account. A conference service hosts calls between
+// several participants.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //
@@ -7019,6 +7971,8 @@ var opListCurrentOrderIDs = &ovh.Operation{Name: "telephony.ListCurrentOrderIDs"
 
 // ListCurrentOrderIDs calls GET /v1/telephony/currentOrderIds: List current order IDs
 //
+// Returns the identifiers of the telephony orders of the customer that are still in progress.
+//
 // Requires the IAM action account:apiovh:voip/currentOrderIds/get.
 func (s *Service) ListCurrentOrderIDs(ctx context.Context) ([]int, error) {
 	return ovh.Call[[]int](ctx, s.c, &ovh.Request{Operation: opListCurrentOrderIDs, Method: http.MethodGet, Path: "/v1/telephony/currentOrderIds"})
@@ -7028,6 +7982,8 @@ func (s *Service) ListCurrentOrderIDs(ctx context.Context) ([]int, error) {
 var opListDdis = &ovh.Operation{Name: "telephony.ListDdis", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/ddi", Summary: "List DDI numbers", IAMActions: []string{"voip:apiovh:ddi/get"}}
 
 // ListDdis calls GET /v1/telephony/{billingAccount}/ddi: List DDI numbers
+//
+// Returns the DDI numbers of the billing account. A DDI number forwards calls to a destination.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -7066,6 +8022,9 @@ var opListEasyHuntingHuntingAgentCalls = &ovh.Operation{Name: "telephony.ListEas
 
 // ListEasyHuntingHuntingAgentCalls calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/calls: List agent calls
 //
+// Returns the identifiers of the calls the agent is handling. Get a live call for its caller,
+// queue, state and dates.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7080,6 +8039,9 @@ func (s *Service) ListEasyHuntingHuntingAgentCalls(ctx context.Context, billingA
 var opListEasyHuntingHuntingAgentQueues = &ovh.Operation{Name: "telephony.ListEasyHuntingHuntingAgentQueues", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/queue", Summary: "List the queues of an agent", IAMActions: []string{"voip:apiovh:easyHunting/hunting/agent/queue/get"}}
 
 // ListEasyHuntingHuntingAgentQueues calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/queue: List the queues of an agent
+//
+// Returns the identifiers of the queues the agent belongs to. Get an agent position in a queue to
+// see its order in that queue.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -7096,6 +8058,9 @@ var opListEasyHuntingHuntingAgents = &ovh.Operation{Name: "telephony.ListEasyHun
 
 // ListEasyHuntingHuntingAgents calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent: List agents
 //
+// Returns the identifiers of the agents. An agent is a phone number that answers the calls of one
+// or several queues.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7110,6 +8075,9 @@ var opListEasyHuntingHuntingCustomStatus = &ovh.Operation{Name: "telephony.ListE
 
 // ListEasyHuntingHuntingCustomStatus calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/customStatus: List custom statuses
 //
+// Returns the identifiers of the custom statuses agents can set, such as a break. Each status has a
+// name, a description and a color.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7123,6 +8091,9 @@ func (s *Service) ListEasyHuntingHuntingCustomStatus(ctx context.Context, billin
 var opListEasyHuntingHuntingQueueAgents = &ovh.Operation{Name: "telephony.ListEasyHuntingHuntingQueueAgents", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue/{queueId}/agent", Summary: "List the agents of a queue", IAMActions: []string{"voip:apiovh:easyHunting/hunting/queue/agent/get"}}
 
 // ListEasyHuntingHuntingQueueAgents calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue/{queueId}/agent: List the agents of a queue
+//
+// Returns the identifiers of the agents of the queue. Get an agent position in the queue to see the
+// order in which agents receive calls.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -7139,6 +8110,9 @@ var opListEasyHuntingHuntingQueueLiveCalls = &ovh.Operation{Name: "telephony.Lis
 
 // ListEasyHuntingHuntingQueueLiveCalls calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue/{queueId}/liveCalls: List queue live calls
 //
+// Returns the identifiers of the calls waiting or answered in the queue. Get a live call for its
+// caller, agent, state and dates.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7154,6 +8128,9 @@ var opListEasyHuntingHuntingQueues = &ovh.Operation{Name: "telephony.ListEasyHun
 
 // ListEasyHuntingHuntingQueues calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue: List queues
 //
+// Returns the identifiers of the queues. A queue holds incoming calls and dispatches them to its
+// agents with a strategy.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7167,6 +8144,9 @@ func (s *Service) ListEasyHuntingHuntingQueues(ctx context.Context, billingAccou
 var opListEasyHuntingRecords = &ovh.Operation{Name: "telephony.ListEasyHuntingRecords", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/records", Summary: "List call recordings", IAMActions: []string{"voip:apiovh:easyHunting/records/get"}}
 
 // ListEasyHuntingRecords calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/records: List call recordings
+//
+// Returns the identifiers of the recordings of the calls handled by the service. Get a call
+// recording for its details.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -7188,6 +8168,9 @@ type ListEasyHuntingScreenListConditionsConditionsParams struct {
 
 // ListEasyHuntingScreenListConditionsConditions calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/screenListConditions/conditions: List filtering conditions
 //
+// Returns the identifiers of the filtering conditions checked when a call is received. The list can
+// be filtered by screen list type.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7201,6 +8184,9 @@ func (s *Service) ListEasyHuntingScreenListConditionsConditions(ctx context.Cont
 var opListEasyHuntingSounds = &ovh.Operation{Name: "telephony.ListEasyHuntingSounds", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/sound", Summary: "List sounds", IAMActions: []string{"voip:apiovh:easyHunting/sound/get"}}
 
 // ListEasyHuntingSounds calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/sound: List sounds
+//
+// Returns the identifiers of the sound files of the service. Add a sound with the soundUpload call,
+// from /me/document or a URL.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -7222,6 +8208,9 @@ type ListEasyHuntingTimeConditionsConditionsParams struct {
 
 // ListEasyHuntingTimeConditionsConditions calls GET /v1/telephony/{billingAccount}/easyHunting/{serviceName}/timeConditions/conditions: List time conditions
 //
+// Returns the identifiers of the time conditions of the contact center, optionally filtered by
+// policy. Each one defines a day and a time slot.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7235,6 +8224,9 @@ func (s *Service) ListEasyHuntingTimeConditionsConditions(ctx context.Context, b
 var opListEasyHuntings = &ovh.Operation{Name: "telephony.ListEasyHuntings", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/easyHunting", Summary: "List contact center services", IAMActions: []string{"voip:apiovh:easyHunting/get"}}
 
 // ListEasyHuntings calls GET /v1/telephony/{billingAccount}/easyHunting: List contact center services
+//
+// Returns the contact center services of the billing account. A contact center routes calls to
+// agents through queues.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -7293,6 +8285,9 @@ var opListHistoryConsumptions = &ovh.Operation{Name: "telephony.ListHistoryConsu
 
 // ListHistoryConsumptions calls GET /v1/telephony/{billingAccount}/historyConsumption: List billed consumptions
 //
+// Returns the dates of the billed consumptions. Get a billed consumption for its price, out-of-plan
+// price and status.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //
@@ -7305,6 +8300,9 @@ func (s *Service) ListHistoryConsumptions(ctx context.Context, billingAccount st
 var opListHistoryRepaymentConsumptions = &ovh.Operation{Name: "telephony.ListHistoryRepaymentConsumptions", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/historyRepaymentConsumption", Summary: "List repayment bills", IAMActions: []string{"voip:apiovh:historyRepaymentConsumption/get"}}
 
 // ListHistoryRepaymentConsumptions calls GET /v1/telephony/{billingAccount}/historyRepaymentConsumption: List repayment bills
+//
+// Returns the dates of the repayment bills. Get a repayment bill for its amount, bill number and
+// status.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -7319,6 +8317,9 @@ var opListHistoryTollfreeConsumptions = &ovh.Operation{Name: "telephony.ListHist
 
 // ListHistoryTollfreeConsumptions calls GET /v1/telephony/{billingAccount}/historyTollfreeConsumption: List toll-free bills
 //
+// Returns the dates of the toll-free bills. Get a toll-free bill for the amount paid by the called
+// number.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //
@@ -7331,6 +8332,9 @@ func (s *Service) ListHistoryTollfreeConsumptions(ctx context.Context, billingAc
 var opListLineAbbreviatedNumbers = &ovh.Operation{Name: "telephony.ListLineAbbreviatedNumbers", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/abbreviatedNumber", Summary: "List speed dial numbers", IAMActions: []string{"voip:apiovh:line/abbreviatedNumber/get"}}
 
 // ListLineAbbreviatedNumbers calls GET /v1/telephony/{billingAccount}/line/{serviceName}/abbreviatedNumber: List speed dial numbers
+//
+// Returns the speed dial numbers of the line. A speed dial number is a short code of 3 or 4 digits,
+// starting with 2, that calls a destination.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -7346,6 +8350,8 @@ var opListLineAntihacks = &ovh.Operation{Name: "telephony.ListLineAntihacks", Me
 
 // ListLineAntihacks calls GET /v1/telephony/{billingAccount}/line/{serviceName}/antihack: List numbers blocked by antihack
 //
+// Returns the numbers and short codes blocked by the automatic antihack protection of the line.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7359,6 +8365,9 @@ func (s *Service) ListLineAntihacks(ctx context.Context, billingAccount string, 
 var opListLineAutomaticCalls = &ovh.Operation{Name: "telephony.ListLineAutomaticCalls", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/automaticCall", Summary: "List automatic calls", IAMActions: []string{"voip:apiovh:line/automaticCall/get"}}
 
 // ListLineAutomaticCalls calls GET /v1/telephony/{billingAccount}/line/{serviceName}/automaticCall: List automatic calls
+//
+// Returns the identifiers of the automatic calls made from the line by the call generator. Get an
+// automatic call for its dates, duration and result.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -7374,6 +8383,8 @@ var opListLineAvailableSIPDomains = &ovh.Operation{Name: "telephony.ListLineAvai
 
 // ListLineAvailableSIPDomains calls GET /v1/telephony/{billingAccount}/line/{serviceName}/availableSipDomains: List available SIP domains
 //
+// Returns the SIP domains the line can use, for the SIP configuration of its phone or softphone.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7387,6 +8398,9 @@ func (s *Service) ListLineAvailableSIPDomains(ctx context.Context, billingAccoun
 var opListLineCalls = &ovh.Operation{Name: "telephony.ListLineCalls", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/calls", Summary: "List live calls", IAMActions: []string{"voip:apiovh:line/calls/get"}, Deprecated: true}
 
 // ListLineCalls calls GET /v1/telephony/{billingAccount}/line/{serviceName}/calls: List live calls
+//
+// Returns the identifiers of the live calls of the line, when it is a call center agent. Get a live
+// call for its state, numbers and dates.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -7404,6 +8418,9 @@ var opListLineClick2CallUsers = &ovh.Operation{Name: "telephony.ListLineClick2Ca
 
 // ListLineClick2CallUsers calls GET /v1/telephony/{billingAccount}/line/{serviceName}/click2CallUser: List click2call users
 //
+// Returns the identifiers of the click2call users of the line. A click2call user starts calls from
+// the line with its own login.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7417,6 +8434,8 @@ func (s *Service) ListLineClick2CallUsers(ctx context.Context, billingAccount st
 var opListLineIPs = &ovh.Operation{Name: "telephony.ListLineIPs", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/ips", Summary: "List last registered IPs", IAMActions: []string{"voip:apiovh:line/ips/get"}}
 
 // ListLineIPs calls GET /v1/telephony/{billingAccount}/line/{serviceName}/ips: List last registered IPs
+//
+// Returns the last IP addresses the line registered from, with the date of each registration.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -7432,6 +8451,9 @@ var opListLineLastRegistrations = &ovh.Operation{Name: "telephony.ListLineLastRe
 
 // ListLineLastRegistrations calls GET /v1/telephony/{billingAccount}/line/{serviceName}/lastRegistrations: List last registrations
 //
+// Returns the last registrations of the line: date, public and local IP addresses and ports, user
+// agent and SIP domain.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7445,6 +8467,9 @@ func (s *Service) ListLineLastRegistrations(ctx context.Context, billingAccount 
 var opListLineListAssociablePhones = &ovh.Operation{Name: "telephony.ListLineListAssociablePhones", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/listAssociablePhones", Summary: "List associable phones", IAMActions: []string{"voip:apiovh:line/listAssociablePhones/get"}}
 
 // ListLineListAssociablePhones calls GET /v1/telephony/{billingAccount}/line/{serviceName}/listAssociablePhones: List associable phones
+//
+// Returns the phones with a free slot that the line can be attached to, with their brand, protocol,
+// attached lines and maximum number of lines.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -7483,6 +8508,9 @@ var opListLineOptionsAvailableCodecs = &ovh.Operation{Name: "telephony.ListLineO
 
 // ListLineOptionsAvailableCodecs calls GET /v1/telephony/{billingAccount}/line/{serviceName}/options/availableCodecs: List available codecs
 //
+// Returns the codec combinations available for the line. One of them can be set as the codecs
+// preferences in the line options.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7496,6 +8524,9 @@ func (s *Service) ListLineOptionsAvailableCodecs(ctx context.Context, billingAcc
 var opListLinePhoneCanBeAssociables = &ovh.Operation{Name: "telephony.ListLinePhoneCanBeAssociables", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/phoneCanBeAssociable", Summary: "List phones with a free SIP slot", IAMActions: []string{"voip:apiovh:line/phoneCanBeAssociable/get"}, Deprecated: true}
 
 // ListLinePhoneCanBeAssociables calls GET /v1/telephony/{billingAccount}/line/{serviceName}/phoneCanBeAssociable: List phones with a free SIP slot
+//
+// Returns the phones with a free SIP slot for the line: brand, protocol, maximum number of lines,
+// price and fees.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -7514,6 +8545,9 @@ var opListLinePhoneFunctionKeyAvailableFunctions = &ovh.Operation{Name: "telepho
 
 // ListLinePhoneFunctionKeyAvailableFunctions calls GET /v1/telephony/{billingAccount}/line/{serviceName}/phone/functionKey/{keyNum}/availableFunction: List available functions
 //
+// Returns the functions that can be set on the function key. Set one with the function and
+// parameter of the key.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7529,6 +8563,9 @@ var opListLinePhoneFunctionKeys = &ovh.Operation{Name: "telephony.ListLinePhoneF
 
 // ListLinePhoneFunctionKeys calls GET /v1/telephony/{billingAccount}/line/{serviceName}/phone/functionKey: List function keys
 //
+// Returns the numbers (keyNum) of the function keys of the phone. Get a function key for its label,
+// type and active function.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7543,6 +8580,9 @@ var opListLinePhoneMerchandiseAvailables = &ovh.Operation{Name: "telephony.ListL
 
 // ListLinePhoneMerchandiseAvailables calls GET /v1/telephony/{billingAccount}/line/{serviceName}/phone/merchandiseAvailable: List exchange phones
 //
+// Returns the phones available to exchange the current phone, with their name, description, URL and
+// price.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7556,6 +8596,9 @@ func (s *Service) ListLinePhoneMerchandiseAvailables(ctx context.Context, billin
 var opListLinePhonePhonebookPhonebookContacts = &ovh.Operation{Name: "telephony.ListLinePhonePhonebookPhonebookContacts", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/phone/phonebook/{bookKey}/phonebookContact", Summary: "List contacts", IAMActions: []string{"voip:apiovh:line/phone/phonebook/phonebookContact/get"}}
 
 // ListLinePhonePhonebookPhonebookContacts calls GET /v1/telephony/{billingAccount}/line/{serviceName}/phone/phonebook/{bookKey}/phonebookContact: List contacts
+//
+// Returns the identifiers of the contacts of the phonebook. Get a contact for its name, group and
+// phone numbers.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -7572,6 +8615,9 @@ var opListLinePhonePhonebooks = &ovh.Operation{Name: "telephony.ListLinePhonePho
 
 // ListLinePhonePhonebooks calls GET /v1/telephony/{billingAccount}/line/{serviceName}/phone/phonebook: List phonebooks
 //
+// Returns the identifiers (bookKey) of the phonebooks of the phone. Check first that the phone
+// supports phonebooks.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7586,6 +8632,9 @@ var opListLinePhoneRmas = &ovh.Operation{Name: "telephony.ListLinePhoneRmas", Me
 
 // ListLinePhoneRmas calls GET /v1/telephony/{billingAccount}/line/{serviceName}/phone/rma: List RMAs
 //
+// Returns the identifiers of the RMAs of the phone. An RMA is a request to return or exchange a
+// phone.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7599,6 +8648,9 @@ func (s *Service) ListLinePhoneRmas(ctx context.Context, billingAccount string, 
 var opListLineRecords = &ovh.Operation{Name: "telephony.ListLineRecords", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/records", Summary: "List call recordings", IAMActions: []string{"voip:apiovh:line/records/get"}}
 
 // ListLineRecords calls GET /v1/telephony/{billingAccount}/line/{serviceName}/records: List call recordings
+//
+// Returns the identifiers of the call recordings of the line. Get a recording for its numbers,
+// dates, duration and download URL.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -7631,6 +8683,9 @@ var opListLineTrafficExtracts = &ovh.Operation{Name: "telephony.ListLineTrafficE
 
 // ListLineTrafficExtracts calls GET /v1/telephony/{billingAccount}/line/{serviceName}/trafficExtracts: List traffic extracts
 //
+// Returns the identifiers of the SIP traffic extracts of the line. A traffic extract is a PCAP
+// capture of the SIP traffic over a time range.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7650,6 +8705,9 @@ type ListLinesParams struct {
 }
 
 // ListLines calls GET /v1/telephony/lines: List lines
+//
+// Returns the lines of the customer, across all billing accounts. Get a line or trunk for the
+// service without its billing account.
 //
 // Requires the IAM action voip:apiovh:lines/get.
 func (s *Service) ListLines(ctx context.Context, params ...ListLinesParams) ([]string, error) {
@@ -7726,6 +8784,9 @@ var opListNumbers = &ovh.Operation{Name: "telephony.ListNumbers", Method: http.M
 
 // ListNumbers calls GET /v1/telephony/{billingAccount}/number: List numbers
 //
+// Returns the numbers of the billing account. A number has no phone: it routes incoming calls with
+// a feature.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //
@@ -7749,6 +8810,9 @@ type ListOfferTasksParams struct {
 
 // ListOfferTasks calls GET /v1/telephony/{billingAccount}/offerTask: List offer tasks
 //
+// Returns the identifiers of the scheduled offer operations of the billing account, such as an
+// offer change or a termination.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //
@@ -7761,6 +8825,8 @@ func (s *Service) ListOfferTasks(ctx context.Context, billingAccount string, par
 var opListOldPhones = &ovh.Operation{Name: "telephony.ListOldPhones", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/oldPhone", Summary: "List unreturned old phones", IAMActions: []string{"voip:apiovh:oldPhone/get"}}
 
 // ListOldPhones calls GET /v1/telephony/{billingAccount}/oldPhone: List unreturned old phones
+//
+// Returns the old phones not returned after an RMA, with their model and MAC address.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -7775,6 +8841,9 @@ var opListOutplanNotifications = &ovh.Operation{Name: "telephony.ListOutplanNoti
 
 // ListOutplanNotifications calls GET /v1/telephony/{billingAccount}/outplanNotification: List out-of-plan alerts
 //
+// Returns the identifiers of the out-of-plan alerts. An alert notifies when out-of-plan consumption
+// reaches a threshold.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //
@@ -7787,6 +8856,9 @@ func (s *Service) ListOutplanNotifications(ctx context.Context, billingAccount s
 var opListOvhPabxDialplanExtensionConditionScreenLists = &ovh.Operation{Name: "telephony.ListOvhPabxDialplanExtensionConditionScreenLists", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}/conditionScreenList", Summary: "List filtering conditions", IAMActions: []string{"voip:apiovh:ovhPabx/dialplan/extension/conditionScreenList/get"}}
 
 // ListOvhPabxDialplanExtensionConditionScreenLists calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}/conditionScreenList: List filtering conditions
+//
+// Returns the identifiers of the filtering conditions of the extension, checked against the screen
+// list type of the extension.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -7804,6 +8876,9 @@ var opListOvhPabxDialplanExtensionConditionTimes = &ovh.Operation{Name: "telepho
 
 // ListOvhPabxDialplanExtensionConditionTimes calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}/conditionTime: List time conditions
 //
+// Returns the identifiers of the time conditions of the extension. The extension runs on the days
+// and time slots they define.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7819,6 +8894,9 @@ func (s *Service) ListOvhPabxDialplanExtensionConditionTimes(ctx context.Context
 var opListOvhPabxDialplanExtensionRules = &ovh.Operation{Name: "telephony.ListOvhPabxDialplanExtensionRules", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}/rule", Summary: "List extension rules", IAMActions: []string{"voip:apiovh:ovhPabx/dialplan/extension/rule/get"}}
 
 // ListOvhPabxDialplanExtensionRules calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}/rule: List extension rules
+//
+// Returns the identifiers of the rules of the extension. A rule is an action, such as play a sound
+// or forward the call.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -7836,6 +8914,9 @@ var opListOvhPabxDialplanExtensions = &ovh.Operation{Name: "telephony.ListOvhPab
 
 // ListOvhPabxDialplanExtensions calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension: List extensions
 //
+// Returns the identifiers of the extensions of the dialplan. An extension is a step that applies
+// rules when its conditions match.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7851,6 +8932,8 @@ var opListOvhPabxDialplans = &ovh.Operation{Name: "telephony.ListOvhPabxDialplan
 
 // ListOvhPabxDialplans calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan: List dialplans
 //
+// Returns the identifiers of the dialplans of the PBX. A dialplan routes calls through extensions.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7864,6 +8947,9 @@ func (s *Service) ListOvhPabxDialplans(ctx context.Context, billingAccount strin
 var opListOvhPabxHuntingAgentCalls = &ovh.Operation{Name: "telephony.ListOvhPabxHuntingAgentCalls", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/calls", Summary: "List agent calls", IAMActions: []string{"voip:apiovh:ovhPabx/hunting/agent/calls/get"}}
 
 // ListOvhPabxHuntingAgentCalls calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/calls: List agent calls
+//
+// Returns the identifiers of the calls the agent is handling. Get a live call for its caller,
+// queue, state and dates.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -7880,6 +8966,9 @@ var opListOvhPabxHuntingAgentQueues = &ovh.Operation{Name: "telephony.ListOvhPab
 
 // ListOvhPabxHuntingAgentQueues calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/queue: List the queues of an agent
 //
+// Returns the identifiers of the queues the agent belongs to. Get an agent position in a queue to
+// see its order in that queue.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7895,6 +8984,9 @@ var opListOvhPabxHuntingAgents = &ovh.Operation{Name: "telephony.ListOvhPabxHunt
 
 // ListOvhPabxHuntingAgents calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent: List agents
 //
+// Returns the identifiers of the agents. An agent is a phone number that answers the calls of one
+// or several queues.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7909,6 +9001,9 @@ var opListOvhPabxHuntingCustomStatus = &ovh.Operation{Name: "telephony.ListOvhPa
 
 // ListOvhPabxHuntingCustomStatus calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/customStatus: List custom statuses
 //
+// Returns the identifiers of the custom statuses agents can set, such as a break. Each status has a
+// name, a description and a color.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7922,6 +9017,9 @@ func (s *Service) ListOvhPabxHuntingCustomStatus(ctx context.Context, billingAcc
 var opListOvhPabxHuntingQueueAgents = &ovh.Operation{Name: "telephony.ListOvhPabxHuntingQueueAgents", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}/agent", Summary: "List the agents of a queue", IAMActions: []string{"voip:apiovh:ovhPabx/hunting/queue/agent/get"}}
 
 // ListOvhPabxHuntingQueueAgents calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}/agent: List the agents of a queue
+//
+// Returns the identifiers of the agents of the queue. Get an agent position in the queue to see the
+// order in which agents receive calls.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -7938,6 +9036,9 @@ var opListOvhPabxHuntingQueueLiveCalls = &ovh.Operation{Name: "telephony.ListOvh
 
 // ListOvhPabxHuntingQueueLiveCalls calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}/liveCalls: List queue live calls
 //
+// Returns the identifiers of the calls waiting or answered in the queue. Get a live call for its
+// caller, agent, state and dates.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7953,6 +9054,9 @@ var opListOvhPabxHuntingQueues = &ovh.Operation{Name: "telephony.ListOvhPabxHunt
 
 // ListOvhPabxHuntingQueues calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue: List queues
 //
+// Returns the identifiers of the queues. A queue holds incoming calls and dispatches them to its
+// agents with a strategy.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7966,6 +9070,8 @@ func (s *Service) ListOvhPabxHuntingQueues(ctx context.Context, billingAccount s
 var opListOvhPabxMenuEntries = &ovh.Operation{Name: "telephony.ListOvhPabxMenuEntries", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/menu/{menuId}/entry", Summary: "List menu entries", IAMActions: []string{"voip:apiovh:ovhPabx/menu/entry/get"}}
 
 // ListOvhPabxMenuEntries calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/menu/{menuId}/entry: List menu entries
+//
+// Returns the identifiers of the entries of the voice menu. An entry maps a key to an action.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -7982,6 +9088,9 @@ var opListOvhPabxMenus = &ovh.Operation{Name: "telephony.ListOvhPabxMenus", Meth
 
 // ListOvhPabxMenus calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/menu: List menus
 //
+// Returns the identifiers of the voice menus (IVR) of the PBX. A menu plays a sound and routes the
+// call according to the key pressed.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -7995,6 +9104,9 @@ func (s *Service) ListOvhPabxMenus(ctx context.Context, billingAccount string, s
 var opListOvhPabxRecords = &ovh.Operation{Name: "telephony.ListOvhPabxRecords", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/records", Summary: "List call recordings", IAMActions: []string{"voip:apiovh:ovhPabx/records/get"}}
 
 // ListOvhPabxRecords calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/records: List call recordings
+//
+// Returns the identifiers of the recordings of the calls handled by the service. Get a call
+// recording for its details.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -8010,6 +9122,9 @@ var opListOvhPabxSounds = &ovh.Operation{Name: "telephony.ListOvhPabxSounds", Me
 
 // ListOvhPabxSounds calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/sound: List sounds
 //
+// Returns the identifiers of the sound files of the service. Add a sound with the soundUpload call,
+// from /me/document or a URL.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -8023,6 +9138,9 @@ func (s *Service) ListOvhPabxSounds(ctx context.Context, billingAccount string, 
 var opListOvhPabxTts = &ovh.Operation{Name: "telephony.ListOvhPabxTts", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/tts", Summary: "List TTS prompts", IAMActions: []string{"voip:apiovh:ovhPabx/tts/get"}}
 
 // ListOvhPabxTts calls GET /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/tts: List TTS prompts
+//
+// Returns the identifiers of the text to speech prompts of the PBX. A prompt is a text read by a
+// synthetic voice.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -8038,6 +9156,8 @@ var opListOvhPabxes = &ovh.Operation{Name: "telephony.ListOvhPabxes", Method: ht
 
 // ListOvhPabxes calls GET /v1/telephony/{billingAccount}/ovhPabx: List PBX services
 //
+// Returns the PBX services of the billing account: voice menus (IVR), dialplans and call queues.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //
@@ -8050,6 +9170,9 @@ func (s *Service) ListOvhPabxes(ctx context.Context, billingAccount string) ([]s
 var opListPhonebookPhonebookContacts = &ovh.Operation{Name: "telephony.ListPhonebookPhonebookContacts", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/phonebook/{bookKey}/phonebookContact", Summary: "List contacts", IAMActions: []string{"voip:apiovh:phonebook/phonebookContact/get"}}
 
 // ListPhonebookPhonebookContacts calls GET /v1/telephony/{billingAccount}/phonebook/{bookKey}/phonebookContact: List contacts
+//
+// Returns the identifiers of the contacts of the phonebook. Get a contact for its name, group and
+// phone numbers.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -8065,6 +9188,9 @@ var opListPhonebooks = &ovh.Operation{Name: "telephony.ListPhonebooks", Method: 
 
 // ListPhonebooks calls GET /v1/telephony/{billingAccount}/phonebook: List phonebooks
 //
+// Returns the identifiers (bookKey) of the phonebooks shared by the billing account. A phonebook
+// stores contacts with their phone numbers.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //
@@ -8078,6 +9204,9 @@ var opListPortabilities = &ovh.Operation{Name: "telephony.ListPortabilities", Me
 
 // ListPortabilities calls GET /v1/telephony/{billingAccount}/portability: List number portings
 //
+// Returns the identifiers of the number portings. A number porting transfers a number from another
+// operator.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //
@@ -8090,6 +9219,9 @@ func (s *Service) ListPortabilities(ctx context.Context, billingAccount string) 
 var opListPortabilityDocuments = &ovh.Operation{Name: "telephony.ListPortabilityDocuments", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/portability/{id}/document", Summary: "List porting documents", IAMActions: []string{"voip:apiovh:portability/document/get"}}
 
 // ListPortabilityDocuments calls GET /v1/telephony/{billingAccount}/portability/{id}/document: List porting documents
+//
+// Returns the identifiers of the documents attached to the number porting. Get a porting document
+// for its name, size and download URL.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -8105,6 +9237,9 @@ var opListPortabilityStatus = &ovh.Operation{Name: "telephony.ListPortabilitySta
 
 // ListPortabilityStatus calls GET /v1/telephony/{billingAccount}/portability/{id}/status: Get the porting status
 //
+// Returns the status of the number porting, step by step: name, description, status, completion
+// date and duration of each step.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - id: The ID of the portability
@@ -8119,6 +9254,9 @@ var opListProcedures = &ovh.Operation{Name: "telephony.ListProcedures", Method: 
 
 // ListProcedures calls GET /v1/telephony/procedure: List procedures
 //
+// Returns the identifiers of the procedures of the customer, such as identity checks needed to
+// order telephony products.
+//
 // Requires the IAM action account:apiovh:voip/procedure/get.
 //
 // Deprecated: the API has deprecated this operation. Removal date: 2027-06-01.
@@ -8130,6 +9268,9 @@ func (s *Service) ListProcedures(ctx context.Context) ([]int, error) {
 var opListRedirects = &ovh.Operation{Name: "telephony.ListRedirects", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/redirect", Summary: "List redirect numbers", IAMActions: []string{"voip:apiovh:redirect/get"}}
 
 // ListRedirects calls GET /v1/telephony/{billingAccount}/redirect: List redirect numbers
+//
+// Returns the redirect numbers of the billing account. A redirect number forwards calls to a
+// destination.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -8144,6 +9285,9 @@ var opListRsvaAllowedRateCodes = &ovh.Operation{Name: "telephony.ListRsvaAllowed
 
 // ListRsvaAllowedRateCodes calls GET /v1/telephony/{billingAccount}/rsva/{serviceName}/allowedRateCodes: List allowed rate codes
 //
+// Returns the rate codes the premium rate number can use, with the price per minute and per call
+// without tax of each.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -8157,6 +9301,8 @@ func (s *Service) ListRsvaAllowedRateCodes(ctx context.Context, billingAccount s
 var opListRsvas = &ovh.Operation{Name: "telephony.ListRsvas", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/rsva", Summary: "List premium rate numbers", IAMActions: []string{"voip:apiovh:rsva/get"}}
 
 // ListRsvas calls GET /v1/telephony/{billingAccount}/rsva: List premium rate numbers
+//
+// Returns the premium rate numbers of the billing account, subject to the French RSVA rules.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -8185,6 +9331,9 @@ type ListSchedulerEventsParams struct {
 
 // ListSchedulerEvents calls GET /v1/telephony/{billingAccount}/scheduler/{serviceName}/events: List scheduler events
 //
+// Returns the identifiers of the events of the scheduler. Get an event for its dates, category and
+// description.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -8199,6 +9348,9 @@ var opListSchedulers = &ovh.Operation{Name: "telephony.ListSchedulers", Method: 
 
 // ListSchedulers calls GET /v1/telephony/{billingAccount}/scheduler: List schedulers
 //
+// Returns the services of the billing account that have a scheduler. A scheduler holds calendar
+// events, such as closing days.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //
@@ -8211,6 +9363,9 @@ func (s *Service) ListSchedulers(ctx context.Context, billingAccount string) ([]
 var opListScreenScreenLists = &ovh.Operation{Name: "telephony.ListScreenScreenLists", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/screen/{serviceName}/screenLists", Summary: "List filtering rules", IAMActions: []string{"voip:apiovh:screen/screenLists/get"}}
 
 // ListScreenScreenLists calls GET /v1/telephony/{billingAccount}/screen/{serviceName}/screenLists: List filtering rules
+//
+// Returns the identifiers of the call filtering rules of the service. Each rule allows or blocks a
+// number.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -8226,6 +9381,9 @@ var opListScreens = &ovh.Operation{Name: "telephony.ListScreens", Method: http.M
 
 // ListScreens calls GET /v1/telephony/{billingAccount}/screen: List call filtering services
 //
+// Returns the services of the billing account that support call filtering with allowed or blocked
+// numbers.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //
@@ -8239,6 +9397,9 @@ var opListSearchServices = &ovh.Operation{Name: "telephony.ListSearchServices", 
 
 // ListSearchServices calls GET /v1/telephony/searchServices: Search a service
 //
+// Finds services whose number matches the search value, and returns for each one its billing
+// account and service type.
+//
 // Arguments:
 //   - axiom: Filter the value of property (like)
 //
@@ -8251,6 +9412,9 @@ func (s *Service) ListSearchServices(ctx context.Context, axiom string) ([]Telep
 var opListServiceDiagnosticReports = &ovh.Operation{Name: "telephony.ListServiceDiagnosticReports", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/service/{serviceName}/diagnosticReports", Summary: "Get diagnostic reports", IAMActions: []string{"voip:apiovh:service/diagnosticReports/get"}, Deprecated: true}
 
 // ListServiceDiagnosticReports calls GET /v1/telephony/{billingAccount}/service/{serviceName}/diagnosticReports: Get diagnostic reports
+//
+// Returns the diagnostic reports of the service: call quality problems detected on the network, for
+// today or one of the last three days.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -8269,6 +9433,8 @@ var opListServiceDirectoryGetDirectoryServiceCodes = &ovh.Operation{Name: "telep
 
 // ListServiceDirectoryGetDirectoryServiceCodes calls GET /v1/telephony/{billingAccount}/service/{serviceName}/directory/getDirectoryServiceCode: Get the directory service code
 //
+// Returns the directory service codes for an APE code (main business activity code).
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -8283,6 +9449,9 @@ func (s *Service) ListServiceDirectoryGetDirectoryServiceCodes(ctx context.Conte
 var opListServiceDirectoryGetWayTypes = &ovh.Operation{Name: "telephony.ListServiceDirectoryGetWayTypes", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/service/{serviceName}/directory/getWayTypes", Summary: "List street types", IAMActions: []string{"voip:apiovh:service/directory/getWayTypes/get"}}
 
 // ListServiceDirectoryGetWayTypes calls GET /v1/telephony/{billingAccount}/service/{serviceName}/directory/getWayTypes: List street types
+//
+// Returns the street types available for a directory listing address, with their full and
+// abbreviated names.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -8308,6 +9477,9 @@ type ListServiceFaxConsumptionsParams struct {
 
 // ListServiceFaxConsumptions calls GET /v1/telephony/{billingAccount}/service/{serviceName}/faxConsumption: List fax records
 //
+// Returns the identifiers of the fax records of the current month. Get a fax record for its called
+// number, pages and price excluding tax.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -8321,6 +9493,8 @@ func (s *Service) ListServiceFaxConsumptions(ctx context.Context, billingAccount
 var opListServiceOfferChanges = &ovh.Operation{Name: "telephony.ListServiceOfferChanges", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/service/{serviceName}/offerChanges", Summary: "List available offer changes", IAMActions: []string{"voip:apiovh:service/offerChanges/get"}}
 
 // ListServiceOfferChanges calls GET /v1/telephony/{billingAccount}/service/{serviceName}/offerChanges: List available offer changes
+//
+// Returns the offers the service can change to. Use one of them to schedule an offer change.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -8345,6 +9519,9 @@ type ListServiceOfferTasksParams struct {
 }
 
 // ListServiceOfferTasks calls GET /v1/telephony/{billingAccount}/service/{serviceName}/offerTask: List offer tasks
+//
+// Returns the identifiers of the scheduled offer operations of the service, such as an offer change
+// or a termination.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -8374,6 +9551,9 @@ type ListServicePreviousVoiceConsumptionsParams struct {
 
 // ListServicePreviousVoiceConsumptions calls GET /v1/telephony/{billingAccount}/service/{serviceName}/previousVoiceConsumption: List last month call records
 //
+// Returns the identifiers of the call records of the previous month. Get a call record for its
+// called number, duration and price excluding tax.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -8395,6 +9575,9 @@ type ListServiceRepaymentConsumptionsParams struct {
 }
 
 // ListServiceRepaymentConsumptions calls GET /v1/telephony/{billingAccount}/service/{serviceName}/repaymentConsumption: List repayable calls
+//
+// Returns the identifiers of the calls that can be repaid. Request a repayment on the billing
+// account to get them repaid.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -8419,6 +9602,9 @@ type ListServiceTasksParams struct {
 }
 
 // ListServiceTasks calls GET /v1/telephony/{billingAccount}/service/{serviceName}/task: List tasks
+//
+// Returns the identifiers of the operations in progress on the service. Get a task for its action,
+// status and failure message.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -8448,6 +9634,9 @@ type ListServiceVoiceConsumptionsParams struct {
 
 // ListServiceVoiceConsumptions calls GET /v1/telephony/{billingAccount}/service/{serviceName}/voiceConsumption: List call records
 //
+// Returns the identifiers of the call records of the current month. Get a call record for its
+// called number, duration and price excluding tax.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -8461,6 +9650,9 @@ func (s *Service) ListServiceVoiceConsumptions(ctx context.Context, billingAccou
 var opListServices = &ovh.Operation{Name: "telephony.ListServices", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/service", Summary: "List services", IAMActions: []string{"voip:apiovh:service/get"}}
 
 // ListServices calls GET /v1/telephony/{billingAccount}/service: List services
+//
+// Returns the services of the billing account: lines, numbers, fax, trunks. Get a service for its
+// type, offers and status.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -8503,6 +9695,8 @@ var opListSpareCompatibleReplacements = &ovh.Operation{Name: "telephony.ListSpar
 
 // ListSpareCompatibleReplacements calls GET /v1/telephony/spare/{spare}/compatibleReplacement: List phones replaceable by the spare
 //
+// Returns the phones that the spare can replace. Use one of them to replace a phone with the spare.
+//
 // Arguments:
 //   - spare: The internal name of your spare
 //
@@ -8521,6 +9715,9 @@ type ListSparesParams struct {
 }
 
 // ListSpares calls GET /v1/telephony/spare: List spare phones
+//
+// Returns the spare phones of the customer. A spare phone can replace a phone of a line, with the
+// same protocol.
 //
 // Requires the IAM action voip:apiovh:spare/get.
 func (s *Service) ListSpares(ctx context.Context, params ...ListSparesParams) ([]string, error) {
@@ -8542,6 +9739,9 @@ type ListTasksParams struct {
 
 // ListTasks calls GET /v1/telephony/{billingAccount}/task: List tasks
 //
+// Returns the identifiers of the operations in progress on the billing account. Get a task for its
+// action, status and failure message.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //
@@ -8561,6 +9761,9 @@ type ListTelephoniesParams struct {
 
 // ListTelephonies calls GET /v1/telephony: List billing accounts
 //
+// Returns the billing accounts of the customer. A billing account groups telephony services billed
+// together.
+//
 // Requires the IAM action voip:apiovh:get.
 func (s *Service) ListTelephonies(ctx context.Context, params ...ListTelephoniesParams) ([]string, error) {
 	return ovh.Call[[]string](ctx, s.c, &ovh.Request{Operation: opListTelephonies, Method: http.MethodGet, Path: "/v1/telephony", Params: ovh.Optional(params)})
@@ -8570,6 +9773,9 @@ func (s *Service) ListTelephonies(ctx context.Context, params ...ListTelephonies
 var opListTimeConditionConditions = &ovh.Operation{Name: "telephony.ListTimeConditionConditions", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/timeCondition/{serviceName}/condition", Summary: "List time conditions", IAMActions: []string{"voip:apiovh:timeCondition/condition/get"}}
 
 // ListTimeConditionConditions calls GET /v1/telephony/{billingAccount}/timeCondition/{serviceName}/condition: List time conditions
+//
+// Returns the identifiers of the time conditions of the service. A time condition routes calls by
+// time slot.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -8585,6 +9791,9 @@ var opListTimeConditions = &ovh.Operation{Name: "telephony.ListTimeConditions", 
 
 // ListTimeConditions calls GET /v1/telephony/{billingAccount}/timeCondition: List time condition services
 //
+// Returns the services of the billing account that support time conditions. A time condition routes
+// calls by time slot.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //
@@ -8597,6 +9806,9 @@ func (s *Service) ListTimeConditions(ctx context.Context, billingAccount string)
 var opListTrunkExternalDisplayedNumbers = &ovh.Operation{Name: "telephony.ListTrunkExternalDisplayedNumbers", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/trunk/{serviceName}/externalDisplayedNumber", Summary: "List external displayed numbers", IAMActions: []string{"voip:apiovh:trunk/externalDisplayedNumber/get"}}
 
 // ListTrunkExternalDisplayedNumbers calls GET /v1/telephony/{billingAccount}/trunk/{serviceName}/externalDisplayedNumber: List external displayed numbers
+//
+// Returns the external numbers the trunk can display to callees. Each number must be validated by a
+// phone call before use.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -8618,6 +9830,9 @@ type ListTrunksParams struct {
 
 // ListTrunks calls GET /v1/telephony/trunks: List trunks
 //
+// Returns the trunks of the customer, across all billing accounts. A trunk connects a customer PBX
+// to OVHcloud over SIP.
+//
 // Requires the IAM action voip:apiovh:trunks/get.
 func (s *Service) ListTrunks(ctx context.Context, params ...ListTrunksParams) ([]string, error) {
 	return ovh.Call[[]string](ctx, s.c, &ovh.Request{Operation: opListTrunks, Method: http.MethodGet, Path: "/v1/telephony/trunks", Params: ovh.Optional(params)})
@@ -8633,6 +9848,9 @@ type ListVoicemailDirectoriesParams struct {
 }
 
 // ListVoicemailDirectories calls GET /v1/telephony/{billingAccount}/voicemail/{serviceName}/directories: List voicemail messages
+//
+// Returns the identifiers of the voicemail messages, filtered by folder. Get a message for its
+// caller, date and duration.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -8654,6 +9872,9 @@ type ListVoicemailGreetingsParams struct {
 
 // ListVoicemailGreetings calls GET /v1/telephony/{billingAccount}/voicemail/{serviceName}/greetings: List greetings
 //
+// Returns the identifiers of the custom greetings of the voicemail, filtered by folder. Greetings
+// can also be added with this route.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -8668,6 +9889,9 @@ var opListVoicemails = &ovh.Operation{Name: "telephony.ListVoicemails", Method: 
 
 // ListVoicemails calls GET /v1/telephony/{billingAccount}/voicemail: List voicemails
 //
+// Returns the voicemails of the billing account. Get the voicemail settings for its greetings and
+// email notifications.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //
@@ -8680,6 +9904,9 @@ func (s *Service) ListVoicemails(ctx context.Context, billingAccount string) ([]
 var opListVxmls = &ovh.Operation{Name: "telephony.ListVxmls", Method: http.MethodGet, Path: "/v1/telephony/{billingAccount}/vxml", Summary: "List VXML services", IAMActions: []string{"voip:apiovh:vxml/get"}}
 
 // ListVxmls calls GET /v1/telephony/{billingAccount}/vxml: List VXML services
+//
+// Returns the VXML services of the billing account. A VXML service runs a voice application hosted
+// on a web server.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -8694,6 +9921,8 @@ var opLockConference = &ovh.Operation{Name: "telephony.LockConference", Method: 
 
 // LockConference calls POST /v1/telephony/{billingAccount}/conference/{serviceName}/lock: Lock the conference room
 //
+// Locks the conference room. No new participant can join. Returns the task that performs it.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -8707,6 +9936,8 @@ func (s *Service) LockConference(ctx context.Context, billingAccount string, ser
 var opLockConferenceRooms = &ovh.Operation{Name: "telephony.LockConferenceRooms", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/lock", Summary: "Lock the conference room", IAMActions: []string{"voip:apiovh:conference/rooms/lock"}}
 
 // LockConferenceRooms calls POST /v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/lock: Lock the conference room
+//
+// Locks the conference room. No new participant can join. Returns the task that performs it.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -8723,6 +9954,9 @@ var opLogsVxmlSettings = &ovh.Operation{Name: "telephony.LogsVxmlSettings", Meth
 
 // LogsVxmlSettings calls POST /v1/telephony/{billingAccount}/vxml/{serviceName}/settings/logs: Generate a logs URL
 //
+// Generates a temporary URL to download the logs of the VXML service. Returns the URL and its
+// expiration date.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -8737,6 +9971,8 @@ var opMigrateOnNewVersionVoicemail = &ovh.Operation{Name: "telephony.MigrateOnNe
 
 // MigrateOnNewVersionVoicemail calls POST /v1/telephony/{billingAccount}/voicemail/{serviceName}/migrateOnNewVersion: Migrate the voicemail to the new version
 //
+// Migrates the voicemail to the new version, with greetings, folders and extra features.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -8750,6 +9986,8 @@ func (s *Service) MigrateOnNewVersionVoicemail(ctx context.Context, billingAccou
 var opMoveVoicemailDirectories = &ovh.Operation{Name: "telephony.MoveVoicemailDirectories", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/voicemail/{serviceName}/directories/{id}/move", Summary: "Move a voicemail message", IAMActions: []string{"voip:apiovh:voicemail/directories/move"}}
 
 // MoveVoicemailDirectories calls POST /v1/telephony/{billingAccount}/voicemail/{serviceName}/directories/{id}/move: Move a voicemail message
+//
+// Moves the voicemail message to another folder: inbox, old, work, family, friends or urgent.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -8767,6 +10005,9 @@ var opMoveVoicemailGreetings = &ovh.Operation{Name: "telephony.MoveVoicemailGree
 
 // MoveVoicemailGreetings calls POST /v1/telephony/{billingAccount}/voicemail/{serviceName}/greetings/{id}/move: Move a greeting
 //
+// Moves the greeting to another greeting folder: unavail, busy, greet or temp. The folder sets when
+// the greeting is played.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -8783,6 +10024,8 @@ var opMuteConferenceParticipants = &ovh.Operation{Name: "telephony.MuteConferenc
 
 // MuteConferenceParticipants calls POST /v1/telephony/{billingAccount}/conference/{serviceName}/participants/{id}/mute: Mute a participant
 //
+// Mutes the participant, who can still hear the conference. Returns the task that performs it.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -8797,6 +10040,8 @@ func (s *Service) MuteConferenceParticipants(ctx context.Context, billingAccount
 var opMuteConferenceRoomsParticipants = &ovh.Operation{Name: "telephony.MuteConferenceRoomsParticipants", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/participants/{id}/mute", Summary: "Mute a participant", IAMActions: []string{"voip:apiovh:conference/rooms/participants/mute"}}
 
 // MuteConferenceRoomsParticipants calls POST /v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/participants/{id}/mute: Mute a participant
+//
+// Mutes the participant, who can still hear the conference. Returns the task that performs it.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -8814,6 +10059,9 @@ var opRebootLinePhone = &ovh.Operation{Name: "telephony.RebootLinePhone", Method
 
 // RebootLinePhone calls POST /v1/telephony/{billingAccount}/line/{serviceName}/phone/reboot: Reboot the phone
 //
+// Reboots the phone attached to the line. Returns the task that tracks the reboot, to follow its
+// status.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -8828,6 +10076,8 @@ var opRefreshScreenLinePhone = &ovh.Operation{Name: "telephony.RefreshScreenLine
 
 // RefreshScreenLinePhone calls POST /v1/telephony/{billingAccount}/line/{serviceName}/phone/refreshScreen: Refresh the phone screen
 //
+// Refreshes the screen of the MGCP phone. Returns the task that tracks the refresh.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -8841,6 +10091,9 @@ func (s *Service) RefreshScreenLinePhone(ctx context.Context, billingAccount str
 var opRemoveSimultaneousLinesLine = &ovh.Operation{Name: "telephony.RemoveSimultaneousLinesLine", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/removeSimultaneousLines", Summary: "Remove extra simultaneous lines", IAMActions: []string{"voip:apiovh:line/removeSimultaneousLines"}}
 
 // RemoveSimultaneousLinesLine calls POST /v1/telephony/{billingAccount}/line/{serviceName}/removeSimultaneousLines: Remove extra simultaneous lines
+//
+// Removes the given quantity of extra simultaneous lines from the line. The extra channels are
+// listed in the simultaneous channels details.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -8857,6 +10110,9 @@ var opReplaceSpare = &ovh.Operation{Name: "telephony.ReplaceSpare", Method: http
 
 // ReplaceSpare calls POST /v1/telephony/spare/{spare}/replace: Replace a phone with the spare
 //
+// Replaces the phone of a line, given by its domain and public IP address, with the spare. The
+// replaced phone becomes a spare if it was bought.
+//
 // Arguments:
 //   - spare: The internal name of your spare
 //   - body: the request body
@@ -8870,6 +10126,9 @@ func (s *Service) ReplaceSpare(ctx context.Context, spare string, body ReplaceSp
 var opResetConfigLinePhone = &ovh.Operation{Name: "telephony.ResetConfigLinePhone", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/phone/resetConfig", Summary: "Reset the phone configuration", IAMActions: []string{"voip:apiovh:line/phone/resetConfig"}}
 
 // ResetConfigLinePhone calls POST /v1/telephony/{billingAccount}/line/{serviceName}/phone/resetConfig: Reset the phone configuration
+//
+// Resets the phone configuration to its default values, for the given public IP address. Returns
+// the reset code and the reset method.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -8902,6 +10161,9 @@ func (s *Service) ResetFaxScreenLists(ctx context.Context, billingAccount string
 var opScheduleRateCodeRsva = &ovh.Operation{Name: "telephony.ScheduleRateCodeRsva", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/rsva/{serviceName}/scheduleRateCode", Summary: "Schedule a rate code", IAMActions: []string{"voip:apiovh:rsva/scheduleRateCode/create"}}
 
 // ScheduleRateCodeRsva calls POST /v1/telephony/{billingAccount}/rsva/{serviceName}/scheduleRateCode: Schedule a rate code
+//
+// Schedules a new rate code for the premium rate number. Returns the rate code with its effective
+// date and the price of the change.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -8936,6 +10198,9 @@ var opSetDefaultSIPDomain = &ovh.Operation{Name: "telephony.SetDefaultSIPDomain"
 
 // SetDefaultSIPDomain calls POST /v1/telephony/setDefaultSipDomain: Set the default SIP domain
 //
+// Sets the default SIP domain of the customer for a country and a product type. List the default
+// SIP domains for the available domains.
+//
 // Arguments:
 //   - body: the request body
 //
@@ -8948,6 +10213,9 @@ func (s *Service) SetDefaultSIPDomain(ctx context.Context, body SetDefaultSIPDom
 var opSoundUploadEasyHunting = &ovh.Operation{Name: "telephony.SoundUploadEasyHunting", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/soundUpload", Summary: "Upload a sound", IAMActions: []string{"voip:apiovh:easyHunting/soundUpload"}}
 
 // SoundUploadEasyHunting calls POST /v1/telephony/{billingAccount}/easyHunting/{serviceName}/soundUpload: Upload a sound
+//
+// Uploads a sound file to the service, from a /me/document identifier or a URL, with an optional
+// name. Returns the task that performs it.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -8963,6 +10231,9 @@ func (s *Service) SoundUploadEasyHunting(ctx context.Context, billingAccount str
 var opSoundUploadOvhPabx = &ovh.Operation{Name: "telephony.SoundUploadOvhPabx", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/soundUpload", Summary: "Upload a sound", IAMActions: []string{"voip:apiovh:ovhPabx/soundUpload"}}
 
 // SoundUploadOvhPabx calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/soundUpload: Upload a sound
+//
+// Uploads a sound file to the service, from a /me/document identifier or a URL, with an optional
+// name. Returns the task that performs it.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -9033,6 +10304,9 @@ var opToneUploadLineTones = &ovh.Operation{Name: "telephony.ToneUploadLineTones"
 
 // ToneUploadLineTones calls POST /v1/telephony/{billingAccount}/line/{serviceName}/tones/toneUpload: Upload a tone
 //
+// Uploads a sound file to use as a tone: ringback, on hold, call waiting or closure. The file is
+// given by a /me/document ID or a URL. Returns the task that tracks the upload.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -9047,6 +10321,9 @@ func (s *Service) ToneUploadLineTones(ctx context.Context, billingAccount string
 var opTransferEasyHuntingHuntingAgentCalls = &ovh.Operation{Name: "telephony.TransferEasyHuntingHuntingAgentCalls", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/calls/{id}/transfer", Summary: "Transfer an answered call", IAMActions: []string{"voip:apiovh:easyHunting/hunting/agent/calls/transfer"}}
 
 // TransferEasyHuntingHuntingAgentCalls calls POST /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/calls/{id}/transfer: Transfer an answered call
+//
+// Transfers the answered call to another phone number, given as a parameter. Returns the task that
+// performs the transfer.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -9065,6 +10342,9 @@ var opTransferEasyHuntingHuntingQueueLiveCalls = &ovh.Operation{Name: "telephony
 
 // TransferEasyHuntingHuntingQueueLiveCalls calls POST /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue/{queueId}/liveCalls/{id}/transfer: Transfer an answered call
 //
+// Transfers the answered call to another phone number, given as a parameter. Returns the task that
+// performs the transfer.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -9081,6 +10361,9 @@ func (s *Service) TransferEasyHuntingHuntingQueueLiveCalls(ctx context.Context, 
 var opTransferLineCalls = &ovh.Operation{Name: "telephony.TransferLineCalls", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/calls/{id}/transfer", Summary: "Transfer an answered call", IAMActions: []string{"voip:apiovh:line/calls/transfer"}, Deprecated: true}
 
 // TransferLineCalls calls POST /v1/telephony/{billingAccount}/line/{serviceName}/calls/{id}/transfer: Transfer an answered call
+//
+// Transfers the answered call to another phone number, given as a parameter. Returns the task that
+// performs the transfer.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -9100,6 +10383,9 @@ var opTransferOvhPabxHuntingAgentCalls = &ovh.Operation{Name: "telephony.Transfe
 
 // TransferOvhPabxHuntingAgentCalls calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/calls/{id}/transfer: Transfer an answered call
 //
+// Transfers the answered call to another phone number, given as a parameter. Returns the task that
+// performs the transfer.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -9116,6 +10402,9 @@ func (s *Service) TransferOvhPabxHuntingAgentCalls(ctx context.Context, billingA
 var opTransferOvhPabxHuntingQueueLiveCalls = &ovh.Operation{Name: "telephony.TransferOvhPabxHuntingQueueLiveCalls", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}/liveCalls/{id}/transfer", Summary: "Transfer an answered call", IAMActions: []string{"voip:apiovh:ovhPabx/hunting/queue/liveCalls/transfer"}}
 
 // TransferOvhPabxHuntingQueueLiveCalls calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}/liveCalls/{id}/transfer: Transfer an answered call
+//
+// Transfers the answered call to another phone number, given as a parameter. Returns the task that
+// performs the transfer.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -9134,6 +10423,9 @@ var opTransferSecurityDeposit = &ovh.Operation{Name: "telephony.TransferSecurity
 
 // TransferSecurityDeposit calls POST /v1/telephony/{billingAccount}/transferSecurityDeposit: Transfer the security deposit
 //
+// Transfers an amount of the security deposit, in euros, to another billing account given by its
+// name.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - body: the request body
@@ -9147,6 +10439,8 @@ func (s *Service) TransferSecurityDeposit(ctx context.Context, billingAccount st
 var opUnblockLine = &ovh.Operation{Name: "telephony.UnblockLine", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/unblock", Summary: "Unblock the line", IAMActions: []string{"voip:apiovh:line/unblock"}}
 
 // UnblockLine calls POST /v1/telephony/{billingAccount}/line/{serviceName}/unblock: Unblock the line
+//
+// Unblocks the line and removes every incoming and outgoing block set with the block call.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -9162,6 +10456,8 @@ var opUndeafConferenceParticipants = &ovh.Operation{Name: "telephony.UndeafConfe
 
 // UndeafConferenceParticipants calls POST /v1/telephony/{billingAccount}/conference/{serviceName}/participants/{id}/undeaf: Undeafen a participant
 //
+// Lets the participant hear the conference again. Returns the task that performs it.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -9176,6 +10472,8 @@ func (s *Service) UndeafConferenceParticipants(ctx context.Context, billingAccou
 var opUndeafConferenceRoomsParticipants = &ovh.Operation{Name: "telephony.UndeafConferenceRoomsParticipants", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/participants/{id}/undeaf", Summary: "Undeafen a participant", IAMActions: []string{"voip:apiovh:conference/rooms/participants/undeaf"}}
 
 // UndeafConferenceRoomsParticipants calls POST /v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/participants/{id}/undeaf: Undeafen a participant
+//
+// Lets the participant hear the conference again. Returns the task that performs it.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -9193,6 +10491,8 @@ var opUnlockConference = &ovh.Operation{Name: "telephony.UnlockConference", Meth
 
 // UnlockConference calls POST /v1/telephony/{billingAccount}/conference/{serviceName}/unlock: Unlock the conference room
 //
+// Unlocks the conference room. New participants can join again. Returns the task that performs it.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -9206,6 +10506,8 @@ func (s *Service) UnlockConference(ctx context.Context, billingAccount string, s
 var opUnlockConferenceRooms = &ovh.Operation{Name: "telephony.UnlockConferenceRooms", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/unlock", Summary: "Unlock the conference room", IAMActions: []string{"voip:apiovh:conference/rooms/unlock"}}
 
 // UnlockConferenceRooms calls POST /v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/unlock: Unlock the conference room
+//
+// Unlocks the conference room. New participants can join again. Returns the task that performs it.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -9222,6 +10524,8 @@ var opUnmuteConferenceParticipants = &ovh.Operation{Name: "telephony.UnmuteConfe
 
 // UnmuteConferenceParticipants calls POST /v1/telephony/{billingAccount}/conference/{serviceName}/participants/{id}/unmute: Unmute a participant
 //
+// Unmutes the participant, who can talk in the conference again. Returns the task that performs it.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -9236,6 +10540,8 @@ func (s *Service) UnmuteConferenceParticipants(ctx context.Context, billingAccou
 var opUnmuteConferenceRoomsParticipants = &ovh.Operation{Name: "telephony.UnmuteConferenceRoomsParticipants", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/participants/{id}/unmute", Summary: "Unmute a participant", IAMActions: []string{"voip:apiovh:conference/rooms/participants/unmute"}}
 
 // UnmuteConferenceRoomsParticipants calls POST /v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}/participants/{id}/unmute: Unmute a participant
+//
+// Unmutes the participant, who can talk in the conference again. Returns the task that performs it.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -9252,6 +10558,9 @@ func (s *Service) UnmuteConferenceRoomsParticipants(ctx context.Context, billing
 var opUpdateAbbreviatedNumber = &ovh.Operation{Name: "telephony.UpdateAbbreviatedNumber", Method: http.MethodPut, Path: "/v1/telephony/{billingAccount}/abbreviatedNumber/{abbreviatedNumber}", Summary: "Update a speed dial number", IAMActions: []string{"voip:apiovh:abbreviatedNumber/edit"}}
 
 // UpdateAbbreviatedNumber calls PUT /v1/telephony/{billingAccount}/abbreviatedNumber/{abbreviatedNumber}: Update a speed dial number
+//
+// Updates the speed dial number of the billing account: destination number, name and surname. The
+// short code starts with 7 and has 3 or 4 digits.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -9285,6 +10594,9 @@ var opUpdateCarrierSIPSettings = &ovh.Operation{Name: "telephony.UpdateCarrierSI
 
 // UpdateCarrierSIPSettings calls PUT /v1/telephony/{billingAccount}/carrierSip/{serviceName}/settings: Update the settings
 //
+// Updates the Carrier SIP settings. Only the description can be changed; the call limits are read
+// only.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -9299,6 +10611,8 @@ func (s *Service) UpdateCarrierSIPSettings(ctx context.Context, billingAccount s
 var opUpdateCarrierSIPVnoRanges = &ovh.Operation{Name: "telephony.UpdateCarrierSIPVnoRanges", Method: http.MethodPut, Path: "/v1/telephony/{billingAccount}/carrierSip/{serviceName}/vno/{contractReference}/ranges/{prefix}", Summary: "Update a number range", IAMActions: []string{"voip:apiovh:carrierSip/vno/ranges/edit"}}
 
 // UpdateCarrierSIPVnoRanges calls PUT /v1/telephony/{billingAccount}/carrierSip/{serviceName}/vno/{contractReference}/ranges/{prefix}: Update a number range
+//
+// Updates the description of the number range of the mandate. The prefix cannot be changed.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -9317,6 +10631,9 @@ var opUpdateConferenceRooms = &ovh.Operation{Name: "telephony.UpdateConferenceRo
 
 // UpdateConferenceRooms calls PUT /v1/telephony/{billingAccount}/conference/{serviceName}/rooms/{roomNumber}: Update a conference room
 //
+// Updates the room settings: PIN, language, muted entry, recording, anonymous rejection,
+// announcement, report and expiration date.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -9333,6 +10650,9 @@ var opUpdateConferenceSettings = &ovh.Operation{Name: "telephony.UpdateConferenc
 
 // UpdateConferenceSettings calls PUT /v1/telephony/{billingAccount}/conference/{serviceName}/settings: Update the conference settings
 //
+// Updates the PIN, language, muted entry, recording, anonymous rejection, announcement and report
+// settings of the conference.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -9347,6 +10667,9 @@ func (s *Service) UpdateConferenceSettings(ctx context.Context, billingAccount s
 var opUpdateDdi = &ovh.Operation{Name: "telephony.UpdateDdi", Method: http.MethodPut, Path: "/v1/telephony/{billingAccount}/ddi/{serviceName}", Summary: "Update a DDI number", IAMActions: []string{"voip:apiovh:ddi/edit"}}
 
 // UpdateDdi calls PUT /v1/telephony/{billingAccount}/ddi/{serviceName}: Update a DDI number
+//
+// Updates the description of the DDI number. The destination is changed with the changeDestination
+// call.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -9363,6 +10686,9 @@ var opUpdateEasyHunting = &ovh.Operation{Name: "telephony.UpdateEasyHunting", Me
 
 // UpdateEasyHunting calls PUT /v1/telephony/{billingAccount}/easyHunting/{serviceName}: Update a contact center service
 //
+// Updates the queue strategy and size, the maximum wait time, the tones, the voicemail, anonymous
+// call rejection and the status IVR.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -9377,6 +10703,9 @@ func (s *Service) UpdateEasyHunting(ctx context.Context, billingAccount string, 
 var opUpdateEasyHuntingHunting = &ovh.Operation{Name: "telephony.UpdateEasyHuntingHunting", Method: http.MethodPut, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting", Summary: "Update the queue system settings", IAMActions: []string{"voip:apiovh:easyHunting/hunting/edit"}}
 
 // UpdateEasyHuntingHunting calls PUT /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting: Update the queue system settings
+//
+// Updates the queue system settings: the CRM URL template opened by the agent banner, the G729
+// codec and the status change IVR.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -9393,6 +10722,9 @@ var opUpdateEasyHuntingHuntingAgent = &ovh.Operation{Name: "telephony.UpdateEasy
 
 // UpdateEasyHuntingHuntingAgent calls PUT /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}: Update an agent
 //
+// Updates the agent: number, description, status (available, logged out or on break), break status,
+// ring timeout, wrap-up time and simultaneous calls.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -9408,6 +10740,9 @@ func (s *Service) UpdateEasyHuntingHuntingAgent(ctx context.Context, billingAcco
 var opUpdateEasyHuntingHuntingAgentQueue = &ovh.Operation{Name: "telephony.UpdateEasyHuntingHuntingAgentQueue", Method: http.MethodPut, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/queue/{queueId}", Summary: "Update an agent position in a queue", IAMActions: []string{"voip:apiovh:easyHunting/hunting/agent/queue/edit"}}
 
 // UpdateEasyHuntingHuntingAgentQueue calls PUT /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/queue/{queueId}: Update an agent position in a queue
+//
+// Updates the position of the agent in the queue. The position sets the order in which agents
+// receive calls, depending on the queue strategy.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -9426,6 +10761,9 @@ var opUpdateEasyHuntingHuntingQueue = &ovh.Operation{Name: "telephony.UpdateEasy
 
 // UpdateEasyHuntingHuntingQueue calls PUT /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue/{queueId}: Update a queue
 //
+// Updates the queue: name, dispatching strategy, maximum waiting callers and wait time, sound on
+// hold, call recording and overflow and closure actions.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -9441,6 +10779,9 @@ func (s *Service) UpdateEasyHuntingHuntingQueue(ctx context.Context, billingAcco
 var opUpdateEasyHuntingHuntingQueueAgent = &ovh.Operation{Name: "telephony.UpdateEasyHuntingHuntingQueueAgent", Method: http.MethodPut, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue/{queueId}/agent/{agentId}", Summary: "Update an agent position in a queue", IAMActions: []string{"voip:apiovh:easyHunting/hunting/queue/agent/edit"}}
 
 // UpdateEasyHuntingHuntingQueueAgent calls PUT /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue/{queueId}/agent/{agentId}: Update an agent position in a queue
+//
+// Updates the position of the agent in the queue. The position sets the order in which agents
+// receive calls, depending on the queue strategy.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -9459,6 +10800,9 @@ var opUpdateEasyHuntingScreenListConditions = &ovh.Operation{Name: "telephony.Up
 
 // UpdateEasyHuntingScreenListConditions calls PUT /v1/telephony/{billingAccount}/easyHunting/{serviceName}/screenListConditions: Update the filtering condition settings
 //
+// Updates the call filtering status of the contact center: disabled, incoming whitelist or incoming
+// blacklist.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -9473,6 +10817,9 @@ func (s *Service) UpdateEasyHuntingScreenListConditions(ctx context.Context, bil
 var opUpdateEasyHuntingScreenListConditionsConditions = &ovh.Operation{Name: "telephony.UpdateEasyHuntingScreenListConditionsConditions", Method: http.MethodPut, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/screenListConditions/conditions/{conditionId}", Summary: "Update a filtering condition", IAMActions: []string{"voip:apiovh:easyHunting/screenListConditions/conditions/edit"}}
 
 // UpdateEasyHuntingScreenListConditionsConditions calls PUT /v1/telephony/{billingAccount}/easyHunting/{serviceName}/screenListConditions/conditions/{conditionId}: Update a filtering condition
+//
+// Updates the caller number or the destination number checked by the filtering condition of the
+// contact center.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -9490,6 +10837,9 @@ var opUpdateEasyHuntingTimeConditions = &ovh.Operation{Name: "telephony.UpdateEa
 
 // UpdateEasyHuntingTimeConditions calls PUT /v1/telephony/{billingAccount}/easyHunting/{serviceName}/timeConditions: Update the time condition settings
 //
+// Enables or disables the time conditions of the contact center, and sets the action (number or
+// voicemail) and number of each slot.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -9504,6 +10854,9 @@ func (s *Service) UpdateEasyHuntingTimeConditions(ctx context.Context, billingAc
 var opUpdateEasyHuntingTimeConditionsConditions = &ovh.Operation{Name: "telephony.UpdateEasyHuntingTimeConditionsConditions", Method: http.MethodPut, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/timeConditions/conditions/{conditionId}", Summary: "Update a time condition", IAMActions: []string{"voip:apiovh:easyHunting/timeConditions/conditions/edit"}}
 
 // UpdateEasyHuntingTimeConditionsConditions calls PUT /v1/telephony/{billingAccount}/easyHunting/{serviceName}/timeConditions/conditions/{conditionId}: Update a time condition
+//
+// Updates the day of the week, the start and end times and the policy of the time condition of the
+// contact center.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -9574,6 +10927,8 @@ var opUpdateLine = &ovh.Operation{Name: "telephony.UpdateLine", Method: http.Met
 
 // UpdateLine calls PUT /v1/telephony/{billingAccount}/line/{serviceName}: Update a line
 //
+// Updates the description of the line and the notifications sent about its diagnostic reports.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -9588,6 +10943,9 @@ func (s *Service) UpdateLine(ctx context.Context, billingAccount string, service
 var opUpdateLineAbbreviatedNumber = &ovh.Operation{Name: "telephony.UpdateLineAbbreviatedNumber", Method: http.MethodPut, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/abbreviatedNumber/{abbreviatedNumber}", Summary: "Update a speed dial number", IAMActions: []string{"voip:apiovh:line/abbreviatedNumber/edit"}}
 
 // UpdateLineAbbreviatedNumber calls PUT /v1/telephony/{billingAccount}/line/{serviceName}/abbreviatedNumber/{abbreviatedNumber}: Update a speed dial number
+//
+// Updates the speed dial number of the line: destination number, name and surname. The short code
+// starts with 2 and has 3 or 4 digits.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -9605,6 +10963,9 @@ var opUpdateLineOptions = &ovh.Operation{Name: "telephony.UpdateLineOptions", Me
 
 // UpdateLineOptions calls PUT /v1/telephony/{billingAccount}/line/{serviceName}/options: Update the line options
 //
+// Updates the line options: forwarding rules, do not disturb, caller identification, call waiting,
+// codecs, IP restrictions and call restrictions.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -9620,6 +10981,8 @@ var opUpdateLinePhone = &ovh.Operation{Name: "telephony.UpdateLinePhone", Method
 
 // UpdateLinePhone calls PUT /v1/telephony/{billingAccount}/line/{serviceName}/phone: Update the phone
 //
+// Updates the phone attached to the line: the IP address restriction of an MGCP phone.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -9634,6 +10997,9 @@ func (s *Service) UpdateLinePhone(ctx context.Context, billingAccount string, se
 var opUpdateLinePhoneFunctionKey = &ovh.Operation{Name: "telephony.UpdateLinePhoneFunctionKey", Method: http.MethodPut, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/phone/functionKey/{keyNum}", Summary: "Update a function key", IAMActions: []string{"voip:apiovh:line/phone/functionKey/edit"}}
 
 // UpdateLinePhoneFunctionKey calls PUT /v1/telephony/{billingAccount}/line/{serviceName}/phone/functionKey/{keyNum}: Update a function key
+//
+// Updates the function active on the key and its parameter. The available functions are listed for
+// each key.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -9651,6 +11017,9 @@ var opUpdateLinePhonePhonebook = &ovh.Operation{Name: "telephony.UpdateLinePhone
 
 // UpdateLinePhonePhonebook calls PUT /v1/telephony/{billingAccount}/line/{serviceName}/phone/phonebook/{bookKey}: Update a phonebook
 //
+// Updates the name of the phonebook of the phone. Contacts are updated one by one with the
+// phonebookContact route.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -9666,6 +11035,9 @@ func (s *Service) UpdateLinePhonePhonebook(ctx context.Context, billingAccount s
 var opUpdateLinePhonePhonebookPhonebookContact = &ovh.Operation{Name: "telephony.UpdateLinePhonePhonebookPhonebookContact", Method: http.MethodPut, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/phone/phonebook/{bookKey}/phonebookContact/{id}", Summary: "Update a contact", IAMActions: []string{"voip:apiovh:line/phone/phonebook/phonebookContact/edit"}}
 
 // UpdateLinePhonePhonebookPhonebookContact calls PUT /v1/telephony/{billingAccount}/line/{serviceName}/phone/phonebook/{bookKey}/phonebookContact/{id}: Update a contact
+//
+// Updates the contact of the phonebook: name, surname, group, and office and home phone numbers,
+// landline and mobile.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -9683,6 +11055,9 @@ func (s *Service) UpdateLinePhonePhonebookPhonebookContact(ctx context.Context, 
 var opUpdateLinePhoneRma = &ovh.Operation{Name: "telephony.UpdateLinePhoneRma", Method: http.MethodPut, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/phone/rma/{id}", Summary: "Update an RMA", IAMActions: []string{"voip:apiovh:line/phone/rma/edit"}}
 
 // UpdateLinePhoneRma calls PUT /v1/telephony/{billingAccount}/line/{serviceName}/phone/rma/{id}: Update an RMA
+//
+// Updates the shipping contact used for an exchange and the process determined for the returned
+// phone.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -9751,6 +11126,9 @@ var opUpdateLineTones = &ovh.Operation{Name: "telephony.UpdateLineTones", Method
 
 // UpdateLineTones calls PUT /v1/telephony/{billingAccount}/line/{serviceName}/tones: Update the tones
 //
+// Updates the tones of the line: ringback, on hold, call waiting and end of call. Custom sounds are
+// uploaded with the tone upload call.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -9783,6 +11161,9 @@ var opUpdateNumber = &ovh.Operation{Name: "telephony.UpdateNumber", Method: http
 
 // UpdateNumber calls PUT /v1/telephony/{billingAccount}/number/{serviceName}: Update a number
 //
+// Updates the description of the number. The feature type is changed with the changeFeatureType
+// call.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: Name of the service
@@ -9797,6 +11178,8 @@ func (s *Service) UpdateNumber(ctx context.Context, billingAccount string, servi
 var opUpdateOfferTask = &ovh.Operation{Name: "telephony.UpdateOfferTask", Method: http.MethodPut, Path: "/v1/telephony/{billingAccount}/offerTask/{taskId}", Summary: "Update an offer task", IAMActions: []string{"voip:apiovh:offerTask/edit"}}
 
 // UpdateOfferTask calls PUT /v1/telephony/{billingAccount}/offerTask/{taskId}: Update an offer task
+//
+// Updates the scheduled offer operation. Only its planned execution date can be changed.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -9813,6 +11196,9 @@ var opUpdateOvhPabx = &ovh.Operation{Name: "telephony.UpdateOvhPabx", Method: ht
 
 // UpdateOvhPabx calls PUT /v1/telephony/{billingAccount}/ovhPabx/{serviceName}: Update a PBX service
 //
+// Updates the description of the PBX service. Its dialplans, menus and queues are managed with
+// their own routes.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -9827,6 +11213,9 @@ func (s *Service) UpdateOvhPabx(ctx context.Context, billingAccount string, serv
 var opUpdateOvhPabxDialplan = &ovh.Operation{Name: "telephony.UpdateOvhPabxDialplan", Method: http.MethodPut, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}", Summary: "Update a dialplan", IAMActions: []string{"voip:apiovh:ovhPabx/dialplan/edit"}}
 
 // UpdateOvhPabxDialplan calls PUT /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}: Update a dialplan
+//
+// Updates the dialplan name, transfer timeout, anonymous call rejection and number presented when
+// bridging calls.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -9844,6 +11233,9 @@ var opUpdateOvhPabxDialplanExtension = &ovh.Operation{Name: "telephony.UpdateOvh
 
 // UpdateOvhPabxDialplanExtension calls PUT /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}: Update an extension
 //
+// Updates the position of the extension in the dialplan, its status, its scheduler category and its
+// screen list type.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -9860,6 +11252,8 @@ func (s *Service) UpdateOvhPabxDialplanExtension(ctx context.Context, billingAcc
 var opUpdateOvhPabxDialplanExtensionConditionTime = &ovh.Operation{Name: "telephony.UpdateOvhPabxDialplanExtensionConditionTime", Method: http.MethodPut, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}/conditionTime/{conditionId}", Summary: "Update a time condition", IAMActions: []string{"voip:apiovh:ovhPabx/dialplan/extension/conditionTime/edit"}}
 
 // UpdateOvhPabxDialplanExtensionConditionTime calls PUT /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}/conditionTime/{conditionId}: Update a time condition
+//
+// Updates the day of the week and the start and end times when the extension of the dialplan runs.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -9879,6 +11273,9 @@ var opUpdateOvhPabxDialplanExtensionRule = &ovh.Operation{Name: "telephony.Updat
 
 // UpdateOvhPabxDialplanExtensionRule calls PUT /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/dialplan/{dialplanId}/extension/{extensionId}/rule/{ruleId}: Update an extension rule
 //
+// Updates the action of the rule, its parameter, its position in the extension and whether it runs
+// when the conditions are false.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -9897,6 +11294,9 @@ var opUpdateOvhPabxHunting = &ovh.Operation{Name: "telephony.UpdateOvhPabxHuntin
 
 // UpdateOvhPabxHunting calls PUT /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting: Update the queue system settings
 //
+// Updates the queue system settings: the CRM URL template opened by the agent banner, the G729
+// codec and the status change IVR.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -9911,6 +11311,9 @@ func (s *Service) UpdateOvhPabxHunting(ctx context.Context, billingAccount strin
 var opUpdateOvhPabxHuntingAgent = &ovh.Operation{Name: "telephony.UpdateOvhPabxHuntingAgent", Method: http.MethodPut, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}", Summary: "Update an agent", IAMActions: []string{"voip:apiovh:ovhPabx/hunting/agent/edit"}}
 
 // UpdateOvhPabxHuntingAgent calls PUT /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}: Update an agent
+//
+// Updates the agent: number, description, status (available, logged out or on break), break status,
+// ring timeout, wrap-up time and simultaneous calls.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -9927,6 +11330,9 @@ func (s *Service) UpdateOvhPabxHuntingAgent(ctx context.Context, billingAccount 
 var opUpdateOvhPabxHuntingAgentQueue = &ovh.Operation{Name: "telephony.UpdateOvhPabxHuntingAgentQueue", Method: http.MethodPut, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/queue/{queueId}", Summary: "Update an agent position in a queue", IAMActions: []string{"voip:apiovh:ovhPabx/hunting/agent/queue/edit"}}
 
 // UpdateOvhPabxHuntingAgentQueue calls PUT /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/queue/{queueId}: Update an agent position in a queue
+//
+// Updates the position of the agent in the queue. The position sets the order in which agents
+// receive calls, depending on the queue strategy.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -9945,6 +11351,9 @@ var opUpdateOvhPabxHuntingQueue = &ovh.Operation{Name: "telephony.UpdateOvhPabxH
 
 // UpdateOvhPabxHuntingQueue calls PUT /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}: Update a queue
 //
+// Updates the queue: name, dispatching strategy, maximum waiting callers and wait time, sound on
+// hold, call recording and overflow and closure actions.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -9960,6 +11369,9 @@ func (s *Service) UpdateOvhPabxHuntingQueue(ctx context.Context, billingAccount 
 var opUpdateOvhPabxHuntingQueueAgent = &ovh.Operation{Name: "telephony.UpdateOvhPabxHuntingQueueAgent", Method: http.MethodPut, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}/agent/{agentId}", Summary: "Update an agent position in a queue", IAMActions: []string{"voip:apiovh:ovhPabx/hunting/queue/agent/edit"}}
 
 // UpdateOvhPabxHuntingQueueAgent calls PUT /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}/agent/{agentId}: Update an agent position in a queue
+//
+// Updates the position of the agent in the queue. The position sets the order in which agents
+// receive calls, depending on the queue strategy.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -9978,6 +11390,9 @@ var opUpdateOvhPabxMenu = &ovh.Operation{Name: "telephony.UpdateOvhPabxMenu", Me
 
 // UpdateOvhPabxMenu calls PUT /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/menu/{menuId}: Update a menu
 //
+// Updates the voice menu: name, greeting and invalid key sounds or text to speech, and the key
+// entry and menu timeouts in milliseconds.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -9993,6 +11408,9 @@ func (s *Service) UpdateOvhPabxMenu(ctx context.Context, billingAccount string, 
 var opUpdateOvhPabxMenuEntry = &ovh.Operation{Name: "telephony.UpdateOvhPabxMenuEntry", Method: http.MethodPut, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/menu/{menuId}/entry/{entryId}", Summary: "Update a menu entry", IAMActions: []string{"voip:apiovh:ovhPabx/menu/entry/edit"}}
 
 // UpdateOvhPabxMenuEntry calls PUT /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/menu/{menuId}/entry/{entryId}: Update a menu entry
+//
+// Updates the menu entry: position, key (DTMF), action such as bridge, playback, sub menu or call
+// center, and its parameter.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -10011,6 +11429,9 @@ var opUpdateOvhPabxTts = &ovh.Operation{Name: "telephony.UpdateOvhPabxTts", Meth
 
 // UpdateOvhPabxTts calls PUT /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/tts/{id}: Update a TTS prompt
 //
+// Updates the text to speech prompt: the text played and the voice that reads it (Helene, Loic,
+// Jenny or Bruce).
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -10027,6 +11448,8 @@ var opUpdatePhonebook = &ovh.Operation{Name: "telephony.UpdatePhonebook", Method
 
 // UpdatePhonebook calls PUT /v1/telephony/{billingAccount}/phonebook/{bookKey}: Update a phonebook
 //
+// Updates the name of the phonebook shared by the billing account. Contacts are updated one by one.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - bookKey: Identifier of the phonebook
@@ -10041,6 +11464,9 @@ func (s *Service) UpdatePhonebook(ctx context.Context, billingAccount string, bo
 var opUpdatePhonebookPhonebookContact = &ovh.Operation{Name: "telephony.UpdatePhonebookPhonebookContact", Method: http.MethodPut, Path: "/v1/telephony/{billingAccount}/phonebook/{bookKey}/phonebookContact/{id}", Summary: "Update a contact", IAMActions: []string{"voip:apiovh:phonebook/phonebookContact/edit"}}
 
 // UpdatePhonebookPhonebookContact calls PUT /v1/telephony/{billingAccount}/phonebook/{bookKey}/phonebookContact/{id}: Update a contact
+//
+// Updates the contact of the phonebook: name, surname, group, and office and home phone numbers,
+// landline and mobile.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -10058,6 +11484,9 @@ var opUpdatePortabilityDocument = &ovh.Operation{Name: "telephony.UpdatePortabil
 
 // UpdatePortabilityDocument calls PUT /v1/telephony/{billingAccount}/portability/{id}/document/{documentId}: Update a porting document
 //
+// Updates the name and the description of the porting document. The file itself is uploaded with
+// the upload URL of the document.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - id: The ID of the portability
@@ -10074,6 +11503,9 @@ var opUpdateRedirect = &ovh.Operation{Name: "telephony.UpdateRedirect", Method: 
 
 // UpdateRedirect calls PUT /v1/telephony/{billingAccount}/redirect/{serviceName}: Update a redirect number
 //
+// Updates the description of the redirect number. The destination is changed with the
+// changeDestination call.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -10088,6 +11520,9 @@ func (s *Service) UpdateRedirect(ctx context.Context, billingAccount string, ser
 var opUpdateRsva = &ovh.Operation{Name: "telephony.UpdateRsva", Method: http.MethodPut, Path: "/v1/telephony/{billingAccount}/rsva/{serviceName}", Summary: "Update a premium rate number", IAMActions: []string{"voip:apiovh:rsva/edit"}}
 
 // UpdateRsva calls PUT /v1/telephony/{billingAccount}/rsva/{serviceName}: Update a premium rate number
+//
+// Updates the typology of the premium rate number, such as relationship, contents, games, directory
+// or conferencing.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -10104,6 +11539,9 @@ var opUpdateScheduler = &ovh.Operation{Name: "telephony.UpdateScheduler", Method
 
 // UpdateScheduler calls PUT /v1/telephony/{billingAccount}/scheduler/{serviceName}: Update a scheduler
 //
+// Updates the scheduler of the service. Only its timezone can be changed, the events are managed
+// separately.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -10118,6 +11556,8 @@ func (s *Service) UpdateScheduler(ctx context.Context, billingAccount string, se
 var opUpdateSchedulerEvents = &ovh.Operation{Name: "telephony.UpdateSchedulerEvents", Method: http.MethodPut, Path: "/v1/telephony/{billingAccount}/scheduler/{serviceName}/events/{uid}", Summary: "Update a scheduler event", IAMActions: []string{"voip:apiovh:scheduler/events/edit"}}
 
 // UpdateSchedulerEvents calls PUT /v1/telephony/{billingAccount}/scheduler/{serviceName}/events/{uid}: Update a scheduler event
+//
+// Updates the scheduler event: title, description, start and end dates, and category.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -10135,6 +11575,9 @@ var opUpdateScreen = &ovh.Operation{Name: "telephony.UpdateScreen", Method: http
 
 // UpdateScreen calls PUT /v1/telephony/{billingAccount}/screen/{serviceName}: Update call filtering settings
 //
+// Updates the incoming and outgoing filtering mode of the service: whitelist, blacklist or
+// disabled.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -10150,6 +11593,9 @@ var opUpdateService = &ovh.Operation{Name: "telephony.UpdateService", Method: ht
 
 // UpdateService calls PUT /v1/telephony/{billingAccount}/service/{serviceName}: Update a service
 //
+// Updates the service description. The other properties of the service, such as its type and
+// offers, are read-only.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -10164,6 +11610,9 @@ func (s *Service) UpdateService(ctx context.Context, billingAccount string, serv
 var opUpdateServiceDirectory = &ovh.Operation{Name: "telephony.UpdateServiceDirectory", Method: http.MethodPut, Path: "/v1/telephony/{billingAccount}/service/{serviceName}/directory", Summary: "Update the directory listing", IAMActions: []string{"voip:apiovh:service/directory/edit"}}
 
 // UpdateServiceDirectory calls PUT /v1/telephony/{billingAccount}/service/{serviceName}/directory: Update the directory listing
+//
+// Updates the directory listing of the service: name, company details, address, contact email and
+// display options in the directories.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -10196,6 +11645,8 @@ func (s *Service) UpdateServiceInfos(ctx context.Context, billingAccount string,
 var opUpdateServiceOfferTask = &ovh.Operation{Name: "telephony.UpdateServiceOfferTask", Method: http.MethodPut, Path: "/v1/telephony/{billingAccount}/service/{serviceName}/offerTask/{taskId}", Summary: "Update an offer task", IAMActions: []string{"voip:apiovh:service/offerTask/edit"}}
 
 // UpdateServiceOfferTask calls PUT /v1/telephony/{billingAccount}/service/{serviceName}/offerTask/{taskId}: Update an offer task
+//
+// Updates the scheduled offer operation. Only its planned execution date can be changed.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -10245,6 +11696,9 @@ var opUpdateSounds = &ovh.Operation{Name: "telephony.UpdateSounds", Method: http
 
 // UpdateSounds calls PUT /v1/telephony/sounds/{id}: Update a sound
 //
+// Updates the sound filename and description. The sound file itself is uploaded with the upload URL
+// of the sound.
+//
 // Arguments:
 //   - id: Sound ID
 //   - body: the request body
@@ -10276,6 +11730,9 @@ var opUpdateTelephony = &ovh.Operation{Name: "telephony.UpdateTelephony", Method
 
 // UpdateTelephony calls PUT /v1/telephony/{billingAccount}: Update a billing account
 //
+// Updates the billing account settings: description, credit threshold, and the displayed or hidden
+// external number.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - body: the request body
@@ -10289,6 +11746,9 @@ func (s *Service) UpdateTelephony(ctx context.Context, billingAccount string, bo
 var opUpdateTimeConditionCondition = &ovh.Operation{Name: "telephony.UpdateTimeConditionCondition", Method: http.MethodPut, Path: "/v1/telephony/{billingAccount}/timeCondition/{serviceName}/condition/{id}", Summary: "Update a time condition", IAMActions: []string{"voip:apiovh:timeCondition/condition/edit"}}
 
 // UpdateTimeConditionCondition calls PUT /v1/telephony/{billingAccount}/timeCondition/{serviceName}/condition/{id}: Update a time condition
+//
+// Updates the day, the start and end hours (hhmm), the status and the routing policy (slot1, slot2,
+// slot3 or available) of the time condition.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -10305,6 +11765,9 @@ func (s *Service) UpdateTimeConditionCondition(ctx context.Context, billingAccou
 var opUpdateTimeConditionOptions = &ovh.Operation{Name: "telephony.UpdateTimeConditionOptions", Method: http.MethodPut, Path: "/v1/telephony/{billingAccount}/timeCondition/{serviceName}/options", Summary: "Update time condition options", IAMActions: []string{"voip:apiovh:timeCondition/options/edit"}}
 
 // UpdateTimeConditionOptions calls PUT /v1/telephony/{billingAccount}/timeCondition/{serviceName}/options: Update time condition options
+//
+// Updates the time condition options: global status, the action (voicemail or number) of each slot
+// and when unavailable, and the timeout.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -10338,6 +11801,9 @@ var opUpdateVoicemail = &ovh.Operation{Name: "telephony.UpdateVoicemail", Method
 
 // UpdateVoicemail calls PUT /v1/telephony/{billingAccount}/voicemail/{serviceName}: Update a voicemail
 //
+// Updates the description of the voicemail service. The voicemail behaviour is changed in its
+// settings.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -10352,6 +11818,9 @@ func (s *Service) UpdateVoicemail(ctx context.Context, billingAccount string, se
 var opUpdateVoicemailSettings = &ovh.Operation{Name: "telephony.UpdateVoicemailSettings", Method: http.MethodPut, Path: "/v1/telephony/{billingAccount}/voicemail/{serviceName}/settings", Summary: "Update the voicemail settings", IAMActions: []string{"voip:apiovh:voicemail/settings/edit"}}
 
 // UpdateVoicemailSettings calls PUT /v1/telephony/{billingAccount}/voicemail/{serviceName}/settings: Update the voicemail settings
+//
+// Updates the voicemail settings: greetings, sender of the notification emails, notified addresses,
+// audio format, and message recording and storage.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -10368,6 +11837,8 @@ var opUpdateVxmlSettings = &ovh.Operation{Name: "telephony.UpdateVxmlSettings", 
 
 // UpdateVxmlSettings calls PUT /v1/telephony/{billingAccount}/vxml/{serviceName}/settings: Update the VXML settings
 //
+// Updates the URL of the VXML application and the URL used for recordings of the VXML service.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -10383,6 +11854,9 @@ var opValidateTrunkExternalDisplayedNumber = &ovh.Operation{Name: "telephony.Val
 
 // ValidateTrunkExternalDisplayedNumber calls POST /v1/telephony/{billingAccount}/trunk/{serviceName}/externalDisplayedNumber/{number}/validate: Validate an external displayed number
 //
+// Calls the external number to validate it. Type the returned validation code when the call asks
+// for it.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: Name of the service
@@ -10397,6 +11871,9 @@ func (s *Service) ValidateTrunkExternalDisplayedNumber(ctx context.Context, bill
 var opWhisperEasyHuntingHuntingAgentCalls = &ovh.Operation{Name: "telephony.WhisperEasyHuntingHuntingAgentCalls", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/calls/{id}/whisper", Summary: "Whisper on a call", IAMActions: []string{"voip:apiovh:easyHunting/hunting/agent/calls/whisper"}}
 
 // WhisperEasyHuntingHuntingAgentCalls calls POST /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/agent/{agentId}/calls/{id}/whisper: Whisper on a call
+//
+// Speaks during the live call from the given phone number, heard by the agent only or by all
+// participants, depending on the whispering mode.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -10415,6 +11892,9 @@ var opWhisperEasyHuntingHuntingQueueLiveCalls = &ovh.Operation{Name: "telephony.
 
 // WhisperEasyHuntingHuntingQueueLiveCalls calls POST /v1/telephony/{billingAccount}/easyHunting/{serviceName}/hunting/queue/{queueId}/liveCalls/{id}/whisper: Whisper on a call
 //
+// Speaks during the live call from the given phone number, heard by the agent only or by all
+// participants, depending on the whispering mode.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -10431,6 +11911,9 @@ func (s *Service) WhisperEasyHuntingHuntingQueueLiveCalls(ctx context.Context, b
 var opWhisperLineCalls = &ovh.Operation{Name: "telephony.WhisperLineCalls", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/line/{serviceName}/calls/{id}/whisper", Summary: "Whisper on a call", IAMActions: []string{"voip:apiovh:line/calls/whisper"}, Deprecated: true}
 
 // WhisperLineCalls calls POST /v1/telephony/{billingAccount}/line/{serviceName}/calls/{id}/whisper: Whisper on a call
+//
+// Speaks during the live call from the given phone number, heard by the agent only or by all
+// participants, depending on the whispering mode.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
@@ -10450,6 +11933,9 @@ var opWhisperOvhPabxHuntingAgentCalls = &ovh.Operation{Name: "telephony.WhisperO
 
 // WhisperOvhPabxHuntingAgentCalls calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/agent/{agentId}/calls/{id}/whisper: Whisper on a call
 //
+// Speaks during the live call from the given phone number, heard by the agent only or by all
+// participants, depending on the whispering mode.
+//
 // Arguments:
 //   - billingAccount: The name of your billingAccount
 //   - serviceName: the serviceName path parameter
@@ -10466,6 +11952,9 @@ func (s *Service) WhisperOvhPabxHuntingAgentCalls(ctx context.Context, billingAc
 var opWhisperOvhPabxHuntingQueueLiveCalls = &ovh.Operation{Name: "telephony.WhisperOvhPabxHuntingQueueLiveCalls", Method: http.MethodPost, Path: "/v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}/liveCalls/{id}/whisper", Summary: "Whisper on a call", IAMActions: []string{"voip:apiovh:ovhPabx/hunting/queue/liveCalls/whisper"}}
 
 // WhisperOvhPabxHuntingQueueLiveCalls calls POST /v1/telephony/{billingAccount}/ovhPabx/{serviceName}/hunting/queue/{queueId}/liveCalls/{id}/whisper: Whisper on a call
+//
+// Speaks during the live call from the given phone number, heard by the agent only or by all
+// participants, depending on the whispering mode.
 //
 // Arguments:
 //   - billingAccount: The name of your billingAccount
